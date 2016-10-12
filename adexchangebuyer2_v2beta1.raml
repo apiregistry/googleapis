@@ -1,0 +1,344 @@
+#%RAML 1.0
+title: Ad Exchange Buyer API II
+version: v2beta1
+baseUri: https://adexchangebuyer.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/ad-exchange/buyer-rest/guides/client-access/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): adexchangebuyer2:v2beta1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/adexchange.buyer
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+        enum:
+        - '1'
+        - '2'
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Client:
+    type: object
+    properties:
+      role?:
+        type: string
+        description: |-
+          The role which is assigned to the client buyer. Each role implies a set of
+          permissions granted to the client. Must be one of `CLIENT_DEAL_VIEWER`,
+          `CLIENT_DEAL_NEGOTIATOR` or `CLIENT_DEAL_APPROVER`.
+        enum:
+        - CLIENT_ROLE_UNSPECIFIED
+        - CLIENT_DEAL_VIEWER
+        - CLIENT_DEAL_NEGOTIATOR
+        - CLIENT_DEAL_APPROVER
+      clientName?:
+        type: string
+        description: |-
+          Name used to represent this client to publishers.
+          You may have multiple clients that map to the same entity,
+          but for each client the combination of `clientName` and entity
+          must be unique.
+          You can specify this field as empty.
+      entityType?:
+        type: string
+        description: 'The type of the client entity: `ADVERTISER`, `BRAND`, or `AGENCY`.'
+        enum:
+        - ENTITY_TYPE_UNSPECIFIED
+        - ADVERTISER
+        - BRAND
+        - AGENCY
+      entityName?:
+        type: string
+        description: |-
+          The name of the entity. This field is automatically fetched based on
+          the type and ID.
+          The value of this field is ignored in create and update operations.
+      visibleToSeller?:
+        type: boolean
+        description: Whether the client buyer will be visible to sellers.
+      entityId?:
+        type: integer
+        format: int64
+        description: |-
+          Numerical identifier of the client entity.
+          The entity can be an advertiser, a brand, or an agency.
+          This identifier is unique among all the entities with the same type.
+
+          A list of all known advertisers with their identifiers is available in the
+          [advertisers.txt](https://storage.googleapis.com/adx-rtb-dictionaries/advertisers.txt)
+          file.
+
+          A list of all known brands with their identifiers is available in the
+          [brands.txt](https://storage.googleapis.com/adx-rtb-dictionaries/brands.txt)
+          file.
+
+          A list of all known agencies with their identifiers is available in the
+          [agencies.txt](https://storage.googleapis.com/adx-rtb-dictionaries/agencies.txt)
+          file.
+      clientAccountId?:
+        type: integer
+        format: int64
+        description: |-
+          The globally-unique numerical ID of the client.
+          The value of this field is ignored in create and update operations.
+      status?:
+        type: string
+        description: The status of the client buyer.
+        enum:
+        - CLIENT_STATUS_UNSPECIFIED
+        - DISABLED
+        - ACTIVE
+    description: |-
+      A client resource represents a client buyer&mdash;an agency,
+      a brand, or an advertiser customer of the sponsor buyer.
+      Users associated with the client buyer have restricted access to
+      the Ad Exchange Marketplace and certain other sections
+      of the Ad Exchange Buyer UI based on the role
+      granted to the client buyer.
+      All fields are required unless otherwise specified.
+  ClientUser:
+    type: object
+    properties:
+      clientAccountId?:
+        type: integer
+        format: int64
+        description: |-
+          Numerical account ID of the client buyer
+          with which the user is associated; the
+          buyer must be a client of the current sponsor buyer.
+          The value of this field is ignored in an update operation.
+      userId?:
+        type: integer
+        format: int64
+        description: |-
+          The unique numerical ID of the client user
+          that has accepted an invitation.
+          The value of this field is ignored in an update operation.
+      email?:
+        type: string
+        description: |-
+          User's email address. The value of this field
+          is ignored in an update operation.
+      status?:
+        type: string
+        description: The status of the client user.
+        enum:
+        - USER_STATUS_UNSPECIFIED
+        - PENDING
+        - ACTIVE
+        - DISABLED
+    description: |-
+      A client user is created under a client buyer and has restricted access to
+      the Ad Exchange Marketplace and certain other sections
+      of the Ad Exchange Buyer UI based on the role
+      granted to the associated client buyer.
+
+      The only way a new client user can be created is via accepting an
+      email invitation
+      (see the
+      accounts.clients.invitations.create
+      method).
+
+      All fields are required unless otherwise specified.
+  ClientUserInvitation:
+    type: object
+    properties:
+      clientAccountId?:
+        type: integer
+        format: int64
+        description: |-
+          Numerical account ID of the client buyer
+          that the invited user is associated with.
+          The value of this field is ignored in create operations.
+      invitationId?:
+        type: integer
+        format: int64
+        description: |-
+          The unique numerical ID of the invitation that is sent to the user.
+          The value of this field is ignored in create operations.
+      email?:
+        type: string
+        description: |-
+          The email address to which the invitation is sent. Email
+          addresses should be unique among all client users under each sponsor
+          buyer.
+    description: |-
+      An invitation for a new client user to get access to the Ad Exchange
+      Buyer UI.
+      All fields are required unless otherwise specified.
+  ListClientUserInvitationsResponse:
+    type: object
+    properties:
+      invitations?:
+        type: array
+        description: The returned list of client users.
+        items: ClientUserInvitation
+      nextPageToken?:
+        type: string
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListClientUserInvitationsRequest.pageToken
+          field in the subsequent call to the
+          clients.invitations.list
+          method to retrieve the next
+          page of results.
+  ListClientUsersResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListClientUsersRequest.pageToken
+          field in the subsequent call to the
+          clients.invitations.list
+          method to retrieve the next
+          page of results.
+      users?:
+        type: array
+        description: The returned list of client users.
+        items: ClientUser
+  ListClientsResponse:
+    type: object
+    properties:
+      clients?:
+        type: array
+        description: The returned list of clients.
+        items: Client
+      nextPageToken?:
+        type: string
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListClientsRequest.pageToken
+          field in the subsequent call to the
+          accounts.clients.list method
+          to retrieve the next page of results.
+/v2beta1:
+  /accounts:
+    /{accountId}:
+      uriParameters:
+        accountId:
+          type: integer
+          format: int64
+          description: Numerical account ID of the client's sponsor buyer. (required)
+      /clients:
+        /{clientAccountId}:
+          uriParameters:
+            clientAccountId:
+              type: integer
+              format: int64
+              description: Numerical account ID of the client buyer to retrieve. (required)
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/adexchange.buyer
+            description: Gets a client buyer with a given client account ID.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Client
+          put:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/adexchange.buyer
+            description: Updates an existing client buyer.
+            is:
+            - hasParameters
+            body:
+              application/json: Client
+            responses:
+              200:
+                body:
+                  application/json: Client
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.buyer
+          description: Creates a new client buyer.
+          is:
+          - hasParameters
+          body:
+            application/json: Client
+          responses:
+            200:
+              body:
+                application/json: Client
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.buyer
+          description: Lists all the clients for the current sponsor buyer.
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: |-
+                Requested page size. The server may return fewer clients than requested.
+                If unspecified, the server will pick an appropriate default.
+            pageToken?:
+              type: string
+              description: |-
+                A token identifying a page of results the server should return.
+                Typically, this is the value of
+                ListClientsResponse.nextPageToken
+                returned from the previous call to the
+                accounts.clients.list method.
+          responses:
+            200:
+              body:
+                application/json: ListClientsResponse

@@ -1,0 +1,909 @@
+#%RAML 1.0
+title: Cloud User Accounts API
+version: vm_beta
+baseUri: https://www.googleapis.com/clouduseraccounts/vm_beta/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/compute/docs/access/user-accounts/api/latest/
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/compute_engine-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/compute_engine-16.png
+  name: x16
+(commons.Id): clouduseraccounts:vm_beta
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/cloud.useraccounts
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AuthorizedKeysView:
+    type: object
+    properties:
+      keys?:
+        type: array
+        description: '[Output Only] The list of authorized public keys in SSH format.'
+        items:
+          type: string
+      sudoer?:
+        type: boolean
+        description: '[Output Only] Whether the user has the ability to elevate on
+          the instance that requested the authorized keys.'
+    description: A list of authorized public keys for a user account.
+  Group:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: clouduseraccounts#group
+        description: '[Output Only] Type of the resource. Always clouduseraccounts#group
+          for groups.'
+      members?:
+        type: array
+        description: '[Output Only] A list of URLs to User resources who belong to
+          the group. Users may only be members of groups in the same project.'
+        items:
+          type: string
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      name?:
+        type: string
+        pattern: '[a-z][-a-z0-9_]{0,31}'
+        description: Name of the resource; provided by the client when the resource is created.
+      description?:
+        type: string
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server defined URL for the resource.'
+    description: A Group resource.
+  GroupList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: clouduseraccounts#groupList
+        description: '[Output Only] Type of resource. Always clouduseraccounts#groupList
+          for lists of groups.'
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncated list request.'
+      id?:
+        type: string
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      items?:
+        type: array
+        description: '[Output Only] A list of Group resources.'
+        items: Group
+      selfLink?:
+        type: string
+        description: '[Output Only] Server defined URL for this resource.'
+  GroupsAddMemberRequest:
+    type: object
+    properties:
+      users?:
+        type: array
+        description: Fully-qualified URLs of the User resources to add.
+        items:
+          type: string
+  GroupsRemoveMemberRequest:
+    type: object
+    properties:
+      users?:
+        type: array
+        description: Fully-qualified URLs of the User resources to remove.
+        items:
+          type: string
+  LinuxAccountViews:
+    type: object
+    properties:
+      groupViews?:
+        type: array
+        description: '[Output Only] A list of all groups within a project.'
+        items: LinuxGroupView
+      kind?:
+        type: string
+        default: clouduseraccounts#linuxAccountViews
+        description: '[Output Only] Type of the resource. Always clouduseraccounts#linuxAccountViews
+          for Linux resources.'
+      userViews?:
+        type: array
+        description: '[Output Only] A list of all users within a project.'
+        items: LinuxUserView
+    description: A list of all Linux accounts for this project. This API is only used by Compute Engine virtual machines to get information about user accounts for a project or instance. Linux resources are read-only views into users and groups managed by the Compute Engine Accounts API.
+  LinuxGetAuthorizedKeysViewResponse:
+    type: object
+    properties:
+      resource?: AuthorizedKeysView
+  LinuxGetLinuxAccountViewsResponse:
+    type: object
+    properties:
+      resource?: LinuxAccountViews
+  LinuxGroupView:
+    type: object
+    properties:
+      groupName?:
+        type: string
+        description: '[Output Only] Group name.'
+      gid?:
+        type: integer
+        format: int32
+        description: '[Output Only] The Group ID.'
+      members?:
+        type: array
+        description: '[Output Only] List of user accounts that belong to the group.'
+        items:
+          type: string
+    description: A detailed view of a Linux group.
+  LinuxUserView:
+    type: object
+    properties:
+      uid?:
+        type: integer
+        format: int32
+        description: '[Output Only] User ID.'
+      gecos?:
+        type: string
+        description: '[Output Only] The GECOS (user information) entry for this account.'
+      gid?:
+        type: integer
+        format: int32
+        description: '[Output Only] User''s default group ID.'
+      homeDirectory?:
+        type: string
+        description: '[Output Only] The path to the home directory for this account.'
+      shell?:
+        type: string
+        description: '[Output Only] The path to the login shell for this account.'
+      username?:
+        type: string
+        description: '[Output Only] The username of the account.'
+    description: A detailed view of a Linux user account.
+  Operation:
+    type: object
+    properties:
+      httpErrorMessage?:
+        type: string
+        description: '[Output Only] If the operation fails, this field contains the
+          HTTP error message that was returned, such as NOT FOUND.'
+      targetId?:
+        type: integer
+        format: int64
+        description: '[Output Only] The unique target ID, which identifies a specific
+          incarnation of the target resource.'
+      kind?:
+        type: string
+        default: clouduseraccounts#operation
+        description: '[Output Only] Type of the resource. Always compute#operation
+          for Operation resources.'
+      warnings?:
+        type: array
+        description: '[Output Only] If warning messages are generated during processing
+          of the operation, this field will be populated.'
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output Only] A warning code, if applicable. For example,
+                Compute Engine returns NO_RESULTS_ON_PAGE if there are no results
+                in the response.'
+              enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            data?:
+              type: array
+              description: |-
+                [Output Only] Metadata about this warning in key: value format. For example:
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] A warning data value corresponding
+                      to the key.'
+                  key?:
+                    type: string
+                    description: '[Output Only] A key that provides more detail on
+                      the warning being returned. For example, for warnings where
+                      there are no results in a list request for a particular zone,
+                      this key might be scope and the key value might be the zone
+                      name. Other examples might be a key indicating a deprecated
+                      resource and a suggested replacement, or a warning about invalid
+                      network settings (for example, if an instance attempts to perform
+                      IP forwarding but is not enabled for IP forwarding).'
+            message?:
+              type: string
+              description: '[Output Only] A human-readable description of the warning
+                code.'
+      description?:
+        type: string
+        description: '[Output Only] A textual description of the operation, which
+          is set when the operation is created.'
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request that
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] If errors are generated during processing of the
+          operation, this field will be populated.'
+      statusMessage?:
+        type: string
+        description: '[Output Only] An optional textual description of the current
+          status of the operation.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined URL for the resource.'
+      insertTime?:
+        type: string
+        description: '[Output Only] The time that this operation was requested. This
+          value is in RFC3339 text format.'
+      httpErrorStatusCode?:
+        type: integer
+        format: int32
+        description: '[Output Only] If the operation fails, this field contains the
+          HTTP error status code that was returned. For example, a 404 means the resource
+          was not found.'
+      zone?:
+        type: string
+        description: '[Output Only] The URL of the zone where the operation resides.
+          Only available when performing per-zone operations.'
+      targetLink?:
+        type: string
+        description: '[Output Only] The URL of the resource that the operation modifies.'
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      name?:
+        type: string
+        description: '[Output Only] Name of the resource.'
+      progress?:
+        type: integer
+        format: int32
+        description: '[Output Only] An optional progress indicator that ranges from
+          0 to 100. There is no requirement that this be linear or support any granularity
+          of operations. This should not be used to guess when the operation will
+          be complete. This number should monotonically increase as the operation
+          progresses.'
+      operationType?:
+        type: string
+        description: '[Output Only] The type of operation, such as insert, update,
+          or delete, and so on.'
+      startTime?:
+        type: string
+        description: '[Output Only] The time that this operation was started by the
+          server. This value is in RFC3339 text format.'
+      endTime?:
+        type: string
+        description: '[Output Only] The time that this operation was completed. This
+          value is in RFC3339 text format.'
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] The unique identifier for the resource. This identifier
+          is defined by the server.'
+      region?:
+        type: string
+        description: '[Output Only] The URL of the region where the operation resides.
+          Only available when performing regional operations.'
+      clientOperationId?:
+        type: string
+        description: '[Output Only] Reserved for future use.'
+      user?:
+        type: string
+        description: '[Output Only] User who requested the operation, for example:
+          user@example.com.'
+      status?:
+        type: string
+        description: '[Output Only] The status of the operation, which can be one
+          of the following: PENDING, RUNNING, or DONE.'
+        enum:
+        - DONE
+        - PENDING
+        - RUNNING
+    description: An Operation resource, used to manage asynchronous API requests.
+  OperationList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: clouduseraccounts#operationList
+        description: '[Output Only] Type of resource. Always compute#operations for
+          Operations resource.'
+      nextPageToken?:
+        type: string
+        description: '[Output Only] This token allows you to get the next page of
+          results for list requests. If the number of results is larger than maxResults,
+          use the nextPageToken as a value for the query parameter pageToken in the
+          next list request. Subsequent list requests will have their own nextPageToken
+          to continue paging through the results.'
+      id?:
+        type: string
+        description: '[Output Only] The unique identifier for the resource. This identifier
+          is defined by the server.'
+      items?:
+        type: array
+        description: '[Output Only] A list of Operation resources.'
+        items: Operation
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined URL for this resource.'
+    description: Contains a list of Operation resources.
+  PublicKey:
+    type: object
+    properties:
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      fingerprint?:
+        type: string
+        description: '[Output Only] The fingerprint of the key is defined by RFC4716
+          to be the MD5 digest of the public key.'
+      description?:
+        type: string
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+      expirationTimestamp?:
+        type: string
+        description: Optional expiration timestamp. If provided, the timestamp must be in RFC3339 text format. If not provided, the public key never expires.
+      key?:
+        type: string
+        description: Public key text in SSH format, defined by RFC4253 section 6.6.
+    description: A public key for authenticating to guests.
+  User:
+    type: object
+    properties:
+      owner?:
+        type: string
+        description: Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account.
+      publicKeys?:
+        type: array
+        description: '[Output Only] Public keys that this user may use to login.'
+        items: PublicKey
+      kind?:
+        type: string
+        default: clouduseraccounts#user
+        description: '[Output Only] Type of the resource. Always clouduseraccounts#user
+          for users.'
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      name?:
+        type: string
+        pattern: '[a-z][-a-z0-9_]{0,31}'
+        description: Name of the resource; provided by the client when the resource is created.
+      description?:
+        type: string
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+      groups?:
+        type: array
+        description: '[Output Only] A list of URLs to Group resources who contain
+          the user. Users are only members of groups in the same project.'
+        items:
+          type: string
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server defined URL for the resource.'
+    description: A User resource.
+  UserList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: clouduseraccounts#userList
+        description: '[Output Only] Type of resource. Always clouduseraccounts#userList
+          for lists of users.'
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncated list request.'
+      id?:
+        type: string
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      items?:
+        type: array
+        description: '[Output Only] A list of User resources.'
+        items: User
+      selfLink?:
+        type: string
+        description: '[Output Only] Server defined URL for this resource.'
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      pattern: (?:(?:[-a-z0-9]{1,63}\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?))
+      description: Project ID for this request.
+  /zones:
+    /{zone}:
+      uriParameters:
+        zone:
+          type: string
+          pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+          description: Name of the zone for this request.
+      /authorizedKeysView:
+        /{user}:
+          uriParameters:
+            user:
+              type: string
+              pattern: '[a-z][-a-z0-9_]{0,31}'
+              description: The user account for which you want to get a list of authorized public keys.
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/cloud.useraccounts
+                - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+            description: Returns a list of authorized public keys for a specific user account.
+            is:
+            - hasParameters
+            queryParameters:
+              instance:
+                type: string
+                description: The fully-qualified URL of the virtual machine requesting the view.
+              login?:
+                type: boolean
+                description: Whether the view was requested as part of a user-initiated login.
+            responses:
+              200:
+                body:
+                  application/json: LinuxGetAuthorizedKeysViewResponse
+      /linuxAccountViews:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/cloud.useraccounts
+              - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+          description: Retrieves a list of user accounts for an instance within a specific project.
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: |-
+                Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+                The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+                For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+                Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+                The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+            instance:
+              type: string
+              description: The fully-qualified URL of the virtual machine requesting the views.
+            maxResults?:
+              type: integer
+              default: 500
+              format: int32
+              description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+              maximum: 500
+              minimum: 0
+            orderBy?:
+              type: string
+              description: |-
+                Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+                You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+                Currently, only sorting by name or creationTimestamp desc is supported.
+            pageToken?:
+              type: string
+              description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          responses:
+            200:
+              body:
+                application/json: LinuxGetLinuxAccountViewsResponse
+  /global:
+    /groups:
+      /{groupName}:
+        uriParameters:
+          groupName:
+            type: string
+            pattern: '[a-z][-a-z0-9_]{0,31}'
+            description: Name of the group for this request.
+        /removeMember:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud.useraccounts
+            description: Removes users from the specified group.
+            is:
+            - hasParameters
+            body:
+              application/json: GroupsRemoveMemberRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /addMember:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud.useraccounts
+            description: Adds users to the specified group.
+            is:
+            - hasParameters
+            body:
+              application/json: GroupsAddMemberRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/cloud.useraccounts
+              - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+          description: Returns the specified Group resource.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Group
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud.useraccounts
+          description: Deletes the specified Group resource.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud.useraccounts
+        description: Creates a Group resource in the specified project using the data included in the request.
+        is:
+        - hasParameters
+        body:
+          application/json: Group
+        responses:
+          200:
+            body:
+              application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/cloud.useraccounts
+            - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+        description: Retrieves the list of groups contained within the specified project.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+              The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: GroupList
+    /operations:
+      /{operation}:
+        uriParameters:
+          operation:
+            type: string
+            pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+            description: Name of the Operations resource to return.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/cloud.useraccounts
+              - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+          description: Retrieves the specified operation resource.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud.useraccounts
+          description: Deletes the specified operation resource.
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/cloud.useraccounts
+            - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+        description: Retrieves the list of operation resources contained within the specified project.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+              The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: OperationList
+    /users:
+      /{user}:
+        uriParameters:
+          user:
+            type: string
+            pattern: '[a-z][-a-z0-9_]{0,31}'
+            description: Name of the user for this request.
+        /addPublicKey:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud.useraccounts
+            description: Adds a public key to the specified User resource with the data included in the request.
+            is:
+            - hasParameters
+            body:
+              application/json: PublicKey
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /removePublicKey:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud.useraccounts
+            description: Removes the specified public key from the user.
+            is:
+            - hasParameters
+            queryParameters:
+              fingerprint:
+                type: string
+                pattern: '[a-f0-9]{32}'
+                description: The fingerprint of the public key to delete. Public keys are identified by their fingerprint, which is defined by RFC4716 to be the MD5 digest of the public key.
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/cloud.useraccounts
+              - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+          description: Returns the specified User resource.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: User
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud.useraccounts
+          description: Deletes the specified User resource.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud.useraccounts
+        description: Creates a User resource in the specified project using the data included in the request.
+        is:
+        - hasParameters
+        body:
+          application/json: User
+        responses:
+          200:
+            body:
+              application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/cloud.useraccounts
+            - https://www.googleapis.com/auth/cloud.useraccounts.readonly
+        description: Retrieves a list of users contained within the specified project.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+              The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: UserList

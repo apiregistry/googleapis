@@ -1,0 +1,702 @@
+#%RAML 1.0
+title: Fitness
+version: v1
+baseUri: https://www.googleapis.com/fitness/v1/users/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/fit/rest/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): fitness:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/fitness.activity.write
+      - https://www.googleapis.com/auth/fitness.location.write
+      - https://www.googleapis.com/auth/fitness.nutrition.write
+      - https://www.googleapis.com/auth/fitness.location.read
+      - https://www.googleapis.com/auth/fitness.body.read
+      - https://www.googleapis.com/auth/fitness.activity.read
+      - https://www.googleapis.com/auth/fitness.nutrition.read
+      - https://www.googleapis.com/auth/fitness.body.write
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AggregateBucket:
+    type: object
+    properties:
+      endTimeMillis?:
+        type: integer
+        format: int64
+        description: The end time for the aggregated data, in milliseconds since epoch, inclusive.
+      activity?:
+        type: integer
+        format: int32
+        description: Available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT
+      startTimeMillis?:
+        type: integer
+        format: int64
+        description: The start time for the aggregated data, in milliseconds since epoch, inclusive.
+      session?: Session
+      type?:
+        type: string
+        description: The type of a bucket signifies how the data aggregation is performed in the bucket.
+        enum:
+        - activitySegment
+        - activityType
+        - session
+        - time
+        - unknown
+      dataset?:
+        type: array
+        description: There will be one dataset per AggregateBy in the request.
+        items: Dataset
+  AggregateBy:
+    type: object
+    properties:
+      dataSourceId?:
+        type: string
+        description: A data source ID to aggregate. Mutually exclusive of dataTypeName. Only data from the specified data source ID will be included in the aggregation. The dataset in the response will have the same data source ID.
+      dataTypeName?:
+        type: string
+        description: The data type to aggregate. All data sources providing this data type will contribute data to the aggregation. The response will contain a single dataset for this data type name. The dataset will have a data source ID of derived:com.google.:com.google.android.gms:aggregated
+    description: The specification of which data to aggregate.
+  AggregateRequest:
+    type: object
+    properties:
+      bucketBySession?: BucketBySession
+      endTimeMillis?:
+        type: integer
+        format: int64
+        description: The end of a window of time. Data that intersects with this time window will be aggregated. The time is in milliseconds since epoch, inclusive.
+      startTimeMillis?:
+        type: integer
+        format: int64
+        description: The start of a window of time. Data that intersects with this time window will be aggregated. The time is in milliseconds since epoch, inclusive.
+      bucketByActivitySegment?: BucketByActivity
+      bucketByActivityType?: BucketByActivity
+      filteredDataQualityStandard?:
+        type: array
+        description: A list of acceptable data quality standards. Only data points which conform to at least one of the specified data quality standards will be returned. If the list is empty, all data points are returned.
+        items:
+          type: string
+          enum:
+          - dataQualityBloodGlucoseIso151972003
+          - dataQualityBloodGlucoseIso151972013
+          - dataQualityBloodPressureAami
+          - dataQualityBloodPressureBhsAA
+          - dataQualityBloodPressureBhsAB
+          - dataQualityBloodPressureBhsBA
+          - dataQualityBloodPressureBhsBB
+          - dataQualityBloodPressureEsh2002
+          - dataQualityBloodPressureEsh2010
+          - dataQualityUnknown
+      bucketByTime?: BucketByTime
+      aggregateBy?:
+        type: array
+        description: The specification of data to be aggregated. At least one aggregateBy spec must be provided. All data that is specified will be aggregated using the same bucketing criteria. There will be one dataset in the response for every aggregateBy spec.
+        items: AggregateBy
+    description: 'Next id: 10'
+  AggregateResponse:
+    type: object
+    properties:
+      bucket?:
+        type: array
+        description: A list of buckets containing the aggregated data.
+        items: AggregateBucket
+  Application:
+    type: object
+    properties:
+      detailsUrl?:
+        type: string
+        description: An optional URI that can be used to link back to the application.
+      name?:
+        type: string
+        description: The name of this application. This is required for REST clients, but we do not enforce uniqueness of this name. It is provided as a matter of convenience for other developers who would like to identify which REST created an Application or Data Source.
+      packageName?:
+        type: string
+        description: Package name for this application. This is used as a unique identifier when created by Android applications, but cannot be specified by REST clients. REST clients will have their developer project number reflected into the Data Source data stream IDs, instead of the packageName.
+      version?:
+        type: string
+        description: Version of the application. You should update this field whenever the application changes in a way that affects the computation of the data.
+    description: ''
+  BucketByActivity:
+    type: object
+    properties:
+      minDurationMillis?:
+        type: integer
+        format: int64
+        description: Specifies that only activity segments of duration longer than minDurationMillis are considered and used as a container for aggregated data.
+      activityDataSourceId?:
+        type: string
+        description: The default activity stream will be used if a specific activityDataSourceId is not specified.
+  BucketBySession:
+    type: object
+    properties:
+      minDurationMillis?:
+        type: integer
+        format: int64
+        description: Specifies that only sessions of duration longer than minDurationMillis are considered and used as a container for aggregated data.
+  BucketByTime:
+    type: object
+    properties:
+      period?: BucketByTimePeriod
+      durationMillis?:
+        type: integer
+        format: int64
+        description: Specifies that result buckets aggregate data by exactly durationMillis time frames. Time frames that contain no data will be included in the response with an empty dataset.
+  BucketByTimePeriod:
+    type: object
+    properties:
+      timeZoneId?:
+        type: string
+        description: org.joda.timezone.DateTimeZone
+      type?:
+        type: string
+        enum:
+        - day
+        - month
+        - week
+      value?:
+        type: integer
+        format: int32
+  DataPoint:
+    type: object
+    properties:
+      originDataSourceId?:
+        type: string
+        description: If the data point is contained in a dataset for a derived data source, this field will be populated with the data source stream ID that created the data point originally.
+      endTimeNanos?:
+        type: integer
+        format: int64
+        description: The end time of the interval represented by this data point, in nanoseconds since epoch.
+      dataTypeName?:
+        type: string
+        description: The data type defining the format of the values in this data point.
+      startTimeNanos?:
+        type: integer
+        format: int64
+        description: The start time of the interval represented by this data point, in nanoseconds since epoch.
+      modifiedTimeMillis?:
+        type: integer
+        format: int64
+        description: Indicates the last time this data point was modified. Useful only in contexts where we are listing the data changes, rather than representing the current state of the data.
+      rawTimestampNanos?:
+        type: integer
+        format: int64
+        description: The raw timestamp from the original SensorEvent.
+      computationTimeMillis?:
+        type: integer
+        format: int64
+        description: Used for version checking during transformation; that is, a datapoint can only replace another datapoint that has an older computation time stamp.
+      value?:
+        type: array
+        description: |-
+          Values of each data type field for the data point. It is expected that each value corresponding to a data type field will occur in the same order that the field is listed with in the data type specified in a data source.
+
+          Only one of integer and floating point fields will be populated, depending on the format enum value within data source's type field.
+        items: Value
+    description: |-
+      Represents a single data point, generated by a particular data source. A data point holds a value for each field, an end timestamp and an optional start time. The exact semantics of each of these attributes are specified in the documentation for the particular data type.
+
+      A data point can represent an instantaneous measurement, reading or input observation, as well as averages or aggregates over a time interval. Check the data type documentation to determine which is the case for a particular data type.
+
+      Data points always contain one value for each field of the data type.
+  DataSource:
+    type: object
+    properties:
+      dataStreamName?:
+        type: string
+        description: The stream name uniquely identifies this particular data source among other data sources of the same type from the same underlying producer. Setting the stream name is optional, but should be done whenever an application exposes two streams for the same data type, or when a device has two equivalent sensors.
+      application?: Application
+      dataType?: DataType
+      name?:
+        type: string
+        description: An end-user visible name for this data source.
+      dataQualityStandard?:
+        type: array
+        description: ''
+        items:
+          type: string
+          enum:
+          - dataQualityBloodGlucoseIso151972003
+          - dataQualityBloodGlucoseIso151972013
+          - dataQualityBloodPressureAami
+          - dataQualityBloodPressureBhsAA
+          - dataQualityBloodPressureBhsAB
+          - dataQualityBloodPressureBhsBA
+          - dataQualityBloodPressureBhsBB
+          - dataQualityBloodPressureEsh2002
+          - dataQualityBloodPressureEsh2010
+          - dataQualityUnknown
+      type?:
+        type: string
+        description: A constant describing the type of this data source. Indicates whether this data source produces raw or derived data.
+        enum:
+        - derived
+        - raw
+      device?: Device
+      dataStreamId?:
+        type: string
+        description: "A unique identifier for the data stream produced by this data\
+          \ source. The identifier includes:\n\n \n- The physical device's manufacturer,\
+          \ model, and serial number (UID). \n- The application's package name or\
+          \ name. Package name is used when the data source was created by an Android\
+          \ application. The developer project number is used when the data source\
+          \ was created by a REST client. \n- The data source's type. \n- The data\
+          \ source's stream name.  Note that not all attributes of the data source\
+          \ are used as part of the stream identifier. In particular, the version\
+          \ of the hardware/the application isn't used. This allows us to preserve\
+          \ the same stream through version updates. This also means that two DataSource\
+          \ objects may represent the same data stream even if they're not equal.\n\
+          \nThe exact format of the data stream ID created by an Android application\
+          \ is: type:dataType.name:application.packageName:device.manufacturer:device.model:device.uid:dataStreamName\
+          \ \n\nThe exact format of the data stream ID created by a REST client is:\
+          \ type:dataType.name:developer project number:device.manufacturer:device.model:device.uid:dataStreamName\
+          \ \n\nWhen any of the optional fields that comprise of the data stream ID\
+          \ are blank, they will be omitted from the data stream ID. The minnimum\
+          \ viable data stream ID would be: type:dataType.name:developer project number\n\
+          \nFinally, the developer project number is obfuscated when read by any REST\
+          \ or Android client that did not create the data source. Only the data source\
+          \ creator will see the developer project number in clear and normal form."
+    description: |-
+      Definition of a unique source of sensor data. Data sources can expose raw data coming from hardware sensors on local or companion devices. They can also expose derived data, created by transforming or merging other data sources. Multiple data sources can exist for the same data type. Every data point inserted into or read from this service has an associated data source.
+
+      The data source contains enough information to uniquely identify its data, including the hardware device and the application that collected and/or transformed the data. It also holds useful metadata, such as the hardware and application versions, and the device type.
+
+      Each data source produces a unique stream of data, with a unique identifier. Not all changes to data source affect the stream identifier, so that data collected by updated versions of the same application/device can still be considered to belong to the same data stream.
+  DataType:
+    type: object
+    properties:
+      field?:
+        type: array
+        description: A field represents one dimension of a data type.
+        items: DataTypeField
+      name?:
+        type: string
+        description: Each data type has a unique, namespaced, name. All data types in the com.google namespace are shared as part of the platform.
+    description: ''
+  DataTypeField:
+    type: object
+    properties:
+      format?:
+        type: string
+        description: The different supported formats for each field in a data type.
+        enum:
+        - blob
+        - floatList
+        - floatPoint
+        - integer
+        - integerList
+        - map
+        - string
+      name?:
+        type: string
+        description: Defines the name and format of data. Unlike data type names, field names are not namespaced, and only need to be unique within the data type.
+      optional?:
+        type: boolean
+    description: |-
+      In case of multi-dimensional data (such as an accelerometer with x, y, and z axes) each field represents one dimension. Each data type field has a unique name which identifies it. The field also defines the format of the data (int, float, etc.).
+
+      This message is only instantiated in code and not used for wire comms or stored in any way.
+  Dataset:
+    type: object
+    properties:
+      dataSourceId?:
+        type: string
+        description: The data stream ID of the data source that created the points in this dataset.
+      maxEndTimeNs?:
+        type: integer
+        format: int64
+        description: The largest end time of all data points in this possibly partial representation of the dataset. Time is in nanoseconds from epoch. This should also match the first part of the dataset identifier.
+      minStartTimeNs?:
+        type: integer
+        format: int64
+        description: The smallest start time of all data points in this possibly partial representation of the dataset. Time is in nanoseconds from epoch. This should also match the first part of the dataset identifier.
+      nextPageToken?:
+        type: string
+        description: This token will be set when a dataset is received in response to a GET request and the dataset is too large to be included in a single response. Provide this value in a subsequent GET request to return the next page of data points within this dataset.
+      point?:
+        type: array
+        description: A partial list of data points contained in the dataset, ordered by largest endTimeNanos first. This list is considered complete when retrieving a small dataset and partial when patching a dataset or retrieving a dataset that is too large to include in a single response.
+        items: DataPoint
+    description: A dataset represents a projection container for data points. They do not carry any info of their own. Datasets represent a set of data points from a particular data source. A data point can be found in more than one dataset.
+  Device:
+    type: object
+    properties:
+      uid?:
+        type: string
+        description: The serial number or other unique ID for the hardware. This field is obfuscated when read by any REST or Android client that did not create the data source. Only the data source creator will see the uid field in clear and normal form.
+      model?:
+        type: string
+        description: End-user visible model name for the device.
+      type?:
+        type: string
+        description: A constant representing the type of the device.
+        enum:
+        - chestStrap
+        - headMounted
+        - phone
+        - scale
+        - tablet
+        - unknown
+        - watch
+      version?:
+        type: string
+        description: Version string for the device hardware/software.
+      manufacturer?:
+        type: string
+        description: Manufacturer of the product/hardware.
+    description: "Representation of an integrated device (such as a phone or a wearable)\
+      \ that can hold sensors. Each sensor is exposed as a data source.\n\nThe main\
+      \ purpose of the device information contained in this class is to identify the\
+      \ hardware of a particular data source. This can be useful in different ways,\
+      \ including:  \n- Distinguishing two similar sensors on different devices (the\
+      \ step counter on two nexus 5 phones, for instance)\n- Display the source of\
+      \ data to the user (by using the device make / model)\n- Treat data differently\
+      \ depending on sensor type (accelerometers on a watch may give different patterns\
+      \ than those on a phone)\n- Build different analysis models for each device/version."
+  ListDataSourcesResponse:
+    type: object
+    properties:
+      dataSource?:
+        type: array
+        description: A previously created data source.
+        items: DataSource
+  ListSessionsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      session?:
+        type: array
+        description: Sessions with an end time that is between startTime and endTime of the request.
+        items: Session
+      hasMoreData?:
+        type: boolean
+        description: Flag to indicate server has more data to transfer
+      deletedSession?:
+        type: array
+        description: If includeDeleted is set to true in the request, this list will contain sessions deleted with original end times that are within the startTime and endTime frame.
+        items: Session
+  MapValue:
+    type: object
+    properties:
+      fpVal?:
+        type: number
+        format: double
+        description: Floating point value.
+    description: |-
+      Holder object for the value of an entry in a map field of a data point.
+
+      A map value supports a subset of the formats that the regular Value supports.
+  Session:
+    type: object
+    properties:
+      activeTimeMillis?:
+        type: integer
+        format: int64
+        description: Session active time. While start_time_millis and end_time_millis define the full session time, the active time can be shorter and specified by active_time_millis. If the inactive time during the session is known, it should also be inserted via a com.google.activity.segment data point with a STILL activity value
+      endTimeMillis?:
+        type: integer
+        format: int64
+        description: An end time, in milliseconds since epoch, inclusive.
+      application?: Application
+      startTimeMillis?:
+        type: integer
+        format: int64
+        description: A start time, in milliseconds since epoch, inclusive.
+      name?:
+        type: string
+        description: A human readable name of the session.
+      description?:
+        type: string
+        description: A description for this session.
+      modifiedTimeMillis?:
+        type: integer
+        format: int64
+        description: A timestamp that indicates when the session was last modified.
+      id?:
+        type: string
+        description: A client-generated identifier that is unique across all sessions owned by this particular user.
+      activityType?:
+        type: integer
+        format: int32
+        description: The type of activity this session represents.
+    description: Sessions contain metadata, such as a user-friendly name and time interval information.
+  Value:
+    type: object
+    properties:
+      intVal?:
+        type: integer
+        format: int32
+        description: Integer value. When this is set, other values must not be set.
+      fpVal?:
+        type: number
+        format: double
+        description: Floating point value. When this is set, other values must not be set.
+      stringVal?:
+        type: string
+        description: String value. When this is set, other values must not be set. Strings should be kept small whenever possible. Data streams with large string values and high data frequency may be down sampled.
+      mapVal?:
+        type: array
+        description: Map value. The valid key space and units for the corresponding value of each entry should be documented as part of the data type definition. Keys should be kept small whenever possible. Data streams with large keys and high data frequency may be down sampled.
+        items: ValueMapValEntry
+    description: |-
+      Holder object for the value of a single field in a data point.
+
+      A field value has a particular format and is only ever set to one of an integer or a floating point value.
+  ValueMapValEntry:
+    type: object
+    properties:
+      value?: MapValue
+      key?:
+        type: string
+/{userId}:
+  uriParameters:
+    userId:
+      type: string
+      description: Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+  /sessions:
+    /{sessionId}:
+      uriParameters:
+        sessionId:
+          type: string
+          description: The ID of the session to be created.
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fitness.activity.write
+        description: Updates or insert a given session.
+        is:
+        - hasParameters
+        queryParameters:
+          currentTimeMillis?:
+            type: integer
+            format: int64
+            description: The client's current time in milliseconds since epoch.
+        body:
+          application/json: Session
+        responses:
+          200:
+            body:
+              application/json: Session
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fitness.activity.write
+        description: Deletes a session specified by the given session ID.
+        is:
+        - hasParameters
+        queryParameters:
+          currentTimeMillis?:
+            type: integer
+            format: int64
+            description: The client's current time in milliseconds since epoch.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fitness.activity.read
+          - https://www.googleapis.com/auth/fitness.activity.write
+          - https://www.googleapis.com/auth/fitness.body.read
+          - https://www.googleapis.com/auth/fitness.body.write
+          - https://www.googleapis.com/auth/fitness.location.read
+          - https://www.googleapis.com/auth/fitness.location.write
+          - https://www.googleapis.com/auth/fitness.nutrition.read
+          - https://www.googleapis.com/auth/fitness.nutrition.write
+      description: Lists sessions previously created.
+      is:
+      - hasParameters
+      queryParameters:
+        includeDeleted?:
+          type: boolean
+          description: If true, deleted sessions will be returned. When set to true, sessions returned in this response will only have an ID and will not have any other fields.
+        startTime?:
+          type: string
+          description: An RFC3339 timestamp. Only sessions ending between the start and end times will be included in the response.
+        endTime?:
+          type: string
+          description: An RFC3339 timestamp. Only sessions ending between the start and end times will be included in the response.
+        pageToken?:
+          type: string
+          description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+      responses:
+        200:
+          body:
+            application/json: ListSessionsResponse
+  /dataSources:
+    /{dataSourceId}:
+      uriParameters:
+        dataSourceId:
+          type: string
+          description: The data stream ID of the data source to update.
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fitness.activity.write
+            - https://www.googleapis.com/auth/fitness.body.write
+            - https://www.googleapis.com/auth/fitness.location.write
+            - https://www.googleapis.com/auth/fitness.nutrition.write
+        description: |-
+          Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified.
+
+          Data sources are identified by their dataStreamId. This method supports patch semantics.
+        is:
+        - hasParameters
+        body:
+          application/json: DataSource
+        responses:
+          200:
+            body:
+              application/json: DataSource
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fitness.activity.read
+            - https://www.googleapis.com/auth/fitness.activity.write
+            - https://www.googleapis.com/auth/fitness.body.read
+            - https://www.googleapis.com/auth/fitness.body.write
+            - https://www.googleapis.com/auth/fitness.location.read
+            - https://www.googleapis.com/auth/fitness.location.write
+            - https://www.googleapis.com/auth/fitness.nutrition.read
+            - https://www.googleapis.com/auth/fitness.nutrition.write
+        description: Returns the specified data source.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: DataSource
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fitness.activity.write
+            - https://www.googleapis.com/auth/fitness.body.write
+            - https://www.googleapis.com/auth/fitness.location.write
+            - https://www.googleapis.com/auth/fitness.nutrition.write
+        description: |-
+          Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified.
+
+          Data sources are identified by their dataStreamId.
+        is:
+        - hasParameters
+        body:
+          application/json: DataSource
+        responses:
+          200:
+            body:
+              application/json: DataSource
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fitness.activity.write
+            - https://www.googleapis.com/auth/fitness.body.write
+            - https://www.googleapis.com/auth/fitness.location.write
+            - https://www.googleapis.com/auth/fitness.nutrition.write
+        description: Deletes the specified data source. The request will fail if the data source contains any data points.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: DataSource
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fitness.activity.write
+          - https://www.googleapis.com/auth/fitness.body.write
+          - https://www.googleapis.com/auth/fitness.location.write
+          - https://www.googleapis.com/auth/fitness.nutrition.write
+      description: Creates a new data source that is unique across all data sources belonging to this user. The data stream ID field can be omitted and will be generated by the server with the correct format. The data stream ID is an ordered combination of some fields from the data source. In addition to the data source fields reflected into the data source ID, the developer project number that is authenticated when creating the data source is included. This developer project number is obfuscated when read by any other developer reading public data types.
+      is:
+      - hasParameters
+      body:
+        application/json: DataSource
+      responses:
+        200:
+          body:
+            application/json: DataSource
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fitness.activity.read
+          - https://www.googleapis.com/auth/fitness.activity.write
+          - https://www.googleapis.com/auth/fitness.body.read
+          - https://www.googleapis.com/auth/fitness.body.write
+          - https://www.googleapis.com/auth/fitness.location.read
+          - https://www.googleapis.com/auth/fitness.location.write
+          - https://www.googleapis.com/auth/fitness.nutrition.read
+          - https://www.googleapis.com/auth/fitness.nutrition.write
+      description: Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes.
+      is:
+      - hasParameters
+      queryParameters:
+        dataTypeName?:
+          type: string
+          description: The names of data types to include in the list. If not specified, all data sources will be returned.
+      responses:
+        200:
+          body:
+            application/json: ListDataSourcesResponse
+  /dataset:aggregate:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fitness.activity.read
+          - https://www.googleapis.com/auth/fitness.activity.write
+          - https://www.googleapis.com/auth/fitness.body.read
+          - https://www.googleapis.com/auth/fitness.body.write
+          - https://www.googleapis.com/auth/fitness.location.read
+          - https://www.googleapis.com/auth/fitness.location.write
+          - https://www.googleapis.com/auth/fitness.nutrition.read
+          - https://www.googleapis.com/auth/fitness.nutrition.write
+      description: Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggreated into exactly one bucket type per request.
+      is:
+      - hasParameters
+      body:
+        application/json: AggregateRequest
+      responses:
+        200:
+          body:
+            application/json: AggregateResponse

@@ -1,0 +1,2695 @@
+#%RAML 1.0
+title: Drive API
+version: v2
+baseUri: https://www.googleapis.com/drive/v2/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/drive/
+  role: documentation
+(commons.Icons):
+- url: https://ssl.gstatic.com/docs/doclist/images/drive_icon_32.png
+  name: x32
+- url: https://ssl.gstatic.com/docs/doclist/images/drive_icon_16.png
+  name: x16
+(commons.Id): drive:v2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/drive.appdata
+      - https://www.googleapis.com/auth/drive.scripts
+      - https://www.googleapis.com/auth/drive.apps.readonly
+      - https://www.googleapis.com/auth/drive.file
+      - https://www.googleapis.com/auth/drive.metadata.readonly
+      - https://www.googleapis.com/auth/drive.readonly
+      - https://www.googleapis.com/auth/drive
+      - https://www.googleapis.com/auth/drive.metadata
+      - https://www.googleapis.com/auth/drive.photos.readonly
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  About:
+    type: object
+    properties:
+      permissionId?:
+        type: string
+        description: The current user's ID as visible in the permissions collection.
+      largestChangeId?:
+        type: integer
+        format: int64
+        description: The largest change id.
+      kind?:
+        type: string
+        default: drive#about
+        description: This is always drive#about.
+      quotaBytesUsedAggregate?:
+        type: integer
+        format: int64
+        description: The number of quota bytes used by all Google apps (Drive, Picasa, etc.).
+      folderColorPalette?:
+        type: array
+        description: The palette of allowable folder colors as RGB hex strings.
+        items:
+          type: string
+      remainingChangeIds?:
+        type: integer
+        format: int64
+        description: The number of remaining change ids, limited to no more than 2500.
+      isCurrentAppInstalled?:
+        type: boolean
+        description: A boolean indicating whether the authenticated app is installed by the authenticated user.
+      rootFolderId?:
+        type: string
+        description: The id of the root folder.
+      additionalRoleInfo?:
+        type: array
+        description: Information about supported additional roles per file type. The most specific type takes precedence.
+        items:
+          type: object
+          properties:
+            roleSets?:
+              type: array
+              description: The supported additional roles per primary role.
+              items:
+                type: object
+                properties:
+                  primaryRole?:
+                    type: string
+                    description: A primary permission role.
+                  additionalRoles?:
+                    type: array
+                    description: The supported additional roles with the primary role.
+                    items:
+                      type: string
+            type?:
+              type: string
+              description: The content type that this additional role info applies to.
+      languageCode?:
+        type: string
+        description: The user's language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format (http://www.unicode.org/reports/tr35/).
+      quotaBytesByService?:
+        type: array
+        description: The amount of storage quota used by different Google services.
+        items:
+          type: object
+          properties:
+            bytesUsed?:
+              type: integer
+              format: int64
+              description: The storage quota bytes used by the service.
+            serviceName?:
+              type: string
+              description: The service's name, e.g. DRIVE, GMAIL, or PHOTOS.
+      quotaBytesUsed?:
+        type: integer
+        format: int64
+        description: The number of quota bytes used by Google Drive.
+      selfLink?:
+        type: string
+        description: A link back to this item.
+      features?:
+        type: array
+        description: List of additional features enabled on this account.
+        items:
+          type: object
+          properties:
+            featureRate?:
+              type: number
+              format: double
+              description: The request limit rate for this feature, in queries per second.
+            featureName?:
+              type: string
+              description: The name of the feature.
+      quotaType?:
+        type: string
+        description: "The type of the user's storage quota. Possible values are: \
+          \ \n- LIMITED \n- UNLIMITED"
+      quotaBytesTotal?:
+        type: integer
+        format: int64
+        description: The total number of quota bytes.
+      domainSharingPolicy?:
+        type: string
+        description: "The domain sharing policy for the current user. Possible values\
+          \ are:  \n- allowed \n- allowedWithWarning \n- incomingOnly \n- disallowed"
+      quotaBytesUsedInTrash?:
+        type: integer
+        format: int64
+        description: The number of quota bytes used by trashed items.
+      importFormats?:
+        type: array
+        description: The allowable import formats.
+        items:
+          type: object
+          properties:
+            source?:
+              type: string
+              description: The imported file's content type to convert from.
+            targets?:
+              type: array
+              description: The possible content types to convert to.
+              items:
+                type: string
+      name?:
+        type: string
+        description: The name of the current user.
+      etag?:
+        type: string
+        description: The ETag of the item.
+      maxUploadSizes?:
+        type: array
+        description: List of max upload sizes for each file type. The most specific type takes precedence.
+        items:
+          type: object
+          properties:
+            size?:
+              type: integer
+              format: int64
+              description: The max upload size for this type.
+            type?:
+              type: string
+              description: The file type.
+      user?: User
+      exportFormats?:
+        type: array
+        description: The allowable export formats.
+        items:
+          type: object
+          properties:
+            source?:
+              type: string
+              description: The content type to convert from.
+            targets?:
+              type: array
+              description: The possible content types to convert to.
+              items:
+                type: string
+    description: An item with user information and settings.
+  App:
+    type: object
+    properties:
+      longDescription?:
+        type: string
+        description: A long description of the app.
+      installed?:
+        type: boolean
+        description: Whether the app is installed.
+      supportsOfflineCreate?:
+        type: boolean
+        description: Whether this app supports creating new files when offline.
+      productId?:
+        type: string
+        description: The ID of the product listing for this app.
+      kind?:
+        type: string
+        default: drive#app
+        description: This is always drive#app.
+      useByDefault?:
+        type: boolean
+        description: Whether the app is selected as the default handler for the types it supports.
+      createInFolderTemplate?:
+        type: string
+        description: The template url to create a new file with this app in a given folder. The template will contain {folderId} to be replaced by the folder to create the new file in.
+      secondaryMimeTypes?:
+        type: array
+        description: The list of secondary mime types.
+        items:
+          type: string
+      shortDescription?:
+        type: string
+        description: A short description of the app.
+      icons?:
+        type: array
+        description: The various icons for the app.
+        items:
+          type: object
+          properties:
+            size?:
+              type: integer
+              format: int32
+              description: Size of the icon. Represented as the maximum of the width and height.
+            iconUrl?:
+              type: string
+              description: URL for the icon.
+            category?:
+              type: string
+              description: "Category of the icon. Allowed values are:  \n- application\
+                \ - icon for the application \n- document - icon for a file associated\
+                \ with the app \n- documentShared - icon for a shared file associated\
+                \ with the app"
+      primaryMimeTypes?:
+        type: array
+        description: The list of primary mime types.
+        items:
+          type: string
+      objectType?:
+        type: string
+        description: The type of object this app creates (e.g. Chart). If empty, the app name should be used instead.
+      hasDriveWideScope?:
+        type: boolean
+        description: Whether the app has drive-wide scope. An app with drive-wide scope can access all files in the user's drive.
+      openUrlTemplate?:
+        type: string
+        description: The template url for opening files with this app. The template will contain {ids} and/or {exportIds} to be replaced by the actual file ids. See  Open Files  for the full documentation.
+      supportsMultiOpen?:
+        type: boolean
+        description: Whether this app supports opening more than one file.
+      authorized?:
+        type: boolean
+        description: Whether the app is authorized to access data on the user's Drive.
+      name?:
+        type: string
+        description: The name of the app.
+      primaryFileExtensions?:
+        type: array
+        description: The list of primary file extensions.
+        items:
+          type: string
+      createUrl?:
+        type: string
+        description: The url to create a new file with this app.
+      secondaryFileExtensions?:
+        type: array
+        description: The list of secondary file extensions.
+        items:
+          type: string
+      id?:
+        type: string
+        description: The ID of the app.
+      supportsCreate?:
+        type: boolean
+        description: Whether this app supports creating new objects.
+      productUrl?:
+        type: string
+        description: A link to the product listing for this app.
+      supportsImport?:
+        type: boolean
+        description: Whether this app supports importing Google Docs.
+    description: The apps resource provides a list of the apps that a user has installed, with information about each app's supported MIME types, file extensions, and other details.
+  AppList:
+    type: object
+    properties:
+      defaultAppIds?:
+        type: array
+        description: List of app IDs that the user has specified to use by default. The list is in reverse-priority order (lowest to highest).
+        items:
+          type: string
+      kind?:
+        type: string
+        default: drive#appList
+        description: This is always drive#appList.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of apps.
+        items: App
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of third-party applications which the user has installed or given access to Google Drive.
+  Change:
+    type: object
+    properties:
+      modificationDate?:
+        type: datetime
+        description: The time of this modification.
+      deleted?:
+        type: boolean
+        description: Whether the file has been deleted.
+      file?: File
+      kind?:
+        type: string
+        default: drive#change
+        description: This is always drive#change.
+      id?:
+        type: integer
+        format: int64
+        description: The ID of the change.
+      fileId?:
+        type: string
+        description: The ID of the file associated with this change.
+      selfLink?:
+        type: string
+        description: A link back to this change.
+    description: Representation of a change to a file.
+  ChangeList:
+    type: object
+    properties:
+      largestChangeId?:
+        type: integer
+        format: int64
+        description: The current largest change ID.
+      kind?:
+        type: string
+        default: drive#changeList
+        description: This is always drive#changeList.
+      nextPageToken?:
+        type: string
+        description: The page token for the next page of changes.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of changes.
+        items: Change
+      nextLink?:
+        type: string
+        description: A link to the next page of changes.
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of changes for a user.
+  Channel:
+    type: object
+    properties:
+      resourceId?:
+        type: string
+        description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+      address?:
+        type: string
+        description: The address where notifications are delivered for this channel.
+      payload?:
+        type: boolean
+        description: A Boolean value to indicate whether payload is wanted. Optional.
+      kind?:
+        type: string
+        default: api#channel
+        description: 'Identifies this as a notification channel used to watch for
+          changes to a resource. Value: the fixed string "api#channel".'
+      expiration?:
+        type: integer
+        format: int64
+        description: Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+      id?:
+        type: string
+        description: A UUID or similar unique string that identifies this channel.
+      resourceUri?:
+        type: string
+        description: A version-specific identifier for the watched resource.
+      params?:
+        type: object
+        description: Additional parameters controlling delivery channel behavior. Optional.
+      type?:
+        type: string
+        description: The type of delivery mechanism used for this channel.
+      token?:
+        type: string
+        description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+    description: An notification channel used to watch for resource changes.
+  ChildList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#childList
+        description: This is always drive#childList.
+      nextPageToken?:
+        type: string
+        description: The page token for the next page of children.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of children.
+        items: ChildReference
+      nextLink?:
+        type: string
+        description: A link to the next page of children.
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of children of a file.
+  ChildReference:
+    type: object
+    properties:
+      childLink?:
+        type: string
+        description: A link to the child.
+      kind?:
+        type: string
+        default: drive#childReference
+        description: This is always drive#childReference.
+      id?:
+        type: string
+        description: The ID of the child.
+      selfLink?:
+        type: string
+        description: A link back to this reference.
+    description: A reference to a folder's child.
+  Comment:
+    type: object
+    properties:
+      author?: User
+      kind?:
+        type: string
+        default: drive#comment
+        description: This is always drive#comment.
+      content?:
+        type: string
+        description: The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content.
+      htmlContent?:
+        type: string
+        description: HTML formatted content for this comment.
+      selfLink?:
+        type: string
+        description: A link back to this comment.
+      createdDate?:
+        type: datetime
+        description: The date when this comment was first created.
+      deleted?:
+        type: boolean
+        description: Whether this comment has been deleted. If a comment has been deleted the content will be cleared and this will only represent a comment that once existed.
+      replies?:
+        type: array
+        description: Replies to this post.
+        items: CommentReply
+      anchor?:
+        type: string
+        description: A region of the document represented as a JSON string. See anchor documentation for details on how to define and interpret anchor properties.
+      fileTitle?:
+        type: string
+        description: The title of the file which this comment is addressing.
+      context?:
+        type: object
+        properties:
+          type?:
+            type: string
+            description: The MIME type of the context snippet.
+          value?:
+            type: string
+            description: Data representation of the segment of the file being commented on. In the case of a text file for example, this would be the actual text that the comment is about.
+        description: The context of the file which is being commented on.
+      modifiedDate?:
+        type: datetime
+        description: The date when this comment or any of its replies were last modified.
+      commentId?:
+        type: string
+        description: The ID of the comment.
+      fileId?:
+        type: string
+        description: The file which this comment is addressing.
+      status?:
+        type: string
+        description: "The status of this comment. Status can be changed by posting\
+          \ a reply to a comment with the desired status.  \n- \"open\" - The comment\
+          \ is still open. \n- \"resolved\" - The comment has been resolved by one\
+          \ of its replies."
+    description: A comment on a file in Google Drive.
+  CommentList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#commentList
+        description: This is always drive#commentList.
+      nextPageToken?:
+        type: string
+        description: The token to use to request the next page of results.
+      items?:
+        type: array
+        description: List of comments.
+        items: Comment
+      nextLink?:
+        type: string
+        description: A link to the next page of comments.
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of comments on a file in Google Drive.
+  CommentReply:
+    type: object
+    properties:
+      createdDate?:
+        type: datetime
+        description: The date when this reply was first created.
+      deleted?:
+        type: boolean
+        description: Whether this reply has been deleted. If a reply has been deleted the content will be cleared and this will only represent a reply that once existed.
+      author?: User
+      kind?:
+        type: string
+        default: drive#commentReply
+        description: This is always drive#commentReply.
+      modifiedDate?:
+        type: datetime
+        description: The date when this reply was last modified.
+      replyId?:
+        type: string
+        description: The ID of the reply.
+      verb?:
+        type: string
+        description: "The action this reply performed to the parent comment. When\
+          \ creating a new reply this is the action to be perform to the parent comment.\
+          \ Possible values are:  \n- \"resolve\" - To resolve a comment. \n- \"reopen\"\
+          \ - To reopen (un-resolve) a comment."
+      content?:
+        type: string
+        description: The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen).
+      htmlContent?:
+        type: string
+        description: HTML formatted content for this reply.
+    description: A comment on a file in Google Drive.
+  CommentReplyList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#commentReplyList
+        description: This is always drive#commentReplyList.
+      nextPageToken?:
+        type: string
+        description: The token to use to request the next page of results.
+      items?:
+        type: array
+        description: List of reply.
+        items: CommentReply
+      nextLink?:
+        type: string
+        description: A link to the next page of replies.
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of replies to a comment on a file in Google Drive.
+  File:
+    type: object
+    properties:
+      lastModifyingUserName?:
+        type: string
+        description: Name of the last user to modify this file.
+      shareable?:
+        type: boolean
+        description: Whether the file's sharing settings can be modified by the current user.
+      downloadUrl?:
+        type: string
+      owners?:
+        type: array
+        description: The owner(s) of this file.
+        items: User
+      mimeType?:
+        type: string
+        description: The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type.
+      copyable?:
+        type: boolean
+        description: Whether the file can be copied by the current user.
+      iconLink?:
+        type: string
+        description: A link to the file's icon.
+      indexableText?:
+        type: object
+        properties:
+          text?:
+            type: string
+            description: The text to be indexed for this file.
+        description: Indexable text attributes for the file (can only be written)
+      permissions?:
+        type: array
+        description: The list of permissions for users with access to this file.
+        items: Permission
+      isAppAuthorized?:
+        type: boolean
+        description: Whether the file was created or opened by the requesting app.
+      canComment?:
+        type: boolean
+        description: Whether the current user can comment on the file.
+      id?:
+        type: string
+        description: The ID of the file.
+      writersCanShare?:
+        type: boolean
+        description: Whether writers can share the document with other users.
+      thumbnail?:
+        type: object
+        properties:
+          image?:
+            type: string
+            description: The URL-safe Base64 encoded bytes of the thumbnail image. It should conform to RFC 4648 section 5.
+          mimeType?:
+            type: string
+            description: The MIME type of the thumbnail.
+        description: Thumbnail for the file. Only accepted on upload and for files that are not already thumbnailed by Google.
+      kind?:
+        type: string
+        default: drive#file
+        description: The type of file. This is always drive#file.
+      webViewLink?:
+        type: string
+        description: A link only available on public folders for viewing their static web assets (HTML, CSS, JS, etc) via Google Drive's Website Hosting.
+      ownedByMe?:
+        type: boolean
+        description: Whether the file is owned by the current user.
+      version?:
+        type: integer
+        format: int64
+        description: A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the requesting user.
+      labels?:
+        type: object
+        properties:
+          hidden?:
+            type: boolean
+            description: Deprecated.
+          starred?:
+            type: boolean
+            description: Whether this file is starred by the user.
+          restricted?:
+            type: boolean
+            description: Whether viewers and commenters are prevented from downloading, printing, and copying this file.
+          viewed?:
+            type: boolean
+            description: Whether this file has been viewed by this user.
+          trashed?:
+            type: boolean
+            description: Whether this file has been trashed. This label applies to all users accessing the file; however, only owners are allowed to see and untrash files.
+        description: A group of labels for the file.
+      appDataContents?:
+        type: boolean
+        description: Whether this file is in the Application Data folder.
+      explicitlyTrashed?:
+        type: boolean
+        description: Whether this file has been explicitly trashed, as opposed to recursively trashed.
+      fileSize?:
+        type: integer
+        format: int64
+        description: The size of the file in bytes. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
+      sharedWithMeDate?:
+        type: string
+        description: Time at which this file was shared with the user (formatted RFC 3339 timestamp).
+      imageMediaMetadata?:
+        type: object
+        properties:
+          date?:
+            type: string
+            description: The date and time the photo was taken (EXIF format timestamp).
+          meteringMode?:
+            type: string
+            description: The metering mode used to create the photo.
+          exposureTime?:
+            type: number
+            format: float
+            description: The length of the exposure, in seconds.
+          whiteBalance?:
+            type: string
+            description: The white balance mode used to create the photo.
+          rotation?:
+            type: integer
+            format: int32
+            description: The rotation in clockwise degrees from the image's original orientation.
+          maxApertureValue?:
+            type: number
+            format: float
+            description: The smallest f-number of the lens at the focal length used to create the photo (APEX value).
+          lens?:
+            type: string
+            description: The lens used to create the photo.
+          exposureBias?:
+            type: number
+            format: float
+            description: The exposure bias of the photo (APEX value).
+          colorSpace?:
+            type: string
+            description: The color space of the photo.
+          aperture?:
+            type: number
+            format: float
+            description: The aperture used to create the photo (f-number).
+          flashUsed?:
+            type: boolean
+            description: Whether a flash was used to create the photo.
+          subjectDistance?:
+            type: integer
+            format: int32
+            description: The distance to the subject of the photo, in meters.
+          cameraModel?:
+            type: string
+            description: The model of the camera used to create the photo.
+          width?:
+            type: integer
+            format: int32
+            description: The width of the image in pixels.
+          isoSpeed?:
+            type: integer
+            format: int32
+            description: The ISO speed used to create the photo.
+          location?:
+            type: object
+            properties:
+              altitude?:
+                type: number
+                format: double
+                description: The altitude stored in the image.
+              latitude?:
+                type: number
+                format: double
+                description: The latitude stored in the image.
+              longitude?:
+                type: number
+                format: double
+                description: The longitude stored in the image.
+            description: Geographic location information stored in the image.
+          sensor?:
+            type: string
+            description: The type of sensor used to create the photo.
+          cameraMake?:
+            type: string
+            description: The make of the camera used to create the photo.
+          exposureMode?:
+            type: string
+            description: The exposure mode used to create the photo.
+          focalLength?:
+            type: number
+            format: float
+            description: The focal length used to create the photo, in millimeters.
+          height?:
+            type: integer
+            format: int32
+            description: The height of the image in pixels.
+        description: Metadata about image media. This will only be present for image types, and its contents will depend on what can be parsed from the image content.
+      modifiedDate?:
+        type: string
+        description: Last time this file was modified by anyone (formatted RFC 3339 timestamp). This is only mutable on update when the setModifiedDate parameter is set.
+      spaces?:
+        type: array
+        description: The list of spaces which contain the file. Supported values are 'drive', 'appDataFolder' and 'photos'.
+        items:
+          type: string
+      etag?:
+        type: string
+        description: ETag of the file.
+      folderColorRgb?:
+        type: string
+        description: Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.
+      headRevisionId?:
+        type: string
+        description: The ID of the file's head revision. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
+      parents?:
+        type: array
+        description: |-
+          Collection of parent folders which contain this file.
+          Setting this field will put the file in all of the provided folders. On insert, if no folders are provided, the file will be placed in the default root folder.
+        items: ParentReference
+      canReadRevisions?:
+        type: boolean
+        description: Whether the current user has read access to the Revisions resource of the file.
+      shared?:
+        type: boolean
+        description: Whether the file has been shared.
+      description?:
+        type: string
+        description: A short description of the file.
+      title?:
+        type: string
+        description: The title of this file.
+      thumbnailLink?:
+        type: string
+        description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours.
+      quotaBytesUsed?:
+        type: integer
+        format: int64
+        description: The number of quota bytes used by this file.
+      lastModifyingUser?: User
+      md5Checksum?:
+        type: string
+        description: An MD5 checksum for the content of this file. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
+      fileExtension?:
+        type: string
+        description: The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
+      alternateLink?:
+        type: string
+        description: A link for opening the file in a relevant Google editor or viewer.
+      fullFileExtension?:
+        type: string
+        description: The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
+      modifiedByMeDate?:
+        type: string
+        description: Last time this file was modified by the user (formatted RFC 3339 timestamp). Note that setting modifiedDate will also update the modifiedByMe date for the user which set the date.
+      lastViewedByMeDate?:
+        type: string
+        description: Last time this file was viewed by the user (formatted RFC 3339 timestamp).
+      webContentLink?:
+        type: string
+        description: A link for downloading the content of the file in a browser using cookie based authentication. In cases where the content is shared publicly, the content can be downloaded without any credentials.
+      userPermission?: Permission
+      defaultOpenWithLink?:
+        type: string
+        description: A link to open this file with the user's default app for this file. Only populated when the drive.apps.readonly scope is used.
+      editable?:
+        type: boolean
+        description: Whether the file can be edited by the current user.
+      ownerNames?:
+        type: array
+        description: Name(s) of the owner(s) of this file.
+        items:
+          type: string
+      selfLink?:
+        type: string
+        description: A link back to this file.
+      markedViewedByMeDate?:
+        type: string
+        description: Deprecated.
+      openWithLinks?:
+        type: object
+        description: A map of the id of each of the user's apps to a link to open this file with that app. Only populated when the drive.apps.readonly scope is used.
+      embedLink?:
+        type: string
+        description: A link for embedding the file.
+      videoMediaMetadata?:
+        type: object
+        properties:
+          width?:
+            type: integer
+            format: int32
+            description: The width of the video in pixels.
+          durationMillis?:
+            type: integer
+            format: int64
+            description: The duration of the video in milliseconds.
+          height?:
+            type: integer
+            format: int32
+            description: The height of the video in pixels.
+        description: Metadata about video media. This will only be present for video types.
+      createdDate?:
+        type: string
+        description: Create time for this file (formatted RFC 3339 timestamp).
+      exportLinks?:
+        type: object
+        description: Links for exporting Google Docs to specific formats.
+      sharingUser?: User
+      originalFilename?:
+        type: string
+        description: The original filename of the uploaded content if available, or else the original value of the title field. This is only available for files with binary content in Drive.
+      properties?:
+        type: array
+        description: The list of properties.
+        items: Property
+    description: The metadata for a file.
+  FileList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#fileList
+        description: This is always drive#fileList.
+      nextPageToken?:
+        type: string
+        description: The page token for the next page of files.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of files.
+        items: File
+      nextLink?:
+        type: string
+        description: A link to the next page of files.
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of files.
+  GeneratedIds:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#generatedIds
+        description: This is always drive#generatedIds
+      ids?:
+        type: array
+        description: The IDs generated for the requesting user in the specified space.
+        items:
+          type: string
+      space?:
+        type: string
+        description: The type of file that can be created with these IDs.
+    description: A list of generated IDs which can be provided in insert requests
+  ParentList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#parentList
+        description: This is always drive#parentList.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of parents.
+        items: ParentReference
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of a file's parents.
+  ParentReference:
+    type: object
+    properties:
+      parentLink?:
+        type: string
+        description: A link to the parent.
+      isRoot?:
+        type: boolean
+        description: Whether or not the parent is the root folder.
+      kind?:
+        type: string
+        default: drive#parentReference
+        description: This is always drive#parentReference.
+      id?:
+        type: string
+        description: The ID of the parent.
+      selfLink?:
+        type: string
+        description: A link back to this reference.
+    description: A reference to a file's parent.
+  Permission:
+    type: object
+    properties:
+      authKey?:
+        type: string
+        description: The authkey parameter required for this permission.
+      role?:
+        type: string
+        description: "The primary role for this user. Allowed values are:  \n- owner\
+          \ \n- reader \n- writer"
+      kind?:
+        type: string
+        default: drive#permission
+        description: This is always drive#permission.
+      additionalRoles?:
+        type: array
+        description: Additional roles for this user. Only commenter is currently allowed.
+        items:
+          type: string
+      withLink?:
+        type: boolean
+        description: Whether the link is required for this permission.
+      type?:
+        type: string
+        description: "The account type. Allowed values are:  \n- user \n- group \n\
+          - domain \n- anyone"
+      selfLink?:
+        type: string
+        description: A link back to this permission.
+      emailAddress?:
+        type: string
+        description: The email address of the user or group this permission refers to. This is an output-only field which is present when the permission type is user or group.
+      domain?:
+        type: string
+        description: The domain name of the entity this permission refers to. This is an output-only field which is present when the permission type is user, group or domain.
+      name?:
+        type: string
+        description: The name for this permission.
+      etag?:
+        type: string
+        description: The ETag of the permission.
+      id?:
+        type: string
+        description: The ID of the user this permission refers to, and identical to the permissionId in the About and Files resources. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type anyone, in which case both id and value are ignored.
+      photoLink?:
+        type: string
+        description: A link to the profile photo, if available.
+      value?:
+        type: string
+        description: The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type anyone, in which case both id and value are ignored.
+      expirationDate?:
+        type: datetime
+        description: The time at which this permission will expire (RFC 3339 date-time).
+    description: A permission for a file.
+  PermissionId:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#permissionId
+        description: This is always drive#permissionId.
+      id?:
+        type: string
+        description: The permission ID.
+    description: An ID for a user or group as seen in Permission items.
+  PermissionList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#permissionList
+        description: This is always drive#permissionList.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of permissions.
+        items: Permission
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of permissions associated with a file.
+  Property:
+    type: object
+    properties:
+      visibility?:
+        type: string
+        description: The visibility of this property.
+      kind?:
+        type: string
+        default: drive#property
+        description: This is always drive#property.
+      etag?:
+        type: string
+        description: ETag of the property.
+      value?:
+        type: string
+        description: The value of this property.
+      key?:
+        type: string
+        description: The key of this property.
+      selfLink?:
+        type: string
+        description: The link back to this property.
+    description: "A key-value pair attached to a file that is either public or private\
+      \ to an application.\nThe following limits apply to file properties:  \n- Maximum\
+      \ of 100 properties total per file\n- Maximum of 30 private properties per app\n\
+      - Maximum of 30 public properties\n- Maximum of 124 bytes size limit on (key\
+      \ + value) string in UTF-8 encoding for a single property."
+  PropertyList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#propertyList
+        description: This is always drive#propertyList.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The list of properties.
+        items: Property
+      selfLink?:
+        type: string
+        description: The link back to this list.
+    description: A collection of properties, key-value pairs that are either public or private to an application.
+  Revision:
+    type: object
+    properties:
+      lastModifyingUserName?:
+        type: string
+        description: Name of the last user to modify this revision.
+      pinned?:
+        type: boolean
+        description: Whether this revision is pinned to prevent automatic purging. This will only be populated and can only be modified on files with content stored in Drive which are not Google Docs. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter.
+      publishedLink?:
+        type: string
+        description: A link to the published revision.
+      kind?:
+        type: string
+        default: drive#revision
+        description: This is always drive#revision.
+      downloadUrl?:
+        type: string
+        description: Short term download URL for the file. This will only be populated on files with content stored in Drive.
+      publishAuto?:
+        type: boolean
+        description: Whether subsequent revisions will be automatically republished. This is only populated and can only be modified for Google Docs.
+      mimeType?:
+        type: string
+        description: The MIME type of the revision.
+      published?:
+        type: boolean
+        description: Whether this revision is published. This is only populated and can only be modified for Google Docs.
+      selfLink?:
+        type: string
+        description: A link back to this revision.
+      lastModifyingUser?: User
+      md5Checksum?:
+        type: string
+        description: An MD5 checksum for the content of this revision. This will only be populated on files with content stored in Drive.
+      fileSize?:
+        type: integer
+        format: int64
+        description: The size of the revision in bytes. This will only be populated on files with content stored in Drive.
+      exportLinks?:
+        type: object
+        description: Links for exporting Google Docs to specific formats.
+      publishedOutsideDomain?:
+        type: boolean
+        description: Whether this revision is published outside the domain. This is only populated and can only be modified for Google Docs.
+      modifiedDate?:
+        type: string
+        description: Last time this revision was modified (formatted RFC 3339 timestamp).
+      etag?:
+        type: string
+        description: The ETag of the revision.
+      id?:
+        type: string
+        description: The ID of the revision.
+      originalFilename?:
+        type: string
+        description: The original filename when this revision was created. This will only be populated on files with content stored in Drive.
+    description: A revision of a file.
+  RevisionList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: drive#revisionList
+        description: This is always drive#revisionList.
+      etag?:
+        type: string
+        description: The ETag of the list.
+      items?:
+        type: array
+        description: The actual list of revisions.
+        items: Revision
+      selfLink?:
+        type: string
+        description: A link back to this list.
+    description: A list of revisions of a file.
+  User:
+    type: object
+    properties:
+      permissionId?:
+        type: string
+        description: The user's ID as visible in the permissions collection.
+      emailAddress?:
+        type: string
+        description: The email address of the user.
+      isAuthenticatedUser?:
+        type: boolean
+        description: Whether this user is the same as the authenticated user for whom the request was made.
+      displayName?:
+        type: string
+        description: A plain text displayable name for this user.
+      kind?:
+        type: string
+        default: drive#user
+        description: This is always drive#user.
+      picture?:
+        type: object
+        properties:
+          url?:
+            type: string
+            description: A URL that points to a profile picture of this user.
+        description: The user's profile picture.
+    description: Information about a Drive user.
+/files:
+  /{fileId}:
+    uriParameters:
+      fileId:
+        type: string
+        description: The ID of the file that the Realtime API data model is associated with.
+    /realtime:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Exports the contents of the Realtime API data model associated with this file as JSON.
+        is:
+        - hasParameters
+        queryParameters:
+          revision?:
+            type: integer
+            format: int32
+            description: The revision of the Realtime API data model to export. Revisions start at 1 (the initial empty data model) and are incremented with each change. If this parameter is excluded, the most recent data model will be returned.
+            minimum: 1
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+        description: Overwrites the Realtime API data model associated with this file with the provided JSON data model.
+        is:
+        - hasParameters
+        queryParameters:
+          baseRevision?:
+            type: string
+            description: The revision of the model to diff the uploaded model against. If set, the uploaded model is diffed against the provided revision and those differences are merged with any changes made to the model after the provided revision. If not set, the uploaded model replaces the current model on the server.
+    /comments:
+      /{commentId}:
+        uriParameters:
+          commentId:
+            type: string
+            description: The ID of the comment.
+        /replies:
+          /{replyId}:
+            uriParameters:
+              replyId:
+                type: string
+                description: The ID of the reply.
+            patch:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/drive
+                  - https://www.googleapis.com/auth/drive.file
+              description: Updates an existing reply. This method supports patch semantics.
+              is:
+              - hasParameters
+              body:
+                application/json: CommentReply
+              responses:
+                200:
+                  body:
+                    application/json: CommentReply
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/drive
+                  - https://www.googleapis.com/auth/drive.file
+                  - https://www.googleapis.com/auth/drive.readonly
+              description: Gets a reply.
+              is:
+              - hasParameters
+              queryParameters:
+                includeDeleted?:
+                  type: boolean
+                  default: false
+                  description: If set, this will succeed when retrieving a deleted reply.
+              responses:
+                200:
+                  body:
+                    application/json: CommentReply
+            put:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/drive
+                  - https://www.googleapis.com/auth/drive.file
+              description: Updates an existing reply.
+              is:
+              - hasParameters
+              body:
+                application/json: CommentReply
+              responses:
+                200:
+                  body:
+                    application/json: CommentReply
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/drive
+                  - https://www.googleapis.com/auth/drive.file
+              description: Deletes a reply.
+              is:
+              - hasParameters
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/drive
+                - https://www.googleapis.com/auth/drive.file
+            description: Creates a new reply to the given comment.
+            is:
+            - hasParameters
+            body:
+              application/json: CommentReply
+            responses:
+              200:
+                body:
+                  application/json: CommentReply
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/drive
+                - https://www.googleapis.com/auth/drive.file
+                - https://www.googleapis.com/auth/drive.readonly
+            description: Lists all of the replies to a comment.
+            is:
+            - hasParameters
+            queryParameters:
+              maxResults?:
+                type: integer
+                default: 20
+                format: int32
+                description: The maximum number of replies to include in the response, used for paging.
+                maximum: 100
+                minimum: 0
+              includeDeleted?:
+                type: boolean
+                default: false
+                description: If set, all replies, including deleted replies (with content stripped) will be returned.
+              pageToken?:
+                type: string
+                description: The continuation token, used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+            responses:
+              200:
+                body:
+                  application/json: CommentReplyList
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Updates an existing comment. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Comment
+          responses:
+            200:
+              body:
+                application/json: Comment
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.readonly
+          description: Gets a comment by ID.
+          is:
+          - hasParameters
+          queryParameters:
+            includeDeleted?:
+              type: boolean
+              default: false
+              description: If set, this will succeed when retrieving a deleted comment, and will include any deleted replies.
+          responses:
+            200:
+              body:
+                application/json: Comment
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Updates an existing comment.
+          is:
+          - hasParameters
+          body:
+            application/json: Comment
+          responses:
+            200:
+              body:
+                application/json: Comment
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Deletes a comment.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+        description: Creates a new comment on the given file.
+        is:
+        - hasParameters
+        body:
+          application/json: Comment
+        responses:
+          200:
+            body:
+              application/json: Comment
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Lists a file's comments.
+        is:
+        - hasParameters
+        queryParameters:
+          updatedMin?:
+            type: string
+            description: Only discussions that were updated after this timestamp will be returned. Formatted as an RFC 3339 timestamp.
+          maxResults?:
+            type: integer
+            default: 20
+            format: int32
+            description: The maximum number of discussions to include in the response, used for paging.
+            maximum: 100
+            minimum: 0
+          includeDeleted?:
+            type: boolean
+            default: false
+            description: If set, all comments and replies, including deleted comments and replies (with content stripped) will be returned.
+          pageToken?:
+            type: string
+            description: The continuation token, used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+        responses:
+          200:
+            body:
+              application/json: CommentList
+    /permissions:
+      /{permissionId}:
+        uriParameters:
+          permissionId:
+            type: string
+            description: The ID for the permission.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Updates a permission using patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            transferOwnership?:
+              type: boolean
+              default: false
+              description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
+            removeExpiration?:
+              type: boolean
+              default: false
+              description: Whether to remove the expiration date.
+          body:
+            application/json: Permission
+          responses:
+            200:
+              body:
+                application/json: Permission
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+              - https://www.googleapis.com/auth/drive.metadata.readonly
+              - https://www.googleapis.com/auth/drive.photos.readonly
+              - https://www.googleapis.com/auth/drive.readonly
+          description: Gets a permission by ID.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Permission
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Updates a permission.
+          is:
+          - hasParameters
+          queryParameters:
+            transferOwnership?:
+              type: boolean
+              default: false
+              description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
+            removeExpiration?:
+              type: boolean
+              default: false
+              description: Whether to remove the expiration date.
+          body:
+            application/json: Permission
+          responses:
+            200:
+              body:
+                application/json: Permission
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Deletes a permission from a file.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+        description: Inserts a permission for a file.
+        is:
+        - hasParameters
+        queryParameters:
+          emailMessage?:
+            type: string
+            description: A custom message to include in notification emails.
+          sendNotificationEmails?:
+            type: boolean
+            default: true
+            description: Whether to send notification emails when sharing to users or groups. This parameter is ignored and an email is sent if the role is owner.
+        body:
+          application/json: Permission
+        responses:
+          200:
+            body:
+              application/json: Permission
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+            - https://www.googleapis.com/auth/drive.metadata.readonly
+            - https://www.googleapis.com/auth/drive.photos.readonly
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Lists a file's permissions.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: PermissionList
+    /touch:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.apps.readonly
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+        description: Set the file's updated time to the current server time.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: File
+    /trash:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.apps.readonly
+            - https://www.googleapis.com/auth/drive.file
+        description: Moves a file to the trash. The currently authenticated user must own the file.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: File
+    /watch:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+            - https://www.googleapis.com/auth/drive.metadata.readonly
+            - https://www.googleapis.com/auth/drive.photos.readonly
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Subscribe to changes on a file
+        is:
+        - hasParameters
+        queryParameters:
+          revisionId?:
+            type: string
+            description: Specifies the Revision ID that should be downloaded. Ignored unless alt=media is specified.
+          updateViewedDate?:
+            type: boolean
+            default: false
+            description: 'Deprecated: Use files.update with modifiedDateBehavior=noChange,
+              updateViewedDate=true and an empty request body.'
+          acknowledgeAbuse?:
+            type: boolean
+            default: false
+            description: Whether the user is acknowledging the risk of downloading known malware or other abusive files.
+          projection?:
+            type: string
+            description: This parameter is deprecated and has no function.
+            enum:
+            - BASIC
+            - FULL
+        body:
+          application/json: Channel
+        responses:
+          200:
+            body:
+              application/json: Channel
+    /untrash:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.apps.readonly
+            - https://www.googleapis.com/auth/drive.file
+        description: Restores a file from the trash.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: File
+    /copy:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.apps.readonly
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.photos.readonly
+        description: Creates a copy of the specified file.
+        is:
+        - hasParameters
+        queryParameters:
+          ocrLanguage?:
+            type: string
+            description: If ocr is true, hints at the language to use. Valid values are BCP 47 codes.
+          pinned?:
+            type: boolean
+            default: false
+            description: Whether to pin the head revision of the new copy. A file can have a maximum of 200 pinned revisions.
+          visibility?:
+            type: string
+            default: DEFAULT
+            description: The visibility of the new file. This parameter is only relevant when the source is not a native Google Doc and convert=false.
+            enum:
+            - DEFAULT
+            - PRIVATE
+          timedTextLanguage?:
+            type: string
+            description: The language of the timed text.
+          timedTextTrackName?:
+            type: string
+            description: The timed text track name.
+          convert?:
+            type: boolean
+            default: false
+            description: Whether to convert this file to the corresponding Google Docs format.
+          ocr?:
+            type: boolean
+            default: false
+            description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
+        body:
+          application/json: File
+        responses:
+          200:
+            body:
+              application/json: File
+    /export:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Exports a Google Doc to the requested MIME type and returns the exported content.
+        is:
+        - hasParameters
+        queryParameters:
+          mimeType:
+            type: string
+            description: The MIME type of the format requested for this export.
+    /revisions:
+      /{revisionId}:
+        uriParameters:
+          revisionId:
+            type: string
+            description: The ID for the revision.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+          description: Updates a revision. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Revision
+          responses:
+            200:
+              body:
+                application/json: Revision
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+              - https://www.googleapis.com/auth/drive.metadata.readonly
+              - https://www.googleapis.com/auth/drive.photos.readonly
+              - https://www.googleapis.com/auth/drive.readonly
+          description: Gets a specific revision.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Revision
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+          description: Updates a revision.
+          is:
+          - hasParameters
+          body:
+            application/json: Revision
+          responses:
+            200:
+              body:
+                application/json: Revision
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+          description: Removes a revision.
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+            - https://www.googleapis.com/auth/drive.metadata.readonly
+            - https://www.googleapis.com/auth/drive.photos.readonly
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Lists a file's revisions.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: RevisionList
+    /properties:
+      /{propertyKey}:
+        uriParameters:
+          propertyKey:
+            type: string
+            description: The key of the property.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+          description: Updates a property, or adds it if it doesn't exist. This method supports patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            visibility?:
+              type: string
+              default: private
+              description: The visibility of the property.
+          body:
+            application/json: Property
+          responses:
+            200:
+              body:
+                application/json: Property
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+              - https://www.googleapis.com/auth/drive.metadata.readonly
+              - https://www.googleapis.com/auth/drive.photos.readonly
+              - https://www.googleapis.com/auth/drive.readonly
+          description: Gets a property by its key.
+          is:
+          - hasParameters
+          queryParameters:
+            visibility?:
+              type: string
+              default: private
+              description: The visibility of the property.
+          responses:
+            200:
+              body:
+                application/json: Property
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+          description: Updates a property, or adds it if it doesn't exist.
+          is:
+          - hasParameters
+          queryParameters:
+            visibility?:
+              type: string
+              default: private
+              description: The visibility of the property.
+          body:
+            application/json: Property
+          responses:
+            200:
+              body:
+                application/json: Property
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+          description: Deletes a property.
+          is:
+          - hasParameters
+          queryParameters:
+            visibility?:
+              type: string
+              default: private
+              description: The visibility of the property.
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+        description: Adds a property to a file, or updates it if it already exists.
+        is:
+        - hasParameters
+        body:
+          application/json: Property
+        responses:
+          200:
+            body:
+              application/json: Property
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+            - https://www.googleapis.com/auth/drive.metadata.readonly
+            - https://www.googleapis.com/auth/drive.photos.readonly
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Lists a file's properties.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: PropertyList
+    /parents:
+      /{parentId}:
+        uriParameters:
+          parentId:
+            type: string
+            description: The ID of the parent.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+              - https://www.googleapis.com/auth/drive.metadata.readonly
+              - https://www.googleapis.com/auth/drive.photos.readonly
+              - https://www.googleapis.com/auth/drive.readonly
+          description: Gets a specific parent reference.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: ParentReference
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Removes a parent from a file.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+        description: Adds a parent folder for a file.
+        is:
+        - hasParameters
+        body:
+          application/json: ParentReference
+        responses:
+          200:
+            body:
+              application/json: ParentReference
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+            - https://www.googleapis.com/auth/drive.metadata.readonly
+            - https://www.googleapis.com/auth/drive.photos.readonly
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Lists a file's parents.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: ParentList
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.scripts
+      description: Updates file metadata and/or content.
+      is:
+      - hasParameters
+      queryParameters:
+        ocrLanguage?:
+          type: string
+          description: If ocr is true, hints at the language to use. Valid values are BCP 47 codes.
+        pinned?:
+          type: boolean
+          default: false
+          description: Whether to pin the new revision. A file can have a maximum of 200 pinned revisions.
+        updateViewedDate?:
+          type: boolean
+          default: true
+          description: Whether to update the view date after successfully updating the file.
+        useContentAsIndexableText?:
+          type: boolean
+          default: false
+          description: Whether to use the content as indexable text.
+        newRevision?:
+          type: boolean
+          default: true
+          description: Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center.
+        timedTextTrackName?:
+          type: string
+          description: The timed text track name.
+        convert?:
+          type: boolean
+          default: false
+          description: This parameter is deprecated and has no function.
+        modifiedDateBehavior?:
+          type: string
+          description: Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.
+          enum:
+          - fromBody
+          - fromBodyIfNeeded
+          - fromBodyOrNow
+          - noChange
+          - now
+          - nowIfNeeded
+        removeParents?:
+          type: string
+          description: Comma-separated list of parent IDs to remove.
+        setModifiedDate?:
+          type: boolean
+          default: false
+          description: Whether to set the modified date with the supplied modified date.
+        timedTextLanguage?:
+          type: string
+          description: The language of the timed text.
+        addParents?:
+          type: string
+          description: Comma-separated list of parent IDs to add.
+        ocr?:
+          type: boolean
+          default: false
+          description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
+      body:
+        application/json: File
+      responses:
+        200:
+          body:
+            application/json: File
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.file
+      description: Permanently deletes a file by ID. Skips the trash. The currently authenticated user must own the file.
+      is:
+      - hasParameters
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.scripts
+      description: Updates file metadata and/or content. This method supports patch semantics.
+      is:
+      - hasParameters
+      queryParameters:
+        ocrLanguage?:
+          type: string
+          description: If ocr is true, hints at the language to use. Valid values are BCP 47 codes.
+        pinned?:
+          type: boolean
+          default: false
+          description: Whether to pin the new revision. A file can have a maximum of 200 pinned revisions.
+        updateViewedDate?:
+          type: boolean
+          default: true
+          description: Whether to update the view date after successfully updating the file.
+        useContentAsIndexableText?:
+          type: boolean
+          default: false
+          description: Whether to use the content as indexable text.
+        newRevision?:
+          type: boolean
+          default: true
+          description: Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center.
+        timedTextTrackName?:
+          type: string
+          description: The timed text track name.
+        convert?:
+          type: boolean
+          default: false
+          description: This parameter is deprecated and has no function.
+        modifiedDateBehavior?:
+          type: string
+          description: Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.
+          enum:
+          - fromBody
+          - fromBodyIfNeeded
+          - fromBodyOrNow
+          - noChange
+          - now
+          - nowIfNeeded
+        removeParents?:
+          type: string
+          description: Comma-separated list of parent IDs to remove.
+        setModifiedDate?:
+          type: boolean
+          default: false
+          description: Whether to set the modified date with the supplied modified date.
+        timedTextLanguage?:
+          type: string
+          description: The language of the timed text.
+        addParents?:
+          type: string
+          description: Comma-separated list of parent IDs to add.
+        ocr?:
+          type: boolean
+          default: false
+          description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
+      body:
+        application/json: File
+      responses:
+        200:
+          body:
+            application/json: File
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.metadata.readonly
+          - https://www.googleapis.com/auth/drive.photos.readonly
+          - https://www.googleapis.com/auth/drive.readonly
+      description: Gets a file's metadata by ID.
+      is:
+      - hasParameters
+      queryParameters:
+        revisionId?:
+          type: string
+          description: Specifies the Revision ID that should be downloaded. Ignored unless alt=media is specified.
+        updateViewedDate?:
+          type: boolean
+          default: false
+          description: 'Deprecated: Use files.update with modifiedDateBehavior=noChange,
+            updateViewedDate=true and an empty request body.'
+        acknowledgeAbuse?:
+          type: boolean
+          default: false
+          description: Whether the user is acknowledging the risk of downloading known malware or other abusive files.
+        projection?:
+          type: string
+          description: This parameter is deprecated and has no function.
+          enum:
+          - BASIC
+          - FULL
+      responses:
+        200:
+          body:
+            application/json: File
+  /{folderId}:
+    uriParameters:
+      folderId:
+        type: string
+        description: The ID of the folder.
+    /children:
+      /{childId}:
+        uriParameters:
+          childId:
+            type: string
+            description: The ID of the child.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.appdata
+              - https://www.googleapis.com/auth/drive.file
+              - https://www.googleapis.com/auth/drive.metadata
+              - https://www.googleapis.com/auth/drive.metadata.readonly
+              - https://www.googleapis.com/auth/drive.photos.readonly
+              - https://www.googleapis.com/auth/drive.readonly
+          description: Gets a specific child reference.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: ChildReference
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/drive
+              - https://www.googleapis.com/auth/drive.file
+          description: Removes a child from a folder.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+        description: Inserts a file into a folder.
+        is:
+        - hasParameters
+        body:
+          application/json: ChildReference
+        responses:
+          200:
+            body:
+              application/json: ChildReference
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/drive
+            - https://www.googleapis.com/auth/drive.appdata
+            - https://www.googleapis.com/auth/drive.file
+            - https://www.googleapis.com/auth/drive.metadata
+            - https://www.googleapis.com/auth/drive.metadata.readonly
+            - https://www.googleapis.com/auth/drive.photos.readonly
+            - https://www.googleapis.com/auth/drive.readonly
+        description: Lists a folder's children.
+        is:
+        - hasParameters
+        queryParameters:
+          q?:
+            type: string
+            description: Query string for searching children.
+          maxResults?:
+            type: integer
+            default: 100
+            format: int32
+            description: Maximum number of children to return.
+            minimum: 0
+          orderBy?:
+            type: string
+            description: 'A comma-separated list of sort keys. Valid keys are ''createdDate'',
+              ''folder'', ''lastViewedByMeDate'', ''modifiedByMeDate'', ''modifiedDate'',
+              ''quotaBytesUsed'', ''recency'', ''sharedWithMeDate'', ''starred'',
+              and ''title''. Each key sorts ascending by default, but may be reversed
+              with the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedDate
+              desc,title. Please note that there is a current limitation for users
+              with approximately one million files in which the requested sort order
+              is ignored.'
+          pageToken?:
+            type: string
+            description: Page token for children.
+        responses:
+          200:
+            body:
+              application/json: ChildList
+  /trash:
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+      description: Permanently deletes all of the user's trashed files.
+      is:
+      - hasParameters
+  /generateIds:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.file
+      description: Generates a set of file IDs which can be provided in insert requests.
+      is:
+      - hasParameters
+      queryParameters:
+        maxResults?:
+          type: integer
+          default: 10
+          format: int32
+          description: Maximum number of IDs to return.
+          maximum: 1000
+          minimum: 1
+        space?:
+          type: string
+          default: drive
+          description: The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.
+      responses:
+        200:
+          body:
+            application/json: GeneratedIds
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/drive
+        - https://www.googleapis.com/auth/drive.appdata
+        - https://www.googleapis.com/auth/drive.apps.readonly
+        - https://www.googleapis.com/auth/drive.file
+    description: Insert a new file.
+    is:
+    - hasParameters
+    queryParameters:
+      ocrLanguage?:
+        type: string
+        description: If ocr is true, hints at the language to use. Valid values are BCP 47 codes.
+      pinned?:
+        type: boolean
+        default: false
+        description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions.
+      visibility?:
+        type: string
+        default: DEFAULT
+        description: The visibility of the new file. This parameter is only relevant when convert=false.
+        enum:
+        - DEFAULT
+        - PRIVATE
+      timedTextLanguage?:
+        type: string
+        description: The language of the timed text.
+      useContentAsIndexableText?:
+        type: boolean
+        default: false
+        description: Whether to use the content as indexable text.
+      timedTextTrackName?:
+        type: string
+        description: The timed text track name.
+      convert?:
+        type: boolean
+        default: false
+        description: Whether to convert this file to the corresponding Google Docs format.
+      ocr?:
+        type: boolean
+        default: false
+        description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
+    body:
+      application/json: File
+    responses:
+      200:
+        body:
+          application/json: File
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/drive
+        - https://www.googleapis.com/auth/drive.appdata
+        - https://www.googleapis.com/auth/drive.apps.readonly
+        - https://www.googleapis.com/auth/drive.file
+        - https://www.googleapis.com/auth/drive.metadata
+        - https://www.googleapis.com/auth/drive.metadata.readonly
+        - https://www.googleapis.com/auth/drive.photos.readonly
+        - https://www.googleapis.com/auth/drive.readonly
+    description: Lists the user's files.
+    is:
+    - hasParameters
+    queryParameters:
+      q?:
+        type: string
+        description: Query string for searching files.
+      maxResults?:
+        type: integer
+        default: 100
+        format: int32
+        description: Maximum number of files to return.
+        minimum: 0
+      spaces?:
+        type: string
+        description: A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'.
+      corpus?:
+        type: string
+        description: The body of items (files/documents) to which the query applies.
+        enum:
+        - DEFAULT
+        - DOMAIN
+      orderBy?:
+        type: string
+        description: 'A comma-separated list of sort keys. Valid keys are ''createdDate'',
+          ''folder'', ''lastViewedByMeDate'', ''modifiedByMeDate'', ''modifiedDate'',
+          ''quotaBytesUsed'', ''recency'', ''sharedWithMeDate'', ''starred'', and
+          ''title''. Each key sorts ascending by default, but may be reversed with
+          the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title.
+          Please note that there is a current limitation for users with approximately
+          one million files in which the requested sort order is ignored.'
+      pageToken?:
+        type: string
+        description: Page token for files.
+      projection?:
+        type: string
+        description: This parameter is deprecated and has no function.
+        enum:
+        - BASIC
+        - FULL
+    responses:
+      200:
+        body:
+          application/json: FileList
+/about:
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/drive
+        - https://www.googleapis.com/auth/drive.appdata
+        - https://www.googleapis.com/auth/drive.file
+        - https://www.googleapis.com/auth/drive.metadata
+        - https://www.googleapis.com/auth/drive.metadata.readonly
+        - https://www.googleapis.com/auth/drive.photos.readonly
+        - https://www.googleapis.com/auth/drive.readonly
+    description: Gets the information about the current user along with Drive API settings
+    is:
+    - hasParameters
+    queryParameters:
+      maxChangeIdCount?:
+        type: integer
+        default: 1
+        format: int64
+        description: Maximum number of remaining change IDs to count
+      includeSubscribed?:
+        type: boolean
+        default: true
+        description: When calculating the number of remaining change IDs, whether to include public files the user has opened and shared files. When set to false, this counts only change IDs for owned files and any shared or public files that the user has explicitly added to a folder they own.
+      startChangeId?:
+        type: integer
+        format: int64
+        description: Change ID to start counting from when calculating number of remaining change IDs
+    responses:
+      200:
+        body:
+          application/json: About
+/changes:
+  /watch:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.metadata.readonly
+          - https://www.googleapis.com/auth/drive.photos.readonly
+          - https://www.googleapis.com/auth/drive.readonly
+      description: Subscribe to changes for a user.
+      is:
+      - hasParameters
+      queryParameters:
+        includeSubscribed?:
+          type: boolean
+          default: true
+          description: Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.
+        maxResults?:
+          type: integer
+          default: 100
+          format: int32
+          description: Maximum number of changes to return.
+          minimum: 1
+        spaces?:
+          type: string
+          description: A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'.
+        includeDeleted?:
+          type: boolean
+          default: true
+          description: Whether to include deleted items.
+        startChangeId?:
+          type: integer
+          format: int64
+          description: Change ID to start listing changes from.
+        pageToken?:
+          type: string
+          description: Page token for changes.
+      body:
+        application/json: Channel
+      responses:
+        200:
+          body:
+            application/json: Channel
+  /{changeId}:
+    uriParameters:
+      changeId:
+        type: string
+        description: The ID of the change.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.metadata.readonly
+          - https://www.googleapis.com/auth/drive.photos.readonly
+          - https://www.googleapis.com/auth/drive.readonly
+      description: Gets a specific change.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Change
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/drive
+        - https://www.googleapis.com/auth/drive.appdata
+        - https://www.googleapis.com/auth/drive.apps.readonly
+        - https://www.googleapis.com/auth/drive.file
+        - https://www.googleapis.com/auth/drive.metadata
+        - https://www.googleapis.com/auth/drive.metadata.readonly
+        - https://www.googleapis.com/auth/drive.photos.readonly
+        - https://www.googleapis.com/auth/drive.readonly
+    description: Lists the changes for a user.
+    is:
+    - hasParameters
+    queryParameters:
+      includeSubscribed?:
+        type: boolean
+        default: true
+        description: Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.
+      maxResults?:
+        type: integer
+        default: 100
+        format: int32
+        description: Maximum number of changes to return.
+        minimum: 1
+      spaces?:
+        type: string
+        description: A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'.
+      includeDeleted?:
+        type: boolean
+        default: true
+        description: Whether to include deleted items.
+      startChangeId?:
+        type: integer
+        format: int64
+        description: Change ID to start listing changes from.
+      pageToken?:
+        type: string
+        description: Page token for changes.
+    responses:
+      200:
+        body:
+          application/json: ChangeList
+/channels:
+  /stop:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.metadata.readonly
+          - https://www.googleapis.com/auth/drive.photos.readonly
+          - https://www.googleapis.com/auth/drive.readonly
+      description: Stop watching resources through this channel
+      is:
+      - hasParameters
+      body:
+        application/json: Channel
+/permissionIds:
+  /{email}:
+    uriParameters:
+      email:
+        type: string
+        description: The email address for which to return a permission ID
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.metadata.readonly
+          - https://www.googleapis.com/auth/drive.photos.readonly
+          - https://www.googleapis.com/auth/drive.readonly
+      description: Returns the permission ID for an email address.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: PermissionId
+/apps:
+  /{appId}:
+    uriParameters:
+      appId:
+        type: string
+        description: The ID of the app.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/drive
+          - https://www.googleapis.com/auth/drive.appdata
+          - https://www.googleapis.com/auth/drive.apps.readonly
+          - https://www.googleapis.com/auth/drive.file
+          - https://www.googleapis.com/auth/drive.metadata
+          - https://www.googleapis.com/auth/drive.metadata.readonly
+          - https://www.googleapis.com/auth/drive.readonly
+      description: Gets a specific app.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: App
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/drive.apps.readonly
+    description: Lists a user's installed apps.
+    is:
+    - hasParameters
+    queryParameters:
+      appFilterMimeTypes?:
+        type: string
+        default: ''
+        description: A comma-separated list of MIME types for open with filtering. All apps within the given app query scope which can open any of the given MIME types will be included in the response. If appFilterExtensions are provided as well, the result is a union of the two resulting app lists.
+      appFilterExtensions?:
+        type: string
+        default: ''
+        description: A comma-separated list of file extensions for open with filtering. All apps within the given app query scope which can open any of the given file extensions will be included in the response. If appFilterMimeTypes are provided as well, the result is a union of the two resulting app lists.
+      languageCode?:
+        type: string
+        description: A language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format (http://www.unicode.org/reports/tr35/).
+    responses:
+      200:
+        body:
+          application/json: AppList

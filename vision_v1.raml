@@ -1,0 +1,822 @@
+#%RAML 1.0
+title: Google Cloud Vision API
+version: v1
+baseUri: https://vision.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/vision/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): vision:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+        enum:
+        - '1'
+        - '2'
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AnnotateImageRequest:
+    type: object
+    properties:
+      image?: Image
+      features?:
+        type: array
+        description: Requested features.
+        items: Feature
+      imageContext?: ImageContext
+    description: |-
+      Request for performing Google Cloud Vision API tasks over a user-provided
+      image, with user-requested features.
+  AnnotateImageResponse:
+    type: object
+    properties:
+      safeSearchAnnotation?: SafeSearchAnnotation
+      landmarkAnnotations?:
+        type: array
+        description: If present, landmark detection completed successfully.
+        items: EntityAnnotation
+      logoAnnotations?:
+        type: array
+        description: If present, logo detection completed successfully.
+        items: EntityAnnotation
+      faceAnnotations?:
+        type: array
+        description: If present, face detection completed successfully.
+        items: FaceAnnotation
+      textAnnotations?:
+        type: array
+        description: If present, text (OCR) detection completed successfully.
+        items: EntityAnnotation
+      error?: Status
+      labelAnnotations?:
+        type: array
+        description: If present, label detection completed successfully.
+        items: EntityAnnotation
+      imagePropertiesAnnotation?: ImageProperties
+    description: Response to an image annotation request.
+  BatchAnnotateImagesRequest:
+    type: object
+    properties:
+      requests?:
+        type: array
+        description: Individual image annotation requests for this batch.
+        items: AnnotateImageRequest
+    description: Multiple image annotation requests are batched into a single service call.
+  BatchAnnotateImagesResponse:
+    type: object
+    properties:
+      responses?:
+        type: array
+        description: Individual responses to image annotation requests within the batch.
+        items: AnnotateImageResponse
+    description: Response to a batch image annotation request.
+  BoundingPoly:
+    type: object
+    properties:
+      vertices?:
+        type: array
+        description: The bounding polygon vertices.
+        items: Vertex
+    description: A bounding polygon for the detected image annotation.
+  Color:
+    type: object
+    properties:
+      red?:
+        type: number
+        format: float
+        description: The amount of red in the color as a value in the interval [0, 1].
+      green?:
+        type: number
+        format: float
+        description: The amount of green in the color as a value in the interval [0, 1].
+      blue?:
+        type: number
+        format: float
+        description: The amount of blue in the color as a value in the interval [0, 1].
+      alpha?:
+        type: number
+        format: float
+        description: |-
+          The fraction of this color that should be applied to the pixel. That is,
+          the final pixel color is defined by the equation:
+
+            pixel color = alpha * (this color) + (1.0 - alpha) * (background color)
+
+          This means that a value of 1.0 corresponds to a solid color, whereas
+          a value of 0.0 corresponds to a completely transparent color. This
+          uses a wrapper message rather than a simple float scalar so that it is
+          possible to distinguish between a default value and the value being unset.
+          If omitted, this color object is to be rendered as a solid color
+          (as if the alpha value had been explicitly given with a value of 1.0).
+    description: |-
+      Represents a color in the RGBA color space. This representation is designed
+      for simplicity of conversion to/from color representations in various
+      languages over compactness; for example, the fields of this representation
+      can be trivially provided to the constructor of "java.awt.Color" in Java; it
+      can also be trivially provided to UIColor's "+colorWithRed:green:blue:alpha"
+      method in iOS; and, with just a little work, it can be easily formatted into
+      a CSS "rgba()" string in JavaScript, as well. Here are some examples:
+
+      Example (Java):
+
+           import com.google.type.Color;
+
+           // ...
+           public static java.awt.Color fromProto(Color protocolor) {
+             float alpha = protocolor.hasAlpha()
+                 ? protocolor.getAlpha().getValue()
+                 : 1.0;
+
+             return new java.awt.Color(
+                 protocolor.getRed(),
+                 protocolor.getGreen(),
+                 protocolor.getBlue(),
+                 alpha);
+           }
+
+           public static Color toProto(java.awt.Color color) {
+             float red = (float) color.getRed();
+             float green = (float) color.getGreen();
+             float blue = (float) color.getBlue();
+             float denominator = 255.0;
+             Color.Builder resultBuilder =
+                 Color
+                     .newBuilder()
+                     .setRed(red / denominator)
+                     .setGreen(green / denominator)
+                     .setBlue(blue / denominator);
+             int alpha = color.getAlpha();
+             if (alpha != 255) {
+               result.setAlpha(
+                   FloatValue
+                       .newBuilder()
+                       .setValue(((float) alpha) / denominator)
+                       .build());
+             }
+             return resultBuilder.build();
+           }
+           // ...
+
+      Example (iOS / Obj-C):
+
+           // ...
+           static UIColor* fromProto(Color* protocolor) {
+              float red = [protocolor red];
+              float green = [protocolor green];
+              float blue = [protocolor blue];
+              FloatValue* alpha_wrapper = [protocolor alpha];
+              float alpha = 1.0;
+              if (alpha_wrapper != nil) {
+                alpha = [alpha_wrapper value];
+              }
+              return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+           }
+
+           static Color* toProto(UIColor* color) {
+               CGFloat red, green, blue, alpha;
+               if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) {
+                 return nil;
+               }
+               Color* result = [Color alloc] init];
+               [result setRed:red];
+               [result setGreen:green];
+               [result setBlue:blue];
+               if (alpha <= 0.9999) {
+                 [result setAlpha:floatWrapperWithValue(alpha)];
+               }
+               [result autorelease];
+               return result;
+          }
+          // ...
+
+       Example (JavaScript):
+
+          // ...
+
+          var protoToCssColor = function(rgb_color) {
+             var redFrac = rgb_color.red || 0.0;
+             var greenFrac = rgb_color.green || 0.0;
+             var blueFrac = rgb_color.blue || 0.0;
+             var red = Math.floor(redFrac * 255);
+             var green = Math.floor(greenFrac * 255);
+             var blue = Math.floor(blueFrac * 255);
+
+             if (!('alpha' in rgb_color)) {
+                return rgbToCssColor_(red, green, blue);
+             }
+
+             var alphaFrac = rgb_color.alpha.value || 0.0;
+             var rgbParams = [red, green, blue].join(',');
+             return ['rgba(', rgbParams, ',', alphaFrac, ')'].join('');
+          };
+
+          var rgbToCssColor_ = function(red, green, blue) {
+            var rgbNumber = new Number((red << 16) | (green << 8) | blue);
+            var hexString = rgbNumber.toString(16);
+            var missingZeros = 6 - hexString.length;
+            var resultBuilder = ['#'];
+            for (var i = 0; i < missingZeros; i++) {
+               resultBuilder.push('0');
+            }
+            resultBuilder.push(hexString);
+            return resultBuilder.join('');
+          };
+
+          // ...
+  ColorInfo:
+    type: object
+    properties:
+      score?:
+        type: number
+        format: float
+        description: Image-specific score for this color. Value in range [0, 1].
+      color?: Color
+      pixelFraction?:
+        type: number
+        format: float
+        description: |-
+          Stores the fraction of pixels the color occupies in the image.
+          Value in range [0, 1].
+    description: |-
+      Color information consists of RGB channels, score and fraction of
+      image the color occupies in the image.
+  DominantColorsAnnotation:
+    type: object
+    properties:
+      colors?:
+        type: array
+        description: RGB color values, with their score and pixel fraction.
+        items: ColorInfo
+    description: Set of dominant colors and their corresponding scores.
+  EntityAnnotation:
+    type: object
+    properties:
+      score?:
+        type: number
+        format: float
+        description: Overall score of the result. Range [0, 1].
+      confidence?:
+        type: number
+        format: float
+        description: |-
+          The accuracy of the entity detection in an image.
+          For example, for an image containing 'Eiffel Tower,' this field represents
+          the confidence that there is a tower in the query image. Range [0, 1].
+      mid?:
+        type: string
+        description: |-
+          Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
+          For more details on KG please see:
+          https://developers.google.com/knowledge-graph/
+      description?:
+        type: string
+        description: Entity textual description, expressed in its <code>locale</code> language.
+      topicality?:
+        type: number
+        format: float
+        description: |-
+          The relevancy of the ICA (Image Content Annotation) label to the
+          image. For example, the relevancy of 'tower' to an image containing
+          'Eiffel Tower' is likely higher than an image containing a distant towering
+          building, though the confidence that there is a tower may be the same.
+          Range [0, 1].
+      locations?:
+        type: array
+        description: |-
+          The location information for the detected entity. Multiple
+          <code>LocationInfo</code> elements can be present since one location may
+          indicate the location of the scene in the query image, and another the
+          location of the place where the query image was taken. Location information
+          is usually present for landmarks.
+        items: LocationInfo
+      locale?:
+        type: string
+        description: |-
+          The language code for the locale in which the entity textual
+          <code>description</code> (next field) is expressed.
+      boundingPoly?: BoundingPoly
+      properties?:
+        type: array
+        description: |-
+          Some entities can have additional optional <code>Property</code> fields.
+          For example a different kind of score or string that qualifies the entity.
+        items: Property
+    description: Set of detected entity features.
+  FaceAnnotation:
+    type: object
+    properties:
+      surpriseLikelihood?:
+        type: string
+        description: Surprise likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      headwearLikelihood?:
+        type: string
+        description: Headwear likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      sorrowLikelihood?:
+        type: string
+        description: Sorrow likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      panAngle?:
+        type: number
+        format: float
+        description: |-
+          Yaw angle. Indicates the leftward/rightward angle that the face is
+          pointing, relative to the vertical plane perpendicular to the image. Range
+          [-180,180].
+      fdBoundingPoly?: BoundingPoly
+      landmarks?:
+        type: array
+        description: Detected face landmarks.
+        items: Landmark
+      detectionConfidence?:
+        type: number
+        format: float
+        description: Detection confidence. Range [0, 1].
+      blurredLikelihood?:
+        type: string
+        description: Blurred likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      tiltAngle?:
+        type: number
+        format: float
+        description: |-
+          Pitch angle. Indicates the upwards/downwards angle that the face is
+          pointing
+          relative to the image's horizontal plane. Range [-180,180].
+      joyLikelihood?:
+        type: string
+        description: Joy likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      underExposedLikelihood?:
+        type: string
+        description: Under-exposed likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      landmarkingConfidence?:
+        type: number
+        format: float
+        description: Face landmarking confidence. Range [0, 1].
+      rollAngle?:
+        type: number
+        format: float
+        description: |-
+          Roll angle. Indicates the amount of clockwise/anti-clockwise rotation of
+          the
+          face relative to the image vertical, about the axis perpendicular to the
+          face. Range [-180,180].
+      angerLikelihood?:
+        type: string
+        description: Anger likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      boundingPoly?: BoundingPoly
+    description: A face annotation object contains the results of face detection.
+  Feature:
+    type: object
+    properties:
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of results of this type.
+      type?:
+        type: string
+        description: The feature type.
+        enum:
+        - TYPE_UNSPECIFIED
+        - FACE_DETECTION
+        - LANDMARK_DETECTION
+        - LOGO_DETECTION
+        - LABEL_DETECTION
+        - TEXT_DETECTION
+        - SAFE_SEARCH_DETECTION
+        - IMAGE_PROPERTIES
+    description: |-
+      The <em>Feature</em> indicates what type of image detection task to perform.
+      Users describe the type of Google Cloud Vision API tasks to perform over
+      images by using <em>Feature</em>s. Features encode the Cloud Vision API
+      vertical to operate on and the number of top-scoring results to return.
+  Image:
+    type: object
+    properties:
+      source?: ImageSource
+      content?:
+        type: string
+        description: |-
+          Image content, represented as a stream of bytes.
+          Note: as with all `bytes` fields, protobuffers use a pure binary
+          representation, whereas JSON representations use base64.
+    description: Client image to perform Google Cloud Vision API tasks over.
+  ImageContext:
+    type: object
+    properties:
+      languageHints?:
+        type: array
+        description: |-
+          List of languages to use for TEXT_DETECTION. In most cases, an empty value
+          yields the best results since it enables automatic language detection. For
+          languages based on the Latin alphabet, setting `language_hints` is not
+          needed. In rare cases, when the language of the text in the image is known,
+          setting a hint will help get better results (although it will be a
+          significant hindrance if the hint is wrong). Text detection returns an
+          error if one or more of the specified languages is not one of the
+          [supported
+          languages](/translate/v2/translate-reference#supported_languages).
+        items:
+          type: string
+      latLongRect?: LatLongRect
+    description: Image context.
+  ImageProperties:
+    type: object
+    properties:
+      dominantColors?: DominantColorsAnnotation
+    description: Stores image properties (e.g. dominant colors).
+  ImageSource:
+    type: object
+    properties:
+      gcsImageUri?:
+        type: string
+        description: |-
+          Google Cloud Storage image URI. It must be in the following form:
+          `gs://bucket_name/object_name`. For more
+          details, please see: https://cloud.google.com/storage/docs/reference-uris.
+          NOTE: Cloud Storage object versioning is not supported!
+    description: External image source (Google Cloud Storage image location).
+  Landmark:
+    type: object
+    properties:
+      position?: Position
+      type?:
+        type: string
+        description: Face landmark type.
+        enum:
+        - UNKNOWN_LANDMARK
+        - LEFT_EYE
+        - RIGHT_EYE
+        - LEFT_OF_LEFT_EYEBROW
+        - RIGHT_OF_LEFT_EYEBROW
+        - LEFT_OF_RIGHT_EYEBROW
+        - RIGHT_OF_RIGHT_EYEBROW
+        - MIDPOINT_BETWEEN_EYES
+        - NOSE_TIP
+        - UPPER_LIP
+        - LOWER_LIP
+        - MOUTH_LEFT
+        - MOUTH_RIGHT
+        - MOUTH_CENTER
+        - NOSE_BOTTOM_RIGHT
+        - NOSE_BOTTOM_LEFT
+        - NOSE_BOTTOM_CENTER
+        - LEFT_EYE_TOP_BOUNDARY
+        - LEFT_EYE_RIGHT_CORNER
+        - LEFT_EYE_BOTTOM_BOUNDARY
+        - LEFT_EYE_LEFT_CORNER
+        - RIGHT_EYE_TOP_BOUNDARY
+        - RIGHT_EYE_RIGHT_CORNER
+        - RIGHT_EYE_BOTTOM_BOUNDARY
+        - RIGHT_EYE_LEFT_CORNER
+        - LEFT_EYEBROW_UPPER_MIDPOINT
+        - RIGHT_EYEBROW_UPPER_MIDPOINT
+        - LEFT_EAR_TRAGION
+        - RIGHT_EAR_TRAGION
+        - LEFT_EYE_PUPIL
+        - RIGHT_EYE_PUPIL
+        - FOREHEAD_GLABELLA
+        - CHIN_GNATHION
+        - CHIN_LEFT_GONION
+        - CHIN_RIGHT_GONION
+    description: |-
+      A face-specific landmark (for example, a face feature).
+      Landmark positions may fall outside the bounds of the image
+      when the face is near one or more edges of the image.
+      Therefore it is NOT guaranteed that 0 <= x < width or 0 <= y < height.
+  LatLng:
+    type: object
+    properties:
+      latitude?:
+        type: number
+        format: double
+        description: The latitude in degrees. It must be in the range [-90.0, +90.0].
+      longitude?:
+        type: number
+        format: double
+        description: The longitude in degrees. It must be in the range [-180.0, +180.0].
+    description: |-
+      An object representing a latitude/longitude pair. This is expressed as a pair
+      of doubles representing degrees latitude and degrees longitude. Unless
+      specified otherwise, this must conform to the
+      <a href="http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84
+      standard</a>. Values must be within normalized ranges.
+
+      Example of normalization code in Python:
+
+          def NormalizeLongitude(longitude):
+            """Wraps decimal degrees longitude to [-180.0, 180.0]."""
+            q, r = divmod(longitude, 360.0)
+            if r > 180.0 or (r == 180.0 and q <= -1.0):
+              return r - 360.0
+            return r
+
+          def NormalizeLatLng(latitude, longitude):
+            """Wraps decimal degrees latitude and longitude to
+            [-90.0, 90.0] and [-180.0, 180.0], respectively."""
+            r = latitude % 360.0
+            if r <= 90.0:
+              return r, NormalizeLongitude(longitude)
+            elif r >= 270.0:
+              return r - 360, NormalizeLongitude(longitude)
+            else:
+              return 180 - r, NormalizeLongitude(longitude + 180.0)
+
+          assert 180.0 == NormalizeLongitude(180.0)
+          assert -180.0 == NormalizeLongitude(-180.0)
+          assert -179.0 == NormalizeLongitude(181.0)
+          assert (0.0, 0.0) == NormalizeLatLng(360.0, 0.0)
+          assert (0.0, 0.0) == NormalizeLatLng(-360.0, 0.0)
+          assert (85.0, 180.0) == NormalizeLatLng(95.0, 0.0)
+          assert (-85.0, -170.0) == NormalizeLatLng(-95.0, 10.0)
+          assert (90.0, 10.0) == NormalizeLatLng(90.0, 10.0)
+          assert (-90.0, -10.0) == NormalizeLatLng(-90.0, -10.0)
+          assert (0.0, -170.0) == NormalizeLatLng(-180.0, 10.0)
+          assert (0.0, -170.0) == NormalizeLatLng(180.0, 10.0)
+          assert (-90.0, 10.0) == NormalizeLatLng(270.0, 10.0)
+          assert (90.0, 10.0) == NormalizeLatLng(-270.0, 10.0)
+  LatLongRect:
+    type: object
+    properties:
+      minLatLng?: LatLng
+      maxLatLng?: LatLng
+    description: Rectangle determined by min and max LatLng pairs.
+  LocationInfo:
+    type: object
+    properties:
+      latLng?: LatLng
+    description: Detected entity location information.
+  Position:
+    type: object
+    properties:
+      x?:
+        type: number
+        format: float
+        description: X coordinate.
+      y?:
+        type: number
+        format: float
+        description: Y coordinate.
+      z?:
+        type: number
+        format: float
+        description: Z coordinate (or depth).
+    description: |-
+      A 3D position in the image, used primarily for Face detection landmarks.
+      A valid Position must have both x and y coordinates.
+      The position coordinates are in the same scale as the original image.
+  Property:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: Name of the property.
+      value?:
+        type: string
+        description: Value of the property.
+    description: Arbitrary name/value pair.
+  SafeSearchAnnotation:
+    type: object
+    properties:
+      spoof?:
+        type: string
+        description: |-
+          Spoof likelihood. The likelihood that an obvious modification
+          was made to the image's canonical version to make it appear
+          funny or offensive.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      medical?:
+        type: string
+        description: Likelihood this is a medical image.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      adult?:
+        type: string
+        description: Represents the adult contents likelihood for the image.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+      violence?:
+        type: string
+        description: Violence likelihood.
+        enum:
+        - UNKNOWN
+        - VERY_UNLIKELY
+        - UNLIKELY
+        - POSSIBLE
+        - LIKELY
+        - VERY_LIKELY
+    description: |-
+      Set of features pertaining to the image, computed by various computer vision
+      methods over safe-search verticals (for example, adult, spoof, medical,
+      violence).
+  Status:
+    type: object
+    properties:
+      code?:
+        type: integer
+        format: int32
+        description: The status code, which should be an enum value of google.rpc.Code.
+      details?:
+        type: array
+        description: |-
+          A list of messages that carry the error details.  There will be a
+          common set of message types for APIs to use.
+        items:
+          type: object
+      message?:
+        type: string
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` which can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting purpose.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+  Vertex:
+    type: object
+    properties:
+      x?:
+        type: integer
+        format: int32
+        description: X coordinate.
+      y?:
+        type: integer
+        format: int32
+        description: Y coordinate.
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the vertex coordinates are in the same scale as the original image.
+/v1:
+  /images:annotate:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: Run image detection and annotation for a batch of images.
+      is:
+      - hasParameters
+      body:
+        application/json: BatchAnnotateImagesRequest
+      responses:
+        200:
+          body:
+            application/json: BatchAnnotateImagesResponse

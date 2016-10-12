@@ -1,0 +1,3063 @@
+#%RAML 1.0
+title: Admin Directory API
+version: directory_v1
+baseUri: https://www.googleapis.com/admin/directory/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Id): admin:directory_v1
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/admin-sdk/directory/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/admin.directory.orgunit
+      - https://www.googleapis.com/auth/admin.directory.device.mobile.action
+      - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
+      - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
+      - https://www.googleapis.com/auth/admin.directory.userschema
+      - https://www.googleapis.com/auth/admin.directory.device.chromeos
+      - https://www.googleapis.com/auth/admin.directory.notifications
+      - https://www.googleapis.com/auth/admin.directory.device.mobile
+      - https://www.googleapis.com/auth/admin.directory.customer.readonly
+      - https://www.googleapis.com/auth/admin.directory.group.readonly
+      - https://www.googleapis.com/auth/admin.directory.group.member.readonly
+      - https://www.googleapis.com/auth/admin.directory.user.security
+      - https://www.googleapis.com/auth/admin.directory.user
+      - https://www.googleapis.com/auth/admin.directory.user.readonly
+      - https://www.googleapis.com/auth/admin.directory.group
+      - https://www.googleapis.com/auth/admin.directory.group.member
+      - https://www.googleapis.com/auth/admin.directory.domain
+      - https://www.googleapis.com/auth/admin.directory.rolemanagement
+      - https://www.googleapis.com/auth/admin.directory.resource.calendar
+      - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
+      - https://www.googleapis.com/auth/admin.directory.userschema.readonly
+      - https://www.googleapis.com/auth/admin.directory.domain.readonly
+      - https://www.googleapis.com/auth/admin.directory.user.alias
+      - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
+      - https://www.googleapis.com/auth/admin.directory.customer
+      - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+      - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Alias:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#alias
+        description: Kind of resource this is.
+      alias?:
+        type: string
+        description: A alias email
+      etag?:
+        type: string
+        description: ETag of the resource.
+      id?:
+        type: string
+        description: Unique id of the group (Read-only) Unique id of the user (Read-only)
+      primaryEmail?:
+        type: string
+        description: Group's primary email (Read-only) User's primary email (Read-only)
+    description: JSON template for Alias object in Directory API.
+  Aliases:
+    type: object
+    properties:
+      aliases?:
+        type: array
+        description: List of alias objects.
+        items:
+          type: any
+      kind?:
+        type: string
+        default: admin#directory#aliases
+        description: Kind of resource this is.
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template to list aliases in Directory API.
+  Asp:
+    type: object
+    properties:
+      codeId?:
+        type: integer
+        format: int32
+        description: The unique ID of the ASP.
+      lastTimeUsed?:
+        type: integer
+        format: int64
+        description: The time when the ASP was last used. Expressed in Unix time format.
+      creationTime?:
+        type: integer
+        format: int64
+        description: The time when the ASP was created. Expressed in Unix time format.
+      kind?:
+        type: string
+        default: admin#directory#asp
+        description: The type of the API resource. This is always admin#directory#asp.
+      name?:
+        type: string
+        description: The name of the application that the user, represented by their userId, entered when the ASP was created.
+      etag?:
+        type: string
+        description: ETag of the ASP.
+      userKey?:
+        type: string
+        description: The unique ID of the user who issued the ASP.
+    description: The template that returns individual ASP (Access Code) data.
+  Asps:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#aspList
+        description: The type of the API resource. This is always admin#directory#aspList.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: A list of ASP resources.
+        items: Asp
+  CalendarResource:
+    type: object
+    properties:
+      resourceId?:
+        type: string
+        description: The unique ID for the calendar resource.
+      kind?:
+        type: string
+        default: admin#directory#resources#calendars#CalendarResource
+        description: The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.
+      resourceDescription?:
+        type: string
+        description: The brief description of the calendar resource.
+      resourceName?:
+        type: string
+        description: The name of the calendar resource. For example, Training Room 1A
+      etags?:
+        type: string
+        description: ETag of the resource.
+      resourceEmail?:
+        type: string
+        description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource.
+      resourceType?:
+        type: string
+        description: The type of the calendar resource. Used for grouping resources in the calendar user interface.
+    description: JSON template for Calendar Resource object in Directory API.
+  CalendarResources:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#resources#calendars#calendarResourcesList
+        description: Identifies this as a collection of CalendarResources. This is always admin#directory#resources#calendars#calendarResourcesList.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: The CalendarResources in this page of results.
+        items: CalendarResource
+    description: JSON template for Calendar Resource List Response object in Directory API.
+  Channel:
+    type: object
+    properties:
+      resourceId?:
+        type: string
+        description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+      address?:
+        type: string
+        description: The address where notifications are delivered for this channel.
+      payload?:
+        type: boolean
+        description: A Boolean value to indicate whether payload is wanted. Optional.
+      kind?:
+        type: string
+        default: api#channel
+        description: 'Identifies this as a notification channel used to watch for
+          changes to a resource. Value: the fixed string "api#channel".'
+      expiration?:
+        type: integer
+        format: int64
+        description: Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+      id?:
+        type: string
+        description: A UUID or similar unique string that identifies this channel.
+      resourceUri?:
+        type: string
+        description: A version-specific identifier for the watched resource.
+      params?:
+        type: object
+        description: Additional parameters controlling delivery channel behavior. Optional.
+      type?:
+        type: string
+        description: The type of delivery mechanism used for this channel.
+      token?:
+        type: string
+        description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+    description: An notification channel used to watch for resource changes.
+  ChromeOsDevice:
+    type: object
+    properties:
+      meid?:
+        type: string
+        description: Mobile Equipment identifier for the 3G mobile card in the Chromebook (Read-only)
+      orgUnitPath?:
+        type: string
+        description: OrgUnit of the device
+      annotatedUser?:
+        type: string
+        description: User of the device
+      notes?:
+        type: string
+        description: Notes added by the administrator
+      orderNumber?:
+        type: string
+        description: Chromebook order number (Read-only)
+      annotatedLocation?:
+        type: string
+        description: Address or location of the device as noted by the administrator
+      bootMode?:
+        type: string
+        description: Chromebook boot mode (Read-only)
+      deviceId?:
+        type: string
+        description: Unique identifier of Chrome OS Device (Read-only)
+      recentUsers?:
+        type: array
+        description: List of recent device users, in descending order by last login time (Read-only)
+        items:
+          type: object
+          properties:
+            type?:
+              type: string
+              description: The type of the user
+            email?:
+              type: string
+              description: Email address of the user. Present only if the user type is managed
+      supportEndDate?:
+        type: datetime
+        description: Final date the device will be supported (Read-only)
+      lastSync?:
+        type: datetime
+        description: Date and time the device was last synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
+      osVersion?:
+        type: string
+        description: Chromebook Os Version (Read-only)
+      ethernetMacAddress?:
+        type: string
+        description: Chromebook Mac Address on ethernet network interface (Read-only)
+      platformVersion?:
+        type: string
+        description: Chromebook platform version (Read-only)
+      willAutoRenew?:
+        type: boolean
+        description: Will Chromebook auto renew after support end date (Read-only)
+      model?:
+        type: string
+        description: Chromebook Model (Read-only)
+      firmwareVersion?:
+        type: string
+        description: Chromebook firmware version (Read-only)
+      lastEnrollmentTime?:
+        type: datetime
+        description: Date and time the device was last enrolled (Read-only)
+      serialNumber?:
+        type: string
+        description: Chromebook serial number (Read-only)
+      kind?:
+        type: string
+        default: admin#directory#chromeosdevice
+        description: Kind of resource this is.
+      annotatedAssetId?:
+        type: string
+        description: AssetId specified during enrollment or through later annotation
+      macAddress?:
+        type: string
+        description: Chromebook Mac Address on wifi network interface (Read-only)
+      activeTimeRanges?:
+        type: array
+        description: List of active time ranges (Read-only)
+        items:
+          type: object
+          properties:
+            date?:
+              type: string
+              description: Date of usage
+            activeTime?:
+              type: integer
+              format: int32
+              description: Duration in milliseconds
+      etag?:
+        type: string
+        description: ETag of the resource.
+      status?:
+        type: string
+        description: status of the device (Read-only)
+    description: JSON template for Chrome Os Device resource in Directory API.
+  ChromeOsDeviceAction:
+    type: object
+    properties:
+      action?:
+        type: string
+        description: Action to be taken on the ChromeOs Device
+      deprovisionReason?:
+        type: string
+    description: JSON request template for firing actions on ChromeOs Device in Directory Devices API.
+  ChromeOsDevices:
+    type: object
+    properties:
+      chromeosdevices?:
+        type: array
+        description: List of Chrome OS Device objects.
+        items: ChromeOsDevice
+      kind?:
+        type: string
+        default: admin#directory#chromeosdevices
+        description: Kind of resource this is.
+      nextPageToken?:
+        type: string
+        description: Token used to access next page of this result.
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template for List Chrome OS Devices operation in Directory API.
+  Customer:
+    type: object
+    properties:
+      alternateEmail?:
+        type: string
+        description: The customer's secondary contact email address. This email address cannot be on the same domain as the customerDomain
+      phoneNumber?:
+        type: string
+        description: The customer's contact phone number in E.164 format.
+      postalAddress?: CustomerPostalAddress
+      customerCreationTime?:
+        type: datetime
+        description: The customer's creation time (Readonly)
+      customerDomain?:
+        type: string
+        description: The customer's primary domain name string. Do not include the www prefix when creating a new customer.
+      kind?:
+        type: string
+        default: admin#directory#customer
+        description: 'Identifies the resource as a customer. Value: admin#directory#customer'
+      etag?:
+        type: string
+        description: ETag of the resource.
+      language?:
+        type: string
+        description: The customer's ISO 639-2 language code. The default value is en-US
+      id?:
+        type: string
+        description: The unique ID for the customer's Google account. (Readonly)
+    description: JSON template for Customer Resource object in Directory API.
+  CustomerPostalAddress:
+    type: object
+    properties:
+      organizationName?:
+        type: string
+        description: The company or company division name.
+      contactName?:
+        type: string
+        description: The customer contact's name.
+      countryCode?:
+        type: string
+        description: This is a required property. For countryCode information see the ISO 3166 country code elements.
+      postalCode?:
+        type: string
+        description: The postal code. A postalCode example is a postal zip code such as 10009. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.
+      locality?:
+        type: string
+        description: Name of the locality. An example of a locality value is the city of San Francisco.
+      addressLine1?:
+        type: string
+        description: A customer's physical address. The address can be composed of one to three lines.
+      addressLine2?:
+        type: string
+        description: Address line 2 of the address.
+      addressLine3?:
+        type: string
+        description: Address line 3 of the address.
+      region?:
+        type: string
+        description: Name of the region. An example of a region value is NY for the state of New York.
+    description: JSON template for postal address of a customer.
+  DomainAlias:
+    type: object
+    properties:
+      parentDomainName?:
+        type: string
+        description: The parent domain name that the domain alias is associated with. This can either be a primary or secondary domain name within a customer.
+      creationTime?:
+        type: integer
+        format: int64
+        description: The creation time of the domain alias. (Read-only).
+      domainAliasName?:
+        type: string
+        description: The domain alias name.
+      kind?:
+        type: string
+        default: admin#directory#domainAlias
+        description: Kind of resource this is.
+      verified?:
+        type: boolean
+        description: Indicates the verification state of a domain alias. (Read-only)
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON template for Domain Alias object in Directory API.
+  DomainAliases:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#domainAliases
+        description: Kind of resource this is.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      domainAliases?:
+        type: array
+        description: List of domain alias objects.
+        items: DomainAlias
+    description: JSON response template to list domain aliases in Directory API.
+  Domains:
+    type: object
+    properties:
+      creationTime?:
+        type: integer
+        format: int64
+        description: Creation time of the domain. (Read-only).
+      isPrimary?:
+        type: boolean
+        description: Indicates if the domain is a primary domain (Read-only).
+      kind?:
+        type: string
+        default: admin#directory#domain
+        description: Kind of resource this is.
+      domainName?:
+        type: string
+        description: The domain name of the customer.
+      verified?:
+        type: boolean
+        description: Indicates the verification state of a domain. (Read-only).
+      etag?:
+        type: string
+        description: ETag of the resource.
+      domainAliases?:
+        type: array
+        description: List of domain alias objects. (Read-only)
+        items: DomainAlias
+    description: JSON template for Domain object in Directory API.
+  Domains2:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#domains
+        description: Kind of resource this is.
+      domains?:
+        type: array
+        description: List of domain objects.
+        items: Domains
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template to list Domains in Directory API.
+  Group:
+    type: object
+    properties:
+      aliases?:
+        type: array
+        description: List of aliases (Read-only)
+        items:
+          type: string
+      kind?:
+        type: string
+        default: admin#directory#group
+        description: Kind of resource this is.
+      name?:
+        type: string
+        description: Group name
+      description?:
+        type: string
+        description: Description of the group
+      etag?:
+        type: string
+        description: ETag of the resource.
+      nonEditableAliases?:
+        type: array
+        description: List of non editable aliases (Read-only)
+        items:
+          type: string
+      id?:
+        type: string
+        description: Unique identifier of Group (Read-only)
+      adminCreated?:
+        type: boolean
+        description: Is the group created by admin (Read-only) *
+      directMembersCount?:
+        type: integer
+        format: int64
+        description: Group direct members count
+      email?:
+        type: string
+        description: Email of Group
+    description: JSON template for Group resource in Directory API.
+  Groups:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#groups
+        description: Kind of resource this is.
+      nextPageToken?:
+        type: string
+        description: Token used to access next page of this result.
+      groups?:
+        type: array
+        description: List of group objects.
+        items: Group
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template for List Groups operation in Directory API.
+  Member:
+    type: object
+    properties:
+      role?:
+        type: string
+        description: Role of member
+      kind?:
+        type: string
+        default: admin#directory#member
+        description: Kind of resource this is.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      id?:
+        type: string
+        description: Unique identifier of customer member (Read-only) Unique identifier of group (Read-only) Unique identifier of member (Read-only)
+      type?:
+        type: string
+        description: Type of member (Immutable)
+      email?:
+        type: string
+        description: Email of member (Read-only)
+      status?:
+        type: string
+        description: Status of member (Immutable)
+    description: JSON template for Member resource in Directory API.
+  Members:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#members
+        description: Kind of resource this is.
+      nextPageToken?:
+        type: string
+        description: Token used to access next page of this result.
+      members?:
+        type: array
+        description: List of member objects.
+        items: Member
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template for List Members operation in Directory API.
+  MobileDevice:
+    type: object
+    properties:
+      meid?:
+        type: string
+        description: Mobile Device MEID number (Read-only)
+      resourceId?:
+        type: string
+        description: Unique identifier of Mobile Device (Read-only)
+      networkOperator?:
+        type: string
+        description: Mobile Device mobile or network operator (if available) (Read-only)
+      firstSync?:
+        type: string
+        description: Date and time the device was first synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
+      encryptionStatus?:
+        type: string
+        description: Mobile Device Encryption Status (Read-only)
+      adbStatus?:
+        type: boolean
+        description: Adb (USB debugging) enabled or disabled on device (Read-only)
+      privilege?:
+        type: string
+        description: DMAgentPermission (Read-only)
+      type?:
+        type: string
+        description: The type of device (Read-only)
+      buildNumber?:
+        type: string
+        description: Mobile Device Build number (Read-only)
+      deviceId?:
+        type: string
+        description: Mobile Device serial number (Read-only)
+      manufacturer?:
+        type: string
+        description: Mobile Device manufacturer (Read-only)
+      wifiMacAddress?:
+        type: string
+        description: Mobile Device WiFi MAC address (Read-only)
+      bootloaderVersion?:
+        type: string
+        description: Mobile Device Bootloader version (Read-only)
+      defaultLanguage?:
+        type: string
+        description: The default locale used on the Mobile Device (Read-only)
+      lastSync?:
+        type: string
+        description: Date and time the device was last synchronized with the policy settings in the Google Apps administrator control panel (Read-only)
+      managedAccountIsOnOwnerProfile?:
+        type: boolean
+        description: Boolean indicating if this account is on owner/primary profile or not (Read-only)
+      basebandVersion?:
+        type: string
+        description: Mobile Device Baseband version (Read-only)
+      model?:
+        type: string
+        description: Name of the model of the device
+      brand?:
+        type: string
+        description: Mobile Device Brand (Read-only)
+      email?:
+        type: array
+        description: List of owner user's email addresses (Read-only)
+        items:
+          type: string
+      hardware?:
+        type: string
+        description: Mobile Device Hardware (Read-only)
+      securityPatchLevel?:
+        type: integer
+        format: int64
+        description: Mobile Device Security patch level (Read-only)
+      serialNumber?:
+        type: string
+        description: Mobile Device SSN or Serial Number (Read-only)
+      os?:
+        type: string
+        description: Name of the mobile operating system
+      kind?:
+        type: string
+        default: admin#directory#mobiledevice
+        description: Kind of resource this is.
+      releaseVersion?:
+        type: string
+        description: Mobile Device release version version (Read-only)
+      devicePasswordStatus?:
+        type: string
+        description: DevicePasswordStatus (Read-only)
+      userAgent?:
+        type: string
+        description: Mobile Device user agent
+      supportsWorkProfile?:
+        type: boolean
+        description: Work profile supported on device (Read-only)
+      developerOptionsStatus?:
+        type: boolean
+        description: Developer options enabled or disabled on device (Read-only)
+      deviceCompromisedStatus?:
+        type: string
+        description: Mobile Device compromised status (Read-only)
+      hardwareId?:
+        type: string
+        description: Mobile Device Hardware Id (Read-only)
+      unknownSourcesStatus?:
+        type: boolean
+        description: Unknown sources enabled or disabled on device (Read-only)
+      kernelVersion?:
+        type: string
+        description: Mobile Device Kernel version (Read-only)
+      name?:
+        type: array
+        description: List of owner user's names (Read-only)
+        items:
+          type: string
+      imei?:
+        type: string
+        description: Mobile Device IMEI number (Read-only)
+      etag?:
+        type: string
+        description: ETag of the resource.
+      applications?:
+        type: array
+        description: List of applications installed on Mobile Device
+        items:
+          type: object
+          properties:
+            displayName?:
+              type: string
+              description: Display name of application
+            permission?:
+              type: array
+              description: List of Permissions for application
+              items:
+                type: string
+            packageName?:
+              type: string
+              description: Package name of application
+            versionName?:
+              type: string
+              description: Version name of application
+            versionCode?:
+              type: integer
+              format: int32
+              description: Version code of application
+      otherAccountsInfo?:
+        type: array
+        description: List of accounts added on device (Read-only)
+        items:
+          type: string
+      status?:
+        type: string
+        description: Status of the device (Read-only)
+    description: JSON template for Mobile Device resource in Directory API.
+  MobileDeviceAction:
+    type: object
+    properties:
+      action?:
+        type: string
+        description: Action to be taken on the Mobile Device
+    description: JSON request template for firing commands on Mobile Device in Directory Devices API.
+  MobileDevices:
+    type: object
+    properties:
+      mobiledevices?:
+        type: array
+        description: List of Mobile Device objects.
+        items: MobileDevice
+      kind?:
+        type: string
+        default: admin#directory#mobiledevices
+        description: Kind of resource this is.
+      nextPageToken?:
+        type: string
+        description: Token used to access next page of this result.
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template for List Mobile Devices operation in Directory API.
+  Notification:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#notification
+        description: The type of the resource.
+      subject?:
+        type: string
+        description: Subject of the notification (Read-only)
+      etag?:
+        type: string
+        description: ETag of the resource.
+      fromAddress?:
+        type: string
+        description: Address from which the notification is received (Read-only)
+      notificationId?:
+        type: string
+      body?:
+        type: string
+        description: Body of the notification (Read-only)
+      isUnread?:
+        type: boolean
+        description: Boolean indicating whether the notification is unread or not.
+      sendTime?:
+        type: string
+        description: Time at which notification was sent (Read-only)
+    description: Template for a notification resource.
+  Notifications:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#notifications
+        description: The type of the resource.
+      nextPageToken?:
+        type: string
+        description: Token for fetching the next page of notifications.
+      unreadNotificationsCount?:
+        type: integer
+        format: int32
+        description: Number of unread notification for the domain.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: List of notifications in this page.
+        items: Notification
+    description: Template for notifications list response.
+  OrgUnit:
+    type: object
+    properties:
+      orgUnitPath?:
+        type: string
+        description: Path of OrgUnit
+      kind?:
+        type: string
+        default: admin#directory#orgUnit
+        description: Kind of resource this is.
+      blockInheritance?:
+        type: boolean
+        description: Should block inheritance
+      name?:
+        type: string
+        description: Name of OrgUnit
+      description?:
+        type: string
+        description: Description of OrgUnit
+      etag?:
+        type: string
+        description: ETag of the resource.
+      orgUnitId?:
+        type: string
+        description: Id of OrgUnit
+      parentOrgUnitId?:
+        type: string
+        description: Id of parent OrgUnit
+      parentOrgUnitPath?:
+        type: string
+        description: Path of parent OrgUnit
+    description: JSON template for Org Unit resource in Directory API.
+  OrgUnits:
+    type: object
+    properties:
+      organizationUnits?:
+        type: array
+        description: List of user objects.
+        items: OrgUnit
+      kind?:
+        type: string
+        default: admin#directory#orgUnits
+        description: Kind of resource this is.
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template for List Organization Units operation in Directory API.
+  Privilege:
+    type: object
+    properties:
+      childPrivileges?:
+        type: array
+        description: A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
+        items: Privilege
+      kind?:
+        type: string
+        default: admin#directory#privilege
+        description: The type of the API resource. This is always admin#directory#privilege.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      serviceId?:
+        type: string
+        description: The obfuscated ID of the service this privilege is for.
+      serviceName?:
+        type: string
+        description: The name of the service this privilege is for.
+      isOuScopable?:
+        type: boolean
+        description: If the privilege can be restricted to an organization unit.
+      privilegeName?:
+        type: string
+        description: The name of the privilege.
+    description: JSON template for privilege resource in Directory API.
+  Privileges:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#privileges
+        description: The type of the API resource. This is always admin#directory#privileges.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: A list of Privilege resources.
+        items: Privilege
+    description: JSON response template for List privileges operation in Directory API.
+  Role:
+    type: object
+    properties:
+      isSuperAdminRole?:
+        type: boolean
+        description: Returns true if the role is a super admin role.
+      isSystemRole?:
+        type: boolean
+        description: Returns true if this is a pre-defined system role.
+      kind?:
+        type: string
+        default: admin#directory#role
+        description: The type of the API resource. This is always admin#directory#role.
+      roleId?:
+        type: integer
+        format: int64
+        description: ID of the role.
+      roleName?:
+        type: string
+        description: Name of the role.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      roleDescription?:
+        type: string
+        description: A short description of the role.
+      rolePrivileges?:
+        type: array
+        description: The set of privileges that are granted to this role.
+        items:
+          type: object
+          properties:
+            serviceId?:
+              type: string
+              description: The obfuscated ID of the service this privilege is for.
+            privilegeName?:
+              type: string
+              description: The name of the privilege.
+    description: JSON template for role resource in Directory API.
+  RoleAssignment:
+    type: object
+    properties:
+      roleAssignmentId?:
+        type: integer
+        format: int64
+        description: ID of this roleAssignment.
+      scopeType?:
+        type: string
+        description: "The scope in which this role is assigned. Possible values are:\
+          \ \n- CUSTOMER\n- ORG_UNIT"
+      kind?:
+        type: string
+        default: admin#directory#roleAssignment
+        description: The type of the API resource. This is always admin#directory#roleAssignment.
+      roleId?:
+        type: integer
+        format: int64
+        description: The ID of the role that is assigned.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      orgUnitId?:
+        type: string
+        description: If the role is restricted to an organization unit, this contains the ID for the organization unit the exercise of this role is restricted to.
+      assignedTo?:
+        type: string
+        description: The unique ID of the user this role is assigned to.
+    description: JSON template for roleAssignment resource in Directory API.
+  RoleAssignments:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#roleAssignments
+        description: The type of the API resource. This is always admin#directory#roleAssignments.
+      nextPageToken?:
+        type: string
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: A list of RoleAssignment resources.
+        items: RoleAssignment
+    description: JSON response template for List roleAssignments operation in Directory API.
+  Roles:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#roles
+        description: The type of the API resource. This is always admin#directory#roles.
+      nextPageToken?:
+        type: string
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: A list of Role resources.
+        items: Role
+    description: JSON response template for List roles operation in Directory API.
+  Schema:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#schema
+        description: Kind of resource this is.
+      schemaId?:
+        type: string
+        description: Unique identifier of Schema (Read-only)
+      etag?:
+        type: string
+        description: ETag of the resource.
+      fields?:
+        type: array
+        description: Fields of Schema
+        items: SchemaFieldSpec
+      schemaName?:
+        type: string
+        description: Schema name
+    description: JSON template for Schema resource in Directory API.
+  SchemaFieldSpec:
+    type: object
+    properties:
+      fieldName?:
+        type: string
+        description: Name of the field.
+      numericIndexingSpec?:
+        type: object
+        properties:
+          minValue?:
+            type: number
+            format: double
+            description: Minimum value of this field. This is meant to be indicative rather than enforced. Values outside this range will still be indexed, but search may not be as performant.
+          maxValue?:
+            type: number
+            format: double
+            description: Maximum value of this field. This is meant to be indicative rather than enforced. Values outside this range will still be indexed, but search may not be as performant.
+        description: Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the numericIndexingSpec allows range queries to be supported.
+      indexed?:
+        type: boolean
+        default: true
+        description: Boolean specifying whether the field is indexed or not.
+      kind?:
+        type: string
+        default: admin#directory#schema#fieldspec
+        description: Kind of resource this is.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      multiValued?:
+        type: boolean
+        description: Boolean specifying whether this is a multi-valued field or not.
+      fieldType?:
+        type: string
+        description: Type of the field.
+      fieldId?:
+        type: string
+        description: Unique identifier of Field (Read-only)
+      readAccessType?:
+        type: string
+        default: ALL_DOMAIN_USERS
+        description: Read ACLs on the field specifying who can view values of this field. Valid values are "ALL_DOMAIN_USERS" and "ADMINS_AND_SELF".
+    description: JSON template for FieldSpec resource for Schemas in Directory API.
+  Schemas:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#schemas
+        description: Kind of resource this is.
+      schemas?:
+        type: array
+        description: List of UserSchema objects.
+        items: Schema
+      etag?:
+        type: string
+        description: ETag of the resource.
+    description: JSON response template for List Schema operation in Directory API.
+  Token:
+    type: object
+    properties:
+      displayText?:
+        type: string
+        description: The displayable name of the application the token is issued to.
+      clientId?:
+        type: string
+        description: The Client ID of the application the token is issued to.
+      kind?:
+        type: string
+        default: admin#directory#token
+        description: The type of the API resource. This is always admin#directory#token.
+      anonymous?:
+        type: boolean
+        description: Whether the application is registered with Google. The value is true if the application has an anonymous Client ID.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      scopes?:
+        type: array
+        description: A list of authorization scopes the application is granted.
+        items:
+          type: string
+      nativeApp?:
+        type: boolean
+        description: Whether the token is issued to an installed application. The value is true if the application is installed to a desktop or mobile device.
+      userKey?:
+        type: string
+        description: The unique ID of the user that issued the token.
+    description: JSON template for token resource in Directory API.
+  Tokens:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#tokenList
+        description: The type of the API resource. This is always admin#directory#tokenList.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: A list of Token resources.
+        items: Token
+    description: JSON response template for List tokens operation in Directory API.
+  User:
+    type: object
+    properties:
+      orgUnitPath?:
+        type: string
+        description: OrgUnit of User
+      hashFunction?:
+        type: string
+        description: Hash function name for password. Supported are MD5, SHA-1 and crypt
+      addresses?:
+        type: any
+      ipWhitelisted?:
+        type: boolean
+        description: Boolean indicating if ip is whitelisted
+      aliases?:
+        type: array
+        description: List of aliases (Read-only)
+        items:
+          type: string
+      notes?:
+        type: any
+      creationTime?:
+        type: string
+        description: User's Google account creation time. (Read-only)
+      isMailboxSetup?:
+        type: boolean
+        description: Is mailbox setup (Read-only)
+      phones?:
+        type: any
+      deletionTime?:
+        type: string
+      ims?:
+        type: any
+      emails?:
+        type: any
+      password?:
+        type: string
+        description: User's password
+      thumbnailPhotoUrl?:
+        type: string
+        description: Photo Url of the user (Read-only)
+      changePasswordAtNextLogin?:
+        type: boolean
+        description: Boolean indicating if the user should change password in next login
+      customerId?:
+        type: string
+        description: CustomerId of User (Read-only)
+      nonEditableAliases?:
+        type: array
+        description: List of non editable aliases (Read-only)
+        items:
+          type: string
+      id?:
+        type: string
+        description: Unique identifier of User (Read-only)
+      agreedToTerms?:
+        type: boolean
+        description: Indicates if user has agreed to terms (Read-only)
+      primaryEmail?:
+        type: string
+        description: username of User
+      includeInGlobalAddressList?:
+        type: boolean
+        description: Boolean indicating if user is included in Global Address List
+      kind?:
+        type: string
+        default: admin#directory#user
+        description: Kind of resource this is.
+      suspensionReason?:
+        type: string
+        description: Suspension reason if user is suspended (Read-only)
+      customSchemas?:
+        type: object
+        description: Custom fields of the user.
+      externalIds?:
+        type: any
+      isAdmin?:
+        type: boolean
+        description: Boolean indicating if the user is admin (Read-only)
+      suspended?:
+        type: boolean
+        description: Indicates if user is suspended
+      lastLoginTime?:
+        type: string
+        description: User's last login time. (Read-only)
+      isDelegatedAdmin?:
+        type: boolean
+        description: Boolean indicating if the user is delegated admin (Read-only)
+      name?: UserName
+      organizations?:
+        type: any
+      etag?:
+        type: string
+        description: ETag of the resource.
+      websites?:
+        type: any
+      thumbnailPhotoEtag?:
+        type: string
+        description: ETag of the user's photo (Read-only)
+      relations?:
+        type: any
+    description: JSON template for User object in Directory API.
+  UserAbout:
+    type: object
+    properties:
+      contentType?:
+        type: string
+        description: About entry can have a type which indicates the content type. It can either be plain or html. By default, notes contents are assumed to contain plain text.
+      value?:
+        type: string
+        description: Actual value of notes.
+    description: JSON template for About (notes) of a user in Directory API.
+  UserAddress:
+    type: object
+    properties:
+      country?:
+        type: string
+        description: Country.
+      formatted?:
+        type: string
+        description: Formatted address.
+      postalCode?:
+        type: string
+        description: Postal code.
+      locality?:
+        type: string
+        description: Locality.
+      extendedAddress?:
+        type: string
+        description: Extended Address.
+      type?:
+        type: string
+        description: Each entry can have a type which indicates standard values of that entry. For example address could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such type should have the CUSTOM value as type and also have a customType value.
+      poBox?:
+        type: string
+        description: Other parts of address.
+      customType?:
+        type: string
+        description: Custom type.
+      sourceIsStructured?:
+        type: boolean
+        description: User supplied address was structured. Structured addresses are NOT supported at this time. You might be able to write structured addresses, but any values will eventually be clobbered.
+      streetAddress?:
+        type: string
+        description: Street.
+      countryCode?:
+        type: string
+        description: Country code.
+      region?:
+        type: string
+        description: Region.
+      primary?:
+        type: boolean
+        description: If this is user's primary address. Only one entry could be marked as primary.
+    description: JSON template for address.
+  UserCustomProperties:
+    type: object
+    description: JSON template for a set of custom properties (i.e. all fields in a particular schema)
+  UserEmail:
+    type: object
+    properties:
+      customType?:
+        type: string
+        description: Custom Type.
+      address?:
+        type: string
+        description: Email id of the user.
+      type?:
+        type: string
+        description: Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.
+      primary?:
+        type: boolean
+        description: If this is user's primary email. Only one entry could be marked as primary.
+    description: JSON template for an email.
+  UserExternalId:
+    type: object
+    properties:
+      customType?:
+        type: string
+        description: Custom type.
+      type?:
+        type: string
+        description: The type of the Id.
+      value?:
+        type: string
+        description: The value of the id.
+    description: JSON template for an externalId entry.
+  UserIm:
+    type: object
+    properties:
+      customType?:
+        type: string
+        description: Custom type.
+      protocol?:
+        type: string
+        description: Protocol used in the instant messenger. It should be one of the values from ImProtocolTypes map. Similar to type, it can take a CUSTOM value and specify the custom name in customProtocol field.
+      im?:
+        type: string
+        description: Instant messenger id.
+      customProtocol?:
+        type: string
+        description: Custom protocol.
+      type?:
+        type: string
+        description: Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.
+      primary?:
+        type: boolean
+        description: If this is user's primary im. Only one entry could be marked as primary.
+    description: JSON template for instant messenger of an user.
+  UserMakeAdmin:
+    type: object
+    properties:
+      status?:
+        type: boolean
+        description: Boolean indicating new admin status of the user
+    description: JSON request template for setting/revoking admin status of a user in Directory API.
+  UserName:
+    type: object
+    properties:
+      familyName?:
+        type: string
+        description: Last Name
+      givenName?:
+        type: string
+        description: First Name
+      fullName?:
+        type: string
+        description: Full Name
+    description: JSON template for name of a user in Directory API.
+  UserOrganization:
+    type: object
+    properties:
+      symbol?:
+        type: string
+        description: Symbol of the organization.
+      customType?:
+        type: string
+        description: Custom type.
+      costCenter?:
+        type: string
+        description: The cost center of the users department.
+      domain?:
+        type: string
+        description: The domain to which the organization belongs to.
+      name?:
+        type: string
+        description: Name of the organization
+      description?:
+        type: string
+        description: Description of the organization.
+      location?:
+        type: string
+        description: Location of the organization. This need not be fully qualified address.
+      department?:
+        type: string
+        description: Department within the organization.
+      title?:
+        type: string
+        description: Title (designation) of the user in the organization.
+      type?:
+        type: string
+        description: Each entry can have a type which indicates standard types of that entry. For example organization could be of school, work etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a CustomType value.
+      primary?:
+        type: boolean
+        description: If it user's primary organization.
+    description: JSON template for an organization entry.
+  UserPhone:
+    type: object
+    properties:
+      customType?:
+        type: string
+        description: Custom Type.
+      type?:
+        type: string
+        description: Each entry can have a type which indicates standard types of that entry. For example phone could be of home_fax, work, mobile etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
+      value?:
+        type: string
+        description: Phone number.
+      primary?:
+        type: boolean
+        description: If this is user's primary phone or not.
+    description: JSON template for a phone entry.
+  UserPhoto:
+    type: object
+    properties:
+      photoData?:
+        type: string
+        description: Base64 encoded photo data
+      kind?:
+        type: string
+        default: admin#directory#user#photo
+        description: Kind of resource this is.
+      width?:
+        type: integer
+        format: int32
+        description: Width in pixels of the photo
+      etag?:
+        type: string
+        description: ETag of the resource.
+      id?:
+        type: string
+        description: Unique identifier of User (Read-only)
+      mimeType?:
+        type: string
+        description: Mime Type of the photo
+      primaryEmail?:
+        type: string
+        description: Primary email of User (Read-only)
+      height?:
+        type: integer
+        format: int32
+        description: Height in pixels of the photo
+    description: JSON template for Photo object in Directory API.
+  UserRelation:
+    type: object
+    properties:
+      customType?:
+        type: string
+        description: Custom Type.
+      type?:
+        type: string
+        description: The relation of the user. Some of the possible values are mother, father, sister, brother, manager, assistant, partner.
+      value?:
+        type: string
+        description: The name of the relation.
+    description: JSON template for a relation entry.
+  UserUndelete:
+    type: object
+    properties:
+      orgUnitPath?:
+        type: string
+        description: OrgUnit of User
+    description: JSON request template to undelete a user in Directory API.
+  UserWebsite:
+    type: object
+    properties:
+      customType?:
+        type: string
+        description: Custom Type.
+      type?:
+        type: string
+        description: Each entry can have a type which indicates standard types of that entry. For example website could be of home, work, blog etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
+      value?:
+        type: string
+        description: Website.
+      primary?:
+        type: boolean
+        description: If this is user's primary website or not.
+    description: JSON template for a website entry.
+  Users:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#users
+        description: Kind of resource this is.
+      nextPageToken?:
+        type: string
+        description: Token used to access next page of this result.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      trigger_event?:
+        type: string
+        description: Event that triggered this response (only used in case of Push Response)
+      users?:
+        type: array
+        description: List of user objects.
+        items: User
+    description: JSON response template for List Users operation in Apps Directory API.
+  VerificationCode:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#verificationCode
+        description: The type of the resource. This is always admin#directory#verificationCode.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      userId?:
+        type: string
+        description: The obfuscated unique ID of the user.
+      verificationCode?:
+        type: string
+        description: A current verification code for the user. Invalidated or used verification codes are not returned as part of the result.
+    description: JSON template for verification codes in Directory API.
+  VerificationCodes:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#directory#verificationCodesList
+        description: The type of the resource. This is always admin#directory#verificationCodesList.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: A list of verification code resources.
+        items: VerificationCode
+    description: JSON response template for List verification codes operation in Directory API.
+/customer:
+  /{customer}:
+    uriParameters:
+      customer:
+        type: string
+        description: Immutable ID of the Google Apps account.
+    /roles:
+      /ALL:
+        /privileges:
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.rolemanagement
+                - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+            description: Retrieves a paginated list of all privileges for a customer.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Privileges
+      /{roleId}:
+        uriParameters:
+          roleId:
+            type: string
+            description: Immutable ID of the role.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement
+          description: Updates a role. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Role
+          responses:
+            200:
+              body:
+                application/json: Role
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+          description: Retrieves a role.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Role
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement
+          description: Updates a role.
+          is:
+          - hasParameters
+          body:
+            application/json: Role
+          responses:
+            200:
+              body:
+                application/json: Role
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement
+          description: Deletes a role.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.rolemanagement
+        description: Creates a role.
+        is:
+        - hasParameters
+        body:
+          application/json: Role
+        responses:
+          200:
+            body:
+              application/json: Role
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.rolemanagement
+            - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+        description: Retrieves a paginated list of all the roles in a domain.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of results to return.
+            maximum: 100
+            minimum: 1
+          pageToken?:
+            type: string
+            description: Token to specify the next page in the list.
+        responses:
+          200:
+            body:
+              application/json: Roles
+    /domains:
+      /{domainName}:
+        uriParameters:
+          domainName:
+            type: string
+            description: Name of domain to be retrieved
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.domain
+              - https://www.googleapis.com/auth/admin.directory.domain.readonly
+          description: Retrieves a domain of the customer.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Domains
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.domain
+          description: Deletes a domain of the customer.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.domain
+        description: Inserts a domain of the customer.
+        is:
+        - hasParameters
+        body:
+          application/json: Domains
+        responses:
+          200:
+            body:
+              application/json: Domains
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.domain
+            - https://www.googleapis.com/auth/admin.directory.domain.readonly
+        description: Lists the domains of the customer.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Domains2
+    /resources:
+      /calendars:
+        /{calendarResourceId}:
+          uriParameters:
+            calendarResourceId:
+              type: string
+              description: The unique ID of the calendar resource to update.
+          patch:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.resource.calendar
+            description: Updates a calendar resource. This method supports patch semantics.
+            is:
+            - hasParameters
+            body:
+              application/json: CalendarResource
+            responses:
+              200:
+                body:
+                  application/json: CalendarResource
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.resource.calendar
+                - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
+            description: Retrieves a calendar resource.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: CalendarResource
+          put:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.resource.calendar
+            description: Updates a calendar resource.
+            is:
+            - hasParameters
+            body:
+              application/json: CalendarResource
+            responses:
+              200:
+                body:
+                  application/json: CalendarResource
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.resource.calendar
+            description: Deletes a calendar resource.
+            is:
+            - hasParameters
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.resource.calendar
+          description: Inserts a calendar resource.
+          is:
+          - hasParameters
+          body:
+            application/json: CalendarResource
+          responses:
+            200:
+              body:
+                application/json: CalendarResource
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.resource.calendar
+              - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
+          description: Retrieves a list of calendar resources for an account.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: Maximum number of results to return.
+              maximum: 500
+              minimum: 1
+            pageToken?:
+              type: string
+              description: Token to specify the next page in the list.
+          responses:
+            200:
+              body:
+                application/json: CalendarResources
+    /domainaliases:
+      /{domainAliasName}:
+        uriParameters:
+          domainAliasName:
+            type: string
+            description: Name of domain alias to be retrieved.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.domain
+              - https://www.googleapis.com/auth/admin.directory.domain.readonly
+          description: Retrieves a domain alias of the customer.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: DomainAlias
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.domain
+          description: Deletes a Domain Alias of the customer.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.domain
+        description: Inserts a Domain alias of the customer.
+        is:
+        - hasParameters
+        body:
+          application/json: DomainAlias
+        responses:
+          200:
+            body:
+              application/json: DomainAlias
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.domain
+            - https://www.googleapis.com/auth/admin.directory.domain.readonly
+        description: Lists the domain aliases of the customer.
+        is:
+        - hasParameters
+        queryParameters:
+          parentDomainName?:
+            type: string
+            description: Name of the parent domain for which domain aliases are to be fetched.
+        responses:
+          200:
+            body:
+              application/json: DomainAliases
+    /roleassignments:
+      /{roleAssignmentId}:
+        uriParameters:
+          roleAssignmentId:
+            type: string
+            description: Immutable ID of the role assignment.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+          description: Retrieve a role assignment.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: RoleAssignment
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.rolemanagement
+          description: Deletes a role assignment.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.rolemanagement
+        description: Creates a role assignment.
+        is:
+        - hasParameters
+        body:
+          application/json: RoleAssignment
+        responses:
+          200:
+            body:
+              application/json: RoleAssignment
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.rolemanagement
+            - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+        description: Retrieves a paginated list of all roleAssignments.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of results to return.
+            maximum: 200
+            minimum: 1
+          roleId?:
+            type: string
+            description: Immutable ID of a role. If included in the request, returns only role assignments containing this role ID.
+          pageToken?:
+            type: string
+            description: Token to specify the next page in the list.
+          userKey?:
+            type: string
+            description: The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
+        responses:
+          200:
+            body:
+              application/json: RoleAssignments
+    /notifications:
+      /{notificationId}:
+        uriParameters:
+          notificationId:
+            type: string
+            description: The unique ID of the notification.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.notifications
+          description: Updates a notification. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Notification
+          responses:
+            200:
+              body:
+                application/json: Notification
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.notifications
+          description: Retrieves a notification.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Notification
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.notifications
+          description: Updates a notification.
+          is:
+          - hasParameters
+          body:
+            application/json: Notification
+          responses:
+            200:
+              body:
+                application/json: Notification
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.notifications
+          description: Deletes a notification
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.notifications
+        description: Retrieves a list of notifications.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of notifications to return per page. The default is 100.
+          language?:
+            type: string
+            description: The ISO 639-1 code of the language notifications are returned in. The default is English (en).
+          pageToken?:
+            type: string
+            description: The token to specify the page of results to retrieve.
+        responses:
+          200:
+            body:
+              application/json: Notifications
+  /{customerId}:
+    uriParameters:
+      customerId:
+        type: string
+        description: Immutable id of the Google Apps account
+    /devices:
+      /chromeos:
+        /{deviceId}:
+          uriParameters:
+            deviceId:
+              type: string
+              description: Immutable id of Chrome OS Device
+          patch:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.device.chromeos
+            description: Update Chrome OS Device. This method supports patch semantics.
+            is:
+            - hasParameters
+            queryParameters:
+              projection?:
+                type: string
+                description: Restrict information returned to a set of selected fields.
+                enum:
+                - BASIC
+                - FULL
+            body:
+              application/json: ChromeOsDevice
+            responses:
+              200:
+                body:
+                  application/json: ChromeOsDevice
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.device.chromeos
+                - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
+            description: Retrieve Chrome OS Device
+            is:
+            - hasParameters
+            queryParameters:
+              projection?:
+                type: string
+                description: Restrict information returned to a set of selected fields.
+                enum:
+                - BASIC
+                - FULL
+            responses:
+              200:
+                body:
+                  application/json: ChromeOsDevice
+          put:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.device.chromeos
+            description: Update Chrome OS Device
+            is:
+            - hasParameters
+            queryParameters:
+              projection?:
+                type: string
+                description: Restrict information returned to a set of selected fields.
+                enum:
+                - BASIC
+                - FULL
+            body:
+              application/json: ChromeOsDevice
+            responses:
+              200:
+                body:
+                  application/json: ChromeOsDevice
+        /{resourceId}:
+          uriParameters:
+            resourceId:
+              type: string
+              description: Immutable id of Chrome OS Device
+          /action:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/admin.directory.device.chromeos
+              description: Take action on Chrome OS Device
+              is:
+              - hasParameters
+              body:
+                application/json: ChromeOsDeviceAction
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.device.chromeos
+              - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
+          description: Retrieve all Chrome OS Devices of a customer (paginated)
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: Maximum number of results to return. Default is 100
+              minimum: 1
+            query?:
+              type: string
+              description: Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?hl=en&answer=1698333
+            sortOrder?:
+              type: string
+              description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+              enum:
+              - ASCENDING
+              - DESCENDING
+            orderBy?:
+              type: string
+              description: Column to use for sorting results
+              enum:
+              - annotatedLocation
+              - annotatedUser
+              - lastSync
+              - notes
+              - serialNumber
+              - status
+              - supportEndDate
+            pageToken?:
+              type: string
+              description: Token to specify next page in the list
+            projection?:
+              type: string
+              description: Restrict information returned to a set of selected fields.
+              enum:
+              - BASIC
+              - FULL
+          responses:
+            200:
+              body:
+                application/json: ChromeOsDevices
+      /mobile:
+        /{resourceId}:
+          uriParameters:
+            resourceId:
+              type: string
+              description: Immutable id of Mobile Device
+          /action:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/admin.directory.device.mobile
+                  - https://www.googleapis.com/auth/admin.directory.device.mobile.action
+              description: Take action on Mobile Device
+              is:
+              - hasParameters
+              body:
+                application/json: MobileDeviceAction
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.device.mobile
+                - https://www.googleapis.com/auth/admin.directory.device.mobile.action
+                - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
+            description: Retrieve Mobile Device
+            is:
+            - hasParameters
+            queryParameters:
+              projection?:
+                type: string
+                description: Restrict information returned to a set of selected fields.
+                enum:
+                - BASIC
+                - FULL
+            responses:
+              200:
+                body:
+                  application/json: MobileDevice
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.device.mobile
+            description: Delete Mobile Device
+            is:
+            - hasParameters
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.device.mobile
+              - https://www.googleapis.com/auth/admin.directory.device.mobile.action
+              - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
+          description: Retrieve all Mobile Devices of a customer (paginated)
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: Maximum number of results to return. Default is 100
+              minimum: 1
+            query?:
+              type: string
+              description: Search string in the format given at http://support.google.com/a/bin/answer.py?hl=en&answer=1408863#search
+            sortOrder?:
+              type: string
+              description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+              enum:
+              - ASCENDING
+              - DESCENDING
+            orderBy?:
+              type: string
+              description: Column to use for sorting results
+              enum:
+              - deviceId
+              - email
+              - lastSync
+              - model
+              - name
+              - os
+              - status
+              - type
+            pageToken?:
+              type: string
+              description: Token to specify next page in the list
+            projection?:
+              type: string
+              description: Restrict information returned to a set of selected fields.
+              enum:
+              - BASIC
+              - FULL
+          responses:
+            200:
+              body:
+                application/json: MobileDevices
+    /schemas:
+      /{schemaKey}:
+        uriParameters:
+          schemaKey:
+            type: string
+            description: Name or immutable Id of the schema.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.userschema
+          description: Update schema. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Schema
+          responses:
+            200:
+              body:
+                application/json: Schema
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.userschema
+              - https://www.googleapis.com/auth/admin.directory.userschema.readonly
+          description: Retrieve schema
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Schema
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.userschema
+          description: Update schema
+          is:
+          - hasParameters
+          body:
+            application/json: Schema
+          responses:
+            200:
+              body:
+                application/json: Schema
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.userschema
+          description: Delete schema
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.userschema
+        description: Create schema.
+        is:
+        - hasParameters
+        body:
+          application/json: Schema
+        responses:
+          200:
+            body:
+              application/json: Schema
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.userschema
+            - https://www.googleapis.com/auth/admin.directory.userschema.readonly
+        description: Retrieve all schemas for a customer
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Schemas
+    /orgunits{orgUnitPath}:
+      uriParameters:
+        orgUnitPath:
+          type: string
+          description: Full path of the organization unit or its Id
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.orgunit
+        description: Update Organization Unit. This method supports patch semantics.
+        is:
+        - hasParameters
+        body:
+          application/json: OrgUnit
+        responses:
+          200:
+            body:
+              application/json: OrgUnit
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.orgunit
+            - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
+        description: Retrieve Organization Unit
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: OrgUnit
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.orgunit
+        description: Update Organization Unit
+        is:
+        - hasParameters
+        body:
+          application/json: OrgUnit
+        responses:
+          200:
+            body:
+              application/json: OrgUnit
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.orgunit
+        description: Remove Organization Unit
+        is:
+        - hasParameters
+    /orgunits:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.orgunit
+        description: Add Organization Unit
+        is:
+        - hasParameters
+        body:
+          application/json: OrgUnit
+        responses:
+          200:
+            body:
+              application/json: OrgUnit
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.orgunit
+            - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
+        description: Retrieve all Organization Units
+        is:
+        - hasParameters
+        queryParameters:
+          orgUnitPath?:
+            type: string
+            default: ''
+            description: the URL-encoded organization unit's path or its Id
+          type?:
+            type: string
+            description: Whether to return all sub-organizations or just immediate children
+            enum:
+            - all
+            - children
+        responses:
+          200:
+            body:
+              application/json: OrgUnits
+/groups:
+  /{groupKey}:
+    uriParameters:
+      groupKey:
+        type: string
+        description: Email or immutable Id of the group. If Id, it should match with id of group object
+    /members:
+      /{memberKey}:
+        uriParameters:
+          memberKey:
+            type: string
+            description: Email or immutable Id of the user. If Id, it should match with id of member object
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.group
+              - https://www.googleapis.com/auth/admin.directory.group.member
+          description: Update membership of a user in the specified group. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Member
+          responses:
+            200:
+              body:
+                application/json: Member
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.group
+              - https://www.googleapis.com/auth/admin.directory.group.member
+              - https://www.googleapis.com/auth/admin.directory.group.member.readonly
+              - https://www.googleapis.com/auth/admin.directory.group.readonly
+          description: Retrieve Group Member
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Member
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.group
+              - https://www.googleapis.com/auth/admin.directory.group.member
+          description: Update membership of a user in the specified group.
+          is:
+          - hasParameters
+          body:
+            application/json: Member
+          responses:
+            200:
+              body:
+                application/json: Member
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.group
+              - https://www.googleapis.com/auth/admin.directory.group.member
+          description: Remove membership.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.group
+            - https://www.googleapis.com/auth/admin.directory.group.member
+        description: Add user to the specified group.
+        is:
+        - hasParameters
+        body:
+          application/json: Member
+        responses:
+          200:
+            body:
+              application/json: Member
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.group
+            - https://www.googleapis.com/auth/admin.directory.group.member
+            - https://www.googleapis.com/auth/admin.directory.group.member.readonly
+            - https://www.googleapis.com/auth/admin.directory.group.readonly
+        description: Retrieve all members in a group (paginated)
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of results to return. Default is 200
+            minimum: 1
+          roles?:
+            type: string
+            description: Comma separated role values to filter list results on.
+          pageToken?:
+            type: string
+            description: Token to specify next page in the list
+        responses:
+          200:
+            body:
+              application/json: Members
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.group
+      description: Update Group. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Group
+      responses:
+        200:
+          body:
+            application/json: Group
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.group
+          - https://www.googleapis.com/auth/admin.directory.group.readonly
+      description: Retrieve Group
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Group
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.group
+      description: Update Group
+      is:
+      - hasParameters
+      body:
+        application/json: Group
+      responses:
+        200:
+          body:
+            application/json: Group
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.group
+      description: Delete Group
+      is:
+      - hasParameters
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.directory.group
+    description: Create Group
+    is:
+    - hasParameters
+    body:
+      application/json: Group
+    responses:
+      200:
+        body:
+          application/json: Group
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.directory.group
+        - https://www.googleapis.com/auth/admin.directory.group.readonly
+    description: Retrieve all groups in a domain (paginated)
+    is:
+    - hasParameters
+    queryParameters:
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of results to return. Default is 200
+        minimum: 1
+      domain?:
+        type: string
+        description: Name of the domain. Fill this field to get groups from only this domain. To return all groups in a multi-domain fill customer field instead.
+      pageToken?:
+        type: string
+        description: Token to specify next page in the list
+      userKey?:
+        type: string
+        description: Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object
+      customer?:
+        type: string
+        description: Immutable id of the Google Apps account. In case of multi-domain, to fetch all groups for a customer, fill this field instead of domain.
+    responses:
+      200:
+        body:
+          application/json: Groups
+/users:
+  /{userKey}:
+    uriParameters:
+      userKey:
+        type: string
+        description: Email or immutable Id of the user
+    /verificationCodes:
+      /invalidate:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user.security
+          description: Invalidate the current backup verification codes for the user.
+          is:
+          - hasParameters
+      /generate:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user.security
+          description: Generate new backup verification codes for the user.
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+        description: Returns the current set of valid backup verification codes for the specified user.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: VerificationCodes
+    /undelete:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user
+        description: Undelete a deleted user
+        is:
+        - hasParameters
+        body:
+          application/json: UserUndelete
+    /makeAdmin:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user
+        description: change admin status of a user
+        is:
+        - hasParameters
+        body:
+          application/json: UserMakeAdmin
+    /asps:
+      /{codeId}:
+        uriParameters:
+          codeId:
+            type: integer
+            format: int32
+            description: The unique ID of the ASP.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user.security
+          description: Get information about an ASP issued by a user.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Asp
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user.security
+          description: Delete an ASP issued by a user.
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+        description: List the ASPs issued by a user.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Asps
+    /tokens:
+      /{clientId}:
+        uriParameters:
+          clientId:
+            type: string
+            description: The Client ID of the application the token is issued to.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user.security
+          description: Get information about an access token issued by a user.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Token
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user.security
+          description: Delete all access tokens issued by a user for an application.
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+        description: Returns the set of tokens specified user has issued to 3rd party applications.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Tokens
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.user
+      description: update user. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: User
+      responses:
+        200:
+          body:
+            application/json: User
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.user
+          - https://www.googleapis.com/auth/admin.directory.user.readonly
+      description: retrieve user
+      is:
+      - hasParameters
+      queryParameters:
+        viewType?:
+          type: string
+          default: admin_view
+          description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          enum:
+          - admin_view
+          - domain_public
+        projection?:
+          type: string
+          default: basic
+          description: What subset of fields to fetch for this user.
+          enum:
+          - basic
+          - custom
+          - full
+        customFieldMask?:
+          type: string
+          description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+      responses:
+        200:
+          body:
+            application/json: User
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.user
+      description: update user
+      is:
+      - hasParameters
+      body:
+        application/json: User
+      responses:
+        200:
+          body:
+            application/json: User
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.user
+      description: Delete user
+      is:
+      - hasParameters
+  /watch:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.user
+          - https://www.googleapis.com/auth/admin.directory.user.readonly
+      description: Watch for changes in users list
+      is:
+      - hasParameters
+      queryParameters:
+        showDeleted?:
+          type: string
+          description: If set to true retrieves the list of deleted users. Default is false
+        maxResults?:
+          type: integer
+          format: int32
+          description: Maximum number of results to return. Default is 100. Max allowed is 500
+          maximum: 500
+          minimum: 1
+        domain?:
+          type: string
+          description: Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.
+        query?:
+          type: string
+          description: Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-users
+        sortOrder?:
+          type: string
+          description: Whether to return results in ascending or descending order.
+          enum:
+          - ASCENDING
+          - DESCENDING
+        viewType?:
+          type: string
+          default: admin_view
+          description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          enum:
+          - admin_view
+          - domain_public
+        orderBy?:
+          type: string
+          description: Column to use for sorting results
+          enum:
+          - email
+          - familyName
+          - givenName
+        pageToken?:
+          type: string
+          description: Token to specify next page in the list
+        projection?:
+          type: string
+          default: basic
+          description: What subset of fields to fetch for this user.
+          enum:
+          - basic
+          - custom
+          - full
+        event?:
+          type: string
+          description: Event on which subscription is intended (if subscribing)
+          enum:
+          - add
+          - delete
+          - makeAdmin
+          - undelete
+          - update
+        customFieldMask?:
+          type: string
+          description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+        customer?:
+          type: string
+          description: Immutable id of the Google Apps account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
+      body:
+        application/json: Channel
+      responses:
+        200:
+          body:
+            application/json: Channel
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.directory.user
+    description: create user.
+    is:
+    - hasParameters
+    body:
+      application/json: User
+    responses:
+      200:
+        body:
+          application/json: User
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.directory.user
+        - https://www.googleapis.com/auth/admin.directory.user.readonly
+    description: Retrieve either deleted users or all users in a domain (paginated)
+    is:
+    - hasParameters
+    queryParameters:
+      showDeleted?:
+        type: string
+        description: If set to true retrieves the list of deleted users. Default is false
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of results to return. Default is 100. Max allowed is 500
+        maximum: 500
+        minimum: 1
+      domain?:
+        type: string
+        description: Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.
+      query?:
+        type: string
+        description: Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-users
+      sortOrder?:
+        type: string
+        description: Whether to return results in ascending or descending order.
+        enum:
+        - ASCENDING
+        - DESCENDING
+      viewType?:
+        type: string
+        default: admin_view
+        description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+        enum:
+        - admin_view
+        - domain_public
+      orderBy?:
+        type: string
+        description: Column to use for sorting results
+        enum:
+        - email
+        - familyName
+        - givenName
+      pageToken?:
+        type: string
+        description: Token to specify next page in the list
+      projection?:
+        type: string
+        default: basic
+        description: What subset of fields to fetch for this user.
+        enum:
+        - basic
+        - custom
+        - full
+      event?:
+        type: string
+        description: Event on which subscription is intended (if subscribing)
+        enum:
+        - add
+        - delete
+        - makeAdmin
+        - undelete
+        - update
+      customFieldMask?:
+        type: string
+        description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+      customer?:
+        type: string
+        description: Immutable id of the Google Apps account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
+    responses:
+      200:
+        body:
+          application/json: Users
+/:
+  /admin:
+    /directory_v1:
+      /channels:
+        /stop:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/admin.directory.user
+                - https://www.googleapis.com/auth/admin.directory.user.alias
+                - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
+                - https://www.googleapis.com/auth/admin.directory.user.readonly
+            description: Stop watching resources through this channel
+            is:
+            - hasParameters
+            body:
+              application/json: Channel
+/customers:
+  /{customerKey}:
+    uriParameters:
+      customerKey:
+        type: string
+        description: Id of the customer to be updated
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.customer
+      description: Updates a customer. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Customer
+      responses:
+        200:
+          body:
+            application/json: Customer
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.customer
+          - https://www.googleapis.com/auth/admin.directory.customer.readonly
+      description: Retrieves a customer.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Customer
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.directory.customer
+      description: Updates a customer.
+      is:
+      - hasParameters
+      body:
+        application/json: Customer
+      responses:
+        200:
+          body:
+            application/json: Customer

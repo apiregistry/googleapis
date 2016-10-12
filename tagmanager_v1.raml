@@ -1,0 +1,899 @@
+#%RAML 1.0
+title: Tag Manager API
+version: v1
+baseUri: https://www.googleapis.com/tagmanager/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/tag-manager/api/v1/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): tagmanager:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/tagmanager.manage.users
+      - https://www.googleapis.com/auth/tagmanager.delete.containers
+      - https://www.googleapis.com/auth/tagmanager.readonly
+      - https://www.googleapis.com/auth/tagmanager.edit.containerversions
+      - https://www.googleapis.com/auth/tagmanager.publish
+      - https://www.googleapis.com/auth/tagmanager.manage.accounts
+      - https://www.googleapis.com/auth/tagmanager.edit.containers
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Account:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: The Account ID uniquely identifies the GTM Account.
+      shareData?:
+        type: boolean
+        description: Whether the account shares data anonymously with Google and others.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Account as computed at storage time. This value is recomputed whenever the account is modified.
+      name?:
+        type: string
+        description: Account display name.
+    description: Represents a Google Tag Manager Account.
+  AccountAccess:
+    type: object
+    properties:
+      permission?:
+        type: array
+        description: List of Account permissions. Valid account permissions are read and manage.
+        items:
+          type: string
+          enum:
+          - delete
+          - edit
+          - manage
+          - publish
+          - read
+    description: Defines the Google Tag Manager Account access permissions.
+  Condition:
+    type: object
+    properties:
+      parameter?:
+        type: array
+        description: "A list of named parameters (key/value), depending on the condition's\
+          \ type. Notes: \n- For binary operators, include parameters named arg0 and\
+          \ arg1 for specifying the left and right operands, respectively. \n- At\
+          \ this time, the left operand (arg0) must be a reference to a variable.\
+          \ \n- For case-insensitive Regex matching, include a boolean parameter named\
+          \ ignore_case that is set to true. If not specified or set to any other\
+          \ value, the matching will be case sensitive. \n- To negate an operator,\
+          \ include a boolean parameter named negate boolean parameter that is set\
+          \ to true."
+        items: Parameter
+      type?:
+        type: string
+        description: The type of operator for this condition.
+        enum:
+        - contains
+        - cssSelector
+        - endsWith
+        - equals
+        - greater
+        - greaterOrEquals
+        - less
+        - lessOrEquals
+        - matchRegex
+        - startsWith
+        - urlMatches
+    description: Represents a predicate.
+  Container:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      usageContext?:
+        type: array
+        description: 'List of Usage Contexts for the Container. Valid values include:
+          web, android, ios.'
+        items:
+          type: string
+          enum:
+          - android
+          - androidSdk5
+          - ios
+          - iosSdk5
+          - web
+      notes?:
+        type: string
+        description: Container Notes.
+      timeZoneId?:
+        type: string
+        description: Container Time Zone ID.
+      domainName?:
+        type: array
+        description: Optional list of domain names associated with the Container.
+        items:
+          type: string
+      enabledBuiltInVariable?:
+        type: array
+        description: 'List of enabled built-in variables. Valid values include: pageUrl,
+          pageHostname, pagePath, referrer, event, clickElement, clickClasses, clickId,
+          clickTarget, clickUrl, clickText, formElement, formClasses, formId, formTarget,
+          formUrl, formText, errorMessage, errorUrl, errorLine, newHistoryFragment,
+          oldHistoryFragment, newHistoryState, oldHistoryState, historySource, containerVersion,
+          debugMode, randomNumber, containerId.'
+        items:
+          type: string
+          enum:
+          - advertiserId
+          - advertisingTrackingEnabled
+          - appId
+          - appName
+          - appVersionCode
+          - appVersionName
+          - clickClasses
+          - clickElement
+          - clickId
+          - clickTarget
+          - clickText
+          - clickUrl
+          - containerId
+          - containerVersion
+          - debugMode
+          - deviceName
+          - environmentName
+          - errorLine
+          - errorMessage
+          - errorUrl
+          - event
+          - formClasses
+          - formElement
+          - formId
+          - formTarget
+          - formText
+          - formUrl
+          - historySource
+          - htmlId
+          - language
+          - newHistoryFragment
+          - newHistoryState
+          - oldHistoryFragment
+          - oldHistoryState
+          - osVersion
+          - pageHostname
+          - pagePath
+          - pageUrl
+          - platform
+          - randomNumber
+          - referrer
+          - resolution
+          - sdkVersion
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the account is modified.
+      name?:
+        type: string
+        description: Container display name.
+      timeZoneCountryId?:
+        type: string
+        description: Container Country ID.
+      containerId?:
+        type: string
+        description: The Container ID uniquely identifies the GTM Container.
+      publicId?:
+        type: string
+        description: Container Public ID.
+    description: Represents a Google Tag Manager Container.
+  ContainerAccess:
+    type: object
+    properties:
+      permission?:
+        type: array
+        description: 'List of Container permissions. Valid container permissions are:
+          read, edit, delete, publish.'
+        items:
+          type: string
+          enum:
+          - delete
+          - edit
+          - manage
+          - publish
+          - read
+      containerId?:
+        type: string
+        description: GTM Container ID.
+    description: Defines the Google Tag Manager Container access permissions.
+  ContainerVersion:
+    type: object
+    properties:
+      container?: Container
+      macro?:
+        type: array
+        description: The macros in the container that this version was taken from.
+        items: Macro
+      notes?:
+        type: string
+        description: User notes on how to apply this container version in the container.
+      rule?:
+        type: array
+        description: The rules in the container that this version was taken from.
+        items: Rule
+      trigger?:
+        type: array
+        description: The triggers in the container that this version was taken from.
+        items: Trigger
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      deleted?:
+        type: boolean
+        description: A value of true indicates this container version has been deleted.
+      folder?:
+        type: array
+        description: The folders in the container that this version was taken from.
+        items: Folder
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Container Version as computed at storage time. This value is recomputed whenever the container version is modified.
+      name?:
+        type: string
+        description: Container version display name.
+      variable?:
+        type: array
+        description: The variables in the container that this version was taken from.
+        items: Variable
+      containerVersionId?:
+        type: string
+        description: The Container Version ID uniquely identifies the GTM Container Version.
+      tag?:
+        type: array
+        description: The tags in the container that this version was taken from.
+        items: Tag
+      containerId?:
+        type: string
+        description: GTM Container ID.
+    description: Represents a Google Tag Manager Container Version.
+  ContainerVersionHeader:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      deleted?:
+        type: boolean
+        description: A value of true indicates this container version has been deleted.
+      numTags?:
+        type: string
+        description: Number of tags in the container version.
+      numRules?:
+        type: string
+        description: Number of rules in the container version.
+      numVariables?:
+        type: string
+        description: Number of variables in the container version.
+      name?:
+        type: string
+        description: Container version display name.
+      containerVersionId?:
+        type: string
+        description: The Container Version ID uniquely identifies the GTM Container Version.
+      numTriggers?:
+        type: string
+        description: Number of triggers in the container version.
+      containerId?:
+        type: string
+        description: GTM Container ID.
+      numMacros?:
+        type: string
+        description: Number of macros in the container version.
+    description: Represents a Google Tag Manager Container Version Header.
+  CreateContainerVersionRequestVersionOptions:
+    type: object
+    properties:
+      notes?:
+        type: string
+        description: The notes of the container version to be created.
+      name?:
+        type: string
+        description: The name of the container version to be created.
+      quickPreview?:
+        type: boolean
+        description: The creation of this version may be for quick preview and shouldn't be saved.
+    description: Options for new container versions.
+  CreateContainerVersionResponse:
+    type: object
+    properties:
+      containerVersion?: ContainerVersion
+      compilerError?:
+        type: boolean
+        description: Compiler errors or not.
+    description: Create container versions response.
+  Environment:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      enableDebug?:
+        type: boolean
+        description: Whether or not to enable debug by default on for the environment.
+      environmentId?:
+        type: string
+        description: GTM Environment ID uniquely identifies the GTM Environment.
+      authorizationCode?:
+        type: string
+        description: The environment authorization code.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM environment as computed at storage time. This value is recomputed whenever the environment is modified.
+      name?:
+        type: string
+        description: The environment display name. Can be set or changed only on USER type environments.
+      description?:
+        type: string
+        description: The environment description. Can be set or changed only on USER type environments.
+      containerVersionId?:
+        type: string
+        description: ''
+      containerId?:
+        type: string
+        description: GTM Container ID.
+      type?:
+        type: string
+        description: The type of this environment.
+        enum:
+        - draft
+        - latest
+        - live
+        - user
+      authorizationTimestampMs?:
+        type: integer
+        format: int64
+        description: The last update time-stamp for the authorization code.
+      url?:
+        type: string
+        description: Default preview page url for the environment.
+    description: Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.
+  Folder:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Folder as computed at storage time. This value is recomputed whenever the folder is modified.
+      name?:
+        type: string
+        description: Folder display name.
+      containerId?:
+        type: string
+        description: GTM Container ID.
+      folderId?:
+        type: string
+        description: The Folder ID uniquely identifies the GTM Folder.
+    description: Represents a Google Tag Manager Folder.
+  FolderEntities:
+    type: object
+    properties:
+      variable?:
+        type: array
+        description: The list of variables inside the folder.
+        items: Variable
+      tag?:
+        type: array
+        description: The list of tags inside the folder.
+        items: Tag
+      trigger?:
+        type: array
+        description: The list of triggers inside the folder.
+        items: Trigger
+    description: Represents a Google Tag Manager Folder's contents.
+  ListAccountUsersResponse:
+    type: object
+    properties:
+      userAccess?:
+        type: array
+        description: All GTM AccountUsers of a GTM Account.
+        items: UserAccess
+    description: List AccountUsers Response.
+  ListAccountsResponse:
+    type: object
+    properties:
+      accounts?:
+        type: array
+        description: List of GTM Accounts that a user has access to.
+        items: Account
+    description: List Accounts Response.
+  ListContainerVersionsResponse:
+    type: object
+    properties:
+      containerVersion?:
+        type: array
+        description: All versions of a GTM Container.
+        items: ContainerVersion
+      containerVersionHeader?:
+        type: array
+        description: All container version headers of a GTM Container.
+        items: ContainerVersionHeader
+    description: List container versions response.
+  ListContainersResponse:
+    type: object
+    properties:
+      containers?:
+        type: array
+        description: All Containers of a GTM Account.
+        items: Container
+    description: List Containers Response.
+  ListEnvironmentsResponse:
+    type: object
+    properties:
+      environments?:
+        type: array
+        description: All Environments of a GTM Container.
+        items: Environment
+    description: List Environments Response.
+  ListFoldersResponse:
+    type: object
+    properties:
+      folders?:
+        type: array
+        description: All GTM Folders of a GTM Container.
+        items: Folder
+    description: List Folders Response.
+  ListTagsResponse:
+    type: object
+    properties:
+      tags?:
+        type: array
+        description: All GTM Tags of a GTM Container.
+        items: Tag
+    description: List Tags Response.
+  ListTriggersResponse:
+    type: object
+    properties:
+      triggers?:
+        type: array
+        description: All GTM Triggers of a GTM Container.
+        items: Trigger
+    description: List triggers response.
+  ListVariablesResponse:
+    type: object
+    properties:
+      variables?:
+        type: array
+        description: All GTM Variables of a GTM Container.
+        items: Variable
+    description: List Variables Response.
+  Macro:
+    type: object
+    properties:
+      notes?:
+        type: string
+        description: User notes on how to apply this macro in the container.
+      parentFolderId?:
+        type: string
+        description: Parent folder id.
+      type?:
+        type: string
+        description: GTM Macro Type.
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      macroId?:
+        type: string
+        description: The Macro ID uniquely identifies the GTM Macro.
+      parameter?:
+        type: array
+        description: The macro's parameters.
+        items: Parameter
+      scheduleStartMs?:
+        type: integer
+        format: int64
+        description: The start timestamp in milliseconds to schedule a macro.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Macro as computed at storage time. This value is recomputed whenever the macro is modified.
+      name?:
+        type: string
+        description: Macro display name.
+      disablingRuleId?:
+        type: array
+        description: 'For mobile containers only: A list of rule IDs for disabling
+          conditional macros; the macro is enabled if one of the enabling rules is
+          true while all the disabling rules are false. Treated as an unordered set.'
+        items:
+          type: string
+      scheduleEndMs?:
+        type: integer
+        format: int64
+        description: The end timestamp in milliseconds to schedule a macro.
+      containerId?:
+        type: string
+        description: GTM Container ID.
+      enablingRuleId?:
+        type: array
+        description: 'For mobile containers only: A list of rule IDs for enabling
+          conditional macros; the macro is enabled if one of the enabling rules is
+          true while all the disabling rules are false. Treated as an unordered set.'
+        items:
+          type: string
+    description: Represents a Google Tag Manager Macro.
+  Parameter:
+    type: object
+    properties:
+      list?:
+        type: array
+        description: This list parameter's parameters (keys will be ignored).
+        items: Parameter
+      type?:
+        type: string
+        description: "The parameter type. Valid values are: \n- boolean: The value\
+          \ represents a boolean, represented as 'true' or 'false' \n- integer: The\
+          \ value represents a 64-bit signed integer value, in base 10 \n- list: A\
+          \ list of parameters should be specified \n- map: A map of parameters should\
+          \ be specified \n- template: The value represents any text; this can include\
+          \ variable references (even variable references that might return non-string\
+          \ types)"
+        enum:
+        - boolean
+        - integer
+        - list
+        - map
+        - template
+      map?:
+        type: array
+        description: This map parameter's parameters (must have keys; keys must be unique).
+        items: Parameter
+      value?:
+        type: string
+        description: A parameter's value (may contain variable references such as "{{myVariable}}") as appropriate to the specified type.
+      key?:
+        type: string
+        description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+    description: Represents a Google Tag Manager Parameter.
+  PublishContainerVersionResponse:
+    type: object
+    properties:
+      containerVersion?: ContainerVersion
+      compilerError?:
+        type: boolean
+        description: Compiler errors or not.
+    description: Publish container version response.
+  Rule:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      condition?:
+        type: array
+        description: The list of conditions that make up this rule (implicit AND between them).
+        items: Condition
+      notes?:
+        type: string
+        description: User notes on how to apply this rule in the container.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Rule as computed at storage time. This value is recomputed whenever the rule is modified.
+      name?:
+        type: string
+        description: Rule display name.
+      containerId?:
+        type: string
+        description: GTM Container ID.
+      ruleId?:
+        type: string
+        description: The Rule ID uniquely identifies the GTM Rule.
+    description: Represents a Google Tag Manager Rule.
+  SetupTag:
+    type: object
+    properties:
+      stopOnSetupFailure?:
+        type: boolean
+        description: If true, fire the main tag if and only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
+      tagName?:
+        type: string
+        description: The name of the setup tag.
+  Tag:
+    type: object
+    properties:
+      notes?:
+        type: string
+        description: User notes on how to apply this tag in the container.
+      firingRuleId?:
+        type: array
+        description: Firing rule IDs. A tag will fire when any of the listed rules are true and all of its blockingRuleIds (if any specified) are false.
+        items:
+          type: string
+      tagFiringOption?:
+        type: string
+        description: Option to fire this tag.
+        enum:
+        - oncePerEvent
+        - oncePerLoad
+        - unlimited
+      liveOnly?:
+        type: boolean
+        description: If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode).
+      parentFolderId?:
+        type: string
+        description: Parent folder id.
+      tagId?:
+        type: string
+        description: The Tag ID uniquely identifies the GTM Tag.
+      priority?: Parameter
+      type?:
+        type: string
+        description: GTM Tag Type.
+      setupTag?:
+        type: array
+        description: The list of setup tags. Currently we only allow one.
+        items: SetupTag
+      blockingTriggerId?:
+        type: array
+        description: Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag will not fire.
+        items:
+          type: string
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      blockingRuleId?:
+        type: array
+        description: Blocking rule IDs. If any of the listed rules evaluate to true, the tag will not fire.
+        items:
+          type: string
+      teardownTag?:
+        type: array
+        description: The list of teardown tags. Currently we only allow one.
+        items: TeardownTag
+      firingTriggerId?:
+        type: array
+        description: Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its blockingTriggerIds (if any specified) are false.
+        items:
+          type: string
+      parameter?:
+        type: array
+        description: The tag's parameters.
+        items: Parameter
+      scheduleStartMs?:
+        type: integer
+        format: int64
+        description: The start timestamp in milliseconds to schedule a tag.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Tag as computed at storage time. This value is recomputed whenever the tag is modified.
+      name?:
+        type: string
+        description: Tag display name.
+      scheduleEndMs?:
+        type: integer
+        format: int64
+        description: The end timestamp in milliseconds to schedule a tag.
+      containerId?:
+        type: string
+        description: GTM Container ID.
+    description: Represents a Google Tag Manager Tag.
+  TeardownTag:
+    type: object
+    properties:
+      stopTeardownOnFailure?:
+        type: boolean
+        description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
+      tagName?:
+        type: string
+        description: The name of the teardown tag.
+  Trigger:
+    type: object
+    properties:
+      uniqueTriggerId?: Parameter
+      videoPercentageList?: Parameter
+      waitForTagsTimeout?: Parameter
+      waitForTags?: Parameter
+      autoEventFilter?:
+        type: array
+        description: Used in the case of auto event tracking.
+        items: Condition
+      parentFolderId?:
+        type: string
+        description: Parent folder id.
+      enableAllVideos?: Parameter
+      triggerId?:
+        type: string
+        description: The Trigger ID uniquely identifies the GTM Trigger.
+      checkValidation?: Parameter
+      type?:
+        type: string
+        description: Defines the data layer event that causes this trigger.
+        enum:
+        - ajaxSubmission
+        - always
+        - click
+        - customEvent
+        - domReady
+        - formSubmission
+        - historyChange
+        - jsError
+        - linkClick
+        - pageview
+        - timer
+        - windowLoaded
+        - youTube
+      filter?:
+        type: array
+        description: The trigger will only fire iff all Conditions are true.
+        items: Condition
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Trigger as computed at storage time. This value is recomputed whenever the trigger is modified.
+      limit?: Parameter
+      name?:
+        type: string
+        description: Trigger display name.
+      eventName?: Parameter
+      interval?: Parameter
+      containerId?:
+        type: string
+        description: GTM Container ID.
+      customEventFilter?:
+        type: array
+        description: Used in the case of custom event, which is fired iff all Conditions are true.
+        items: Condition
+    description: Represents a Google Tag Manager Trigger
+  UserAccess:
+    type: object
+    properties:
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      permissionId?:
+        type: string
+        description: Account Permission ID.
+      emailAddress?:
+        type: string
+        description: User's email address.
+      accountAccess?: AccountAccess
+      containerAccess?:
+        type: array
+        description: GTM Container access permissions.
+        items: ContainerAccess
+    description: Represents a user's permissions to an account and its container.
+  Variable:
+    type: object
+    properties:
+      notes?:
+        type: string
+        description: User notes on how to apply this variable in the container.
+      parentFolderId?:
+        type: string
+        description: Parent folder id.
+      enablingTriggerId?:
+        type: array
+        description: 'For mobile containers only: A list of trigger IDs for enabling
+          conditional variables; the variable is enabled if one of the enabling triggers
+          is true while all the disabling triggers are false. Treated as an unordered
+          set.'
+        items:
+          type: string
+      type?:
+        type: string
+        description: GTM Variable Type.
+      variableId?:
+        type: string
+        description: The Variable ID uniquely identifies the GTM Variable.
+      accountId?:
+        type: string
+        description: GTM Account ID.
+      parameter?:
+        type: array
+        description: The variable's parameters.
+        items: Parameter
+      scheduleStartMs?:
+        type: integer
+        format: int64
+        description: The start timestamp in milliseconds to schedule a variable.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified.
+      name?:
+        type: string
+        description: Variable display name.
+      scheduleEndMs?:
+        type: integer
+        format: int64
+        description: The end timestamp in milliseconds to schedule a variable.
+      disablingTriggerId?:
+        type: array
+        description: 'For mobile containers only: A list of trigger IDs for disabling
+          conditional variables; the variable is enabled if one of the enabling trigger
+          is true while all the disabling trigger are false. Treated as an unordered
+          set.'
+        items:
+          type: string
+      containerId?:
+        type: string
+        description: GTM Container ID.
+    description: Represents a Google Tag Manager Variable.
+/accounts:
+  /{accountId}:
+    uriParameters:
+      accountId:
+        type: string
+        description: The GTM Account ID.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/tagmanager.edit.containers
+          - https://www.googleapis.com/auth/tagmanager.manage.accounts
+          - https://www.googleapis.com/auth/tagmanager.readonly
+      description: Gets a GTM Account.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Account
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/tagmanager.manage.accounts
+      description: Updates a GTM Account.
+      is:
+      - hasParameters
+      queryParameters:
+        fingerprint?:
+          type: string
+          description: When provided, this fingerprint must match the fingerprint of the account in storage.
+      body:
+        application/json: Account
+      responses:
+        200:
+          body:
+            application/json: Account
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/tagmanager.edit.containers
+        - https://www.googleapis.com/auth/tagmanager.manage.accounts
+        - https://www.googleapis.com/auth/tagmanager.readonly
+    description: Lists all GTM Accounts that a user has access to.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: ListAccountsResponse

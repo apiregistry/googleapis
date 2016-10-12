@@ -1,0 +1,480 @@
+#%RAML 1.0
+title: Prediction API
+version: v1.6
+baseUri: https://www.googleapis.com/prediction/v1.6/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/prediction/docs/developer-guide
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/feature/predictionapi-32.png
+  name: x32
+- url: https://www.google.com/images/icons/feature/predictionapi-16.png
+  name: x16
+(commons.Id): prediction:v1.6
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/devstorage.full_control
+      - https://www.googleapis.com/auth/cloud-platform
+      - https://www.googleapis.com/auth/devstorage.read_write
+      - https://www.googleapis.com/auth/prediction
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Analyze:
+    type: object
+    properties:
+      modelDescription?:
+        type: object
+        properties:
+          modelinfo?: Insert2
+          confusionMatrix?:
+            type: object
+            description: An output confusion matrix. This shows an estimate for how this model will do in predictions. This is first indexed by the true class label. For each true class label, this provides a pair {predicted_label, count}, where count is the estimated number of times the model will predict the predicted label given the true label. Will not output if more then 100 classes (Categorical models only).
+          confusionMatrixRowTotals?:
+            type: object
+            description: A list of the confusion matrix row totals.
+        description: Description of the model.
+      kind?:
+        type: string
+        default: prediction#analyze
+        description: What kind of resource this is.
+      id?:
+        type: string
+        description: The unique name for the predictive model.
+      dataDescription?:
+        type: object
+        properties:
+          features?:
+            type: array
+            description: Description of the input features in the data set.
+            items:
+              type: object
+              properties:
+                categorical?:
+                  type: object
+                  properties:
+                    values?:
+                      type: array
+                      description: List of all the categories for this feature in the data set.
+                      items:
+                        type: object
+                        properties:
+                          count?:
+                            type: integer
+                            format: int64
+                            description: Number of times this feature had this value.
+                          value?:
+                            type: string
+                            description: The category name.
+                    count?:
+                      type: integer
+                      format: int64
+                      description: Number of categorical values for this feature in the data.
+                  description: Description of the categorical values of this feature.
+                index?:
+                  type: integer
+                  format: int64
+                  description: The feature index.
+                numeric?:
+                  type: object
+                  properties:
+                    variance?:
+                      type: string
+                      description: Variance of the numeric values of this feature in the data set.
+                    mean?:
+                      type: string
+                      description: Mean of the numeric values of this feature in the data set.
+                    count?:
+                      type: integer
+                      format: int64
+                      description: Number of numeric values for this feature in the data set.
+                  description: Description of the numeric values of this feature.
+                text?:
+                  type: object
+                  properties:
+                    count?:
+                      type: integer
+                      format: int64
+                      description: Number of multiple-word text values for this feature.
+                  description: Description of multiple-word text values of this feature.
+          outputFeature?:
+            type: object
+            properties:
+              numeric?:
+                type: object
+                properties:
+                  variance?:
+                    type: string
+                    description: Variance of the output values in the data set.
+                  mean?:
+                    type: string
+                    description: Mean of the output values in the data set.
+                  count?:
+                    type: integer
+                    format: int64
+                    description: Number of numeric output values in the data set.
+                description: Description of the output values in the data set.
+              text?:
+                type: array
+                description: Description of the output labels in the data set.
+                items:
+                  type: object
+                  properties:
+                    count?:
+                      type: integer
+                      format: int64
+                      description: Number of times the output label occurred in the data set.
+                    value?:
+                      type: string
+                      description: The output label.
+            description: Description of the output value or label.
+        description: Description of the data the model was trained on.
+      errors?:
+        type: array
+        description: List of errors with the data.
+        items:
+          type: object
+      selfLink?:
+        type: string
+        description: A URL to re-request this resource.
+  Input:
+    type: object
+    properties:
+      input?:
+        type: object
+        properties:
+          csvInstance?:
+            type: array
+            description: A list of input features, these can be strings or doubles.
+            items:
+              type: any
+        description: Input to the model for a prediction.
+  Insert:
+    type: object
+    properties:
+      storagePMMLModelLocation?:
+        type: string
+        description: Google storage location of the pmml model file.
+      storageDataLocation?:
+        type: string
+        description: Google storage location of the training data file.
+      trainingInstances?:
+        type: array
+        description: Instances to train model on.
+        items:
+          type: object
+          properties:
+            csvInstance?:
+              type: array
+              description: The input features for this instance.
+              items:
+                type: any
+            output?:
+              type: string
+              description: The generic output value - could be regression or class label.
+      utility?:
+        type: array
+        description: A class weighting function, which allows the importance weights for class labels to be specified (Categorical models only).
+        items:
+          type: object
+          description: Class label (string).
+      sourceModel?:
+        type: string
+        description: The Id of the model to be copied over.
+      id?:
+        type: string
+        description: The unique name for the predictive model.
+      modelType?:
+        type: string
+        description: Type of predictive model (classification or regression).
+      storagePMMLLocation?:
+        type: string
+        description: Google storage location of the preprocessing pmml file.
+  Insert2:
+    type: object
+    properties:
+      storagePMMLModelLocation?:
+        type: string
+        description: Google storage location of the pmml model file.
+      storageDataLocation?:
+        type: string
+        description: Google storage location of the training data file.
+      modelInfo?:
+        type: object
+        properties:
+          classificationAccuracy?:
+            type: string
+            description: A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an estimate, based on the amount and quality of the training data, of the estimated prediction accuracy. You can use this is a guide to decide whether the results are accurate enough for your needs. This estimate will be more reliable if your real input data is similar to your training data (Categorical models only).
+          meanSquaredError?:
+            type: string
+            description: An estimated mean squared error. The can be used to measure the quality of the predicted model (Regression models only).
+          numberInstances?:
+            type: integer
+            format: int64
+            description: Number of valid data instances used in the trained model.
+          classWeightedAccuracy?:
+            type: string
+            description: Estimated accuracy of model taking utility weights into account (Categorical models only).
+          modelType?:
+            type: string
+            description: Type of predictive model (CLASSIFICATION or REGRESSION).
+          numberLabels?:
+            type: integer
+            format: int64
+            description: Number of class labels in the trained model (Categorical models only).
+        description: Model metadata.
+      created?:
+        type: datetime
+        description: Insert time of the model (as a RFC 3339 timestamp).
+      kind?:
+        type: string
+        default: prediction#training
+        description: What kind of resource this is.
+      trainingStatus?:
+        type: string
+        description: 'The current status of the training job. This can be one of following:
+          RUNNING; DONE; ERROR; ERROR: TRAINING JOB NOT FOUND'
+      id?:
+        type: string
+        description: The unique name for the predictive model.
+      modelType?:
+        type: string
+        description: Type of predictive model (CLASSIFICATION or REGRESSION).
+      storagePMMLLocation?:
+        type: string
+        description: Google storage location of the preprocessing pmml file.
+      trainingComplete?:
+        type: datetime
+        description: Training completion time (as a RFC 3339 timestamp).
+      selfLink?:
+        type: string
+        description: A URL to re-request this resource.
+  List:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: prediction#list
+        description: What kind of resource this is.
+      nextPageToken?:
+        type: string
+        description: Pagination token to fetch the next page, if one exists.
+      items?:
+        type: array
+        description: List of models.
+        items: Insert2
+      selfLink?:
+        type: string
+        description: A URL to re-request this resource.
+  Output:
+    type: object
+    properties:
+      outputLabel?:
+        type: string
+        description: The most likely class label (Categorical models only).
+      outputValue?:
+        type: string
+        description: The estimated regression value (Regression models only).
+      kind?:
+        type: string
+        default: prediction#output
+        description: What kind of resource this is.
+      outputMulti?:
+        type: array
+        description: A list of class labels with their estimated probabilities (Categorical models only).
+        items:
+          type: object
+          properties:
+            score?:
+              type: string
+              description: The probability of the class label.
+            label?:
+              type: string
+              description: The class label.
+      id?:
+        type: string
+        description: The unique name for the predictive model.
+      selfLink?:
+        type: string
+        description: A URL to re-request this resource.
+  Update:
+    type: object
+    properties:
+      csvInstance?:
+        type: array
+        description: The input features for this instance.
+        items:
+          type: any
+      output?:
+        type: string
+        description: The generic output value - could be regression or class label.
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      description: The project associated with the model.
+  /hostedmodels:
+    /{hostedModelName}:
+      uriParameters:
+        hostedModelName:
+          type: string
+          description: The name of a hosted model.
+      /predict:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/prediction
+          description: Submit input and request an output against a hosted model.
+          is:
+          - hasParameters
+          body:
+            application/json: Input
+          responses:
+            200:
+              body:
+                application/json: Output
+  /trainedmodels:
+    /{id}:
+      uriParameters:
+        id:
+          type: string
+          description: The unique name for the predictive model.
+      /analyze:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/prediction
+          description: Get analysis of the model and the data the model was trained on.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Analyze
+      /predict:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/prediction
+          description: Submit model id and request a prediction.
+          is:
+          - hasParameters
+          body:
+            application/json: Input
+          responses:
+            200:
+              body:
+                application/json: Output
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/prediction
+        description: Check training status of your model.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Insert2
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/prediction
+        description: Add new data to a trained model.
+        is:
+        - hasParameters
+        body:
+          application/json: Update
+        responses:
+          200:
+            body:
+              application/json: Insert2
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/prediction
+        description: Delete a trained model.
+        is:
+        - hasParameters
+    /list:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/prediction
+        description: List available models.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of results to return.
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Pagination token.
+        responses:
+          200:
+            body:
+              application/json: List
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_only
+          - https://www.googleapis.com/auth/devstorage.read_write
+          - https://www.googleapis.com/auth/prediction
+      description: Train a Prediction API model.
+      is:
+      - hasParameters
+      body:
+        application/json: Insert
+      responses:
+        200:
+          body:
+            application/json: Insert2

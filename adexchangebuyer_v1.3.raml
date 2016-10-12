@@ -1,0 +1,1085 @@
+#%RAML 1.0
+title: Ad Exchange Buyer API
+version: v1.3
+baseUri: https://www.googleapis.com/adexchangebuyer/v1.3/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/ad-exchange/buyer-rest
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/doubleclick-32.gif
+  name: x32
+- url: https://www.google.com/images/icons/product/doubleclick-16.gif
+  name: x16
+(commons.Id): adexchangebuyer:v1.3
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/adexchange.buyer
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Account:
+    type: object
+    properties:
+      numberActiveCreatives?:
+        type: integer
+        format: int32
+        description: The number of creatives that this account inserted or bid with in the last 30 days.
+      maximumTotalQps?:
+        type: integer
+        format: int32
+        description: The sum of all bidderLocation.maximumQps values cannot exceed this. Please contact your technical account manager if you need to change this.
+      bidderLocation?:
+        type: array
+        description: Your bidder locations that have distinct URLs.
+        items:
+          type: object
+          properties:
+            maximumQps?:
+              type: integer
+              format: int32
+              description: The maximum queries per second the Ad Exchange will send.
+            region?:
+              type: string
+              description: "The geographical region the Ad Exchange should send requests\
+                \ from. Only used by some quota systems, but always setting the value\
+                \ is recommended. Allowed values:  \n- ASIA \n- EUROPE \n- US_EAST\
+                \ \n- US_WEST"
+            url?:
+              type: string
+              description: The URL to which the Ad Exchange will send bid requests.
+      kind?:
+        type: string
+        default: adexchangebuyer#account
+        description: Resource type.
+      maximumActiveCreatives?:
+        type: integer
+        format: int32
+        description: The maximum number of active creatives that an account can have, where a creative is active if it was inserted or bid with in the last 30 days. Please contact your technical account manager if you need to change this.
+      cookieMatchingNid?:
+        type: string
+        description: The nid parameter value used in cookie match requests. Please contact your technical account manager if you need to change this.
+      id?:
+        type: integer
+        format: int32
+        description: Account id.
+      cookieMatchingUrl?:
+        type: string
+        description: The base URL used in cookie match requests.
+    description: Configuration data for an Ad Exchange buyer account.
+  AccountsList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: adexchangebuyer#accountsList
+        description: Resource type.
+      items?:
+        type: array
+        description: A list of accounts.
+        items: Account
+    description: An account feed lists Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single buyer account.
+  BillingInfo:
+    type: object
+    properties:
+      accountId?:
+        type: integer
+        format: int32
+        description: Account id.
+      billingId?:
+        type: array
+        description: A list of adgroup IDs associated with this particular account. These IDs may show up as part of a realtime bidding BidRequest, which indicates a bid request for this account.
+        items:
+          type: string
+      accountName?:
+        type: string
+        description: Account name.
+      kind?:
+        type: string
+        default: adexchangebuyer#billingInfo
+        description: Resource type.
+    description: The configuration data for an Ad Exchange billing info.
+  BillingInfoList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: adexchangebuyer#billingInfoList
+        description: Resource type.
+      items?:
+        type: array
+        description: A list of billing info relevant for your account.
+        items: BillingInfo
+    description: A billing info feed lists Billing Info the Ad Exchange buyer account has access to. Each entry in the feed corresponds to a single billing info.
+  Budget:
+    type: object
+    properties:
+      accountId?:
+        type: integer
+        format: int64
+        description: The id of the account. This is required for get and update requests.
+      billingId?:
+        type: integer
+        format: int64
+        description: The billing id to determine which adgroup to provide budget information for. This is required for get and update requests.
+      budgetAmount?:
+        type: integer
+        format: int64
+        description: The daily budget amount in unit amount of the account currency to apply for the billingId provided. This is required for update requests.
+      kind?:
+        type: string
+        default: adexchangebuyer#budget
+        description: The kind of the resource, i.e. "adexchangebuyer#budget".
+      id?:
+        type: string
+        description: The unique id that describes this item.
+      currencyCode?:
+        type: string
+        description: The currency code for the buyer. This cannot be altered here.
+    description: The configuration data for Ad Exchange RTB - Budget API.
+  Creative:
+    type: object
+    properties:
+      disapprovalReasons?:
+        type: array
+        description: The reasons for disapproval, if any. Note that not all disapproval reasons may be categorized, so it is possible for the creative to have a status of DISAPPROVED with an empty list for disapproval_reasons. In this case, please reach out to your TAM to help debug the issue. Read-only. This field should not be set in requests.
+        items:
+          type: object
+          properties:
+            reason?:
+              type: string
+              description: The categorized reason for disapproval.
+            details?:
+              type: array
+              description: Additional details about the reason for disapproval.
+              items:
+                type: string
+      vendorType?:
+        type: array
+        description: All vendor types for the ads that may be shown from this snippet.
+        items:
+          type: integer
+          format: int32
+      HTMLSnippet?:
+        type: string
+        description: The HTML snippet that displays the ad when inserted in the web page. If set, videoURL should not be set.
+      filteringReasons?:
+        type: object
+        properties:
+          date?:
+            type: string
+            description: The date in ISO 8601 format for the data. The data is collected from 00:00:00 to 23:59:59 in PST.
+          reasons?:
+            type: array
+            description: The filtering reasons.
+            items:
+              type: object
+              properties:
+                filteringStatus?:
+                  type: integer
+                  format: int32
+                  description: The filtering status code. Please refer to the creative-status-codes.txt file for different statuses.
+                filteringCount?:
+                  type: integer
+                  format: int64
+                  description: The number of times the creative was filtered for the status. The count is aggregated across all publishers on the exchange.
+        description: The filtering reasons for the creative. Read-only. This field should not be set in requests.
+      kind?:
+        type: string
+        default: adexchangebuyer#creative
+        description: Resource type.
+      clickThroughUrl?:
+        type: array
+        description: The set of destination urls for the snippet.
+        items:
+          type: string
+      impressionTrackingUrl?:
+        type: array
+        description: The set of urls to be called to record an impression.
+        items:
+          type: string
+      agencyId?:
+        type: integer
+        format: int64
+        description: The agency id for this creative.
+      version?:
+        type: integer
+        format: int32
+        description: The version for this creative. Read-only. This field should not be set in requests.
+      advertiserName?:
+        type: string
+        description: The name of the company being advertised in the creative.
+      advertiserId?:
+        type: array
+        description: Detected advertiser id, if any. Read-only. This field should not be set in requests.
+        items:
+          type: integer
+          format: int64
+      buyerCreativeId?:
+        type: string
+        description: A buyer-specific id identifying the creative in this ad.
+      restrictedCategories?:
+        type: array
+        description: All restricted categories for the ads that may be shown from this snippet.
+        items:
+          type: integer
+          format: int32
+      accountId?:
+        type: integer
+        format: int32
+        description: Account id.
+      productCategories?:
+        type: array
+        description: Detected product categories, if any. Read-only. This field should not be set in requests.
+        items:
+          type: integer
+          format: int32
+      corrections?:
+        type: array
+        description: Shows any corrections that were applied to this creative. Read-only. This field should not be set in requests.
+        items:
+          type: object
+          properties:
+            reason?:
+              type: string
+              description: The type of correction that was applied to the creative.
+            details?:
+              type: array
+              description: Additional details about the correction.
+              items:
+                type: string
+      nativeAd?:
+        type: object
+        properties:
+          advertiser?:
+            type: string
+          image?:
+            type: object
+            properties:
+              width?:
+                type: integer
+                format: int32
+              url?:
+                type: string
+              height?:
+                type: integer
+                format: int32
+            description: A large image.
+          appIcon?:
+            type: object
+            properties:
+              width?:
+                type: integer
+                format: int32
+              url?:
+                type: string
+              height?:
+                type: integer
+                format: int32
+            description: The app icon, for app download ads.
+          clickTrackingUrl?:
+            type: string
+            description: The URL to use for click tracking.
+          price?:
+            type: string
+            description: The price of the promoted app including the currency info.
+          impressionTrackingUrl?:
+            type: array
+            description: The URLs are called when the impression is rendered.
+            items:
+              type: string
+          logo?:
+            type: object
+            properties:
+              width?:
+                type: integer
+                format: int32
+              url?:
+                type: string
+              height?:
+                type: integer
+                format: int32
+            description: A smaller image, for the advertiser logo.
+          store?:
+            type: string
+            description: The URL to the app store to purchase/download the promoted app.
+          body?:
+            type: string
+            description: A long description of the ad.
+          starRating?:
+            type: number
+            format: double
+            description: The app rating in the app store. Must be in the range [0-5].
+          headline?:
+            type: string
+            description: A short title for the ad.
+          callToAction?:
+            type: string
+            description: A label for the button that the user is supposed to click.
+        description: If nativeAd is set, HTMLSnippet and videoURL should not be set.
+      videoURL?:
+        type: string
+        description: The url to fetch a video ad. If set, HTMLSnippet should not be set.
+      apiUploadTimestamp?:
+        type: string
+        description: The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).
+      width?:
+        type: integer
+        format: int32
+        description: Ad width.
+      attribute?:
+        type: array
+        description: All attributes for the ads that may be shown from this snippet.
+        items:
+          type: integer
+          format: int32
+      height?:
+        type: integer
+        format: int32
+        description: Ad height.
+      sensitiveCategories?:
+        type: array
+        description: Detected sensitive categories, if any. Read-only. This field should not be set in requests.
+        items:
+          type: integer
+          format: int32
+      status?:
+        type: string
+        description: Creative serving status. Read-only. This field should not be set in requests.
+    description: A creative and its classification data.
+  CreativesList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: adexchangebuyer#creativesList
+        description: Resource type.
+      nextPageToken?:
+        type: string
+        description: Continuation token used to page through creatives. To retrieve the next page of results, set the next request's "pageToken" value to this.
+      items?:
+        type: array
+        description: A list of creatives.
+        items: Creative
+    description: The creatives feed lists the active creatives for the Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single creative.
+  DirectDeal:
+    type: object
+    properties:
+      advertiser?:
+        type: string
+        description: The name of the advertiser this deal is for.
+      dealTier?:
+        type: string
+        description: The deal type such as programmatic reservation or fixed price and so on.
+      fixedCpm?:
+        type: integer
+        format: int64
+        description: The fixed price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the fixed price tier of buying (highest priority, pay exactly the configured fixed price).
+      kind?:
+        type: string
+        default: adexchangebuyer#directDeal
+        description: Resource type.
+      sellerNetwork?:
+        type: string
+        description: The name of the publisher offering this direct deal.
+      allowsAlcohol?:
+        type: boolean
+        description: Whether the publisher for this deal is eligible for alcohol ads.
+      buyerAccountId?:
+        type: integer
+        format: int64
+        description: The account id that this deal was negotiated for. It is either the buyer or the client that this deal was negotiated on behalf of.
+      privateExchangeMinCpm?:
+        type: integer
+        format: int64
+        description: The minimum price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the private exchange tier of buying (below fixed price priority, run as a second price auction).
+      accountId?:
+        type: integer
+        format: int32
+        description: The account id of the buyer this deal is for.
+      publisherBlocksOverriden?:
+        type: boolean
+        description: If true, the publisher has opted to have their blocks ignored when a creative is bid with for this deal.
+      name?:
+        type: string
+        description: Deal name.
+      startTime?:
+        type: integer
+        format: int64
+        description: Start time for when this deal becomes active. If not set then this deal is active immediately upon creation. In seconds since the epoch.
+      endTime?:
+        type: integer
+        format: int64
+        description: End time for when this deal stops being active. If not set then this deal is valid until manually disabled by the publisher. In seconds since the epoch.
+      id?:
+        type: integer
+        format: int64
+        description: Deal id.
+      currencyCode?:
+        type: string
+        description: The currency code that applies to the fixed_cpm value. If not set then assumed to be USD.
+    description: The configuration data for an Ad Exchange direct deal.
+  DirectDealsList:
+    type: object
+    properties:
+      directDeals?:
+        type: array
+        description: A list of direct deals relevant for your account.
+        items: DirectDeal
+      kind?:
+        type: string
+        default: adexchangebuyer#directDealsList
+        description: Resource type.
+    description: A direct deals feed lists Direct Deals the Ad Exchange buyer account has access to. This includes direct deals set up for the buyer account as well as its merged stream seats.
+  PerformanceReport:
+    type: object
+    properties:
+      cookieMatcherStatusRate?:
+        type: array
+        description: Average QPS for cookie matcher operations.
+        items:
+          type: any
+      inventoryMatchRate?:
+        type: number
+        format: double
+        description: The number of potential queries based on your pretargeting settings.
+      kind?:
+        type: string
+        default: adexchangebuyer#performanceReport
+        description: Resource type.
+      bidRate?:
+        type: number
+        format: double
+        description: The number of bid responses with an ad.
+      latency95thPercentile?:
+        type: number
+        format: double
+        description: The 95th percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report.
+      successfulRequestRate?:
+        type: number
+        format: double
+        description: The number of properly formed bid responses received by our servers within the deadline.
+      bidRequestRate?:
+        type: number
+        format: double
+        description: The number of bid requests sent to your bidder.
+      latency85thPercentile?:
+        type: number
+        format: double
+        description: The 85th percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report.
+      pixelMatchResponses?:
+        type: number
+        format: double
+        description: Average QPS for pixel match responses from clients.
+      calloutStatusRate?:
+        type: array
+        description: Rate of various prefiltering statuses per match. Please refer to the callout-status-codes.txt file for different statuses.
+        items:
+          type: any
+      latency50thPercentile?:
+        type: number
+        format: double
+        description: The 50th percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report.
+      creativeStatusRate?:
+        type: array
+        description: Rate of ads with a given status. Please refer to the creative-status-codes.txt file for different statuses.
+        items:
+          type: any
+      quotaThrottledLimit?:
+        type: number
+        format: double
+        description: The throttled quota limits for this account.
+      noQuotaInRegion?:
+        type: number
+        format: double
+        description: Rate of various quota account statuses per quota check.
+      filteredBidRate?:
+        type: number
+        format: double
+        description: The number of bid responses that were filtered due to a policy violation or other errors.
+      pixelMatchRequests?:
+        type: number
+        format: double
+        description: Average QPS for pixel match requests from clients.
+      quotaConfiguredLimit?:
+        type: number
+        format: double
+        description: The configured quota limits for this account.
+      region?:
+        type: string
+        description: The trading location of this data.
+      unsuccessfulRequestRate?:
+        type: number
+        format: double
+        description: The number of bid responses that were unsuccessful due to timeouts, incorrect formatting, etc.
+      outOfQuota?:
+        type: number
+        format: double
+        description: Rate of various quota account statuses per quota check.
+      hostedMatchStatusRate?:
+        type: array
+        description: Average QPS for hosted match operations.
+        items:
+          type: any
+      timestamp?:
+        type: integer
+        format: int64
+        description: The unix timestamp of the starting time of this performance data.
+    description: The configuration data for an Ad Exchange performance report list.
+  PerformanceReportList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: adexchangebuyer#performanceReportList
+        description: Resource type.
+      performanceReport?:
+        type: array
+        description: A list of performance reports relevant for the account.
+        items: PerformanceReport
+    description: The configuration data for an Ad Exchange performance report list.
+  PretargetingConfig:
+    type: object
+    properties:
+      configName?:
+        type: string
+        description: The name of the config. Must be unique. Required for all requests.
+      billingId?:
+        type: integer
+        format: int64
+        description: The id for billing purposes, provided for reference. Leave this field blank for insert requests; the id will be generated automatically.
+      languages?:
+        type: array
+        description: Request containing any of these language codes will match.
+        items:
+          type: string
+      vendorTypes?:
+        type: array
+        description: Requests that allow any of these vendor ids will match. Values are from vendors.txt in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      kind?:
+        type: string
+        default: adexchangebuyer#pretargetingConfig
+        description: The kind of the resource, i.e. "adexchangebuyer#pretargetingConfig".
+      userLists?:
+        type: array
+        description: Requests containing any of these user list ids will match.
+        items:
+          type: integer
+          format: int64
+      mobileCarriers?:
+        type: array
+        description: Requests containing any of these mobile carrier ids will match. Values are from mobile-carriers.csv in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      placements?:
+        type: array
+        description: Requests containing any of these placements will match.
+        items:
+          type: object
+          properties:
+            type?:
+              type: string
+              description: The type of the placement.
+            token?:
+              type: string
+              description: The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.
+      isActive?:
+        type: boolean
+        description: Whether this config is active. Required for all requests.
+      excludedPlacements?:
+        type: array
+        description: Requests containing any of these placements will not match.
+        items:
+          type: object
+          properties:
+            type?:
+              type: string
+              description: The type of the placement.
+            token?:
+              type: string
+              description: The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.
+      verticals?:
+        type: array
+        description: Requests containing any of these vertical ids will match.
+        items:
+          type: integer
+          format: int64
+      platforms?:
+        type: array
+        description: Requests matching any of these platforms will match. Possible values are PRETARGETING_PLATFORM_MOBILE, PRETARGETING_PLATFORM_DESKTOP, and PRETARGETING_PLATFORM_TABLET.
+        items:
+          type: string
+      excludedVerticals?:
+        type: array
+        description: Requests containing any of these vertical ids will not match. Values are from the publisher-verticals.txt file in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      excludedContentLabels?:
+        type: array
+        description: Requests with any of these content labels will not match. Values are from content-labels.txt in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      creativeType?:
+        type: array
+        description: List must contain exactly one of PRETARGETING_CREATIVE_TYPE_HTML or PRETARGETING_CREATIVE_TYPE_VIDEO.
+        items:
+          type: string
+      configId?:
+        type: integer
+        format: int64
+        description: The config id; generated automatically. Leave this field blank for insert requests.
+      mobileOperatingSystemVersions?:
+        type: array
+        description: Requests containing any of these mobile operating system version ids will match. Values are from mobile-os.csv in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      geoCriteriaIds?:
+        type: array
+        description: Requests containing any of these geo criteria ids will match.
+        items:
+          type: integer
+          format: int64
+      mobileDevices?:
+        type: array
+        description: Requests containing any of these mobile device ids will match. Values are from mobile-devices.csv in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      supportedCreativeAttributes?:
+        type: array
+        description: Creative attributes should be declared here if all creatives corresponding to this pretargeting configuration have that creative attribute. Values are from pretargetable-creative-attributes.txt in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      excludedGeoCriteriaIds?:
+        type: array
+        description: Requests containing any of these geo criteria ids will not match.
+        items:
+          type: integer
+          format: int64
+      dimensions?:
+        type: array
+        description: Requests which allow one of these (width, height) pairs will match. All pairs must be supported ad dimensions.
+        items:
+          type: object
+          properties:
+            width?:
+              type: integer
+              format: int64
+              description: Width in pixels.
+            height?:
+              type: integer
+              format: int64
+              description: Height in pixels.
+      excludedUserLists?:
+        type: array
+        description: Requests containing any of these users list ids will not match.
+        items:
+          type: integer
+          format: int64
+  PretargetingConfigList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: adexchangebuyer#pretargetingConfigList
+        description: Resource type.
+      items?:
+        type: array
+        description: A list of pretargeting configs
+        items: PretargetingConfig
+/directdeals:
+  /{id}:
+    uriParameters:
+      id:
+        type: integer
+        format: int64
+        description: The direct deal id
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Gets one direct deal by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: DirectDeal
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/adexchange.buyer
+    description: Retrieves the authenticated user's list of direct deals.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: DirectDealsList
+/billinginfo:
+  /{accountId}:
+    uriParameters:
+      accountId:
+        type: integer
+        format: int32
+        description: The account id.
+    /{billingId}:
+      uriParameters:
+        billingId:
+          type: integer
+          format: int64
+          description: The billing id associated with the budget being updated.
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.
+        is:
+        - hasParameters
+        body:
+          application/json: Budget
+        responses:
+          200:
+            body:
+              application/json: Budget
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Returns the budget information for the adgroup specified by the accountId and billingId.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Budget
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.
+        is:
+        - hasParameters
+        body:
+          application/json: Budget
+        responses:
+          200:
+            body:
+              application/json: Budget
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Returns the billing information for one account specified by account ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: BillingInfo
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/adexchange.buyer
+    description: Retrieves a list of billing information for all accounts of the authenticated user.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: BillingInfoList
+/performancereport:
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/adexchange.buyer
+    description: Retrieves the authenticated user's list of performance metrics.
+    is:
+    - hasParameters
+    queryParameters:
+      accountId:
+        type: integer
+        format: int64
+        description: The account id to get the reports.
+      startDateTime:
+        type: string
+        description: The start time of the report in ISO 8601 timestamp format using UTC.
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of entries returned on one result page. If not set, the default is 100. Optional.
+        maximum: 1000
+        minimum: 1
+      pageToken?:
+        type: string
+        description: A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.
+      endDateTime:
+        type: string
+        description: The end time of the report in ISO 8601 timestamp format using UTC.
+    responses:
+      200:
+        body:
+          application/json: PerformanceReportList
+/pretargetingconfigs:
+  /{accountId}:
+    uriParameters:
+      accountId:
+        type: integer
+        format: int64
+        description: The account id to update the pretargeting config for.
+    /{configId}:
+      uriParameters:
+        configId:
+          type: integer
+          format: int64
+          description: The specific id of the configuration to update.
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Updates an existing pretargeting config. This method supports patch semantics.
+        is:
+        - hasParameters
+        body:
+          application/json: PretargetingConfig
+        responses:
+          200:
+            body:
+              application/json: PretargetingConfig
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Gets a specific pretargeting configuration
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: PretargetingConfig
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Updates an existing pretargeting config.
+        is:
+        - hasParameters
+        body:
+          application/json: PretargetingConfig
+        responses:
+          200:
+            body:
+              application/json: PretargetingConfig
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Deletes an existing pretargeting config.
+        is:
+        - hasParameters
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Inserts a new pretargeting configuration.
+      is:
+      - hasParameters
+      body:
+        application/json: PretargetingConfig
+      responses:
+        200:
+          body:
+            application/json: PretargetingConfig
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Retrieves a list of the authenticated user's pretargeting configurations.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: PretargetingConfigList
+/creatives:
+  /{accountId}:
+    uriParameters:
+      accountId:
+        type: integer
+        format: int32
+        description: The id for the account that will serve this creative.
+    /{buyerCreativeId}:
+      uriParameters:
+        buyerCreativeId:
+          type: string
+          description: The buyer-specific id for this creative.
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.buyer
+        description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Creative
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/adexchange.buyer
+    description: Submit a new creative.
+    is:
+    - hasParameters
+    body:
+      application/json: Creative
+    responses:
+      200:
+        body:
+          application/json: Creative
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/adexchange.buyer
+    description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
+    is:
+    - hasParameters
+    queryParameters:
+      buyerCreativeId?:
+        type: string
+        description: When specified, only creatives for the given buyer creative ids are returned.
+      accountId?:
+        type: integer
+        format: int32
+        description: When specified, only creatives for the given account ids are returned.
+      statusFilter?:
+        type: string
+        description: When specified, only creatives having the given status are returned.
+        enum:
+        - approved
+        - disapproved
+        - not_checked
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of entries returned on one result page. If not set, the default is 100. Optional.
+        maximum: 1000
+        minimum: 1
+      pageToken?:
+        type: string
+        description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.
+    responses:
+      200:
+        body:
+          application/json: CreativesList
+/accounts:
+  /{id}:
+    uriParameters:
+      id:
+        type: integer
+        format: int32
+        description: The account id
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Updates an existing account. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Account
+      responses:
+        200:
+          body:
+            application/json: Account
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Gets one account by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Account
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.buyer
+      description: Updates an existing account.
+      is:
+      - hasParameters
+      body:
+        application/json: Account
+      responses:
+        200:
+          body:
+            application/json: Account
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/adexchange.buyer
+    description: Retrieves the authenticated user's list of accounts.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: AccountsList

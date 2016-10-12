@@ -1,0 +1,197 @@
+#%RAML 1.0
+title: URL Shortener API
+version: v1
+baseUri: https://www.googleapis.com/urlshortener/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/url-shortener/v1/getting_started
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): urlshortener:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/urlshortener
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AnalyticsSnapshot:
+    type: object
+    properties:
+      referrers?:
+        type: array
+        description: Top referring hosts, e.g. "www.google.com"; sorted by (descending) click counts. Only present if this data is available.
+        items: StringCount
+      shortUrlClicks?:
+        type: integer
+        format: int64
+        description: Number of clicks on this short URL.
+      longUrlClicks?:
+        type: integer
+        format: int64
+        description: Number of clicks on all goo.gl short URLs pointing to this long URL.
+      countries?:
+        type: array
+        description: Top countries (expressed as country codes), e.g. "US" or "DE"; sorted by (descending) click counts. Only present if this data is available.
+        items: StringCount
+      browsers?:
+        type: array
+        description: Top browsers, e.g. "Chrome"; sorted by (descending) click counts. Only present if this data is available.
+        items: StringCount
+      platforms?:
+        type: array
+        description: Top platforms or OSes, e.g. "Windows"; sorted by (descending) click counts. Only present if this data is available.
+        items: StringCount
+  AnalyticsSummary:
+    type: object
+    properties:
+      twoHours?: AnalyticsSnapshot
+      week?: AnalyticsSnapshot
+      month?: AnalyticsSnapshot
+      day?: AnalyticsSnapshot
+      allTime?: AnalyticsSnapshot
+  StringCount:
+    type: object
+    properties:
+      count?:
+        type: integer
+        format: int64
+        description: Number of clicks for this top entry, e.g. for this particular country or browser.
+      id?:
+        type: string
+        description: Label assigned to this top entry, e.g. "US" or "Chrome".
+  Url:
+    type: object
+    properties:
+      analytics?: AnalyticsSummary
+      created?:
+        type: string
+        description: Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd'T'HH:mm:ss.SSSZZ format, e.g. "2010-10-14T19:01:24.944+00:00".
+      kind?:
+        type: string
+        default: urlshortener#url
+        description: The fixed string "urlshortener#url".
+      longUrl?:
+        type: string
+        description: Long URL, e.g. "http://www.google.com/". Might not be present if the status is "REMOVED".
+      id?:
+        type: string
+        description: Short URL, e.g. "http://goo.gl/l6MS".
+      status?:
+        type: string
+        description: 'Status of the target URL. Possible values: "OK", "MALWARE",
+          "PHISHING", or "REMOVED". A URL might be marked "REMOVED" if it was flagged
+          as spam, for example.'
+  UrlHistory:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: Total number of short URLs associated with this user (may be approximate).
+      itemsPerPage?:
+        type: integer
+        format: int32
+        description: Number of items returned with each full "page" of results. Note that the last page could have fewer items than the "itemsPerPage" value.
+      kind?:
+        type: string
+        default: urlshortener#urlHistory
+        description: The fixed string "urlshortener#urlHistory".
+      nextPageToken?:
+        type: string
+        description: A token to provide to get the next page of results.
+      items?:
+        type: array
+        description: A list of URL resources.
+        items: Url
+/url:
+  /history:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/urlshortener
+      description: Retrieves a list of URLs shortened by a user.
+      is:
+      - hasParameters
+      queryParameters:
+        start-token?:
+          type: string
+          description: Token for requesting successive pages of results.
+        projection?:
+          type: string
+          description: Additional information to return.
+          enum:
+          - ANALYTICS_CLICKS
+          - FULL
+      responses:
+        200:
+          body:
+            application/json: UrlHistory
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/urlshortener
+    description: Expands a short URL or gets creation time and analytics.
+    is:
+    - hasParameters
+    queryParameters:
+      shortUrl:
+        type: string
+        description: The short URL, including the protocol.
+      projection?:
+        type: string
+        description: Additional information to return.
+        enum:
+        - ANALYTICS_CLICKS
+        - ANALYTICS_TOP_STRINGS
+        - FULL
+    responses:
+      200:
+        body:
+          application/json: Url
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/urlshortener
+    description: Creates a new short URL.
+    is:
+    - hasParameters
+    body:
+      application/json: Url
+    responses:
+      200:
+        body:
+          application/json: Url

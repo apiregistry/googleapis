@@ -1,0 +1,754 @@
+#%RAML 1.0
+title: Google People API
+version: v1
+baseUri: https://people.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/people/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): people:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/contacts
+      - https://www.googleapis.com/auth/user.emails.read
+      - https://www.googleapis.com/auth/userinfo.profile
+      - https://www.googleapis.com/auth/contacts.readonly
+      - https://www.googleapis.com/auth/user.birthday.read
+      - https://www.googleapis.com/auth/userinfo.email
+      - https://www.googleapis.com/auth/plus.login
+      - https://www.googleapis.com/auth/user.addresses.read
+      - https://www.googleapis.com/auth/user.phonenumbers.read
+traits:
+  hasParameters:
+    queryParameters:
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Address:
+    type: object
+    properties:
+      poBox?:
+        type: string
+        description: The P.O. box of the address.
+      country?:
+        type: string
+        description: The country of the address.
+      metadata?: FieldMetadata
+      formattedType?:
+        type: string
+        description: The read-only type of the address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      streetAddress?:
+        type: string
+        description: The street address.
+      city?:
+        type: string
+        description: The city of the address.
+      countryCode?:
+        type: string
+        description: The [ISO 3166-1 alpha-2](http://www.iso.org/iso/country_codes.htm) country code of the address.
+      postalCode?:
+        type: string
+        description: The postal code of the address.
+      formattedValue?:
+        type: string
+        description: The read-only value of the address formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      type?:
+        type: string
+        description: 'The type of the address. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `home`
+          * `work` * `other`'
+      extendedAddress?:
+        type: string
+        description: The extended address of the address; for example, the apartment number.
+      region?:
+        type: string
+        description: The region of the address; for example, the state or province.
+    description: A person's physical address. May be a P.O. box or street address. All fields are optional.
+  Biography:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The short biography.
+    description: A person's short biography.
+  Birthday:
+    type: object
+    properties:
+      date?: Date
+      metadata?: FieldMetadata
+      text?:
+        type: string
+        description: A free-form string representing the user's birthday.
+    description: A person's birthday. At least one of the `date` and `text` fields are specified. The `date` and `text` fields typically represent the same date, but are not guaranteed to.
+  BraggingRights:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The bragging rights; for example, `climbed mount everest`.
+    description: A person's bragging rights.
+  ContactGroupMembership:
+    type: object
+    properties:
+      contactGroupId?:
+        type: string
+        description: 'The contact group ID for the contact group membership. The contact
+          group ID can be custom or predefined. Possible values include, but are not
+          limited to, the following: * `myContacts` * `starred` * A numerical ID for
+          user-created groups.'
+    description: A Google contact group membership.
+  CoverPhoto:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      default?:
+        type: boolean
+        description: True if the cover photo is the default cover photo; false if the cover photo is a user-provided cover photo.
+      url?:
+        type: string
+        description: The URL of the cover photo.
+    description: A person's cover photo. A large image shown on the person's profile page that represents who they are or what they care about.
+  Date:
+    type: object
+    properties:
+      month?:
+        type: integer
+        format: int32
+        description: Month of year. Must be from 1 to 12.
+      year?:
+        type: integer
+        format: int32
+        description: Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.
+      day?:
+        type: integer
+        format: int32
+        description: Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year/month where the day is not significant.
+    description: Represents a whole calendar date, for example a date of birth. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the [Proleptic Gregorian Calendar](https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar). The day may be 0 to represent a year and month where the day is not significant. The year may be 0 to represent a month and day independent of year; for example, anniversary date.
+  DomainMembership:
+    type: object
+    properties:
+      inViewerDomain?:
+        type: boolean
+        description: True if the person is in the viewer's Google Apps domain.
+    description: A Google Apps Domain membership.
+  EmailAddress:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      formattedType?:
+        type: string
+        description: The read-only type of the email address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      type?:
+        type: string
+        description: 'The type of the email address. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `home`
+          * `work` * `other`'
+      value?:
+        type: string
+        description: The email address.
+    description: A person's email address.
+  Event:
+    type: object
+    properties:
+      date?: Date
+      metadata?: FieldMetadata
+      formattedType?:
+        type: string
+        description: The read-only type of the event translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      type?:
+        type: string
+        description: 'The type of the event. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `anniversary`
+          * `other`'
+    description: An event related to the person.
+  FieldMetadata:
+    type: object
+    properties:
+      verified?:
+        type: boolean
+        description: True if the field is verified; false if the field is unverified. A verified field is typically a name, email address, phone number, or website that has been confirmed to be owned by the person.
+      source?: Source
+      primary?:
+        type: boolean
+        description: True if the field is the primary field; false if the field is a secondary field.
+    description: Metadata about a field.
+  Gender:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      formattedValue?:
+        type: string
+        description: The read-only value of the gender translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      value?:
+        type: string
+        description: 'The gender for the person. The gender can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `male`
+          * `female` * `other` * `unknown`'
+    description: A person's gender.
+  GetPeopleResponse:
+    type: object
+    properties:
+      responses?:
+        type: array
+        description: The response for each requested resource name.
+        items: PersonResponse
+  ImClient:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      protocol?:
+        type: string
+        description: 'The protocol of the IM client. The protocol can be custom or
+          predefined. Possible values include, but are not limited to, the following:
+          * `aim` * `msn` * `yahoo` * `skype` * `qq` * `googleTalk` * `icq` * `jabber`
+          * `netMeeting`'
+      formattedType?:
+        type: string
+        description: The read-only type of the IM client translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      formattedProtocol?:
+        type: string
+        description: The read-only protocol of the IM client formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      type?:
+        type: string
+        description: 'The type of the IM client. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `home`
+          * `work` * `other`'
+      username?:
+        type: string
+        description: The user name used in the IM client.
+    description: A person's instant messaging client.
+  Interest:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The interest; for example, `stargazing`.
+    description: One of the person's interests.
+  ListConnectionsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The token that can be used to retrieve the next page of results.
+      nextSyncToken?:
+        type: string
+        description: The token that can be used to retrieve changes since the last request.
+      connections?:
+        type: array
+        description: The list of people that the requestor is connected to.
+        items: Person
+  Locale:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The well-formed [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag representing the locale.
+    description: A person's locale preference.
+  Membership:
+    type: object
+    properties:
+      contactGroupMembership?: ContactGroupMembership
+      metadata?: FieldMetadata
+      domainMembership?: DomainMembership
+    description: A person's membership in a group.
+  Name:
+    type: object
+    properties:
+      honorificSuffix?:
+        type: string
+        description: The honorific suffixes, such as `Jr.`
+      phoneticGivenName?:
+        type: string
+        description: The given name spelled as it sounds.
+      metadata?: FieldMetadata
+      phoneticHonorificSuffix?:
+        type: string
+        description: The honorific suffixes spelled as they sound.
+      displayName?:
+        type: string
+        description: The display name formatted according to the locale specified by the viewer's account or the Accept-Language HTTP header.
+      phoneticMiddleName?:
+        type: string
+        description: The middle name(s) spelled as they sound.
+      familyName?:
+        type: string
+        description: The family name.
+      givenName?:
+        type: string
+        description: The given name.
+      honorificPrefix?:
+        type: string
+        description: The honorific prefixes, such as `Mrs.` or `Dr.`
+      middleName?:
+        type: string
+        description: The middle name(s).
+      phoneticFamilyName?:
+        type: string
+        description: The family name spelled as it sounds.
+      phoneticHonorificPrefix?:
+        type: string
+        description: The honorific prefixes spelled as they sound.
+    description: A person's name. If the name is a mononym, the family name is empty.
+  Nickname:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      type?:
+        type: string
+        description: The type of the nickname.
+        enum:
+        - DEFAULT
+        - MAIDEN_NAME
+        - INITIALS
+        - GPLUS
+        - OTHER_NAME
+      value?:
+        type: string
+        description: The nickname.
+    description: A person's nickname.
+  Occupation:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The occupation; for example, `carpenter`.
+    description: A person's occupation.
+  Organization:
+    type: object
+    properties:
+      symbol?:
+        type: string
+        description: The symbol associated with the organization; for example, a stock ticker symbol, abbreviation, or acronym.
+      metadata?: FieldMetadata
+      phoneticName?:
+        type: string
+        description: The phonetic name of the organization.
+      endDate?: Date
+      type?:
+        type: string
+        description: 'The type of the organization. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `work`
+          * `school`'
+      title?:
+        type: string
+        description: The person's job title at the organization.
+      current?:
+        type: boolean
+        description: True if the organization is the person's current organization; false if the organization is a past organization.
+      formattedType?:
+        type: string
+        description: The read-only type of the organization translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      domain?:
+        type: string
+        description: The domain name associated with the organization; for example, `google.com`.
+      name?:
+        type: string
+        description: The name of the organization.
+      jobDescription?:
+        type: string
+        description: The person's job description at the organization.
+      location?:
+        type: string
+        description: The location of the organization office the person works at.
+      department?:
+        type: string
+        description: The person's department at the organization.
+      startDate?: Date
+    description: A person's past or current organization. Overlapping date ranges are permitted.
+  Person:
+    type: object
+    properties:
+      ageRange?:
+        type: string
+        description: The person's age range.
+        enum:
+        - AGE_RANGE_UNSPECIFIED
+        - LESS_THAN_EIGHTEEN
+        - EIGHTEEN_TO_TWENTY
+        - TWENTY_ONE_OR_OLDER
+      metadata?: PersonMetadata
+      addresses?:
+        type: array
+        description: The person's street addresses.
+        items: Address
+      relationshipStatuses?:
+        type: array
+        description: The person's relationship statuses.
+        items: RelationshipStatus
+      biographies?:
+        type: array
+        description: The person's biographies.
+        items: Biography
+      relationshipInterests?:
+        type: array
+        description: The kind of relationship the person is looking for.
+        items: RelationshipInterest
+      occupations?:
+        type: array
+        description: The person's occupations.
+        items: Occupation
+      photos?:
+        type: array
+        description: The person's photos.
+        items: Photo
+      phoneNumbers?:
+        type: array
+        description: The person's phone numbers.
+        items: PhoneNumber
+      taglines?:
+        type: array
+        description: The person's taglines.
+        items: Tagline
+      memberships?:
+        type: array
+        description: The person's group memberships.
+        items: Membership
+      skills?:
+        type: array
+        description: The person's skills.
+        items: Skill
+      urls?:
+        type: array
+        description: The person's associated URLs.
+        items: Url
+      emailAddresses?:
+        type: array
+        description: The person's email addresses.
+        items: EmailAddress
+      nicknames?:
+        type: array
+        description: The person's nicknames.
+        items: Nickname
+      residences?:
+        type: array
+        description: The person's residences.
+        items: Residence
+      events?:
+        type: array
+        description: The person's events.
+        items: Event
+      resourceName?:
+        type: string
+        description: The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters. Always starts with `people/`.
+      genders?:
+        type: array
+        description: The person's genders.
+        items: Gender
+      imClients?:
+        type: array
+        description: The person's instant messaging clients.
+        items: ImClient
+      locales?:
+        type: array
+        description: The person's locale preferences.
+        items: Locale
+      braggingRights?:
+        type: array
+        description: The person's bragging rights.
+        items: BraggingRights
+      names?:
+        type: array
+        description: The person's names.
+        items: Name
+      birthdays?:
+        type: array
+        description: The person's birthdays.
+        items: Birthday
+      organizations?:
+        type: array
+        description: The person's past or current organizations.
+        items: Organization
+      etag?:
+        type: string
+        description: The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.
+      coverPhotos?:
+        type: array
+        description: The person's cover photos.
+        items: CoverPhoto
+      interests?:
+        type: array
+        description: The person's interests.
+        items: Interest
+      relations?:
+        type: array
+        description: The person's relations.
+        items: Relation
+    description: Information about a person merged from various data sources such as the authenticated user's contacts and profile data. Fields other than IDs, metadata, and group memberships are user-edited. Most fields can have multiple items. The items in a field have no guaranteed order, but each non-empty field is guaranteed to have exactly one field with `metadata.primary` set to true.
+  PersonMetadata:
+    type: object
+    properties:
+      previousResourceNames?:
+        type: array
+        description: Any former resource names this person has had. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token. The resource name may change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or profile URL.
+        items:
+          type: string
+      deleted?:
+        type: boolean
+        description: True if the person resource has been deleted. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token.
+      sources?:
+        type: array
+        description: The sources of data for the person.
+        items: Source
+      objectType?:
+        type: string
+        description: The type of the person object.
+        enum:
+        - OBJECT_TYPE_UNSPECIFIED
+        - PERSON
+        - PAGE
+    description: Metadata about a person.
+  PersonResponse:
+    type: object
+    properties:
+      person?: Person
+      requestedResourceName?:
+        type: string
+        description: The original requested resource name. May be different than the resource name on the returned person. The resource name can change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or a profile URL.
+      httpStatusCode?:
+        type: integer
+        format: int32
+        description: '[HTTP 1.1 status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).'
+    description: The response for a single person
+  PhoneNumber:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      canonicalForm?:
+        type: string
+        description: The read-only canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf) form of the phone number.
+      formattedType?:
+        type: string
+        description: The read-only type of the phone number translated and formatted in the viewer's account locale or the the `Accept-Language` HTTP header locale.
+      type?:
+        type: string
+        description: 'The type of the phone number. The type can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `home`
+          * `work` * `mobile` * `homeFax` * `workFax` * `otherFax` * `pager` * `workMobile`
+          * `workPager` * `main` * `googleVoice` * `other`'
+      value?:
+        type: string
+        description: The phone number.
+    description: A person's phone number.
+  Photo:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      url?:
+        type: string
+        description: The URL of the photo.
+    description: A person's photo. A picture shown next to the person's name to help others recognize the person.
+  Relation:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      formattedType?:
+        type: string
+        description: The type of the relation translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
+      person?:
+        type: string
+        description: The name of the other person this relation refers to.
+      type?:
+        type: string
+        description: 'The person''s relation to the other person. The type can be
+          custom or predefined. Possible values include, but are not limited to, the
+          following values: * `spouse` * `child` * `mother` * `father` * `parent`
+          * `brother` * `sister` * `friend` * `relative` * `domesticPartner` * `manager`
+          * `assistant` * `referredBy` * `partner`'
+    description: A person's relation to another person.
+  RelationshipInterest:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      formattedValue?:
+        type: string
+        description: The value of the relationship interest translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
+      value?:
+        type: string
+        description: 'The kind of relationship the person is looking for. The value
+          can be custom or predefined. Possible values include, but are not limited
+          to, the following values: * `friend` * `date` * `relationship` * `networking`'
+    description: The kind of relationship the person is looking for.
+  RelationshipStatus:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      formattedValue?:
+        type: string
+        description: The read-only value of the relationship status translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      value?:
+        type: string
+        description: 'The relationship status. The value can be custom or predefined.
+          Possible values include, but are not limited to, the following: * `single`
+          * `inARelationship` * `engaged` * `married` * `itsComplicated` * `openRelationship`
+          * `widowed` * `inDomesticPartnership` * `inCivilUnion`'
+    description: A person's relationship status.
+  Residence:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      current?:
+        type: boolean
+        description: True if the residence is the person's current residence; false if the residence is a past residence.
+      value?:
+        type: string
+        description: The address of the residence.
+    description: A person's past or current residence.
+  Skill:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The skill; for example, `underwater basket weaving`.
+    description: A skill that the person has.
+  Source:
+    type: object
+    properties:
+      id?:
+        type: string
+        description: A unique identifier within the source type generated by the server.
+      type?:
+        type: string
+        description: The source type.
+        enum:
+        - OTHER
+        - ACCOUNT
+        - PROFILE
+        - DOMAIN_PROFILE
+        - CONTACT
+    description: The source of a field.
+  Tagline:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      value?:
+        type: string
+        description: The tagline.
+    description: A brief one-line description of the person.
+  Url:
+    type: object
+    properties:
+      metadata?: FieldMetadata
+      formattedType?:
+        type: string
+        description: The read-only type of the URL translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
+      type?:
+        type: string
+        description: 'The type of the URL. The type can be custom or predefined. Possible
+          values include, but are not limited to, the following: * `home` * `work`
+          * `blog` * `profile` * `homePage` * `ftp` * `reservations` * `appInstallPage`:
+          website for a Google+ application. * `other`'
+      value?:
+        type: string
+        description: The URL.
+    description: A person's associated URLs.
+/v1:
+  /{resourceName}:
+    uriParameters:
+      resourceName:
+        type: string
+        pattern: ^people/[^/]*$
+        description: The resource name of the person to provide information about. - To get information about the authenticated user, specify `people/me`. - To get information about any user, specify the resource name that identifies the user, such as the resource names returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/contacts
+          - https://www.googleapis.com/auth/contacts.readonly
+          - https://www.googleapis.com/auth/plus.login
+          - https://www.googleapis.com/auth/user.addresses.read
+          - https://www.googleapis.com/auth/user.birthday.read
+          - https://www.googleapis.com/auth/user.emails.read
+          - https://www.googleapis.com/auth/user.phonenumbers.read
+          - https://www.googleapis.com/auth/userinfo.email
+          - https://www.googleapis.com/auth/userinfo.profile
+      description: Provides information about a person resource for a resource name. Use `people/me` to indicate the authenticated user.
+      is:
+      - hasParameters
+      queryParameters:
+        requestMask.includeField?:
+          type: string
+          description: 'Comma-separated list of fields to be included in the response.
+            Omitting this field will include all fields. Each path should start with
+            `person.`: for example, `person.names` or `person.photos`.'
+      responses:
+        200:
+          body:
+            application/json: Person
+  /people:batchGet:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/contacts
+          - https://www.googleapis.com/auth/contacts.readonly
+          - https://www.googleapis.com/auth/plus.login
+          - https://www.googleapis.com/auth/user.addresses.read
+          - https://www.googleapis.com/auth/user.birthday.read
+          - https://www.googleapis.com/auth/user.emails.read
+          - https://www.googleapis.com/auth/user.phonenumbers.read
+          - https://www.googleapis.com/auth/userinfo.email
+          - https://www.googleapis.com/auth/userinfo.profile
+      description: Provides information about a list of specific people by specifying a list of requested resource names. Use `people/me` to indicate the authenticated user.
+      is:
+      - hasParameters
+      queryParameters:
+        resourceNames?:
+          type: string
+          description: The resource name, such as one returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list), of one of the people to provide information about. You can include this parameter up to 50 times in one request.
+        requestMask.includeField?:
+          type: string
+          description: 'Comma-separated list of fields to be included in the response.
+            Omitting this field will include all fields. Each path should start with
+            `person.`: for example, `person.names` or `person.photos`.'
+      responses:
+        200:
+          body:
+            application/json: GetPeopleResponse

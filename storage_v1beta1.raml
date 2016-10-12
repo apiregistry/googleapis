@@ -1,0 +1,750 @@
+#%RAML 1.0
+title: Cloud Storage JSON API
+version: v1beta1
+baseUri: https://www.googleapis.com/storage/v1beta1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/storage/docs/json_api/
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/cloud_storage-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/cloud_storage-16.png
+  name: x16
+(commons.Tags):
+- labs
+(commons.Id): storage:v1beta1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/devstorage.full_control
+      - https://www.googleapis.com/auth/devstorage.read_write
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Bucket:
+    type: object
+    properties:
+      defaultObjectAcl?:
+        type: array
+        description: Default access controls to apply to new objects when no ACL is provided.
+        items: ObjectAccessControl
+      owner?:
+        type: object
+        properties:
+          entityId?:
+            type: string
+            description: The ID for the entity.
+          entity?:
+            type: string
+            description: The entity, in the form group-groupId.
+        description: The owner of the bucket. This will always be the project team's owner group.
+      website?:
+        type: object
+        properties:
+          mainPageSuffix?:
+            type: string
+            description: Behaves as the bucket's directory index where missing objects are treated as potential directories.
+          notFoundPage?:
+            type: string
+            description: The custom object to return when a requested resource is not found.
+        description: The bucket's website configuration.
+      kind?:
+        type: string
+        default: storage#bucket
+        description: The kind of item this is. For buckets, this is always storage#bucket.
+      location?:
+        type: string
+        description: The location of the bucket. Object data for objects in the bucket resides in physical storage in this location. Can be US or EU. Defaults to US.
+      timeCreated?:
+        type: datetime
+        description: Creation time of the bucket in RFC 3339 format.
+      acl?:
+        type: array
+        description: Access controls on the bucket.
+        items: BucketAccessControl
+      id?:
+        type: string
+        description: The name of the bucket.
+      projectId?:
+        type: integer
+        format: int64
+        description: The project the bucket belongs to.
+      selfLink?:
+        type: string
+        description: The URI of this bucket.
+    description: A bucket.
+  BucketAccessControl:
+    type: object
+    properties:
+      bucket?:
+        type: string
+        description: The name of the bucket.
+      role?:
+        type: string
+        description: The access permission for the entity. Can be READER, WRITER, or OWNER.
+      kind?:
+        type: string
+        default: storage#bucketAccessControl
+        description: The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.
+      domain?:
+        type: string
+        description: The domain associated with the entity, if any.
+      entityId?:
+        type: string
+        description: The ID for the entity, if any.
+      id?:
+        type: string
+        description: The ID of the access-control entry.
+      email?:
+        type: string
+        description: The email address associated with the entity, if any.
+      entity?:
+        type: string
+        description: "The entity holding the permission, in one of the following forms:\
+          \ \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain\
+          \ \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com\
+          \ would be user-liz@example.com. \n- The group example@googlegroups.com\
+          \ would be group-example@googlegroups.com. \n- To refer to all members of\
+          \ the Google Apps for Business domain example.com, the entity would be domain-example.com."
+      selfLink?:
+        type: string
+        description: The link to this access-control entry.
+    description: An access-control entry.
+  BucketAccessControls:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#bucketAccessControls
+        description: The kind of item this is. For lists of bucket access control entries, this is always storage#bucketAccessControls.
+      items?:
+        type: array
+        description: The list of items.
+        items: BucketAccessControl
+    description: An access-control list.
+  Buckets:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#buckets
+        description: The kind of item this is. For lists of buckets, this is always storage#buckets.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: The list of items.
+        items: Bucket
+    description: A list of buckets.
+  Object:
+    type: object
+    properties:
+      owner?:
+        type: object
+        properties:
+          entityId?:
+            type: string
+            description: The ID for the entity.
+          entity?:
+            type: string
+            description: The entity, in the form user-userId.
+        description: The owner of the object. This will always be the uploader of the object.
+      metadata?:
+        type: object
+        description: User-provided metadata, in key/value pairs.
+      kind?:
+        type: string
+        default: storage#object
+        description: The kind of item this is. For objects, this is always storage#object.
+      acl?:
+        type: array
+        description: Access controls on the object.
+        items: ObjectAccessControl
+      media?:
+        type: object
+        properties:
+          data?:
+            type: string
+            description: URL-safe Base64-encoded data. This property can be used to insert objects under 64KB in size, and will only be returned in response to the get method for objects so created. When this resource is returned in response to the list method, this property is omitted.
+          length?:
+            type: integer
+            format: int64
+            description: Content-Length of the data in bytes.
+          link?:
+            type: string
+            description: Media download link.
+          timeCreated?:
+            type: string
+            description: Creation time of the data in RFC 3339 format.
+          contentType?:
+            type: string
+            description: Content-Type of the object data.
+          hash?:
+            type: string
+            description: Hash of the data. Required if a hash algorithm is provided.
+          algorithm?:
+            type: string
+            default: MD5
+            description: Hash algorithm used. Currently only MD5 is supported. Required if a hash is provided.
+        description: Object media data. Provided on your behalf when uploading raw media or multipart/related with an auxiliary media part.
+      cacheControl?:
+        type: string
+        description: Cache-Control directive for the object data.
+      selfLink?:
+        type: string
+        description: The link to this object.
+      bucket?:
+        type: string
+        description: The bucket containing this object.
+      contentDisposition?:
+        type: string
+        description: Content-Disposition of the object data.
+      name?:
+        type: string
+        description: The name of this object. Required if not specified by URL parameter.
+      contentEncoding?:
+        type: string
+        description: Content-Encoding of the object data.
+      contentLanguage?:
+        type: string
+        description: Content-Language of the object data.
+      id?:
+        type: string
+        description: The ID of the object.
+    description: An object.
+  ObjectAccessControl:
+    type: object
+    properties:
+      bucket?:
+        type: string
+        description: The name of the bucket.
+      role?:
+        type: string
+        description: The access permission for the entity. Can be READER or OWNER.
+      kind?:
+        type: string
+        default: storage#objectAccessControl
+        description: The kind of item this is. For object access control entries, this is always storage#objectAccessControl.
+      domain?:
+        type: string
+        description: The domain associated with the entity, if any.
+      entityId?:
+        type: string
+        description: The ID for the entity, if any.
+      id?:
+        type: string
+        description: The ID of the access-control entry.
+      email?:
+        type: string
+        description: The email address associated with the entity, if any.
+      entity?:
+        type: string
+        description: "The entity holding the permission, in one of the following forms:\
+          \ \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain\
+          \ \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com\
+          \ would be user-liz@example.com. \n- The group example@googlegroups.com\
+          \ would be group-example@googlegroups.com. \n- To refer to all members of\
+          \ the Google Apps for Business domain example.com, the entity would be domain-example.com."
+      object?:
+        type: string
+        description: The name of the object.
+      selfLink?:
+        type: string
+        description: The link to this access-control entry.
+    description: An access-control entry.
+  ObjectAccessControls:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#objectAccessControls
+        description: The kind of item this is. For lists of object access control entries, this is always storage#objectAccessControls.
+      items?:
+        type: array
+        description: The list of items.
+        items: ObjectAccessControl
+    description: An access-control list.
+  Objects:
+    type: object
+    properties:
+      prefixes?:
+        type: array
+        description: The list of prefixes of objects matching-but-not-listed up to and including the requested delimiter.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: storage#objects
+        description: The kind of item this is. For lists of objects, this is always storage#objects.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: The list of items.
+        items: Object
+    description: A list of objects.
+/b:
+  /{bucket}:
+    uriParameters:
+      bucket:
+        type: string
+        description: Name of a bucket.
+    /o:
+      /{object}:
+        uriParameters:
+          object:
+            type: string
+            description: Name of the object.
+        /acl:
+          /{entity}:
+            uriParameters:
+              entity:
+                type: string
+                description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
+            patch:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Updates an ACL entry on the specified object. This method supports patch semantics.
+              is:
+              - hasParameters
+              body:
+                application/json: ObjectAccessControl
+              responses:
+                200:
+                  body:
+                    application/json: ObjectAccessControl
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Returns the ACL entry for the specified entity on the specified object.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: ObjectAccessControl
+            put:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Updates an ACL entry on the specified object.
+              is:
+              - hasParameters
+              body:
+                application/json: ObjectAccessControl
+              responses:
+                200:
+                  body:
+                    application/json: ObjectAccessControl
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Deletes the ACL entry for the specified entity on the specified object.
+              is:
+              - hasParameters
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/devstorage.full_control
+            description: Creates a new ACL entry on the specified object.
+            is:
+            - hasParameters
+            body:
+              application/json: ObjectAccessControl
+            responses:
+              200:
+                body:
+                  application/json: ObjectAccessControl
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/devstorage.full_control
+            description: Retrieves ACL entries on the specified object.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: ObjectAccessControls
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Updates a data blob's associated metadata. This method supports patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to full.
+              enum:
+              - full
+              - no_acl
+          body:
+            application/json: Object
+          responses:
+            200:
+              body:
+                application/json: Object
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_only
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Retrieves objects or their associated metadata.
+          is:
+          - hasParameters
+          queryParameters:
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to no_acl.
+              enum:
+              - full
+              - no_acl
+          responses:
+            200:
+              body:
+                application/json: Object
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Updates a data blob's associated metadata.
+          is:
+          - hasParameters
+          queryParameters:
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to full.
+              enum:
+              - full
+              - no_acl
+          body:
+            application/json: Object
+          responses:
+            200:
+              body:
+                application/json: Object
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Deletes data blobs and associated metadata.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/devstorage.full_control
+            - https://www.googleapis.com/auth/devstorage.read_write
+        description: Stores new data blobs and associated metadata.
+        is:
+        - hasParameters
+        queryParameters:
+          name?:
+            type: string
+            description: Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any.
+          projection?:
+            type: string
+            description: Set of properties to return. Defaults to no_acl, unless the object resource specifies the acl property, when it defaults to full.
+            enum:
+            - full
+            - no_acl
+        body:
+          application/json: Object
+        responses:
+          200:
+            body:
+              application/json: Object
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/devstorage.full_control
+            - https://www.googleapis.com/auth/devstorage.read_only
+            - https://www.googleapis.com/auth/devstorage.read_write
+        description: Retrieves a list of objects matching the criteria.
+        is:
+        - hasParameters
+        queryParameters:
+          max-results?:
+            type: integer
+            format: int32
+            description: Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.
+            minimum: 0
+          delimiter?:
+            type: string
+            description: Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
+          prefix?:
+            type: string
+            description: Filter results to objects whose names begin with this prefix.
+          pageToken?:
+            type: string
+            description: A previously-returned page token representing part of the larger set of results to view.
+          projection?:
+            type: string
+            description: Set of properties to return. Defaults to no_acl.
+            enum:
+            - full
+            - no_acl
+        responses:
+          200:
+            body:
+              application/json: Objects
+    /acl:
+      /{entity}:
+        uriParameters:
+          entity:
+            type: string
+            description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: BucketAccessControl
+          responses:
+            200:
+              body:
+                application/json: BucketAccessControl
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Returns the ACL entry for the specified entity on the specified bucket.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: BucketAccessControl
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates an ACL entry on the specified bucket.
+          is:
+          - hasParameters
+          body:
+            application/json: BucketAccessControl
+          responses:
+            200:
+              body:
+                application/json: BucketAccessControl
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Deletes the ACL entry for the specified entity on the specified bucket.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        description: Creates a new ACL entry on the specified bucket.
+        is:
+        - hasParameters
+        body:
+          application/json: BucketAccessControl
+        responses:
+          200:
+            body:
+              application/json: BucketAccessControl
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        description: Retrieves ACL entries on the specified bucket.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: BucketAccessControls
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Updates a bucket. This method supports patch semantics.
+      is:
+      - hasParameters
+      queryParameters:
+        projection?:
+          type: string
+          description: Set of properties to return. Defaults to full.
+          enum:
+          - full
+          - no_acl
+      body:
+        application/json: Bucket
+      responses:
+        200:
+          body:
+            application/json: Bucket
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_only
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Returns metadata for the specified bucket.
+      is:
+      - hasParameters
+      queryParameters:
+        projection?:
+          type: string
+          description: Set of properties to return. Defaults to no_acl.
+          enum:
+          - full
+          - no_acl
+      responses:
+        200:
+          body:
+            application/json: Bucket
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Updates a bucket.
+      is:
+      - hasParameters
+      queryParameters:
+        projection?:
+          type: string
+          description: Set of properties to return. Defaults to full.
+          enum:
+          - full
+          - no_acl
+      body:
+        application/json: Bucket
+      responses:
+        200:
+          body:
+            application/json: Bucket
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Deletes an empty bucket.
+      is:
+      - hasParameters
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/devstorage.full_control
+        - https://www.googleapis.com/auth/devstorage.read_write
+    description: Creates a new bucket.
+    is:
+    - hasParameters
+    queryParameters:
+      projection?:
+        type: string
+        description: Set of properties to return. Defaults to no_acl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.
+        enum:
+        - full
+        - no_acl
+    body:
+      application/json: Bucket
+    responses:
+      200:
+        body:
+          application/json: Bucket
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/devstorage.full_control
+        - https://www.googleapis.com/auth/devstorage.read_only
+        - https://www.googleapis.com/auth/devstorage.read_write
+    description: Retrieves a list of buckets for a given project.
+    is:
+    - hasParameters
+    queryParameters:
+      max-results?:
+        type: integer
+        format: int32
+        description: Maximum number of buckets to return.
+        minimum: 0
+      pageToken?:
+        type: string
+        description: A previously-returned page token representing part of the larger set of results to view.
+      projection?:
+        type: string
+        description: Set of properties to return. Defaults to no_acl.
+        enum:
+        - full
+        - no_acl
+      projectId:
+        type: integer
+        format: int64
+        description: A valid API project identifier.
+    responses:
+      200:
+        body:
+          application/json: Buckets

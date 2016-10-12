@@ -1,0 +1,580 @@
+#%RAML 1.0
+title: Google Compute Engine Instance Group Updater API
+version: v1beta1
+baseUri: https://www.googleapis.com/replicapoolupdater/v1beta1/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Tags):
+- limited_availability
+(commons.Id): replicapoolupdater:v1beta1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/replicapool
+      - https://www.googleapis.com/auth/replicapool.readonly
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  InstanceUpdate:
+    type: object
+    properties:
+      instance?:
+        type: string
+        description: Fully-qualified URL of the instance being updated.
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request that
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: Errors that occurred during the instance update.
+      status?:
+        type: string
+        description: "Status of the instance update. Possible values are:  \n- \"\
+          PENDING\": The instance update is pending execution. \n- \"ROLLING_FORWARD\"\
+          : The instance update is going forward. \n- \"ROLLING_BACK\": The instance\
+          \ update is being rolled back. \n- \"PAUSED\": The instance update is temporarily\
+          \ paused (inactive). \n- \"ROLLED_OUT\": The instance update is finished,\
+          \ the instance is running the new template. \n- \"ROLLED_BACK\": The instance\
+          \ update is finished, the instance has been reverted to the previous template.\
+          \ \n- \"CANCELLED\": The instance update is paused and no longer can be\
+          \ resumed, undefined in which template the instance is running."
+    description: Update of a single instance.
+  InstanceUpdateList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: replicapoolupdater#instanceUpdateList
+        description: '[Output Only] Type of the resource.'
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request.
+      items?:
+        type: array
+        description: Collection of requested instance updates.
+        items: InstanceUpdate
+      selfLink?:
+        type: string
+        description: '[Output Only] The fully qualified URL for the resource.'
+    description: Response returned by ListInstanceUpdates method.
+  Operation:
+    type: object
+    properties:
+      httpErrorMessage?:
+        type: string
+      targetId?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique target id which identifies a particular
+          incarnation of the target.'
+      kind?:
+        type: string
+        default: replicapoolupdater#operation
+        description: '[Output Only] Type of the resource. Always replicapoolupdater#operation
+          for Operation resources.'
+      warnings?:
+        type: array
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output only] The warning type identifier for this warning.'
+            data?:
+              type: array
+              description: '[Output only] Metadata for this warning in key:value format.'
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] Metadata value for this warning.'
+                  key?:
+                    type: string
+                    description: '[Output Only] Metadata key for this warning.'
+            message?:
+              type: string
+              description: '[Output only] Optional human-readable details for this
+                warning.'
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request that
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] If errors occurred during processing of this operation,
+          this field will be populated.'
+      statusMessage?:
+        type: string
+        description: '[Output Only] An optional textual description of the current
+          status of the operation.'
+      selfLink?:
+        type: string
+        description: '[Output Only] The fully qualified URL for the resource.'
+      insertTime?:
+        type: string
+        description: '[Output Only] The time that this operation was requested. This
+          is in RFC 3339 format.'
+      httpErrorStatusCode?:
+        type: integer
+        format: int32
+      zone?:
+        type: string
+        description: '[Output Only] URL of the zone where the operation resides.'
+      targetLink?:
+        type: string
+        description: '[Output Only] URL of the resource the operation is mutating.'
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      name?:
+        type: string
+        description: '[Output Only] Name of the resource.'
+      progress?:
+        type: integer
+        format: int32
+      operationType?:
+        type: string
+      startTime?:
+        type: string
+        description: '[Output Only] The time that this operation was started by the
+          server. This is in RFC 3339 format.'
+      endTime?:
+        type: string
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      region?:
+        type: string
+        description: '[Output Only] URL of the region where the operation resides.'
+      clientOperationId?:
+        type: string
+      user?:
+        type: string
+      status?:
+        type: string
+        description: '[Output Only] Status of the operation. Can be one of the following:
+          "PENDING", "RUNNING", or "DONE".'
+    description: An operation resource, used to manage asynchronous API requests.
+  OperationList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: replicapoolupdater#operationList
+        description: '[Output Only] Type of resource. Always replicapoolupdater#operationList
+          for OperationList resources.'
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncate.'
+      id?:
+        type: string
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      items?:
+        type: array
+        description: '[Output Only] The Operation resources.'
+        items: Operation
+      selfLink?:
+        type: string
+        description: '[Output Only] The fully qualified URL for the resource.'
+    description: Contains a list of Operation resources.
+  RollingUpdate:
+    type: object
+    properties:
+      oldInstanceTemplate?:
+        type: string
+        description: Fully-qualified URL of the instance template encountered while starting the update.
+      instanceTemplate?:
+        type: string
+        description: Fully-qualified URL of an instance template to apply.
+      kind?:
+        type: string
+        default: replicapoolupdater#rollingUpdate
+        description: '[Output Only] Type of the resource.'
+      description?:
+        type: string
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request that
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] Errors that occurred during the rolling update.'
+      instanceGroup?:
+        type: string
+        description: Fully-qualified URL of an instance group being updated. Exactly one of instanceGroupManager and instanceGroup must be set.
+      statusMessage?:
+        type: string
+        description: '[Output Only] An optional textual description of the current
+          status of the update.'
+      selfLink?:
+        type: string
+        description: '[Output Only] The fully qualified URL for the resource.'
+      actionType?:
+        type: string
+        description: Specifies the action to take for each instance within the instance group. This can be RECREATE which will recreate each instance and is only available for managed instance groups. It can also be REBOOT which performs a soft reboot for each instance and is only available for regular (non-managed) instance groups.
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      instanceGroupManager?:
+        type: string
+        description: Fully-qualified URL of an instance group manager being updated. Exactly one of instanceGroupManager and instanceGroup must be set.
+      progress?:
+        type: integer
+        format: int32
+        description: '[Output Only] An optional progress indicator that ranges from
+          0 to 100. There is no requirement that this be linear or support any granularity
+          of operations. This should not be used to guess at when the update will
+          be complete. This number should be monotonically increasing as the update
+          progresses.'
+      id?:
+        type: string
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      user?:
+        type: string
+        description: '[Output Only] User who requested the update, for example: user@example.com.'
+      policy?:
+        type: object
+        properties:
+          instanceStartupTimeoutSec?:
+            type: integer
+            format: int32
+            description: The maximum amount of time that the updater waits for a HEALTHY state after all of the update steps are complete. If the HEALTHY state is not received before the deadline, the instance update is considered a failure.
+          minInstanceUpdateTimeSec?:
+            type: integer
+            format: int32
+            description: The minimum amount of time that the updater spends to update each instance. Update time is the time it takes to complete all update actions (e.g. Stop call on Instance resource in Rolling Reboot), reboot, and initialize. If the instance update finishes early, the updater pauses for the remainder of the time before it starts the next instance update.
+          autoPauseAfterInstances?:
+            type: integer
+            format: int32
+            description: Number of instances to update before the updater pauses the rolling update.
+          maxNumFailedInstances?:
+            type: integer
+            format: int32
+            description: The maximum number of instance updates that can fail before the group update is considered a failure. An instance update is considered failed if any of its update actions (e.g. Stop call on Instance resource in Rolling Reboot) failed with permanent failure, or if the instance is in an UNHEALTHY state after it finishes all of the update actions.
+          maxNumConcurrentInstances?:
+            type: integer
+            format: int32
+            description: The maximum number of instances that can be updated simultaneously. An instance update is considered complete only after the instance is restarted and initialized.
+        description: Parameters of the update process.
+      status?:
+        type: string
+        description: "[Output Only] Status of the update. Possible values are:  \n\
+          - \"ROLLING_FORWARD\": The update is going forward. \n- \"ROLLING_BACK\"\
+          : The update is being rolled back. \n- \"PAUSED\": The update is temporarily\
+          \ paused (inactive). \n- \"ROLLED_OUT\": The update is finished, all instances\
+          \ have been updated successfully. \n- \"ROLLED_BACK\": The update is finished,\
+          \ all instances have been reverted to the previous template. \n- \"CANCELLED\"\
+          : The update is paused and no longer can be resumed, undefined how many\
+          \ instances are running in which template."
+    description: The following represents a resource describing a single update (rollout) of a group of instances to the given template.
+  RollingUpdateList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: replicapoolupdater#rollingUpdateList
+        description: '[Output Only] Type of the resource.'
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request.
+      items?:
+        type: array
+        description: Collection of requested updates.
+        items: RollingUpdate
+      selfLink?:
+        type: string
+        description: '[Output Only] The fully qualified URL for the resource.'
+    description: Response returned by List method.
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      pattern: (?:(?:[-a-z0-9]{1,63}\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?))
+      description: The Google Developers Console project name.
+  /zones:
+    /{zone}:
+      uriParameters:
+        zone:
+          type: string
+          description: The name of the zone in which the update's target resides.
+      /rollingUpdates:
+        /{rollingUpdate}:
+          uriParameters:
+            rollingUpdate:
+              type: string
+              description: The name of the update.
+          /cancel:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/replicapool
+              description: Cancels an update. The update must be PAUSED before it can be cancelled. This has no effect if the update is already CANCELLED.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /resume:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/replicapool
+              description: Continues an update in PAUSED state. Has no effect if invoked when the state of the update is ROLLED_OUT.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /rollback:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/replicapool
+              description: Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no effect if invoked when the state of the update is ROLLED_BACK.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /instanceUpdates:
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud-platform.read-only
+                  - https://www.googleapis.com/auth/replicapool
+                  - https://www.googleapis.com/auth/replicapool.readonly
+              description: Lists the current status for each instance within a given update.
+              is:
+              - hasParameters
+              queryParameters:
+                filter?:
+                  type: string
+                  description: Optional. Filter expression for filtering listed resources.
+                maxResults?:
+                  type: integer
+                  default: 500
+                  format: int32
+                  description: Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
+                  maximum: 500
+                  minimum: 0
+                pageToken?:
+                  type: string
+                  description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
+              responses:
+                200:
+                  body:
+                    application/json: InstanceUpdateList
+          /pause:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/replicapool
+              description: Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no effect if invoked when the state of the update is PAUSED.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/replicapool
+                - https://www.googleapis.com/auth/replicapool.readonly
+            description: Returns information about an update.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: RollingUpdate
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/replicapool
+          description: Inserts and starts a new update.
+          is:
+          - hasParameters
+          body:
+            application/json: RollingUpdate
+          responses:
+            200:
+              body:
+                application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/replicapool
+              - https://www.googleapis.com/auth/replicapool.readonly
+          description: Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: Optional. Filter expression for filtering listed resources.
+            maxResults?:
+              type: integer
+              default: 500
+              format: int32
+              description: Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
+              maximum: 500
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: RollingUpdateList
+      /operations:
+        /{operation}:
+          uriParameters:
+            operation:
+              type: string
+              description: Name of the operation resource to return.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/replicapool
+            description: Retrieves the specified zone-specific operation resource.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/replicapool
+          description: Retrieves the list of Operation resources contained within the specified zone.
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: Optional. Filter expression for filtering listed resources.
+            maxResults?:
+              type: integer
+              default: 500
+              format: int32
+              description: Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
+              maximum: 500
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: OperationList

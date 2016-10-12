@@ -1,0 +1,998 @@
+#%RAML 1.0
+title: Stackdriver Monitoring API
+version: v3
+baseUri: https://monitoring.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/monitoring/api/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): monitoring:v3
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/monitoring
+      - https://www.googleapis.com/auth/monitoring.write
+      - https://www.googleapis.com/auth/monitoring.read
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+        enum:
+        - '1'
+        - '2'
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  BucketOptions:
+    type: object
+    properties:
+      explicitBuckets?: Explicit
+      linearBuckets?: Linear
+      exponentialBuckets?: Exponential
+    description: 'A Distribution may optionally contain a histogram of the values
+      in the population. The histogram is given in bucket_counts as counts of values
+      that fall into one of a sequence of non-overlapping buckets. The sequence of
+      buckets is described by bucket_options.A bucket specifies an inclusive lower
+      bound and exclusive upper bound for the values that are counted for that bucket.
+      The upper bound of a bucket is strictly greater than the lower bound.The sequence
+      of N buckets for a Distribution consists of an underflow bucket (number 0),
+      zero or more finite buckets (number 1 through N - 2) and an overflow bucket
+      (number N - 1). The buckets are contiguous: the lower bound of bucket i (i &gt;
+      0) is the same as the upper bound of bucket i - 1. The buckets span the whole
+      range of finite values: lower bound of the underflow bucket is -infinity and
+      the upper bound of the overflow bucket is +infinity. The finite buckets are
+      so-called because both bounds are finite.BucketOptions describes bucket boundaries
+      in one of three ways. Two describe the boundaries by giving parameters for a
+      formula to generate boundaries and one gives the bucket boundaries explicitly.If
+      bucket_options is not given, then no bucket_counts may be given.'
+  CollectdPayload:
+    type: object
+    properties:
+      metadata?:
+        type: object
+        description: 'The measurement metadata. Example: &quot;process_id&quot; -&gt;
+          12345'
+      pluginInstance?:
+        type: string
+        description: 'The instance name of the plugin Example: &quot;hdcl&quot;.'
+      plugin?:
+        type: string
+        description: 'The name of the plugin. Example: &quot;disk&quot;.'
+      typeInstance?:
+        type: string
+        description: 'The measurement type instance. Example: &quot;used&quot;.'
+      values?:
+        type: array
+        description: The measured values during this time interval. Each value must have a different dataSourceName.
+        items: CollectdValue
+      startTime?:
+        type: string
+        description: The start time of the interval.
+      endTime?:
+        type: string
+        description: The end time of the interval.
+      type?:
+        type: string
+        description: 'The measurement type. Example: &quot;memory&quot;.'
+    description: A collection of data points sent from a collectd-based plugin. See the collectd documentation for more information.
+  CollectdValue:
+    type: object
+    properties:
+      value?: TypedValue
+      dataSourceName?:
+        type: string
+        description: 'The data source for the collectd value. For example there are
+          two data sources for network measurements: &quot;rx&quot; and &quot;tx&quot;.'
+      dataSourceType?:
+        type: string
+        description: The type of measurement.
+        enum:
+        - UNSPECIFIED_DATA_SOURCE_TYPE
+        - GAUGE
+        - COUNTER
+        - DERIVE
+        - ABSOLUTE
+    description: A single data point from a collectd-based plugin.
+  CreateCollectdTimeSeriesRequest:
+    type: object
+    properties:
+      resource?: MonitoredResource
+      collectdPayloads?:
+        type: array
+        description: The collectd payloads representing the time series data. You must not include more than a single point for each time series, so no two payloads can have the same values for all of the fields plugin, plugin_instance, type, and type_instance.
+        items: CollectdPayload
+      collectdVersion?:
+        type: string
+        description: 'The version of collectd that collected the data. Example: &quot;5.3.0-192.el6&quot;.'
+    description: The CreateCollectdTimeSeries request.
+  CreateTimeSeriesRequest:
+    type: object
+    properties:
+      timeSeries?:
+        type: array
+        description: The new data to be added to a list of time series. Adds at most one data point to each of several time series. The new data point must be more recent than any other point in its time series. Each TimeSeries value must fully specify a unique time series by supplying all label values for the metric and the monitored resource.
+        items: TimeSeries
+    description: The CreateTimeSeries request.
+  Distribution:
+    type: object
+    properties:
+      mean?:
+        type: number
+        format: double
+        description: The arithmetic mean of the values in the population. If count is zero then this field must be zero.
+      bucketCounts?:
+        type: array
+        description: If bucket_options is given, then the sum of the values in bucket_counts must equal the value in count. If bucket_options is not given, no bucket_counts fields may be given.Bucket counts are given in order under the numbering scheme described above (the underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; the overflow bucket has number N-1).The size of bucket_counts must be no greater than N as defined in bucket_options.Any suffix of trailing zero bucket_count fields may be omitted.
+        items:
+          type: integer
+          format: int64
+      bucketOptions?: BucketOptions
+      count?:
+        type: integer
+        format: int64
+        description: The number of values in the population. Must be non-negative.
+      range?: Range
+      sumOfSquaredDeviation?:
+        type: number
+        format: double
+        description: |-
+          The sum of squared deviations from the mean of the values in the population. For values x_i this is:
+          Sum[i=1..n]((x_i - mean)^2)
+          Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero.
+    description: Distribution contains summary statistics for a population of values and, optionally, a histogram representing the distribution of those values across a specified set of histogram buckets.The summary statistics are the count, mean, sum of the squared deviation from the mean, the minimum, and the maximum of the set of population of values.The histogram is based on a sequence of buckets and gives a count of values that fall into each bucket. The boundaries of the buckets are given either explicitly or by specifying parameters for a method of computing them (buckets of fixed width or buckets of exponentially increasing width).Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the mean and sum_of_squared_deviation fields meaningless.
+  Empty:
+    type: object
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
+      service Foo {
+        rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+      }
+      The JSON representation for Empty is empty JSON object {}.
+  Explicit:
+    type: object
+    properties:
+      bounds?:
+        type: array
+        description: The values must be monotonically increasing.
+        items:
+          type: number
+          format: double
+    description: 'A set of buckets with arbitrary widths.Defines size(bounds) + 1
+      (= N) buckets with these boundaries for bucket i:Upper bound (0 &lt;= i &lt;
+      N-1): boundsi  Lower bound (1 &lt;= i &lt; N); boundsi - 1There must be at least
+      one element in bounds. If bounds has only one element, there are no finite buckets,
+      and that single element is the common boundary of the overflow and underflow
+      buckets.'
+  Exponential:
+    type: object
+    properties:
+      growthFactor?:
+        type: number
+        format: double
+        description: Must be greater than 1.
+      scale?:
+        type: number
+        format: double
+        description: Must be greater than 0.
+      numFiniteBuckets?:
+        type: integer
+        format: int32
+        description: Must be greater than 0.
+    description: 'Specify a sequence of buckets that have a width that is proportional
+      to the value of the lower bound. Each bucket represents a constant relative
+      uncertainty on a specific value in the bucket.Defines num_finite_buckets + 2
+      (= N) buckets with these boundaries for bucket i:Upper bound (0 &lt;= i &lt;
+      N-1): scale * (growth_factor ^ i).  Lower bound (1 &lt;= i &lt; N): scale *
+      (growth_factor ^ (i - 1)).'
+  Field:
+    type: object
+    properties:
+      number?:
+        type: integer
+        format: int32
+        description: The field number.
+      typeUrl?:
+        type: string
+        description: 'The field type URL, without the scheme, for message or enumeration
+          types. Example: &quot;type.googleapis.com/google.protobuf.Timestamp&quot;.'
+      jsonName?:
+        type: string
+        description: The field JSON name.
+      oneofIndex?:
+        type: integer
+        format: int32
+        description: The index of the field type in Type.oneofs, for message or enumeration types. The first type has index 1; zero means the type is not in the list.
+      defaultValue?:
+        type: string
+        description: The string value of the default value of this field. Proto2 syntax only.
+      kind?:
+        type: string
+        description: The field type.
+        enum:
+        - TYPE_UNKNOWN
+        - TYPE_DOUBLE
+        - TYPE_FLOAT
+        - TYPE_INT64
+        - TYPE_UINT64
+        - TYPE_INT32
+        - TYPE_FIXED64
+        - TYPE_FIXED32
+        - TYPE_BOOL
+        - TYPE_STRING
+        - TYPE_GROUP
+        - TYPE_MESSAGE
+        - TYPE_BYTES
+        - TYPE_UINT32
+        - TYPE_ENUM
+        - TYPE_SFIXED32
+        - TYPE_SFIXED64
+        - TYPE_SINT32
+        - TYPE_SINT64
+      options?:
+        type: array
+        description: The protocol buffer options.
+        items: Option
+      name?:
+        type: string
+        description: The field name.
+      packed?:
+        type: boolean
+        description: Whether to use alternative packed wire representation.
+      cardinality?:
+        type: string
+        description: The field cardinality.
+        enum:
+        - CARDINALITY_UNKNOWN
+        - CARDINALITY_OPTIONAL
+        - CARDINALITY_REQUIRED
+        - CARDINALITY_REPEATED
+    description: A single field of a message type.
+  Group:
+    type: object
+    properties:
+      filter?:
+        type: string
+        description: The filter used to determine which monitored resources belong to this group.
+      parentName?:
+        type: string
+        description: The name of the group's parent, if it has one. The format is &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. For groups with no parent, parentName is the empty string, &quot;&quot;.
+      displayName?:
+        type: string
+        description: A user-assigned name for this group, used only for display purposes.
+      name?:
+        type: string
+        description: Output only. The name of this group. The format is &quot;projects/{project_id_or_number}/groups/{group_id}&quot;. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.
+      isCluster?:
+        type: boolean
+        description: If true, the members of this group are considered to be a cluster. The system can perform additional analysis on groups that are clusters.
+    description: 'The description of a dynamic collection of monitored resources.
+      Each group has a filter that is matched against monitored resources and their
+      associated metadata. If a group''s filter matches an available monitored resource,
+      then that resource is a member of that group. Groups can contain any number
+      of monitored resources, and each monitored resource can be a member of any number
+      of groups.Groups can be nested in parent-child hierarchies. The parentName field
+      identifies an optional parent for each group. If a group has a parent, then
+      the only monitored resources available to be matched by the group''s filter
+      are the resources contained in the parent group. In other words, a group contains
+      the monitored resources that match its filter and the filters of all the group''s
+      ancestors. A group without a parent can contain any monitored resource.For example,
+      consider an infrastructure running a set of instances with two user-defined
+      tags: &quot;environment&quot; and &quot;role&quot;. A parent group has a filter,
+      environment=&quot;production&quot;. A child of that parent group has a filter,
+      role=&quot;transcoder&quot;. The parent group contains all instances in the
+      production environment, regardless of their roles. The child group contains
+      instances that have the transcoder role and are in the production environment.The
+      monitored resources contained in a group can change at any moment, depending
+      on what resources exist and what filters are associated with the group and its
+      ancestors.'
+  LabelDescriptor:
+    type: object
+    properties:
+      valueType?:
+        type: string
+        description: The type of data that can be assigned to the label.
+        enum:
+        - STRING
+        - BOOL
+        - INT64
+      description?:
+        type: string
+        description: A human-readable description for the label.
+      key?:
+        type: string
+        description: The label key.
+    description: A description of a label.
+  Linear:
+    type: object
+    properties:
+      offset?:
+        type: number
+        format: double
+        description: Lower bound of the first bucket.
+      width?:
+        type: number
+        format: double
+        description: Must be greater than 0.
+      numFiniteBuckets?:
+        type: integer
+        format: int32
+        description: Must be greater than 0.
+    description: 'Specify a sequence of buckets that all have the same width (except
+      overflow and underflow). Each bucket represents a constant absolute uncertainty
+      on the specific value in the bucket.Defines num_finite_buckets + 2 (= N) buckets
+      with these boundaries for bucket i:Upper bound (0 &lt;= i &lt; N-1): offset
+      + (width * i).  Lower bound (1 &lt;= i &lt; N): offset + (width * (i - 1)).'
+  ListGroupMembersResponse:
+    type: object
+    properties:
+      totalSize?:
+        type: integer
+        format: int32
+        description: The total number of elements matching this request.
+      nextPageToken?:
+        type: string
+        description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.
+      members?:
+        type: array
+        description: A set of monitored resources in the group.
+        items: MonitoredResource
+    description: The ListGroupMembers response.
+  ListGroupsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.
+      group?:
+        type: array
+        description: The groups that match the specified filters.
+        items: Group
+    description: The ListGroups response.
+  ListMetricDescriptorsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.
+      metricDescriptors?:
+        type: array
+        description: The metric descriptors that are available to the project and that match the value of filter, if present.
+        items: MetricDescriptor
+    description: The ListMetricDescriptors response.
+  ListMonitoredResourceDescriptorsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.
+      resourceDescriptors?:
+        type: array
+        description: The monitored resource descriptors that are available to this project and that match filter, if present.
+        items: MonitoredResourceDescriptor
+    description: The ListMonitoredResourcDescriptors response.
+  ListTimeSeriesResponse:
+    type: object
+    properties:
+      timeSeries?:
+        type: array
+        description: One or more time series that match the filter included in the request.
+        items: TimeSeries
+      nextPageToken?:
+        type: string
+        description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.
+    description: The ListTimeSeries response.
+  Metric:
+    type: object
+    properties:
+      type?:
+        type: string
+        description: An existing metric type, see google.api.MetricDescriptor. For example, compute.googleapis.com/instance/cpu/usage_time.
+      labels?:
+        type: object
+        description: The set of labels that uniquely identify a metric. To specify a metric, all labels enumerated in the MetricDescriptor must be assigned values.
+    description: A specific metric identified by specifying values for all of the labels of a MetricDescriptor.
+  MetricDescriptor:
+    type: object
+    properties:
+      unit?:
+        type: string
+        description: |-
+          The unit in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT)
+          bit bit
+          By byte
+          s second
+          min minute
+          h hour
+          d dayPrefixes (PREFIX)
+          k kilo (10**3)
+          M mega (10**6)
+          G giga (10**9)
+          T tera (10**12)
+          P peta (10**15)
+          E exa (10**18)
+          Z zetta (10**21)
+          Y yotta (10**24)
+          m milli (10**-3)
+          u micro (10**-6)
+          n nano (10**-9)
+          p pico (10**-12)
+          f femto (10**-15)
+          a atto (10**-18)
+          z zepto (10**-21)
+          y yocto (10**-24)
+          Ki kibi (2**10)
+          Mi mebi (2**20)
+          Gi gibi (2**30)
+          Ti tebi (2**40)GrammarThe grammar includes the dimensionless unit 1, such as 1/s.The grammar also includes these connectors:
+          / division (as an infix operator, e.g. 1/s).
+          . multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit is as follows:
+          Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;
+
+          Component = [ PREFIX ] UNIT [ Annotation ]
+                    | Annotation
+                    | &quot;1&quot;
+                    ;
+
+          Annotation = &quot;{&quot; NAME &quot;}&quot; ;
+          Notes:
+          Annotation is just a comment if it follows a UNIT and is  equivalent to 1 if it is used alone. For examples,  {requests}/s == 1/s, By{transmitted}/s == By/s.
+          NAME is a sequence of non-blank printable ASCII characters not  containing '{' or '}'.
+      metricKind?:
+        type: string
+        description: Whether the metric records instantaneous values, changes to a value, etc. Some combinations of metric_kind and value_type might not be supported.
+        enum:
+        - METRIC_KIND_UNSPECIFIED
+        - GAUGE
+        - DELTA
+        - CUMULATIVE
+      displayName?:
+        type: string
+        description: A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example "Request count".
+      valueType?:
+        type: string
+        description: Whether the measurement is an integer, a floating-point number, etc. Some combinations of metric_kind and value_type might not be supported.
+        enum:
+        - VALUE_TYPE_UNSPECIFIED
+        - BOOL
+        - INT64
+        - DOUBLE
+        - STRING
+        - DISTRIBUTION
+        - MONEY
+      name?:
+        type: string
+        description: |
+          Resource name. The format of the name may vary between different implementations. For examples:
+          projects/{project_id}/metricDescriptors/{type=**}
+          metricDescriptors/{type=**}
+      description?:
+        type: string
+        description: A detailed description of the metric, which can be used in documentation.
+      type?:
+        type: string
+        description: |-
+          The metric type including a DNS name prefix, for example &quot;compute.googleapis.com/instance/cpu/utilization&quot;. Metric types should use a natural hierarchical grouping such as the following:
+          compute.googleapis.com/instance/cpu/utilization
+          compute.googleapis.com/instance/disk/read_ops_count
+          compute.googleapis.com/instance/network/received_bytes_count
+          Note that if the metric type changes, the monitoring data will be discontinued, and anything depends on it will break, such as monitoring dashboards, alerting rules and quota limits. Therefore, once a metric has been published, its type should be immutable.
+      labels?:
+        type: array
+        description: The set of labels that can be used to describe a specific instance of this metric type. For example, the compute.googleapis.com/instance/network/received_bytes_count metric type has a label, loadbalanced, that specifies whether the traffic was received through a load balanced IP address.
+        items: LabelDescriptor
+    description: Defines a metric type and its schema.
+  MonitoredResource:
+    type: object
+    properties:
+      type?:
+        type: string
+        description: Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Cloud SQL database is &quot;cloudsql_database&quot;.
+      labels?:
+        type: object
+        description: Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Cloud SQL databases use the labels &quot;database_id&quot; and &quot;zone&quot;.
+    description: |
+      An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The type field identifies a MonitoredResourceDescriptor object that describes the resource's schema. Information in the labels field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for &quot;gce_instance&quot; has labels &quot;instance_id&quot; and &quot;zone&quot;:
+      { &quot;type&quot;: &quot;gce_instance&quot;,
+        &quot;labels&quot;: { &quot;instance_id&quot;: &quot;12345678901234&quot;,
+                    &quot;zone&quot;: &quot;us-central1-a&quot; }}
+  MonitoredResourceDescriptor:
+    type: object
+    properties:
+      displayName?:
+        type: string
+        description: Optional. A concise name for the monitored resource type that might be displayed in user interfaces. It should be a Title Cased Noun Phrase, without any article or other determiners. For example, &quot;Google Cloud SQL Database&quot;.
+      name?:
+        type: string
+        description: 'Optional. The resource name of the monitored resource descriptor:
+          &quot;projects/{project_id}/monitoredResourceDescriptors/{type}&quot; where
+          {type} is the value of the type field in this object and {project_id} is
+          a project ID that provides API-specific context for accessing the type.
+          APIs that do not use project information can use the resource name format
+          &quot;monitoredResourceDescriptors/{type}&quot;.'
+      description?:
+        type: string
+        description: Optional. A detailed description of the monitored resource type that might be used in documentation.
+      type?:
+        type: string
+        description: Required. The monitored resource type. For example, the type &quot;cloudsql_database&quot; represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.
+      labels?:
+        type: array
+        description: Required. A set of labels used to describe instances of this monitored resource type. For example, an individual Google Cloud SQL database is identified by values for the labels &quot;database_id&quot; and &quot;zone&quot;.
+        items: LabelDescriptor
+    description: An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of &quot;gce_instance&quot; and specifies the use of the labels &quot;instance_id&quot; and &quot;zone&quot; to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.
+  Option:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The option's name. For example, &quot;java_package&quot;.
+      value?:
+        type: object
+        description: The option's value. For example, &quot;com.google.protobuf&quot;.
+    description: A protocol buffer option, which can be attached to a message, field, enumeration, etc.
+  Point:
+    type: object
+    properties:
+      interval?: TimeInterval
+      value?: TypedValue
+    description: A single data point in a time series.
+  Range:
+    type: object
+    properties:
+      min?:
+        type: number
+        format: double
+        description: The minimum of the population values.
+      max?:
+        type: number
+        format: double
+        description: The maximum of the population values.
+    description: The range of the population values.
+  SourceContext:
+    type: object
+    properties:
+      fileName?:
+        type: string
+        description: 'The path-qualified name of the .proto file that contained the
+          associated protobuf element. For example: &quot;google/protobuf/source_context.proto&quot;.'
+    description: SourceContext represents information about the source of a protobuf element, like the file in which it is defined.
+  TimeInterval:
+    type: object
+    properties:
+      startTime?:
+        type: string
+        description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+      endTime?:
+        type: string
+        description: Required. The end of the time interval.
+    description: A time interval extending just after a start time through an end time. If the start time is the same as the end time, then the interval represents a single point in time.
+  TimeSeries:
+    type: object
+    properties:
+      metricKind?:
+        type: string
+        description: The metric kind of the time series. When listing time series, this metric kind might be different from the metric kind of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the metric kind of the associated metric. If the associated metric's descriptor must be auto-created, then this field specifies the metric kind of the new descriptor and must be either GAUGE (the default) or CUMULATIVE.
+        enum:
+        - METRIC_KIND_UNSPECIFIED
+        - GAUGE
+        - DELTA
+        - CUMULATIVE
+      metric?: Metric
+      resource?: MonitoredResource
+      valueType?:
+        type: string
+        description: The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.
+        enum:
+        - VALUE_TYPE_UNSPECIFIED
+        - BOOL
+        - INT64
+        - DOUBLE
+        - STRING
+        - DISTRIBUTION
+        - MONEY
+      points?:
+        type: array
+        description: The data points of this time series. When listing time series, the order of the points is specified by the list method.When creating a time series, this field must contain exactly one point and the point's type must be the same as the value type of the associated metric. If the associated metric's descriptor must be auto-created, then the value type of the descriptor is determined by the point's type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.
+        items: Point
+    description: A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.
+  Type:
+    type: object
+    properties:
+      oneofs?:
+        type: array
+        description: The list of types appearing in oneof definitions in this type.
+        items:
+          type: string
+      options?:
+        type: array
+        description: The protocol buffer options.
+        items: Option
+      name?:
+        type: string
+        description: The fully qualified message name.
+      syntax?:
+        type: string
+        description: The source syntax.
+        enum:
+        - SYNTAX_PROTO2
+        - SYNTAX_PROTO3
+      fields?:
+        type: array
+        description: The list of fields.
+        items: Field
+      sourceContext?: SourceContext
+    description: A protocol buffer message type.
+  TypedValue:
+    type: object
+    properties:
+      int64Value?:
+        type: integer
+        format: int64
+        description: A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.
+      stringValue?:
+        type: string
+        description: A variable-length string value.
+      boolValue?:
+        type: boolean
+        description: 'A Boolean value: true or false.'
+      doubleValue?:
+        type: number
+        format: double
+        description: A 64-bit double-precision floating-point number. Its magnitude is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16 significant digits of precision.
+      distributionValue?: Distribution
+    description: A single strongly-typed value.
+/v3:
+  /{name}:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]*$
+        description: The project on which to execute the request. The format is &quot;projects/{project_id_or_number}&quot;.
+    /timeSeries:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.write
+        description: Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
+        is:
+        - hasParameters
+        body:
+          application/json: CreateTimeSeriesRequest
+        responses:
+          200:
+            body:
+              application/json: Empty
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.read
+        description: Lists time series that match a filter. This method does not require a Stackdriver account.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |
+              A monitoring filter (/monitoring/api/v3/filters) that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
+              metric.type = &quot;compute.googleapis.com/instance/cpu/usage_time&quot; AND
+                  metric.label.instance_name = &quot;my-instance-name&quot;
+          interval.endTime?:
+            type: string
+            description: Required. The end of the time interval.
+          view?:
+            type: string
+            description: Specifies which information is returned about the time series.
+            enum:
+            - FULL
+            - HEADERS
+          aggregation.alignmentPeriod?:
+            type: string
+            description: The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.
+          aggregation.groupByFields?:
+            type: string
+            description: The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified, the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.
+          aggregation.crossSeriesReducer?:
+            type: string
+            description: The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.
+            enum:
+            - REDUCE_NONE
+            - REDUCE_MEAN
+            - REDUCE_MIN
+            - REDUCE_MAX
+            - REDUCE_SUM
+            - REDUCE_STDDEV
+            - REDUCE_COUNT
+            - REDUCE_COUNT_TRUE
+            - REDUCE_FRACTION_TRUE
+            - REDUCE_PERCENTILE_99
+            - REDUCE_PERCENTILE_95
+            - REDUCE_PERCENTILE_50
+            - REDUCE_PERCENTILE_05
+          pageSize?:
+            type: integer
+            format: int32
+            description: A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.
+          orderBy?:
+            type: string
+            description: Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.
+          pageToken?:
+            type: string
+            description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          interval.startTime?:
+            type: string
+            description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          aggregation.perSeriesAligner?:
+            type: string
+            description: The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.
+            enum:
+            - ALIGN_NONE
+            - ALIGN_DELTA
+            - ALIGN_RATE
+            - ALIGN_INTERPOLATE
+            - ALIGN_NEXT_OLDER
+            - ALIGN_MIN
+            - ALIGN_MAX
+            - ALIGN_MEAN
+            - ALIGN_COUNT
+            - ALIGN_SUM
+            - ALIGN_STDDEV
+            - ALIGN_COUNT_TRUE
+            - ALIGN_FRACTION_TRUE
+            - ALIGN_PERCENTILE_99
+            - ALIGN_PERCENTILE_95
+            - ALIGN_PERCENTILE_50
+            - ALIGN_PERCENTILE_05
+        responses:
+          200:
+            body:
+              application/json: ListTimeSeriesResponse
+    /groups:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+        description: Creates a new group.
+        is:
+        - hasParameters
+        queryParameters:
+          validateOnly?:
+            type: boolean
+            description: If true, validate this request but do not create the group.
+        body:
+          application/json: Group
+        responses:
+          200:
+            body:
+              application/json: Group
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.read
+        description: Lists the existing groups.
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: A positive number that is the maximum number of results to return.
+          ancestorsOfGroup?:
+            type: string
+            description: 'A group name: &quot;projects/{project_id_or_number}/groups/{group_id}&quot;.
+              Returns groups that are ancestors of the specified group. The groups
+              are returned in order, starting with the immediate parent and ending
+              with the most distant ancestor. If the specified group has no immediate
+              parent, the results are empty.'
+          pageToken?:
+            type: string
+            description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          descendantsOfGroup?:
+            type: string
+            description: 'A group name: &quot;projects/{project_id_or_number}/groups/{group_id}&quot;.
+              Returns the descendants of the specified group. This is a superset of
+              the results returned by the childrenOfGroup filter, and includes children-of-children,
+              and so forth.'
+          childrenOfGroup?:
+            type: string
+            description: 'A group name: &quot;projects/{project_id_or_number}/groups/{group_id}&quot;.
+              Returns groups whose parentName field contains the group name. If no
+              groups have this parent, the results are empty.'
+        responses:
+          200:
+            body:
+              application/json: ListGroupsResponse
+    /monitoredResourceDescriptors:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.read
+            - https://www.googleapis.com/auth/monitoring.write
+        description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |
+              An optional filter (/monitoring/api/v3/filters) describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+              resource.type = starts_with(&quot;gce_&quot;) AND resource.label:id
+          pageSize?:
+            type: integer
+            format: int32
+            description: A positive number that is the maximum number of results to return.
+          pageToken?:
+            type: string
+            description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+        responses:
+          200:
+            body:
+              application/json: ListMonitoredResourceDescriptorsResponse
+    /metricDescriptors:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.write
+        description: Creates a new metric descriptor. User-created metric descriptors define custom metrics (/monitoring/custom-metrics).
+        is:
+        - hasParameters
+        body:
+          application/json: MetricDescriptor
+        responses:
+          200:
+            body:
+              application/json: MetricDescriptor
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.read
+            - https://www.googleapis.com/auth/monitoring.write
+        description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |
+              If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter (/monitoring/api/v3/filters) specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics (/monitoring/custom-metrics):
+              metric.type = starts_with(&quot;custom.googleapis.com/&quot;)
+          pageSize?:
+            type: integer
+            format: int32
+            description: A positive number that is the maximum number of results to return.
+          pageToken?:
+            type: string
+            description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+        responses:
+          200:
+            body:
+              application/json: ListMetricDescriptorsResponse
+    /collectdTimeSeries:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+            - https://www.googleapis.com/auth/monitoring.write
+        description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside
+          class="caution">This method is only for use by the Stackdriver Monitoring
+          Agent. Use projects.timeSeries.create instead.</aside>'
+        is:
+        - hasParameters
+        body:
+          application/json: CreateCollectdTimeSeriesRequest
+        responses:
+          200:
+            body:
+              application/json: Empty
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/monitoring
+          - https://www.googleapis.com/auth/monitoring.read
+          - https://www.googleapis.com/auth/monitoring.write
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      is:
+      - hasParameters
+      - hasParameters
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: MetricDescriptor
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/monitoring
+      description: Updates an existing group. You can change any group attributes except name.
+      is:
+      - hasParameters
+      queryParameters:
+        validateOnly?:
+          type: boolean
+          description: If true, validate this request but do not update the existing group.
+      body:
+        application/json: Group
+      responses:
+        200:
+          body:
+            application/json: Group
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/monitoring
+      description: Deletes a metric descriptor. Only user-created custom metrics (/monitoring/custom-metrics) can be deleted.
+      is:
+      - hasParameters
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Empty

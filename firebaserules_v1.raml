@@ -1,0 +1,287 @@
+#%RAML 1.0
+title: Firebase Rules API
+version: v1
+baseUri: https://firebaserules.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://firebase.google.com/docs/storage/security
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): firebaserules:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/firebase.readonly
+      - https://www.googleapis.com/auth/firebase
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+        enum:
+        - '1'
+        - '2'
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Empty:
+    type: object
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+  File:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: File name.
+      fingerprint?:
+        type: string
+        description: Fingerprint (e.g. github sha) associated with the `File`.
+      content?:
+        type: string
+        description: Textual Content.
+    description: '`File` containing source content.'
+  Issue:
+    type: object
+    properties:
+      severity?:
+        type: string
+        description: The severity of the issue.
+        enum:
+        - SEVERITY_UNSPECIFIED
+        - DEPRECATION
+        - WARNING
+        - ERROR
+      description?:
+        type: string
+        description: Short error description.
+      sourcePosition?: SourcePosition
+    description: Issues include warnings, errors, and deprecation notices.
+  ListReleasesResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: |-
+          The pagination token to retrieve the next page of results. If the value is
+          empty, no further results remain.
+      releases?:
+        type: array
+        description: List of `Release` instances.
+        items: Release
+    description: The response for FirebaseRulesService.ListReleases.
+  ListRulesetsResponse:
+    type: object
+    properties:
+      rulesets?:
+        type: array
+        description: List of `Ruleset` instances.
+        items: Ruleset
+      nextPageToken?:
+        type: string
+        description: |-
+          The pagination token to retrieve the next page of results. If the value is
+          empty, no further results remain.
+    description: The response for FirebaseRulesService.ListRulesets
+  Release:
+    type: object
+    properties:
+      createTime?:
+        type: string
+        description: |-
+          Time the release was created.
+          @OutputOnly
+      name?:
+        type: string
+        description: |-
+          Resource name for the `Release`.
+
+          `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`
+          which affords developers a great deal of flexibility in mapping the name
+          to the style that best fits their existing development practices. For
+          example, a name could refer to an environment, an app, a version, or some
+          combination of three.
+
+          In the table below, for the project name `projects/foo`, the following
+          relative release paths show how flat and structured names might be chosen
+          to match a desired development / deployment strategy.
+
+          Use Case     | Flat Name           | Structured Name
+          -------------|---------------------|----------------
+          Environments | releases/qa         | releases/qa
+          Apps         | releases/app1_qa    | releases/app1/qa
+          Versions     | releases/app1_v2_qa | releases/app1/v2/qa
+
+          The delimiter between the release name path elements can be almost anything
+          and it should work equally well with the release name list filter, but in
+          many ways the structured paths provide a clearer picture of the
+          relationship between `Release` instances.
+
+          Format: `projects/{project_id}/releases/{release_id}`
+      updateTime?:
+        type: string
+        description: |-
+          Time the release was updated.
+          @OutputOnly
+      rulesetName?:
+        type: string
+        description: |-
+          Name of the `Ruleset` referred to by this `Release`. The `Ruleset` must
+          exist the `Release` to be created.
+    description: |-
+      `Release` is a named reference to a `Ruleset`. Once a `Release` refers to a
+      `Ruleset`, rules-enabled services will be able to enforce the `Ruleset`.
+  Ruleset:
+    type: object
+    properties:
+      createTime?:
+        type: string
+        description: |-
+          Time the `Ruleset` was created.
+          @OutputOnly
+      name?:
+        type: string
+        description: |-
+          Name of the `Ruleset`. The ruleset_id is auto generated by the service.
+          Format: `projects/{project_id}/rulesets/{ruleset_id}`
+          @OutputOnly
+      source?: Source
+    description: |-
+      `Ruleset` is an immutable copy of `Source` with a globally unique identifier
+      and a creation time.
+  Source:
+    type: object
+    properties:
+      files?:
+        type: array
+        description: '`File` set constituting the `Source` bundle.'
+        items: File
+    description: '`Source` is one or more `File` messages comprising a logical set
+      of rules.'
+  SourcePosition:
+    type: object
+    properties:
+      fileName?:
+        type: string
+        description: Name of the `File`.
+      line?:
+        type: integer
+        format: int32
+        description: Line number of the source fragment. 1-based.
+      column?:
+        type: integer
+        format: int32
+        description: First column on the source line associated with the source fragment.
+    description: |-
+      Position in the `Source` content including its line, column number, and an
+      index of the `File` in the `Source` message. Used for debug purposes.
+  TestRulesetRequest:
+    type: object
+    properties:
+      source?: Source
+    description: The request for FirebaseRulesService.TestRuleset.
+  TestRulesetResponse:
+    type: object
+    properties:
+      issues?:
+        type: array
+        description: |-
+          Syntactic and semantic `Source` issues of varying severity. Issues of
+          `ERROR` severity will prevent tests from executing.
+        items: Issue
+    description: The response for FirebaseRulesService.TestRuleset.
+/v1:
+  /{name}:test:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/.*$
+        description: |-
+          Name of the project.
+
+          Format: `projects/{project_id}`
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/firebase
+          - https://www.googleapis.com/auth/firebase.readonly
+      description: |-
+        Test `Source` for syntactic and semantic correctness. Issues present in the
+        rules, if any, will be returned to the caller with a description, severity,
+        and source location.
+
+        The test method will typically be executed with a developer provided
+        `Source`, but if regression testing is desired, this method may be
+        executed against a `Ruleset` resource name and the `Source` will be
+        retrieved from the persisted `Ruleset`.
+
+        The following is an example of `Source` that permits users to upload images
+        to a bucket bearing their user id and matching the correct metadata:
+
+        _*Example*_
+
+            // Users are allowed to subscribe and unsubscribe to the blog.
+            service firebase.storage {
+              match /users/{userId}/images/{imageName} {
+                  allow write: if userId == request.userId
+                      && (imageName.endsWith('.png') || imageName.endsWith('.jpg'))
+                      && resource.mimeType.startsWith('image/')
+              }
+            }
+      is:
+      - hasParameters
+      body:
+        application/json: TestRulesetRequest
+      responses:
+        200:
+          body:
+            application/json: TestRulesetResponse

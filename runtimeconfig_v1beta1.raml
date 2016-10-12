@@ -1,0 +1,536 @@
+#%RAML 1.0
+title: Google Cloud RuntimeConfig API
+version: v1beta1
+baseUri: https://runtimeconfig.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/deployment-manager/runtime-configurator/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): runtimeconfig:v1beta1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/cloudruntimeconfig
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+        enum:
+        - '1'
+        - '2'
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Cardinality:
+    type: object
+    properties:
+      path?:
+        type: string
+        description: The root of the variable subtree to monitor. For example, `/foo`.
+      number?:
+        type: integer
+        format: int32
+        description: |-
+          The number variables under the `path` that must exist to meet this
+          condition. Defaults to 1 if not specified.
+    description: |-
+      A Cardinality condition for the Waiter resource. A cardinality condition is
+      met when the number of variables under a specified path prefix reaches a
+      predefined number. For example, if you set a Cardinality condition where
+      the `path` is set to `/foo` and the number of paths is set to 2, the
+      following variables would meet the condition in a RuntimeConfig resource:
+
+      + `/foo/variable1 = "value1"`
+      + `/foo/variable2 = "value2"`
+      + `/bar/variable3 = "value3"`
+
+      It would not would not satisify the same condition with the `number` set to
+      3, however, because there is only 2 paths that start with `/foo`.
+      Cardinality conditions are recursive; all subtrees under the specific
+      path prefix are counted.
+  Empty:
+    type: object
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+  EndCondition:
+    type: object
+    properties:
+      cardinality?: Cardinality
+    description: The condition that a Waiter resource is waiting for.
+  ListConfigsResponse:
+    type: object
+    properties:
+      configs?:
+        type: array
+        description: |-
+          A list of the configurations in the project. The order of returned
+          objects is arbitrary; that is, it is not ordered in any particular way.
+        items: RuntimeConfig
+      nextPageToken?:
+        type: string
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `pageSize`, use the `nextPageToken`
+          as a value for the query parameter `pageToken` in the next list request.
+          Subsequent list requests will have their own `nextPageToken` to continue
+          paging through the results
+    description: |-
+      `ListConfigs()` returns the following response. The order of returned
+      objects is arbitrary; that is, it is not ordered in any particular way.
+  ListVariablesResponse:
+    type: object
+    properties:
+      variables?:
+        type: array
+        description: |-
+          A list of variables and their values. The order of returned variable
+          objects is arbitrary.
+        items: Variable
+      nextPageToken?:
+        type: string
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `pageSize`, use the `nextPageToken`
+          as a value for the query parameter `pageToken` in the next list request.
+          Subsequent list requests will have their own `nextPageToken` to continue
+          paging through the results
+    description: Response for the `ListVariables()` method.
+  ListWaitersResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `pageSize`, use the `nextPageToken`
+          as a value for the query parameter `pageToken` in the next list request.
+          Subsequent list requests will have their own `nextPageToken` to continue
+          paging through the results
+      waiters?:
+        type: array
+        description: Found waiters in the project.
+        items: Waiter
+    description: |-
+      Response for the `ListWaiters()` method.
+      Order of returned waiter objects is arbitrary.
+  Operation:
+    type: object
+    properties:
+      metadata?:
+        type: object
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+      response?:
+        type: object
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+      name?:
+        type: string
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+      error?: Status
+      done?:
+        type: boolean
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If true, the operation is completed, and either `error` or `response` is
+          available.
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+  RuntimeConfig:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: |-
+          The resource name of a runtime config. The name must have the format:
+
+              projects/[PROJECT_ID]/configs/[CONFIG_NAME]
+
+          The `[PROJECT_ID]` must be a valid project ID, and `[CONFIG_NAME]` is an
+          arbitrary name that matches RFC 1035 segment specification. The length of
+          `[CONFIG_NAME]` must be less than 64 bytes.
+
+          You pick the RuntimeConfig resource name, but the server will validate that
+          the name adheres to this format. After you create the resource, you cannot
+          change the resource's name.
+      description?:
+        type: string
+        description: |-
+          An optional description of the RuntimeConfig object.
+          The length of the description must be less than 256 bytes.
+    description: |-
+      A RuntimeConfig resource is the primary resource in the Cloud RuntimeConfig
+      service. A RuntimeConfig resource consists of metadata and a hierarchy of
+      variables.
+  Status:
+    type: object
+    properties:
+      code?:
+        type: integer
+        format: int32
+        description: The status code, which should be an enum value of google.rpc.Code.
+      details?:
+        type: array
+        description: |-
+          A list of messages that carry the error details.  There will be a
+          common set of message types for APIs to use.
+        items:
+          type: object
+      message?:
+        type: string
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` which can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting purpose.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+  Variable:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: |-
+          The name of the variable resource, in the format:
+
+              projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]
+
+          The `[PROJECT_ID]` must be a valid project ID, `[CONFIG_NAME]` must be a
+          valid RuntimeConfig reource and `[VARIABLE_NAME]` follows Unix file system
+          file path naming.
+
+          The `[VARIABLE_NAME]` can contain ASCII letters, numbers, slashes and
+          dashes. Slashes are used as path element separators and are not part of the
+          `[VARIABLE_NAME]` itself, so `[VARIABLE_NAME]` must contain at least one
+          non-slash character. Multiple slashes are coalesced into single slash
+          character. Each path segment should follow RFC 1035 segment specification.
+          The length of a `[VARIABLE_NAME]` must be less than 256 bytes.
+
+          Once you create a variable, you cannot change the variable name.
+      updateTime?:
+        type: string
+        description: '[Output Only] The time of the last variable update.'
+      text?:
+        type: string
+        description: |-
+          The textual value of the variable. The length of the value must be less
+          than 4096 bytes. Empty values are also accepted.
+          NB: Only one of value and string_value can be set at the same time.
+      state?:
+        type: string
+        description: |-
+          [Ouput only] The current state of the variable. The variable state indicates
+          the outcome of the `variables().watch` call and is visible through the
+          `get` and `list` calls.
+        enum:
+        - VARIABLE_STATE_UNSPECIFIED
+        - UPDATED
+        - DELETED
+      value?:
+        type: string
+        description: |-
+          The binary value of the variable. The length of the value must be less
+          than 4096 bytes. Empty values are also accepted. The value must be
+          Base64 encoded.
+          NB: Only one of value and string_value can be set at the same time.
+    description: |-
+      Describes a single variable within a RuntimeConfig resource.
+      The name denotes the hierarchical variable name. For example,
+      `ports/serving_port` is a valid variable name. The variable value is an
+      opaque string and only leaf variables can have values (that is, variables
+      that do not have any child variables).
+  Waiter:
+    type: object
+    properties:
+      createTime?:
+        type: string
+        description: |-
+          [Output Only] The instant at which this Waiter resource was created. Adding
+          the value of `timeout` to this instant yields the timeout deadline for the
+          waiter.
+      success?: EndCondition
+      failure?: EndCondition
+      name?:
+        type: string
+        description: |-
+          The name of the Waiter resource, in the format:
+
+              projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]
+
+          The `[PROJECT_ID]` must be a valid Google Cloud project ID,
+          the `[CONFIG_NAME]` must be a valid RuntimeConfig resource, the
+          `[WAITER_NAME]` must match RFC 1035 segment specification, and the length
+          of `[WAITER_NAME]` must be less than 64 bytes.
+
+          After you create a Waiter resource, you cannot change the resource name.
+      error?: Status
+      done?:
+        type: boolean
+        description: |-
+          [Output Only] If the value is `false`, it means the waiter is still waiting
+          for one of its conditions to be met.
+
+          If true, the waiter has finished. If the waiter finished due to a timeout
+          or failure, `error` will be set.
+      timeout?:
+        type: string
+        description: |-
+          [Required] Specifies the timeout of the waiter in seconds, beginning from
+          the instant that `waiters().create` method is called. If this time elapses
+          before the success or failure conditions are met, the waiter fails and sets
+          the `error` code to `DEADLINE_EXCEEDED`.
+    description: |-
+      A Waiter resource waits for some end condition within a RuntimeConfig resource
+      to be met before it returns. For example, assume you have a distributed
+      system where each node writes to a Variable resource indidicating the node's
+      readiness as part of the startup process.
+
+      You then configure a Waiter resource with the success condition set to wait
+      until some number of nodes have checked in. Afterwards, your application
+      runs some arbitrary code after the condition has been met and the waiter
+      returns successfully.
+
+      Once created, a Waiter resource is immutable.
+
+      To learn more about using waiters, read the
+      [Creating a Waiter](/deployment-manager/runtime-configurator/creating-a-waiter)
+      documentation.
+  WatchVariableRequest:
+    type: object
+    properties:
+      newerThan?:
+        type: string
+        description: |-
+          If specified, checks the current timestamp of the variable and if the
+          current timestamp is newer than `newerThan` timestamp, the method returns
+          immediately.
+
+          If not specified or the variable has an older timestamp, the watcher waits
+          for a the value to change before returning.
+    description: Request for the `WatchVariable()` method.
+/v1beta1:
+  /{name}:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]*/configs/[^/]*$
+        description: |-
+          The name of the RuntimeConfig resource to retrieve, in the format:
+
+          `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloudruntimeconfig
+      description: Gets information about a RuntimeConfig resource.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: RuntimeConfig
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloudruntimeconfig
+      description: Updates a RuntimeConfig resource. The configuration must exist beforehand.
+      is:
+      - hasParameters
+      body:
+        application/json: RuntimeConfig
+      responses:
+        200:
+          body:
+            application/json: RuntimeConfig
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloudruntimeconfig
+      description: Deletes a RuntimeConfig resource.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Empty
+  /{parent}:
+    uriParameters:
+      parent:
+        type: string
+        pattern: ^projects/[^/]*$
+        description: |-
+          The [project ID](https://support.google.com/cloud/answer/6158840?hl=en&ref_topic=6158848)
+          for this request, in the format `projects/[PROJECT_ID]`.
+    /configs:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloudruntimeconfig
+        description: |-
+          Creates a new RuntimeConfig resource. The configuration name must be
+          unique within project.
+        is:
+        - hasParameters
+        queryParameters:
+          requestId?:
+            type: string
+            description: |-
+              An optional unique request_id. If server receives two Create requests with
+              the same request_id then second request will be ignored and the resource
+              stored in the backend will be returned. Empty request_id fields are
+              ignored.
+              It is responsibility of the client to ensure uniqueness of the request_id
+              strings.
+              The strings are limited to 64 characters.
+        body:
+          application/json: RuntimeConfig
+        responses:
+          200:
+            body:
+              application/json: RuntimeConfig
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloudruntimeconfig
+        description: Lists all the RuntimeConfig resources within project.
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Specifies the number of results to return per page. If there are fewer
+              elements than the specified number, returns all elements.
+          pageToken?:
+            type: string
+            description: |-
+              Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+              returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: ListConfigsResponse

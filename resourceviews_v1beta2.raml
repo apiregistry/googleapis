@@ -1,0 +1,624 @@
+#%RAML 1.0
+title: Google Compute Engine Instance Groups API
+version: v1beta2
+baseUri: https://www.googleapis.com/resourceviews/v1beta2/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/compute/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Tags):
+- limited_availability
+(commons.Id): resourceviews:v1beta2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/ndev.cloudman
+      - https://www.googleapis.com/auth/ndev.cloudman.readonly
+      - https://www.googleapis.com/auth/compute.readonly
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/compute
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Label:
+    type: object
+    properties:
+      value?:
+        type: string
+        description: Value of the label.
+      key?:
+        type: string
+        description: Key of the label.
+    description: The Label to be applied to the resource views.
+  ListResourceResponseItem:
+    type: object
+    properties:
+      endpoints?:
+        type: object
+        description: The list of service end points on the resource.
+      resource?:
+        type: string
+        description: The full URL of the resource.
+    description: The list response item that contains the resource and end points information.
+  Operation:
+    type: object
+    properties:
+      httpErrorMessage?:
+        type: string
+        description: '[Output only] If operation fails, the HTTP error message returned.'
+      targetId?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique target ID which identifies a particular
+          incarnation of the target.'
+      kind?:
+        type: string
+        default: resourceviews#operation
+        description: '[Output only] Type of the resource.'
+      warnings?:
+        type: array
+        description: '[Output Only] If there are issues with this operation, a warning
+          is returned.'
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output only] The warning type identifier for this warning.'
+            data?:
+              type: array
+              description: '[Output only] Metadata for this warning in key:value format.'
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] Metadata value for this warning.'
+                  key?:
+                    type: string
+                    description: '[Output Only] Metadata key for this warning.'
+            message?:
+              type: string
+              description: '[Output only] Optional human-readable details for this
+                warning.'
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request which
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] If errors occurred during processing of this operation,
+          this field will be populated.'
+      statusMessage?:
+        type: string
+        description: '[Output Only] An optional textual description of the current
+          status of the operation.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+      insertTime?:
+        type: string
+        description: '[Output Only] The time that this operation was requested, in
+          RFC3339 text format.'
+      httpErrorStatusCode?:
+        type: integer
+        format: int32
+        description: '[Output only] If operation fails, the HTTP error status code
+          returned.'
+      zone?:
+        type: string
+        description: '[Output Only] URL of the zone where the operation resides. Only
+          available when performing per-zone operations.'
+      targetLink?:
+        type: string
+        description: '[Output only] URL of the resource the operation is mutating.'
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] The time that this operation was requested, in
+          RFC3339 text format.'
+      name?:
+        type: string
+        description: '[Output Only] Name of the resource.'
+      progress?:
+        type: integer
+        format: int32
+        description: '[Output only] An optional progress indicator that ranges from
+          0 to 100. There is no requirement that this be linear or support any granularity
+          of operations. This should not be used to guess at when the operation will
+          be complete. This number should be monotonically increasing as the operation
+          progresses.'
+      operationType?:
+        type: string
+        description: '[Output only] Type of the operation. Operations include insert,
+          update, and delete.'
+      startTime?:
+        type: string
+        description: '[Output Only] The time that this operation was started by the
+          server, in RFC3339 text format.'
+      endTime?:
+        type: string
+        description: '[Output Only] The time that this operation was completed, in
+          RFC3339 text format.'
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource, generated
+          by the server.'
+      region?:
+        type: string
+        description: '[Output Only] URL of the region where the operation resides.
+          Only available when performing regional operations.'
+      clientOperationId?:
+        type: string
+        description: '[Output only] An optional identifier specified by the client
+          when the mutation was initiated. Must be unique for all operation resources
+          in the project.'
+      user?:
+        type: string
+        description: '[Output Only] User who requested the operation, for example:
+          user@example.com.'
+      status?:
+        type: string
+        description: '[Output Only] Status of the operation.'
+    description: An operation resource, used to manage asynchronous API requests.
+  OperationList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: resourceviews#operationList
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request (output only).
+      id?:
+        type: string
+        description: Unique identifier for the resource; defined by the server (output only).
+      items?:
+        type: array
+        description: The operation resources.
+        items: Operation
+      selfLink?:
+        type: string
+        description: Server defined URL for this resource (output only).
+  ResourceView:
+    type: object
+    properties:
+      endpoints?:
+        type: array
+        description: Services endpoint information.
+        items: ServiceEndpoint
+      size?:
+        type: integer
+        format: int32
+        description: The total number of resources in the resource view.
+      kind?:
+        type: string
+        default: resourceviews#resourceView
+        description: Type of the resource.
+      creationTimestamp?:
+        type: string
+        description: The creation time of the resource view.
+      fingerprint?:
+        type: string
+        description: The fingerprint of the service endpoint information.
+      name?:
+        type: string
+        description: The name of the resource view.
+      description?:
+        type: string
+        description: The detailed description of the resource view.
+      resources?:
+        type: array
+        description: A list of all resources in the resource view.
+        items:
+          type: string
+      id?:
+        type: string
+        description: '[Output Only] The ID of the resource view.'
+      labels?:
+        type: array
+        description: The labels for events.
+        items: Label
+      network?:
+        type: string
+        description: The URL of a Compute Engine network to which the resources in the view belong.
+      selfLink?:
+        type: string
+        description: '[Output Only] A self-link to the resource view.'
+    description: The resource view object.
+  ServiceEndpoint:
+    type: object
+    properties:
+      port?:
+        type: integer
+        format: int32
+        description: The port of the service endpoint.
+      name?:
+        type: string
+        description: The name of the service endpoint.
+    description: The service endpoint that may be started in a VM.
+  ZoneViewsAddResourcesRequest:
+    type: object
+    properties:
+      resources?:
+        type: array
+        description: The list of resources to be added.
+        items:
+          type: string
+    description: The request to add resources to the resource view.
+  ZoneViewsGetServiceResponse:
+    type: object
+    properties:
+      endpoints?:
+        type: array
+        description: The service information.
+        items: ServiceEndpoint
+      fingerprint?:
+        type: string
+        description: The fingerprint of the service information.
+  ZoneViewsList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: resourceviews#zoneViewsList
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: A token used for pagination.
+      items?:
+        type: array
+        description: The result that contains all resource views that meet the criteria.
+        items: ResourceView
+      selfLink?:
+        type: string
+        description: Server defined URL for this resource (output only).
+    description: The response to a list request.
+  ZoneViewsListResourcesResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: A token used for pagination.
+      items?:
+        type: array
+        description: The formatted JSON that is requested by the user.
+        items: ListResourceResponseItem
+      network?:
+        type: string
+        description: The URL of a Compute Engine network to which the resources in the view belong.
+    description: The response to a list resource request.
+  ZoneViewsRemoveResourcesRequest:
+    type: object
+    properties:
+      resources?:
+        type: array
+        description: The list of resources to be removed.
+        items:
+          type: string
+    description: The request to remove resources from the resource view.
+  ZoneViewsSetServiceRequest:
+    type: object
+    properties:
+      endpoints?:
+        type: array
+        description: The service information to be updated.
+        items: ServiceEndpoint
+      fingerprint?:
+        type: string
+        description: Fingerprint of the service information; a hash of the contents. This field is used for optimistic locking when updating the service entries.
+      resourceName?:
+        type: string
+        description: The name of the resource if user wants to update the service information of the resource.
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      description: The project name of the resource view.
+  /zones:
+    /{zone}:
+      uriParameters:
+        zone:
+          type: string
+          description: The zone name of the resource view.
+      /resourceViews:
+        /{resourceView}:
+          uriParameters:
+            resourceView:
+              type: string
+              description: The name of the resource view.
+          /addResources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Add resources to the view.
+              is:
+              - hasParameters
+              body:
+                application/json: ZoneViewsAddResourcesRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /setService:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Update the service information of a resource view or a resource.
+              is:
+              - hasParameters
+              body:
+                application/json: ZoneViewsSetServiceRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /resources:
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud-platform.read-only
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/compute.readonly
+                  - https://www.googleapis.com/auth/ndev.cloudman
+                  - https://www.googleapis.com/auth/ndev.cloudman.readonly
+              description: List the resources of the resource view.
+              is:
+              - hasParameters
+              queryParameters:
+                listState?:
+                  type: string
+                  default: ALL
+                  description: The state of the instance to list. By default, it lists all instances.
+                  enum:
+                  - ALL
+                  - RUNNING
+                maxResults?:
+                  type: integer
+                  default: 5000
+                  format: int32
+                  description: 'Maximum count of results to be returned. Acceptable
+                    values are 0 to 5000, inclusive. (Default: 5000)'
+                  maximum: 5000
+                  minimum: 0
+                format?:
+                  type: string
+                  description: The requested format of the return value. It can be URL or URL_PORT. A JSON object will be included in the response based on the format. The default format is NONE, which results in no JSON in the response.
+                  enum:
+                  - NONE
+                  - URL
+                  - URL_PORT
+                pageToken?:
+                  type: string
+                  description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+                serviceName?:
+                  type: string
+                  description: The service name to return in the response. It is optional and if it is not set, all the service end points will be returned.
+              responses:
+                200:
+                  body:
+                    application/json: ZoneViewsListResourcesResponse
+          /removeResources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Remove resources from the view.
+              is:
+              - hasParameters
+              body:
+                application/json: ZoneViewsRemoveResourcesRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /getService:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Get the service information of a resource view or a resource.
+              is:
+              - hasParameters
+              queryParameters:
+                resourceName?:
+                  type: string
+                  description: The name of the resource if user wants to get the service information of the resource.
+              responses:
+                200:
+                  body:
+                    application/json: ZoneViewsGetServiceResponse
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/compute.readonly
+                - https://www.googleapis.com/auth/ndev.cloudman
+                - https://www.googleapis.com/auth/ndev.cloudman.readonly
+            description: Get the information of a zonal resource view.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: ResourceView
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Delete a resource view.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/ndev.cloudman
+          description: Create a resource view.
+          is:
+          - hasParameters
+          body:
+            application/json: ResourceView
+          responses:
+            200:
+              body:
+                application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/compute.readonly
+              - https://www.googleapis.com/auth/ndev.cloudman
+              - https://www.googleapis.com/auth/ndev.cloudman.readonly
+          description: List resource views.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 5000
+              format: int32
+              description: 'Maximum count of results to be returned. Acceptable values
+                are 0 to 5000, inclusive. (Default: 5000)'
+              maximum: 5000
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          responses:
+            200:
+              body:
+                application/json: ZoneViewsList
+      /operations:
+        /{operation}:
+          uriParameters:
+            operation:
+              type: string
+              pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+              description: Name of the operation resource to return.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/compute.readonly
+                - https://www.googleapis.com/auth/ndev.cloudman
+                - https://www.googleapis.com/auth/ndev.cloudman.readonly
+            description: Retrieves the specified zone-specific operation resource.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/compute.readonly
+              - https://www.googleapis.com/auth/ndev.cloudman
+              - https://www.googleapis.com/auth/ndev.cloudman.readonly
+          description: Retrieves the list of operation resources contained within the specified zone.
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: Optional. Filter expression for filtering listed resources.
+            maxResults?:
+              type: integer
+              default: 500
+              format: int32
+              description: Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
+              maximum: 500
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: OperationList

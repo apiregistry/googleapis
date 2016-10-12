@@ -1,0 +1,1291 @@
+#%RAML 1.0
+title: Content API for Shopping
+version: v2sandbox
+baseUri: https://www.googleapis.com/content/v2sandbox/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/shopping-content
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): content:v2sandbox
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/content
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Error:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The error code.
+      domain?:
+        type: string
+        description: The domain of the error.
+      message?:
+        type: string
+        description: A description of the error.
+    description: An error returned by the API.
+  Errors:
+    type: object
+    properties:
+      code?:
+        type: integer
+        format: int32
+        description: The HTTP status of the first error in errors.
+      message?:
+        type: string
+        description: The message of the first error in errors.
+      errors?:
+        type: array
+        description: A list of errors.
+        items: Error
+    description: A list of errors returned by a failed batch entry.
+  Order:
+    type: object
+    properties:
+      shippingCost?: Price
+      acknowledged?:
+        type: boolean
+        description: Whether the order was acknowledged.
+      netAmount?: Price
+      kind?:
+        type: string
+        default: content#order
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#order".'
+      channelType?:
+        type: string
+        description: 'The channel type of the order: "purchaseOnGoogle" or "googleExpress".'
+      merchantOrderId?:
+        type: string
+        description: Merchant-provided id of the order.
+      shipments?:
+        type: array
+        description: Shipments of the order.
+        items: OrderShipment
+      refunds?:
+        type: array
+        description: Refunds for the order.
+        items: OrderRefund
+      shippingOption?:
+        type: string
+        description: The requested shipping option.
+      lineItems?:
+        type: array
+        description: Line items that are ordered.
+        items: OrderLineItem
+      promotions?:
+        type: array
+        description: The details of the merchant provided promotions applied to the order. More details about the program are  here.
+        items: OrderPromotion
+      merchantId?:
+        type: integer
+        format: int64
+      shippingCostTax?: Price
+      deliveryDetails?: OrderDeliveryDetails
+      paymentMethod?: OrderPaymentMethod
+      id?:
+        type: string
+        description: The REST id of the order. Globally unique.
+      placedDate?:
+        type: string
+        description: The date when the order was placed, in ISO 8601 format.
+      paymentStatus?:
+        type: string
+        description: The status of the payment.
+      customer?: OrderCustomer
+      status?:
+        type: string
+        description: The status of the order.
+  OrderAddress:
+    type: object
+    properties:
+      country?:
+        type: string
+        description: CLDR country code (e.g. "US").
+      streetAddress?:
+        type: array
+        description: Street-level part of the address.
+        items:
+          type: string
+      postalCode?:
+        type: string
+        description: Postal Code or ZIP (e.g. "94043").
+      fullAddress?:
+        type: array
+        description: |-
+          Strings representing the lines of the printed label for mailing the order, for example:
+          John Smith
+          1600 Amphitheatre Parkway
+          Mountain View, CA, 94043
+          United States
+        items:
+          type: string
+      isPostOfficeBox?:
+        type: boolean
+        description: Whether the address is a post office box.
+      locality?:
+        type: string
+        description: City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs).
+      recipientName?:
+        type: string
+        description: Name of the recipient.
+      region?:
+        type: string
+        description: Top-level administrative subdivision of the country (e.g. "CA").
+  OrderCancellation:
+    type: object
+    properties:
+      actor?:
+        type: string
+        description: The actor that created the cancellation.
+      reason?:
+        type: string
+        description: The reason for the cancellation. Orders that are cancelled with a noInventory reason will lead to the removal of the product from POG until you make an update to that product. This will not affect your Shopping ads.
+      quantity?:
+        type: integer
+        format: int32
+        description: The quantity that was canceled.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      creationDate?:
+        type: string
+        description: Date on which the cancellation has been created, in ISO 8601 format.
+  OrderCustomer:
+    type: object
+    properties:
+      explicitMarketingPreference?:
+        type: boolean
+        description: If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow.
+      fullName?:
+        type: string
+        description: Full name of the customer.
+      email?:
+        type: string
+        description: Email address of the customer.
+  OrderDeliveryDetails:
+    type: object
+    properties:
+      address?: OrderAddress
+      phoneNumber?:
+        type: string
+        description: The phone number of the person receiving the delivery.
+  OrderLineItem:
+    type: object
+    properties:
+      quantityReturned?:
+        type: integer
+        format: int32
+        description: Number of items returned.
+      product?: OrderLineItemProduct
+      quantityPending?:
+        type: integer
+        format: int32
+        description: Number of items pending.
+      quantityOrdered?:
+        type: integer
+        format: int32
+        description: Number of items ordered.
+      tax?: Price
+      quantityCanceled?:
+        type: integer
+        format: int32
+        description: Number of items canceled.
+      cancellations?:
+        type: array
+        description: Cancellations of the line item.
+        items: OrderCancellation
+      quantityDelivered?:
+        type: integer
+        format: int32
+        description: Number of items delivered.
+      returnInfo?: OrderLineItemReturnInfo
+      quantityShipped?:
+        type: integer
+        format: int32
+        description: Number of items shipped.
+      shippingDetails?: OrderLineItemShippingDetails
+      price?: Price
+      returns?:
+        type: array
+        description: Returns of the line item.
+        items: OrderReturn
+      id?:
+        type: string
+        description: The id of the line item.
+  OrderLineItemProduct:
+    type: object
+    properties:
+      gtin?:
+        type: string
+        description: Global Trade Item Number (GTIN) of the item.
+      variantAttributes?:
+        type: array
+        description: Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.
+        items: OrderLineItemProductVariantAttribute
+      channel?:
+        type: string
+        description: The item's channel (online or local).
+      mpn?:
+        type: string
+        description: Manufacturer Part Number (MPN) of the item.
+      title?:
+        type: string
+        description: The title of the product.
+      itemGroupId?:
+        type: string
+        description: Shared identifier for all variants of the same product.
+      targetCountry?:
+        type: string
+        description: The CLDR territory code of the target country of the product.
+      imageLink?:
+        type: string
+        description: URL of an image of the item.
+      condition?:
+        type: string
+        description: Condition or state of the item.
+      shownImage?:
+        type: string
+        description: URL to the cached image shown to the user when order was placed.
+      price?: Price
+      contentLanguage?:
+        type: string
+        description: The two-letter ISO 639-1 language code for the item.
+      offerId?:
+        type: string
+        description: An identifier of the item.
+      id?:
+        type: string
+        description: The REST id of the product.
+      brand?:
+        type: string
+        description: Brand of the item.
+  OrderLineItemProductVariantAttribute:
+    type: object
+    properties:
+      dimension?:
+        type: string
+        description: The dimension of the variant.
+      value?:
+        type: string
+        description: The value for the dimension.
+  OrderLineItemReturnInfo:
+    type: object
+    properties:
+      isReturnable?:
+        type: boolean
+        description: Whether the item is returnable.
+      policyUrl?:
+        type: string
+        description: URL of the item return policy.
+      daysToReturn?:
+        type: integer
+        format: int32
+        description: How many days later the item can be returned.
+  OrderLineItemShippingDetails:
+    type: object
+    properties:
+      method?: OrderLineItemShippingDetailsMethod
+      shipByDate?:
+        type: string
+        description: The ship by date, in ISO 8601 format.
+      deliverByDate?:
+        type: string
+        description: The delivery by date, in ISO 8601 format.
+  OrderLineItemShippingDetailsMethod:
+    type: object
+    properties:
+      carrier?:
+        type: string
+        description: The carrier for the shipping. Optional.
+      minDaysInTransit?:
+        type: integer
+        format: int32
+        description: Minimum transit time.
+      methodName?:
+        type: string
+        description: The name of the shipping method.
+      maxDaysInTransit?:
+        type: integer
+        format: int32
+        description: Maximum transit time.
+  OrderPaymentMethod:
+    type: object
+    properties:
+      expirationYear?:
+        type: integer
+        format: int32
+        description: The card expiration year (4-digit, e.g. 2015).
+      phoneNumber?:
+        type: string
+        description: The billing phone number.
+      lastFourDigits?:
+        type: string
+        description: The last four digits of the card number.
+      billingAddress?: OrderAddress
+      expirationMonth?:
+        type: integer
+        format: int32
+        description: The card expiration month (January = 1, February = 2 etc.).
+      type?:
+        type: string
+        description: The type of instrument (VISA, Mastercard, etc).
+  OrderPromotion:
+    type: object
+    properties:
+      benefits?: OrderPromotionBenefit[]
+      redemptionChannel?:
+        type: string
+        description: Indicates that the promotion is valid online.
+      genericRedemptionCode?:
+        type: string
+        description: Optional. The text code that corresponds to the promotion when applied on the retailer?s website.
+      id?:
+        type: string
+        description: The unique ID of the promotion.
+      productApplicability?:
+        type: string
+        description: Whether the promotion is applicable to all products or only specific products.
+      effectiveDates?:
+        type: string
+        description: |-
+          The date and time frame when the promotion is active and ready for validation review. Note that the promotion live time may be delayed for a few hours due to the validation review.
+          Start date and end date are separated by a forward slash (/). The start date is specified by the format (YYYY-MM-DD), followed by the letter ?T?, the time of the day when the sale starts (in Greenwich Mean Time, GMT), followed by an expression of the time zone for the sale. The end date is in the same format.
+      longTitle?:
+        type: string
+        description: The full title of the promotion.
+  OrderPromotionBenefit:
+    type: object
+    properties:
+      taxImpact?: Price
+      discount?: Price
+      subType?:
+        type: string
+        description: Further describes the benefit of the promotion. Note that we will expand on this enumeration as we support new promotion sub-types.
+      offerIds?:
+        type: array
+        description: The OfferId(s) that were purchased in this order and map to this specific benefit of the promotion.
+        items:
+          type: string
+      type?:
+        type: string
+        description: Describes whether the promotion applies to products (e.g. 20% off) or to shipping (e.g. Free Shipping).
+  OrderRefund:
+    type: object
+    properties:
+      actor?:
+        type: string
+        description: The actor that created the refund.
+      reason?:
+        type: string
+        description: The reason for the refund.
+      amount?: Price
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      creationDate?:
+        type: string
+        description: Date on which the item has been created, in ISO 8601 format.
+  OrderReturn:
+    type: object
+    properties:
+      actor?:
+        type: string
+        description: The actor that created the refund.
+      reason?:
+        type: string
+        description: The reason for the return.
+      quantity?:
+        type: integer
+        format: int32
+        description: Quantity that is returned.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      creationDate?:
+        type: string
+        description: Date on which the item has been created, in ISO 8601 format.
+  OrderShipment:
+    type: object
+    properties:
+      lineItems?:
+        type: array
+        description: The line items that are shipped.
+        items: OrderShipmentLineItemShipment
+      carrier?:
+        type: string
+        description: The carrier handling the shipment.
+      id?:
+        type: string
+        description: The id of the shipment.
+      creationDate?:
+        type: string
+        description: Date on which the shipment has been created, in ISO 8601 format.
+      deliveryDate?:
+        type: string
+        description: Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delievered
+      status?:
+        type: string
+        description: The status of the shipment.
+      trackingId?:
+        type: string
+        description: The tracking id for the shipment.
+  OrderShipmentLineItemShipment:
+    type: object
+    properties:
+      quantity?:
+        type: integer
+        format: int32
+        description: The quantity that is shipped.
+      lineItemId?:
+        type: string
+        description: The id of the line item that is shipped.
+  OrdersAcknowledgeRequest:
+    type: object
+    properties:
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+  OrdersAcknowledgeResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersAcknowledgeResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersAcknowledgeResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersAdvanceTestOrderResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersAdvanceTestOrderResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersAdvanceTestOrderResponse".'
+  OrdersCancelLineItemRequest:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the cancellation.
+      amount?: Price
+      quantity?:
+        type: integer
+        format: int32
+        description: The quantity to cancel.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      lineItemId?:
+        type: string
+        description: The ID of the line item to cancel.
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+  OrdersCancelLineItemResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersCancelLineItemResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersCancelLineItemResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersCancelRequest:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the cancellation.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+  OrdersCancelResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersCancelResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersCancelResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersCreateTestOrderRequest:
+    type: object
+    properties:
+      templateName?:
+        type: string
+        description: The test order template to use. Specify as an alternative to testOrder as a shortcut for retrieving a template and then creating an order using that template.
+      testOrder?: TestOrder
+  OrdersCreateTestOrderResponse:
+    type: object
+    properties:
+      orderId?:
+        type: string
+        description: The ID of the newly created test order.
+      kind?:
+        type: string
+        default: content#ordersCreateTestOrderResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersCreateTestOrderResponse".'
+  OrdersCustomBatchRequest:
+    type: object
+    properties:
+      entries?:
+        type: array
+        description: The request entries to be processed in the batch.
+        items: OrdersCustomBatchRequestEntry
+  OrdersCustomBatchRequestEntry:
+    type: object
+    properties:
+      cancel?: OrdersCustomBatchRequestEntryCancel
+      returnLineItem?: OrdersCustomBatchRequestEntryReturnLineItem
+      method?:
+        type: string
+        description: The method to apply.
+      shipLineItems?: OrdersCustomBatchRequestEntryShipLineItems
+      updateShipment?: OrdersCustomBatchRequestEntryUpdateShipment
+      merchantId?:
+        type: integer
+        format: int64
+        description: The ID of the managing account.
+      orderId?:
+        type: string
+        description: The ID of the order. Required for all methods beside getByMerchantOrderId.
+      cancelLineItem?: OrdersCustomBatchRequestEntryCancelLineItem
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order. Required for all methods beside get and getByMerchantOrderId.
+      merchantOrderId?:
+        type: string
+        description: The merchant order id. Required for updateMerchantOrderId and getByMerchantOrderId methods.
+      batchId?:
+        type: integer
+        format: int32
+        description: An entry ID, unique within the batch request.
+      refund?: OrdersCustomBatchRequestEntryRefund
+  OrdersCustomBatchRequestEntryCancel:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the cancellation.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+  OrdersCustomBatchRequestEntryCancelLineItem:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the cancellation.
+      amount?: Price
+      quantity?:
+        type: integer
+        format: int32
+        description: The quantity to cancel.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      lineItemId?:
+        type: string
+        description: The ID of the line item to cancel.
+  OrdersCustomBatchRequestEntryRefund:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the refund.
+      amount?: Price
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+  OrdersCustomBatchRequestEntryReturnLineItem:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the return.
+      quantity?:
+        type: integer
+        format: int32
+        description: The quantity to return.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      lineItemId?:
+        type: string
+        description: The ID of the line item to return.
+  OrdersCustomBatchRequestEntryShipLineItems:
+    type: object
+    properties:
+      lineItems?:
+        type: array
+        description: Line items to ship.
+        items: OrderShipmentLineItemShipment
+      carrier?:
+        type: string
+        description: The carrier handling the shipment.
+      shipmentId?:
+        type: string
+        description: The ID of the shipment.
+      trackingId?:
+        type: string
+        description: The tracking id for the shipment.
+  OrdersCustomBatchRequestEntryUpdateShipment:
+    type: object
+    properties:
+      carrier?:
+        type: string
+        description: The carrier handling the shipment. Not updated if missing.
+      shipmentId?:
+        type: string
+        description: The ID of the shipment.
+      status?:
+        type: string
+        description: New status for the shipment. Not updated if missing.
+      trackingId?:
+        type: string
+        description: The tracking id for the shipment. Not updated if missing.
+  OrdersCustomBatchResponse:
+    type: object
+    properties:
+      entries?:
+        type: array
+        description: The result of the execution of the batch requests.
+        items: OrdersCustomBatchResponseEntry
+      kind?:
+        type: string
+        default: content#ordersCustomBatchResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersCustomBatchResponse".'
+  OrdersCustomBatchResponseEntry:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersCustomBatchResponseEntry
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersCustomBatchResponseEntry".'
+      executionStatus?:
+        type: string
+        description: The status of the execution. Only defined if the method is not get or getByMerchantOrderId and if the request was successful.
+      batchId?:
+        type: integer
+        format: int32
+        description: The ID of the request entry this entry responds to.
+      errors?: Errors
+      order?: Order
+  OrdersGetByMerchantOrderIdResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersGetByMerchantOrderIdResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersGetByMerchantOrderIdResponse".'
+      order?: Order
+  OrdersGetTestOrderTemplateResponse:
+    type: object
+    properties:
+      template?: TestOrder
+      kind?:
+        type: string
+        default: content#ordersGetTestOrderTemplateResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersGetTestOrderTemplateResponse".'
+  OrdersListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersListResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersListResponse".'
+      nextPageToken?:
+        type: string
+        description: The token for the retrieval of the next page of orders.
+      resources?: Order[]
+  OrdersRefundRequest:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the refund.
+      amount?: Price
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+  OrdersRefundResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersRefundResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersRefundResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersReturnLineItemRequest:
+    type: object
+    properties:
+      reason?:
+        type: string
+        description: The reason for the return.
+      quantity?:
+        type: integer
+        format: int32
+        description: The quantity to return.
+      reasonText?:
+        type: string
+        description: The explanation of the reason.
+      lineItemId?:
+        type: string
+        description: The ID of the line item to return.
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+  OrdersReturnLineItemResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersReturnLineItemResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersReturnLineItemResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersShipLineItemsRequest:
+    type: object
+    properties:
+      lineItems?:
+        type: array
+        description: Line items to ship.
+        items: OrderShipmentLineItemShipment
+      carrier?:
+        type: string
+        description: The carrier handling the shipment.
+      shipmentId?:
+        type: string
+        description: The ID of the shipment.
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+      trackingId?:
+        type: string
+        description: The tracking id for the shipment.
+  OrdersShipLineItemsResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersShipLineItemsResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersShipLineItemsResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersUpdateMerchantOrderIdRequest:
+    type: object
+    properties:
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+      merchantOrderId?:
+        type: string
+        description: The merchant order id to be assigned to the order. Must be unique per merchant.
+  OrdersUpdateMerchantOrderIdResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersUpdateMerchantOrderIdResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersUpdateMerchantOrderIdResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  OrdersUpdateShipmentRequest:
+    type: object
+    properties:
+      carrier?:
+        type: string
+        description: The carrier handling the shipment. Not updated if missing.
+      shipmentId?:
+        type: string
+        description: The ID of the shipment.
+      operationId?:
+        type: string
+        description: The ID of the operation. Unique across all operations for a given order.
+      status?:
+        type: string
+        description: New status for the shipment. Not updated if missing.
+      trackingId?:
+        type: string
+        description: The tracking id for the shipment. Not updated if missing.
+  OrdersUpdateShipmentResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: content#ordersUpdateShipmentResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#ordersUpdateShipmentResponse".'
+      executionStatus?:
+        type: string
+        description: The status of the execution.
+  Price:
+    type: object
+    properties:
+      currency?:
+        type: string
+        description: The currency of the price.
+      value?:
+        type: string
+        description: The price represented as a number.
+  TestOrder:
+    type: object
+    properties:
+      lineItems?:
+        type: array
+        description: Line items that are ordered. At least one line item must be provided.
+        items: TestOrderLineItem
+      promotions?:
+        type: array
+        description: The details of the merchant provided promotions applied to the order. More details about the program are  here.
+        items: OrderPromotion
+      shippingCost?: Price
+      predefinedDeliveryAddress?:
+        type: string
+        description: Identifier of one of the predefined delivery addresses for the delivery.
+      shippingCostTax?: Price
+      kind?:
+        type: string
+        default: content#testOrder
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "content#testOrder".'
+      paymentMethod?: TestOrderPaymentMethod
+      customer?: TestOrderCustomer
+      shippingOption?:
+        type: string
+        description: The requested shipping option.
+  TestOrderCustomer:
+    type: object
+    properties:
+      explicitMarketingPreference?:
+        type: boolean
+        description: If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional.
+      fullName?:
+        type: string
+        description: Full name of the customer.
+      email?:
+        type: string
+        description: Email address of the customer.
+  TestOrderLineItem:
+    type: object
+    properties:
+      returnInfo?: OrderLineItemReturnInfo
+      product?: TestOrderLineItemProduct
+      shippingDetails?: OrderLineItemShippingDetails
+      quantityOrdered?:
+        type: integer
+        format: int32
+        description: Number of items ordered.
+      unitTax?: Price
+  TestOrderLineItemProduct:
+    type: object
+    properties:
+      gtin?:
+        type: string
+        description: Global Trade Item Number (GTIN) of the item. Optional.
+      variantAttributes?:
+        type: array
+        description: Variant attributes for the item. Optional.
+        items: OrderLineItemProductVariantAttribute
+      channel?:
+        type: string
+        description: The item's channel.
+      mpn?:
+        type: string
+        description: Manufacturer Part Number (MPN) of the item. Optional.
+      title?:
+        type: string
+        description: The title of the product.
+      itemGroupId?:
+        type: string
+        description: Shared identifier for all variants of the same product. Optional.
+      targetCountry?:
+        type: string
+        description: The CLDR territory code of the target country of the product.
+      imageLink?:
+        type: string
+        description: URL of an image of the item.
+      condition?:
+        type: string
+        description: Condition or state of the item.
+      price?: Price
+      contentLanguage?:
+        type: string
+        description: The two-letter ISO 639-1 language code for the item.
+      offerId?:
+        type: string
+        description: An identifier of the item.
+      brand?:
+        type: string
+        description: Brand of the item.
+  TestOrderPaymentMethod:
+    type: object
+    properties:
+      expirationYear?:
+        type: integer
+        format: int32
+        description: The card expiration year (4-digit, e.g. 2015).
+      lastFourDigits?:
+        type: string
+        description: The last four digits of the card number.
+      expirationMonth?:
+        type: integer
+        format: int32
+        description: The card expiration month (January = 1, February = 2 etc.).
+      type?:
+        type: string
+        description: The type of instrument. Note that real orders might have different values than the four values accepted by createTestOrder.
+      predefinedBillingAddress?:
+        type: string
+        description: The billing address.
+/{merchantId}:
+  uriParameters:
+    merchantId:
+      type: integer
+      format: int64
+      description: The ID of the managing account.
+  /orders:
+    /{orderId}:
+      uriParameters:
+        orderId:
+          type: string
+          description: The ID of the order to cancel.
+      /cancel:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Cancels all line items in an order.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersCancelRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersCancelResponse
+      /shipLineItems:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Marks line item(s) as shipped.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersShipLineItemsRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersShipLineItemsResponse
+      /cancelLineItem:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Cancels a line item.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersCancelLineItemRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersCancelLineItemResponse
+      /returnLineItem:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Returns a line item.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersReturnLineItemRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersReturnLineItemResponse
+      /acknowledge:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Marks an order as acknowledged.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersAcknowledgeRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersAcknowledgeResponse
+      /updateMerchantOrderId:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Updates the merchant order ID for a given order.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersUpdateMerchantOrderIdRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersUpdateMerchantOrderIdResponse
+      /refund:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Refund a portion of the order, up to the full amount paid.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersRefundRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersRefundResponse
+      /updateShipment:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Updates a shipment's status, carrier, and/or tracking ID.
+          is:
+          - hasParameters
+          body:
+            application/json: OrdersUpdateShipmentRequest
+          responses:
+            200:
+              body:
+                application/json: OrdersUpdateShipmentResponse
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/content
+        description: Retrieves an order from your Merchant Center account.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Order
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/content
+      description: Lists the orders in your Merchant Center account.
+      is:
+      - hasParameters
+      queryParameters:
+        placedDateStart?:
+          type: string
+          description: Obtains orders placed after this date (inclusively), in ISO 8601 format.
+        acknowledged?:
+          type: boolean
+          description: |-
+            Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
+            We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
+        maxResults?:
+          type: integer
+          format: int32
+          description: |-
+            The maximum number of orders to return in the response, used for paging. The default value is 25 orders per page, and the maximum allowed value is 250 orders per page.
+            Known issue: All List calls will return all Orders without limit regardless of the value of this field.
+        placedDateEnd?:
+          type: string
+          description: Obtains orders placed before this date (exclusively), in ISO 8601 format.
+        orderBy?:
+          type: string
+          description: The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. "placedDate desc" stands for listing orders by placement date, from oldest to most recent. "placedDate asc" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria.
+          enum:
+          - placedDate asc
+          - placedDate desc
+        statuses?:
+          type: string
+          description: Obtains orders that match any of the specified statuses. Multiple values can be specified with comma separation. Additionally, please note that active is a shortcut for pendingShipment and partiallyShipped, and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.
+          enum:
+          - active
+          - canceled
+          - completed
+          - delivered
+          - inProgress
+          - partiallyDelivered
+          - partiallyReturned
+          - partiallyShipped
+          - pendingShipment
+          - returned
+          - shipped
+        pageToken?:
+          type: string
+          description: The token returned by the previous request.
+      responses:
+        200:
+          body:
+            application/json: OrdersListResponse
+  /testorders:
+    /{orderId}:
+      uriParameters:
+        orderId:
+          type: string
+          description: The ID of the test order to modify.
+      /advance:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/content
+          description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: OrdersAdvanceTestOrderResponse
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/content
+      description: Sandbox only. Creates a test order.
+      is:
+      - hasParameters
+      body:
+        application/json: OrdersCreateTestOrderRequest
+      responses:
+        200:
+          body:
+            application/json: OrdersCreateTestOrderResponse
+  /ordersbymerchantid:
+    /{merchantOrderId}:
+      uriParameters:
+        merchantOrderId:
+          type: string
+          description: The merchant order id to be looked for.
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/content
+        description: Retrieves an order using merchant order id.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: OrdersGetByMerchantOrderIdResponse
+  /testordertemplates:
+    /{templateName}:
+      uriParameters:
+        templateName:
+          type: string
+          description: The name of the template to retrieve.
+          enum:
+          - template1
+          - template1a
+          - template1b
+          - template2
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/content
+        description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: OrdersGetTestOrderTemplateResponse
+/orders:
+  /batch:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/content
+      description: Retrieves or modifies multiple orders in a single request.
+      is:
+      - hasParameters
+      body:
+        application/json: OrdersCustomBatchRequest
+      responses:
+        200:
+          body:
+            application/json: OrdersCustomBatchResponse

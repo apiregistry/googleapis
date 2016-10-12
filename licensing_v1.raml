@@ -1,0 +1,230 @@
+#%RAML 1.0
+title: Enterprise License Manager API
+version: v1
+baseUri: https://www.googleapis.com/apps/licensing/v1/product/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/google-apps/licensing/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): licensing:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/apps.licensing
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  LicenseAssignment:
+    type: object
+    properties:
+      productId?:
+        type: string
+        description: Name of the product.
+      kind?:
+        type: string
+        default: licensing#licenseAssignment
+        description: Identifies the resource as a LicenseAssignment.
+      etags?:
+        type: string
+        description: ETag of the resource.
+      userId?:
+        type: string
+        description: Email id of the user.
+      skuId?:
+        type: string
+        description: Name of the sku of the product.
+      selfLink?:
+        type: string
+        description: Link to this page.
+    description: Template for LiscenseAssignment Resource
+  LicenseAssignmentInsert:
+    type: object
+    properties:
+      userId?:
+        type: string
+        description: Email id of the user
+    description: Template for LicenseAssignment Insert request
+  LicenseAssignmentList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: licensing#licenseAssignmentList
+        description: Identifies the resource as a collection of LicenseAssignments.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      items?:
+        type: array
+        description: The LicenseAssignments in this page of results.
+        items: LicenseAssignment
+    description: LicesnseAssignment List for a given product/sku for a customer.
+/{productId}:
+  uriParameters:
+    productId:
+      type: string
+      description: Name for product
+  /sku:
+    /{skuId}:
+      uriParameters:
+        skuId:
+          type: string
+          description: Name for sku for which license would be revoked
+      /user:
+        /{userId}:
+          uriParameters:
+            userId:
+              type: string
+              description: email id or unique Id of the user
+          patch:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.licensing
+            description: Assign License. This method supports patch semantics.
+            is:
+            - hasParameters
+            body:
+              application/json: LicenseAssignment
+            responses:
+              200:
+                body:
+                  application/json: LicenseAssignment
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.licensing
+            description: Get license assignment of a particular product and sku for a user
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: LicenseAssignment
+          put:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.licensing
+            description: Assign License.
+            is:
+            - hasParameters
+            body:
+              application/json: LicenseAssignment
+            responses:
+              200:
+                body:
+                  application/json: LicenseAssignment
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.licensing
+            description: Revoke License.
+            is:
+            - hasParameters
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/apps.licensing
+          description: Assign License.
+          is:
+          - hasParameters
+          body:
+            application/json: LicenseAssignmentInsert
+          responses:
+            200:
+              body:
+                application/json: LicenseAssignment
+      /users:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/apps.licensing
+          description: List license assignments for given product and sku of the customer.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 100
+              format: int32
+              description: Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.
+              maximum: 1000
+              minimum: 1
+            customerId:
+              type: string
+              description: CustomerId represents the customer for whom licenseassignments are queried
+            pageToken?:
+              type: string
+              default: ''
+              description: Token to fetch the next page.Optional. By default server will return first page
+          responses:
+            200:
+              body:
+                application/json: LicenseAssignmentList
+  /users:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/apps.licensing
+      description: List license assignments for given product of the customer.
+      is:
+      - hasParameters
+      queryParameters:
+        maxResults?:
+          type: integer
+          default: 100
+          format: int32
+          description: Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.
+          maximum: 1000
+          minimum: 1
+        customerId:
+          type: string
+          description: CustomerId represents the customer for whom licenseassignments are queried
+        pageToken?:
+          type: string
+          default: ''
+          description: Token to fetch the next page.Optional. By default server will return first page
+      responses:
+        200:
+          body:
+            application/json: LicenseAssignmentList

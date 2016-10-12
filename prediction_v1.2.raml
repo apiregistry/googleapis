@@ -1,0 +1,216 @@
+#%RAML 1.0
+title: Prediction API
+version: v1.2
+baseUri: https://www.googleapis.com/prediction/v1.2/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/prediction/docs/developer-guide
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/feature/predictionapi-32.png
+  name: x32
+- url: https://www.google.com/images/icons/feature/predictionapi-16.png
+  name: x16
+(commons.Id): prediction:v1.2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/devstorage.full_control
+      - https://www.googleapis.com/auth/devstorage.read_write
+      - https://www.googleapis.com/auth/prediction
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Input:
+    type: object
+    properties:
+      input?:
+        type: object
+        properties:
+          csvInstance?:
+            type: array
+            items:
+              type: any
+  Output:
+    type: object
+    properties:
+      outputLabel?:
+        type: string
+      outputValue?:
+        type: number
+        format: double
+      kind?:
+        type: string
+        default: prediction#output
+      outputMulti?:
+        type: array
+        items:
+          type: object
+          properties:
+            score?:
+              type: number
+              format: double
+            label?:
+              type: string
+      id?:
+        type: string
+      selfLink?:
+        type: string
+  Training:
+    type: object
+    properties:
+      modelInfo?:
+        type: object
+        properties:
+          classificationAccuracy?:
+            type: number
+            format: double
+          meanSquaredError?:
+            type: number
+            format: double
+          modelType?:
+            type: string
+      kind?:
+        type: string
+        default: prediction#training
+      trainingStatus?:
+        type: string
+      id?:
+        type: string
+      selfLink?:
+        type: string
+  Update:
+    type: object
+    properties:
+      csvInstance?:
+        type: array
+        description: The input features for this instance
+        items:
+          type: any
+      classLabel?:
+        type: string
+        description: The true class label of this instance
+/training:
+  /{data}:
+    uriParameters:
+      data:
+        type: string
+        description: mybucket%2Fmydata resource in Google Storage
+    /predict:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/prediction
+        description: Submit data and request a prediction
+        is:
+        - hasParameters
+        body:
+          application/json: Input
+        responses:
+          200:
+            body:
+              application/json: Output
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/prediction
+      description: Check training status of your model
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Training
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/prediction
+      description: Add new data to a trained model
+      is:
+      - hasParameters
+      body:
+        application/json: Update
+      responses:
+        200:
+          body:
+            application/json: Training
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/prediction
+      description: Delete a trained model
+      is:
+      - hasParameters
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/devstorage.full_control
+        - https://www.googleapis.com/auth/devstorage.read_only
+        - https://www.googleapis.com/auth/devstorage.read_write
+        - https://www.googleapis.com/auth/prediction
+    description: Begin training your model
+    is:
+    - hasParameters
+    queryParameters:
+      data?:
+        type: string
+        description: mybucket/mydata resource in Google Storage
+    body:
+      application/json: Training
+    responses:
+      200:
+        body:
+          application/json: Training
+/hostedmodels:
+  /{hostedModelName}:
+    uriParameters:
+      hostedModelName:
+        type: string
+        description: The name of a hosted model
+    /predict:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/prediction
+        description: Submit input and request an output against a hosted model
+        is:
+        - hasParameters
+        body:
+          application/json: Input
+        responses:
+          200:
+            body:
+              application/json: Output

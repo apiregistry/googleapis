@@ -1,0 +1,613 @@
+#%RAML 1.0
+title: Google Compute Engine Instance Group Manager API
+version: v1beta2
+baseUri: https://www.googleapis.com/replicapool/v1beta2/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/compute/docs/instance-groups/manager/v1beta2
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Tags):
+- limited_availability
+(commons.Id): replicapool:v1beta2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/compute.readonly
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/compute
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  InstanceGroupManager:
+    type: object
+    properties:
+      autoHealingPolicies?:
+        type: array
+        description: The autohealing policy for this managed instance group. You can specify only one value.
+        items: ReplicaPoolAutoHealingPolicy
+      instanceTemplate?:
+        type: string
+        description: The full URL to an instance template from which all new instances will be created.
+      kind?:
+        type: string
+        default: replicapool#instanceGroupManager
+        description: '[Output only] The resource type. Always replicapool#instanceGroupManager.'
+      description?:
+        type: string
+        description: An optional textual description of the instance group manager.
+      baseInstanceName?:
+        type: string
+        description: The base instance name to use for instances in this group. The value must be a valid RFC1035 name. Supported characters are lowercase letters, numbers, and hyphens (-). Instances are named by appending a hyphen and a random four-character string to the base instance name.
+      targetPools?:
+        type: array
+        description: The full URL of all target pools to which new instances in the group are added. Updating the target pool values does not affect existing instances.
+        items:
+          type: string
+      currentSize?:
+        type: integer
+        format: int32
+        description: '[Output only] The number of instances that currently exist and
+          are a part of this group. This includes instances that are starting but
+          are not yet RUNNING, and instances that are in the process of being deleted
+          or abandoned.'
+      selfLink?:
+        type: string
+        description: '[Output only] The fully qualified URL for this resource.'
+      targetSize?:
+        type: integer
+        format: int32
+        description: '[Output only] The number of instances that the manager is attempting
+          to maintain. Deleting or abandoning instances affects this number, as does
+          resizing the group.'
+      creationTimestamp?:
+        type: string
+        description: '[Output only] The time the instance group manager was created,
+          in RFC3339 text format.'
+      fingerprint?:
+        type: string
+        description: '[Output only] Fingerprint of the instance group manager. This
+          field is used for optimistic locking. An up-to-date fingerprint must be
+          provided in order to modify the Instance Group Manager resource.'
+      name?:
+        type: string
+        description: The name of the instance group manager. Must be 1-63 characters long and comply with RFC1035. Supported characters include lowercase letters, numbers, and hyphens.
+      id?:
+        type: integer
+        format: int64
+        description: '[Output only] A server-assigned unique identifier for the resource.'
+      group?:
+        type: string
+        description: '[Output only] The full URL of the instance group created by
+          the manager. This group contains all of the instances being managed, and
+          cannot contain non-managed instances.'
+    description: An Instance Group Manager resource.
+  InstanceGroupManagerList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: replicapool#instanceGroupManagerList
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request (output only).
+      id?:
+        type: string
+        description: Unique identifier for the resource; defined by the server (output only).
+      items?:
+        type: array
+        description: A list of instance resources.
+        items: InstanceGroupManager
+      selfLink?:
+        type: string
+        description: Server defined URL for this resource (output only).
+  InstanceGroupManagersAbandonInstancesRequest:
+    type: object
+    properties:
+      instances?:
+        type: array
+        description: |-
+          The names of one or more instances to abandon. For example:
+          { 'instances': [ 'instance-c3po', 'instance-r2d2' ] }
+        items:
+          type: string
+  InstanceGroupManagersDeleteInstancesRequest:
+    type: object
+    properties:
+      instances?:
+        type: array
+        description: |-
+          Names of instances to delete.
+
+          Example: 'instance-foo', 'instance-bar'
+        items:
+          type: string
+  InstanceGroupManagersRecreateInstancesRequest:
+    type: object
+    properties:
+      instances?:
+        type: array
+        description: |-
+          The names of one or more instances to recreate. For example:
+          { 'instances': [ 'instance-c3po', 'instance-r2d2' ] }
+        items:
+          type: string
+  InstanceGroupManagersSetInstanceTemplateRequest:
+    type: object
+    properties:
+      instanceTemplate?:
+        type: string
+        description: The full URL to an Instance Template from which all new instances will be created.
+  InstanceGroupManagersSetTargetPoolsRequest:
+    type: object
+    properties:
+      fingerprint?:
+        type: string
+        description: The current fingerprint of the Instance Group Manager resource. If this does not match the server-side fingerprint of the resource, then the request will be rejected.
+      targetPools?:
+        type: array
+        description: A list of fully-qualified URLs to existing Target Pool resources. New instances in the Instance Group Manager will be added to the specified target pools; existing instances are not affected.
+        items:
+          type: string
+  Operation:
+    type: object
+    properties:
+      httpErrorMessage?:
+        type: string
+        description: '[Output only] If operation fails, the HTTP error message returned.'
+      targetId?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique target ID which identifies a particular
+          incarnation of the target.'
+      kind?:
+        type: string
+        default: replicapool#operation
+        description: '[Output only] Type of the resource.'
+      warnings?:
+        type: array
+        description: '[Output Only] If there are issues with this operation, a warning
+          is returned.'
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output only] The warning type identifier for this warning.'
+              enum:
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            data?:
+              type: array
+              description: '[Output only] Metadata for this warning in key:value format.'
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] Metadata value for this warning.'
+                  key?:
+                    type: string
+                    description: '[Output Only] Metadata key for this warning.'
+            message?:
+              type: string
+              description: '[Output only] Optional human-readable details for this
+                warning.'
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request which
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] If errors occurred during processing of this operation,
+          this field will be populated.'
+      statusMessage?:
+        type: string
+        description: '[Output Only] An optional textual description of the current
+          status of the operation.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+      insertTime?:
+        type: string
+        description: '[Output Only] The time that this operation was requested, in
+          RFC3339 text format.'
+      httpErrorStatusCode?:
+        type: integer
+        format: int32
+        description: '[Output only] If operation fails, the HTTP error status code
+          returned.'
+      zone?:
+        type: string
+        description: '[Output Only] URL of the zone where the operation resides. Only
+          available when performing per-zone operations.'
+      targetLink?:
+        type: string
+        description: '[Output only] URL of the resource the operation is mutating.'
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] The time that this operation was requested, in
+          RFC3339 text format.'
+      name?:
+        type: string
+        description: '[Output Only] Name of the resource.'
+      progress?:
+        type: integer
+        format: int32
+        description: '[Output only] An optional progress indicator that ranges from
+          0 to 100. There is no requirement that this be linear or support any granularity
+          of operations. This should not be used to guess at when the operation will
+          be complete. This number should be monotonically increasing as the operation
+          progresses.'
+      operationType?:
+        type: string
+        description: '[Output only] Type of the operation. Operations include insert,
+          update, and delete.'
+      startTime?:
+        type: string
+        description: '[Output Only] The time that this operation was started by the
+          server, in RFC3339 text format.'
+      endTime?:
+        type: string
+        description: '[Output Only] The time that this operation was completed, in
+          RFC3339 text format.'
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource, generated
+          by the server.'
+      region?:
+        type: string
+        description: '[Output Only] URL of the region where the operation resides.
+          Only available when performing regional operations.'
+      clientOperationId?:
+        type: string
+        description: '[Output only] An optional identifier specified by the client
+          when the mutation was initiated. Must be unique for all operation resources
+          in the project.'
+      user?:
+        type: string
+        description: '[Output Only] User who requested the operation, for example:
+          user@example.com.'
+      status?:
+        type: string
+        description: '[Output Only] Status of the operation.'
+        enum:
+        - DONE
+        - PENDING
+        - RUNNING
+    description: An operation resource, used to manage asynchronous API requests.
+  OperationList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: replicapool#operationList
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request (output only).
+      id?:
+        type: string
+        description: Unique identifier for the resource; defined by the server (output only).
+      items?:
+        type: array
+        description: The operation resources.
+        items: Operation
+      selfLink?:
+        type: string
+        description: Server defined URL for this resource (output only).
+  ReplicaPoolAutoHealingPolicy:
+    type: object
+    properties:
+      actionType?:
+        type: string
+        description: The action to perform when an instance becomes unhealthy. Possible values are RECREATE or REBOOT. RECREATE replaces an unhealthy instance with a new instance that is based on the instance template for this managed instance group. REBOOT performs a soft reboot on an instance. If the instance cannot reboot, the instance performs a hard restart.
+        enum:
+        - REBOOT
+        - RECREATE
+      healthCheck?:
+        type: string
+        description: The URL for the HealthCheck that signals autohealing.
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      pattern: (?:(?:[-a-z0-9]{1,63}\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?))
+      description: The Google Developers Console project name.
+  /zones:
+    /{zone}:
+      uriParameters:
+        zone:
+          type: string
+          pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+          description: The name of the zone in which the instance group manager resides.
+      /instanceGroupManagers:
+        /{instanceGroupManager}:
+          uriParameters:
+            instanceGroupManager:
+              type: string
+              pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+              description: The name of the instance group manager.
+          /setInstanceTemplate:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Sets the instance template to use when creating new instances in this group. Existing instances are not affected.
+              is:
+              - hasParameters
+              body:
+                application/json: InstanceGroupManagersSetInstanceTemplateRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /setTargetPools:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
+              is:
+              - hasParameters
+              body:
+                application/json: InstanceGroupManagersSetTargetPoolsRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /recreateInstances:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Recreates the specified instances. The instances are deleted, then recreated using the instance group manager's current instance template.
+              is:
+              - hasParameters
+              body:
+                application/json: InstanceGroupManagersRecreateInstancesRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /deleteInstances:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Deletes the specified instances. The instances are deleted, then removed from the instance group and any target pools of which they were a member. The targetSize of the instance group manager is reduced by the number of instances deleted.
+              is:
+              - hasParameters
+              body:
+                application/json: InstanceGroupManagersDeleteInstancesRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /resize:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Resizes the managed instance group up or down. If resized up, new instances are created using the current instance template. If resized down, instances are removed in the order outlined in Resizing a managed instance group.
+              is:
+              - hasParameters
+              queryParameters:
+                size:
+                  type: integer
+                  format: int32
+                  description: Number of instances that should exist in this Instance Group Manager.
+                  minimum: 0
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          /abandonInstances:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Removes the specified instances from the managed instance group, and from any target pools of which they were members, without deleting the instances.
+              is:
+              - hasParameters
+              body:
+                application/json: InstanceGroupManagersAbandonInstancesRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/compute.readonly
+            description: Returns the specified Instance Group Manager resource.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: InstanceGroupManager
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/compute
+            description: Deletes the instance group manager and all instances contained within. If you'd like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+          description: Creates an instance group manager, as well as the instance group and the specified number of instances.
+          is:
+          - hasParameters
+          queryParameters:
+            size:
+              type: integer
+              format: int32
+              description: Number of instances that should exist.
+              minimum: 0
+          body:
+            application/json: InstanceGroupManager
+          responses:
+            200:
+              body:
+                application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/compute.readonly
+          description: Retrieves the list of Instance Group Manager resources contained within the specified zone.
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: Optional. Filter expression for filtering listed resources.
+            maxResults?:
+              type: integer
+              default: 500
+              format: int32
+              description: Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
+              maximum: 500
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: InstanceGroupManagerList
+      /operations:
+        /{operation}:
+          uriParameters:
+            operation:
+              type: string
+              pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+              description: Name of the operation resource to return.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/compute
+            description: Retrieves the specified zone-specific operation resource.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+          description: Retrieves the list of operation resources contained within the specified zone.
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: Optional. Filter expression for filtering listed resources.
+            maxResults?:
+              type: integer
+              default: 500
+              format: int32
+              description: Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.
+              maximum: 500
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: OperationList

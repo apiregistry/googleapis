@@ -1,0 +1,2422 @@
+#%RAML 1.0
+title: Genomics API
+version: v1beta2
+baseUri: https://www.googleapis.com/genomics/v1beta2/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/genomics/v1beta2/reference
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): genomics:v1beta2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/bigquery
+      - https://www.googleapis.com/auth/genomics
+      - https://www.googleapis.com/auth/cloud-platform
+      - https://www.googleapis.com/auth/devstorage.read_write
+      - https://www.googleapis.com/auth/genomics.readonly
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Annotation:
+    type: object
+    properties:
+      annotationSetId?:
+        type: string
+        description: The annotation set to which this annotation belongs.
+      transcript?: Transcript
+      name?:
+        type: string
+        description: The display name of this annotation.
+      variant?: VariantAnnotation
+      id?:
+        type: string
+        description: The server-generated annotation ID, unique across all annotations.
+      position?: RangePosition
+      type?:
+        type: string
+        description: The data type for this annotation. Must match the containing annotation set's type.
+        enum:
+        - GENE
+        - GENERIC
+        - TRANSCRIPT
+        - VARIANT
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. An annotation is not inherently associated with a specific sample or individual (though a client could choose to use annotations in this way). Example canonical annotation types are GENE and VARIANT.
+  AnnotationSet:
+    type: object
+    properties:
+      referenceSetId?:
+        type: string
+        description: The ID of the reference set that defines the coordinate space for this set's annotations.
+      sourceUri?:
+        type: string
+        description: The source URI describing the file from which this annotation set was generated, if any.
+      name?:
+        type: string
+        description: The display name for this annotation set.
+      datasetId?:
+        type: string
+        description: The dataset to which this annotation set belongs.
+      id?:
+        type: string
+        description: The server-generated annotation set ID, unique across all annotation sets.
+      type?:
+        type: string
+        description: The type of annotations contained within this set.
+        enum:
+        - GENE
+        - GENERIC
+        - TRANSCRIPT
+        - VARIANT
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include 'all genes from refseq', and 'all variant annotations from ClinVar'.
+  BatchAnnotationsResponse:
+    type: object
+    properties:
+      entries?:
+        type: array
+        description: The resulting per-annotation entries, ordered consistently with the original request.
+        items: BatchAnnotationsResponseEntry
+  BatchAnnotationsResponseEntry:
+    type: object
+    properties:
+      annotation?: Annotation
+      status?: BatchAnnotationsResponseEntryStatus
+  BatchAnnotationsResponseEntryStatus:
+    type: object
+    properties:
+      code?:
+        type: integer
+        format: int32
+        description: The HTTP status code for this operation.
+      message?:
+        type: string
+        description: Error message for this status, if any.
+    description: ''
+  BatchCreateAnnotationsRequest:
+    type: object
+    properties:
+      annotations?:
+        type: array
+        description: The annotations to be created. At most 4096 can be specified in a single request.
+        items: Annotation
+  Call:
+    type: object
+    properties:
+      phaseset?:
+        type: string
+        description: If this field is present, this variant call's genotype ordering implies the phase of the bases and is consistent with any other variant calls in the same reference sequence which have the same phaseset value. When importing data from VCF, if the genotype data was phased but no phase set was specified this field will be set to *.
+      genotypeLikelihood?:
+        type: array
+        description: The genotype likelihoods for this variant call. Each array entry represents how likely a specific genotype is for this call. The value ordering is defined by the GL tag in the VCF spec. If Phred-scaled genotype likelihood scores (PL) are available and log10(P) genotype likelihood scores (GL) are not, PL scores are converted to GL scores. If both are available, PL scores are stored in info.
+        items:
+          type: number
+          format: double
+      callSetName?:
+        type: string
+        description: The name of the call set this variant call belongs to.
+      callSetId?:
+        type: string
+        description: The ID of the call set this variant call belongs to.
+      genotype?:
+        type: array
+        description: The genotype of this variant call. Each value represents either the value of the referenceBases field or a 1-based index into alternateBases. If a variant had a referenceBases value of T and an alternateBases value of ["A", "C"], and the genotype was [2, 1], that would mean the call represented the heterozygous value CA for this variant. If the genotype was instead [0, 1], the represented value would be TA. Ordering of the genotype values is important if the phaseset is present. If a genotype is not called (that is, a . is present in the GT string) -1 is returned.
+        items:
+          type: integer
+          format: int32
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: A call represents the determination of genotype with respect to a particular variant. It may include associated information such as quality and phasing. For example, a call might assign a probability of 0.32 to the occurrence of a SNP named rs1234 in a call set with the name NA12345.
+  CallSet:
+    type: object
+    properties:
+      sampleId?:
+        type: string
+        description: The sample ID this call set corresponds to.
+      created?:
+        type: integer
+        format: int64
+        description: The date this call set was created in milliseconds from the epoch.
+      name?:
+        type: string
+        description: The call set name.
+      id?:
+        type: string
+        description: The Google generated ID of the call set, immutable.
+      variantSetIds?:
+        type: array
+        description: The IDs of the variant sets this call set belongs to.
+        items:
+          type: string
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: A call set is a collection of variant calls, typically for one sample. It belongs to a variant set.
+  CigarUnit:
+    type: object
+    properties:
+      operationLength?:
+        type: integer
+        format: int64
+        description: The number of bases that the operation runs for. Required.
+      operation?:
+        type: string
+        enum:
+        - ALIGNMENT_MATCH
+        - CLIP_HARD
+        - CLIP_SOFT
+        - DELETE
+        - INSERT
+        - OPERATION_UNSPECIFIED
+        - PAD
+        - SEQUENCE_MATCH
+        - SEQUENCE_MISMATCH
+        - SKIP
+      referenceSequence?:
+        type: string
+        description: referenceSequence is only used at mismatches (SEQUENCE_MISMATCH) and deletions (DELETE). Filling this field replaces SAM's MD tag. If the relevant information is not available, this field is unset.
+    description: A single CIGAR operation.
+  CoverageBucket:
+    type: object
+    properties:
+      meanCoverage?:
+        type: number
+        format: float
+        description: The average number of reads which are aligned to each individual reference base in this bucket.
+      range?: Range
+    description: A bucket over which read coverage has been precomputed. A bucket corresponds to a specific range of the reference sequence.
+  Dataset:
+    type: object
+    properties:
+      createTime?:
+        type: integer
+        format: int64
+        description: The time this dataset was created, in seconds from the epoch.
+      projectNumber?:
+        type: integer
+        format: int64
+        description: The Google Developers Console project number that this dataset belongs to.
+      name?:
+        type: string
+        description: The dataset name.
+      isPublic?:
+        type: boolean
+        description: Flag indicating whether or not a dataset is publicly viewable. If a dataset is not public, it inherits viewing permissions from its project.
+      id?:
+        type: string
+        description: The Google generated ID of the dataset, immutable.
+    description: A Dataset is a collection of genomic data.
+  ExperimentalCreateJobRequest:
+    type: object
+    properties:
+      sourceUris?:
+        type: array
+        description: A list of Google Cloud Storage URIs of data files to operate upon. These can be .bam, interleaved .fastq, or paired .fastq. If specifying paired .fastq files, the first of each pair of files should be listed here, and the second of each pair should be listed in pairedSourceUris.
+        items:
+          type: string
+      gcsOutputPath?:
+        type: string
+        description: Specifies where to copy the results of certain pipelines. This should be in the form of gs://bucket/path.
+      projectNumber?:
+        type: integer
+        format: int64
+        description: Required. The Google Cloud Project ID with which to associate the request.
+      callVariants?:
+        type: boolean
+        description: Specifies whether or not to run the variant calling pipeline. Either align or callVariants must be set.
+      align?:
+        type: boolean
+        description: Specifies whether or not to run the alignment pipeline. Either align or callVariants must be set.
+      pairedSourceUris?:
+        type: array
+        description: A list of Google Cloud Storage URIs of paired end .fastq files to operate upon. If specified, this represents the second file of each paired .fastq file. The first file of each pair should be specified in sourceUris.
+        items:
+          type: string
+    description: The job creation request.
+  ExperimentalCreateJobResponse:
+    type: object
+    properties:
+      jobId?:
+        type: string
+        description: A job ID that can be used to get status information.
+    description: The job creation response.
+  ExportReadGroupSetsRequest:
+    type: object
+    properties:
+      exportUri?:
+        type: string
+        description: Required. A Google Cloud Storage URI for the exported BAM file. The currently authenticated user must have write access to the new file. An error will be returned if the URI already contains data.
+      referenceNames?:
+        type: array
+        description: The reference names to export. If this is not specified, all reference sequences, including unmapped reads, are exported. Use * to export only unmapped reads.
+        items:
+          type: string
+      projectNumber?:
+        type: integer
+        format: int64
+        description: Required. The Google Developers Console project number that owns this export. The caller must have WRITE access to this project.
+      readGroupSetIds?:
+        type: array
+        description: Required. The IDs of the read group sets to export. The caller must have READ access to these read group sets.
+        items:
+          type: string
+    description: The read group set export request.
+  ExportReadGroupSetsResponse:
+    type: object
+    properties:
+      jobId?:
+        type: string
+        description: A job ID that can be used to get status information.
+    description: The read group set export response.
+  ExportVariantSetRequest:
+    type: object
+    properties:
+      projectNumber?:
+        type: integer
+        format: int64
+        description: Required. The Google Cloud project number that owns the destination BigQuery dataset. The caller must have WRITE access to this project. This project will also own the resulting export job.
+      callSetIds?:
+        type: array
+        description: If provided, only variant call information from the specified call sets will be exported. By default all variant calls are exported.
+        items:
+          type: string
+      format?:
+        type: string
+        description: The format for the exported data.
+        enum:
+        - BIGQUERY
+      bigqueryTable?:
+        type: string
+        description: Required. The BigQuery table to export data to. If the table doesn't exist, it will be created. If it already exists, it will be overwritten.
+      bigqueryDataset?:
+        type: string
+        description: Required. The BigQuery dataset to export data to. This dataset must already exist. Note that this is distinct from the Genomics concept of "dataset".
+    description: The variant data export request.
+  ExportVariantSetResponse:
+    type: object
+    properties:
+      jobId?:
+        type: string
+        description: A job ID that can be used to get status information.
+    description: The variant data export response.
+  ExternalId:
+    type: object
+    properties:
+      id?:
+        type: string
+        description: The id used by the source of this data.
+      sourceName?:
+        type: string
+        description: The name of the source of this data.
+  ImportReadGroupSetsRequest:
+    type: object
+    properties:
+      referenceSetId?:
+        type: string
+        description: The reference set to which the imported read group sets are aligned to, if any. The reference names of this reference set must be a superset of those found in the imported file headers. If no reference set id is provided, a best effort is made to associate with a matching reference set.
+      partitionStrategy?:
+        type: string
+        description: The partition strategy describes how read groups are partitioned into read group sets.
+        enum:
+        - MERGE_ALL
+        - PER_FILE_PER_SAMPLE
+      sourceUris?:
+        type: array
+        description: A list of URIs pointing at BAM files in Google Cloud Storage.
+        items:
+          type: string
+      datasetId?:
+        type: string
+        description: Required. The ID of the dataset these read group sets will belong to. The caller must have WRITE permissions to this dataset.
+    description: The read group set import request.
+  ImportReadGroupSetsResponse:
+    type: object
+    properties:
+      jobId?:
+        type: string
+        description: A job ID that can be used to get status information.
+    description: The read group set import response.
+  ImportVariantsRequest:
+    type: object
+    properties:
+      normalizeReferenceNames?:
+        type: boolean
+        description: 'Convert reference names to the canonical representation. hg19
+          haploytypes (those reference names containing "_hap") are not modified in
+          any way. All other reference names are modified according to the following
+          rules: The reference name is capitalized. The "chr" prefix is dropped for
+          all autosomes and sex chromsomes. For example "chr17" becomes "17" and "chrX"
+          becomes "X". All mitochondrial chromosomes ("chrM", "chrMT", etc) become
+          "MT".'
+      sourceUris?:
+        type: array
+        description: A list of URIs referencing variant files in Google Cloud Storage. URIs can include wildcards as described here. Note that recursive wildcards ('**') are not supported.
+        items:
+          type: string
+      format?:
+        type: string
+        description: The format of the variant data being imported. If unspecified, defaults to "VCF".
+        enum:
+        - COMPLETE_GENOMICS
+        - VCF
+    description: The variant data import request.
+  ImportVariantsResponse:
+    type: object
+    properties:
+      jobId?:
+        type: string
+        description: A job ID that can be used to get status information.
+    description: The variant data import response.
+  Int32Value:
+    type: object
+    properties:
+      value?:
+        type: integer
+        format: int32
+        description: The int32 value.
+    description: |-
+      Wrapper message for `int32`.
+
+      The JSON representation for `Int32Value` is JSON number.
+  Job:
+    type: object
+    properties:
+      request?: JobRequest
+      detailedStatus?:
+        type: string
+        description: A more detailed description of this job's current status.
+      created?:
+        type: integer
+        format: int64
+        description: The date this job was created, in milliseconds from the epoch.
+      projectNumber?:
+        type: integer
+        format: int64
+        description: The Google Developers Console project number to which this job belongs.
+      warnings?:
+        type: array
+        description: Any warnings that occurred during processing.
+        items:
+          type: string
+      id?:
+        type: string
+        description: The job ID.
+      errors?:
+        type: array
+        description: Any errors that occurred during processing.
+        items:
+          type: string
+      importedIds?:
+        type: array
+        description: If this Job represents an import, this field will contain the IDs of the objects that were successfully imported.
+        items:
+          type: string
+      status?:
+        type: string
+        description: The status of this job.
+        enum:
+        - CANCELED
+        - FAILURE
+        - NEW
+        - PENDING
+        - RUNNING
+        - SUCCESS
+        - UNKNOWN_STATUS
+    description: A Job represents an ongoing process that can be monitored for status information.
+  JobRequest:
+    type: object
+    properties:
+      destination?:
+        type: array
+        description: The data destination of the request, for example, a Google BigQuery Table or Dataset ID.
+        items:
+          type: string
+      source?:
+        type: array
+        description: The data source of the request, for example, a Google Cloud Storage object path or Readset ID.
+        items:
+          type: string
+      type?:
+        type: string
+        description: The original request type.
+        enum:
+        - ALIGN_READSETS
+        - CALL_READSETS
+        - EXPERIMENTAL_CREATE_JOB
+        - EXPORT_READSETS
+        - EXPORT_VARIANTS
+        - IMPORT_READSETS
+        - IMPORT_VARIANTS
+        - UNKNOWN_TYPE
+    description: A summary representation of the service request that spawned the job.
+  KeyValue:
+    type: object
+    properties:
+      value?:
+        type: array
+        description: The string values.
+        items:
+          type: string
+      key?:
+        type: string
+        description: A string which maps to an array of values.
+    description: Used to hold basic key value information.
+  LinearAlignment:
+    type: object
+    properties:
+      mappingQuality?:
+        type: integer
+        format: int32
+        description: |-
+          The mapping quality of this alignment. Represents how likely the read maps to this position as opposed to other locations.
+
+          Specifically, this is -10 log10 Pr(mapping position is wrong), rounded to the nearest integer.
+      cigar?:
+        type: array
+        description: Represents the local alignment of this sequence (alignment matches, indels, etc) against the reference.
+        items: CigarUnit
+      position?: Position
+    description: A linear alignment can be represented by one CIGAR string. Describes the mapped position and local alignment of the read to the reference.
+  ListBasesResponse:
+    type: object
+    properties:
+      sequence?:
+        type: string
+        description: A substring of the bases that make up this reference.
+      offset?:
+        type: integer
+        format: int64
+        description: The offset position (0-based) of the given sequence from the start of this Reference. This value will differ for each page in a paginated request.
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+  ListCoverageBucketsResponse:
+    type: object
+    properties:
+      coverageBuckets?:
+        type: array
+        description: The coverage buckets. The list of buckets is sparse; a bucket with 0 overlapping reads is not returned. A bucket never crosses more than one reference sequence. Each bucket has width bucketWidth, unless its end is the end of the reference sequence.
+        items: CoverageBucket
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      bucketWidth?:
+        type: integer
+        format: int64
+        description: The length of each coverage bucket in base pairs. Note that buckets at the end of a reference sequence may be shorter. This value is omitted if the bucket width is infinity (the default behaviour, with no range or targetBucketWidth).
+  ListDatasetsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      datasets?:
+        type: array
+        description: The list of matching Datasets.
+        items: Dataset
+    description: The dataset list response.
+  MergeVariantsRequest:
+    type: object
+    properties:
+      variants?:
+        type: array
+        description: The variants to be merged with existing variants.
+        items: Variant
+  Metadata:
+    type: object
+    properties:
+      number?:
+        type: string
+        description: The number of values that can be included in a field described by this metadata.
+      description?:
+        type: string
+        description: A textual description of this metadata.
+      id?:
+        type: string
+        description: User-provided ID field, not enforced by this API. Two or more pieces of structured metadata with identical id and key fields are considered equivalent.
+      type?:
+        type: string
+        description: 'The type of data. Possible types include: Integer, Float, Flag,
+          Character, and String.'
+        enum:
+        - CHARACTER
+        - FLAG
+        - FLOAT
+        - INTEGER
+        - STRING
+        - UNKNOWN_TYPE
+      value?:
+        type: string
+        description: The value field for simple metadata
+      key?:
+        type: string
+        description: The top-level key.
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: Metadata describes a single piece of variant call metadata. These data include a top level key and either a single value string (value) or a list of key-value pairs (info.) Value and info are mutually exclusive.
+  Position:
+    type: object
+    properties:
+      position?:
+        type: integer
+        format: int64
+        description: The 0-based offset from the start of the forward strand for that reference.
+      reverseStrand?:
+        type: boolean
+        description: Whether this position is on the reverse strand, as opposed to the forward strand.
+      referenceName?:
+        type: string
+        description: The name of the reference in whatever reference set is being used.
+    description: An abstraction for referring to a genomic position, in relation to some already known reference. For now, represents a genomic position as a reference name, a base number on that reference (0-based), and a determination of forward or reverse strand.
+  QueryRange:
+    type: object
+    properties:
+      start?:
+        type: integer
+        format: int64
+        description: The start position of the range on the reference, 0-based inclusive. If specified, referenceId or referenceName must also be specified. Defaults to 0.
+      end?:
+        type: integer
+        format: int64
+        description: The end position of the range on the reference, 0-based exclusive. If specified, referenceId or referenceName must also be specified. If unset or 0, defaults to the length of the reference.
+      referenceId?:
+        type: string
+        description: The ID of the reference to query.
+      referenceName?:
+        type: string
+        description: The name of the reference to query, within the reference set associated with this query.
+    description: A 0-based half-open genomic coordinate range for search requests. reference_id or reference_name must be set.
+  Range:
+    type: object
+    properties:
+      start?:
+        type: integer
+        format: int64
+        description: The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.
+      end?:
+        type: integer
+        format: int64
+        description: The end position of the range on the reference, 0-based exclusive. If specified, referenceName must also be specified.
+      referenceName?:
+        type: string
+        description: The reference sequence name, for example chr1, 1, or chrX.
+    description: A 0-based half-open genomic coordinate range over a reference sequence.
+  RangePosition:
+    type: object
+    properties:
+      start?:
+        type: integer
+        format: int64
+        description: The start position of the range on the reference, 0-based inclusive.
+      end?:
+        type: integer
+        format: int64
+        description: The end position of the range on the reference, 0-based exclusive.
+      reverseStrand?:
+        type: boolean
+        description: Whether this range refers to the reverse strand, as opposed to the forward strand. Note that regardless of this field, the start/end position of the range always refer to the forward strand.
+      referenceId?:
+        type: string
+        description: The ID of the Google Genomics reference associated with this range.
+      referenceName?:
+        type: string
+        description: The display name corresponding to the reference specified by referenceId, for example chr1, 1, or chrX.
+    description: A 0-based half-open genomic coordinate range over a reference sequence, for representing the position of a genomic resource.
+  Read:
+    type: object
+    properties:
+      failedVendorQualityChecks?:
+        type: boolean
+        description: Whether this read did not pass filters, such as platform or vendor quality controls (SAM flag 0x200).
+      fragmentLength?:
+        type: integer
+        format: int32
+        description: The observed length of the fragment, equivalent to TLEN in SAM.
+      alignedQuality?:
+        type: array
+        description: The quality of the read sequence contained in this alignment record. (equivalent to QUAL in SAM). alignedSequence and alignedQuality may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.
+        items:
+          type: integer
+          format: int32
+      numberReads?:
+        type: integer
+        format: int32
+        description: The number of reads in the fragment (extension to SAM flag 0x1).
+      duplicateFragment?:
+        type: boolean
+        description: The fragment is a PCR or optical duplicate (SAM flag 0x400).
+      readNumber?:
+        type: integer
+        format: int32
+        description: The read number in sequencing. 0-based and less than numberReads. This field replaces SAM flag 0x40 and 0x80.
+      secondaryAlignment?:
+        type: boolean
+        description: Whether this alignment is secondary. Equivalent to SAM flag 0x100. A secondary alignment represents an alternative to the primary alignment for this read. Aligners may return secondary alignments if a read can map ambiguously to multiple coordinates in the genome. By convention, each read has one and only one alignment where both secondaryAlignment and supplementaryAlignment are false.
+      readGroupId?:
+        type: string
+        description: The ID of the read group this read belongs to. A read belongs to exactly one read group. This is a server-generated ID (not SAM's RG tag).
+      alignedSequence?:
+        type: string
+        description: The bases of the read sequence contained in this alignment record, without CIGAR operations applied (equivalent to SEQ in SAM). alignedSequence and alignedQuality may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.
+      fragmentName?:
+        type: string
+        description: The fragment name. Equivalent to QNAME (query template name) in SAM.
+      readGroupSetId?:
+        type: string
+        description: The ID of the read group set this read belongs to. A read belongs to exactly one read group set.
+      id?:
+        type: string
+        description: The unique ID for this read. This is a generated unique ID, not to be confused with fragmentName.
+      alignment?: LinearAlignment
+      properPlacement?:
+        type: boolean
+        description: The orientation and the distance between reads from the fragment are consistent with the sequencing protocol (SAM flag 0x2).
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+      nextMatePosition?: Position
+      supplementaryAlignment?:
+        type: boolean
+        description: Whether this alignment is supplementary. Equivalent to SAM flag 0x800. Supplementary alignments are used in the representation of a chimeric alignment. In a chimeric alignment, a read is split into multiple linear alignments that map to different reference contigs. The first linear alignment in the read will be designated as the representative alignment; the remaining linear alignments will be designated as supplementary alignments. These alignments may have different mapping quality scores. In each linear alignment in a chimeric alignment, the read will be hard clipped. The alignedSequence and alignedQuality fields in the alignment record will only represent the bases for its respective linear alignment.
+    description: |-
+      A read alignment describes a linear alignment of a string of DNA to a reference sequence, in addition to metadata about the fragment (the molecule of DNA sequenced) and the read (the bases which were read by the sequencer). A read is equivalent to a line in a SAM file. A read belongs to exactly one read group and exactly one read group set. Generating a reference-aligned sequence string When interacting with mapped reads, it's often useful to produce a string representing the local alignment of the read to reference. The following pseudocode demonstrates one way of doing this:
+      out = "" offset = 0 for c in read.alignment.cigar { switch c.operation { case "ALIGNMENT_MATCH", "SEQUENCE_MATCH", "SEQUENCE_MISMATCH": out += read.alignedSequence[offset:offset+c.operationLength] offset += c.operationLength break case "CLIP_SOFT", "INSERT": offset += c.operationLength break case "PAD": out += repeat("*", c.operationLength) break case "DELETE": out += repeat("-", c.operationLength) break case "SKIP": out += repeat(" ", c.operationLength) break case "CLIP_HARD": break } } return out
+      Converting to SAM's CIGAR string The following pseudocode generates a SAM CIGAR string from the cigar field. Note that this is a lossy conversion (cigar.referenceSequence is lost).
+      cigarMap = { "ALIGNMENT_MATCH": "M", "INSERT": "I", "DELETE": "D", "SKIP": "N", "CLIP_SOFT": "S", "CLIP_HARD": "H", "PAD": "P", "SEQUENCE_MATCH": "=", "SEQUENCE_MISMATCH": "X", } cigarStr = "" for c in read.alignment.cigar { cigarStr += c.operationLength + cigarMap[c.operation] } return cigarStr
+  ReadGroup:
+    type: object
+    properties:
+      referenceSetId?:
+        type: string
+        description: The reference set to which the reads in this read group are aligned.
+      experiment?: ReadGroupExperiment
+      predictedInsertSize?:
+        type: integer
+        format: int32
+        description: The predicted insert size of this read group. The insert size is the length the sequenced DNA fragment from end-to-end, not including the adapters.
+      sampleId?:
+        type: string
+        description: 'The sample this read group''s data was generated from. Note:
+          This is not an actual ID within this repository, but rather an identifier
+          for a sample which may be meaningful to some external system.'
+      name?:
+        type: string
+        description: The read group name. This corresponds to the @RG ID field in the SAM spec.
+      datasetId?:
+        type: string
+        description: The ID of the dataset this read group belongs to.
+      description?:
+        type: string
+        description: A free-form text description of this read group.
+      id?:
+        type: string
+        description: 'The generated unique read group ID. Note: This is different
+          than the @RG ID field in the SAM spec. For that value, see the name field.'
+      programs?:
+        type: array
+        description: The programs used to generate this read group. Programs are always identical for all read groups within a read group set. For this reason, only the first read group in a returned set will have this field populated.
+        items: ReadGroupProgram
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: A read group is all the data that's processed the same way by the sequencer.
+  ReadGroupExperiment:
+    type: object
+    properties:
+      platformUnit?:
+        type: string
+        description: The platform unit used as part of this experiment e.g. flowcell-barcode.lane for Illumina or slide for SOLiD. Corresponds to the
+      libraryId?:
+        type: string
+        description: 'The library used as part of this experiment. Note: This is not
+          an actual ID within this repository, but rather an identifier for a library
+          which may be meaningful to some external system.'
+      instrumentModel?:
+        type: string
+        description: The instrument model used as part of this experiment. This maps to sequencing technology in BAM.
+      sequencingCenter?:
+        type: string
+        description: The sequencing center used as part of this experiment.
+  ReadGroupProgram:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The display name of the program. This is typically the colloquial name of the tool used, for example 'bwa' or 'picard'.
+      prevProgramId?:
+        type: string
+        description: The ID of the program run before this one.
+      id?:
+        type: string
+        description: The user specified locally unique ID of the program. Used along with prevProgramId to define an ordering between programs.
+      commandLine?:
+        type: string
+        description: The command line used to run this program.
+      version?:
+        type: string
+        description: The version of the program run.
+  ReadGroupSet:
+    type: object
+    properties:
+      readGroups?:
+        type: array
+        description: The read groups in this set. There are typically 1-10 read groups in a read group set.
+        items: ReadGroup
+      referenceSetId?:
+        type: string
+        description: The reference set the reads in this read group set are aligned to.
+      filename?:
+        type: string
+        description: The filename of the original source file for this read group set, if any.
+      name?:
+        type: string
+        description: The read group set name. By default this will be initialized to the sample name of the sequenced data contained in this set.
+      datasetId?:
+        type: string
+        description: The dataset ID.
+      id?:
+        type: string
+        description: The read group set ID.
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+    description: "A read group set is a logical collection of read groups, which are\
+      \ collections of reads produced by a sequencer. A read group set typically models\
+      \ reads corresponding to one sample, sequenced one way, and aligned one way.\
+      \  \n- A read group set belongs to one dataset.\n- A read group belongs to one\
+      \ read group set.\n- A read belongs to one read group."
+  Reference:
+    type: object
+    properties:
+      ncbiTaxonId?:
+        type: integer
+        format: int32
+        description: ID from http://www.ncbi.nlm.nih.gov/taxonomy. For example, 9606 for human.
+      sourceURI?:
+        type: string
+        description: The URI from which the sequence was obtained. Typically specifies a FASTA format file.
+      md5checksum?:
+        type: string
+        description: MD5 of the upper-case sequence excluding all whitespace characters (this is equivalent to SQ:M5 in SAM). This value is represented in lower case hexadecimal format.
+      length?:
+        type: integer
+        format: int64
+        description: The length of this reference's sequence.
+      name?:
+        type: string
+        description: The name of this reference, for example 22.
+      id?:
+        type: string
+        description: The Google generated immutable ID of the reference.
+      sourceAccessions?:
+        type: array
+        description: All known corresponding accession IDs in INSDC (GenBank/ENA/DDBJ) ideally with a version number, for example GCF_000001405.26.
+        items:
+          type: string
+    description: A reference is a canonical assembled DNA sequence, intended to act as a reference coordinate space for other genomic annotations. A single reference might represent the human chromosome 1 or mitochandrial DNA, for instance. A reference belongs to one or more reference sets.
+  ReferenceBound:
+    type: object
+    properties:
+      upperBound?:
+        type: integer
+        format: int64
+        description: An upper bound (inclusive) on the starting coordinate of any variant in the reference sequence.
+      referenceName?:
+        type: string
+        description: The name of the reference associated with this reference bound.
+    description: ReferenceBound records an upper bound for the starting coordinate of variants in a particular reference.
+  ReferenceSet:
+    type: object
+    properties:
+      ncbiTaxonId?:
+        type: integer
+        format: int32
+        description: ID from http://www.ncbi.nlm.nih.gov/taxonomy (for example, 9606 for human) indicating the species which this reference set is intended to model. Note that contained references may specify a different ncbiTaxonId, as assemblies may contain reference sequences which do not belong to the modeled species, for example EBV in a human reference genome.
+      sourceURI?:
+        type: string
+        description: The URI from which the references were obtained.
+      referenceIds?:
+        type: array
+        description: The IDs of the reference objects that are part of this set. Reference.md5checksum must be unique within this set.
+        items:
+          type: string
+      assemblyId?:
+        type: string
+        description: Public id of this reference set, such as GRCh37.
+      md5checksum?:
+        type: string
+        description: Order-independent MD5 checksum which identifies this reference set. The checksum is computed by sorting all lower case hexidecimal string reference.md5checksum (for all reference in this set) in ascending lexicographic order, concatenating, and taking the MD5 of that value. The resulting value is represented in lower case hexadecimal format.
+      description?:
+        type: string
+        description: Free text description of this reference set.
+      id?:
+        type: string
+        description: The Google generated immutable ID of the reference set.
+      sourceAccessions?:
+        type: array
+        description: All known corresponding accession IDs in INSDC (GenBank/ENA/DDBJ) ideally with a version number, for example NC_000001.11.
+        items:
+          type: string
+    description: A reference set is a set of references which typically comprise a reference assembly for a species, such as GRCh38 which is representative of the human genome. A reference set defines a common coordinate space for comparing reference-aligned experimental data. A reference set contains 1 or more references.
+  SearchAnnotationSetsRequest:
+    type: object
+    properties:
+      referenceSetId?:
+        type: string
+        description: If specified, only annotation sets associated with the given reference set are returned.
+      types?:
+        type: array
+        description: If specified, only annotation sets that have any of these types are returned.
+        items:
+          type: string
+          enum:
+          - GENE
+          - GENERIC
+          - TRANSCRIPT
+          - VARIANT
+      datasetIds?:
+        type: array
+        description: The dataset IDs to search within. Caller must have READ access to these datasets.
+        items:
+          type: string
+      name?:
+        type: string
+        description: Only return annotations sets for which a substring of the name matches this string (case insensitive).
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 128. The maximum value is 1024.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+  SearchAnnotationSetsResponse:
+    type: object
+    properties:
+      annotationSets?:
+        type: array
+        description: The matching annotation sets.
+        items: AnnotationSet
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+  SearchAnnotationsRequest:
+    type: object
+    properties:
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 2048.
+      range?: QueryRange
+      annotationSetIds?:
+        type: array
+        description: The annotation sets to search within. The caller must have READ access to these annotation sets. Required. All queried annotation sets must have the same type.
+        items:
+          type: string
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+  SearchAnnotationsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      annotations?:
+        type: array
+        description: The matching annotations.
+        items: Annotation
+  SearchCallSetsRequest:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: Only return call sets for which a substring of the name matches this string.
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 1024.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+      variantSetIds?:
+        type: array
+        description: Restrict the query to call sets within the given variant sets. At least one ID must be provided.
+        items:
+          type: string
+    description: The call set search request.
+  SearchCallSetsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      callSets?:
+        type: array
+        description: The list of matching call sets.
+        items: CallSet
+    description: The call set search response.
+  SearchJobsRequest:
+    type: object
+    properties:
+      projectNumber?:
+        type: integer
+        format: int64
+        description: Required. Only return jobs which belong to this Google Developers Console project.
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 128. The maximum value is 256.
+      createdBefore?:
+        type: integer
+        format: int64
+        description: If specified, only jobs created prior to this date, given in milliseconds since Unix epoch, will be returned.
+      pageToken?:
+        type: string
+        description: The continuation token which is used to page through large result sets. To get the next page of results, set this parameter to the value of the nextPageToken from the previous response.
+      createdAfter?:
+        type: integer
+        format: int64
+        description: If specified, only jobs created on or after this date, given in milliseconds since Unix epoch, will be returned.
+      status?:
+        type: array
+        description: Only return jobs which have a matching status.
+        items:
+          type: string
+          enum:
+          - CANCELED
+          - FAILURE
+          - NEW
+          - PENDING
+          - RUNNING
+          - SUCCESS
+          - UNKNOWN_STATUS
+    description: The jobs search request.
+  SearchJobsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token which is used to page through large result sets. Provide this value is a subsequent request to return the next page of results. This field will be empty if there are no more results.
+      jobs?:
+        type: array
+        description: The list of jobs results, ordered newest to oldest.
+        items: Job
+    description: The job search response.
+  SearchReadGroupSetsRequest:
+    type: object
+    properties:
+      datasetIds?:
+        type: array
+        description: Restricts this query to read group sets within the given datasets. At least one ID must be provided.
+        items:
+          type: string
+      name?:
+        type: string
+        description: Only return read group sets for which a substring of the name matches this string.
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 1024.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+    description: The read group set search request.
+  SearchReadGroupSetsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      readGroupSets?:
+        type: array
+        description: The list of matching read group sets.
+        items: ReadGroupSet
+    description: The read group set search response.
+  SearchReadsRequest:
+    type: object
+    properties:
+      readGroupIds?:
+        type: array
+        description: The IDs of the read groups within which to search for reads. All specified read groups must belong to the same read group sets. Must specify one of readGroupSetIds or readGroupIds.
+        items:
+          type: string
+      readGroupSetIds?:
+        type: array
+        description: The IDs of the read groups sets within which to search for reads. All specified read group sets must be aligned against a common set of reference sequences; this defines the genomic coordinates for the query. Must specify one of readGroupSetIds or readGroupIds.
+        items:
+          type: string
+      start?:
+        type: integer
+        format: int64
+        description: The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 2048.
+      end?:
+        type: integer
+        format: int64
+        description: The end position of the range on the reference, 0-based exclusive. If specified, referenceName must also be specified.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+      referenceName?:
+        type: string
+        description: The reference sequence name, for example chr1, 1, or chrX. If set to *, only unmapped reads are returned. If unspecified, all reads (mapped and unmapped) returned.
+    description: The read search request.
+  SearchReadsResponse:
+    type: object
+    properties:
+      alignments?:
+        type: array
+        description: The list of matching alignments sorted by mapped genomic coordinate, if any, ascending in position within the same reference. Unmapped reads, which have no position, are returned contiguously and are sorted in ascending lexicographic order by fragment name.
+        items: Read
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+    description: The read search response.
+  SearchReferenceSetsRequest:
+    type: object
+    properties:
+      assemblyId?:
+        type: string
+        description: If present, return reference sets for which a substring of their assemblyId matches this string (case insensitive).
+      accessions?:
+        type: array
+        description: If present, return references for which the accession matches any of these strings. Best to give a version number, for example GCF_000001405.26. If only the main accession number is given then all records with that main accession will be returned, whichever version. Note that different versions will have different sequences.
+        items:
+          type: string
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 4096.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+      md5checksums?:
+        type: array
+        description: If present, return references for which the md5checksum matches. See ReferenceSet.md5checksum for details.
+        items:
+          type: string
+  SearchReferenceSetsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      referenceSets?:
+        type: array
+        description: The matching references sets.
+        items: ReferenceSet
+  SearchReferencesRequest:
+    type: object
+    properties:
+      referenceSetId?:
+        type: string
+        description: If present, return only references which belong to this reference set.
+      accessions?:
+        type: array
+        description: If present, return references for which the accession matches this string. Best to give a version number, for example GCF_000001405.26. If only the main accession number is given then all records with that main accession will be returned, whichever version. Note that different versions will have different sequences.
+        items:
+          type: string
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 4096.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+      md5checksums?:
+        type: array
+        description: If present, return references for which the md5checksum matches. See Reference.md5checksum for construction details.
+        items:
+          type: string
+  SearchReferencesResponse:
+    type: object
+    properties:
+      references?:
+        type: array
+        description: The matching references.
+        items: Reference
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+  SearchVariantSetsRequest:
+    type: object
+    properties:
+      datasetIds?:
+        type: array
+        description: Exactly one dataset ID must be provided here. Only variant sets which belong to this dataset will be returned.
+        items:
+          type: string
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 1024.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+    description: The search variant sets request.
+  SearchVariantSetsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      variantSets?:
+        type: array
+        description: The variant sets belonging to the requested dataset.
+        items: VariantSet
+    description: The search variant sets response.
+  SearchVariantsRequest:
+    type: object
+    properties:
+      callSetIds?:
+        type: array
+        description: Only return variant calls which belong to call sets with these ids. Leaving this blank returns all variant calls. If a variant has no calls belonging to any of these call sets, it won't be returned at all.
+        items:
+          type: string
+      start?:
+        type: integer
+        format: int64
+        description: The beginning of the window (0-based, inclusive) for which overlapping variants should be returned. If unspecified, defaults to 0.
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of variants to return in a single page. If unspecified, defaults to 5000. The maximum value is 10000.
+      end?:
+        type: integer
+        format: int64
+        description: The end of the window, 0-based exclusive. If unspecified or 0, defaults to the length of the reference.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+      variantName?:
+        type: string
+        description: Only return variants which have exactly this name.
+      maxCalls?:
+        type: integer
+        format: int32
+        description: The maximum number of calls to return in a single page. Note that this limit may be exceeded in the event that a matching variant contains more calls than the requested maximum. If unspecified, defaults to 5000. The maximum value is 10000.
+      variantSetIds?:
+        type: array
+        description: At most one variant set ID must be provided. Only variants from this variant set will be returned. If omitted, a call set id must be included in the request. Both this and call_set_ids may be set.
+        items:
+          type: string
+      referenceName?:
+        type: string
+        description: Required. Only return variants in this reference sequence.
+    description: The variant search request.
+  SearchVariantsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
+      variants?:
+        type: array
+        description: The list of matching Variants.
+        items: Variant
+    description: The variant search response.
+  Transcript:
+    type: object
+    properties:
+      codingSequence?: TranscriptCodingSequence
+      geneId?:
+        type: string
+        description: The annotation ID of the gene from which this transcript is transcribed.
+      exons?:
+        type: array
+        description: |-
+          The exons that compose this transcript. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes.
+
+
+          Introns are regions of the transcript that are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript that are not exons are introns.
+
+
+          Exonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the codingSequence correspond to coding DNA sequence.
+
+
+          Exons are ordered by start position and may not overlap.
+        items: TranscriptExon
+    description: A transcript represents the assertion that a particular region of the reference genome may be transcribed as RNA.
+  TranscriptCodingSequence:
+    type: object
+    properties:
+      start?:
+        type: integer
+        format: int64
+        description: The start of the coding sequence on this annotation's reference sequence, 0-based inclusive. Note that this position is relative to the reference start, and not the containing annotation start.
+      end?:
+        type: integer
+        format: int64
+        description: The end of the coding sequence on this annotation's reference sequence, 0-based exclusive. Note that this position is relative to the reference start, and not the containing annotation start.
+  TranscriptExon:
+    type: object
+    properties:
+      start?:
+        type: integer
+        format: int64
+        description: The start position of the exon on this annotation's reference sequence, 0-based inclusive. Note that this is relative to the reference start, and not the containing annotation start.
+      end?:
+        type: integer
+        format: int64
+        description: The end position of the exon on this annotation's reference sequence, 0-based exclusive. Note that this is relative to the reference start, and not the containing annotation start.
+      frame?: Int32Value
+  Variant:
+    type: object
+    properties:
+      created?:
+        type: integer
+        format: int64
+        description: The date this variant was created, in milliseconds from the epoch.
+      referenceBases?:
+        type: string
+        description: The reference bases for this variant. They start at the given position.
+      start?:
+        type: integer
+        format: int64
+        description: The position at which this variant occurs (0-based). This corresponds to the first base of the string of reference bases.
+      quality?:
+        type: number
+        format: double
+        description: A measure of how likely this variant is to be real. A higher value is better.
+      filter?:
+        type: array
+        description: A list of filters (normally quality filters) this variant has failed. PASS indicates this variant has passed all filters.
+        items:
+          type: string
+      names?:
+        type: array
+        description: Names for the variant, for example a RefSNP ID.
+        items:
+          type: string
+      calls?:
+        type: array
+        description: The variant calls for this particular variant. Each one represents the determination of genotype with respect to this variant.
+        items: Call
+      end?:
+        type: integer
+        format: int64
+        description: The end position (0-based) of this variant. This corresponds to the first base after the last base in the reference allele. So, the length of the reference allele is (end - start). This is useful for variants that don't explicitly give alternate bases, for example large deletions.
+      variantSetId?:
+        type: string
+        description: The ID of the variant set this variant belongs to.
+      alternateBases?:
+        type: array
+        description: The bases that appear instead of the reference bases.
+        items:
+          type: string
+      id?:
+        type: string
+        description: The Google generated ID of the variant, immutable.
+      info?:
+        type: object
+        description: A string which maps to an array of values.
+      referenceName?:
+        type: string
+        description: The reference on which this variant occurs. (such as chr20 or X)
+    description: A variant represents a change in DNA sequence relative to a reference sequence. For example, a variant could represent a SNP or an insertion. Variants belong to a variant set. Each of the calls on a variant represent a determination of genotype with respect to that variant. For example, a call might assign probability of 0.32 to the occurrence of a SNP named rs1234 in a sample named NA12345. A call belongs to a call set, which contains related calls typically from one sample.
+  VariantAnnotation:
+    type: object
+    properties:
+      clinicalSignificance?:
+        type: string
+        description: 'Describes the clinical significance of a variant. It is adapted
+          from the ClinVar controlled vocabulary for clinical significance described
+          at: http://www.ncbi.nlm.nih.gov/clinvar/docs/clinsig/'
+        enum:
+        - ASSOCIATION
+        - BENIGN
+        - CLINICAL_SIGNIFICANCE_UNSPECIFIED
+        - CONFERS_SENSITIVITY
+        - DRUG_RESPONSE
+        - HISTOCOMPATIBILITY
+        - LIKELY_BENIGN
+        - LIKELY_PATHOGENIC
+        - MULTIPLE_REPORTED
+        - OTHER
+        - PATHOGENIC
+        - PROTECTIVE
+        - RISK_FACTOR
+        - UNCERTAIN
+      transcriptIds?:
+        type: array
+        description: Google annotation IDs of the transcripts affected by this variant. These should be provided when the variant is created.
+        items:
+          type: string
+      geneId?:
+        type: string
+        description: Google annotation ID of the gene affected by this variant. This should be provided when the variant is created.
+      effect?:
+        type: string
+        description: Effect of the variant on the coding sequence.
+        enum:
+        - EFFECT_UNSPECIFIED
+        - FRAMESHIFT
+        - FRAME_PRESERVING_INDEL
+        - NONSYNONYMOUS_SNP
+        - OTHER
+        - SPLICE_SITE_DISRUPTION
+        - STOP_GAIN
+        - STOP_LOSS
+        - SYNONYMOUS_SNP
+      alternateBases?:
+        type: string
+        description: The alternate allele for this variant. If multiple alternate alleles exist at this location, create a separate variant for each one, as they may represent distinct conditions.
+      conditions?:
+        type: array
+        description: The set of conditions associated with this variant. A condition describes the way a variant influences human health.
+        items: VariantAnnotationCondition
+      type?:
+        type: string
+        description: Type has been adapted from ClinVar's list of variant types.
+        enum:
+        - CNV
+        - DELETION
+        - INSERTION
+        - OTHER
+        - SNP
+        - STRUCTURAL
+        - SUBSTITUTION
+        - TYPE_UNSPECIFIED
+    description: A Variant annotation.
+  VariantAnnotationCondition:
+    type: object
+    properties:
+      names?:
+        type: array
+        description: A set of names for the condition.
+        items:
+          type: string
+      omimId?:
+        type: string
+        description: The OMIM id for this condition. Search for these IDs at http://omim.org/
+      externalIds?:
+        type: array
+        description: The set of external IDs for this condition.
+        items: ExternalId
+      conceptId?:
+        type: string
+        description: The MedGen concept id associated with this gene. Search for these IDs at http://www.ncbi.nlm.nih.gov/medgen/
+  VariantSet:
+    type: object
+    properties:
+      metadata?:
+        type: array
+        description: The metadata associated with this variant set.
+        items: Metadata
+      referenceSetId?:
+        type: string
+        description: |-
+          The reference set to which the variant set is mapped. The reference set describes the alignment provenance of the variant set, while the referenceBounds describe the shape of the actual variant data. The reference set's reference names are a superset of those found in the referenceBounds.
+
+          For example, given a variant set that is mapped to the GRCh38 reference set and contains a single variant on reference 'X', referenceBounds would contain only an entry for 'X', while the associated reference set enumerates all possible references: '1', '2', 'X', 'Y', 'MT', etc.
+      referenceBounds?:
+        type: array
+        description: A list of all references used by the variants in a variant set with associated coordinate upper bounds for each one.
+        items: ReferenceBound
+      name?:
+        type: string
+        description: User-specified, mutable name.
+      datasetId?:
+        type: string
+        description: The dataset to which this variant set belongs. Immutable.
+      description?:
+        type: string
+        description: A textual description of this variant set.
+      id?:
+        type: string
+        description: The Google-generated ID of the variant set. Immutable.
+    description: A variant set is a collection of call sets and variants. It contains summary statistics of those contents. A variant set belongs to a dataset.
+/annotationSets:
+  /{annotationSetId}:
+    uriParameters:
+      annotationSetId:
+        type: string
+        description: The ID of the annotation set to be updated.
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: AnnotationSet
+      responses:
+        200:
+          body:
+            application/json: AnnotationSet
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets an annotation set. Caller must have READ permission for the associated dataset.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: AnnotationSet
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset.
+      is:
+      - hasParameters
+      body:
+        application/json: AnnotationSet
+      responses:
+        200:
+          body:
+            application/json: AnnotationSet
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes an annotation set. Caller must have WRITE permission for the associated annotation set.
+      is:
+      - hasParameters
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Searches for annotation sets that match the given criteria. Annotation sets are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotation sets in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried datasets.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchAnnotationSetsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchAnnotationSetsResponse
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: "Creates a new annotation set. Caller must have WRITE permission\
+      \ for the associated dataset.\n\nThe following fields must be provided when\
+      \ creating an annotation set:  \n- datasetId \n- referenceSetId  \nAll other\
+      \ fields may be optionally specified, unless documented as being server-generated\
+      \ (for example, the id field)."
+    is:
+    - hasParameters
+    body:
+      application/json: AnnotationSet
+    responses:
+      200:
+        body:
+          application/json: AnnotationSet
+/references:
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Searches for references which match the given criteria.
+
+        Implements GlobalAllianceApi.searchReferences.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchReferencesRequest
+      responses:
+        200:
+          body:
+            application/json: SearchReferencesResponse
+  /{referenceId}:
+    uriParameters:
+      referenceId:
+        type: string
+        description: The ID of the reference.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Gets a reference.
+
+        Implements GlobalAllianceApi.getReference.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Reference
+/referencesets:
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Searches for reference sets which match the given criteria.
+
+        Implements GlobalAllianceApi.searchReferenceSets.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchReferenceSetsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchReferenceSetsResponse
+  /{referenceSetId}:
+    uriParameters:
+      referenceSetId:
+        type: string
+        description: The ID of the reference set.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Gets a reference set.
+
+        Implements GlobalAllianceApi.getReferenceSet.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: ReferenceSet
+/jobs:
+  /{jobId}:
+    uriParameters:
+      jobId:
+        type: string
+        description: Required. The ID of the job.
+    /cancel:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/genomics
+        description: Cancels a job by ID. Note that it is possible for partial results to be generated and stored for cancelled jobs.
+        is:
+        - hasParameters
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a job by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Job
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a list of jobs matching the criteria.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchJobsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchJobsResponse
+/reads:
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Gets a list of reads for one or more read group sets. Reads search operates over a genomic coordinate space of reference sequence & position defined over the reference sequences to which the requested read group sets are aligned.
+
+        If a target positional range is specified, search returns all reads whose alignment to the reference genome overlap the range. A query which specifies only read group set IDs yields all reads in those read group sets, including unmapped reads.
+
+        All reads returned (including reads on subsequent pages) are ordered by genomic coordinate (by reference sequence, then position). Reads with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield reads in the same order across their respective streams of paginated responses.
+
+        Implements GlobalAllianceApi.searchReads.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchReadsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchReadsResponse
+/annotations:
+  /{annotationId}:
+    uriParameters:
+      annotationId:
+        type: string
+        description: The ID of the annotation to be updated.
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates an annotation. The update must respect all mutability restrictions and other invariants described on the annotation resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Annotation
+      responses:
+        200:
+          body:
+            application/json: Annotation
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets an annotation. Caller must have READ permission for the associated annotation set.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Annotation
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates an annotation. The update must respect all mutability restrictions and other invariants described on the annotation resource. Caller must have WRITE permission for the associated dataset.
+      is:
+      - hasParameters
+      body:
+        application/json: Annotation
+      responses:
+        200:
+          body:
+            application/json: Annotation
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes an annotation. Caller must have WRITE permission for the associated annotation set.
+      is:
+      - hasParameters
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Searches for annotations that match the given criteria. Results are ordered by genomic coordinate (by reference sequence, then position). Annotations with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotations in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried annotation sets.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchAnnotationsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchAnnotationsResponse
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: "Creates a new annotation. Caller must have WRITE permission for\
+      \ the associated annotation set.\n\n\nThe following fields must be provided\
+      \ when creating an annotation:  \n- annotationSetId \n- position.referenceName\
+      \ or  position.referenceId  Transcripts \nFor annotations of type TRANSCRIPT,\
+      \ the following fields of annotation.transcript must be provided:  \n- exons.start\
+      \ \n- exons.end  \nAll other fields may be optionally specified, unless documented\
+      \ as being server-generated (for example, the id field). The annotated range\
+      \ must be no longer than 100Mbp (mega base pairs). See the annotation resource\
+      \ for additional restrictions on each field."
+    is:
+    - hasParameters
+    body:
+      application/json: Annotation
+    responses:
+      200:
+        body:
+          application/json: Annotation
+/annotations:batchCreate:
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: |-
+      Creates one or more new annotations atomically. All annotations must belong to the same annotation set. Caller must have WRITE permission for this annotation set. For optimal performance, batch positionally adjacent annotations together.
+
+
+      If the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally.
+
+
+      For details on the requirements for each individual annotation resource, see annotations.create.
+    is:
+    - hasParameters
+    body:
+      application/json: BatchCreateAnnotationsRequest
+    responses:
+      200:
+        body:
+          application/json: BatchAnnotationsResponse
+/experimental:
+  /jobs:
+    /create:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_write
+            - https://www.googleapis.com/auth/genomics
+        description: Creates and asynchronously runs an ad-hoc job. This is an experimental call and may be removed or changed at any time.
+        is:
+        - hasParameters
+        body:
+          application/json: ExperimentalCreateJobRequest
+        responses:
+          200:
+            body:
+              application/json: ExperimentalCreateJobResponse
+/readgroupsets:
+  /{readGroupSetId}:
+    uriParameters:
+      readGroupSetId:
+        type: string
+        description: The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a read group set. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: ReadGroupSet
+      responses:
+        200:
+          body:
+            application/json: ReadGroupSet
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a read group set by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: ReadGroupSet
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a read group set.
+      is:
+      - hasParameters
+      body:
+        application/json: ReadGroupSet
+      responses:
+        200:
+          body:
+            application/json: ReadGroupSet
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes a read group set.
+      is:
+      - hasParameters
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Searches for read group sets matching the criteria.
+
+        Implements GlobalAllianceApi.searchReadGroupSets.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchReadGroupSetsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchReadGroupSetsResponse
+  /import:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/devstorage.read_write
+          - https://www.googleapis.com/auth/genomics
+      description: "Creates read group sets by asynchronously importing the provided\
+        \ information. The caller must have WRITE permissions to the dataset.\n\n\
+        Notes on BAM import:  \n- Tags will be converted to strings - tag types are\
+        \ not preserved\n- Comments (@CO) in the input file header are not imported\n\
+        - Original order of reference headers is not preserved\n- Any reverse stranded\
+        \ unmapped reads will be reverse complemented, and their qualities (also the\
+        \ \"BQ\" and \"OQ\" tags, if any) will be reversed\n- Unmapped reads will\
+        \ be stripped of positional information (referenceName and position)"
+      is:
+      - hasParameters
+      body:
+        application/json: ImportReadGroupSetsRequest
+      responses:
+        200:
+          body:
+            application/json: ImportReadGroupSetsResponse
+  /export:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/devstorage.read_write
+          - https://www.googleapis.com/auth/genomics
+      description: |-
+        Exports read group sets to a BAM file in Google Cloud Storage.
+
+        Note that currently there may be some differences between exported BAM files and the original BAM file at the time of import. See ImportReadGroupSets for details.
+      is:
+      - hasParameters
+      body:
+        application/json: ExportReadGroupSetsRequest
+      responses:
+        200:
+          body:
+            application/json: ExportReadGroupSetsResponse
+/datasets:
+  /{datasetId}:
+    uriParameters:
+      datasetId:
+        type: string
+        description: The ID of the dataset to be updated.
+    /undelete:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/genomics
+        description: Undeletes a dataset by restoring a dataset which was deleted via this API. This operation is only possible for a week after the deletion occurred.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Dataset
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a dataset. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Dataset
+      responses:
+        200:
+          body:
+            application/json: Dataset
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a dataset by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Dataset
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a dataset.
+      is:
+      - hasParameters
+      body:
+        application/json: Dataset
+      responses:
+        200:
+          body:
+            application/json: Dataset
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes a dataset and all of its contents (all read group sets, reference sets, variant sets, call sets, annotation sets, etc.) This is reversible (up to one week after the deletion) via the UndeleteDataset operation.
+      is:
+      - hasParameters
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: Creates a new dataset.
+    is:
+    - hasParameters
+    body:
+      application/json: Dataset
+    responses:
+      200:
+        body:
+          application/json: Dataset
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+        - https://www.googleapis.com/auth/genomics.readonly
+    description: Lists datasets within a project.
+    is:
+    - hasParameters
+    queryParameters:
+      projectNumber?:
+        type: integer
+        format: int64
+        description: Required. The project to list datasets for.
+      pageSize?:
+        type: integer
+        format: int32
+        description: The maximum number of results to return in a single page. If unspecified, defaults to 50. The maximum value is 1024.
+      pageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+    responses:
+      200:
+        body:
+          application/json: ListDatasetsResponse
+/variants:
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Gets a list of variants matching the criteria.
+
+        Implements GlobalAllianceApi.searchVariants.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchVariantsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchVariantsResponse
+  /{variantId}:
+    uriParameters:
+      variantId:
+        type: string
+        description: Required.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a variant by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Variant
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a variant's names and info fields. All other modifications are silently ignored. Returns the modified variant without its calls.
+      is:
+      - hasParameters
+      body:
+        application/json: Variant
+      responses:
+        200:
+          body:
+            application/json: Variant
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes a variant.
+      is:
+      - hasParameters
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: Creates a new variant.
+    is:
+    - hasParameters
+    body:
+      application/json: Variant
+    responses:
+      200:
+        body:
+          application/json: Variant
+/variantsets:
+  /{variantSetId}:
+    uriParameters:
+      variantSetId:
+        type: string
+        description: The ID of the variant set to be updated (must already exist).
+    /mergeVariants:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/genomics
+        description: |-
+          Merges the given variants with existing variants. Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created.
+
+          When variants are merged, the call information from the new variant is added to the existing variant. Variant info fields are merged as specified in the InfoMergeConfig field of the MergeVariantsRequest.
+        is:
+        - hasParameters
+        body:
+          application/json: MergeVariantsRequest
+    /importVariants:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_write
+            - https://www.googleapis.com/auth/genomics
+        description: |-
+          Creates variant data by asynchronously importing the provided information.
+
+          The variants for import will be merged with any existing data and each other according to the behavior of mergeVariants. In particular, this means for merged VCF variants that have conflicting info fields, some data will be arbitrarily discarded unless otherwise specified in the InfoMergeConfig field of ImportVariantsRequest. As a special case, for single-sample VCF files, QUAL and FILTER fields will be moved to the call level; these are sometimes interpreted in a call-specific context. Imported VCF headers are appended to the metadata already in a variant set.
+        is:
+        - hasParameters
+        body:
+          application/json: ImportVariantsRequest
+        responses:
+          200:
+            body:
+              application/json: ImportVariantsResponse
+    /export:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/bigquery
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/genomics
+        description: Exports variant set data to an external destination.
+        is:
+        - hasParameters
+        body:
+          application/json: ExportVariantSetRequest
+        responses:
+          200:
+            body:
+              application/json: ExportVariantSetResponse
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a variant set's metadata. All other modifications are silently ignored. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: VariantSet
+      responses:
+        200:
+          body:
+            application/json: VariantSet
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a variant set by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: VariantSet
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a variant set's metadata. All other modifications are silently ignored.
+      is:
+      - hasParameters
+      body:
+        application/json: VariantSet
+      responses:
+        200:
+          body:
+            application/json: VariantSet
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes a variant set including all variants, call sets, and calls within. This is not reversible.
+      is:
+      - hasParameters
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Returns a list of all variant sets matching search criteria.
+
+        Implements GlobalAllianceApi.searchVariantSets.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchVariantSetsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchVariantSetsResponse
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: |-
+      Creates a new variant set (only necessary in v1).
+
+      The provided variant set must have a valid datasetId set - all other fields are optional. Note that the id field will be ignored, as this is assigned by the server.
+    is:
+    - hasParameters
+    body:
+      application/json: VariantSet
+    responses:
+      200:
+        body:
+          application/json: VariantSet
+/callsets:
+  /{callSetId}:
+    uriParameters:
+      callSetId:
+        type: string
+        description: Required. The ID of the call set to be updated.
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a call set. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: CallSet
+      responses:
+        200:
+          body:
+            application/json: CallSet
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: Gets a call set by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: CallSet
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Updates a call set.
+      is:
+      - hasParameters
+      body:
+        application/json: CallSet
+      responses:
+        200:
+          body:
+            application/json: CallSet
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+      description: Deletes a call set.
+      is:
+      - hasParameters
+  /search:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/genomics
+          - https://www.googleapis.com/auth/genomics.readonly
+      description: |-
+        Gets a list of call sets matching the criteria.
+
+        Implements GlobalAllianceApi.searchCallSets.
+      is:
+      - hasParameters
+      body:
+        application/json: SearchCallSetsRequest
+      responses:
+        200:
+          body:
+            application/json: SearchCallSetsResponse
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/genomics
+    description: Creates a new call set.
+    is:
+    - hasParameters
+    body:
+      application/json: CallSet
+    responses:
+      200:
+        body:
+          application/json: CallSet

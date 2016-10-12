@@ -1,0 +1,1528 @@
+#%RAML 1.0
+title: Google+ Domains API
+version: v1
+baseUri: https://www.googleapis.com/plusDomains/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/+/domains/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/gplus-32.png
+  name: x32
+- url: http://www.google.com/images/icons/product/gplus-16.png
+  name: x16
+(commons.Id): plusDomains:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/userinfo.profile
+      - https://www.googleapis.com/auth/plus.me
+      - https://www.googleapis.com/auth/userinfo.email
+      - https://www.googleapis.com/auth/plus.circles.read
+      - https://www.googleapis.com/auth/plus.profiles.read
+      - https://www.googleapis.com/auth/plus.login
+      - https://www.googleapis.com/auth/plus.stream.write
+      - https://www.googleapis.com/auth/plus.media.upload
+      - https://www.googleapis.com/auth/plus.stream.read
+      - https://www.googleapis.com/auth/plus.circles.write
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Acl:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: plus#acl
+        description: 'Identifies this resource as a collection of access controls.
+          Value: "plus#acl".'
+      description?:
+        type: string
+        description: Description of the access granted, suitable for display.
+      domainRestricted?:
+        type: boolean
+        description: Whether access is restricted to the domain.
+      items?:
+        type: array
+        description: The list of access entries.
+        items: PlusDomainsAclentryResource
+  Activity:
+    type: object
+    properties:
+      annotation?:
+        type: string
+        description: Additional content added by the person who shared this activity, applicable only when resharing an activity.
+      access?: Acl
+      address?:
+        type: string
+        description: Street address where this activity occurred.
+      kind?:
+        type: string
+        default: plus#activity
+        description: 'Identifies this resource as an activity. Value: "plus#activity".'
+      placeId?:
+        type: string
+        description: ID of the place where this activity occurred.
+      verb?:
+        type: string
+        description: "This activity's verb, which indicates the action that was performed.\
+          \ Possible values include, but are not limited to, the following values:\
+          \  \n- \"post\" - Publish content to the stream. \n- \"share\" - Reshare\
+          \ an activity."
+      published?:
+        type: datetime
+        description: The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.
+      title?:
+        type: string
+        description: Title of this activity.
+      url?:
+        type: string
+        description: The link to this activity.
+      crosspostSource?:
+        type: string
+        description: If this activity is a crosspost from another system, this property specifies the ID of the original activity.
+      actor?:
+        type: object
+        properties:
+          image?:
+            type: object
+            properties:
+              url?:
+                type: string
+                description: The URL of the actor's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.
+            description: The image representation of the actor.
+          displayName?:
+            type: string
+            description: The name of the actor, suitable for display.
+          name?:
+            type: object
+            properties:
+              familyName?:
+                type: string
+                description: The family name ("last name") of the actor.
+              givenName?:
+                type: string
+                description: The given name ("first name") of the actor.
+            description: An object representation of the individual components of name.
+          clientSpecificActorInfo?:
+            type: object
+            properties:
+              youtubeActorInfo?:
+                type: object
+                properties:
+                  channelId?:
+                    type: string
+                    description: ID of the YouTube channel owned by the Actor.
+                description: Actor info specific to YouTube clients.
+            description: Actor info specific to particular clients.
+          id?:
+            type: string
+            description: The ID of the actor's Person resource.
+          url?:
+            type: string
+            description: The link to the actor's Google profile.
+          verification?:
+            type: object
+            properties:
+              adHocVerified?:
+                type: string
+                description: Verification for one-time or manual processes.
+            description: Verification status of actor.
+        description: The person who performed this activity.
+      provider?:
+        type: object
+        properties:
+          title?:
+            type: string
+            description: Name of the service provider.
+        description: The service provider that initially published this activity.
+      geocode?:
+        type: string
+        description: Latitude and longitude where this activity occurred. Format is latitude followed by longitude, space separated.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      location?: Place
+      id?:
+        type: string
+        description: The ID of this activity.
+      radius?:
+        type: string
+        description: Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode.
+      placeName?:
+        type: string
+        description: Name of the place where this activity occurred.
+      updated?:
+        type: datetime
+        description: The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.
+      object?:
+        type: object
+        properties:
+          actor?:
+            type: object
+            properties:
+              image?:
+                type: object
+                properties:
+                  url?:
+                    type: string
+                    description: A URL that points to a thumbnail photo of the original actor.
+                description: The image representation of the original actor.
+              displayName?:
+                type: string
+                description: The original actor's name, which is suitable for display.
+              clientSpecificActorInfo?:
+                type: object
+                properties:
+                  youtubeActorInfo?:
+                    type: object
+                    properties:
+                      channelId?:
+                        type: string
+                        description: ID of the YouTube channel owned by the Actor.
+                    description: Actor info specific to YouTube clients.
+                description: Actor info specific to particular clients.
+              id?:
+                type: string
+                description: ID of the original actor.
+              url?:
+                type: string
+                description: A link to the original actor's Google profile.
+              verification?:
+                type: object
+                properties:
+                  adHocVerified?:
+                    type: string
+                    description: Verification for one-time or manual processes.
+                description: Verification status of actor.
+            description: If this activity's object is itself another activity, such as when a person reshares an activity, this property specifies the original activity's actor.
+          attachments?:
+            type: array
+            description: The media objects attached to this activity.
+            items:
+              type: object
+              properties:
+                image?:
+                  type: object
+                  properties:
+                    width?:
+                      type: integer
+                      format: int32
+                      description: The width, in pixels, of the linked resource.
+                    type?:
+                      type: string
+                      description: Media type of the link.
+                    url?:
+                      type: string
+                      description: Image URL.
+                    height?:
+                      type: integer
+                      format: int32
+                      description: The height, in pixels, of the linked resource.
+                  description: The preview image for photos or videos.
+                displayName?:
+                  type: string
+                  description: The title of the attachment, such as a photo caption or an article title.
+                embed?:
+                  type: object
+                  properties:
+                    type?:
+                      type: string
+                      description: Media type of the link.
+                    url?:
+                      type: string
+                      description: URL of the link.
+                  description: If the attachment is a video, the embeddable link.
+                id?:
+                  type: string
+                  description: The ID of the attachment.
+                thumbnails?:
+                  type: array
+                  description: If the attachment is an album, this property is a list of potential additional thumbnails from the album.
+                  items:
+                    type: object
+                    properties:
+                      image?:
+                        type: object
+                        properties:
+                          width?:
+                            type: integer
+                            format: int32
+                            description: The width, in pixels, of the linked resource.
+                          type?:
+                            type: string
+                            description: Media type of the link.
+                          url?:
+                            type: string
+                            description: Image url.
+                          height?:
+                            type: integer
+                            format: int32
+                            description: The height, in pixels, of the linked resource.
+                        description: Image resource.
+                      description?:
+                        type: string
+                        description: Potential name of the thumbnail.
+                      url?:
+                        type: string
+                        description: URL of the webpage containing the image.
+                fullImage?:
+                  type: object
+                  properties:
+                    width?:
+                      type: integer
+                      format: int32
+                      description: The width, in pixels, of the linked resource.
+                    type?:
+                      type: string
+                      description: Media type of the link.
+                    url?:
+                      type: string
+                      description: URL of the image.
+                    height?:
+                      type: integer
+                      format: int32
+                      description: The height, in pixels, of the linked resource.
+                  description: The full image URL for photo attachments.
+                previewThumbnails?:
+                  type: array
+                  description: When previewing, these are the optional thumbnails for the post. When posting an article, choose one by setting the attachment.image.url property. If you don't choose one, one will be chosen for you.
+                  items:
+                    type: object
+                    properties:
+                      url?:
+                        type: string
+                        description: URL of the thumbnail image.
+                content?:
+                  type: string
+                  description: If the attachment is an article, this property contains a snippet of text from the article. It can also include descriptions for other types.
+                url?:
+                  type: string
+                  description: The link to the attachment, which should be of type text/html.
+                objectType?:
+                  type: string
+                  description: "The type of media object. Possible values include,\
+                    \ but are not limited to, the following values:  \n- \"photo\"\
+                    \ - A photo. \n- \"album\" - A photo album. \n- \"video\" - A\
+                    \ video. \n- \"article\" - An article, specified by a link."
+          replies?:
+            type: object
+            properties:
+              totalItems?:
+                type: integer
+                format: int32
+                description: Total number of comments on this activity.
+              selfLink?:
+                type: string
+                description: The URL for the collection of comments in reply to this activity.
+            description: Comments in reply to this activity.
+          statusForViewer?:
+            type: object
+            properties:
+              canUpdate?:
+                type: boolean
+                description: Whether the viewer can edit or delete the activity.
+              canPlusone?:
+                type: boolean
+                description: Whether the viewer can +1 the activity.
+              resharingDisabled?:
+                type: boolean
+                description: Whether reshares are disabled for the activity.
+              canComment?:
+                type: boolean
+                description: Whether the viewer can comment on the activity.
+              isPlusOned?:
+                type: boolean
+                description: Whether the viewer has +1'd the activity.
+            description: Status of the activity as seen by the viewer.
+          plusoners?:
+            type: object
+            properties:
+              totalItems?:
+                type: integer
+                format: int32
+                description: Total number of people who +1'd this activity.
+              selfLink?:
+                type: string
+                description: The URL for the collection of people who +1'd this activity.
+            description: People who +1'd this activity.
+          id?:
+            type: string
+            description: The ID of the object. When resharing an activity, this is the ID of the activity that is being reshared.
+          resharers?:
+            type: object
+            properties:
+              totalItems?:
+                type: integer
+                format: int32
+                description: Total number of people who reshared this activity.
+              selfLink?:
+                type: string
+                description: The URL for the collection of resharers.
+            description: People who reshared this activity.
+          content?:
+            type: string
+            description: The HTML-formatted content, which is suitable for display.
+          originalContent?:
+            type: string
+            description: The content (text) as provided by the author, which is stored without any HTML formatting. When creating or updating an activity, this value must be supplied as plain text in the request.
+          url?:
+            type: string
+            description: The URL that points to the linked resource.
+          objectType?:
+            type: string
+            description: "The type of the object. Possible values include, but are\
+              \ not limited to, the following values:  \n- \"note\" - Textual content.\
+              \ \n- \"activity\" - A Google+ activity."
+        description: The object of this activity.
+  ActivityFeed:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: plus#activityFeed
+        description: 'Identifies this resource as a collection of activities. Value:
+          "plus#activityFeed".'
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      id?:
+        type: string
+        description: The ID of this collection of activities. Deprecated.
+      title?:
+        type: string
+        description: The title of this collection of activities, which is a truncated portion of the content.
+      items?:
+        type: array
+        description: The activities in this page of results.
+        items: Activity
+      updated?:
+        type: datetime
+        description: The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.
+      nextLink?:
+        type: string
+        description: Link to the next page of activities.
+      selfLink?:
+        type: string
+        description: Link to this activity resource.
+  Audience:
+    type: object
+    properties:
+      item?: PlusDomainsAclentryResource
+      visibility?:
+        type: string
+        description: "The circle members' visibility as chosen by the owner of the\
+          \ circle. This only applies for items with \"item.type\" equals \"circle\"\
+          . Possible values are:  \n- \"public\" - Members are visible to the public.\
+          \ \n- \"limited\" - Members are visible to a limited audience. \n- \"private\"\
+          \ - Members are visible to the owner only."
+      kind?:
+        type: string
+        default: plus#audience
+        description: 'Identifies this resource as an audience. Value: "plus#audience".'
+      memberCount?:
+        type: integer
+        format: int32
+        description: The number of people in this circle. This only applies if entity_type is CIRCLE.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+  AudiencesFeed:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: The total number of ACL entries. The number of entries in this response may be smaller due to paging.
+      kind?:
+        type: string
+        default: plus#audiencesFeed
+        description: 'Identifies this resource as a collection of audiences. Value:
+          "plus#audienceFeed".'
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      items?:
+        type: array
+        description: The audiences in this result.
+        items: Audience
+  Circle:
+    type: object
+    properties:
+      displayName?:
+        type: string
+        description: The circle name.
+      kind?:
+        type: string
+        default: plus#circle
+        description: 'Identifies this resource as a circle. Value: "plus#circle".'
+      description?:
+        type: string
+        description: The description of this circle.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      id?:
+        type: string
+        description: The ID of the circle.
+      people?:
+        type: object
+        properties:
+          totalItems?:
+            type: integer
+            format: int32
+            description: The total number of people in this circle.
+        description: The people in this circle.
+      selfLink?:
+        type: string
+        description: Link to this circle resource
+  CircleFeed:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: The total number of circles. The number of circles in this response may be smaller due to paging.
+      kind?:
+        type: string
+        default: plus#circleFeed
+        description: 'Identifies this resource as a collection of circles. Value:
+          "plus#circleFeed".'
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      title?:
+        type: string
+        description: The title of this list of resources.
+      items?:
+        type: array
+        description: The circles in this page of results.
+        items: Circle
+      nextLink?:
+        type: string
+        description: Link to the next page of circles.
+      selfLink?:
+        type: string
+        description: Link to this page of circles.
+  Comment:
+    type: object
+    properties:
+      actor?:
+        type: object
+        properties:
+          image?:
+            type: object
+            properties:
+              url?:
+                type: string
+                description: The URL of the actor's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.
+            description: The image representation of this actor.
+          displayName?:
+            type: string
+            description: The name of this actor, suitable for display.
+          clientSpecificActorInfo?:
+            type: object
+            properties:
+              youtubeActorInfo?:
+                type: object
+                properties:
+                  channelId?:
+                    type: string
+                    description: ID of the YouTube channel owned by the Actor.
+                description: Actor info specific to YouTube clients.
+            description: Actor info specific to particular clients.
+          id?:
+            type: string
+            description: The ID of the actor.
+          url?:
+            type: string
+            description: A link to the Person resource for this actor.
+          verification?:
+            type: object
+            properties:
+              adHocVerified?:
+                type: string
+                description: Verification for one-time or manual processes.
+            description: Verification status of actor.
+        description: The person who posted this comment.
+      kind?:
+        type: string
+        default: plus#comment
+        description: 'Identifies this resource as a comment. Value: "plus#comment".'
+      inReplyTo?:
+        type: array
+        description: The activity this comment replied to.
+        items:
+          type: object
+          properties:
+            id?:
+              type: string
+              description: The ID of the activity.
+            url?:
+              type: string
+              description: The URL of the activity.
+      plusoners?:
+        type: object
+        properties:
+          totalItems?:
+            type: integer
+            format: int32
+            description: Total number of people who +1'd this comment.
+        description: People who +1'd this comment.
+      verb?:
+        type: string
+        default: post
+        description: "This comment's verb, indicating what action was performed. Possible\
+          \ values are:  \n- \"post\" - Publish content to the stream."
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      id?:
+        type: string
+        description: The ID of this comment.
+      published?:
+        type: datetime
+        description: The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.
+      updated?:
+        type: datetime
+        description: The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.
+      object?:
+        type: object
+        properties:
+          content?:
+            type: string
+            description: The HTML-formatted content, suitable for display.
+          originalContent?:
+            type: string
+            description: The content (text) as provided by the author, stored without any HTML formatting. When creating or updating a comment, this value must be supplied as plain text in the request.
+          objectType?:
+            type: string
+            default: comment
+            description: "The object type of this comment. Possible values are:  \n\
+              - \"comment\" - A comment in reply to an activity."
+        description: The object of this comment.
+      selfLink?:
+        type: string
+        description: Link to this comment resource.
+  CommentFeed:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: plus#commentFeed
+        description: 'Identifies this resource as a collection of comments. Value:
+          "plus#commentFeed".'
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      id?:
+        type: string
+        description: The ID of this collection of comments.
+      title?:
+        type: string
+        description: The title of this collection of comments.
+      items?:
+        type: array
+        description: The comments in this page of results.
+        items: Comment
+      updated?:
+        type: datetime
+        description: The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.
+      nextLink?:
+        type: string
+        description: Link to the next page of activities.
+  Media:
+    type: object
+    properties:
+      summary?:
+        type: string
+        description: A description, or caption, for this media.
+      mediaCreatedTime?:
+        type: datetime
+        description: 'The time at which this media was originally created in UTC.
+          Formatted as an RFC 3339 timestamp that matches this example: 2010-11-25T14:30:27.655Z'
+      mediaUrl?:
+        type: string
+        description: The URL of this photo or video's still image.
+      author?:
+        type: object
+        properties:
+          image?:
+            type: object
+            properties:
+              url?:
+                type: string
+                description: The URL of the author's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.
+            description: The author's Google profile image.
+          displayName?:
+            type: string
+            description: The author's name.
+          id?:
+            type: string
+            description: ID of the author.
+          url?:
+            type: string
+            description: A link to the author's Google profile.
+        description: The person who uploaded this media.
+      displayName?:
+        type: string
+        description: The display name for this media.
+      kind?:
+        type: string
+        default: plus#media
+        description: The type of resource.
+      streams?:
+        type: array
+        description: The list of video streams for this video. There might be several different streams available for a single video, either Flash or MPEG, of various sizes
+        items: Videostream
+      published?:
+        type: datetime
+        description: The time at which this media was uploaded. Formatted as an RFC 3339 timestamp.
+      url?:
+        type: string
+        description: The URL for the page that hosts this media.
+      sizeBytes?:
+        type: integer
+        format: int64
+        description: The size in bytes of this video.
+      videoStatus?:
+        type: string
+        description: "The encoding status of this video. Possible values are:  \n\
+          - \"UPLOADING\" - Not all the video bytes have been received. \n- \"PENDING\"\
+          \ - Video not yet processed. \n- \"FAILED\" - Video processing failed. \n\
+          - \"READY\" - A single video stream is playable. \n- \"FINAL\" - All video\
+          \ streams are playable."
+      videoDuration?:
+        type: integer
+        format: int64
+        description: The duration in milliseconds of this video.
+      width?:
+        type: integer
+        format: int32
+        description: The width in pixels of the original image.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      id?:
+        type: string
+        description: ID of this media, which is generated by the API.
+      updated?:
+        type: datetime
+        description: The time at which this media was last updated. This includes changes to media metadata. Formatted as an RFC 3339 timestamp.
+      exif?:
+        type: object
+        properties:
+          time?:
+            type: datetime
+            description: The time the media was captured. Formatted as an RFC 3339 timestamp.
+        description: Exif information of the media item.
+      height?:
+        type: integer
+        format: int32
+        description: The height in pixels of the original image.
+  PeopleFeed:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: The total number of people available in this list. The number of people in a response might be smaller due to paging. This might not be set for all collections.
+      kind?:
+        type: string
+        default: plus#peopleFeed
+        description: 'Identifies this resource as a collection of people. Value: "plus#peopleFeed".'
+      nextPageToken?:
+        type: string
+        description: The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      title?:
+        type: string
+        description: The title of this collection of people.
+      items?:
+        type: array
+        description: The people in this page of results. Each item includes the id, displayName, image, and url for the person. To retrieve additional profile data, see the people.get method.
+        items: Person
+      selfLink?:
+        type: string
+        description: Link to this resource.
+  Person:
+    type: object
+    properties:
+      birthday?:
+        type: string
+        description: The person's date of birth, represented as YYYY-MM-DD.
+      occupation?:
+        type: string
+        description: The occupation of this person.
+      gender?:
+        type: string
+        description: "The person's gender. Possible values include, but are not limited\
+          \ to, the following values:  \n- \"male\" - Male gender. \n- \"female\"\
+          \ - Female gender. \n- \"other\" - Other."
+      displayName?:
+        type: string
+        description: The name of this person, which is suitable for display.
+      relationshipStatus?:
+        type: string
+        description: "The person's relationship status. Possible values include, but\
+          \ are not limited to, the following values:  \n- \"single\" - Person is\
+          \ single. \n- \"in_a_relationship\" - Person is in a relationship. \n- \"\
+          engaged\" - Person is engaged. \n- \"married\" - Person is married. \n-\
+          \ \"its_complicated\" - The relationship is complicated. \n- \"open_relationship\"\
+          \ - Person is in an open relationship. \n- \"widowed\" - Person is widowed.\
+          \ \n- \"in_domestic_partnership\" - Person is in a domestic partnership.\
+          \ \n- \"in_civil_union\" - Person is in a civil union."
+      aboutMe?:
+        type: string
+        description: A short biography for this person.
+      isPlusUser?:
+        type: boolean
+        description: Whether this user has signed up for Google+.
+      objectType?:
+        type: string
+        description: "Type of person within Google+. Possible values include, but\
+          \ are not limited to, the following values:  \n- \"person\" - represents\
+          \ an actual person. \n- \"page\" - represents a page."
+      cover?:
+        type: object
+        properties:
+          layout?:
+            type: string
+            description: "The layout of the cover art. Possible values include, but\
+              \ are not limited to, the following values:  \n- \"banner\" - One large\
+              \ image banner."
+          coverPhoto?:
+            type: object
+            properties:
+              width?:
+                type: integer
+                format: int32
+                description: The width of the image.
+              url?:
+                type: string
+                description: The URL of the image.
+              height?:
+                type: integer
+                format: int32
+                description: The height of the image.
+            description: The person's primary cover image.
+          coverInfo?:
+            type: object
+            properties:
+              topImageOffset?:
+                type: integer
+                format: int32
+                description: The difference between the top position of the cover image and the actual displayed cover image. Only valid for banner layout.
+              leftImageOffset?:
+                type: integer
+                format: int32
+                description: The difference between the left position of the cover image and the actual displayed cover image. Only valid for banner layout.
+            description: Extra information about the cover photo.
+        description: The cover photo content.
+      emails?:
+        type: array
+        description: A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address.
+        items:
+          type: object
+          properties:
+            type?:
+              type: string
+              description: "The type of address. Possible values include, but are\
+                \ not limited to, the following values:  \n- \"account\" - Google\
+                \ account email address. \n- \"home\" - Home email address. \n- \"\
+                work\" - Work email address. \n- \"other\" - Other."
+            value?:
+              type: string
+              description: The email address.
+      skills?:
+        type: string
+        description: The person's skills.
+      urls?:
+        type: array
+        description: A list of URLs for this person.
+        items:
+          type: object
+          properties:
+            label?:
+              type: string
+              description: The label of the URL.
+            type?:
+              type: string
+              description: "The type of URL. Possible values include, but are not\
+                \ limited to, the following values:  \n- \"otherProfile\" - URL for\
+                \ another profile. \n- \"contributor\" - URL to a site for which this\
+                \ person is a contributor. \n- \"website\" - URL for this Google+\
+                \ Page's primary website. \n- \"other\" - Other URL."
+            value?:
+              type: string
+              description: The URL value.
+      nickname?:
+        type: string
+        description: The nickname of this person.
+      id?:
+        type: string
+        description: The ID of this person.
+      image?:
+        type: object
+        properties:
+          isDefault?:
+            type: boolean
+            description: Whether the person's profile photo is the default one
+          url?:
+            type: string
+            description: The URL of the person's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.
+        description: The representation of the person's profile photo.
+      kind?:
+        type: string
+        default: plus#person
+        description: 'Identifies this resource as a person. Value: "plus#person".'
+      verified?:
+        type: boolean
+        description: Whether the person or Google+ Page has been verified.
+      plusOneCount?:
+        type: integer
+        format: int32
+        description: If a Google+ Page, the number of people who have +1'd this page.
+      url?:
+        type: string
+        description: The URL of this person's profile.
+      currentLocation?:
+        type: string
+        description: (this field is not currently used)
+      braggingRights?:
+        type: string
+        description: The "bragging rights" line of this person.
+      placesLived?:
+        type: array
+        description: A list of places where this person has lived.
+        items:
+          type: object
+          properties:
+            value?:
+              type: string
+              description: 'A place where this person has lived. For example: "Seattle,
+                WA", "Near Toronto".'
+            primary?:
+              type: boolean
+              description: If "true", this place of residence is this person's primary residence.
+      domain?:
+        type: string
+        description: The hosted domain name for the user's Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name.
+      name?:
+        type: object
+        properties:
+          honorificSuffix?:
+            type: string
+            description: The honorific suffixes (such as "Jr.") for this person.
+          formatted?:
+            type: string
+            description: The full name of this person, including middle names, suffixes, etc.
+          familyName?:
+            type: string
+            description: The family name (last name) of this person.
+          givenName?:
+            type: string
+            description: The given name (first name) of this person.
+          honorificPrefix?:
+            type: string
+            description: The honorific prefixes (such as "Dr." or "Mrs.") for this person.
+          middleName?:
+            type: string
+            description: The middle name of this person.
+        description: An object representation of the individual components of a person's name.
+      organizations?:
+        type: array
+        description: A list of current or past organizations with which this person is associated.
+        items:
+          type: object
+          properties:
+            endDate?:
+              type: string
+              description: The date that the person left this organization.
+            name?:
+              type: string
+              description: The name of the organization.
+            description?:
+              type: string
+              description: A short description of the person's role in this organization. Deprecated.
+            location?:
+              type: string
+              description: The location of this organization. Deprecated.
+            department?:
+              type: string
+              description: The department within the organization. Deprecated.
+            title?:
+              type: string
+              description: The person's job title or role within the organization.
+            type?:
+              type: string
+              description: "The type of organization. Possible values include, but\
+                \ are not limited to, the following values:  \n- \"work\" - Work.\
+                \ \n- \"school\" - School."
+            startDate?:
+              type: string
+              description: The date that the person joined this organization.
+            primary?:
+              type: boolean
+              description: If "true", indicates this organization is the person's primary one, which is typically interpreted as the current one.
+      tagline?:
+        type: string
+        description: The brief description (tagline) of this person.
+      etag?:
+        type: string
+        description: ETag of this response for caching purposes.
+      circledByCount?:
+        type: integer
+        format: int32
+        description: For followers who are visible, the number of people who have added this person or page to a circle.
+  Place:
+    type: object
+    properties:
+      address?:
+        type: object
+        properties:
+          formatted?:
+            type: string
+            description: The formatted address for display.
+        description: The physical address of the place.
+      displayName?:
+        type: string
+        description: The display name of the place.
+      kind?:
+        type: string
+        default: plus#place
+        description: 'Identifies this resource as a place. Value: "plus#place".'
+      id?:
+        type: string
+        description: The id of the place.
+      position?:
+        type: object
+        properties:
+          latitude?:
+            type: number
+            format: double
+            description: The latitude of this position.
+          longitude?:
+            type: number
+            format: double
+            description: The longitude of this position.
+        description: The position of the place.
+  PlusDomainsAclentryResource:
+    type: object
+    properties:
+      displayName?:
+        type: string
+        description: A descriptive name for this entry. Suitable for display.
+      id?:
+        type: string
+        description: The ID of the entry. For entries of type "person" or "circle", this is the ID of the resource. For other types, this property is not set.
+      type?:
+        type: string
+        description: "The type of entry describing to whom access is granted. Possible\
+          \ values are:  \n- \"person\" - Access to an individual. \n- \"circle\"\
+          \ - Access to members of a circle. \n- \"myCircles\" - Access to members\
+          \ of all the person's circles. \n- \"extendedCircles\" - Access to members\
+          \ of all the person's circles, plus all of the people in their circles.\
+          \ \n- \"domain\" - Access to members of the person's Google Apps domain.\
+          \ \n- \"public\" - Access to anyone on the web."
+  Videostream:
+    type: object
+    properties:
+      width?:
+        type: integer
+        format: int32
+        description: The width, in pixels, of the video resource.
+      type?:
+        type: string
+        description: MIME type of the video stream.
+      url?:
+        type: string
+        description: URL of the video stream.
+      height?:
+        type: integer
+        format: int32
+        description: The height, in pixels, of the video resource.
+/comments:
+  /{commentId}:
+    uriParameters:
+      commentId:
+        type: string
+        description: The ID of the comment to get.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.login
+          - https://www.googleapis.com/auth/plus.stream.read
+      description: Get a comment.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Comment
+/activities:
+  /{activityId}:
+    uriParameters:
+      activityId:
+        type: string
+        description: The ID of the activity to reply to.
+    /comments:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.stream.write
+        description: Create a new comment in reply to an activity.
+        is:
+        - hasParameters
+        body:
+          application/json: Comment
+        responses:
+          200:
+            body:
+              application/json: Comment
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.stream.read
+        description: List all of the comments for an activity.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            default: 20
+            format: int32
+            description: The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+            maximum: 500
+            minimum: 0
+          sortOrder?:
+            type: string
+            default: ascending
+            description: The order in which to sort the list of comments.
+            enum:
+            - ascending
+            - descending
+          pageToken?:
+            type: string
+            description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+        responses:
+          200:
+            body:
+              application/json: CommentFeed
+    /people:
+      /{collection}:
+        uriParameters:
+          collection:
+            type: string
+            description: The collection of people to list.
+            enum:
+            - plusoners
+            - resharers
+            - sharedto
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/plus.login
+              - https://www.googleapis.com/auth/plus.stream.read
+          description: List all of the people in the specified collection for a particular activity.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 20
+              format: int32
+              description: The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+              maximum: 100
+              minimum: 1
+            pageToken?:
+              type: string
+              description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+          responses:
+            200:
+              body:
+                application/json: PeopleFeed
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.login
+          - https://www.googleapis.com/auth/plus.me
+          - https://www.googleapis.com/auth/plus.stream.read
+      description: Get an activity.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Activity
+/people:
+  /{userId}:
+    uriParameters:
+      userId:
+        type: string
+        description: The ID of the user to create the activity on behalf of. Its value should be "me", to indicate the authenticated user.
+    /activities:
+      /{collection}:
+        uriParameters:
+          collection:
+            type: string
+            description: The collection of activities to list.
+            enum:
+            - user
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/plus.login
+              - https://www.googleapis.com/auth/plus.me
+              - https://www.googleapis.com/auth/plus.stream.read
+          description: List all of the activities in the specified collection for a particular user.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 20
+              format: int32
+              description: The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+              maximum: 100
+              minimum: 1
+            pageToken?:
+              type: string
+              description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+          responses:
+            200:
+              body:
+                application/json: ActivityFeed
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.me
+            - https://www.googleapis.com/auth/plus.stream.write
+        description: Create a new activity for the authenticated user.
+        is:
+        - hasParameters
+        queryParameters:
+          preview?:
+            type: boolean
+            description: If "true", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.
+        body:
+          application/json: Activity
+        responses:
+          200:
+            body:
+              application/json: Activity
+    /audiences:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.circles.read
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.me
+        description: List all of the audiences to which a user can share.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            default: 20
+            format: int32
+            description: The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+            maximum: 100
+            minimum: 1
+          pageToken?:
+            type: string
+            description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+        responses:
+          200:
+            body:
+              application/json: AudiencesFeed
+    /circles:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.circles.write
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.me
+        description: Create a new circle for the authenticated user.
+        is:
+        - hasParameters
+        body:
+          application/json: Circle
+        responses:
+          200:
+            body:
+              application/json: Circle
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.circles.read
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.me
+        description: List all of the circles for a user.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            default: 20
+            format: int32
+            description: The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+            maximum: 100
+            minimum: 1
+          pageToken?:
+            type: string
+            description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+        responses:
+          200:
+            body:
+              application/json: CircleFeed
+    /media:
+      /{collection}:
+        uriParameters:
+          collection:
+            type: string
+            enum:
+            - cloud
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/plus.login
+              - https://www.googleapis.com/auth/plus.me
+              - https://www.googleapis.com/auth/plus.media.upload
+          description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
+          is:
+          - hasParameters
+          body:
+            application/json: Media
+          responses:
+            200:
+              body:
+                application/json: Media
+    /people:
+      /{collection}:
+        uriParameters:
+          collection:
+            type: string
+            description: The collection of people to list.
+            enum:
+            - circled
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/plus.circles.read
+              - https://www.googleapis.com/auth/plus.login
+              - https://www.googleapis.com/auth/plus.me
+          description: List all of the people in the specified collection.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 100
+              format: int32
+              description: The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+              maximum: 100
+              minimum: 1
+            orderBy?:
+              type: string
+              description: The order to return people in.
+              enum:
+              - alphabetical
+              - best
+            pageToken?:
+              type: string
+              description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+          responses:
+            200:
+              body:
+                application/json: PeopleFeed
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.login
+          - https://www.googleapis.com/auth/plus.me
+          - https://www.googleapis.com/auth/plus.profiles.read
+          - https://www.googleapis.com/auth/userinfo.email
+          - https://www.googleapis.com/auth/userinfo.profile
+      description: Get a person's profile.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Person
+/circles:
+  /{circleId}:
+    uriParameters:
+      circleId:
+        type: string
+        description: The ID of the circle to update.
+    /people:
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.circles.write
+            - https://www.googleapis.com/auth/plus.login
+        description: Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.
+        is:
+        - hasParameters
+        queryParameters:
+          userId?:
+            type: string
+            description: IDs of the people to add to the circle. Optional, can be repeated.
+          email?:
+            type: string
+            description: Email of the people to add to the circle. Optional, can be repeated.
+        responses:
+          200:
+            body:
+              application/json: Circle
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.circles.write
+            - https://www.googleapis.com/auth/plus.login
+        description: Remove a person from a circle.
+        is:
+        - hasParameters
+        queryParameters:
+          userId?:
+            type: string
+            description: IDs of the people to remove from the circle. Optional, can be repeated.
+          email?:
+            type: string
+            description: Email of the people to add to the circle. Optional, can be repeated.
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.circles.read
+            - https://www.googleapis.com/auth/plus.login
+        description: List all of the people who are members of a circle.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            default: 20
+            format: int32
+            description: The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.
+            maximum: 100
+            minimum: 1
+          pageToken?:
+            type: string
+            description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+        responses:
+          200:
+            body:
+              application/json: PeopleFeed
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.circles.write
+          - https://www.googleapis.com/auth/plus.login
+      description: Update a circle's description. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Circle
+      responses:
+        200:
+          body:
+            application/json: Circle
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.circles.read
+          - https://www.googleapis.com/auth/plus.login
+      description: Get a circle.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Circle
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.circles.write
+          - https://www.googleapis.com/auth/plus.login
+      description: Update a circle's description.
+      is:
+      - hasParameters
+      body:
+        application/json: Circle
+      responses:
+        200:
+          body:
+            application/json: Circle
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/plus.circles.write
+          - https://www.googleapis.com/auth/plus.login
+      description: Delete a circle.
+      is:
+      - hasParameters

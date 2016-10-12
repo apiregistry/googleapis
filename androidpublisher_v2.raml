@@ -1,0 +1,1022 @@
+#%RAML 1.0
+title: Google Play Developer API
+version: v2
+baseUri: https://www.googleapis.com/androidpublisher/v2/applications/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/android-publisher
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/android-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/android-16.png
+  name: x16
+(commons.Id): androidpublisher:v2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/androidpublisher
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Apk:
+    type: object
+    properties:
+      binary?: ApkBinary
+      versionCode?:
+        type: integer
+        format: int32
+        description: The version code of the APK, as specified in the APK's manifest file.
+  ApkBinary:
+    type: object
+    properties:
+      sha1?:
+        type: string
+        description: A sha1 hash of the APK payload, encoded as a hex string and matching the output of the sha1sum command.
+    description: Represents the binary payload of an APK.
+  ApkListing:
+    type: object
+    properties:
+      recentChanges?:
+        type: string
+        description: Describe what's new in your APK.
+      language?:
+        type: string
+        description: The language code, in BCP 47 format (eg "en-US").
+  ApkListingsListResponse:
+    type: object
+    properties:
+      listings?: ApkListing[]
+      kind?:
+        type: string
+        default: androidpublisher#apkListingsListResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "androidpublisher#apkListingsListResponse".'
+  ApksAddExternallyHostedRequest:
+    type: object
+    properties:
+      externallyHostedApk?: ExternallyHostedApk
+  ApksAddExternallyHostedResponse:
+    type: object
+    properties:
+      externallyHostedApk?: ExternallyHostedApk
+  ApksListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: androidpublisher#apksListResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "androidpublisher#apksListResponse".'
+      apks?: Apk[]
+  AppDetails:
+    type: object
+    properties:
+      defaultLanguage?:
+        type: string
+        description: Default language code, in BCP 47 format (eg "en-US").
+      contactEmail?:
+        type: string
+        description: The user-visible support email for this app.
+      contactWebsite?:
+        type: string
+        description: The user-visible website for this app.
+      contactPhone?:
+        type: string
+        description: The user-visible support telephone number for this app.
+  AppEdit:
+    type: object
+    properties:
+      expiryTimeSeconds?:
+        type: string
+        description: The time at which the edit will expire and will be no longer valid for use in any subsequent API calls (encoded as seconds since the Epoch).
+      id?:
+        type: string
+        description: The ID of the edit that can be used in subsequent API calls.
+    description: Represents an edit of an app. An edit allows clients to make multiple changes before committing them in one operation.
+  Comment:
+    type: object
+    properties:
+      userComment?: UserComment
+      developerComment?: DeveloperComment
+  DeveloperComment:
+    type: object
+    properties:
+      lastModified?: Timestamp
+      text?:
+        type: string
+        description: The content of the comment, i.e. reply body.
+  Entitlement:
+    type: object
+    properties:
+      productId?:
+        type: string
+        description: The SKU of the product.
+      kind?:
+        type: string
+        default: androidpublisher#entitlement
+        description: This kind represents an entitlement object in the androidpublisher service.
+      productType?:
+        type: string
+        description: "The type of the inapp product. Possible values are:  \n- In-app\
+          \ item: \"inapp\" \n- Subscription: \"subs\""
+      token?:
+        type: string
+        description: The token which can be verified using the subscriptions or products API.
+    description: An Entitlement resource indicates a user's current entitlement to an inapp item or subscription.
+  EntitlementsListResponse:
+    type: object
+    properties:
+      tokenPagination?: TokenPagination
+      pageInfo?: PageInfo
+      resources?: Entitlement[]
+  ExpansionFile:
+    type: object
+    properties:
+      fileSize?:
+        type: integer
+        format: int64
+        description: 'If set this field indicates that this APK has an Expansion File
+          uploaded to it: this APK does not reference another APK''s Expansion File.
+          The field''s value is the size of the uploaded Expansion File in bytes.'
+      referencesVersion?:
+        type: integer
+        format: int32
+        description: If set this APK's Expansion File references another APK's Expansion File. The file_size field will not be set.
+  ExpansionFilesUploadResponse:
+    type: object
+    properties:
+      expansionFile?: ExpansionFile
+  ExternallyHostedApk:
+    type: object
+    properties:
+      usesFeatures?:
+        type: array
+        description: The features required by this APK (optional).
+        items:
+          type: string
+      fileSha1Base64?:
+        type: string
+        description: The SHA1 checksum of this APK, represented as a base64 encoded byte array.
+      minimumSdk?:
+        type: integer
+        format: int32
+        description: The minimum SDK targeted by this APK.
+      maximumSdk?:
+        type: integer
+        format: int32
+        description: The maximum SDK supported by this APK (optional).
+      versionName?:
+        type: string
+        description: The version name of this APK.
+      versionCode?:
+        type: integer
+        format: int32
+        description: The version code of this APK.
+      applicationLabel?:
+        type: string
+        description: The application label.
+      fileSize?:
+        type: integer
+        format: int64
+        description: The file size in bytes of this APK.
+      certificateBase64s?:
+        type: array
+        description: A certificate (or array of certificates if a certificate-chain is used) used to signed this APK, represented as a base64 encoded byte array.
+        items:
+          type: string
+      externallyHostedUrl?:
+        type: string
+        description: The URL at which the APK is hosted. This must be an https URL.
+      iconBase64?:
+        type: string
+        description: The icon image from the APK, as a base64 encoded byte array.
+      packageName?:
+        type: string
+        description: The package name.
+      nativeCodes?:
+        type: array
+        description: The native code environments supported by this APK (optional).
+        items:
+          type: string
+      usesPermissions?:
+        type: array
+        description: The permissions requested by this APK.
+        items: ExternallyHostedApkUsesPermission
+      fileSha256Base64?:
+        type: string
+        description: The SHA256 checksum of this APK, represented as a base64 encoded byte array.
+    description: Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to enterprises who are using Google Play for Work, and whos application is restricted to the enterprise private channel
+  ExternallyHostedApkUsesPermission:
+    type: object
+    properties:
+      maxSdkVersion?:
+        type: integer
+        format: int32
+        description: Optionally, the maximum SDK version for which the permission is required.
+      name?:
+        type: string
+        description: The name of the permission requested.
+    description: A permission used by this APK.
+  Image:
+    type: object
+    properties:
+      sha1?:
+        type: string
+        description: A sha1 hash of the image that was uploaded.
+      id?:
+        type: string
+        description: A unique id representing this image.
+      url?:
+        type: string
+        description: A URL that will serve a preview of the image.
+  ImagesDeleteAllResponse:
+    type: object
+    properties:
+      deleted?: Image[]
+  ImagesListResponse:
+    type: object
+    properties:
+      images?: Image[]
+  ImagesUploadResponse:
+    type: object
+    properties:
+      image?: Image
+  InAppProduct:
+    type: object
+    properties:
+      defaultPrice?: Price
+      listings?:
+        type: object
+        description: List of localized title and description data.
+      subscriptionPeriod?:
+        type: string
+        description: Subscription period, specified in ISO 8601 format. Acceptable values are "P1W" (one week), "P1M" (one month), "P3M" (three months), "P6M" (six months), and "P1Y" (one year).
+      defaultLanguage?:
+        type: string
+        description: The default language of the localized data, as defined by BCP 47. e.g. "en-US", "en-GB".
+      trialPeriod?:
+        type: string
+        description: Trial period, specified in ISO 8601 format. Acceptable values are anything between "P7D" (seven days) and "P999D" (999 days). Seasonal subscriptions cannot have a trial period.
+      season?: Season
+      packageName?:
+        type: string
+        description: The package name of the parent app.
+      prices?:
+        type: object
+        description: Prices per buyer region. None of these prices should be zero. In-app products can never be free.
+      sku?:
+        type: string
+        description: The stock-keeping-unit (SKU) of the product, unique within an app.
+      purchaseType?:
+        type: string
+        description: Purchase type enum value. Unmodifiable after creation.
+      status?:
+        type: string
+  InAppProductListing:
+    type: object
+    properties:
+      description?:
+        type: string
+      title?:
+        type: string
+  InappproductsBatchRequest:
+    type: object
+    properties:
+      entrys?: InappproductsBatchRequestEntry[]
+  InappproductsBatchRequestEntry:
+    type: object
+    properties:
+      inappproductsupdaterequest?: InappproductsUpdateRequest
+      methodName?:
+        type: string
+      batchId?:
+        type: integer
+        format: int32
+      inappproductsinsertrequest?: InappproductsInsertRequest
+  InappproductsBatchResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: androidpublisher#inappproductsBatchResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "androidpublisher#inappproductsBatchResponse".'
+      entrys?: InappproductsBatchResponseEntry[]
+  InappproductsBatchResponseEntry:
+    type: object
+    properties:
+      inappproductsupdateresponse?: InappproductsUpdateResponse
+      inappproductsinsertresponse?: InappproductsInsertResponse
+      batchId?:
+        type: integer
+        format: int32
+  InappproductsInsertRequest:
+    type: object
+    properties:
+      inappproduct?: InAppProduct
+  InappproductsInsertResponse:
+    type: object
+    properties:
+      inappproduct?: InAppProduct
+  InappproductsListResponse:
+    type: object
+    properties:
+      tokenPagination?: TokenPagination
+      inappproduct?: InAppProduct[]
+      kind?:
+        type: string
+        default: androidpublisher#inappproductsListResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "androidpublisher#inappproductsListResponse".'
+      pageInfo?: PageInfo
+  InappproductsUpdateRequest:
+    type: object
+    properties:
+      inappproduct?: InAppProduct
+  InappproductsUpdateResponse:
+    type: object
+    properties:
+      inappproduct?: InAppProduct
+  Listing:
+    type: object
+    properties:
+      language?:
+        type: string
+        description: Language localization code (for example, "de-AT" for Austrian German).
+      shortDescription?:
+        type: string
+        description: Short description of the app (previously known as promo text); this may be up to 80 characters in length.
+      video?:
+        type: string
+        description: URL of a promotional YouTube video for the app.
+      fullDescription?:
+        type: string
+        description: Full description of the app; this may be up to 4000 characters in length.
+      title?:
+        type: string
+        description: App's localized title.
+  ListingsListResponse:
+    type: object
+    properties:
+      listings?: Listing[]
+      kind?:
+        type: string
+        default: androidpublisher#listingsListResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "androidpublisher#listingsListResponse".'
+  MonthDay:
+    type: object
+    properties:
+      month?:
+        type: integer
+        format: int32
+        description: Month of a year. e.g. 1 = JAN, 2 = FEB etc.
+      day?:
+        type: integer
+        format: int32
+        description: Day of a month, value in [1, 31] range. Valid range depends on the specified month.
+  PageInfo:
+    type: object
+    properties:
+      startIndex?:
+        type: integer
+        format: int32
+      totalResults?:
+        type: integer
+        format: int32
+      resultPerPage?:
+        type: integer
+        format: int32
+  Price:
+    type: object
+    properties:
+      priceMicros?:
+        type: string
+        description: The price in millionths of the currency base unit represented as a string.
+      currency?:
+        type: string
+        description: 3 letter Currency code, as defined by ISO 4217.
+  ProductPurchase:
+    type: object
+    properties:
+      consumptionState?:
+        type: integer
+        format: int32
+        description: "The consumption state of the inapp product. Possible values\
+          \ are:  \n- Yet to be consumed \n- Consumed"
+      kind?:
+        type: string
+        default: androidpublisher#productPurchase
+        description: This kind represents an inappPurchase object in the androidpublisher service.
+      developerPayload?:
+        type: string
+        description: A developer-specified string that contains supplemental information about an order.
+      purchaseState?:
+        type: integer
+        format: int32
+        description: "The purchase state of the order. Possible values are:  \n- Purchased\
+          \ \n- Cancelled"
+      purchaseTimeMillis?:
+        type: integer
+        format: int64
+        description: The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).
+    description: A ProductPurchase resource indicates the status of a user's inapp product purchase.
+  Prorate:
+    type: object
+    properties:
+      defaultPrice?: Price
+      start?: MonthDay
+  Review:
+    type: object
+    properties:
+      comments?:
+        type: array
+        description: A repeated field containing comments for the review.
+        items: Comment
+      authorName?:
+        type: string
+        description: The name of the user who wrote the review.
+      reviewId?:
+        type: string
+        description: Unique identifier for this review.
+  ReviewReplyResult:
+    type: object
+    properties:
+      replyText?:
+        type: string
+        description: The reply text that was applied.
+      lastEdited?: Timestamp
+  ReviewsListResponse:
+    type: object
+    properties:
+      tokenPagination?: TokenPagination
+      reviews?: Review[]
+      pageInfo?: PageInfo
+  ReviewsReplyRequest:
+    type: object
+    properties:
+      replyText?:
+        type: string
+        description: The text to set as the reply. Replies of more than approximately 350 characters will be rejected. HTML tags will be stripped.
+  ReviewsReplyResponse:
+    type: object
+    properties:
+      result?: ReviewReplyResult
+  Season:
+    type: object
+    properties:
+      start?: MonthDay
+      end?: MonthDay
+      prorations?:
+        type: array
+        description: Optionally present list of prorations for the season. Each proration is a one-off discounted entry into a subscription. Each proration contains the first date on which the discount is available and the new pricing information.
+        items: Prorate
+  SubscriptionDeferralInfo:
+    type: object
+    properties:
+      expectedExpiryTimeMillis?:
+        type: integer
+        format: int64
+        description: The expected expiry time for the subscription. If the current expiry time for the subscription is not the value specified here, the deferral will not occur.
+      desiredExpiryTimeMillis?:
+        type: integer
+        format: int64
+        description: The desired next expiry time to assign to the subscription, in milliseconds since the Epoch. The given time must be later/greater than the current expiry time for the subscription.
+    description: A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
+  SubscriptionPurchase:
+    type: object
+    properties:
+      priceAmountMicros?:
+        type: integer
+        format: int64
+        description: Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is ˆ1.99, price_amount_micros is 1990000.
+      startTimeMillis?:
+        type: integer
+        format: int64
+        description: Time at which the subscription was granted, in milliseconds since the Epoch.
+      countryCode?:
+        type: string
+        description: ISO 3166-1 alpha-2 billing country/region code of the user at the time the subscription was granted.
+      expiryTimeMillis?:
+        type: integer
+        format: int64
+        description: Time at which the subscription will expire, in milliseconds since the Epoch.
+      kind?:
+        type: string
+        default: androidpublisher#subscriptionPurchase
+        description: This kind represents a subscriptionPurchase object in the androidpublisher service.
+      developerPayload?:
+        type: string
+        description: A developer-specified string that contains supplemental information about an order.
+      cancelReason?:
+        type: integer
+        format: int32
+        description: "The reason why a subscription was cancelled or is not auto-renewing.\
+          \ Possible values are:  \n- User cancelled the subscription \n- Subscription\
+          \ was cancelled by the system, for example because of a billing problem"
+      paymentState?:
+        type: integer
+        format: int32
+        description: "The payment state of the subscription. Possible values are:\
+          \  \n- Payment pending \n- Payment received"
+      priceCurrencyCode?:
+        type: string
+        description: ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".
+      autoRenewing?:
+        type: boolean
+        description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
+    description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
+  SubscriptionPurchasesDeferRequest:
+    type: object
+    properties:
+      deferralInfo?: SubscriptionDeferralInfo
+  SubscriptionPurchasesDeferResponse:
+    type: object
+    properties:
+      newExpiryTimeMillis?:
+        type: integer
+        format: int64
+        description: The new expiry time for the subscription in milliseconds since the Epoch.
+  Testers:
+    type: object
+    properties:
+      googleGroups?:
+        type: array
+        items:
+          type: string
+      googlePlusCommunities?:
+        type: array
+        items:
+          type: string
+  Timestamp:
+    type: object
+    properties:
+      seconds?:
+        type: integer
+        format: int64
+      nanos?:
+        type: integer
+        format: int32
+  TokenPagination:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+      previousPageToken?:
+        type: string
+  Track:
+    type: object
+    properties:
+      userFraction?:
+        type: number
+        format: double
+      versionCodes?:
+        type: array
+        items:
+          type: integer
+          format: int32
+      track?:
+        type: string
+  TracksListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: androidpublisher#tracksListResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "androidpublisher#tracksListResponse".'
+      tracks?: Track[]
+  UserComment:
+    type: object
+    properties:
+      androidOsVersion?:
+        type: integer
+        format: int32
+        description: Integer Android SDK version of the user's device at the time the review was written, e.g. 23 is Marshmallow. May be absent.
+      lastModified?: Timestamp
+      text?:
+        type: string
+        description: The content of the comment, i.e. review body. In some cases users have been able to write a review with separate title and body; in those cases the title and body are concatenated and separated by a tab character.
+      appVersionName?:
+        type: string
+        description: String version name of the app as installed at the time the review was written. May be absent.
+      starRating?:
+        type: integer
+        format: int32
+        description: The star rating associated with the review, from 1 to 5.
+      appVersionCode?:
+        type: integer
+        format: int32
+        description: Integer version code of the app as installed at the time the review was written. May be absent.
+      device?:
+        type: string
+        description: Codename for the reviewer's device, e.g. klte, flounder. May be absent.
+      reviewerLanguage?:
+        type: string
+        description: Language code for the reviewer. This is taken from the device settings so is not guaranteed to match the language the review is written in. May be absent.
+/{packageName}:
+  uriParameters:
+    packageName:
+      type: string
+      description: The package name of the application the inapp product was sold in (for example, 'com.some.thing').
+  /entitlements:
+    get:
+      description: Lists the user's current inapp item or subscription entitlements
+      is:
+      - hasParameters
+      queryParameters:
+        startIndex?:
+          type: integer
+          format: int32
+        productId?:
+          type: string
+          description: The product id of the inapp product (for example, 'sku1'). This can be used to restrict the result set.
+        maxResults?:
+          type: integer
+          format: int32
+        token?:
+          type: string
+      responses:
+        200:
+          body:
+            application/json: EntitlementsListResponse
+  /reviews:
+    /{reviewId}:
+      uriParameters:
+        reviewId:
+          type: string
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Returns a single review.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Review
+    /{reviewId}:reply:
+      uriParameters:
+        reviewId:
+          type: string
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Reply to a single review, or update an existing reply.
+        is:
+        - hasParameters
+        body:
+          application/json: ReviewsReplyRequest
+        responses:
+          200:
+            body:
+              application/json: ReviewsReplyResponse
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/androidpublisher
+      description: Returns a list of reviews.
+      is:
+      - hasParameters
+      queryParameters:
+        startIndex?:
+          type: integer
+          format: int32
+        maxResults?:
+          type: integer
+          format: int32
+        token?:
+          type: string
+      responses:
+        200:
+          body:
+            application/json: ReviewsListResponse
+  /purchases:
+    /subscriptions:
+      /{subscriptionId}:
+        uriParameters:
+          subscriptionId:
+            type: string
+            description: The purchased subscription ID (for example, 'monthly001').
+        /tokens:
+          /{token}:cancel:
+            uriParameters:
+              token:
+                type: string
+                description: The token provided to the user's device when the subscription was purchased.
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/androidpublisher
+              description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
+              is:
+              - hasParameters
+          /{token}:defer:
+            uriParameters:
+              token:
+                type: string
+                description: The token provided to the user's device when the subscription was purchased.
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/androidpublisher
+              description: Defers a user's subscription purchase until a specified future expiration time.
+              is:
+              - hasParameters
+              body:
+                application/json: SubscriptionPurchasesDeferRequest
+              responses:
+                200:
+                  body:
+                    application/json: SubscriptionPurchasesDeferResponse
+          /{token}:
+            uriParameters:
+              token:
+                type: string
+                description: The token provided to the user's device when the subscription was purchased.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/androidpublisher
+              description: Checks whether a user's subscription purchase is valid and returns its expiry time.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: SubscriptionPurchase
+          /{token}:revoke:
+            uriParameters:
+              token:
+                type: string
+                description: The token provided to the user's device when the subscription was purchased.
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/androidpublisher
+              description: Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.
+              is:
+              - hasParameters
+          /{token}:refund:
+            uriParameters:
+              token:
+                type: string
+                description: The token provided to the user's device when the subscription was purchased.
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/androidpublisher
+              description: Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.
+              is:
+              - hasParameters
+    /products:
+      /{productId}:
+        uriParameters:
+          productId:
+            type: string
+            description: The inapp product SKU (for example, 'com.some.thing.inapp1').
+        /tokens:
+          /{token}:
+            uriParameters:
+              token:
+                type: string
+                description: The token provided to the user's device when the inapp product was purchased.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/androidpublisher
+              description: Checks the purchase and consumption status of an inapp item.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: ProductPurchase
+  /edits:
+    /{editId}:
+      uriParameters:
+        editId:
+          type: string
+          description: Unique identifier for this edit.
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Returns information about the edit specified. Calls will fail if the edit is no long active (e.g. has been deleted, superseded or expired).
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: AppEdit
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Deletes an edit for an app. Creating a new edit will automatically delete any of your previous edits so this method need only be called if you want to preemptively abandon an edit.
+        is:
+        - hasParameters
+    /{editId}:commit:
+      uriParameters:
+        editId:
+          type: string
+          description: Unique identifier for this edit.
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Commits/applies the changes made in this edit back to the app.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: AppEdit
+    /{editId}:validate:
+      uriParameters:
+        editId:
+          type: string
+          description: Unique identifier for this edit.
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: AppEdit
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/androidpublisher
+      description: Creates a new edit for an app, populated with the app's current state.
+      is:
+      - hasParameters
+      body:
+        application/json: AppEdit
+      responses:
+        200:
+          body:
+            application/json: AppEdit
+  /inappproducts:
+    /{sku}:
+      uriParameters:
+        sku:
+          type: string
+          description: Unique identifier for the in-app product.
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Updates the details of an in-app product. This method supports patch semantics.
+        is:
+        - hasParameters
+        queryParameters:
+          autoConvertMissingPrices?:
+            type: boolean
+            description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+        body:
+          application/json: InAppProduct
+        responses:
+          200:
+            body:
+              application/json: InAppProduct
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Returns information about the in-app product specified.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: InAppProduct
+      put:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Updates the details of an in-app product.
+        is:
+        - hasParameters
+        queryParameters:
+          autoConvertMissingPrices?:
+            type: boolean
+            description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+        body:
+          application/json: InAppProduct
+        responses:
+          200:
+            body:
+              application/json: InAppProduct
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/androidpublisher
+        description: Delete an in-app product for an app.
+        is:
+        - hasParameters
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/androidpublisher
+      description: Creates a new in-app product for an app.
+      is:
+      - hasParameters
+      queryParameters:
+        autoConvertMissingPrices?:
+          type: boolean
+          description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+      body:
+        application/json: InAppProduct
+      responses:
+        200:
+          body:
+            application/json: InAppProduct
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/androidpublisher
+      description: List all the in-app products for an Android app, both subscriptions and managed in-app products..
+      is:
+      - hasParameters
+      queryParameters:
+        startIndex?:
+          type: integer
+          format: int32
+        maxResults?:
+          type: integer
+          format: int32
+        token?:
+          type: string
+      responses:
+        200:
+          body:
+            application/json: InappproductsListResponse
+/inappproducts:
+  /batch:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/androidpublisher
+      is:
+      - hasParameters
+      body:
+        application/json: InappproductsBatchRequest
+      responses:
+        200:
+          body:
+            application/json: InappproductsBatchResponse

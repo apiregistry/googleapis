@@ -1,0 +1,142 @@
+#%RAML 1.0
+title: Translate API
+version: v2
+baseUri: https://www.googleapis.com/language/translate/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/translate/v2/using_rest
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/translate-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/translate-16.png
+  name: x16
+(commons.Id): translate:v2
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+types:
+  DetectionsResource:
+    type: array
+    description: An array of languages which we detect for the given text The most likely language list first.
+    items:
+      type: object
+      properties:
+        confidence?:
+          type: number
+          format: float
+          description: The confidence of the detection resul of this language.
+        isReliable?:
+          type: boolean
+          description: A boolean to indicate is the language detection result reliable.
+        language?:
+          type: string
+          description: The language we detect
+  DetectionsListResponse:
+    type: object
+    properties:
+      detections?:
+        type: array
+        description: A detections contains detection results of several text
+        items: DetectionsResource
+  LanguagesListResponse:
+    type: object
+    properties:
+      languages?:
+        type: array
+        description: List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.
+        items: LanguagesResource
+  LanguagesResource:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The localized name of the language if target parameter is given.
+      language?:
+        type: string
+        description: The language code.
+  TranslationsListResponse:
+    type: object
+    properties:
+      translations?:
+        type: array
+        description: Translations contains list of translation results of given text
+        items: TranslationsResource
+  TranslationsResource:
+    type: object
+    properties:
+      translatedText?:
+        type: string
+        description: The translation.
+      detectedSourceLanguage?:
+        type: string
+        description: Detected source language if source parameter is unspecified.
+/v2:
+  /languages:
+    get:
+      description: List the source/target languages supported by the API
+      is:
+      - hasParameters
+      queryParameters:
+        target?:
+          type: string
+          description: the language and collation in which the localized results should be returned
+      responses:
+        200:
+          body:
+            application/json: LanguagesListResponse
+  /detect:
+    get:
+      description: Detect the language of text.
+      is:
+      - hasParameters
+      queryParameters:
+        q:
+          type: string
+          description: The text to detect
+      responses:
+        200:
+          body:
+            application/json: DetectionsListResponse
+  get:
+    description: Returns text translations from one language to another.
+    is:
+    - hasParameters
+    queryParameters:
+      q:
+        type: string
+        description: The text to translate
+      format?:
+        type: string
+        description: The format of the text
+        enum:
+        - html
+        - text
+      source?:
+        type: string
+        description: The source language of the text
+      cid?:
+        type: string
+        description: The customization id for translate
+      target:
+        type: string
+        description: The target language into which the text should be translated
+    responses:
+      200:
+        body:
+          application/json: TranslationsListResponse

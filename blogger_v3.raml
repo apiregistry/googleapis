@@ -1,0 +1,1429 @@
+#%RAML 1.0
+title: Blogger API
+version: v3
+baseUri: https://www.googleapis.com/blogger/v3/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/blogger/docs/3.0/getting_started
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/blogger-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/blogger-16.png
+  name: x16
+(commons.Tags):
+- limited_availability
+(commons.Id): blogger:v3
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/blogger
+      - https://www.googleapis.com/auth/blogger.readonly
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Blog:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: blogger#blog
+        description: The kind of this entry. Always blogger#blog
+      customMetaData?:
+        type: string
+        description: The JSON custom meta-data for the Blog
+      description?:
+        type: string
+        description: The description of this blog. This is displayed underneath the title.
+      published?:
+        type: string
+        description: RFC 3339 date-time when this blog was published.
+      locale?:
+        type: object
+        properties:
+          country?:
+            type: string
+            description: The country this blog's locale is set to.
+          variant?:
+            type: string
+            description: The language variant this blog is authored in.
+          language?:
+            type: string
+            description: The language this blog is authored in.
+        description: The locale this Blog is set to.
+      posts?:
+        type: object
+        properties:
+          totalItems?:
+            type: integer
+            format: int32
+            description: The count of posts in this blog.
+          items?:
+            type: array
+            description: The List of Posts for this Blog.
+            items: Post
+          selfLink?:
+            type: string
+            description: The URL of the container for posts in this blog.
+        description: The container of posts in this blog.
+      url?:
+        type: string
+        description: The URL where this blog is published.
+      selfLink?:
+        type: string
+        description: The API REST URL to fetch this resource from.
+      pages?:
+        type: object
+        properties:
+          totalItems?:
+            type: integer
+            format: int32
+            description: The count of pages in this blog.
+          selfLink?:
+            type: string
+            description: The URL of the container for pages in this blog.
+        description: The container of pages in this blog.
+      name?:
+        type: string
+        description: The name of this blog. This is displayed as the title.
+      id?:
+        type: string
+        description: The identifier for this resource.
+      updated?:
+        type: string
+        description: RFC 3339 date-time when this blog was last updated.
+      status?:
+        type: string
+        description: The status of the blog.
+  BlogList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: blogger#blogList
+        description: The kind of this entity. Always blogger#blogList
+      items?:
+        type: array
+        description: The list of Blogs this user has Authorship or Admin rights over.
+        items: Blog
+      blogUserInfos?:
+        type: array
+        description: Admin level list of blog per-user information
+        items: BlogUserInfo
+  BlogPerUserInfo:
+    type: object
+    properties:
+      role?:
+        type: string
+        description: Access permissions that the user has for the blog (ADMIN, AUTHOR, or READER).
+      kind?:
+        type: string
+        default: blogger#blogPerUserInfo
+        description: The kind of this entity. Always blogger#blogPerUserInfo
+      blogId?:
+        type: string
+        description: ID of the Blog resource
+      photosAlbumKey?:
+        type: string
+        description: The Photo Album Key for the user when adding photos to the blog
+      userId?:
+        type: string
+        description: ID of the User
+      hasAdminAccess?:
+        type: boolean
+        description: True if the user has Admin level access to the blog.
+  BlogUserInfo:
+    type: object
+    properties:
+      blog_user_info?: BlogPerUserInfo
+      kind?:
+        type: string
+        default: blogger#blogUserInfo
+        description: The kind of this entity. Always blogger#blogUserInfo
+      blog?: Blog
+  Comment:
+    type: object
+    properties:
+      post?:
+        type: object
+        properties:
+          id?:
+            type: string
+            description: The identifier of the post containing this comment.
+        description: Data about the post containing this comment.
+      author?:
+        type: object
+        properties:
+          image?:
+            type: object
+            properties:
+              url?:
+                type: string
+                description: The comment creator's avatar URL.
+            description: The comment creator's avatar.
+          displayName?:
+            type: string
+            description: The display name.
+          id?:
+            type: string
+            description: The identifier of the Comment creator.
+          url?:
+            type: string
+            description: The URL of the Comment creator's Profile page.
+        description: The author of this Comment.
+      kind?:
+        type: string
+        default: blogger#comment
+        description: The kind of this entry. Always blogger#comment
+      inReplyTo?:
+        type: object
+        properties:
+          id?:
+            type: string
+            description: The identified of the parent of this comment.
+        description: Data about the comment this is in reply to.
+      id?:
+        type: string
+        description: The identifier for this resource.
+      published?:
+        type: datetime
+        description: RFC 3339 date-time when this comment was published.
+      blog?:
+        type: object
+        properties:
+          id?:
+            type: string
+            description: The identifier of the blog containing this comment.
+        description: Data about the blog containing this comment.
+      updated?:
+        type: datetime
+        description: RFC 3339 date-time when this comment was last updated.
+      content?:
+        type: string
+        description: The actual content of the comment. May include HTML markup.
+      selfLink?:
+        type: string
+        description: The API REST URL to fetch this resource from.
+      status?:
+        type: string
+        description: The status of the comment (only populated for admin users)
+  CommentList:
+    type: object
+    properties:
+      prevPageToken?:
+        type: string
+        description: Pagination token to fetch the previous page, if one exists.
+      kind?:
+        type: string
+        default: blogger#commentList
+        description: The kind of this entry. Always blogger#commentList
+      nextPageToken?:
+        type: string
+        description: Pagination token to fetch the next page, if one exists.
+      etag?:
+        type: string
+        description: Etag of the response.
+      items?:
+        type: array
+        description: The List of Comments for a Post.
+        items: Comment
+  Page:
+    type: object
+    properties:
+      author?:
+        type: object
+        properties:
+          image?:
+            type: object
+            properties:
+              url?:
+                type: string
+                description: The page author's avatar URL.
+            description: The page author's avatar.
+          displayName?:
+            type: string
+            description: The display name.
+          id?:
+            type: string
+            description: The identifier of the Page creator.
+          url?:
+            type: string
+            description: The URL of the Page creator's Profile page.
+        description: The author of this Page.
+      kind?:
+        type: string
+        default: blogger#page
+        description: The kind of this entity. Always blogger#page
+      etag?:
+        type: string
+        description: Etag of the resource.
+      id?:
+        type: string
+        description: The identifier for this resource.
+      published?:
+        type: datetime
+        description: RFC 3339 date-time when this Page was published.
+      blog?:
+        type: object
+        properties:
+          id?:
+            type: string
+            description: The identifier of the blog containing this page.
+        description: Data about the blog containing this Page.
+      title?:
+        type: string
+        description: The title of this entity. This is the name displayed in the Admin user interface.
+      updated?:
+        type: datetime
+        description: RFC 3339 date-time when this Page was last updated.
+      content?:
+        type: string
+        description: The body content of this Page, in HTML.
+      url?:
+        type: string
+        description: The URL that this Page is displayed at.
+      selfLink?:
+        type: string
+        description: The API REST URL to fetch this resource from.
+      status?:
+        type: string
+        description: The status of the page for admin resources (either LIVE or DRAFT).
+  PageList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: blogger#pageList
+        description: The kind of this entity. Always blogger#pageList
+      nextPageToken?:
+        type: string
+        description: Pagination token to fetch the next page, if one exists.
+      etag?:
+        type: string
+        description: Etag of the response.
+      items?:
+        type: array
+        description: The list of Pages for a Blog.
+        items: Page
+  Pageviews:
+    type: object
+    properties:
+      counts?:
+        type: array
+        description: The container of posts in this blog.
+        items:
+          type: object
+          properties:
+            count?:
+              type: integer
+              format: int64
+              description: Count of page views for the given time range
+            timeRange?:
+              type: string
+              description: Time range the given count applies to
+      kind?:
+        type: string
+        default: blogger#page_views
+        description: The kind of this entry. Always blogger#page_views
+      blogId?:
+        type: string
+        description: Blog Id
+  Post:
+    type: object
+    properties:
+      images?:
+        type: array
+        description: Display image for the Post.
+        items:
+          type: object
+          properties:
+            url?:
+              type: string
+      author?:
+        type: object
+        properties:
+          image?:
+            type: object
+            properties:
+              url?:
+                type: string
+                description: The Post author's avatar URL.
+            description: The Post author's avatar.
+          displayName?:
+            type: string
+            description: The display name.
+          id?:
+            type: string
+            description: The identifier of the Post creator.
+          url?:
+            type: string
+            description: The URL of the Post creator's Profile page.
+        description: The author of this Post.
+      kind?:
+        type: string
+        default: blogger#post
+        description: The kind of this entity. Always blogger#post
+      customMetaData?:
+        type: string
+        description: The JSON meta-data for the Post.
+      published?:
+        type: datetime
+        description: RFC 3339 date-time when this Post was published.
+      blog?:
+        type: object
+        properties:
+          id?:
+            type: string
+            description: The identifier of the Blog that contains this Post.
+        description: Data about the blog containing this Post.
+      title?:
+        type: string
+        description: The title of the Post.
+      content?:
+        type: string
+        description: The content of the Post. May contain HTML markup.
+      url?:
+        type: string
+        description: The URL where this Post is displayed.
+      labels?:
+        type: array
+        description: The list of labels this Post was tagged with.
+        items:
+          type: string
+      selfLink?:
+        type: string
+        description: The API REST URL to fetch this resource from.
+      replies?:
+        type: object
+        properties:
+          totalItems?:
+            type: integer
+            format: int64
+            description: The count of comments on this post.
+          items?:
+            type: array
+            description: The List of Comments for this Post.
+            items: Comment
+          selfLink?:
+            type: string
+            description: The URL of the comments on this post.
+        description: The container of comments on this Post.
+      readerComments?:
+        type: string
+        description: Comment control and display setting for readers of this post.
+      etag?:
+        type: string
+        description: Etag of the resource.
+      location?:
+        type: object
+        properties:
+          lng?:
+            type: number
+            format: double
+            description: Location's longitude.
+          name?:
+            type: string
+            description: Location name.
+          lat?:
+            type: number
+            format: double
+            description: Location's latitude.
+          span?:
+            type: string
+            description: Location's viewport span. Can be used when rendering a map preview.
+        description: The location for geotagged posts.
+      id?:
+        type: string
+        description: The identifier of this Post.
+      titleLink?:
+        type: string
+        description: The title link URL, similar to atom's related link.
+      updated?:
+        type: datetime
+        description: RFC 3339 date-time when this Post was last updated.
+      status?:
+        type: string
+        description: Status of the post. Only set for admin-level requests
+  PostList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: blogger#postList
+        description: The kind of this entity. Always blogger#postList
+      nextPageToken?:
+        type: string
+        description: Pagination token to fetch the next page, if one exists.
+      etag?:
+        type: string
+        description: Etag of the response.
+      items?:
+        type: array
+        description: The list of Posts for this Blog.
+        items: Post
+  PostPerUserInfo:
+    type: object
+    properties:
+      hasEditAccess?:
+        type: boolean
+        description: True if the user has Author level access to the post.
+      kind?:
+        type: string
+        default: blogger#postPerUserInfo
+        description: The kind of this entity. Always blogger#postPerUserInfo
+      postId?:
+        type: string
+        description: ID of the Post resource.
+      blogId?:
+        type: string
+        description: ID of the Blog that the post resource belongs to.
+      userId?:
+        type: string
+        description: ID of the User.
+  PostUserInfo:
+    type: object
+    properties:
+      post?: Post
+      kind?:
+        type: string
+        default: blogger#postUserInfo
+        description: The kind of this entity. Always blogger#postUserInfo
+      post_user_info?: PostPerUserInfo
+  PostUserInfosList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: blogger#postUserInfosList
+        description: The kind of this entity. Always blogger#postList
+      nextPageToken?:
+        type: string
+        description: Pagination token to fetch the next page, if one exists.
+      items?:
+        type: array
+        description: The list of Posts with User information for the post, for this Blog.
+        items: PostUserInfo
+  User:
+    type: object
+    properties:
+      blogs?:
+        type: object
+        properties:
+          selfLink?:
+            type: string
+            description: The URL of the Blogs for this user.
+        description: The container of blogs for this user.
+      created?:
+        type: datetime
+        description: The timestamp of when this profile was created, in seconds since epoch.
+      displayName?:
+        type: string
+        description: The display name.
+      kind?:
+        type: string
+        default: blogger#user
+        description: The kind of this entity. Always blogger#user
+      about?:
+        type: string
+        description: Profile summary information.
+      id?:
+        type: string
+        description: The identifier for this User.
+      locale?:
+        type: object
+        properties:
+          country?:
+            type: string
+            description: The user's country setting.
+          variant?:
+            type: string
+            description: The user's language variant setting.
+          language?:
+            type: string
+            description: The user's language setting.
+        description: This user's locale
+      url?:
+        type: string
+        description: The user's profile page.
+      selfLink?:
+        type: string
+        description: The API REST URL to fetch this resource from.
+/blogs:
+  /{blogId}:
+    uriParameters:
+      blogId:
+        type: string
+        description: The ID of the Blog.
+    /posts:
+      /{postId}:
+        uriParameters:
+          postId:
+            type: string
+            description: The ID of the Post.
+        /comments:
+          /{commentId}:
+            uriParameters:
+              commentId:
+                type: string
+                description: The ID of the comment to mark as spam.
+            /spam:
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/blogger
+                description: Marks a comment as spam.
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Comment
+            /approve:
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/blogger
+                description: Marks a comment as not spam.
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Comment
+            /removecontent:
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/blogger
+                description: Removes the content of a comment.
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Comment
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/blogger
+                  - https://www.googleapis.com/auth/blogger.readonly
+              description: Gets one comment by ID.
+              is:
+              - hasParameters
+              queryParameters:
+                view?:
+                  type: string
+                  description: 'Access level for the requested comment (default: READER).
+                    Note that some comments will require elevated permissions, for
+                    example comments where the parent posts which is in a draft state,
+                    or comments that are pending moderation.'
+                  enum:
+                  - ADMIN
+                  - AUTHOR
+                  - READER
+              responses:
+                200:
+                  body:
+                    application/json: Comment
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/blogger
+              description: Delete a comment by ID.
+              is:
+              - hasParameters
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/blogger
+                - https://www.googleapis.com/auth/blogger.readonly
+            description: Retrieves the comments for a post, possibly filtered.
+            is:
+            - hasParameters
+            queryParameters:
+              view?:
+                type: string
+                description: Access level with which to view the returned result. Note that some fields require elevated access.
+                enum:
+                - ADMIN
+                - AUTHOR
+                - READER
+              endDate?:
+                type: datetime
+                description: Latest date of comment to fetch, a date-time with RFC 3339 formatting.
+              maxResults?:
+                type: integer
+                format: int32
+                description: Maximum number of comments to include in the result.
+              fetchBodies?:
+                type: boolean
+                description: Whether the body content of the comments is included.
+              pageToken?:
+                type: string
+                description: Continuation token if request is paged.
+              startDate?:
+                type: datetime
+                description: Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
+              status?:
+                type: string
+                enum:
+                - emptied
+                - live
+                - pending
+                - spam
+            responses:
+              200:
+                body:
+                  application/json: CommentList
+        /publish:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/blogger
+            description: Publishes a draft post, optionally at the specific time of the given publishDate parameter.
+            is:
+            - hasParameters
+            queryParameters:
+              publishDate?:
+                type: datetime
+                description: Optional date and time to schedule the publishing of the Blog. If no publishDate parameter is given, the post is either published at the a previously saved schedule date (if present), or the current time. If a future date is given, the post will be scheduled to be published.
+            responses:
+              200:
+                body:
+                  application/json: Post
+        /revert:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/blogger
+            description: Revert a published or scheduled post to draft state.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Post
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+          description: Update a post. This method supports patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            maxComments?:
+              type: integer
+              format: int32
+              description: Maximum number of comments to retrieve with the returned post.
+            fetchImages?:
+              type: boolean
+              description: 'Whether image URL metadata for each post is included in
+                the returned result (default: false).'
+            publish?:
+              type: boolean
+              description: 'Whether a publish action should be performed when the
+                post is updated (default: false).'
+            fetchBody?:
+              type: boolean
+              default: true
+              description: 'Whether the body content of the post is included with
+                the result (default: true).'
+            revert?:
+              type: boolean
+              description: 'Whether a revert action should be performed when the post
+                is updated (default: false).'
+          body:
+            application/json: Post
+          responses:
+            200:
+              body:
+                application/json: Post
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+              - https://www.googleapis.com/auth/blogger.readonly
+          description: Get a post by ID.
+          is:
+          - hasParameters
+          queryParameters:
+            maxComments?:
+              type: integer
+              format: int32
+              description: Maximum number of comments to pull back on a post.
+            view?:
+              type: string
+              description: Access level with which to view the returned result. Note that some fields require elevated access.
+              enum:
+              - ADMIN
+              - AUTHOR
+              - READER
+            fetchImages?:
+              type: boolean
+              description: 'Whether image URL metadata for each post is included (default:
+                false).'
+            fetchBody?:
+              type: boolean
+              default: true
+              description: 'Whether the body content of the post is included (default:
+                true). This should be set to false when the post bodies are not required,
+                to help minimize traffic.'
+          responses:
+            200:
+              body:
+                application/json: Post
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+          description: Update a post.
+          is:
+          - hasParameters
+          queryParameters:
+            maxComments?:
+              type: integer
+              format: int32
+              description: Maximum number of comments to retrieve with the returned post.
+            fetchImages?:
+              type: boolean
+              description: 'Whether image URL metadata for each post is included in
+                the returned result (default: false).'
+            publish?:
+              type: boolean
+              description: 'Whether a publish action should be performed when the
+                post is updated (default: false).'
+            fetchBody?:
+              type: boolean
+              default: true
+              description: 'Whether the body content of the post is included with
+                the result (default: true).'
+            revert?:
+              type: boolean
+              description: 'Whether a revert action should be performed when the post
+                is updated (default: false).'
+          body:
+            application/json: Post
+          responses:
+            200:
+              body:
+                application/json: Post
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+          description: Delete a post by ID.
+          is:
+          - hasParameters
+      /search:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+              - https://www.googleapis.com/auth/blogger.readonly
+          description: Search for a post.
+          is:
+          - hasParameters
+          queryParameters:
+            q:
+              type: string
+              description: Query terms to search this blog for matching posts.
+            fetchBodies?:
+              type: boolean
+              default: true
+              description: 'Whether the body content of posts is included (default:
+                true). This should be set to false when the post bodies are not required,
+                to help minimize traffic.'
+            orderBy?:
+              type: string
+              default: PUBLISHED
+              description: Sort search results
+              enum:
+              - published
+              - updated
+          responses:
+            200:
+              body:
+                application/json: PostList
+      /bypath:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+              - https://www.googleapis.com/auth/blogger.readonly
+          description: Retrieve a Post by Path.
+          is:
+          - hasParameters
+          queryParameters:
+            path:
+              type: string
+              description: Path of the Post to retrieve.
+            maxComments?:
+              type: integer
+              format: int32
+              description: Maximum number of comments to pull back on a post.
+            view?:
+              type: string
+              description: Access level with which to view the returned result. Note that some fields require elevated access.
+              enum:
+              - ADMIN
+              - AUTHOR
+              - READER
+          responses:
+            200:
+              body:
+                application/json: Post
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+        description: Add a post.
+        is:
+        - hasParameters
+        queryParameters:
+          fetchImages?:
+            type: boolean
+            description: 'Whether image URL metadata for each post is included in
+              the returned result (default: false).'
+          isDraft?:
+            type: boolean
+            description: 'Whether to create the post as a draft (default: false).'
+          fetchBody?:
+            type: boolean
+            default: true
+            description: 'Whether the body content of the post is included with the
+              result (default: true).'
+        body:
+          application/json: Post
+        responses:
+          200:
+            body:
+              application/json: Post
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+            - https://www.googleapis.com/auth/blogger.readonly
+        description: Retrieves a list of posts, possibly filtered.
+        is:
+        - hasParameters
+        queryParameters:
+          view?:
+            type: string
+            description: Access level with which to view the returned result. Note that some fields require escalated access.
+            enum:
+            - ADMIN
+            - AUTHOR
+            - READER
+          endDate?:
+            type: datetime
+            description: Latest post date to fetch, a date-time with RFC 3339 formatting.
+          fetchImages?:
+            type: boolean
+            description: Whether image URL metadata for each post is included.
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of posts to fetch.
+          fetchBodies?:
+            type: boolean
+            default: true
+            description: 'Whether the body content of posts is included (default:
+              true). This should be set to false when the post bodies are not required,
+              to help minimize traffic.'
+          orderBy?:
+            type: string
+            default: PUBLISHED
+            description: Sort search results
+            enum:
+            - published
+            - updated
+          pageToken?:
+            type: string
+            description: Continuation token if the request is paged.
+          startDate?:
+            type: datetime
+            description: Earliest post date to fetch, a date-time with RFC 3339 formatting.
+          labels?:
+            type: string
+            description: Comma-separated list of labels to search for.
+          status?:
+            type: string
+            description: Statuses to include in the results.
+            enum:
+            - draft
+            - live
+            - scheduled
+        responses:
+          200:
+            body:
+              application/json: PostList
+    /comments:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+            - https://www.googleapis.com/auth/blogger.readonly
+        description: Retrieves the comments for a blog, across all posts, possibly filtered.
+        is:
+        - hasParameters
+        queryParameters:
+          endDate?:
+            type: datetime
+            description: Latest date of comment to fetch, a date-time with RFC 3339 formatting.
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of comments to include in the result.
+          fetchBodies?:
+            type: boolean
+            description: Whether the body content of the comments is included.
+          pageToken?:
+            type: string
+            description: Continuation token if request is paged.
+          startDate?:
+            type: datetime
+            description: Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
+          status?:
+            type: string
+            enum:
+            - emptied
+            - live
+            - pending
+            - spam
+        responses:
+          200:
+            body:
+              application/json: CommentList
+    /pages:
+      /{pageId}:
+        uriParameters:
+          pageId:
+            type: string
+            description: The ID of the Page.
+        /publish:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/blogger
+            description: Publishes a draft page.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Page
+        /revert:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/blogger
+            description: Revert a published or scheduled page to draft state.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Page
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+          description: Update a page. This method supports patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            publish?:
+              type: boolean
+              description: 'Whether a publish action should be performed when the
+                page is updated (default: false).'
+            revert?:
+              type: boolean
+              description: 'Whether a revert action should be performed when the page
+                is updated (default: false).'
+          body:
+            application/json: Page
+          responses:
+            200:
+              body:
+                application/json: Page
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+              - https://www.googleapis.com/auth/blogger.readonly
+          description: Gets one blog page by ID.
+          is:
+          - hasParameters
+          queryParameters:
+            view?:
+              type: string
+              enum:
+              - ADMIN
+              - AUTHOR
+              - READER
+          responses:
+            200:
+              body:
+                application/json: Page
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+          description: Update a page.
+          is:
+          - hasParameters
+          queryParameters:
+            publish?:
+              type: boolean
+              description: 'Whether a publish action should be performed when the
+                page is updated (default: false).'
+            revert?:
+              type: boolean
+              description: 'Whether a revert action should be performed when the page
+                is updated (default: false).'
+          body:
+            application/json: Page
+          responses:
+            200:
+              body:
+                application/json: Page
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+          description: Delete a page by ID.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+        description: Add a page.
+        is:
+        - hasParameters
+        queryParameters:
+          isDraft?:
+            type: boolean
+            description: 'Whether to create the page as a draft (default: false).'
+        body:
+          application/json: Page
+        responses:
+          200:
+            body:
+              application/json: Page
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+            - https://www.googleapis.com/auth/blogger.readonly
+        description: Retrieves the pages for a blog, optionally including non-LIVE statuses.
+        is:
+        - hasParameters
+        queryParameters:
+          view?:
+            type: string
+            description: Access level with which to view the returned result. Note that some fields require elevated access.
+            enum:
+            - ADMIN
+            - AUTHOR
+            - READER
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of Pages to fetch.
+          fetchBodies?:
+            type: boolean
+            description: Whether to retrieve the Page bodies.
+          pageToken?:
+            type: string
+            description: Continuation token if the request is paged.
+          status?:
+            type: string
+            enum:
+            - draft
+            - live
+        responses:
+          200:
+            body:
+              application/json: PageList
+    /pageviews:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+        description: Retrieve pageview stats for a Blog.
+        is:
+        - hasParameters
+        queryParameters:
+          range?:
+            type: string
+            enum:
+            - 30DAYS
+            - 7DAYS
+            - all
+        responses:
+          200:
+            body:
+              application/json: Pageviews
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/blogger
+          - https://www.googleapis.com/auth/blogger.readonly
+      description: Gets one blog by ID.
+      is:
+      - hasParameters
+      queryParameters:
+        maxPosts?:
+          type: integer
+          format: int32
+          description: Maximum number of posts to pull back with the blog.
+        view?:
+          type: string
+          description: Access level with which to view the blog. Note that some fields require elevated access.
+          enum:
+          - ADMIN
+          - AUTHOR
+          - READER
+      responses:
+        200:
+          body:
+            application/json: Blog
+  /byurl:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/blogger
+          - https://www.googleapis.com/auth/blogger.readonly
+      description: Retrieve a Blog by URL.
+      is:
+      - hasParameters
+      queryParameters:
+        view?:
+          type: string
+          description: Access level with which to view the blog. Note that some fields require elevated access.
+          enum:
+          - ADMIN
+          - AUTHOR
+          - READER
+        url:
+          type: string
+          description: The URL of the blog to retrieve.
+      responses:
+        200:
+          body:
+            application/json: Blog
+/users:
+  /{userId}:
+    uriParameters:
+      userId:
+        type: string
+        description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
+    /blogs:
+      /{blogId}:
+        uriParameters:
+          blogId:
+            type: string
+            description: The ID of the blog.
+        /posts:
+          /{postId}:
+            uriParameters:
+              postId:
+                type: string
+                description: The ID of the post to get.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/blogger
+                  - https://www.googleapis.com/auth/blogger.readonly
+              description: Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.
+              is:
+              - hasParameters
+              queryParameters:
+                maxComments?:
+                  type: integer
+                  format: int32
+                  description: Maximum number of comments to pull back on a post.
+              responses:
+                200:
+                  body:
+                    application/json: PostUserInfo
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/blogger
+                - https://www.googleapis.com/auth/blogger.readonly
+            description: Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.
+            is:
+            - hasParameters
+            queryParameters:
+              view?:
+                type: string
+                description: Access level with which to view the returned result. Note that some fields require elevated access.
+                enum:
+                - ADMIN
+                - AUTHOR
+                - READER
+              endDate?:
+                type: datetime
+                description: Latest post date to fetch, a date-time with RFC 3339 formatting.
+              maxResults?:
+                type: integer
+                format: int32
+                description: Maximum number of posts to fetch.
+              fetchBodies?:
+                type: boolean
+                default: false
+                description: Whether the body content of posts is included. Default is false.
+              orderBy?:
+                type: string
+                default: PUBLISHED
+                description: Sort order applied to search results. Default is published.
+                enum:
+                - published
+                - updated
+              pageToken?:
+                type: string
+                description: Continuation token if the request is paged.
+              startDate?:
+                type: datetime
+                description: Earliest post date to fetch, a date-time with RFC 3339 formatting.
+              labels?:
+                type: string
+                description: Comma-separated list of labels to search for.
+              status?:
+                type: string
+                enum:
+                - draft
+                - live
+                - scheduled
+            responses:
+              200:
+                body:
+                  application/json: PostUserInfosList
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/blogger
+              - https://www.googleapis.com/auth/blogger.readonly
+          description: Gets one blog and user info pair by blogId and userId.
+          is:
+          - hasParameters
+          queryParameters:
+            maxPosts?:
+              type: integer
+              format: int32
+              description: Maximum number of posts to pull back with the blog.
+          responses:
+            200:
+              body:
+                application/json: BlogUserInfo
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+            - https://www.googleapis.com/auth/blogger.readonly
+        description: Retrieves a list of blogs, possibly filtered.
+        is:
+        - hasParameters
+        queryParameters:
+          fetchUserInfo?:
+            type: boolean
+            description: Whether the response is a list of blogs with per-user information instead of just blogs.
+          view?:
+            type: string
+            description: Access level with which to view the blogs. Note that some fields require elevated access.
+            enum:
+            - ADMIN
+            - AUTHOR
+            - READER
+          role?:
+            type: string
+            description: User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.
+            enum:
+            - ADMIN
+            - AUTHOR
+            - READER
+          status?:
+            type: string
+            default: LIVE
+            description: 'Blog statuses to include in the result (default: Live blogs
+              only). Note that ADMIN access is required to view deleted blogs.'
+            enum:
+            - DELETED
+            - LIVE
+        responses:
+          200:
+            body:
+              application/json: BlogList
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/blogger
+          - https://www.googleapis.com/auth/blogger.readonly
+      description: Gets one user by ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: User

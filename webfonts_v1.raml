@@ -1,0 +1,96 @@
+#%RAML 1.0
+title: Google Fonts Developer API
+version: v1
+baseUri: https://www.googleapis.com/webfonts/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/fonts/docs/developer_api
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/feature/font_api-32.gif
+  name: x32
+- url: https://www.google.com/images/icons/feature/font_api-16.png
+  name: x16
+(commons.Id): webfonts:v1
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+types:
+  Webfont:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: webfonts#webfont
+        description: This kind represents a webfont object in the webfonts service.
+      files?:
+        type: object
+        description: 'The font files (with all supported scripts) for each one of
+          the available variants, as a key : value map.'
+      lastModified?:
+        type: string
+        description: The date (format "yyyy-MM-dd") the font was modified for the last time.
+      variants?:
+        type: array
+        description: The available variants for the font.
+        items:
+          type: string
+      category?:
+        type: string
+        description: The category of the font.
+      family?:
+        type: string
+        description: The name of the font.
+      version?:
+        type: string
+        description: The font version.
+      subsets?:
+        type: array
+        description: The scripts supported by the font.
+        items:
+          type: string
+  WebfontList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: webfonts#webfontList
+        description: This kind represents a list of webfont objects in the webfonts service.
+      items?:
+        type: array
+        description: The list of fonts currently served by the Google Fonts API.
+        items: Webfont
+/webfonts:
+  get:
+    description: Retrieves the list of fonts currently served by the Google Fonts Developer API
+    is:
+    - hasParameters
+    queryParameters:
+      sort?:
+        type: string
+        description: Enables sorting of the list
+        enum:
+        - alpha
+        - date
+        - popularity
+        - style
+        - trending
+    responses:
+      200:
+        body:
+          application/json: WebfontList

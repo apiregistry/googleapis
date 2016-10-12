@@ -1,0 +1,480 @@
+#%RAML 1.0
+title: Resource Views API
+version: v1beta1
+baseUri: https://www.googleapis.com/resourceviews/v1beta1/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/compute/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Tags):
+- limited_availability
+(commons.Id): resourceviews:v1beta1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/ndev.cloudman
+      - https://www.googleapis.com/auth/ndev.cloudman.readonly
+      - https://www.googleapis.com/auth/compute.readonly
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/compute
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Label:
+    type: object
+    properties:
+      value?:
+        type: string
+        description: Value of the label.
+      key?:
+        type: string
+        description: Key of the label.
+    description: The Label to be applied to the resource views.
+  RegionViewsAddResourcesRequest:
+    type: object
+    properties:
+      resources?:
+        type: array
+        description: The list of resources to be added.
+        items:
+          type: string
+    description: The request to add resources to the resource view.
+  RegionViewsInsertResponse:
+    type: object
+    properties:
+      resource?: ResourceView
+    description: The response to a resource view insert request.
+  RegionViewsListResourcesResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: A token used for pagination.
+      members?:
+        type: array
+        description: The resources in the view.
+        items:
+          type: string
+    description: The response to the list resource request.
+  RegionViewsListResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: A token used for pagination.
+      resourceViews?:
+        type: array
+        description: The list of resource views that meet the criteria.
+        items: ResourceView
+    description: The response to the list resource view request.
+  RegionViewsRemoveResourcesRequest:
+    type: object
+    properties:
+      resources?:
+        type: array
+        description: The list of resources to be removed.
+        items:
+          type: string
+    description: The request to remove resources from the resource view.
+  ResourceView:
+    type: object
+    properties:
+      creationTime?:
+        type: string
+        description: The creation time of the resource view.
+      kind?:
+        type: string
+        default: resourceviews#resourceView
+        description: Type of the resource.
+      members?:
+        type: array
+        description: A list of all resources in the resource view.
+        items:
+          type: string
+      name?:
+        type: string
+        description: The name of the resource view.
+      description?:
+        type: string
+        description: The detailed description of the resource view.
+      id?:
+        type: string
+        description: '[Output Only] The ID of the resource view.'
+      lastModified?:
+        type: string
+        description: The last modified time of the view. Not supported yet.
+      labels?:
+        type: array
+        description: The labels for events.
+        items: Label
+      numMembers?:
+        type: integer
+        format: int32
+        description: The total number of resources in the resource view.
+      selfLink?:
+        type: string
+        description: '[Output Only] A self-link to the resource view.'
+    description: The resource view object.
+  ZoneViewsAddResourcesRequest:
+    type: object
+    properties:
+      resources?:
+        type: array
+        description: The list of resources to be added.
+        items:
+          type: string
+    description: The request to add resources to the resource view.
+  ZoneViewsInsertResponse:
+    type: object
+    properties:
+      resource?: ResourceView
+    description: The response to an insert request.
+  ZoneViewsListResourcesResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: A token used for pagination.
+      members?:
+        type: array
+        description: The full URL of resources in the view.
+        items:
+          type: string
+    description: The response to a list resource request.
+  ZoneViewsListResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: A token used for pagination.
+      resourceViews?:
+        type: array
+        description: The result that contains all resource views that meet the criteria.
+        items: ResourceView
+    description: The response to a list request.
+  ZoneViewsRemoveResourcesRequest:
+    type: object
+    properties:
+      resources?:
+        type: array
+        description: The list of resources to be removed.
+        items:
+          type: string
+    description: The request to remove resources from the resource view.
+/{projectName}:
+  uriParameters:
+    projectName:
+      type: string
+      description: The project name of the resource view.
+  /regions:
+    /{region}:
+      uriParameters:
+        region:
+          type: string
+          description: The region name of the resource view.
+      /resourceViews:
+        /{resourceViewName}:
+          uriParameters:
+            resourceViewName:
+              type: string
+              description: The name of the resource view.
+          /resources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud-platform.read-only
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/compute.readonly
+                  - https://www.googleapis.com/auth/ndev.cloudman
+                  - https://www.googleapis.com/auth/ndev.cloudman.readonly
+              description: List the resources in the view.
+              is:
+              - hasParameters
+              queryParameters:
+                maxResults?:
+                  type: integer
+                  default: 5000
+                  format: int32
+                  description: 'Maximum count of results to be returned. Acceptable
+                    values are 0 to 5000, inclusive. (Default: 5000)'
+                  maximum: 5000
+                  minimum: 0
+                pageToken?:
+                  type: string
+                  description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+              responses:
+                200:
+                  body:
+                    application/json: RegionViewsListResourcesResponse
+          /addResources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Add resources to the view.
+              is:
+              - hasParameters
+              body:
+                application/json: RegionViewsAddResourcesRequest
+          /removeResources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Remove resources from the view.
+              is:
+              - hasParameters
+              body:
+                application/json: RegionViewsRemoveResourcesRequest
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/compute.readonly
+                - https://www.googleapis.com/auth/ndev.cloudman
+                - https://www.googleapis.com/auth/ndev.cloudman.readonly
+            description: Get the information of a resource view.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: ResourceView
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Delete a resource view.
+            is:
+            - hasParameters
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/ndev.cloudman
+          description: Create a resource view.
+          is:
+          - hasParameters
+          body:
+            application/json: ResourceView
+          responses:
+            200:
+              body:
+                application/json: RegionViewsInsertResponse
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/compute.readonly
+              - https://www.googleapis.com/auth/ndev.cloudman
+              - https://www.googleapis.com/auth/ndev.cloudman.readonly
+          description: List resource views.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 5000
+              format: int32
+              description: 'Maximum count of results to be returned. Acceptable values
+                are 0 to 5000, inclusive. (Default: 5000)'
+              maximum: 5000
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          responses:
+            200:
+              body:
+                application/json: RegionViewsListResponse
+  /zones:
+    /{zone}:
+      uriParameters:
+        zone:
+          type: string
+          description: The zone name of the resource view.
+      /resourceViews:
+        /{resourceViewName}:
+          uriParameters:
+            resourceViewName:
+              type: string
+              description: The name of the resource view.
+          /resources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud-platform.read-only
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/compute.readonly
+                  - https://www.googleapis.com/auth/ndev.cloudman
+                  - https://www.googleapis.com/auth/ndev.cloudman.readonly
+              description: List the resources of the resource view.
+              is:
+              - hasParameters
+              queryParameters:
+                maxResults?:
+                  type: integer
+                  default: 5000
+                  format: int32
+                  description: 'Maximum count of results to be returned. Acceptable
+                    values are 0 to 5000, inclusive. (Default: 5000)'
+                  maximum: 5000
+                  minimum: 0
+                pageToken?:
+                  type: string
+                  description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+              responses:
+                200:
+                  body:
+                    application/json: ZoneViewsListResourcesResponse
+          /addResources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Add resources to the view.
+              is:
+              - hasParameters
+              body:
+                application/json: ZoneViewsAddResourcesRequest
+          /removeResources:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/ndev.cloudman
+              description: Remove resources from the view.
+              is:
+              - hasParameters
+              body:
+                application/json: ZoneViewsRemoveResourcesRequest
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/compute.readonly
+                - https://www.googleapis.com/auth/ndev.cloudman
+                - https://www.googleapis.com/auth/ndev.cloudman.readonly
+            description: Get the information of a zonal resource view.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: ResourceView
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/compute
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Delete a resource view.
+            is:
+            - hasParameters
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/ndev.cloudman
+          description: Create a resource view.
+          is:
+          - hasParameters
+          body:
+            application/json: ResourceView
+          responses:
+            200:
+              body:
+                application/json: ZoneViewsInsertResponse
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/compute.readonly
+              - https://www.googleapis.com/auth/ndev.cloudman
+              - https://www.googleapis.com/auth/ndev.cloudman.readonly
+          description: List resource views.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              default: 5000
+              format: int32
+              description: 'Maximum count of results to be returned. Acceptable values
+                are 0 to 5000, inclusive. (Default: 5000)'
+              maximum: 5000
+              minimum: 0
+            pageToken?:
+              type: string
+              description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          responses:
+            200:
+              body:
+                application/json: ZoneViewsListResponse

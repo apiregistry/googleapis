@@ -1,0 +1,1665 @@
+#%RAML 1.0
+title: Cloud Storage JSON API
+version: v1
+baseUri: https://www.googleapis.com/storage/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/storage/docs/json_api/
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/cloud_storage-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/cloud_storage-16.png
+  name: x16
+(commons.Tags):
+- labs
+(commons.Id): storage:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/devstorage.full_control
+      - https://www.googleapis.com/auth/cloud-platform
+      - https://www.googleapis.com/auth/devstorage.read_write
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Bucket:
+    type: object
+    properties:
+      defaultObjectAcl?:
+        type: array
+        description: Default access controls to apply to new objects when no ACL is provided.
+        items: ObjectAccessControl
+      owner?:
+        type: object
+        properties:
+          entityId?:
+            type: string
+            description: The ID for the entity.
+          entity?:
+            type: string
+            description: The entity, in the form project-owner-projectId.
+        description: The owner of the bucket. This is always the project team's owner group.
+      metageneration?:
+        type: integer
+        format: int64
+        description: The metadata generation of this bucket.
+      website?:
+        type: object
+        properties:
+          mainPageSuffix?:
+            type: string
+            description: If the requested object path is missing, the service will ensure the path has a trailing '/', append this suffix, and attempt to retrieve the resulting object. This allows the creation of index.html objects to represent directory pages.
+          notFoundPage?:
+            type: string
+            description: If the requested object path is missing, and any mainPageSuffix object is missing, if applicable, the service will return the named object from this bucket as the content for a 404 Not Found result.
+        description: The bucket's website configuration, controlling how the service behaves when accessing bucket contents as a web site. See the Static Website Examples for more information.
+      cors?:
+        type: array
+        description: The bucket's Cross-Origin Resource Sharing (CORS) configuration.
+        items:
+          type: object
+          properties:
+            method?:
+              type: array
+              description: 'The list of HTTP methods on which to include CORS response
+                headers, (GET, OPTIONS, POST, etc) Note: "*" is permitted in the list
+                of methods, and means "any method".'
+              items:
+                type: string
+            origin?:
+              type: array
+              description: 'The list of Origins eligible to receive CORS response
+                headers. Note: "*" is permitted in the list of origins, and means
+                "any Origin".'
+              items:
+                type: string
+            responseHeader?:
+              type: array
+              description: The list of HTTP headers other than the simple response headers to give permission for the user-agent to share across domains.
+              items:
+                type: string
+            maxAgeSeconds?:
+              type: integer
+              format: int32
+              description: The value, in seconds, to return in the  Access-Control-Max-Age header used in preflight responses.
+      versioning?:
+        type: object
+        properties:
+          enabled?:
+            type: boolean
+            description: While set to true, versioning is fully enabled for this bucket.
+        description: The bucket's versioning configuration.
+      kind?:
+        type: string
+        default: storage#bucket
+        description: The kind of item this is. For buckets, this is always storage#bucket.
+      projectNumber?:
+        type: integer
+        format: int64
+        description: The project number of the project the bucket belongs to.
+      acl?:
+        type: array
+        description: Access controls on the bucket.
+        items: BucketAccessControl
+      selfLink?:
+        type: string
+        description: The URI of this bucket.
+      lifecycle?:
+        type: object
+        properties:
+          rule?:
+            type: array
+            description: A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken.
+            items:
+              type: object
+              properties:
+                condition?:
+                  type: object
+                  properties:
+                    isLive?:
+                      type: boolean
+                      description: Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects.
+                    numNewerVersions?:
+                      type: integer
+                      format: int32
+                      description: Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.
+                    createdBefore?:
+                      type: string
+                      description: A date in RFC 3339 format with only the date part (for instance, "2013-01-15"). This condition is satisfied when an object is created before midnight of the specified date in UTC.
+                    age?:
+                      type: integer
+                      format: int32
+                      description: Age of an object (in days). This condition is satisfied when an object reaches the specified age.
+                  description: The condition(s) under which the action will be taken.
+                action?:
+                  type: object
+                  properties:
+                    type?:
+                      type: string
+                      description: Type of the action. Currently, only Delete is supported.
+                  description: The action to take.
+        description: The bucket's lifecycle configuration. See lifecycle management for more information.
+      storageClass?:
+        type: string
+        description: The bucket's storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. For more information, see storage classes.
+      name?:
+        type: string
+        description: The name of the bucket.
+      logging?:
+        type: object
+        properties:
+          logBucket?:
+            type: string
+            description: The destination bucket where the current bucket's logs should be placed.
+          logObjectPrefix?:
+            type: string
+            description: A prefix for log object names.
+        description: The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket's logs.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the bucket.
+      location?:
+        type: string
+        description: The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Defaults to US. See the developer's guide for the authoritative list.
+      timeCreated?:
+        type: datetime
+        description: The creation time of the bucket in RFC 3339 format.
+      id?:
+        type: string
+        description: The ID of the bucket.
+      updated?:
+        type: datetime
+        description: The modification time of the bucket in RFC 3339 format.
+    description: A bucket.
+  BucketAccessControl:
+    type: object
+    properties:
+      bucket?:
+        type: string
+        description: The name of the bucket.
+      role?:
+        type: string
+        description: The access permission for the entity.
+      kind?:
+        type: string
+        default: storage#bucketAccessControl
+        description: The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.
+      domain?:
+        type: string
+        description: The domain associated with the entity, if any.
+      entityId?:
+        type: string
+        description: The ID for the entity, if any.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the access-control entry.
+      id?:
+        type: string
+        description: The ID of the access-control entry.
+      projectTeam?:
+        type: object
+        properties:
+          projectNumber?:
+            type: string
+            description: The project number.
+          team?:
+            type: string
+            description: The team.
+        description: The project team associated with the entity, if any.
+      email?:
+        type: string
+        description: The email address associated with the entity, if any.
+      entity?:
+        type: string
+        description: "The entity holding the permission, in one of the following forms:\
+          \ \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain\
+          \ \n- project-team-projectId \n- allUsers \n- allAuthenticatedUsers Examples:\
+          \ \n- The user liz@example.com would be user-liz@example.com. \n- The group\
+          \ example@googlegroups.com would be group-example@googlegroups.com. \n-\
+          \ To refer to all members of the Google Apps for Business domain example.com,\
+          \ the entity would be domain-example.com."
+      selfLink?:
+        type: string
+        description: The link to this access-control entry.
+    description: An access-control entry.
+  BucketAccessControls:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#bucketAccessControls
+        description: The kind of item this is. For lists of bucket access control entries, this is always storage#bucketAccessControls.
+      items?:
+        type: array
+        description: The list of items.
+        items: BucketAccessControl
+    description: An access-control list.
+  Buckets:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#buckets
+        description: The kind of item this is. For lists of buckets, this is always storage#buckets.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: The list of items.
+        items: Bucket
+    description: A list of buckets.
+  Channel:
+    type: object
+    properties:
+      resourceId?:
+        type: string
+        description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+      address?:
+        type: string
+        description: The address where notifications are delivered for this channel.
+      payload?:
+        type: boolean
+        description: A Boolean value to indicate whether payload is wanted. Optional.
+      kind?:
+        type: string
+        default: api#channel
+        description: 'Identifies this as a notification channel used to watch for
+          changes to a resource. Value: the fixed string "api#channel".'
+      expiration?:
+        type: integer
+        format: int64
+        description: Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+      id?:
+        type: string
+        description: A UUID or similar unique string that identifies this channel.
+      resourceUri?:
+        type: string
+        description: A version-specific identifier for the watched resource.
+      params?:
+        type: object
+        description: Additional parameters controlling delivery channel behavior. Optional.
+      type?:
+        type: string
+        description: The type of delivery mechanism used for this channel.
+      token?:
+        type: string
+        description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+    description: An notification channel used to watch for resource changes.
+  ComposeRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#composeRequest
+        description: The kind of item this is.
+      destination?: Object
+      sourceObjects?:
+        type: array
+        description: The list of source objects that will be concatenated into a single object.
+        items:
+          type: object
+          properties:
+            generation?:
+              type: integer
+              format: int64
+              description: The generation of this object to use as the source.
+            name?:
+              type: string
+              description: The source object's name. The source object's bucket is implicitly the destination bucket.
+            objectPreconditions?:
+              type: object
+              properties:
+                ifGenerationMatch?:
+                  type: integer
+                  format: int64
+                  description: Only perform the composition if the generation of the source object that would be used matches this value. If this value and a generation are both specified, they must be the same value or the call will fail.
+              description: Conditions that must be met for this operation to execute.
+    description: A Compose request.
+  Object:
+    type: object
+    properties:
+      metadata?:
+        type: object
+        description: User-provided metadata, in key/value pairs.
+      acl?:
+        type: array
+        description: Access controls on the object.
+        items: ObjectAccessControl
+      customerEncryption?:
+        type: object
+        properties:
+          encryptionAlgorithm?:
+            type: string
+            description: The encryption algorithm.
+          keySha256?:
+            type: string
+            description: SHA256 hash value of the encryption key.
+        description: Metadata of customer-supplied encryption key, if the object is encrypted by such a key.
+      timeDeleted?:
+        type: string
+        description: The deletion time of the object in RFC 3339 format. Will be returned if and only if this version of the object has been deleted.
+      storageClass?:
+        type: string
+        description: Storage class of the object.
+      md5Hash?:
+        type: string
+        description: 'MD5 hash of the data; encoded using base64. For more information
+          about using the MD5 hash, see Hashes and ETags: Best Practices.'
+      contentDisposition?:
+        type: string
+        description: Content-Disposition of the object data.
+      contentEncoding?:
+        type: string
+        description: Content-Encoding of the object data.
+      timeCreated?:
+        type: string
+        description: The creation time of the object in RFC 3339 format.
+      id?:
+        type: string
+        description: The ID of the object.
+      contentType?:
+        type: string
+        description: Content-Type of the object data. If contentType is not specified, object downloads will be served as application/octet-stream.
+      generation?:
+        type: integer
+        format: int64
+        description: The content generation of this object. Used for object versioning.
+      owner?:
+        type: object
+        properties:
+          entityId?:
+            type: string
+            description: The ID for the entity.
+          entity?:
+            type: string
+            description: The entity, in the form user-userId.
+        description: The owner of the object. This will always be the uploader of the object.
+      metageneration?:
+        type: integer
+        format: int64
+        description: The version of the metadata for this object at this generation. Used for preconditions and for detecting changes in metadata. A metageneration number is only meaningful in the context of a particular generation of a particular object.
+      kind?:
+        type: string
+        default: storage#object
+        description: The kind of item this is. For objects, this is always storage#object.
+      cacheControl?:
+        type: string
+        description: Cache-Control directive for the object data. If omitted, and the object is accessible to all anonymous users, the default will be public, max-age=3600.
+      mediaLink?:
+        type: string
+        description: Media download link.
+      selfLink?:
+        type: string
+        description: The link to this object.
+      bucket?:
+        type: string
+        description: The name of the bucket containing this object.
+      componentCount?:
+        type: integer
+        format: int32
+        description: Number of underlying components that make up this object. Components are accumulated by compose operations.
+      crc32c?:
+        type: string
+        description: 'CRC32c checksum, as described in RFC 4960, Appendix B; encoded
+          using base64 in big-endian byte order. For more information about using
+          the CRC32c checksum, see Hashes and ETags: Best Practices.'
+      size?:
+        type: integer
+        format: int64
+        description: Content-Length of the data in bytes.
+      name?:
+        type: string
+        description: The name of this object. Required if not specified by URL parameter.
+      contentLanguage?:
+        type: string
+        description: Content-Language of the object data.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the object.
+      updated?:
+        type: string
+        description: The modification time of the object metadata in RFC 3339 format.
+    description: An object.
+  ObjectAccessControl:
+    type: object
+    properties:
+      generation?:
+        type: integer
+        format: int64
+        description: The content generation of the object, if applied to an object.
+      role?:
+        type: string
+        description: The access permission for the entity.
+      kind?:
+        type: string
+        default: storage#objectAccessControl
+        description: The kind of item this is. For object access control entries, this is always storage#objectAccessControl.
+      entityId?:
+        type: string
+        description: The ID for the entity, if any.
+      projectTeam?:
+        type: object
+        properties:
+          projectNumber?:
+            type: string
+            description: The project number.
+          team?:
+            type: string
+            description: The team.
+        description: The project team associated with the entity, if any.
+      selfLink?:
+        type: string
+        description: The link to this access-control entry.
+      bucket?:
+        type: string
+        description: The name of the bucket.
+      domain?:
+        type: string
+        description: The domain associated with the entity, if any.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the access-control entry.
+      id?:
+        type: string
+        description: The ID of the access-control entry.
+      email?:
+        type: string
+        description: The email address associated with the entity, if any.
+      entity?:
+        type: string
+        description: "The entity holding the permission, in one of the following forms:\
+          \ \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain\
+          \ \n- project-team-projectId \n- allUsers \n- allAuthenticatedUsers Examples:\
+          \ \n- The user liz@example.com would be user-liz@example.com. \n- The group\
+          \ example@googlegroups.com would be group-example@googlegroups.com. \n-\
+          \ To refer to all members of the Google Apps for Business domain example.com,\
+          \ the entity would be domain-example.com."
+      object?:
+        type: string
+        description: The name of the object, if applied to an object.
+    description: An access-control entry.
+  ObjectAccessControls:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: storage#objectAccessControls
+        description: The kind of item this is. For lists of object access control entries, this is always storage#objectAccessControls.
+      items?:
+        type: array
+        description: The list of items.
+        items: ObjectAccessControl
+    description: An access-control list.
+  Objects:
+    type: object
+    properties:
+      prefixes?:
+        type: array
+        description: The list of prefixes of objects matching-but-not-listed up to and including the requested delimiter.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: storage#objects
+        description: The kind of item this is. For lists of objects, this is always storage#objects.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: The list of items.
+        items: Object
+    description: A list of objects.
+  RewriteResponse:
+    type: object
+    properties:
+      rewriteToken?:
+        type: string
+        description: A token to use in subsequent requests to continue copying data. This token is present in the response only when there is more data to copy.
+      resource?: Object
+      kind?:
+        type: string
+        default: storage#rewriteResponse
+        description: The kind of item this is.
+      objectSize?:
+        type: integer
+        format: int64
+        description: The total size of the object being copied in bytes. This property is always present in the response.
+      totalBytesRewritten?:
+        type: integer
+        format: int64
+        description: The total bytes written so far, which can be used to provide a waiting user with a progress indicator. This property is always present in the response.
+      done?:
+        type: boolean
+        description: true if the copy is finished; otherwise, false if the copy is in progress. This property is always present in the response.
+    description: A rewrite response.
+/b:
+  /{bucket}:
+    uriParameters:
+      bucket:
+        type: string
+        description: Name of a bucket.
+    /o:
+      /{object}:
+        uriParameters:
+          object:
+            type: string
+            description: Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+        /acl:
+          /{entity}:
+            uriParameters:
+              entity:
+                type: string
+                description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
+            patch:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Updates an ACL entry on the specified object. This method supports patch semantics.
+              is:
+              - hasParameters
+              queryParameters:
+                generation?:
+                  type: integer
+                  format: int64
+                  description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+              body:
+                application/json: ObjectAccessControl
+              responses:
+                200:
+                  body:
+                    application/json: ObjectAccessControl
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Returns the ACL entry for the specified entity on the specified object.
+              is:
+              - hasParameters
+              queryParameters:
+                generation?:
+                  type: integer
+                  format: int64
+                  description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+              responses:
+                200:
+                  body:
+                    application/json: ObjectAccessControl
+            put:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Updates an ACL entry on the specified object.
+              is:
+              - hasParameters
+              queryParameters:
+                generation?:
+                  type: integer
+                  format: int64
+                  description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+              body:
+                application/json: ObjectAccessControl
+              responses:
+                200:
+                  body:
+                    application/json: ObjectAccessControl
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/devstorage.full_control
+              description: Permanently deletes the ACL entry for the specified entity on the specified object.
+              is:
+              - hasParameters
+              queryParameters:
+                generation?:
+                  type: integer
+                  format: int64
+                  description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/devstorage.full_control
+            description: Creates a new ACL entry on the specified object.
+            is:
+            - hasParameters
+            queryParameters:
+              generation?:
+                type: integer
+                format: int64
+                description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+            body:
+              application/json: ObjectAccessControl
+            responses:
+              200:
+                body:
+                  application/json: ObjectAccessControl
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/devstorage.full_control
+            description: Retrieves ACL entries on the specified object.
+            is:
+            - hasParameters
+            queryParameters:
+              generation?:
+                type: integer
+                format: int64
+                description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+            responses:
+              200:
+                body:
+                  application/json: ObjectAccessControls
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates an object's metadata. This method supports patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            generation?:
+              type: integer
+              format: int64
+              description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+            ifMetagenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration matches the given value.
+            ifGenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current generation matches the given value.
+            predefinedAcl?:
+              type: string
+              description: Apply a predefined set of access controls to this object.
+              enum:
+              - authenticatedRead
+              - bucketOwnerFullControl
+              - bucketOwnerRead
+              - private
+              - projectPrivate
+              - publicRead
+            ifGenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current generation does not match the given value.
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to full.
+              enum:
+              - full
+              - noAcl
+            ifMetagenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
+          body:
+            application/json: Object
+          responses:
+            200:
+              body:
+                application/json: Object
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_only
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Retrieves an object or its metadata.
+          is:
+          - hasParameters
+          queryParameters:
+            generation?:
+              type: integer
+              format: int64
+              description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+            ifMetagenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration matches the given value.
+            ifGenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's generation matches the given value.
+            ifGenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's generation does not match the given value.
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to noAcl.
+              enum:
+              - full
+              - noAcl
+            ifMetagenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
+          responses:
+            200:
+              body:
+                application/json: Object
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates an object's metadata.
+          is:
+          - hasParameters
+          queryParameters:
+            generation?:
+              type: integer
+              format: int64
+              description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+            ifMetagenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration matches the given value.
+            ifGenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current generation matches the given value.
+            predefinedAcl?:
+              type: string
+              description: Apply a predefined set of access controls to this object.
+              enum:
+              - authenticatedRead
+              - bucketOwnerFullControl
+              - bucketOwnerRead
+              - private
+              - projectPrivate
+              - publicRead
+            ifGenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current generation does not match the given value.
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to full.
+              enum:
+              - full
+              - noAcl
+            ifMetagenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
+          body:
+            application/json: Object
+          responses:
+            200:
+              body:
+                application/json: Object
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Deletes an object and its metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
+          is:
+          - hasParameters
+          queryParameters:
+            generation?:
+              type: integer
+              format: int64
+              description: If present, permanently deletes a specific revision of this object (as opposed to the latest version, the default).
+            ifMetagenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration matches the given value.
+            ifGenerationMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current generation matches the given value.
+            ifGenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current generation does not match the given value.
+            ifMetagenerationNotMatch?:
+              type: integer
+              format: int64
+              description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
+      /watch:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/devstorage.full_control
+              - https://www.googleapis.com/auth/devstorage.read_only
+              - https://www.googleapis.com/auth/devstorage.read_write
+          description: Watch for changes on all objects in a bucket.
+          is:
+          - hasParameters
+          queryParameters:
+            versions?:
+              type: boolean
+              description: If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.
+            delimiter?:
+              type: string
+              description: Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
+            maxResults?:
+              type: integer
+              format: int32
+              description: Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested. The default value of this parameter is 1,000 items.
+              minimum: 0
+            prefix?:
+              type: string
+              description: Filter results to objects whose names begin with this prefix.
+            pageToken?:
+              type: string
+              description: A previously-returned page token representing part of the larger set of results to view.
+            projection?:
+              type: string
+              description: Set of properties to return. Defaults to noAcl.
+              enum:
+              - full
+              - noAcl
+          body:
+            application/json: Channel
+          responses:
+            200:
+              body:
+                application/json: Channel
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+            - https://www.googleapis.com/auth/devstorage.read_write
+        description: Stores a new object and metadata.
+        is:
+        - hasParameters
+        queryParameters:
+          ifMetagenerationMatch?:
+            type: integer
+            format: int64
+            description: Makes the operation conditional on whether the object's current metageneration matches the given value.
+          ifGenerationMatch?:
+            type: integer
+            format: int64
+            description: Makes the operation conditional on whether the object's current generation matches the given value.
+          predefinedAcl?:
+            type: string
+            description: Apply a predefined set of access controls to this object.
+            enum:
+            - authenticatedRead
+            - bucketOwnerFullControl
+            - bucketOwnerRead
+            - private
+            - projectPrivate
+            - publicRead
+          name?:
+            type: string
+            description: Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+          contentEncoding?:
+            type: string
+            description: If set, sets the contentEncoding property of the final object to this value. Setting this parameter is equivalent to setting the contentEncoding metadata property. This can be useful when uploading an object with uploadType=media to indicate the encoding of the content being uploaded.
+          ifGenerationNotMatch?:
+            type: integer
+            format: int64
+            description: Makes the operation conditional on whether the object's current generation does not match the given value.
+          projection?:
+            type: string
+            description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
+            enum:
+            - full
+            - noAcl
+          ifMetagenerationNotMatch?:
+            type: integer
+            format: int64
+            description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
+        body:
+          application/json: Object
+        responses:
+          200:
+            body:
+              application/json: Object
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/devstorage.full_control
+            - https://www.googleapis.com/auth/devstorage.read_only
+            - https://www.googleapis.com/auth/devstorage.read_write
+        description: Retrieves a list of objects matching the criteria.
+        is:
+        - hasParameters
+        queryParameters:
+          versions?:
+            type: boolean
+            description: If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.
+          delimiter?:
+            type: string
+            description: Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested. The default value of this parameter is 1,000 items.
+            minimum: 0
+          prefix?:
+            type: string
+            description: Filter results to objects whose names begin with this prefix.
+          pageToken?:
+            type: string
+            description: A previously-returned page token representing part of the larger set of results to view.
+          projection?:
+            type: string
+            description: Set of properties to return. Defaults to noAcl.
+            enum:
+            - full
+            - noAcl
+        responses:
+          200:
+            body:
+              application/json: Objects
+    /defaultObjectAcl:
+      /{entity}:
+        uriParameters:
+          entity:
+            type: string
+            description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates a default object ACL entry on the specified bucket. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: ObjectAccessControl
+          responses:
+            200:
+              body:
+                application/json: ObjectAccessControl
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Returns the default object ACL entry for the specified entity on the specified bucket.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: ObjectAccessControl
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates a default object ACL entry on the specified bucket.
+          is:
+          - hasParameters
+          body:
+            application/json: ObjectAccessControl
+          responses:
+            200:
+              body:
+                application/json: ObjectAccessControl
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Permanently deletes the default object ACL entry for the specified entity on the specified bucket.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+        description: Creates a new default object ACL entry on the specified bucket.
+        is:
+        - hasParameters
+        body:
+          application/json: ObjectAccessControl
+        responses:
+          200:
+            body:
+              application/json: ObjectAccessControl
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+        description: Retrieves default object ACL entries on the specified bucket.
+        is:
+        - hasParameters
+        queryParameters:
+          ifMetagenerationMatch?:
+            type: integer
+            format: int64
+            description: If present, only return default ACL listing if the bucket's current metageneration matches this value.
+          ifMetagenerationNotMatch?:
+            type: integer
+            format: int64
+            description: If present, only return default ACL listing if the bucket's current metageneration does not match the given value.
+        responses:
+          200:
+            body:
+              application/json: ObjectAccessControls
+    /acl:
+      /{entity}:
+        uriParameters:
+          entity:
+            type: string
+            description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: BucketAccessControl
+          responses:
+            200:
+              body:
+                application/json: BucketAccessControl
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Returns the ACL entry for the specified entity on the specified bucket.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: BucketAccessControl
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Updates an ACL entry on the specified bucket.
+          is:
+          - hasParameters
+          body:
+            application/json: BucketAccessControl
+          responses:
+            200:
+              body:
+                application/json: BucketAccessControl
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/devstorage.full_control
+          description: Permanently deletes the ACL entry for the specified entity on the specified bucket.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+        description: Creates a new ACL entry on the specified bucket.
+        is:
+        - hasParameters
+        body:
+          application/json: BucketAccessControl
+        responses:
+          200:
+            body:
+              application/json: BucketAccessControl
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+        description: Retrieves ACL entries on the specified bucket.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: BucketAccessControls
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/devstorage.full_control
+      description: Updates a bucket. This method supports patch semantics.
+      is:
+      - hasParameters
+      queryParameters:
+        ifMetagenerationMatch?:
+          type: integer
+          format: int64
+          description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
+        predefinedAcl?:
+          type: string
+          description: Apply a predefined set of access controls to this bucket.
+          enum:
+          - authenticatedRead
+          - private
+          - projectPrivate
+          - publicRead
+          - publicReadWrite
+        predefinedDefaultObjectAcl?:
+          type: string
+          description: Apply a predefined set of default object access controls to this bucket.
+          enum:
+          - authenticatedRead
+          - bucketOwnerFullControl
+          - bucketOwnerRead
+          - private
+          - projectPrivate
+          - publicRead
+        projection?:
+          type: string
+          description: Set of properties to return. Defaults to full.
+          enum:
+          - full
+          - noAcl
+        ifMetagenerationNotMatch?:
+          type: integer
+          format: int64
+          description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
+      body:
+        application/json: Bucket
+      responses:
+        200:
+          body:
+            application/json: Bucket
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloud-platform.read-only
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_only
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Returns metadata for the specified bucket.
+      is:
+      - hasParameters
+      queryParameters:
+        ifMetagenerationMatch?:
+          type: integer
+          format: int64
+          description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
+        projection?:
+          type: string
+          description: Set of properties to return. Defaults to noAcl.
+          enum:
+          - full
+          - noAcl
+        ifMetagenerationNotMatch?:
+          type: integer
+          format: int64
+          description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
+      responses:
+        200:
+          body:
+            application/json: Bucket
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/devstorage.full_control
+      description: Updates a bucket.
+      is:
+      - hasParameters
+      queryParameters:
+        ifMetagenerationMatch?:
+          type: integer
+          format: int64
+          description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
+        predefinedAcl?:
+          type: string
+          description: Apply a predefined set of access controls to this bucket.
+          enum:
+          - authenticatedRead
+          - private
+          - projectPrivate
+          - publicRead
+          - publicReadWrite
+        predefinedDefaultObjectAcl?:
+          type: string
+          description: Apply a predefined set of default object access controls to this bucket.
+          enum:
+          - authenticatedRead
+          - bucketOwnerFullControl
+          - bucketOwnerRead
+          - private
+          - projectPrivate
+          - publicRead
+        projection?:
+          type: string
+          description: Set of properties to return. Defaults to full.
+          enum:
+          - full
+          - noAcl
+        ifMetagenerationNotMatch?:
+          type: integer
+          format: int64
+          description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
+      body:
+        application/json: Bucket
+      responses:
+        200:
+          body:
+            application/json: Bucket
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Permanently deletes an empty bucket.
+      is:
+      - hasParameters
+      queryParameters:
+        ifMetagenerationMatch?:
+          type: integer
+          format: int64
+          description: If set, only deletes the bucket if its metageneration matches this value.
+        ifMetagenerationNotMatch?:
+          type: integer
+          format: int64
+          description: If set, only deletes the bucket if its metageneration does not match this value.
+  /{destinationBucket}:
+    uriParameters:
+      destinationBucket:
+        type: string
+        description: Name of the bucket in which to store the new object.
+    /o:
+      /{destinationObject}:
+        uriParameters:
+          destinationObject:
+            type: string
+            description: Name of the new object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+        /compose:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/devstorage.full_control
+                - https://www.googleapis.com/auth/devstorage.read_write
+            description: Concatenates a list of existing objects into a new object in the same bucket.
+            is:
+            - hasParameters
+            queryParameters:
+              ifMetagenerationMatch?:
+                type: integer
+                format: int64
+                description: Makes the operation conditional on whether the object's current metageneration matches the given value.
+              ifGenerationMatch?:
+                type: integer
+                format: int64
+                description: Makes the operation conditional on whether the object's current generation matches the given value.
+              destinationPredefinedAcl?:
+                type: string
+                description: Apply a predefined set of access controls to the destination object.
+                enum:
+                - authenticatedRead
+                - bucketOwnerFullControl
+                - bucketOwnerRead
+                - private
+                - projectPrivate
+                - publicRead
+            body:
+              application/json: ComposeRequest
+            responses:
+              200:
+                body:
+                  application/json: Object
+  /{sourceBucket}:
+    uriParameters:
+      sourceBucket:
+        type: string
+        description: Name of the bucket in which to find the source object.
+    /o:
+      /{sourceObject}:
+        uriParameters:
+          sourceObject:
+            type: string
+            description: Name of the source object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+        /copyTo:
+          /b:
+            /{destinationBucket}:
+              uriParameters:
+                destinationBucket:
+                  type: string
+                  description: Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any.For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+              /o:
+                /{destinationObject}:
+                  uriParameters:
+                    destinationObject:
+                      type: string
+                      description: Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any.
+                  post:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                        - https://www.googleapis.com/auth/devstorage.full_control
+                        - https://www.googleapis.com/auth/devstorage.read_write
+                    description: Copies a source object to a destination object. Optionally overrides metadata.
+                    is:
+                    - hasParameters
+                    queryParameters:
+                      ifMetagenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current metageneration matches the given value.
+                      ifSourceGenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's generation matches the given value.
+                      sourceGeneration?:
+                        type: integer
+                        format: int64
+                        description: If present, selects a specific revision of the source object (as opposed to the latest version, the default).
+                      ifSourceMetagenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's current metageneration does not match the given value.
+                      ifSourceMetagenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's current metageneration matches the given value.
+                      ifSourceGenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's generation does not match the given value.
+                      destinationPredefinedAcl?:
+                        type: string
+                        description: Apply a predefined set of access controls to the destination object.
+                        enum:
+                        - authenticatedRead
+                        - bucketOwnerFullControl
+                        - bucketOwnerRead
+                        - private
+                        - projectPrivate
+                        - publicRead
+                      ifGenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current generation matches the given value.
+                      ifGenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current generation does not match the given value.
+                      projection?:
+                        type: string
+                        description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
+                        enum:
+                        - full
+                        - noAcl
+                      ifMetagenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current metageneration does not match the given value.
+                    body:
+                      application/json: Object
+                    responses:
+                      200:
+                        body:
+                          application/json: Object
+        /rewriteTo:
+          /b:
+            /{destinationBucket}:
+              uriParameters:
+                destinationBucket:
+                  type: string
+                  description: Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any.
+              /o:
+                /{destinationObject}:
+                  uriParameters:
+                    destinationObject:
+                      type: string
+                      description: Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+                  post:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                        - https://www.googleapis.com/auth/devstorage.full_control
+                        - https://www.googleapis.com/auth/devstorage.read_write
+                    description: Rewrites a source object to a destination object. Optionally overrides metadata.
+                    is:
+                    - hasParameters
+                    queryParameters:
+                      ifMetagenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current metageneration matches the given value.
+                      rewriteToken?:
+                        type: string
+                        description: Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response 'done' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.
+                      ifSourceGenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's generation matches the given value.
+                      sourceGeneration?:
+                        type: integer
+                        format: int64
+                        description: If present, selects a specific revision of the source object (as opposed to the latest version, the default).
+                      ifSourceMetagenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's current metageneration does not match the given value.
+                      ifSourceMetagenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's current metageneration matches the given value.
+                      maxBytesRewrittenPerCall?:
+                        type: integer
+                        format: int64
+                        description: The maximum number of bytes that will be rewritten per rewrite request. Most callers shouldn't need to specify this parameter - it is primarily in place to support testing. If specified the value must be an integral multiple of 1 MiB (1048576). Also, this only applies to requests where the source and destination span locations and/or storage classes. Finally, this value must not change across rewrite calls else you'll get an error that the rewriteToken is invalid.
+                      ifSourceGenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the source object's generation does not match the given value.
+                      destinationPredefinedAcl?:
+                        type: string
+                        description: Apply a predefined set of access controls to the destination object.
+                        enum:
+                        - authenticatedRead
+                        - bucketOwnerFullControl
+                        - bucketOwnerRead
+                        - private
+                        - projectPrivate
+                        - publicRead
+                      ifGenerationMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current generation matches the given value.
+                      ifGenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current generation does not match the given value.
+                      projection?:
+                        type: string
+                        description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
+                        enum:
+                        - full
+                        - noAcl
+                      ifMetagenerationNotMatch?:
+                        type: integer
+                        format: int64
+                        description: Makes the operation conditional on whether the destination object's current metageneration does not match the given value.
+                    body:
+                      application/json: Object
+                    responses:
+                      200:
+                        body:
+                          application/json: RewriteResponse
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/devstorage.full_control
+        - https://www.googleapis.com/auth/devstorage.read_write
+    description: Creates a new bucket.
+    is:
+    - hasParameters
+    queryParameters:
+      predefinedAcl?:
+        type: string
+        description: Apply a predefined set of access controls to this bucket.
+        enum:
+        - authenticatedRead
+        - private
+        - projectPrivate
+        - publicRead
+        - publicReadWrite
+      predefinedDefaultObjectAcl?:
+        type: string
+        description: Apply a predefined set of default object access controls to this bucket.
+        enum:
+        - authenticatedRead
+        - bucketOwnerFullControl
+        - bucketOwnerRead
+        - private
+        - projectPrivate
+        - publicRead
+      project:
+        type: string
+        description: A valid API project identifier.
+      projection?:
+        type: string
+        description: Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.
+        enum:
+        - full
+        - noAcl
+    body:
+      application/json: Bucket
+    responses:
+      200:
+        body:
+          application/json: Bucket
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/cloud-platform.read-only
+        - https://www.googleapis.com/auth/devstorage.full_control
+        - https://www.googleapis.com/auth/devstorage.read_only
+        - https://www.googleapis.com/auth/devstorage.read_write
+    description: Retrieves a list of buckets for a given project.
+    is:
+    - hasParameters
+    queryParameters:
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of buckets to return.
+        minimum: 0
+      prefix?:
+        type: string
+        description: Filter results to buckets whose names begin with this prefix.
+      project:
+        type: string
+        description: A valid API project identifier.
+      pageToken?:
+        type: string
+        description: A previously-returned page token representing part of the larger set of results to view.
+      projection?:
+        type: string
+        description: Set of properties to return. Defaults to noAcl.
+        enum:
+        - full
+        - noAcl
+    responses:
+      200:
+        body:
+          application/json: Buckets
+/channels:
+  /stop:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloud-platform.read-only
+          - https://www.googleapis.com/auth/devstorage.full_control
+          - https://www.googleapis.com/auth/devstorage.read_only
+          - https://www.googleapis.com/auth/devstorage.read_write
+      description: Stop watching resources through this channel
+      is:
+      - hasParameters
+      body:
+        application/json: Channel

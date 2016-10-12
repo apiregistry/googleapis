@@ -1,0 +1,682 @@
+#%RAML 1.0
+title: Google Civic Information API
+version: v2
+baseUri: https://www.googleapis.com/civicinfo/v2/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/civic-information
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): civicinfo:v2
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+types:
+  AdministrationRegion:
+    type: object
+    properties:
+      electionAdministrationBody?: AdministrativeBody
+      local_jurisdiction?: AdministrationRegion
+      sources?:
+        type: array
+        description: A list of sources for this area. If multiple sources are listed the data has been aggregated from those sources.
+        items: Source
+      name?:
+        type: string
+        description: The name of the jurisdiction.
+      id?:
+        type: string
+        description: An ID for this object. IDs may change in future requests and should not be cached. Access to this field requires special access that can be requested from the Request more link on the Quotas page.
+    description: Describes information about a regional election administrative area.
+  AdministrativeBody:
+    type: object
+    properties:
+      absenteeVotingInfoUrl?:
+        type: string
+        description: A URL provided by this administrative body for information on absentee voting.
+      voter_services?:
+        type: array
+        description: A description of the services this administrative body may provide.
+        items:
+          type: string
+      electionInfoUrl?:
+        type: string
+        description: A URL provided by this administrative body for looking up general election information.
+      hoursOfOperation?:
+        type: string
+        description: A description of the hours of operation for this administrative body.
+      ballotInfoUrl?:
+        type: string
+        description: A URL provided by this administrative body to give contest information to the voter.
+      electionRulesUrl?:
+        type: string
+        description: A URL provided by this administrative body describing election rules to the voter.
+      correspondenceAddress?: SimpleAddressType
+      votingLocationFinderUrl?:
+        type: string
+        description: A URL provided by this administrative body for looking up where to vote.
+      electionRegistrationConfirmationUrl?:
+        type: string
+        description: A URL provided by this administrative body for confirming that the voter is registered to vote.
+      electionOfficials?:
+        type: array
+        description: The election officials for this election administrative body.
+        items: ElectionOfficial
+      name?:
+        type: string
+        description: The name of this election administrative body.
+      physicalAddress?: SimpleAddressType
+      electionRegistrationUrl?:
+        type: string
+        description: A URL provided by this administrative body for looking up how to register to vote.
+      addressLines?:
+        type: array
+        items:
+          type: string
+    description: Information about an election administrative body (e.g. County Board of Elections).
+  Candidate:
+    type: object
+    properties:
+      photoUrl?:
+        type: string
+        description: A URL for a photo of the candidate.
+      channels?:
+        type: array
+        description: A list of known (social) media channels for this candidate.
+        items: Channel
+      phone?:
+        type: string
+        description: The voice phone number for the candidate's campaign office.
+      name?:
+        type: string
+        description: The candidate's name.
+      orderOnBallot?:
+        type: integer
+        format: int64
+        description: The order the candidate appears on the ballot for this contest.
+      candidateUrl?:
+        type: string
+        description: The URL for the candidate's campaign web site.
+      email?:
+        type: string
+        description: The email address for the candidate's campaign.
+      party?:
+        type: string
+        description: The full name of the party the candidate is a member of.
+    description: Information about a candidate running for elected office.
+  Channel:
+    type: object
+    properties:
+      id?:
+        type: string
+        description: The unique public identifier for the candidate's channel.
+      type?:
+        type: string
+        description: 'The type of channel. The following is a list of types of channels,
+          but is not exhaustive. More channel types may be added at a later time.
+          One of: GooglePlus, YouTube, Facebook, Twitter'
+    description: A social media or web channel for a candidate.
+  Contest:
+    type: object
+    properties:
+      ballotPlacement?:
+        type: integer
+        format: int64
+        description: A number specifying the position of this contest on the voter's ballot.
+      referendumSubtitle?:
+        type: string
+        description: A brief description of the referendum. This field is only populated for contests of type 'Referendum'.
+      sources?:
+        type: array
+        description: A list of sources for this contest. If multiple sources are listed, the data has been aggregated from those sources.
+        items: Source
+      level?:
+        type: array
+        description: The levels of government of the office for this contest. There may be more than one in cases where a jurisdiction effectively acts at two different levels of government; for example, the mayor of the District of Columbia acts at "locality" level, but also effectively at both "administrative-area-2" and "administrative-area-1".
+        items:
+          type: string
+      numberVotingFor?:
+        type: integer
+        format: int64
+        description: The number of candidates that a voter may vote for in this contest.
+      roles?:
+        type: array
+        description: The roles which this office fulfills.
+        items:
+          type: string
+      office?:
+        type: string
+        description: The name of the office for this contest.
+      referendumEffectOfAbstain?:
+        type: string
+        description: Specifies what effect abstaining (not voting) on the proposition will have (i.e. whether abstaining is considered a vote against it). This field is only populated for contests of type 'Referendum'.
+      referendumPassageThreshold?:
+        type: string
+        description: The threshold of votes that the referendum needs in order to pass, e.g. "two-thirds". This field is only populated for contests of type 'Referendum'.
+      referendumText?:
+        type: string
+        description: The full text of the referendum. This field is only populated for contests of type 'Referendum'.
+      type?:
+        type: string
+        description: The type of contest. Usually this will be 'General', 'Primary', or 'Run-off' for contests with candidates. For referenda this will be 'Referendum'. For Retention contests this will typically be 'Retention'.
+      referendumProStatement?:
+        type: string
+        description: A statement in favor of the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'.
+      special?:
+        type: string
+        description: '"Yes" or "No" depending on whether this a contest being held
+          outside the normal election cycle.'
+      candidates?:
+        type: array
+        description: The candidate choices for this contest.
+        items: Candidate
+      referendumUrl?:
+        type: string
+        description: A link to the referendum. This field is only populated for contests of type 'Referendum'.
+      numberElected?:
+        type: integer
+        format: int64
+        description: The number of candidates that will be elected to office in this contest.
+      referendumBallotResponses?:
+        type: array
+        description: The set of ballot responses for the referendum. A ballot response represents a line on the ballot. Common examples might include "yes" or "no" for referenda. This field is only populated for contests of type 'Referendum'.
+        items:
+          type: string
+      district?: ElectoralDistrict
+      referendumBrief?:
+        type: string
+        description: Specifies a short summary of the referendum that is typically on the ballot below the title but above the text. This field is only populated for contests of type 'Referendum'.
+      electorateSpecifications?:
+        type: string
+        description: A description of any additional eligibility requirements for voting in this contest.
+      id?:
+        type: string
+        description: An ID for this object. IDs may change in future requests and should not be cached. Access to this field requires special access that can be requested from the Request more link on the Quotas page.
+      referendumTitle?:
+        type: string
+        description: The title of the referendum (e.g. 'Proposition 42'). This field is only populated for contests of type 'Referendum'.
+      primaryParty?:
+        type: string
+        description: If this is a partisan election, the name of the party it is for.
+      referendumConStatement?:
+        type: string
+        description: A statement in opposition to the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'.
+    description: Information about a contest that appears on a voter's ballot.
+  DivisionSearchResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: civicinfo#divisionSearchResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "civicinfo#divisionSearchResponse".'
+      results?: DivisionSearchResult[]
+    description: The result of a division search query.
+  DivisionSearchResult:
+    type: object
+    properties:
+      ocdId?:
+        type: string
+        description: The unique Open Civic Data identifier for this division.
+      aliases?:
+        type: array
+        description: Other Open Civic Data identifiers that refer to the same division -- for example, those that refer to other political divisions whose boundaries are defined to be coterminous with this one. For example, ocd-division/country:us/state:wy will include an alias of ocd-division/country:us/state:wy/cd:1, since Wyoming has only one Congressional district.
+        items:
+          type: string
+      name?:
+        type: string
+        description: The name of the division.
+    description: Represents a political geographic division that matches the requested query.
+  Election:
+    type: object
+    properties:
+      ocdDivisionId?:
+        type: string
+        description: The political division of the election. Represented as an OCD Division ID. Voters within these political jurisdictions are covered by this election. This is typically a state such as ocd-division/country:us/state:ca or for the midterms or general election the entire US (i.e. ocd-division/country:us).
+      name?:
+        type: string
+        description: A displayable name for the election.
+      electionDay?:
+        type: string
+        description: Day of the election in YYYY-MM-DD format.
+      id?:
+        type: integer
+        format: int64
+        description: The unique ID of this election.
+    description: Information about the election that was queried.
+  ElectionOfficial:
+    type: object
+    properties:
+      emailAddress?:
+        type: string
+        description: The email address of the election official.
+      officePhoneNumber?:
+        type: string
+        description: The office phone number of the election official.
+      name?:
+        type: string
+        description: The full name of the election official.
+      faxNumber?:
+        type: string
+        description: The fax number of the election official.
+      title?:
+        type: string
+        description: The title of the election official.
+    description: Information about individual election officials.
+  ElectionsQueryResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: civicinfo#electionsQueryResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "civicinfo#electionsQueryResponse".'
+      elections?:
+        type: array
+        description: A list of available elections
+        items: Election
+    description: The list of elections available for this version of the API.
+  ElectoralDistrict:
+    type: object
+    properties:
+      scope?:
+        type: string
+        description: 'The geographic scope of this district. If unspecified the district''s
+          geography is not known. One of: national, statewide, congressional, stateUpper,
+          stateLower, countywide, judicial, schoolBoard, cityWide, township, countyCouncil,
+          cityCouncil, ward, special'
+      name?:
+        type: string
+        description: The name of the district.
+      id?:
+        type: string
+        description: An identifier for this district, relative to its scope. For example, the 34th State Senate district would have id "34" and a scope of stateUpper.
+      kgForeignKey?:
+        type: string
+    description: Describes the geographic scope of a contest.
+  GeographicDivision:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of the division.
+      officeIndices?:
+        type: array
+        description: List of indices in the offices array, one for each office elected from this division. Will only be present if includeOffices was true (or absent) in the request.
+        items:
+          type: integer
+          format: int32
+      alsoKnownAs?:
+        type: array
+        description: |-
+          Any other valid OCD IDs that refer to the same division.
+
+          Because OCD IDs are meant to be human-readable and at least somewhat predictable, there are occasionally several identifiers for a single division. These identifiers are defined to be equivalent to one another, and one is always indicated as the primary identifier. The primary identifier will be returned in ocd_id above, and any other equivalent valid identifiers will be returned in this list.
+
+          For example, if this division's OCD ID is ocd-division/country:us/district:dc, this will contain ocd-division/country:us/state:dc.
+        items:
+          type: string
+    description: Describes a political geography.
+  Office:
+    type: object
+    properties:
+      officialIndices?:
+        type: array
+        description: List of indices in the officials array of people who presently hold this office.
+        items:
+          type: integer
+          format: int32
+      sources?:
+        type: array
+        description: A list of sources for this office. If multiple sources are listed, the data has been aggregated from those sources.
+        items: Source
+      roles?:
+        type: array
+        description: The roles which this office fulfills. Roles are not meant to be exhaustive, or to exactly specify the entire set of responsibilities of a given office, but are meant to be rough categories that are useful for general selection from or sorting of a list of offices.
+        items:
+          type: string
+      name?:
+        type: string
+        description: The human-readable name of the office.
+      divisionId?:
+        type: string
+        description: The OCD ID of the division with which this office is associated.
+      levels?:
+        type: array
+        description: The levels of government of which this office is part. There may be more than one in cases where a jurisdiction effectively acts at two different levels of government; for example, the mayor of the District of Columbia acts at "locality" level, but also effectively at both "administrative-area-2" and "administrative-area-1".
+        items:
+          type: string
+    description: Information about an Office held by one or more Officials.
+  Official:
+    type: object
+    properties:
+      emails?:
+        type: array
+        description: The direct email addresses for the official.
+        items:
+          type: string
+      photoUrl?:
+        type: string
+        description: A URL for a photo of the official.
+      urls?:
+        type: array
+        description: The official's public website URLs.
+        items:
+          type: string
+      address?:
+        type: array
+        description: Addresses at which to contact the official.
+        items: SimpleAddressType
+      channels?:
+        type: array
+        description: A list of known (social) media channels for this official.
+        items: Channel
+      name?:
+        type: string
+        description: The official's name.
+      phones?:
+        type: array
+        description: The official's public contact phone numbers.
+        items:
+          type: string
+      party?:
+        type: string
+        description: The full name of the party the official belongs to.
+    description: Information about a person holding an elected office.
+  PollingLocation:
+    type: object
+    properties:
+      address?: SimpleAddressType
+      notes?:
+        type: string
+        description: Notes about this location (e.g. accessibility ramp or entrance to use).
+      sources?:
+        type: array
+        description: A list of sources for this location. If multiple sources are listed the data has been aggregated from those sources.
+        items: Source
+      endDate?:
+        type: string
+        description: The last date that this early vote site or drop off location may be used. This field is not populated for polling locations.
+      name?:
+        type: string
+        description: The name of the early vote site or drop off location. This field is not populated for polling locations.
+      voterServices?:
+        type: string
+        description: The services provided by this early vote site or drop off location. This field is not populated for polling locations.
+      id?:
+        type: string
+        description: An ID for this object. IDs may change in future requests and should not be cached. Access to this field requires special access that can be requested from the Request more link on the Quotas page.
+      startDate?:
+        type: string
+        description: The first date that this early vote site or drop off location may be used. This field is not populated for polling locations.
+      pollingHours?:
+        type: string
+        description: A description of when this location is open.
+    description: A location where a voter can vote. This may be an early vote site, an election day voting location, or a drop off location for a completed ballot.
+  RepresentativeInfoData:
+    type: object
+    properties:
+      offices?:
+        type: array
+        description: Elected offices referenced by the divisions listed above. Will only be present if includeOffices was true in the request.
+        items: Office
+      officials?:
+        type: array
+        description: Officials holding the offices listed above. Will only be present if includeOffices was true in the request.
+        items: Official
+      divisions?:
+        type: object
+        description: Political geographic divisions that contain the requested address.
+  RepresentativeInfoResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: civicinfo#representativeInfoResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "civicinfo#representativeInfoResponse".'
+      normalizedInput?: SimpleAddressType
+      offices?:
+        type: array
+        description: Elected offices referenced by the divisions listed above. Will only be present if includeOffices was true in the request.
+        items: Office
+      officials?:
+        type: array
+        description: Officials holding the offices listed above. Will only be present if includeOffices was true in the request.
+        items: Official
+      divisions?:
+        type: object
+        description: Political geographic divisions that contain the requested address.
+    description: The result of a representative info lookup query.
+  SimpleAddressType:
+    type: object
+    properties:
+      zip?:
+        type: string
+        description: The US Postal Zip Code of the address.
+      locationName?:
+        type: string
+        description: The name of the location.
+      city?:
+        type: string
+        description: The city or town for the address.
+      state?:
+        type: string
+        description: The US two letter state abbreviation of the address.
+      line3?:
+        type: string
+        description: The third line of the address, if needed.
+      line2?:
+        type: string
+        description: The second line the address, if needed.
+      line1?:
+        type: string
+        description: The street name and number of this address.
+    description: A simple representation of an address.
+  Source:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of the data source.
+      official?:
+        type: boolean
+        description: Whether this data comes from an official government source.
+    description: Contains information about the data source for the element containing it.
+  VoterInfoResponse:
+    type: object
+    properties:
+      contests?:
+        type: array
+        description: Contests that will appear on the voter's ballot.
+        items: Contest
+      election?: Election
+      mailOnly?:
+        type: boolean
+        description: Specifies whether voters in the precinct vote only by mailing their ballots (with the possible option of dropping off their ballots as well).
+      precinctId?:
+        type: string
+      dropOffLocations?:
+        type: array
+        description: Locations where a voter is eligible to drop off a completed ballot. The voter must have received and completed a ballot prior to arriving at the location. The location may not have ballots available on the premises. These locations could be open on or before election day as indicated in the pollingHours field.
+        items: PollingLocation
+      kind?:
+        type: string
+        default: civicinfo#voterInfoResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "civicinfo#voterInfoResponse".'
+      normalizedInput?: SimpleAddressType
+      otherElections?:
+        type: array
+        description: If no election ID was specified in the query, and there was more than one election with data for the given voter, this will contain information about the other elections that could apply.
+        items: Election
+      pollingLocations?:
+        type: array
+        description: Locations where the voter is eligible to vote on election day.
+        items: PollingLocation
+      state?:
+        type: array
+        description: Local Election Information for the state that the voter votes in. For the US, there will only be one element in this array.
+        items: AdministrationRegion
+      earlyVoteSites?:
+        type: array
+        description: Locations where the voter is eligible to vote early, prior to election day.
+        items: PollingLocation
+    description: The result of a voter info lookup query.
+/representatives:
+  /{ocdId}:
+    uriParameters:
+      ocdId:
+        type: string
+        description: The Open Civic Data division identifier of the division to look up.
+    get:
+      description: Looks up representative information for a single geographic division.
+      is:
+      - hasParameters
+      queryParameters:
+        roles?:
+          type: string
+          description: A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned.
+          enum:
+          - deputyHeadOfGovernment
+          - executiveCouncil
+          - governmentOfficer
+          - headOfGovernment
+          - headOfState
+          - highestCourtJudge
+          - judge
+          - legislatorLowerBody
+          - legislatorUpperBody
+          - schoolBoard
+          - specialPurposeOfficer
+        levels?:
+          type: string
+          description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
+          enum:
+          - administrativeArea1
+          - administrativeArea2
+          - country
+          - international
+          - locality
+          - regional
+          - special
+          - subLocality1
+          - subLocality2
+        recursive?:
+          type: boolean
+          description: If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC's wards and ANCs.
+      responses:
+        200:
+          body:
+            application/json: RepresentativeInfoData
+  get:
+    description: Looks up political geography and representative information for a single address.
+    is:
+    - hasParameters
+    queryParameters:
+      includeOffices?:
+        type: boolean
+        default: true
+        description: Whether to return information about offices and officials. If false, only the top-level district information will be returned.
+      address?:
+        type: string
+        description: The address to look up. May only be specified if the field ocdId is not given in the URL.
+      roles?:
+        type: string
+        description: A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned.
+        enum:
+        - deputyHeadOfGovernment
+        - executiveCouncil
+        - governmentOfficer
+        - headOfGovernment
+        - headOfState
+        - highestCourtJudge
+        - judge
+        - legislatorLowerBody
+        - legislatorUpperBody
+        - schoolBoard
+        - specialPurposeOfficer
+      levels?:
+        type: string
+        description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
+        enum:
+        - administrativeArea1
+        - administrativeArea2
+        - country
+        - international
+        - locality
+        - regional
+        - special
+        - subLocality1
+        - subLocality2
+    responses:
+      200:
+        body:
+          application/json: RepresentativeInfoResponse
+/elections:
+  get:
+    description: List of available elections to query.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: ElectionsQueryResponse
+/voterinfo:
+  get:
+    description: Looks up information relevant to a voter based on the voter's registered address.
+    is:
+    - hasParameters
+    queryParameters:
+      electionId?:
+        type: integer
+        default: 0
+        format: int64
+        description: The unique ID of the election to look up. A list of election IDs can be obtained at https://www.googleapis.com/civicinfo/{version}/elections
+      address:
+        type: string
+        description: The registered address of the voter to look up.
+      returnAllAvailableData?:
+        type: boolean
+        default: false
+        description: If set to true, the query will return the success codeand include any partial information when it is unable to determine a matching address or unable to determine the election for electionId=0 queries.
+      officialOnly?:
+        type: boolean
+        default: false
+        description: If set to true, only data from official state sources will be returned.
+    responses:
+      200:
+        body:
+          application/json: VoterInfoResponse
+/divisions:
+  get:
+    description: Searches for political divisions by their natural name or OCD ID.
+    is:
+    - hasParameters
+    queryParameters:
+      query?:
+        type: string
+        description: The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
+    responses:
+      200:
+        body:
+          application/json: DivisionSearchResponse

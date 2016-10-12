@@ -1,0 +1,1550 @@
+#%RAML 1.0
+title: Cloud SQL Administration API
+version: v1beta4
+baseUri: https://www.googleapis.com/sql/v1beta4/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/sql/docs/reference/latest
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): sqladmin:v1beta4
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/sqlservice.admin
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AclEntry:
+    type: object
+    properties:
+      expirationTime?:
+        type: string
+        description: The time when this access control entry expires in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      kind?:
+        type: string
+        default: sql#aclEntry
+        description: This is always sql#aclEntry.
+      name?:
+        type: string
+        description: An optional label to identify this entry.
+      value?:
+        type: string
+        description: The whitelisted value for the access control list.
+    description: An entry for an Access Control list.
+  BackupConfiguration:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#backupConfiguration
+        description: This is always sql#backupConfiguration.
+      binaryLogEnabled?:
+        type: boolean
+        description: Whether binary log is enabled. If backup configuration is disabled, binary log must be disabled as well.
+      startTime?:
+        type: string
+        description: Start time for the daily backup configuration in UTC timezone in the 24 hour format - HH:MM.
+      enabled?:
+        type: boolean
+        description: Whether this configuration is enabled.
+    description: Database instance backup configuration.
+  BackupRun:
+    type: object
+    properties:
+      instance?:
+        type: string
+        description: Name of the database instance.
+      windowStartTime?:
+        type: string
+        description: The start time of the backup window during which this the backup was attempted in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      kind?:
+        type: string
+        default: sql#backupRun
+        description: This is always sql#backupRun.
+      enqueuedTime?:
+        type: string
+        description: The time the run was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      description?:
+        type: string
+        description: The description of this run, only applicable to on-demand backups.
+      startTime?:
+        type: string
+        description: The time the backup operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      endTime?:
+        type: string
+        description: The time the backup operation completed in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      id?:
+        type: integer
+        format: int64
+        description: A unique identifier for this backup run. Note that this is unique only within the scope of a particular Cloud SQL instance.
+      error?: OperationError
+      type?:
+        type: string
+        description: The type of this run; can be either "AUTOMATED" or "ON_DEMAND".
+      selfLink?:
+        type: string
+        description: The URI of this resource.
+      status?:
+        type: string
+        description: The status of this run.
+    description: A database instance backup run resource.
+  BackupRunsListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#backupRunsList
+        description: This is always sql#backupRunsList.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: A list of backup runs in reverse chronological order of the enqueued time.
+        items: BackupRun
+    description: Backup run list results.
+  BinLogCoordinates:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#binLogCoordinates
+        description: This is always sql#binLogCoordinates.
+      binLogPosition?:
+        type: integer
+        format: int64
+        description: Position (offset) within the binary log file.
+      binLogFileName?:
+        type: string
+        description: Name of the binary log file for a Cloud SQL instance.
+    description: Binary log coordinates.
+  CloneContext:
+    type: object
+    properties:
+      destinationInstanceName?:
+        type: string
+        description: Name of the Cloud SQL instance to be created as a clone.
+      kind?:
+        type: string
+        default: sql#cloneContext
+        description: This is always sql#cloneContext.
+      binLogCoordinates?: BinLogCoordinates
+    description: Database instance clone context.
+  Database:
+    type: object
+    properties:
+      charset?:
+        type: string
+        description: The MySQL charset value.
+      instance?:
+        type: string
+        description: The name of the Cloud SQL instance. This does not include the project ID.
+      kind?:
+        type: string
+        default: sql#database
+        description: This is always sql#database.
+      name?:
+        type: string
+        description: The name of the database in the Cloud SQL instance. This does not include the project ID or instance name.
+      project?:
+        type: string
+        description: The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the resource.
+      collation?:
+        type: string
+        description: The MySQL collation value.
+      selfLink?:
+        type: string
+        description: The URI of this resource.
+    description: A database resource inside a Cloud SQL instance.
+  DatabaseFlags:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of the flag. These flags are passed at instance startup, so include both MySQL server options and MySQL system variables. Flags should be specified with underscores, not hyphens. For more information, see Configuring MySQL Flags in the Google Cloud SQL documentation, as well as the official MySQL documentation for server options and system variables.
+      value?:
+        type: string
+        description: The value of the flag. Booleans should be set to on for true and off for false. This field must be omitted if the flag doesn't take a value.
+    description: MySQL flags for Cloud SQL instances.
+  DatabaseInstance:
+    type: object
+    properties:
+      settings?: Settings
+      ipv6Address?:
+        type: string
+        description: The IPv6 address assigned to the instance. This property is applicable only to First Generation instances.
+      failoverReplica?:
+        type: object
+        properties:
+          available?:
+            type: boolean
+            description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The master can only failover to the falover replica when the status is true.
+          name?:
+            type: string
+            description: The name of the failover replica. If specified at instance creation, a failover replica is created for the instance. The name doesn't include the project ID. This property is applicable only to Second Generation instances.
+        description: The name and status of the failover replica. This property is applicable only to Second Generation instances.
+      backendType?:
+        type: string
+        description: |-
+          FIRST_GEN: Basic Cloud SQL instance that runs in a Google-managed container.
+          SECOND_GEN: A newer Cloud SQL backend that runs in a Compute Engine VM.
+          EXTERNAL: A MySQL server that is not managed by Google.
+      kind?:
+        type: string
+        default: sql#instance
+        description: This is always sql#instance.
+      suspensionReason?:
+        type: array
+        description: If the instance state is SUSPENDED, the reason for the suspension.
+        items:
+          type: string
+      instanceType?:
+        type: string
+        description: |-
+          The instance type. This can be one of the following.
+          CLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating from a master.
+          ON_PREMISES_INSTANCE: An instance running on the customer's premises.
+          READ_REPLICA_INSTANCE: A Cloud SQL instance configured as a read-replica.
+      project?:
+        type: string
+        description: The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
+      replicaNames?:
+        type: array
+        description: The replicas of the instance.
+        items:
+          type: string
+      currentDiskSize?:
+        type: integer
+        format: int64
+        description: The current disk usage of the instance in bytes. This property has been deprecated. Users should use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ for details.
+      maxDiskSize?:
+        type: integer
+        format: int64
+        description: The maximum disk size of the instance in bytes.
+      databaseVersion?:
+        type: string
+        description: The database engine type and version. The databaseVersion can not be changed after instance creation. Can be MYSQL_5_5, MYSQL_5_6 or MYSQL_5_7. Defaults to MYSQL_5_6. MYSQL_5_7 is applicable only to Second Generation instances.
+      serviceAccountEmailAddress?:
+        type: string
+        description: The service account email address assigned to the instance. This property is applicable only to Second Generation instances.
+      replicaConfiguration?: ReplicaConfiguration
+      selfLink?:
+        type: string
+        description: The URI of this resource.
+      masterInstanceName?:
+        type: string
+        description: The name of the instance which will act as master in the replication setup.
+      serverCaCert?: SslCert
+      onPremisesConfiguration?: OnPremisesConfiguration
+      name?:
+        type: string
+        description: Name of the Cloud SQL instance. This does not include the project ID.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the resource.
+      ipAddresses?:
+        type: array
+        description: The assigned IP addresses for the instance.
+        items: IpMapping
+      connectionName?:
+        type: string
+        description: Connection name of the Cloud SQL instance used in connection strings.
+      state?:
+        type: string
+        description: |-
+          The current serving state of the Cloud SQL instance. This can be one of the following.
+          RUNNABLE: The instance is running, or is ready to run when accessed.
+          SUSPENDED: The instance is not available, for example due to problems with billing.
+          PENDING_CREATE: The instance is being created.
+          MAINTENANCE: The instance is down for maintenance.
+          FAILED: The instance creation failed.
+          UNKNOWN_STATE: The state of the instance is unknown.
+      region?:
+        type: string
+        description: The geographical region. Can be us-central (FIRST_GEN instances only), us-central1 (SECOND_GEN instances only), asia-east1 or europe-west1. Defaults to us-central or us-central1 depending on the instance type (First Generation or Second Generation). The region can not be changed after instance creation.
+    description: A Cloud SQL instance resource.
+  DatabasesListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#databasesList
+        description: This is always sql#databasesList.
+      items?:
+        type: array
+        description: List of database resources in the instance.
+        items: Database
+    description: Database list response.
+  ExportContext:
+    type: object
+    properties:
+      databases?:
+        type: array
+        description: Databases (for example, guestbook) from which the export is made. If fileType is SQL and no database is specified, all databases are exported. If fileType is CSV, you can optionally specify at most one database to export. If csvExportOptions.selectQuery also specifies the database, this field will be ignored.
+        items:
+          type: string
+      sqlExportOptions?:
+        type: object
+        properties:
+          tables?:
+            type: array
+            description: Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database.
+            items:
+              type: string
+          schemaOnly?:
+            type: boolean
+            description: Export only schemas.
+        description: Options for exporting data as SQL statements.
+      csvExportOptions?:
+        type: object
+        properties:
+          selectQuery?:
+            type: string
+            description: The select query used to extract the data.
+        description: Options for exporting data as CSV.
+      kind?:
+        type: string
+        default: sql#exportContext
+        description: This is always sql#exportContext.
+      uri?:
+        type: string
+        description: The path to the file in Google Cloud Storage where the export will be stored. The URI is in the form gs://bucketName/fileName. If the file already exists, the operation fails. If fileType is SQL and the filename ends with .gz, the contents are compressed.
+      fileType?:
+        type: string
+        description: |-
+          The file type for the specified uri.
+          SQL: The file contains SQL statements.
+          CSV: The file contains CSV data.
+    description: Database instance export context.
+  FailoverContext:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#failoverContext
+        description: This is always sql#failoverContext.
+      settingsVersion?:
+        type: integer
+        format: int64
+        description: The current settings version of this instance. Request will be rejected if this version doesn't match the current settings version.
+    description: Database instance failover context.
+  Flag:
+    type: object
+    properties:
+      minValue?:
+        type: integer
+        format: int64
+        description: For INTEGER flags, the minimum allowed value.
+      allowedStringValues?:
+        type: array
+        description: For STRING flags, a list of strings that the value can be set to.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: sql#flag
+        description: This is always sql#flag.
+      maxValue?:
+        type: integer
+        format: int64
+        description: For INTEGER flags, the maximum allowed value.
+      name?:
+        type: string
+        description: This is the name of the flag. Flag names always use underscores, not hyphens, e.g. max_allowed_packet
+      appliesTo?:
+        type: array
+        description: The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6, or MYSQL_5_7. MYSQL_5_7 is applicable only to Second Generation instances.
+        items:
+          type: string
+      requiresRestart?:
+        type: boolean
+        description: Indicates whether changing this flag will trigger a database restart. Only applicable to Second Generation instances.
+      type?:
+        type: string
+        description: The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER or NONE. NONE is used for flags which do not take a value, such as skip_grant_tables.
+    description: A Google Cloud SQL service flag resource.
+  FlagsListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#flagsList
+        description: This is always sql#flagsList.
+      items?:
+        type: array
+        description: List of flags.
+        items: Flag
+    description: Flags list response.
+  ImportContext:
+    type: object
+    properties:
+      database?:
+        type: string
+        description: The database (for example, guestbook) to which the import is made. If fileType is SQL and no database is specified, it is assumed that the database is specified in the file to be imported. If fileType is CSV, it must be specified.
+      kind?:
+        type: string
+        default: sql#importContext
+        description: This is always sql#importContext.
+      csvImportOptions?:
+        type: object
+        properties:
+          columns?:
+            type: array
+            description: The columns to which CSV data is imported. If not specified, all columns of the database table are loaded with CSV data.
+            items:
+              type: string
+          table?:
+            type: string
+            description: The table to which CSV data is imported.
+        description: Options for importing data as CSV.
+      uri?:
+        type: string
+        description: A path to the file in Google Cloud Storage from which the import is made. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are supported when fileType is SQL.
+      fileType?:
+        type: string
+        description: |-
+          The file type for the specified uri.
+          SQL: The file contains SQL statements.
+          CSV: The file contains CSV data.
+    description: Database instance import context.
+  InstancesCloneRequest:
+    type: object
+    properties:
+      cloneContext?: CloneContext
+    description: Database instance clone request.
+  InstancesExportRequest:
+    type: object
+    properties:
+      exportContext?: ExportContext
+    description: Database instance export request.
+  InstancesFailoverRequest:
+    type: object
+    properties:
+      failoverContext?: FailoverContext
+    description: Instance failover request.
+  InstancesImportRequest:
+    type: object
+    properties:
+      importContext?: ImportContext
+    description: Database instance import request.
+  InstancesListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#instancesList
+        description: This is always sql#instancesList.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: List of database instance resources.
+        items: DatabaseInstance
+    description: Database instances list response.
+  InstancesRestoreBackupRequest:
+    type: object
+    properties:
+      restoreBackupContext?: RestoreBackupContext
+    description: Database instance restore backup request.
+  IpConfiguration:
+    type: object
+    properties:
+      ipv4Enabled?:
+        type: boolean
+        description: Whether the instance should be assigned an IP address or not.
+      requireSsl?:
+        type: boolean
+        description: Whether the mysqld should default to 'REQUIRE X509' for users connecting over IP.
+      authorizedNetworks?:
+        type: array
+        description: The list of external networks that are allowed to connect to the instance using the IP. In CIDR notation, also known as 'slash' notation (e.g. 192.168.100.0/24).
+        items: AclEntry
+    description: IP Management configuration.
+  IpMapping:
+    type: object
+    properties:
+      ipAddress?:
+        type: string
+        description: The IP address assigned.
+      timeToRetire?:
+        type: string
+        description: The due time for this IP to be retired in RFC 3339 format, for example 2012-11-15T16:19:00.094Z. This field is only available when the IP is scheduled to be retired.
+    description: Database instance IP Mapping.
+  LocationPreference:
+    type: object
+    properties:
+      zone?:
+        type: string
+        description: The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b, etc.).
+      kind?:
+        type: string
+        default: sql#locationPreference
+        description: This is always sql#locationPreference.
+      followGaeApplication?:
+        type: string
+        description: The AppEngine application to follow, it must be in the same region as the Cloud SQL instance.
+    description: Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.
+  MaintenanceWindow:
+    type: object
+    properties:
+      hour?:
+        type: integer
+        format: int32
+        description: hour of day - 0 to 23.
+      kind?:
+        type: string
+        default: sql#maintenanceWindow
+        description: This is always sql#maintenanceWindow.
+      updateTrack?:
+        type: string
+      day?:
+        type: integer
+        format: int32
+        description: day of week (1-7), starting on Monday.
+    description: Maintenance window. This specifies when a v2 Cloud SQL instance should preferably be restarted for system maintenance puruposes.
+  MySqlReplicaConfiguration:
+    type: object
+    properties:
+      sslCipher?:
+        type: string
+        description: A list of permissible ciphers to use for SSL encryption.
+      verifyServerCertificate?:
+        type: boolean
+        description: Whether or not to check the master's Common Name value in the certificate that it sends during the SSL handshake.
+      clientCertificate?:
+        type: string
+        description: PEM representation of the slave's x509 certificate.
+      password?:
+        type: string
+        description: The password for the replication connection.
+      dumpFilePath?:
+        type: string
+        description: Path to a SQL dump file in Google Cloud Storage from which the slave instance is to be created. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are also supported. Dumps should have the binlog co-ordinates from which replication should begin. This can be accomplished by setting --master-data to 1 when using mysqldump.
+      clientKey?:
+        type: string
+        description: PEM representation of the slave's private key. The corresponsing public key is encoded in the client's certificate.
+      kind?:
+        type: string
+        default: sql#mysqlReplicaConfiguration
+        description: This is always sql#mysqlReplicaConfiguration.
+      masterHeartbeatPeriod?:
+        type: integer
+        format: int64
+        description: Interval in milliseconds between replication heartbeats.
+      connectRetryInterval?:
+        type: integer
+        format: int32
+        description: Seconds to wait between connect retries. MySQL's default is 60 seconds.
+      caCertificate?:
+        type: string
+        description: PEM representation of the trusted CA's x509 certificate.
+      username?:
+        type: string
+        description: The username for the replication connection.
+    description: Read-replica configuration specific to MySQL databases.
+  OnPremisesConfiguration:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#onPremisesConfiguration
+        description: This is always sql#onPremisesConfiguration.
+      hostPort?:
+        type: string
+        description: The host and port of the on-premises instance in host:port format
+    description: On-premises instance configuration.
+  Operation:
+    type: object
+    properties:
+      targetId?:
+        type: string
+        description: Name of the database instance related to this operation.
+      kind?:
+        type: string
+        default: sql#operation
+        description: This is always sql#operation.
+      targetProject?:
+        type: string
+        description: The project ID of the target instance related to this operation.
+      error?: OperationErrors
+      selfLink?:
+        type: string
+        description: The URI of this resource.
+      insertTime?:
+        type: datetime
+        description: The time this operation was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      importContext?: ImportContext
+      exportContext?: ExportContext
+      targetLink?:
+        type: string
+        description: The URI of the instance related to the operation.
+      name?:
+        type: string
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+      operationType?:
+        type: string
+        description: The type of the operation. Valid values are CREATE, DELETE, UPDATE, RESTART, IMPORT, EXPORT, BACKUP_VOLUME, RESTORE_VOLUME, CREATE_USER, DELETE_USER, CREATE_DATABASE, DELETE_DATABASE .
+      startTime?:
+        type: datetime
+        description: The time this operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      endTime?:
+        type: datetime
+        description: The time this operation finished in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      user?:
+        type: string
+        description: The email address of the user who initiated this operation.
+      status?:
+        type: string
+        description: The status of an operation. Valid values are PENDING, RUNNING, DONE, UNKNOWN.
+    description: An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.
+  OperationError:
+    type: object
+    properties:
+      code?:
+        type: string
+        description: Identifies the specific error that occurred.
+      kind?:
+        type: string
+        default: sql#operationError
+        description: This is always sql#operationError.
+      message?:
+        type: string
+        description: Additional information about the error encountered.
+    description: Database instance operation error.
+  OperationErrors:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#operationErrors
+        description: This is always sql#operationErrors.
+      errors?:
+        type: array
+        description: The list of errors encountered while processing this operation.
+        items: OperationError
+    description: Database instance operation errors list wrapper.
+  OperationsListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#operationsList
+        description: This is always sql#operationsList.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+      items?:
+        type: array
+        description: List of operation resources.
+        items: Operation
+    description: Database instance list operations response.
+  ReplicaConfiguration:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#replicaConfiguration
+        description: This is always sql#replicaConfiguration.
+      mysqlReplicaConfiguration?: MySqlReplicaConfiguration
+      failoverTarget?:
+        type: boolean
+        description: |-
+          Specifies if the replica is the failover target. If the field is set to true the replica will be designated as a failover replica. In case the master instance fails, the replica instance will be promoted as the new master instance.
+          Only one replica can be specified as failover target, and the replica has to be in different zone with the master instance.
+    description: Read-replica configuration for connecting to the master.
+  RestoreBackupContext:
+    type: object
+    properties:
+      backupRunId?:
+        type: integer
+        format: int64
+        description: The ID of the backup run to restore from.
+      instanceId?:
+        type: string
+        description: The ID of the instance that the backup was taken from.
+      kind?:
+        type: string
+        default: sql#restoreBackupContext
+        description: This is always sql#restoreBackupContext.
+    description: Database instance restore from backup context.
+  Settings:
+    type: object
+    properties:
+      dataDiskSizeGb?:
+        type: integer
+        format: int64
+        description: The size of data disk, in GB. The data disk size minimum is 10GB. Applies only to Second Generation instances.
+      locationPreference?: LocationPreference
+      databaseFlags?:
+        type: array
+        description: The database flags passed to the instance at startup.
+        items: DatabaseFlags
+      kind?:
+        type: string
+        default: sql#settings
+        description: This is always sql#settings.
+      dataDiskType?:
+        type: string
+        description: The type of data disk. Only supported for Second Generation instances. The default type is PD_SSD. Applies only to Second Generation instances.
+      activationPolicy?:
+        type: string
+        description: |-
+          The activation policy specifies when the instance is activated; it is applicable only when the instance state is RUNNABLE. The activation policy cannot be updated together with other settings for Second Generation instances. Valid values:
+          ALWAYS: The instance is on; it is not deactivated by inactivity.
+          NEVER: The instance is off; it is not activated, even if a connection request arrives.
+          ON_DEMAND: The instance responds to incoming requests, and turns itself off when not in use. Instances with PER_USE pricing turn off after 15 minutes of inactivity. Instances with PER_PACKAGE pricing turn off after 12 hours of inactivity.
+      authorizedGaeApplications?:
+        type: array
+        description: The App Engine app IDs that can access this instance. This property is only applicable to First Generation instances.
+        items:
+          type: string
+      maintenanceWindow?: MaintenanceWindow
+      pricingPlan?:
+        type: string
+        description: The pricing plan for this instance. This can be either PER_USE or PACKAGE. Only PER_USE is supported for Second Generation instances.
+      tier?:
+        type: string
+        description: The tier of service for this instance, for example D1, D2. For more information, see pricing.
+      replicationType?:
+        type: string
+        description: The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS. This property is only applicable to First Generation instances.
+      ipConfiguration?: IpConfiguration
+      crashSafeReplicationEnabled?:
+        type: boolean
+        description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property is only applicable to First Generation instances.
+      storageAutoResize?:
+        type: boolean
+        description: Configuration to increase storage size automatically. The default value is false. Applies only to Second Generation instances.
+      databaseReplicationEnabled?:
+        type: boolean
+        description: Configuration specific to read replica instances. Indicates whether replication is enabled or not.
+      settingsVersion?:
+        type: integer
+        format: int64
+        description: The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.
+      backupConfiguration?: BackupConfiguration
+    description: Database instance settings.
+  SslCert:
+    type: object
+    properties:
+      commonName?:
+        type: string
+        description: User supplied name. Constrained to [a-zA-Z.-_ ]+.
+      instance?:
+        type: string
+        description: Name of the database instance.
+      createTime?:
+        type: datetime
+        description: The time when the certificate was created in RFC 3339 format, for example 2012-11-15T16:19:00.094Z
+      expirationTime?:
+        type: datetime
+        description: The time when the certificate expires in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+      kind?:
+        type: string
+        default: sql#sslCert
+        description: This is always sql#sslCert.
+      certSerialNumber?:
+        type: string
+        description: Serial number, as extracted from the certificate.
+      sha1Fingerprint?:
+        type: string
+        description: Sha1 Fingerprint.
+      cert?:
+        type: string
+        description: PEM representation.
+      selfLink?:
+        type: string
+        description: The URI of this resource.
+    description: SslCerts Resource
+  SslCertDetail:
+    type: object
+    properties:
+      certPrivateKey?:
+        type: string
+        description: The private key for the client cert, in pem format. Keep private in order to protect your security.
+      certInfo?: SslCert
+    description: SslCertDetail.
+  SslCertsCreateEphemeralRequest:
+    type: object
+    properties:
+      public_key?:
+        type: string
+        description: PEM encoded public key to include in the signed certificate.
+    description: SslCerts create ephemeral certificate request.
+  SslCertsInsertRequest:
+    type: object
+    properties:
+      commonName?:
+        type: string
+        description: User supplied name. Must be a distinct name from the other certificates for this instance. New certificates will not be usable until the instance is restarted.
+    description: SslCerts insert request.
+  SslCertsInsertResponse:
+    type: object
+    properties:
+      clientCert?: SslCertDetail
+      serverCaCert?: SslCert
+      kind?:
+        type: string
+        default: sql#sslCertsInsert
+        description: This is always sql#sslCertsInsert.
+      operation?: Operation
+    description: SslCert insert response.
+  SslCertsListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#sslCertsList
+        description: This is always sql#sslCertsList.
+      items?:
+        type: array
+        description: List of client certificates for the instance.
+        items: SslCert
+    description: SslCerts list response.
+  Tier:
+    type: object
+    properties:
+      DiskQuota?:
+        type: integer
+        format: int64
+        description: The maximum disk size of this tier in bytes.
+      tier?:
+        type: string
+        description: An identifier for the service tier, for example D1, D2 etc. For related information, see Pricing.
+      kind?:
+        type: string
+        default: sql#tier
+        description: This is always sql#tier.
+      region?:
+        type: array
+        description: The applicable regions for this tier. Can be us-east1, europe-west1 or asia-east1.
+        items:
+          type: string
+      RAM?:
+        type: integer
+        format: int64
+        description: The maximum RAM usage of this tier in bytes.
+    description: A Google Cloud SQL service tier resource.
+  TiersListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#tiersList
+        description: This is always sql#tiersList.
+      items?:
+        type: array
+        description: List of tiers.
+        items: Tier
+    description: Tiers list response.
+  User:
+    type: object
+    properties:
+      password?:
+        type: string
+        description: The password for the user.
+      instance?:
+        type: string
+        description: The name of the Cloud SQL instance. This does not include the project ID. Can be omitted for update since it is already specified on the URL.
+      kind?:
+        type: string
+        default: sql#user
+        description: This is always sql#user.
+      host?:
+        type: string
+        description: The host name from which the user can connect. For insert operations, host defaults to an empty string. For update operations, host is specified as part of the request URL. The host name cannot be updated after insertion.
+      name?:
+        type: string
+        description: The name of the user in the Cloud SQL instance. Can be omitted for update since it is already specified on the URL.
+      project?:
+        type: string
+        description: The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable. Can be omitted for update since it is already specified on the URL.
+      etag?:
+        type: string
+        description: HTTP 1.1 Entity tag for the resource.
+    description: A Cloud SQL user resource.
+  UsersListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: sql#usersList
+        description: This is always sql#usersList.
+      nextPageToken?:
+        type: string
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+      items?:
+        type: array
+        description: List of user resources in the instance.
+        items: User
+    description: User list response.
+/projects:
+  /{project}:
+    uriParameters:
+      project:
+        type: string
+        description: Project ID of the project that contains the instance.
+    /instances:
+      /{instance}:
+        uriParameters:
+          instance:
+            type: string
+            description: Database instance ID. This does not include the project ID.
+        /databases:
+          /{database}:
+            uriParameters:
+              database:
+                type: string
+                description: Name of the database to be updated in the instance.
+            patch:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Updates a resource containing information about a database inside a Cloud SQL instance. This method supports patch semantics.
+              is:
+              - hasParameters
+              body:
+                application/json: Database
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Retrieves a resource containing information about a database inside a Cloud SQL instance.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Database
+            put:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Updates a resource containing information about a database inside a Cloud SQL instance.
+              is:
+              - hasParameters
+              body:
+                application/json: Database
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Deletes a database from a Cloud SQL instance.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Inserts a resource containing information about a database inside a Cloud SQL instance.
+            is:
+            - hasParameters
+            body:
+              application/json: Database
+            responses:
+              200:
+                body:
+                  application/json: Operation
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Lists databases in the specified Cloud SQL instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: DatabasesListResponse
+        /import:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Imports data into a Cloud SQL instance from a MySQL dump file in Google Cloud Storage.
+            is:
+            - hasParameters
+            body:
+              application/json: InstancesImportRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /restart:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Restarts a Cloud SQL instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /restoreBackup:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Restores a backup of a Cloud SQL instance.
+            is:
+            - hasParameters
+            body:
+              application/json: InstancesRestoreBackupRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /startReplica:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Starts the replication in the read replica instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /failover:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Failover the instance to its failover replica instance.
+            is:
+            - hasParameters
+            body:
+              application/json: InstancesFailoverRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /promoteReplica:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Promotes the read replica instance to be a stand-alone Cloud SQL instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /clone:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Creates a Cloud SQL instance as a clone of the source instance. The API is not ready for Second Generation instances yet.
+            is:
+            - hasParameters
+            body:
+              application/json: InstancesCloneRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /export:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Exports data from a Cloud SQL instance to a Google Cloud Storage bucket as a MySQL dump file.
+            is:
+            - hasParameters
+            body:
+              application/json: InstancesExportRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /stopReplica:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Stops the replication in the read replica instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /resetSslConfig:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Deletes all client certificates and generates a new server SSL certificate for the instance. The changes will not take effect until the instance is restarted. Existing instances without a server certificate will need to call this once to set a server certificate.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /backupRuns:
+          /{id}:
+            uriParameters:
+              id:
+                type: integer
+                format: int64
+                description: The ID of this Backup Run.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Retrieves a resource containing information about a backup run.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: BackupRun
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Deletes the backup taken by a backup run.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Creates a new backup run on demand. This method is applicable only to Second Generation instances.
+            is:
+            - hasParameters
+            body:
+              application/json: BackupRun
+            responses:
+              200:
+                body:
+                  application/json: Operation
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the enqueued time.
+            is:
+            - hasParameters
+            queryParameters:
+              maxResults?:
+                type: integer
+                format: int32
+                description: Maximum number of backup runs per response.
+              pageToken?:
+                type: string
+                description: A previously-returned page token representing part of the larger set of results to view.
+            responses:
+              200:
+                body:
+                  application/json: BackupRunsListResponse
+        /createEphemeral:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.
+            is:
+            - hasParameters
+            body:
+              application/json: SslCertsCreateEphemeralRequest
+            responses:
+              200:
+                body:
+                  application/json: SslCert
+        /sslCerts:
+          /{sha1Fingerprint}:
+            uriParameters:
+              sha1Fingerprint:
+                type: string
+                description: Sha1 FingerPrint.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Retrieves a particular SSL certificate. Does not include the private key (required for usage). The private key must be saved from the response to initial creation.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: SslCert
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/sqlservice.admin
+              description: Deletes the SSL certificate. The change will not take effect until the instance is restarted.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Creates an SSL certificate and returns it along with the private key and server certificate authority. The new certificate will not be usable until the instance is restarted.
+            is:
+            - hasParameters
+            body:
+              application/json: SslCertsInsertRequest
+            responses:
+              200:
+                body:
+                  application/json: SslCertsInsertResponse
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Lists all of the current SSL certificates for the instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: SslCertsListResponse
+        /users:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Creates a new user in a Cloud SQL instance.
+            is:
+            - hasParameters
+            body:
+              application/json: User
+            responses:
+              200:
+                body:
+                  application/json: Operation
+          put:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Updates an existing user in a Cloud SQL instance.
+            is:
+            - hasParameters
+            queryParameters:
+              host:
+                type: string
+                description: Host of the user in the instance.
+              name:
+                type: string
+                description: Name of the user in the instance.
+            body:
+              application/json: User
+            responses:
+              200:
+                body:
+                  application/json: Operation
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Lists users in the specified Cloud SQL instance.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: UsersListResponse
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/sqlservice.admin
+            description: Deletes a user from a Cloud SQL instance.
+            is:
+            - hasParameters
+            queryParameters:
+              host:
+                type: string
+                description: Host of the user in the instance.
+              name:
+                type: string
+                description: Name of the user in the instance.
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/sqlservice.admin
+          description: 'Updates settings of a Cloud SQL instance. Caution: This is
+            not a partial update, so you must include values for all the settings
+            that you want to retain. For partial updates, use patch.'
+          is:
+          - hasParameters
+          body:
+            application/json: DatabaseInstance
+          responses:
+            200:
+              body:
+                application/json: Operation
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/sqlservice.admin
+          description: Deletes a Cloud SQL instance.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/sqlservice.admin
+          description: 'Updates settings of a Cloud SQL instance. Caution: This is
+            not a partial update, so you must include values for all the settings
+            that you want to retain. For partial updates, use patch.. This method
+            supports patch semantics.'
+          is:
+          - hasParameters
+          body:
+            application/json: DatabaseInstance
+          responses:
+            200:
+              body:
+                application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/sqlservice.admin
+          description: Retrieves a resource containing information about a Cloud SQL instance.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: DatabaseInstance
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/sqlservice.admin
+        description: Creates a new Cloud SQL instance.
+        is:
+        - hasParameters
+        body:
+          application/json: DatabaseInstance
+        responses:
+          200:
+            body:
+              application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/sqlservice.admin
+        description: Lists instances under a given project in the alphabetical order of the instance name.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: The maximum number of results to return per response.
+          pageToken?:
+            type: string
+            description: A previously-returned page token representing part of the larger set of results to view.
+        responses:
+          200:
+            body:
+              application/json: InstancesListResponse
+    /tiers:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/sqlservice.admin
+        description: Lists all available service tiers for Google Cloud SQL, for example D1, D2. For related information, see Pricing.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: TiersListResponse
+    /operations:
+      /{operation}:
+        uriParameters:
+          operation:
+            type: string
+            description: Instance operation ID.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/sqlservice.admin
+          description: Retrieves an instance operation that has been performed on an instance.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/sqlservice.admin
+        description: Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.
+        is:
+        - hasParameters
+        queryParameters:
+          instance:
+            type: string
+            description: Cloud SQL instance ID. This does not include the project ID.
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of operations per response.
+          pageToken?:
+            type: string
+            description: A previously-returned page token representing part of the larger set of results to view.
+        responses:
+          200:
+            body:
+              application/json: OperationsListResponse
+/flags:
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/sqlservice.admin
+    description: List all available database flags for Google Cloud SQL instances.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: FlagsListResponse

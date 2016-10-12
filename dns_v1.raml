@@ -1,0 +1,427 @@
+#%RAML 1.0
+title: Google Cloud DNS API
+version: v1
+baseUri: https://www.googleapis.com/dns/v1/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/cloud-dns
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): dns:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      - https://www.googleapis.com/auth/ndev.clouddns.readonly
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Change:
+    type: object
+    properties:
+      additions?:
+        type: array
+        description: Which ResourceRecordSets to add?
+        items: ResourceRecordSet
+      deletions?:
+        type: array
+        description: Which ResourceRecordSets to remove? Must match existing data exactly.
+        items: ResourceRecordSet
+      kind?:
+        type: string
+        default: dns#change
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "dns#change".'
+      startTime?:
+        type: string
+        description: The time that this operation was started by the server (output only). This is in RFC3339 text format.
+      id?:
+        type: string
+        description: Unique identifier for the resource; defined by the server (output only).
+      status?:
+        type: string
+        description: Status of the operation (output only).
+        enum:
+        - done
+        - pending
+    description: An atomic update to a collection of ResourceRecordSets.
+  ChangesListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: dns#changesListResponse
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: |-
+          The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token.
+
+          In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
+      changes?:
+        type: array
+        description: The requested changes.
+        items: Change
+    description: The response to a request to enumerate Changes to a ResourceRecordSets collection.
+  ManagedZone:
+    type: object
+    properties:
+      creationTime?:
+        type: string
+        description: The time that this resource was created on the server. This is in RFC3339 text format. Output only.
+      kind?:
+        type: string
+        default: dns#managedZone
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "dns#managedZone".'
+      nameServerSet?:
+        type: string
+        description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset.
+      name?:
+        type: string
+        description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
+      description?:
+        type: string
+        description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the managed zone's function.
+      dnsName?:
+        type: string
+        description: The DNS name of this managed zone, for instance "example.com.".
+      id?:
+        type: integer
+        format: int64
+        description: Unique identifier for the resource; defined by the server (output only)
+      nameServers?:
+        type: array
+        description: Delegate your managed_zone to these virtual name servers; defined by the server (output only)
+        items:
+          type: string
+    description: A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.
+  ManagedZonesListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: dns#managedZonesListResponse
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: |-
+          The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token.
+
+          In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+      managedZones?:
+        type: array
+        description: The managed zone resources.
+        items: ManagedZone
+  Project:
+    type: object
+    properties:
+      number?:
+        type: integer
+        format: int64
+        description: Unique numeric identifier for the resource; defined by the server (output only).
+      kind?:
+        type: string
+        default: dns#project
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "dns#project".'
+      quota?: Quota
+      id?:
+        type: string
+        description: User assigned unique identifier for the resource (output only).
+    description: A project resource. The project is a top level container for resources including Cloud DNS ManagedZones. Projects can be created only in the APIs console.
+  Quota:
+    type: object
+    properties:
+      rrsetAdditionsPerChange?:
+        type: integer
+        format: int32
+        description: Maximum allowed number of ResourceRecordSets to add per ChangesCreateRequest.
+      rrsetDeletionsPerChange?:
+        type: integer
+        format: int32
+        description: Maximum allowed number of ResourceRecordSets to delete per ChangesCreateRequest.
+      kind?:
+        type: string
+        default: dns#quota
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "dns#quota".'
+      resourceRecordsPerRrset?:
+        type: integer
+        format: int32
+        description: Maximum allowed number of ResourceRecords per ResourceRecordSet.
+      totalRrdataSizePerChange?:
+        type: integer
+        format: int32
+        description: Maximum allowed size for total rrdata in one ChangesCreateRequest in bytes.
+      managedZones?:
+        type: integer
+        format: int32
+        description: Maximum allowed number of managed zones in the project.
+      rrsetsPerManagedZone?:
+        type: integer
+        format: int32
+        description: Maximum allowed number of ResourceRecordSets per zone in the project.
+    description: Limits associated with a Project.
+  ResourceRecordSet:
+    type: object
+    properties:
+      rrdatas?:
+        type: array
+        description: As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
+        items:
+          type: string
+      kind?:
+        type: string
+        default: dns#resourceRecordSet
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "dns#resourceRecordSet".'
+      name?:
+        type: string
+        description: For example, www.example.com.
+      type?:
+        type: string
+        description: The identifier of a supported record type, for example, A, AAAA, MX, TXT, and so on.
+      ttl?:
+        type: integer
+        format: int32
+        description: Number of seconds that this ResourceRecordSet can be cached by resolvers.
+    description: A unit of data that will be returned by the DNS servers.
+  ResourceRecordSetsListResponse:
+    type: object
+    properties:
+      rrsets?:
+        type: array
+        description: The resource record set resources.
+        items: ResourceRecordSet
+      kind?:
+        type: string
+        default: dns#resourceRecordSetsListResponse
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: |-
+          The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token.
+
+          In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      description: Identifies the project addressed by this request.
+  /managedZones:
+    /{managedZone}:
+      uriParameters:
+        managedZone:
+          type: string
+          description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
+      /rrsets:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/ndev.clouddns.readonly
+              - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          description: Enumerate ResourceRecordSets that have been created but not yet deleted.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+            name?:
+              type: string
+              description: Restricts the list to return only records with this fully qualified domain name.
+            pageToken?:
+              type: string
+              description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
+            type?:
+              type: string
+              description: Restricts the list to return only records of this type. If present, the "name" parameter must also be present.
+          responses:
+            200:
+              body:
+                application/json: ResourceRecordSetsListResponse
+      /changes:
+        /{changeId}:
+          uriParameters:
+            changeId:
+              type: string
+              description: The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/ndev.clouddns.readonly
+                - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+            description: Fetch the representation of an existing Change.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Change
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          description: Atomically update the ResourceRecordSet collection.
+          is:
+          - hasParameters
+          body:
+            application/json: Change
+          responses:
+            200:
+              body:
+                application/json: Change
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/ndev.clouddns.readonly
+              - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          description: Enumerate Changes to a ResourceRecordSet collection.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+            sortOrder?:
+              type: string
+              description: 'Sorting order direction: ''ascending'' or ''descending''.'
+            sortBy?:
+              type: string
+              default: changeSequence
+              description: Sorting criterion. The only supported value is change sequence.
+              enum:
+              - changeSequence
+            pageToken?:
+              type: string
+              description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: ChangesListResponse
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+        description: Fetch the representation of an existing ManagedZone.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: ManagedZone
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+        description: Delete a previously created ManagedZone.
+        is:
+        - hasParameters
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      description: Create a new ManagedZone.
+      is:
+      - hasParameters
+      body:
+        application/json: ManagedZone
+      responses:
+        200:
+          body:
+            application/json: ManagedZone
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloud-platform.read-only
+          - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      description: Enumerate ManagedZones that have been created but not yet deleted.
+      is:
+      - hasParameters
+      queryParameters:
+        maxResults?:
+          type: integer
+          format: int32
+          description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        dnsName?:
+          type: string
+          description: Restricts the list to return only zones with this domain name.
+        pageToken?:
+          type: string
+          description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
+      responses:
+        200:
+          body:
+            application/json: ManagedZonesListResponse
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/cloud-platform.read-only
+        - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+    description: Fetch the representation of an existing Project.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: Project

@@ -1,0 +1,278 @@
+#%RAML 1.0
+title: PageSpeed Insights API
+version: v2
+baseUri: https://www.googleapis.com/pagespeedonline/v2/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/speed/docs/insights/v2/getting-started
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/pagespeed-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/pagespeed-16.png
+  name: x16
+(commons.Id): pagespeedonline:v2
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+types:
+  PagespeedApiFormatStringV2:
+    type: object
+    properties:
+      args?:
+        type: array
+        description: List of arguments for the format string.
+        items:
+          type: object
+          properties:
+            secondary_rects?:
+              type: array
+              description: Secondary screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.
+              items:
+                type: object
+                properties:
+                  top?:
+                    type: integer
+                    format: int32
+                    description: The top coordinate of the rect, in page coordinates.
+                  left?:
+                    type: integer
+                    format: int32
+                    description: The left coordinate of the rect, in page coordinates.
+                  width?:
+                    type: integer
+                    format: int32
+                    description: The width of the rect.
+                  height?:
+                    type: integer
+                    format: int32
+                    description: The height of the rect.
+            rects?:
+              type: array
+              description: The screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is absent for a SNAPSHOT_RECT argument, it means that that argument refers to the entire snapshot.
+              items:
+                type: object
+                properties:
+                  top?:
+                    type: integer
+                    format: int32
+                    description: The top coordinate of the rect, in page coordinates.
+                  left?:
+                    type: integer
+                    format: int32
+                    description: The left coordinate of the rect, in page coordinates.
+                  width?:
+                    type: integer
+                    format: int32
+                    description: The width of the rect.
+                  height?:
+                    type: integer
+                    format: int32
+                    description: The height of the rect.
+            type?:
+              type: string
+              description: Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.
+            value?:
+              type: string
+              description: Argument value, as a localized string.
+            key?:
+              type: string
+              description: The placeholder key for this arg, as a string.
+      format?:
+        type: string
+        description: A localized format string with {{FOO}} placeholders, where 'FOO' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key 'FOO'.
+  PagespeedApiImageV2:
+    type: object
+    properties:
+      data?:
+        type: string
+        description: Image data base64 encoded.
+      mime_type?:
+        type: string
+        description: Mime type of image data (e.g. "image/jpeg").
+      width?:
+        type: integer
+        format: int32
+        description: Width of screenshot in pixels.
+      page_rect?:
+        type: object
+        properties:
+          top?:
+            type: integer
+            format: int32
+            description: The top coordinate of the rect, in page coordinates.
+          left?:
+            type: integer
+            format: int32
+            description: The left coordinate of the rect, in page coordinates.
+          width?:
+            type: integer
+            format: int32
+            description: The width of the rect.
+          height?:
+            type: integer
+            format: int32
+            description: The height of the rect.
+        description: The region of the page that is captured by this image, with dimensions measured in CSS pixels.
+      key?:
+        type: string
+        description: Unique string key, if any, identifying this image.
+      height?:
+        type: integer
+        format: int32
+        description: Height of screenshot in pixels.
+  Result:
+    type: object
+    properties:
+      ruleGroups?:
+        type: object
+        description: A map with one entry for each rule group in these results.
+      pageStats?:
+        type: object
+        properties:
+          numberResources?:
+            type: integer
+            format: int32
+            description: Number of HTTP resources loaded by the page.
+          textResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.
+          numberStaticResources?:
+            type: integer
+            format: int32
+            description: Number of static (i.e. cacheable) resources on the page.
+          flashResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of response bytes for flash resources on the page.
+          htmlResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of uncompressed response bytes for the main HTML document and all iframes on the page.
+          otherResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of response bytes for other resources on the page.
+          cssResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of uncompressed response bytes for CSS resources on the page.
+          javascriptResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of uncompressed response bytes for JS resources on the page.
+          numberJsResources?:
+            type: integer
+            format: int32
+            description: Number of JavaScript resources referenced by the page.
+          numberHosts?:
+            type: integer
+            format: int32
+            description: Number of unique hosts referenced by the page.
+          numberCssResources?:
+            type: integer
+            format: int32
+            description: Number of CSS resources referenced by the page.
+          totalRequestBytes?:
+            type: integer
+            format: int64
+            description: Total size of all request bytes sent by the page.
+          imageResponseBytes?:
+            type: integer
+            format: int64
+            description: Number of response bytes for image resources on the page.
+        description: Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.
+      invalidRules?:
+        type: array
+        description: List of rules that were specified in the request, but which the server did not know how to instantiate.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: pagespeedonline#result
+        description: Kind of result.
+      formattedResults?:
+        type: object
+        properties:
+          ruleResults?:
+            type: object
+            description: Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.
+          locale?:
+            type: string
+            description: The locale of the formattedResults, e.g. "en_US".
+        description: Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.
+      id?:
+        type: string
+        description: Canonicalized and final URL for the document, after following page redirects (if any).
+      screenshot?: PagespeedApiImageV2
+      title?:
+        type: string
+        description: Title of the page, as displayed in the browser's title bar.
+      version?:
+        type: object
+        properties:
+          major?:
+            type: integer
+            format: int32
+            description: The major version number of PageSpeed used to generate these results.
+          minor?:
+            type: integer
+            format: int32
+            description: The minor version number of PageSpeed used to generate these results.
+        description: The version of PageSpeed used to generate these results.
+      responseCode?:
+        type: integer
+        format: int32
+        description: Response code for the document. 200 indicates a normal page load. 4xx/5xx indicates an error.
+/runPagespeed:
+  get:
+    description: Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.
+    is:
+    - hasParameters
+    queryParameters:
+      rule?:
+        type: string
+        pattern: '[a-zA-Z]+'
+        description: A PageSpeed rule to run; if none are given, all rules are run
+      filter_third_party_resources?:
+        type: boolean
+        default: false
+        description: Indicates if third party resources should be filtered out before PageSpeed analysis.
+      screenshot?:
+        type: boolean
+        default: false
+        description: Indicates if binary data containing a screenshot should be included
+      locale?:
+        type: string
+        pattern: '[a-zA-Z]+(_[a-zA-Z]+)?'
+        description: The locale used to localize formatted results
+      strategy?:
+        type: string
+        description: The analysis strategy to use
+        enum:
+        - desktop
+        - mobile
+      url:
+        type: string
+        pattern: http(s)?://.*
+        description: The URL to fetch and analyze
+    responses:
+      200:
+        body:
+          application/json: Result

@@ -1,0 +1,278 @@
+#%RAML 1.0
+title: Admin Data Transfer API
+version: datatransfer_v1
+baseUri: https://www.googleapis.com/admin/datatransfer/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Id): admin:datatransfer_v1
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/admin-sdk/data-transfer/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/admin.datatransfer.readonly
+      - https://www.googleapis.com/auth/admin.datatransfer
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Application:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#datatransfer#ApplicationResource
+        description: Identifies the resource as a DataTransfer Application Resource.
+      name?:
+        type: string
+        description: The application's name.
+      etag?:
+        type: string
+        description: Etag of the resource.
+      transferParams?:
+        type: array
+        description: The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transfered.
+        items: ApplicationTransferParam
+      id?:
+        type: integer
+        format: int64
+        description: The application's ID.
+    description: The JSON template for an Application resource.
+  ApplicationDataTransfer:
+    type: object
+    properties:
+      applicationTransferStatus?:
+        type: string
+        description: Current status of transfer for this application. (Read-only)
+      applicationTransferParams?:
+        type: array
+        description: The transfer parameters for the application. These parameters are used to select the data which will get transfered in context of this application.
+        items: ApplicationTransferParam
+      applicationId?:
+        type: integer
+        format: int64
+        description: The application's ID.
+    description: Template to map fields of ApplicationDataTransfer resource.
+  ApplicationTransferParam:
+    type: object
+    properties:
+      value?:
+        type: array
+        description: 'The value of the coressponding transfer parameter. eg: ''PRIVATE''
+          or ''SHARED'''
+        items:
+          type: string
+      key?:
+        type: string
+        description: 'The type of the transfer parameter. eg: ''PRIVACY_LEVEL'''
+    description: Template for application transfer parameters.
+  ApplicationsListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#datatransfer#applicationsList
+        description: Identifies the resource as a collection of Applications.
+      nextPageToken?:
+        type: string
+        description: Continuation token which will be used to specify next page in list API.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      applications?:
+        type: array
+        description: List of applications that support data transfer and are also installed for the customer.
+        items: Application
+    description: Template for a collection of Applications.
+  DataTransfer:
+    type: object
+    properties:
+      requestTime?:
+        type: datetime
+        description: The time at which the data transfer was requested (Read-only).
+      applicationDataTransfers?:
+        type: array
+        description: List of per application data transfer resources. It contains data transfer details of the applications associated with this transfer resource. Note that this list is also used to specify the applications for which data transfer has to be done at the time of the transfer resource creation.
+        items: ApplicationDataTransfer
+      oldOwnerUserId?:
+        type: string
+        description: ID of the user whose data is being transfered.
+      newOwnerUserId?:
+        type: string
+        description: ID of the user to whom the data is being transfered.
+      kind?:
+        type: string
+        default: admin#datatransfer#DataTransfer
+        description: Identifies the resource as a DataTransfer request.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      id?:
+        type: string
+        description: The transfer's ID (Read-only).
+      overallTransferStatusCode?:
+        type: string
+        description: Overall transfer status (Read-only).
+    description: The JSON template for a DataTransfer resource.
+  DataTransfersListResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: admin#datatransfer#dataTransfersList
+        description: Identifies the resource as a collection of data transfer requests.
+      nextPageToken?:
+        type: string
+        description: Continuation token which will be used to specify next page in list API.
+      etag?:
+        type: string
+        description: ETag of the resource.
+      dataTransfers?:
+        type: array
+        description: List of data transfer requests.
+        items: DataTransfer
+    description: Template for a collection of DataTransfer resources.
+/transfers:
+  /{dataTransferId}:
+    uriParameters:
+      dataTransferId:
+        type: string
+        description: ID of the resource to be retrieved. This is returned in the response from the insert method.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.datatransfer
+          - https://www.googleapis.com/auth/admin.datatransfer.readonly
+      description: Retrieves a data transfer request by its resource ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: DataTransfer
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.datatransfer
+    description: Inserts a data transfer request.
+    is:
+    - hasParameters
+    body:
+      application/json: DataTransfer
+    responses:
+      200:
+        body:
+          application/json: DataTransfer
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.datatransfer
+        - https://www.googleapis.com/auth/admin.datatransfer.readonly
+    description: Lists the transfers for a customer by source user, destination user, or status.
+    is:
+    - hasParameters
+    queryParameters:
+      oldOwnerUserId?:
+        type: string
+        description: Source user's profile ID.
+      newOwnerUserId?:
+        type: string
+        description: Destination user's profile ID.
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of results to return. Default is 100.
+        maximum: 500
+        minimum: 1
+      customerId?:
+        type: string
+        description: Immutable ID of the Google Apps account.
+      pageToken?:
+        type: string
+        description: Token to specify the next page in the list.
+      status?:
+        type: string
+        description: Status of the transfer.
+    responses:
+      200:
+        body:
+          application/json: DataTransfersListResponse
+/applications:
+  /{applicationId}:
+    uriParameters:
+      applicationId:
+        type: integer
+        format: int64
+        description: ID of the application resource to be retrieved.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/admin.datatransfer
+          - https://www.googleapis.com/auth/admin.datatransfer.readonly
+      description: Retrieves information about an application for the given application ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Application
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/admin.datatransfer
+        - https://www.googleapis.com/auth/admin.datatransfer.readonly
+    description: Lists the applications available for data transfer for a customer.
+    is:
+    - hasParameters
+    queryParameters:
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of results to return. Default is 100.
+        maximum: 500
+        minimum: 1
+      customerId?:
+        type: string
+        description: Immutable ID of the Google Apps account.
+      pageToken?:
+        type: string
+        description: Token to specify next page in the list.
+    responses:
+      200:
+        body:
+          application/json: ApplicationsListResponse

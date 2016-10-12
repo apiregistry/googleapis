@@ -1,0 +1,512 @@
+#%RAML 1.0
+title: Enterprise Apps Reseller API
+version: v1
+baseUri: https://www.googleapis.com/apps/reseller/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/google-apps/reseller/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Tags):
+- limited_availability
+(commons.Id): reseller:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/apps.order.readonly
+      - https://www.googleapis.com/auth/apps.order
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Address:
+    type: object
+    properties:
+      organizationName?:
+        type: string
+        description: Name of the organization.
+      contactName?:
+        type: string
+        description: Name of the contact person.
+      countryCode?:
+        type: string
+        description: ISO 3166 country code.
+      kind?:
+        type: string
+        default: customers#address
+        description: Identifies the resource as a customer address.
+      postalCode?:
+        type: string
+        description: The postal code. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.
+      locality?:
+        type: string
+        description: Name of the locality. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.
+      addressLine1?:
+        type: string
+        description: Address line 1 of the address.
+      addressLine2?:
+        type: string
+        description: Address line 2 of the address.
+      addressLine3?:
+        type: string
+        description: Address line 3 of the address.
+      region?:
+        type: string
+        description: Name of the region. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.
+    description: JSON template for address of a customer.
+  ChangePlanRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: subscriptions#changePlanRequest
+        description: Identifies the resource as a subscription change plan request.
+      purchaseOrderId?:
+        type: string
+        description: Purchase order id for your order tracking purposes.
+      planName?:
+        type: string
+        description: Name of the plan to change to.
+      dealCode?:
+        type: string
+        description: External name of the deal code applicable for the subscription. This field is optional. If missing, the deal price plan won't be used.
+      seats?: Seats
+    description: JSON template for the ChangePlan rpc request.
+  Customer:
+    type: object
+    properties:
+      alternateEmail?:
+        type: string
+        description: The alternate email of the customer.
+      phoneNumber?:
+        type: string
+        description: The phone number of the customer.
+      postalAddress?: Address
+      customerDomain?:
+        type: string
+        description: The domain name of the customer.
+      kind?:
+        type: string
+        default: reseller#customer
+        description: Identifies the resource as a customer.
+      customerId?:
+        type: string
+        description: The id of the customer.
+      customerDomainVerified?:
+        type: boolean
+        description: Whether the customer's primary domain has been verified.
+      resourceUiUrl?:
+        type: string
+        description: Ui url for customer resource.
+    description: JSON template for a customer.
+  RenewalSettings:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: subscriptions#renewalSettings
+        description: Identifies the resource as a subscription renewal setting.
+      renewalType?:
+        type: string
+        description: Subscription renewal type.
+    description: JSON template for a subscription renewal settings.
+  Seats:
+    type: object
+    properties:
+      numberOfSeats?:
+        type: integer
+        format: int32
+        description: Number of seats to purchase. This is applicable only for a commitment plan.
+      kind?:
+        type: string
+        default: subscriptions#seats
+        description: Identifies the resource as a subscription change plan request.
+      licensedNumberOfSeats?:
+        type: integer
+        format: int32
+        description: Read-only field containing the current number of licensed seats for FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as Google-Vault and Drive-storage.
+      maximumNumberOfSeats?:
+        type: integer
+        format: int32
+        description: Maximum number of seats that can be purchased. This needs to be provided only for a non-commitment plan. For a commitment plan it is decided by the contract.
+    description: JSON template for subscription seats.
+  Subscription:
+    type: object
+    properties:
+      creationTime?:
+        type: integer
+        format: int64
+        description: Creation time of this subscription in milliseconds since Unix epoch.
+      customerDomain?:
+        type: string
+        description: Primary domain name of the customer
+      kind?:
+        type: string
+        default: reseller#subscription
+        description: Identifies the resource as a Subscription.
+      billingMethod?:
+        type: string
+        description: Billing method of this subscription.
+      renewalSettings?: RenewalSettings
+      seats?: Seats
+      transferInfo?:
+        type: object
+        properties:
+          minimumTransferableSeats?:
+            type: integer
+            format: int32
+          transferabilityExpirationTime?:
+            type: integer
+            format: int64
+            description: Time when transfer token or intent to transfer will expire.
+        description: Transfer related information for the subscription.
+      trialSettings?:
+        type: object
+        properties:
+          trialEndTime?:
+            type: integer
+            format: int64
+            description: End time of the trial in milliseconds since Unix epoch.
+          isInTrial?:
+            type: boolean
+            description: Whether the subscription is in trial.
+        description: Trial Settings of the subscription.
+      suspensionReasons?:
+        type: array
+        description: "Read-only field containing an enumerable of all the current\
+          \ suspension reasons for a subscription. It is possible for a subscription\
+          \ to have many concurrent, overlapping suspension reasons. A subscription's\
+          \ STATUS is SUSPENDED until all pending suspensions are removed. Possible\
+          \ options include:  \n- PENDING_TOS_ACCEPTANCE - The customer has not logged\
+          \ in and accepted the Google Apps Resold Terms of Services.  \n- RENEWAL_WITH_TYPE_CANCEL\
+          \ - The customer's commitment ended and their service was cancelled at the\
+          \ end of their term.  \n- RESELLER_INITIATED - A manual suspension invoked\
+          \ by a Reseller.  \n- TRIAL_ENDED - The customer's trial expired without\
+          \ a plan selected.  \n- OTHER - The customer is suspended for an internal\
+          \ Google reason (e.g. abuse or otherwise)."
+        items:
+          type: string
+      purchaseOrderId?:
+        type: string
+        description: Purchase order id for your order tracking purposes.
+      customerId?:
+        type: string
+        description: The id of the customer to whom the subscription belongs.
+      dealCode?:
+        type: string
+        description: External name of the deal, if this subscription was provisioned under one. Otherwise this field will be empty.
+      resourceUiUrl?:
+        type: string
+        description: Ui url for subscription resource.
+      subscriptionId?:
+        type: string
+        description: The id of the subscription.
+      plan?:
+        type: object
+        properties:
+          isCommitmentPlan?:
+            type: boolean
+            description: Whether the plan is a commitment plan or not.
+          commitmentInterval?:
+            type: object
+            properties:
+              startTime?:
+                type: integer
+                format: int64
+                description: Start time of the commitment interval in milliseconds since Unix epoch.
+              endTime?:
+                type: integer
+                format: int64
+                description: End time of the commitment interval in milliseconds since Unix epoch.
+            description: Interval of the commitment if it is a commitment plan.
+          planName?:
+            type: string
+            description: The plan name of this subscription's plan.
+        description: Plan details of the subscription
+      skuId?:
+        type: string
+        description: Name of the sku for which this subscription is purchased.
+      status?:
+        type: string
+        description: Status of the subscription.
+    description: JSON template for a subscription.
+  Subscriptions:
+    type: object
+    properties:
+      subscriptions?:
+        type: array
+        description: The subscriptions in this page of results.
+        items: Subscription
+      kind?:
+        type: string
+        default: reseller#subscriptions
+        description: Identifies the resource as a collection of subscriptions.
+      nextPageToken?:
+        type: string
+        description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+    description: JSON template for a subscription list.
+/customers:
+  /{customerId}:
+    uriParameters:
+      customerId:
+        type: string
+        description: Id of the Customer
+    /subscriptions:
+      /{subscriptionId}:
+        uriParameters:
+          subscriptionId:
+            type: string
+            description: Id of the subscription, which is unique for a customer
+        /suspend:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.order
+            description: Suspends an active subscription
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Subscription
+        /changePlan:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.order
+            description: Changes the plan of a subscription
+            is:
+            - hasParameters
+            body:
+              application/json: ChangePlanRequest
+            responses:
+              200:
+                body:
+                  application/json: Subscription
+        /startPaidService:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.order
+            description: Starts paid service of a trial subscription
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Subscription
+        /activate:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.order
+            description: Activates a subscription previously suspended by the reseller
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Subscription
+        /changeRenewalSettings:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.order
+            description: Changes the renewal settings of a subscription
+            is:
+            - hasParameters
+            body:
+              application/json: RenewalSettings
+            responses:
+              200:
+                body:
+                  application/json: Subscription
+        /changeSeats:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/apps.order
+            description: Changes the seats configuration of a subscription
+            is:
+            - hasParameters
+            body:
+              application/json: Seats
+            responses:
+              200:
+                body:
+                  application/json: Subscription
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/apps.order
+              - https://www.googleapis.com/auth/apps.order.readonly
+          description: Gets a subscription of the customer.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Subscription
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/apps.order
+          description: Cancels/Downgrades a subscription.
+          is:
+          - hasParameters
+          queryParameters:
+            deletionType:
+              type: string
+              description: Whether the subscription is to be fully cancelled or downgraded
+              enum:
+              - cancel
+              - downgrade
+              - suspend
+              - transfer_to_direct
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/apps.order
+        description: Creates/Transfers a subscription for the customer.
+        is:
+        - hasParameters
+        queryParameters:
+          customerAuthToken?:
+            type: string
+            description: An auth token needed for transferring a subscription. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken. Optional.
+        body:
+          application/json: Subscription
+        responses:
+          200:
+            body:
+              application/json: Subscription
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/apps.order
+      description: Update a customer resource if one it exists and is owned by the reseller. This method supports patch semantics.
+      is:
+      - hasParameters
+      body:
+        application/json: Customer
+      responses:
+        200:
+          body:
+            application/json: Customer
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/apps.order
+          - https://www.googleapis.com/auth/apps.order.readonly
+      description: Gets a customer resource if one exists and is owned by the reseller.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Customer
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/apps.order
+      description: Update a customer resource if one it exists and is owned by the reseller.
+      is:
+      - hasParameters
+      body:
+        application/json: Customer
+      responses:
+        200:
+          body:
+            application/json: Customer
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/apps.order
+    description: Creates a customer resource if one does not already exist.
+    is:
+    - hasParameters
+    queryParameters:
+      customerAuthToken?:
+        type: string
+        description: An auth token needed for inserting a customer for which domain already exists. Can be generated at https://admin.google.com/TransferToken. Optional.
+    body:
+      application/json: Customer
+    responses:
+      200:
+        body:
+          application/json: Customer
+/subscriptions:
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/apps.order
+        - https://www.googleapis.com/auth/apps.order.readonly
+    description: Lists subscriptions of a reseller, optionally filtered by a customer name prefix.
+    is:
+    - hasParameters
+    queryParameters:
+      customerNamePrefix?:
+        type: string
+        description: Prefix of the customer's domain name by which the subscriptions should be filtered. Optional
+      customerAuthToken?:
+        type: string
+        description: An auth token needed if the customer is not a resold customer of this reseller. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken.Optional.
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of results to return
+        maximum: 100
+        minimum: 1
+      customerId?:
+        type: string
+        description: Id of the Customer
+      pageToken?:
+        type: string
+        description: Token to specify next page in the list
+    responses:
+      200:
+        body:
+          application/json: Subscriptions

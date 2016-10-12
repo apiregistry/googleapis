@@ -1,0 +1,469 @@
+#%RAML 1.0
+title: Stackdriver Debugger API
+version: v2
+baseUri: https://clouddebugger.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Id): clouddebugger:v2
+(commons.Links):
+- title: Developer Documentation
+  url: http://cloud.google.com/debugger
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/cloud_debugger
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AliasContext:
+    type: object
+    properties:
+      kind?:
+        type: string
+        description: The alias kind.
+        enum:
+        - ANY
+        - FIXED
+        - MOVABLE
+        - OTHER
+      name?:
+        type: string
+        description: The alias name.
+    description: An alias to a repo revision.
+  Breakpoint:
+    type: object
+    properties:
+      stackFrames?:
+        type: array
+        description: The stack at breakpoint time.
+        items: StackFrame
+      evaluatedExpressions?:
+        type: array
+        description: Values of evaluated expressions at breakpoint time. The evaluated expressions appear in exactly the same order they are listed in the `expressions` field. The `name` field holds the original expression text, the `value` or `members` field holds the result of the evaluated expression. If the expression cannot be evaluated, the `status` inside the `Variable` will indicate an error and contain the error text.
+        items: Variable
+      variableTable?:
+        type: array
+        description: The `variable_table` exists to aid with computation, memory and network traffic optimization. It enables storing a variable once and reference it from multiple variables, including variables stored in the `variable_table` itself. For example, the same `this` object, which may appear at many levels of the stack, can have all of its data stored once in this table. The stack frame variables then would hold only a reference to it. The variable `var_table_index` field is an index into this repeated field. The stored objects are nameless and get their name from the referencing variable. The effective variable is a merge of the referencing variable and the referenced variable.
+        items: Variable
+      expressions?:
+        type: array
+        description: List of read-only expressions to evaluate at the breakpoint location. The expressions are composed using expressions in the programming language at the source location. If the breakpoint action is `LOG`, the evaluated expressions are included in log statements.
+        items:
+          type: string
+      finalTime?:
+        type: string
+        description: Time this breakpoint was finalized as seen by the server in seconds resolution.
+      labels?:
+        type: object
+        description: A set of custom breakpoint properties, populated by the agent, to be displayed to the user.
+      condition?:
+        type: string
+        description: Condition that triggers the breakpoint. The condition is a compound boolean expression composed using expressions in a programming language at the source location.
+      logLevel?:
+        type: string
+        description: Indicates the severity of the log. Only relevant when action is `LOG`.
+        enum:
+        - INFO
+        - WARNING
+        - ERROR
+      isFinalState?:
+        type: boolean
+        description: When true, indicates that this is a final result and the breakpoint state will not change from here on.
+      createTime?:
+        type: string
+        description: Time this breakpoint was created by the server in seconds resolution.
+      action?:
+        type: string
+        description: Action that the agent should perform when the code at the breakpoint location is hit.
+        enum:
+        - CAPTURE
+        - LOG
+      logMessageFormat?:
+        type: string
+        description: 'Only relevant when action is `LOG`. Defines the message to log
+          when the breakpoint hits. The message may include parameter placeholders
+          `$0`, `$1`, etc. These placeholders are replaced with the evaluated value
+          of the appropriate expression. Expressions not referenced in `log_message_format`
+          are not logged. Example: `Message received, id = $0, count = $1` with `expressions`
+          = `[ message.id, message.count ]`.'
+      location?: SourceLocation
+      userEmail?:
+        type: string
+        description: E-mail address of the user that created this breakpoint
+      id?:
+        type: string
+        description: Breakpoint identifier, unique in the scope of the debuggee.
+      status?: StatusMessage
+    description: Represents the breakpoint specification, status and results.
+  CloudRepoSourceContext:
+    type: object
+    properties:
+      revisionId?:
+        type: string
+        description: A revision ID.
+      aliasContext?: AliasContext
+      repoId?: RepoId
+      aliasName?:
+        type: string
+        description: The name of an alias (branch, tag, etc.).
+    description: A CloudRepoSourceContext denotes a particular revision in a cloud repo (a repo hosted by the Google Cloud Platform).
+  CloudWorkspaceId:
+    type: object
+    properties:
+      repoId?: RepoId
+      name?:
+        type: string
+        description: The unique name of the workspace within the repo. This is the name chosen by the client in the Source API's CreateWorkspace method.
+    description: A CloudWorkspaceId is a unique identifier for a cloud workspace. A cloud workspace is a place associated with a repo where modified files can be stored before they are committed.
+  CloudWorkspaceSourceContext:
+    type: object
+    properties:
+      snapshotId?:
+        type: string
+        description: The ID of the snapshot. An empty snapshot_id refers to the most recent snapshot.
+      workspaceId?: CloudWorkspaceId
+    description: A CloudWorkspaceSourceContext denotes a workspace at a particular snapshot.
+  Debuggee:
+    type: object
+    properties:
+      extSourceContexts?:
+        type: array
+        description: References to the locations and revisions of the source code used in the deployed application. Contexts describing a remote repo related to the source code have a `category` label of `remote_repo`. Source snapshot source contexts have a `category` of `snapshot`.
+        items: ExtendedSourceContext
+      isInactive?:
+        type: boolean
+        description: If set to `true`, indicates that the debuggee is considered as inactive by the Controller service.
+      sourceContexts?:
+        type: array
+        description: 'References to the locations and revisions of the source code
+          used in the deployed application. NOTE: This field is deprecated. Consumers
+          should use `ext_source_contexts` if it is not empty. Debug agents should
+          populate both this field and `ext_source_contexts`.'
+        items: SourceContext
+      uniquifier?:
+        type: string
+        description: Debuggee uniquifier within the project. Any string that identifies the application within the project can be used. Including environment and version or build IDs is recommended.
+      project?:
+        type: string
+        description: Project the debuggee is associated with. Use the project number when registering a Google Cloud Platform project.
+      description?:
+        type: string
+        description: Human readable description of the debuggee. Including a human-readable project name, environment name and version information is recommended.
+      agentVersion?:
+        type: string
+        description: 'Version ID of the agent release. The version ID is structured
+          as following: `domain/type/vmajor.minor` (for example `google.com/gcp-java/v1.1`).'
+      id?:
+        type: string
+        description: Unique identifier for the debuggee generated by the controller service.
+      isDisabled?:
+        type: boolean
+        description: If set to `true`, indicates that the agent should disable itself and detach from the debuggee.
+      status?: StatusMessage
+      labels?:
+        type: object
+        description: A set of custom debuggee properties, populated by the agent, to be displayed to the user.
+    description: Represents the application to debug. The application may include one or more replicated processes executing the same code. Each of these processes is attached with a debugger agent, carrying out the debugging commands. The agents attached to the same debuggee are identified by using exactly the same field values when registering.
+  Empty:
+    type: object
+    description: 'A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request or
+      the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty)
+      returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty
+      JSON object `{}`.'
+  ExtendedSourceContext:
+    type: object
+    properties:
+      context?: SourceContext
+      labels?:
+        type: object
+        description: Labels with user defined metadata.
+    description: An ExtendedSourceContext is a SourceContext combined with additional details describing the context.
+  FormatMessage:
+    type: object
+    properties:
+      format?:
+        type: string
+        description: 'Format template for the message. The `format` uses placeholders
+          `$0`, `$1`, etc. to reference parameters. `$$` can be used to denote the
+          `$` character. Examples: * `Failed to load ''$0'' which helps debug $1 the
+          first time it is loaded. Again, $0 is very important.` * `Please pay $$10
+          to use $0 instead of $1.`'
+      parameters?:
+        type: array
+        description: Optional parameters to be embedded into the message.
+        items:
+          type: string
+    description: Represents a message with parameters.
+  GerritSourceContext:
+    type: object
+    properties:
+      revisionId?:
+        type: string
+        description: A revision (commit) ID.
+      aliasContext?: AliasContext
+      aliasName?:
+        type: string
+        description: The name of an alias (branch, tag, etc.).
+      hostUri?:
+        type: string
+        description: The URI of a running Gerrit instance.
+      gerritProject?:
+        type: string
+        description: The full project name within the host. Projects may be nested, so "project/subproject" is a valid project name. The "repo name" is hostURI/project.
+    description: A SourceContext referring to a Gerrit project.
+  GetBreakpointResponse:
+    type: object
+    properties:
+      breakpoint?: Breakpoint
+    description: Response for getting breakpoint information.
+  GitSourceContext:
+    type: object
+    properties:
+      revisionId?:
+        type: string
+        description: Git commit hash. required.
+      url?:
+        type: string
+        description: Git repository URL.
+    description: A GitSourceContext denotes a particular revision in a third party Git repository (e.g. GitHub).
+  ListActiveBreakpointsResponse:
+    type: object
+    properties:
+      nextWaitToken?:
+        type: string
+        description: A wait token that can be used in the next method call to block until the list of breakpoints changes.
+      breakpoints?:
+        type: array
+        description: List of all active breakpoints. The fields `id` and `location` are guaranteed to be set on each breakpoint.
+        items: Breakpoint
+      waitExpired?:
+        type: boolean
+        description: The `wait_expired` field is set to true by the server when the request times out and the field `success_on_timeout` is set to true.
+    description: Response for listing active breakpoints.
+  ListBreakpointsResponse:
+    type: object
+    properties:
+      nextWaitToken?:
+        type: string
+        description: A wait token that can be used in the next call to `list` (REST) or `ListBreakpoints` (RPC) to block until the list of breakpoints has changes.
+      breakpoints?:
+        type: array
+        description: List of all breakpoints with complete state. The fields `id` and `location` are guaranteed to be set on each breakpoint.
+        items: Breakpoint
+    description: Response for listing breakpoints.
+  ListDebuggeesResponse:
+    type: object
+    properties:
+      debuggees?:
+        type: array
+        description: List of debuggees accessible to the calling user. Note that the `description` field is the only human readable field that should be displayed to the user. The fields `debuggee.id` and `description` fields are guaranteed to be set on each debuggee.
+        items: Debuggee
+    description: Response for listing debuggees.
+  ProjectRepoId:
+    type: object
+    properties:
+      repoName?:
+        type: string
+        description: The name of the repo. Leave empty for the default repo.
+      projectId?:
+        type: string
+        description: The ID of the project.
+    description: Selects a repo using a Google Cloud Platform project ID (e.g. winged-cargo-31) and a repo name within that project.
+  RegisterDebuggeeRequest:
+    type: object
+    properties:
+      debuggee?: Debuggee
+    description: Request to register a debuggee.
+  RegisterDebuggeeResponse:
+    type: object
+    properties:
+      debuggee?: Debuggee
+    description: Response for registering a debuggee.
+  RepoId:
+    type: object
+    properties:
+      uid?:
+        type: string
+        description: A server-assigned, globally unique identifier.
+      projectRepoId?: ProjectRepoId
+    description: A unique identifier for a cloud repo.
+  SetBreakpointResponse:
+    type: object
+    properties:
+      breakpoint?: Breakpoint
+    description: Response for setting a breakpoint.
+  SourceContext:
+    type: object
+    properties:
+      cloudWorkspace?: CloudWorkspaceSourceContext
+      git?: GitSourceContext
+      gerrit?: GerritSourceContext
+      cloudRepo?: CloudRepoSourceContext
+    description: A SourceContext is a reference to a tree of files. A SourceContext together with a path point to a unique revision of a single file or directory.
+  SourceLocation:
+    type: object
+    properties:
+      path?:
+        type: string
+        description: Path to the source file within the source context of the target binary.
+      line?:
+        type: integer
+        format: int32
+        description: Line inside the file. The first line in the file has the value `1`.
+    description: Represents a location in the source code.
+  StackFrame:
+    type: object
+    properties:
+      function?:
+        type: string
+        description: Demangled function name at the call site.
+      location?: SourceLocation
+      arguments?:
+        type: array
+        description: Set of arguments passed to this function. Note that this might not be populated for all stack frames.
+        items: Variable
+      locals?:
+        type: array
+        description: Set of local variables at the stack frame location. Note that this might not be populated for all stack frames.
+        items: Variable
+    description: Represents a stack frame context.
+  StatusMessage:
+    type: object
+    properties:
+      refersTo?:
+        type: string
+        description: Reference to which the message applies.
+        enum:
+        - UNSPECIFIED
+        - BREAKPOINT_SOURCE_LOCATION
+        - BREAKPOINT_CONDITION
+        - BREAKPOINT_EXPRESSION
+        - VARIABLE_NAME
+        - VARIABLE_VALUE
+      isError?:
+        type: boolean
+        description: Distinguishes errors from informational messages.
+      description?: FormatMessage
+    description: Represents a contextual status message. The message can indicate an error or informational status, and refer to specific parts of the containing object. For example, the `Breakpoint.status` field can indicate an error referring to the `BREAKPOINT_SOURCE_LOCATION` with the message `Location not found`.
+  UpdateActiveBreakpointRequest:
+    type: object
+    properties:
+      breakpoint?: Breakpoint
+    description: Request to update an active breakpoint.
+  UpdateActiveBreakpointResponse:
+    type: object
+    description: Response for updating an active breakpoint. The message is defined to allow future extensions.
+  Variable:
+    type: object
+    properties:
+      varTableIndex?:
+        type: integer
+        format: int32
+        description: Reference to a variable in the shared variable table. More than one variable can reference the same variable in the table. The `var_table_index` field is an index into `variable_table` in Breakpoint.
+      members?:
+        type: array
+        description: Members contained or pointed to by the variable.
+        items: Variable
+      name?:
+        type: string
+        description: Name of the variable, if any.
+      type?:
+        type: string
+        description: Variable type (e.g. `MyClass`). If the variable is split with `var_table_index`, `type` goes next to `value`. The interpretation of a type is agent specific. It is recommended to include the dynamic type rather than a static type of an object.
+      value?:
+        type: string
+        description: Simple value of the variable.
+      status?: StatusMessage
+    description: |-
+      Represents a variable or an argument possibly of a compound object type. Note how the following variables are represented: 1) A simple variable: int x = 5 { name: "x", value: "5", type: "int" } // Captured variable 2) A compound object: struct T { int m1; int m2; }; T x = { 3, 7 }; { // Captured variable name: "x", type: "T", members { name: "m1", value: "3", type: "int" }, members { name: "m2", value: "7", type: "int" } } 3) A pointer where the pointee was captured: T x = { 3, 7 }; T* p = &x; { // Captured variable name: "p", type: "T*", value: "0x00500500", members { name: "m1", value: "3", type: "int" }, members { name: "m2", value: "7", type: "int" } } 4) A pointer where the pointee was not captured: T* p = new T; { // Captured variable name: "p", type: "T*", value: "0x00400400" status { is_error: true, description { format: "unavailable" } } } The status should describe the reason for the missing value, such as ``, ``, `
+      `. Note that a null pointer should not have members. 5) An unnamed value: int* p = new int(7); { // Captured variable name: "p", value: "0x00500500", type: "int*", members { value: "7", type: "int" } } 6) An unnamed pointer where the pointee was not captured: int* p = new int(7); int** pp = &p; { // Captured variable name: "pp", value: "0x00500500", type: "int**", members { value: "0x00400400", type: "int*" status { is_error: true, description: { format: "unavailable" } } } } } To optimize computation, memory and network traffic, variables that repeat in the output multiple times can be stored once in a shared variable table and be referenced using the `var_table_index` field. The variables stored in the shared table are nameless and are essentially a partition of the complete variable. To reconstruct the complete variable, merge the referencing variable with the referenced variable. When using the shared variable table, the following variables: T x = { 3, 7 }; T* p = &x; T& r = x; { name: "x", var_table_index: 3, type: "T" } // Captured variables { name: "p", value "0x00500500", type="T*", var_table_index: 3 } { name: "r", type="T&", var_table_index: 3 } { // Shared variable table entry #3: members { name: "m1", value: "3", type: "int" }, members { name: "m2", value: "7", type: "int" } } Note that the pointer address is stored with the referencing variable and not with the referenced variable. This allows the referenced variable to be shared between pointers and references. The type field is optional. The debugger agent may or may not support it.
+/v2:
+  /controller:
+    /debuggees:
+      /register:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud_debugger
+          description: Registers the debuggee with the controller service. All agents attached to the same application should call this method with the same request content to get back the same stable `debuggee_id`. Agents should call this method again whenever `google.rpc.Code.NOT_FOUND` is returned from any controller method. This allows the controller service to disable the agent or recover from any data loss. If the debuggee is disabled by the server, the response will have `is_disabled` set to `true`.
+          is:
+          - hasParameters
+          body:
+            application/json: RegisterDebuggeeRequest
+          responses:
+            200:
+              body:
+                application/json: RegisterDebuggeeResponse
+  /debugger:
+    /debuggees:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud_debugger
+        description: Lists all the debuggees that the user can set breakpoints to.
+        is:
+        - hasParameters
+        queryParameters:
+          includeInactive?:
+            type: boolean
+            description: When set to `true`, the result includes all debuggees. Otherwise, the result includes only debuggees that are active.
+          project?:
+            type: string
+            description: Project number of a Google Cloud project whose debuggees to list.
+          clientVersion?:
+            type: string
+            description: 'The client version making the call. Following: `domain/type/version`
+              (e.g., `google.com/intellij/v1`).'
+        responses:
+          200:
+            body:
+              application/json: ListDebuggeesResponse

@@ -1,0 +1,280 @@
+#%RAML 1.0
+title: Google Apps Activity API
+version: v1
+baseUri: https://www.googleapis.com/appsactivity/v1/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/google-apps/activity/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): appsactivity:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/activity
+      - https://www.googleapis.com/auth/drive.metadata.readonly
+      - https://www.googleapis.com/auth/drive.readonly
+      - https://www.googleapis.com/auth/drive
+      - https://www.googleapis.com/auth/drive.metadata
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Activity:
+    type: object
+    properties:
+      singleEvents?:
+        type: array
+        description: A list of all the Events that make up the Activity.
+        items: Event
+      combinedEvent?: Event
+    description: An Activity resource is a combined view of multiple events. An activity has a list of individual events and a combined view of the common fields among all events.
+  Event:
+    type: object
+    properties:
+      additionalEventTypes?:
+        type: array
+        description: Additional event types. Some events may have multiple types when multiple actions are part of a single event. For example, creating a document, renaming it, and sharing it may be part of a single file-creation event.
+        items:
+          type: string
+          enum:
+          - comment
+          - create
+          - edit
+          - emptyTrash
+          - move
+          - permissionChange
+          - rename
+          - trash
+          - unknown
+          - untrash
+          - upload
+      move?: Move
+      primaryEventType?:
+        type: string
+        description: The main type of event that occurred.
+        enum:
+        - comment
+        - create
+        - edit
+        - emptyTrash
+        - move
+        - permissionChange
+        - rename
+        - trash
+        - unknown
+        - untrash
+        - upload
+      rename?: Rename
+      fromUserDeletion?:
+        type: boolean
+        description: Whether this event is caused by a user being deleted.
+      permissionChanges?:
+        type: array
+        description: Extra information for permissionChange type events, such as the user or group the new permission applies to.
+        items: PermissionChange
+      user?: User
+      eventTimeMillis?:
+        type: integer
+        format: int64
+        description: The time at which the event occurred formatted as Unix time in milliseconds.
+      target?: Target
+    description: Represents the changes associated with an action taken by a user.
+  ListActivitiesResponse:
+    type: object
+    properties:
+      activities?:
+        type: array
+        description: List of activities.
+        items: Activity
+      nextPageToken?:
+        type: string
+        description: Token for the next page of results.
+    description: The response from the list request. Contains a list of activities and a token to retrieve the next page of results.
+  Move:
+    type: object
+    properties:
+      addedParents?:
+        type: array
+        description: The added parent(s).
+        items: Parent
+      removedParents?:
+        type: array
+        description: The removed parent(s).
+        items: Parent
+    description: Contains information about changes in an object's parents as a result of a move type event.
+  Parent:
+    type: object
+    properties:
+      isRoot?:
+        type: boolean
+        description: Whether this is the root folder.
+      id?:
+        type: string
+        description: The parent's ID.
+      title?:
+        type: string
+        description: The parent's title.
+    description: Contains information about a parent object. For example, a folder in Drive is a parent for all files within it.
+  Permission:
+    type: object
+    properties:
+      permissionId?:
+        type: string
+        description: The ID for this permission. Corresponds to the Drive API's permission ID returned as part of the Drive Permissions resource.
+      role?:
+        type: string
+        description: Indicates the Google Drive permissions role. The role determines a user's ability to read, write, or comment on the file.
+        enum:
+        - commenter
+        - owner
+        - reader
+        - writer
+      name?:
+        type: string
+        description: The name of the user or group the permission applies to.
+      withLink?:
+        type: boolean
+        description: Whether the permission requires a link to the file.
+      type?:
+        type: string
+        description: Indicates how widely permissions are granted.
+        enum:
+        - anyone
+        - domain
+        - group
+        - user
+      user?: User
+    description: Contains information about the permissions and type of access allowed with regards to a Google Drive object. This is a subset of the fields contained in a corresponding Drive Permissions object.
+  PermissionChange:
+    type: object
+    properties:
+      removedPermissions?:
+        type: array
+        description: Lists all Permission objects removed.
+        items: Permission
+      addedPermissions?:
+        type: array
+        description: Lists all Permission objects added.
+        items: Permission
+    description: Contains information about a Drive object's permissions that changed as a result of a permissionChange type event.
+  Photo:
+    type: object
+    properties:
+      url?:
+        type: string
+        description: The URL of the photo.
+    description: Photo information for a user.
+  Rename:
+    type: object
+    properties:
+      newTitle?:
+        type: string
+        description: The new title.
+      oldTitle?:
+        type: string
+        description: The old title.
+    description: Contains information about a renametype event.
+  Target:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of the target. For example, in Google Drive, this is the title of the file.
+      id?:
+        type: string
+        description: The ID of the target. For example, in Google Drive, this is the file or folder ID.
+      mimeType?:
+        type: string
+        description: The MIME type of the target.
+    description: Information about the object modified by the event.
+  User:
+    type: object
+    properties:
+      permissionId?:
+        type: string
+        description: The permission ID associated with this user. Equivalent to the Drive API's permission ID for this user, returned as part of the Drive Permissions resource.
+      isDeleted?:
+        type: boolean
+        description: A boolean which indicates whether the specified User was deleted. If true, name, photo and permission_id will be omitted.
+      name?:
+        type: string
+        description: The displayable name of the user.
+      photo?: Photo
+    description: A representation of a user.
+/activities:
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/activity
+        - https://www.googleapis.com/auth/drive
+        - https://www.googleapis.com/auth/drive.metadata
+        - https://www.googleapis.com/auth/drive.metadata.readonly
+        - https://www.googleapis.com/auth/drive.readonly
+    description: Returns a list of activities visible to the current logged in user. Visible activities are determined by the visiblity settings of the object that was acted on, e.g. Drive files a user can see. An activity is a record of past events. Multiple events may be merged if they are similar. A request is scoped to activities from a given Google service using the source parameter.
+    is:
+    - hasParameters
+    queryParameters:
+      drive.ancestorId?:
+        type: string
+        description: Identifies the Drive folder containing the items for which to return activities.
+      pageSize?:
+        type: integer
+        default: 50
+        format: int32
+        description: The maximum number of events to return on a page. The response includes a continuation token if there are more events.
+      pageToken?:
+        type: string
+        description: A token to retrieve a specific page of results.
+      source?:
+        type: string
+        description: "The Google service from which to return activities. Possible\
+          \ values of source are: \n- drive.google.com"
+      userId?:
+        type: string
+        default: me
+        description: Indicates the user to return activity for. Use the special value me to indicate the currently authenticated user.
+      groupingStrategy?:
+        type: string
+        default: driveUi
+        description: Indicates the strategy to use when grouping singleEvents items in the associated combinedEvent object.
+        enum:
+        - driveUi
+        - none
+      drive.fileId?:
+        type: string
+        description: Identifies the Drive item to return activities for.
+    responses:
+      200:
+        body:
+          application/json: ListActivitiesResponse

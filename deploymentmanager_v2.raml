@@ -1,0 +1,1243 @@
+#%RAML 1.0
+title: Google Cloud Deployment Manager API
+version: v2
+baseUri: https://www.googleapis.com/deploymentmanager/v2/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/deployment-manager/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): deploymentmanager:v2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/ndev.cloudman
+      - https://www.googleapis.com/auth/ndev.cloudman.readonly
+      - https://www.googleapis.com/auth/cloud-platform.read-only
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AuditConfig:
+    type: object
+    properties:
+      exemptedMembers?:
+        type: array
+        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
+        items:
+          type: string
+      service?:
+        type: string
+        description: Specifies a service that will be enabled for "data access" audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.
+    description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
+  Binding:
+    type: object
+    properties:
+      role?:
+        type: string
+        description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+      members?:
+        type: array
+        description: |-
+          Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+
+          * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
+        items:
+          type: string
+    description: Associates `members` with a `role`.
+  Condition:
+    type: object
+    properties:
+      op?:
+        type: string
+        description: An operator to apply the subject with.
+      svc?:
+        type: string
+        description: Trusted attributes discharged by the service.
+      iam?:
+        type: string
+        description: Trusted attributes supplied by the IAM system.
+      values?:
+        type: array
+        description: The objects of the condition. This is mutually exclusive with 'value'.
+        items:
+          type: string
+      sys?:
+        type: string
+        description: Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.
+      value?:
+        type: string
+        description: DEPRECATED. Use 'values' instead.
+    description: A condition to be met.
+  ConfigFile:
+    type: object
+    properties:
+      content?:
+        type: string
+        description: The contents of the file.
+    description: ''
+  Deployment:
+    type: object
+    properties:
+      insertTime?:
+        type: string
+        description: '[Output Only] Timestamp when the deployment was created, in
+          RFC3339 text format .'
+      manifest?:
+        type: string
+        description: '[Output Only] URL of the manifest representing the last manifest
+          that was successfully deployed.'
+      fingerprint?:
+        type: string
+        description: |-
+          Provides a fingerprint to use in requests to modify a deployment, such as update(), stop(), and cancelPreview() requests. A fingerprint is a randomly generated value that must be provided with update(), stop(), and cancelPreview() requests to perform optimistic locking. This ensures optimistic concurrency so that only one request happens at a time.
+
+          The fingerprint is initially generated by Deployment Manager and changes after every request to modify data. To get the latest fingerprint value, perform a get() request to a deployment.
+      name?:
+        type: string
+        description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+      description?:
+        type: string
+        description: An optional user-provided description of the deployment.
+      update?: DeploymentUpdate
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      operation?: Operation
+      labels?:
+        type: array
+        description: 'Map of labels; provided by the client when the resource is created
+          or updated. Specifically: Label keys must be between 1 and 63 characters
+          long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])?
+          Label values must be between 0 and 63 characters long and must conform to
+          the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
+        items: DeploymentLabelEntry
+      selfLink?:
+        type: string
+        description: '[Output Only] Self link for the deployment.'
+      target?: TargetConfiguration
+    description: ''
+  DeploymentLabelEntry:
+    type: object
+    properties:
+      value?:
+        type: string
+      key?:
+        type: string
+  DeploymentUpdate:
+    type: object
+    properties:
+      manifest?:
+        type: string
+        description: '[Output Only] URL of the manifest representing the update configuration
+          of this deployment.'
+      labels?:
+        type: array
+        description: '[Output Only] Map of labels; provided by the client when the
+          resource is created or updated. Specifically: Label keys must be between
+          1 and 63 characters long and must conform to the following regular expression:
+          [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters
+          long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
+        items: DeploymentUpdateLabelEntry
+    description: ''
+  DeploymentUpdateLabelEntry:
+    type: object
+    properties:
+      value?:
+        type: string
+      key?:
+        type: string
+  DeploymentsCancelPreviewRequest:
+    type: object
+    properties:
+      fingerprint?:
+        type: string
+        description: |-
+          Specifies a fingerprint for cancelPreview() requests. A fingerprint is a randomly generated value that must be provided in cancelPreview() requests to perform optimistic locking. This ensures optimistic concurrency so that the deployment does not have conflicting requests (e.g. if someone attempts to make a new update request while another user attempts to cancel a preview, this would prevent one of the requests).
+
+          The fingerprint is initially generated by Deployment Manager and changes after every request to modify a deployment. To get the latest fingerprint value, perform a get() request on the deployment.
+    description: ''
+  DeploymentsListResponse:
+    type: object
+    properties:
+      deployments?:
+        type: array
+        description: '[Output Only] The deployments contained in this response.'
+        items: Deployment
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncated list request.'
+    description: A response containing a partial list of deployments and a page token used to build the next request if the request has been truncated.
+  DeploymentsStopRequest:
+    type: object
+    properties:
+      fingerprint?:
+        type: string
+        description: |-
+          Specifies a fingerprint for stop() requests. A fingerprint is a randomly generated value that must be provided in stop() requests to perform optimistic locking. This ensures optimistic concurrency so that the deployment does not have conflicting requests (e.g. if someone attempts to make a new update request while another user attempts to stop an ongoing update request, this would prevent a collision).
+
+          The fingerprint is initially generated by Deployment Manager and changes after every request to modify a deployment. To get the latest fingerprint value, perform a get() request on the deployment.
+    description: ''
+  ImportFile:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of the file.
+      content?:
+        type: string
+        description: The contents of the file.
+    description: ''
+  LogConfig:
+    type: object
+    properties:
+      counter?: LogConfigCounterOptions
+    description: Specifies what kind of log the caller must write
+  LogConfigCounterOptions:
+    type: object
+    properties:
+      field?:
+        type: string
+        description: The field value to attribute.
+      metric?:
+        type: string
+        description: The metric to update.
+    description: Options for counters
+  Manifest:
+    type: object
+    properties:
+      insertTime?:
+        type: string
+        description: '[Output Only] Timestamp when the manifest was created, in RFC3339
+          text format.'
+      layout?:
+        type: string
+        description: '[Output Only] The YAML layout for this manifest.'
+      imports?:
+        type: array
+        description: '[Output Only] The imported files for this manifest.'
+        items: ImportFile
+      expandedConfig?:
+        type: string
+        description: '[Output Only] The fully-expanded configuration file, including
+          any templates and references.'
+      name?:
+        type: string
+        description: '[Output Only] The name of the manifest.'
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      config?: ConfigFile
+      selfLink?:
+        type: string
+        description: '[Output Only] Self link for the manifest.'
+    description: ''
+  ManifestsListResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncated list request.'
+      manifests?:
+        type: array
+        description: '[Output Only] Manifests contained in this list response.'
+        items: Manifest
+    description: A response containing a partial list of manifests and a page token used to build the next request if the request has been truncated.
+  Operation:
+    type: object
+    properties:
+      httpErrorMessage?:
+        type: string
+        description: '[Output Only] If the operation fails, this field contains the
+          HTTP error message that was returned, such as NOT FOUND.'
+      targetId?:
+        type: integer
+        format: int64
+        description: '[Output Only] The unique target ID, which identifies a specific
+          incarnation of the target resource.'
+      kind?:
+        type: string
+        default: deploymentmanager#operation
+        description: '[Output Only] Type of the resource. Always compute#operation
+          for Operation resources.'
+      warnings?:
+        type: array
+        description: '[Output Only] If warning messages are generated during processing
+          of the operation, this field will be populated.'
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output Only] A warning code, if applicable. For example,
+                Compute Engine returns NO_RESULTS_ON_PAGE if there are no results
+                in the response.'
+            data?:
+              type: array
+              description: |-
+                [Output Only] Metadata about this warning in key: value format. For example:
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] A warning data value corresponding
+                      to the key.'
+                  key?:
+                    type: string
+                    description: '[Output Only] A key that provides more detail on
+                      the warning being returned. For example, for warnings where
+                      there are no results in a list request for a particular zone,
+                      this key might be scope and the key value might be the zone
+                      name. Other examples might be a key indicating a deprecated
+                      resource and a suggested replacement, or a warning about invalid
+                      network settings (for example, if an instance attempts to perform
+                      IP forwarding but is not enabled for IP forwarding).'
+            message?:
+              type: string
+              description: '[Output Only] A human-readable description of the warning
+                code.'
+      description?:
+        type: string
+        description: '[Output Only] A textual description of the operation, which
+          is set when the operation is created.'
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request that
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] If errors are generated during processing of the
+          operation, this field will be populated.'
+      statusMessage?:
+        type: string
+        description: '[Output Only] An optional textual description of the current
+          status of the operation.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined URL for the resource.'
+      insertTime?:
+        type: string
+        description: '[Output Only] The time that this operation was requested. This
+          value is in RFC3339 text format.'
+      httpErrorStatusCode?:
+        type: integer
+        format: int32
+        description: '[Output Only] If the operation fails, this field contains the
+          HTTP error status code that was returned. For example, a 404 means the resource
+          was not found.'
+      zone?:
+        type: string
+        description: '[Output Only] The URL of the zone where the operation resides.
+          Only available when performing per-zone operations.'
+      targetLink?:
+        type: string
+        description: '[Output Only] The URL of the resource that the operation modifies.
+          If creating a persistent disk snapshot, this points to the persistent disk
+          that the snapshot was created from.'
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      name?:
+        type: string
+        description: '[Output Only] Name of the resource.'
+      progress?:
+        type: integer
+        format: int32
+        description: '[Output Only] An optional progress indicator that ranges from
+          0 to 100. There is no requirement that this be linear or support any granularity
+          of operations. This should not be used to guess when the operation will
+          be complete. This number should monotonically increase as the operation
+          progresses.'
+      operationType?:
+        type: string
+        description: '[Output Only] The type of operation, such as insert, update,
+          or delete, and so on.'
+      startTime?:
+        type: string
+        description: '[Output Only] The time that this operation was started by the
+          server. This value is in RFC3339 text format.'
+      endTime?:
+        type: string
+        description: '[Output Only] The time that this operation was completed. This
+          value is in RFC3339 text format.'
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] The unique identifier for the resource. This identifier
+          is defined by the server.'
+      region?:
+        type: string
+        description: '[Output Only] The URL of the region where the operation resides.
+          Only available when performing regional operations.'
+      clientOperationId?:
+        type: string
+        description: '[Output Only] Reserved for future use.'
+      user?:
+        type: string
+        description: '[Output Only] User who requested the operation, for example:
+          user@example.com.'
+      status?:
+        type: string
+        description: '[Output Only] The status of the operation, which can be one
+          of the following: PENDING, RUNNING, or DONE.'
+    description: An Operation resource, used to manage asynchronous API requests.
+  OperationsListResponse:
+    type: object
+    properties:
+      operations?:
+        type: array
+        description: '[Output Only] Operations contained in this list response.'
+        items: Operation
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncated list request.'
+    description: A response containing a partial list of operations and a page token used to build the next request if the request has been truncated.
+  Policy:
+    type: object
+    properties:
+      bindings?:
+        type: array
+        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
+        items: Binding
+      iamOwned?:
+        type: boolean
+        description: ''
+      etag?:
+        type: string
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
+      rules?:
+        type: array
+        description: 'If more than one rule is specified, the rules are applied in
+          the following manner: - All matching LOG rules are always applied. - If
+          any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will
+          be applied if one or more matching rule requires logging. - Otherwise, if
+          any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will
+          be applied if one or more matching rule requires logging. - Otherwise, if
+          no rule applies, permission is denied.'
+        items: Rule
+      version?:
+        type: integer
+        format: int32
+        description: Version of the `Policy`. The default version is 0.
+      auditConfigs?:
+        type: array
+        description: |-
+          Specifies audit logging configs for "data access". "data access": generally refers to data reads/writes and admin reads. "admin activity": generally refers to admin writes.
+
+          Note: `AuditConfig` doesn't apply to "admin activity", which always enables audit logging.
+        items: AuditConfig
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.
+
+
+
+      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+
+      **Example**
+
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
+  Resource:
+    type: object
+    properties:
+      insertTime?:
+        type: string
+        description: '[Output Only] Timestamp when the resource was created or acquired,
+          in RFC3339 text format .'
+      accessControl?: ResourceAccessControl
+      finalProperties?:
+        type: string
+        description: '[Output Only] The evaluated properties of the resource with
+          references expanded. Returned as serialized YAML.'
+      manifest?:
+        type: string
+        description: '[Output Only] URL of the manifest representing the current configuration
+          of this resource.'
+      warnings?:
+        type: array
+        description: '[Output Only] If warning messages are generated during processing
+          of this resource, this field will be populated.'
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output Only] A warning code, if applicable. For example,
+                Compute Engine returns NO_RESULTS_ON_PAGE if there are no results
+                in the response.'
+            data?:
+              type: array
+              description: |-
+                [Output Only] Metadata about this warning in key: value format. For example:
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] A warning data value corresponding
+                      to the key.'
+                  key?:
+                    type: string
+                    description: '[Output Only] A key that provides more detail on
+                      the warning being returned. For example, for warnings where
+                      there are no results in a list request for a particular zone,
+                      this key might be scope and the key value might be the zone
+                      name. Other examples might be a key indicating a deprecated
+                      resource and a suggested replacement, or a warning about invalid
+                      network settings (for example, if an instance attempts to perform
+                      IP forwarding but is not enabled for IP forwarding).'
+            message?:
+              type: string
+              description: '[Output Only] A human-readable description of the warning
+                code.'
+      name?:
+        type: string
+        description: '[Output Only] The name of the resource as it appears in the
+          YAML config.'
+      update?: ResourceUpdate
+      updateTime?:
+        type: string
+        description: '[Output Only] Timestamp when the resource was updated, in RFC3339
+          text format .'
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      type?:
+        type: string
+        description: '[Output Only] The type of the resource, for example compute.v1.instance,
+          or cloudfunctions.v1beta1.function.'
+      properties?:
+        type: string
+        description: '[Output Only] The current properties of the resource before
+          any references have been filled in. Returned as serialized YAML.'
+      url?:
+        type: string
+        description: '[Output Only] The URL of the actual resource.'
+    description: ''
+  ResourceAccessControl:
+    type: object
+    properties:
+      gcpIamPolicy?:
+        type: string
+        description: The GCP IAM Policy to set on the resource.
+    description: The access controls set on the resource.
+  ResourceUpdate:
+    type: object
+    properties:
+      accessControl?: ResourceAccessControl
+      finalProperties?:
+        type: string
+        description: '[Output Only] The expanded properties of the resource with reference
+          values expanded. Returned as serialized YAML.'
+      manifest?:
+        type: string
+        description: '[Output Only] URL of the manifest representing the update configuration
+          of this resource.'
+      warnings?:
+        type: array
+        description: '[Output Only] If warning messages are generated during processing
+          of this resource, this field will be populated.'
+        items:
+          type: object
+          properties:
+            code?:
+              type: string
+              description: '[Output Only] A warning code, if applicable. For example,
+                Compute Engine returns NO_RESULTS_ON_PAGE if there are no results
+                in the response.'
+            data?:
+              type: array
+              description: |-
+                [Output Only] Metadata about this warning in key: value format. For example:
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                type: object
+                properties:
+                  value?:
+                    type: string
+                    description: '[Output Only] A warning data value corresponding
+                      to the key.'
+                  key?:
+                    type: string
+                    description: '[Output Only] A key that provides more detail on
+                      the warning being returned. For example, for warnings where
+                      there are no results in a list request for a particular zone,
+                      this key might be scope and the key value might be the zone
+                      name. Other examples might be a key indicating a deprecated
+                      resource and a suggested replacement, or a warning about invalid
+                      network settings (for example, if an instance attempts to perform
+                      IP forwarding but is not enabled for IP forwarding).'
+            message?:
+              type: string
+              description: '[Output Only] A human-readable description of the warning
+                code.'
+      state?:
+        type: string
+        description: '[Output Only] The state of the resource.'
+      error?:
+        type: object
+        properties:
+          errors?:
+            type: array
+            description: '[Output Only] The array of errors encountered while processing
+              this operation.'
+            items:
+              type: object
+              properties:
+                code?:
+                  type: string
+                  description: '[Output Only] The error type identifier for this error.'
+                location?:
+                  type: string
+                  description: '[Output Only] Indicates the field in the request that
+                    caused the error. This property is optional.'
+                message?:
+                  type: string
+                  description: '[Output Only] An optional, human-readable error message.'
+        description: '[Output Only] If errors are generated during update of the resource,
+          this field will be populated.'
+      intent?:
+        type: string
+        description: '[Output Only] The intent of the resource: PREVIEW, UPDATE, or
+          CANCEL.'
+      properties?:
+        type: string
+        description: '[Output Only] The set of updated properties for this resource,
+          before references are expanded. Returned as serialized YAML.'
+    description: ''
+  ResourcesListResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request.
+      resources?:
+        type: array
+        description: Resources contained in this list response.
+        items: Resource
+    description: A response containing a partial list of resources and a page token used to build the next request if the request has been truncated.
+  Rule:
+    type: object
+    properties:
+      permissions?:
+        type: array
+        description: A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
+        items:
+          type: string
+      logConfigs?:
+        type: array
+        description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
+        items: LogConfig
+      action?:
+        type: string
+        description: Required
+      description?:
+        type: string
+        description: Human-readable description of the rule.
+      conditions?:
+        type: array
+        description: Additional restrictions that must be met
+        items: Condition
+      notIns?:
+        type: array
+        description: If one or more 'not_in' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
+        items:
+          type: string
+      ins?:
+        type: array
+        description: If one or more 'in' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
+        items:
+          type: string
+    description: A rule to be applied in a Policy.
+  TargetConfiguration:
+    type: object
+    properties:
+      imports?:
+        type: array
+        description: Specifies any files to import for this configuration. This can be used to import templates or other files. For example, you might import a text file in order to use the file in a template.
+        items: ImportFile
+      config?: ConfigFile
+    description: ''
+  TestPermissionsRequest:
+    type: object
+    properties:
+      permissions?:
+        type: array
+        description: The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.
+        items:
+          type: string
+  TestPermissionsResponse:
+    type: object
+    properties:
+      permissions?:
+        type: array
+        description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+        items:
+          type: string
+  Type:
+    type: object
+    properties:
+      insertTime?:
+        type: string
+        description: '[Output Only] Timestamp when the type was created, in RFC3339
+          text format.'
+      name?:
+        type: string
+        description: Name of the type.
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      operation?: Operation
+      selfLink?:
+        type: string
+        description: '[Output Only] Self link for the type.'
+    description: A resource type supported by Deployment Manager.
+  TypesListResponse:
+    type: object
+    properties:
+      types?:
+        type: array
+        description: '[Output Only] A list of resource types supported by Deployment
+          Manager.'
+        items: Type
+      nextPageToken?:
+        type: string
+        description: A token used to continue a truncated list request.
+    description: A response that returns all Types supported by Deployment Manager
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      pattern: (?:(?:[-a-z0-9]{1,63}\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?))
+      description: The project ID for this request.
+  /global:
+    /deployments:
+      /{deployment}:
+        uriParameters:
+          deployment:
+            type: string
+            pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+            description: The name of the deployment for this request.
+        /stop:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
+            is:
+            - hasParameters
+            body:
+              application/json: DeploymentsStopRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /cancelPreview:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Cancels and removes the preview currently associated with the deployment.
+            is:
+            - hasParameters
+            body:
+              application/json: DeploymentsCancelPreviewRequest
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        /manifests:
+          /{manifest}:
+            uriParameters:
+              manifest:
+                type: string
+                pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+                description: The name of the manifest for this request.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud-platform.read-only
+                  - https://www.googleapis.com/auth/ndev.cloudman
+                  - https://www.googleapis.com/auth/ndev.cloudman.readonly
+              description: Gets information about a specific manifest.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Manifest
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/ndev.cloudman
+                - https://www.googleapis.com/auth/ndev.cloudman.readonly
+            description: Lists all manifests for a given deployment.
+            is:
+            - hasParameters
+            queryParameters:
+              filter?:
+                type: string
+                description: |-
+                  Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+                  The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+                  For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+                  You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+                  To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+              maxResults?:
+                type: integer
+                default: 500
+                format: int32
+                description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+                maximum: 500
+                minimum: 0
+              pageToken?:
+                type: string
+                description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+            responses:
+              200:
+                body:
+                  application/json: ManifestsListResponse
+        /resources:
+          /{resource}:
+            uriParameters:
+              resource:
+                type: string
+                description: The name of the resource for this request.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud-platform.read-only
+                  - https://www.googleapis.com/auth/ndev.cloudman
+                  - https://www.googleapis.com/auth/ndev.cloudman.readonly
+              description: Gets information about a single resource.
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Resource
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/ndev.cloudman
+                - https://www.googleapis.com/auth/ndev.cloudman.readonly
+            description: Lists all resources in a given deployment.
+            is:
+            - hasParameters
+            queryParameters:
+              filter?:
+                type: string
+                description: |-
+                  Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+                  The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+                  For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+                  You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+                  To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+              maxResults?:
+                type: integer
+                default: 500
+                format: int32
+                description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+                maximum: 500
+                minimum: 0
+              pageToken?:
+                type: string
+                description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+            responses:
+              200:
+                body:
+                  application/json: ResourcesListResponse
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/ndev.cloudman
+          description: Updates a deployment and all of the resources described by the deployment manifest. This method supports patch semantics.
+          is:
+          - hasParameters
+          queryParameters:
+            preview?:
+              type: boolean
+              default: false
+              description: If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
+            deletePolicy?:
+              type: string
+              default: DELETE
+              description: Sets the policy to use for deleting resources.
+              enum:
+              - ABANDON
+              - DELETE
+            createPolicy?:
+              type: string
+              default: CREATE_OR_ACQUIRE
+              description: Sets the policy to use for creating new resources.
+              enum:
+              - ACQUIRE
+              - CREATE_OR_ACQUIRE
+          body:
+            application/json: Deployment
+          responses:
+            200:
+              body:
+                application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/ndev.cloudman
+              - https://www.googleapis.com/auth/ndev.cloudman.readonly
+          description: Gets information about a specific deployment.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Deployment
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/ndev.cloudman
+          description: Updates a deployment and all of the resources described by the deployment manifest.
+          is:
+          - hasParameters
+          queryParameters:
+            preview?:
+              type: boolean
+              default: false
+              description: If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
+            deletePolicy?:
+              type: string
+              default: DELETE
+              description: Sets the policy to use for deleting resources.
+              enum:
+              - ABANDON
+              - DELETE
+            createPolicy?:
+              type: string
+              default: CREATE_OR_ACQUIRE
+              description: Sets the policy to use for creating new resources.
+              enum:
+              - ACQUIRE
+              - CREATE_OR_ACQUIRE
+          body:
+            application/json: Deployment
+          responses:
+            200:
+              body:
+                application/json: Operation
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/ndev.cloudman
+          description: Deletes a deployment and all of the resources in the deployment.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+      /{resource}:
+        uriParameters:
+          resource:
+            type: string
+            pattern: '[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?'
+            description: Name of the resource for this request.
+        /testIamPermissions:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Returns permissions that a caller has on the specified resource.
+            is:
+            - hasParameters
+            body:
+              application/json: TestPermissionsRequest
+            responses:
+              200:
+                body:
+                  application/json: TestPermissionsResponse
+        /getIamPolicy:
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Policy
+        /setIamPolicy:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/ndev.cloudman
+            description: Sets the access control policy on the specified resource. Replaces any existing policy.
+            is:
+            - hasParameters
+            body:
+              application/json: Policy
+            responses:
+              200:
+                body:
+                  application/json: Policy
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/ndev.cloudman
+        description: Creates a deployment and all of the resources described by the deployment manifest.
+        is:
+        - hasParameters
+        queryParameters:
+          preview?:
+            type: boolean
+            description: If set to true, creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the update() method or you can use the cancelPreview() method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
+        body:
+          application/json: Deployment
+        responses:
+          200:
+            body:
+              application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/ndev.cloudman
+            - https://www.googleapis.com/auth/ndev.cloudman.readonly
+        description: Lists all deployments for a given project.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+              To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: DeploymentsListResponse
+    /types:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/ndev.cloudman
+            - https://www.googleapis.com/auth/ndev.cloudman.readonly
+        description: Lists all resource types for Deployment Manager.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+              To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: TypesListResponse
+    /operations:
+      /{operation}:
+        uriParameters:
+          operation:
+            type: string
+            description: The name of the operation for this request.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/ndev.cloudman
+              - https://www.googleapis.com/auth/ndev.cloudman.readonly
+          description: Gets information about a specific operation.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/ndev.cloudman
+            - https://www.googleapis.com/auth/ndev.cloudman.readonly
+        description: Lists all operations for a project.
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+              To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: OperationsListResponse

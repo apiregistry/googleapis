@@ -1,0 +1,214 @@
+#%RAML 1.0
+title: Google Analytics API
+version: v2.4
+baseUri: https://www.googleapis.com/analytics/v2.4/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/analytics/
+  role: documentation
+(commons.Icons):
+- url: https://www.google.com/images/icons/product/analytics-32.png
+  name: x32
+- url: https://www.google.com/images/icons/product/analytics-16.png
+  name: x16
+(commons.Id): analytics:v2.4
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/analytics.readonly
+      - https://www.googleapis.com/auth/analytics
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: false
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+/data:
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/analytics
+        - https://www.googleapis.com/auth/analytics.readonly
+    description: Returns Analytics report data for a view (profile).
+    is:
+    - hasParameters
+    queryParameters:
+      end-date:
+        type: string
+        pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}'
+        description: End date for fetching report data. All requests should specify an end date formatted as YYYY-MM-DD.
+      max-results?:
+        type: integer
+        format: int32
+        description: The maximum number of entries to include in this feed.
+      segment?:
+        type: string
+        description: An Analytics advanced segment to be applied to the report data.
+      start-index?:
+        type: integer
+        format: int32
+        description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+        minimum: 1
+      ids:
+        type: string
+        pattern: ga:[0-9]+
+        description: Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.
+      start-date:
+        type: string
+        pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}'
+        description: Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.
+      filters?:
+        type: string
+        pattern: ga:.+
+        description: A comma-separated list of dimension or metric filters to be applied to the report data.
+      metrics:
+        type: string
+        pattern: ga:.+
+        description: A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report.
+      sort?:
+        type: string
+        pattern: (-)?ga:.+
+        description: A comma-separated list of dimensions or metrics that determine the sort order for the report data.
+      dimensions?:
+        type: string
+        pattern: (ga:.+)?
+        description: A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.
+/management:
+  /accounts:
+    /{accountId}:
+      uriParameters:
+        accountId:
+          type: string
+          description: Account ID for the views (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.
+      /webproperties:
+        /{webPropertyId}:
+          uriParameters:
+            webPropertyId:
+              type: string
+              description: Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.
+          /profiles:
+            /{profileId}:
+              uriParameters:
+                profileId:
+                  type: string
+                  description: View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or '~all', which refers to all the views (profiles) that user has access to.
+              /goals:
+                get:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/analytics
+                      - https://www.googleapis.com/auth/analytics.readonly
+                  description: Lists goals to which the user has access.
+                  is:
+                  - hasParameters
+                  queryParameters:
+                    max-results?:
+                      type: integer
+                      format: int32
+                      description: The maximum number of goals to include in this response.
+                    start-index?:
+                      type: integer
+                      format: int32
+                      description: An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+                      minimum: 1
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/analytics
+                  - https://www.googleapis.com/auth/analytics.readonly
+              description: Lists views (profiles) to which the user has access.
+              is:
+              - hasParameters
+              queryParameters:
+                max-results?:
+                  type: integer
+                  format: int32
+                  description: The maximum number of views (profiles) to include in this response.
+                start-index?:
+                  type: integer
+                  format: int32
+                  description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+                  minimum: 1
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/analytics
+              - https://www.googleapis.com/auth/analytics.readonly
+          description: Lists web properties to which the user has access.
+          is:
+          - hasParameters
+          queryParameters:
+            max-results?:
+              type: integer
+              format: int32
+              description: The maximum number of web properties to include in this response.
+            start-index?:
+              type: integer
+              format: int32
+              description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+              minimum: 1
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/analytics
+          - https://www.googleapis.com/auth/analytics.readonly
+      description: Lists all accounts to which the user has access.
+      is:
+      - hasParameters
+      queryParameters:
+        max-results?:
+          type: integer
+          format: int32
+          description: The maximum number of accounts to include in this response.
+        start-index?:
+          type: integer
+          format: int32
+          description: An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          minimum: 1
+  /segments:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/analytics
+          - https://www.googleapis.com/auth/analytics.readonly
+      description: Lists advanced segments to which the user has access.
+      is:
+      - hasParameters
+      queryParameters:
+        max-results?:
+          type: integer
+          format: int32
+          description: The maximum number of advanced segments to include in this response.
+        start-index?:
+          type: integer
+          format: int32
+          description: An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          minimum: 1

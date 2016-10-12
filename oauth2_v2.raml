@@ -1,0 +1,181 @@
+#%RAML 1.0
+title: Google OAuth2 API
+version: v2
+baseUri: https://www.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/accounts/docs/OAuth2
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): oauth2:v2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/userinfo.profile
+      - https://www.googleapis.com/auth/plus.me
+      - https://www.googleapis.com/auth/userinfo.email
+      - https://www.googleapis.com/auth/plus.login
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Jwk:
+    type: object
+    properties:
+      keys?:
+        type: array
+        items:
+          type: object
+          properties:
+            kty?:
+              type: string
+              default: RSA
+            e?:
+              type: string
+            use?:
+              type: string
+              default: sig
+            kid?:
+              type: string
+            alg?:
+              type: string
+              default: RS256
+            n?:
+              type: string
+  Tokeninfo:
+    type: object
+    properties:
+      token_handle?:
+        type: string
+        description: The token handle associated with this token.
+      access_type?:
+        type: string
+        description: The access type granted with this token. It can be offline or online.
+      audience?:
+        type: string
+        description: Who is the intended audience for this token. In general the same as issued_to.
+      issued_to?:
+        type: string
+        description: To whom was the token issued to. In general the same as audience.
+      user_id?:
+        type: string
+        description: The obfuscated user id.
+      scope?:
+        type: string
+        description: The space separated list of scopes granted to this token.
+      verified_email?:
+        type: boolean
+        description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
+      expires_in?:
+        type: integer
+        format: int32
+        description: The expiry time of the token, as number of seconds left until expiry.
+      email?:
+        type: string
+        description: The email address of the user. Present only if the email scope is present in the request.
+  Userinfoplus:
+    type: object
+    properties:
+      gender?:
+        type: string
+        description: The user's gender.
+      link?:
+        type: string
+        description: URL of the profile page.
+      name?:
+        type: string
+        description: The user's full name.
+      id?:
+        type: string
+        description: The obfuscated ID of the user.
+      verified_email?:
+        type: boolean
+        default: true
+        description: Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address.
+      given_name?:
+        type: string
+        description: The user's first name.
+      hd?:
+        type: string
+        description: The hosted domain e.g. example.com if the user is Google apps user.
+      locale?:
+        type: string
+        description: The user's preferred locale.
+      family_name?:
+        type: string
+        description: The user's last name.
+      email?:
+        type: string
+        description: The user's email address.
+      picture?:
+        type: string
+        description: URL of the user's picture image.
+/oauth2:
+  /v2:
+    /certs:
+      get:
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Jwk
+    /tokeninfo:
+      post:
+        is:
+        - hasParameters
+        queryParameters:
+          access_token?:
+            type: string
+          token_handle?:
+            type: string
+          id_token?:
+            type: string
+        responses:
+          200:
+            body:
+              application/json: Tokeninfo
+    /userinfo:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.me
+            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/userinfo.profile
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Userinfoplus

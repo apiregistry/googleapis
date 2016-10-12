@@ -1,0 +1,630 @@
+#%RAML 1.0
+title: Google Play Game Services Management API
+version: v1management
+baseUri: https://www.googleapis.com/games/v1management/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/games/services
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): gamesManagement:v1management
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/games
+      - https://www.googleapis.com/auth/plus.login
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  AchievementResetAllResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#achievementResetAllResponse
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#achievementResetAllResponse.
+      results?:
+        type: array
+        description: The achievement reset results.
+        items: AchievementResetResponse
+    description: This is a JSON template for achievement reset all response.
+  AchievementResetMultipleForAllRequest:
+    type: object
+    properties:
+      achievement_ids?:
+        type: array
+        description: The IDs of achievements to reset.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: gamesManagement#achievementResetMultipleForAllRequest
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#achievementResetMultipleForAllRequest.
+    description: This is a JSON template for multiple achievements reset all request.
+  AchievementResetResponse:
+    type: object
+    properties:
+      updateOccurred?:
+        type: boolean
+        description: Flag to indicate if the requested update actually occurred.
+      kind?:
+        type: string
+        default: gamesManagement#achievementResetResponse
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#achievementResetResponse.
+      currentState?:
+        type: string
+        description: "The current state of the achievement. This is the same as the\
+          \ initial state of the achievement.\nPossible values are:  \n- \"HIDDEN\"\
+          - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n\
+          - \"UNLOCKED\" - Achievement is unlocked."
+      definitionId?:
+        type: string
+        description: The ID of an achievement for which player state has been updated.
+    description: This is a JSON template for an achievement reset response.
+  EventsResetMultipleForAllRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#eventsResetMultipleForAllRequest
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#eventsResetMultipleForAllRequest.
+      event_ids?:
+        type: array
+        description: The IDs of events to reset.
+        items:
+          type: string
+    description: This is a JSON template for multiple events reset all request.
+  GamesPlayedResource:
+    type: object
+    properties:
+      autoMatched?:
+        type: boolean
+        description: True if the player was auto-matched with the currently authenticated user.
+      timeMillis?:
+        type: integer
+        format: int64
+        description: The last time the player played the game in milliseconds since the epoch in UTC.
+    description: This is a JSON template for metadata about a player playing a game with the currently authenticated user.
+  GamesPlayerExperienceInfoResource:
+    type: object
+    properties:
+      currentLevel?: GamesPlayerLevelResource
+      currentExperiencePoints?:
+        type: integer
+        format: int64
+        description: The current number of experience points for the player.
+      lastLevelUpTimestampMillis?:
+        type: integer
+        format: int64
+        description: The timestamp when the player was leveled up, in millis since Unix epoch UTC.
+      nextLevel?: GamesPlayerLevelResource
+    description: This is a JSON template for 1P/3P metadata about the player's experience.
+  GamesPlayerLevelResource:
+    type: object
+    properties:
+      level?:
+        type: integer
+        format: int32
+        description: The level for the user.
+      minExperiencePoints?:
+        type: integer
+        format: int64
+        description: The minimum experience points for this level.
+      maxExperiencePoints?:
+        type: integer
+        format: int64
+        description: The maximum experience points for this level.
+    description: This is a JSON template for 1P/3P metadata about a user's level.
+  HiddenPlayer:
+    type: object
+    properties:
+      hiddenTimeMillis?:
+        type: integer
+        format: int64
+        description: The time this player was hidden.
+      kind?:
+        type: string
+        default: gamesManagement#hiddenPlayer
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#hiddenPlayer.
+      player?: Player
+    description: This is a JSON template for the HiddenPlayer resource.
+  HiddenPlayerList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#hiddenPlayerList
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#hiddenPlayerList.
+      nextPageToken?:
+        type: string
+        description: The pagination token for the next page of results.
+      items?:
+        type: array
+        description: The players.
+        items: HiddenPlayer
+    description: This is a JSON template for a list of hidden players.
+  Player:
+    type: object
+    properties:
+      lastPlayedWith?: GamesPlayedResource
+      experienceInfo?: GamesPlayerExperienceInfoResource
+      bannerUrlLandscape?:
+        type: string
+        description: The url to the landscape mode player banner image.
+      profileSettings?: ProfileSettings
+      displayName?:
+        type: string
+        description: The name to display for the player.
+      kind?:
+        type: string
+        default: gamesManagement#player
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#player.
+      avatarImageUrl?:
+        type: string
+        description: The base URL for the image that represents the player.
+      name?:
+        type: object
+        properties:
+          familyName?:
+            type: string
+            description: The family name of this player. In some places, this is known as the last name.
+          givenName?:
+            type: string
+            description: The given name of this player. In some places, this is known as the first name.
+        description: An object representation of the individual components of the player's name. For some players, these fields may not be present.
+      originalPlayerId?:
+        type: string
+        description: The player ID that was used for this player the first time they signed into the game in question. This is only populated for calls to player.get for the requesting player, only if the player ID has subsequently changed, and only to clients that support remapping player IDs.
+      bannerUrlPortrait?:
+        type: string
+        description: The url to the portrait mode player banner image.
+      title?:
+        type: string
+        description: The player's title rewarded for their game activities.
+      playerId?:
+        type: string
+        description: The ID of the player.
+    description: This is a JSON template for a Player resource.
+  PlayerScoreResetAllResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#playerScoreResetAllResponse
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#playerScoreResetResponse.
+      results?:
+        type: array
+        description: The leaderboard reset results.
+        items: PlayerScoreResetResponse
+    description: This is a JSON template for a list of leaderboard reset resources.
+  PlayerScoreResetResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#playerScoreResetResponse
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#playerScoreResetResponse.
+      resetScoreTimeSpans?:
+        type: array
+        description: "The time spans of the updated score.\nPossible values are: \
+          \ \n- \"ALL_TIME\" - The score is an all-time score. \n- \"WEEKLY\" - The\
+          \ score is a weekly score. \n- \"DAILY\" - The score is a daily score."
+        items:
+          type: string
+      definitionId?:
+        type: string
+        description: The ID of an leaderboard for which player state has been updated.
+    description: This is a JSON template for a list of reset leaderboard entry resources.
+  ProfileSettings:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#profileSettings
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#profileSettings.
+      profileVisible?:
+        type: boolean
+        description: The player's current profile visibility. This field is visible to both 1P and 3P APIs.
+    description: This is a JSON template for profile settings
+  QuestsResetMultipleForAllRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: gamesManagement#questsResetMultipleForAllRequest
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#questsResetMultipleForAllRequest.
+      quest_ids?:
+        type: array
+        description: The IDs of quests to reset.
+        items:
+          type: string
+    description: This is a JSON template for multiple quests reset all request.
+  ScoresResetMultipleForAllRequest:
+    type: object
+    properties:
+      leaderboard_ids?:
+        type: array
+        description: The IDs of leaderboards to reset.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: gamesManagement#scoresResetMultipleForAllRequest
+        description: Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#scoresResetMultipleForAllRequest.
+    description: This is a JSON template for multiple scores reset all request.
+/rooms:
+  /reset:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Reset all rooms for the currently authenticated player for your application. This method is only accessible to whitelisted tester accounts for your application.
+      is:
+      - hasParameters
+  /resetForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Deletes rooms where the only room participants are from whitelisted tester accounts for your application. This method is only available to user accounts for your developer console.
+      is:
+      - hasParameters
+/turnbasedmatches:
+  /reset:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Reset all turn-based match data for a user. This method is only accessible to whitelisted tester accounts for your application.
+      is:
+      - hasParameters
+  /resetForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Deletes turn-based matches where the only match participants are from whitelisted tester accounts for your application. This method is only available to user accounts for your developer console.
+      is:
+      - hasParameters
+/achievements:
+  /resetMultipleForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets achievements with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft achievements may be reset.
+      is:
+      - hasParameters
+      body:
+        application/json: AchievementResetMultipleForAllRequest
+  /{achievementId}:
+    uriParameters:
+      achievementId:
+        type: string
+        description: The ID of the achievement used by this method.
+    /reset:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/games
+            - https://www.googleapis.com/auth/plus.login
+        description: Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: AchievementResetResponse
+    /resetForAllPlayers:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/games
+            - https://www.googleapis.com/auth/plus.login
+        description: Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.
+        is:
+        - hasParameters
+  /resetAllForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all draft achievements for all players. This method is only available to user accounts for your developer console.
+      is:
+      - hasParameters
+  /reset:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all achievements for the currently authenticated player for your application. This method is only accessible to whitelisted tester accounts for your application.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: AchievementResetAllResponse
+/quests:
+  /resetMultipleForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets quests with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft quests may be reset.
+      is:
+      - hasParameters
+      body:
+        application/json: QuestsResetMultipleForAllRequest
+  /{questId}:
+    uriParameters:
+      questId:
+        type: string
+        description: The ID of the quest.
+    /reset:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/games
+            - https://www.googleapis.com/auth/plus.login
+        description: Resets all player progress on the quest with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+        is:
+        - hasParameters
+    /resetForAllPlayers:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/games
+            - https://www.googleapis.com/auth/plus.login
+        description: Resets all player progress on the quest with the given ID for all players. This method is only available to user accounts for your developer console. Only draft quests can be reset.
+        is:
+        - hasParameters
+  /resetAllForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all draft quests for all players. This method is only available to user accounts for your developer console.
+      is:
+      - hasParameters
+  /reset:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all player progress on all quests for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+      is:
+      - hasParameters
+/scores:
+  /resetMultipleForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets scores for the leaderboards with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft leaderboards may be reset.
+      is:
+      - hasParameters
+      body:
+        application/json: ScoresResetMultipleForAllRequest
+  /resetAllForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
+      is:
+      - hasParameters
+  /reset:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all scores for all leaderboards for the currently authenticated players. This method is only accessible to whitelisted tester accounts for your application.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: PlayerScoreResetAllResponse
+/leaderboards:
+  /{leaderboardId}:
+    uriParameters:
+      leaderboardId:
+        type: string
+        description: The ID of the leaderboard.
+    /scores:
+      /reset:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/games
+              - https://www.googleapis.com/auth/plus.login
+          description: Resets scores for the leaderboard with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: PlayerScoreResetResponse
+      /resetForAllPlayers:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/games
+              - https://www.googleapis.com/auth/plus.login
+          description: Resets scores for the leaderboard with the given ID for all players. This method is only available to user accounts for your developer console. Only draft leaderboards can be reset.
+          is:
+          - hasParameters
+/applications:
+  /{applicationId}:
+    uriParameters:
+      applicationId:
+        type: string
+        description: The application ID from the Google Play developer console.
+    /players:
+      /hidden:
+        /{playerId}:
+          uriParameters:
+            playerId:
+              type: string
+              description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/games
+                - https://www.googleapis.com/auth/plus.login
+            description: Hide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
+            is:
+            - hasParameters
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/games
+                - https://www.googleapis.com/auth/plus.login
+            description: Unhide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
+            is:
+            - hasParameters
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/games
+              - https://www.googleapis.com/auth/plus.login
+          description: Get the list of players hidden from the given application. This method is only available to user accounts for your developer console.
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified maxResults.
+              maximum: 50
+              minimum: 1
+            pageToken?:
+              type: string
+              description: The token returned by the previous request.
+          responses:
+            200:
+              body:
+                application/json: HiddenPlayerList
+/events:
+  /resetMultipleForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset. All quests that use any of the events will also be reset.
+      is:
+      - hasParameters
+      body:
+        application/json: EventsResetMultipleForAllRequest
+  /{eventId}:
+    uriParameters:
+      eventId:
+        type: string
+        description: The ID of the event.
+    /reset:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/games
+            - https://www.googleapis.com/auth/plus.login
+        description: Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player that use the event will also be reset.
+        is:
+        - hasParameters
+    /resetForAllPlayers:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/games
+            - https://www.googleapis.com/auth/plus.login
+        description: Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset. All quests that use the event will also be reset.
+        is:
+        - hasParameters
+  /resetAllForAllPlayers:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all draft events for all players. This method is only available to user accounts for your developer console. All quests that use any of these events will also be reset.
+      is:
+      - hasParameters
+  /reset:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/games
+          - https://www.googleapis.com/auth/plus.login
+      description: Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player will also be reset.
+      is:
+      - hasParameters

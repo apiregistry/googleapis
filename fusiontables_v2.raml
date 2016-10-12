@@ -1,0 +1,1112 @@
+#%RAML 1.0
+title: Fusion Tables API
+version: v2
+baseUri: https://www.googleapis.com/fusiontables/v2/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/fusiontables
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): fusiontables:v2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/fusiontables
+      - https://www.googleapis.com/auth/fusiontables.readonly
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Bucket:
+    type: object
+    properties:
+      min?:
+        type: number
+        format: double
+        description: Minimum value in the selected column for a row to be styled according to the bucket color, opacity, icon, or weight.
+      color?:
+        type: string
+        description: 'Color of line or the interior of a polygon in #RRGGBB format.'
+      max?:
+        type: number
+        format: double
+        description: Maximum value in the selected column for a row to be styled according to the bucket color, opacity, icon, or weight.
+      icon?:
+        type: string
+        description: Icon name used for a point.
+      weight?:
+        type: integer
+        format: int32
+        description: Width of a line (in pixels).
+      opacity?:
+        type: number
+        format: double
+        description: 'Opacity of the color: 0.0 (transparent) to 1.0 (opaque).'
+    description: Specifies the minimum and maximum values, the color, opacity, icon and weight of a bucket within a StyleSetting.
+  Column:
+    type: object
+    properties:
+      columnId?:
+        type: integer
+        format: int32
+        description: Identifier for the column.
+      formatPattern?:
+        type: string
+        description: |-
+          Format pattern.
+          Acceptable values are DT_DATE_MEDIUMe.g Dec 24, 2008 DT_DATE_SHORTfor example 12/24/08 DT_DATE_TIME_MEDIUMfor example Dec 24, 2008 8:30:45 PM DT_DATE_TIME_SHORTfor example 12/24/08 8:30 PM DT_DAY_MONTH_2_DIGIT_YEARfor example 24/12/08 DT_DAY_MONTH_2_DIGIT_YEAR_TIMEfor example 24/12/08 20:30 DT_DAY_MONTH_2_DIGIT_YEAR_TIME_MERIDIANfor example 24/12/08 8:30 PM DT_DAY_MONTH_4_DIGIT_YEARfor example 24/12/2008 DT_DAY_MONTH_4_DIGIT_YEAR_TIMEfor example 24/12/2008 20:30 DT_DAY_MONTH_4_DIGIT_YEAR_TIME_MERIDIANfor example 24/12/2008 8:30 PM DT_ISO_YEAR_MONTH_DAYfor example 2008-12-24 DT_ISO_YEAR_MONTH_DAY_TIMEfor example 2008-12-24 20:30:45 DT_MONTH_DAY_4_DIGIT_YEARfor example 12/24/2008 DT_TIME_LONGfor example 8:30:45 PM UTC-6 DT_TIME_MEDIUMfor example 8:30:45 PM DT_TIME_SHORTfor example 8:30 PM DT_YEAR_ONLYfor example 2008 HIGHLIGHT_UNTYPED_CELLSHighlight cell data that does not match the data type NONENo formatting (default) NUMBER_CURRENCYfor example $1234.56 NUMBER_DEFAULTfor example 1,234.56 NUMBER_INTEGERfor example 1235 NUMBER_NO_SEPARATORfor example 1234.56 NUMBER_PERCENTfor example 123,456% NUMBER_SCIENTIFICfor example 1E3 STRING_EIGHT_LINE_IMAGEDisplays thumbnail images as tall as eight lines of text STRING_FOUR_LINE_IMAGEDisplays thumbnail images as tall as four lines of text STRING_JSON_TEXTAllows editing of text as JSON in UI STRING_JSON_LISTAllows editing of text as a JSON list in UI STRING_LINKTreats cell as a link (must start with http:// or https://) STRING_ONE_LINE_IMAGEDisplays thumbnail images as tall as one line of text STRING_VIDEO_OR_MAPDisplay a video or map thumbnail
+      kind?:
+        type: string
+        default: fusiontables#column
+        description: The kind of item this is. For a column, this is always fusiontables#column.
+      graphPredicate?:
+        type: string
+        description: |-
+          Column graph predicate.
+          Used to map table to graph data model (subject,predicate,object)
+          See W3C Graph-based Data Model.
+      name?:
+        type: string
+        description: Name of the column.
+      description?:
+        type: string
+        description: Column description.
+      columnJsonSchema?:
+        type: string
+        description: JSON schema for interpreting JSON in this column.
+      validateData?:
+        type: boolean
+        description: If true, data entered via the web application is validated.
+      baseColumn?:
+        type: object
+        properties:
+          columnId?:
+            type: integer
+            format: int32
+            description: The id of the column in the base table from which this column is derived.
+          tableIndex?:
+            type: integer
+            format: int32
+            description: Offset to the entry in the list of base tables in the table definition.
+        description: Identifier of the base column. If present, this column is derived from the specified base column.
+      type?:
+        type: string
+        description: Type of the column.
+      validValues?:
+        type: array
+        description: List of valid values used to validate data and supply a drop-down list of values in the web application.
+        items:
+          type: string
+      columnPropertiesJson?:
+        type: string
+        description: JSON object containing custom column properties.
+    description: Specifies the details of a column in a table.
+  ColumnList:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: Total number of columns for the table.
+      kind?:
+        type: string
+        default: fusiontables#columnList
+        description: The kind of item this is. For a column list, this is always fusiontables#columnList.
+      nextPageToken?:
+        type: string
+        description: Token used to access the next page of this result. No token is displayed if there are no more pages left.
+      items?:
+        type: array
+        description: List of all requested columns.
+        items: Column
+    description: Represents a list of columns in a table.
+  Geometry:
+    type: object
+    properties:
+      geometries?:
+        type: array
+        description: The list of geometries in this geometry collection.
+        items:
+          type: any
+      geometry?:
+        type: any
+      type?:
+        type: string
+        default: GeometryCollection
+        description: 'Type: A collection of geometries.'
+    description: Represents a Geometry object.
+  Import:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: fusiontables#import
+        description: The kind of item this is. For an import, this is always fusiontables#import.
+      numRowsReceived?:
+        type: integer
+        format: int64
+        description: The number of rows received from the import request.
+    description: Represents an import request.
+  Line:
+    type: object
+    properties:
+      coordinates?:
+        type: array
+        description: The coordinates that define the line.
+        items:
+          type: array
+          items:
+            type: number
+            format: double
+      type?:
+        type: string
+        default: LineString
+        description: 'Type: A line geometry.'
+    description: Represents a line geometry.
+  LineStyle:
+    type: object
+    properties:
+      strokeColorStyler?: StyleFunction
+      strokeWeight?:
+        type: integer
+        format: int32
+        description: Width of the line in pixels.
+      strokeWeightStyler?: StyleFunction
+      strokeColor?:
+        type: string
+        description: 'Color of the line in #RRGGBB format.'
+      strokeOpacity?:
+        type: number
+        format: double
+        description: 'Opacity of the line : 0.0 (transparent) to 1.0 (opaque).'
+    description: Represents a LineStyle within a StyleSetting
+  Point:
+    type: object
+    properties:
+      coordinates?:
+        type: array
+        description: The coordinates that define the point.
+        items:
+          type: number
+          format: double
+      type?:
+        type: string
+        default: Point
+        description: 'Point: A point geometry.'
+    description: Represents a point object.
+  PointStyle:
+    type: object
+    properties:
+      iconName?:
+        type: string
+        description: Name of the icon. Use values defined in http://www.google.com/fusiontables/DataSource?dsrcid=308519
+      iconStyler?: StyleFunction
+    description: Represents a PointStyle within a StyleSetting
+  Polygon:
+    type: object
+    properties:
+      coordinates?:
+        type: array
+        description: The coordinates that define the polygon.
+        items:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+      type?:
+        type: string
+        default: Polygon
+        description: 'Type: A polygon geometry.'
+    description: Represents a polygon object.
+  PolygonStyle:
+    type: object
+    properties:
+      fillColor?:
+        type: string
+        description: 'Color of the interior of the polygon in #RRGGBB format.'
+      fillOpacity?:
+        type: number
+        format: double
+        description: 'Opacity of the interior of the polygon: 0.0 (transparent) to
+          1.0 (opaque).'
+      strokeColorStyler?: StyleFunction
+      fillColorStyler?: StyleFunction
+      strokeWeight?:
+        type: integer
+        format: int32
+        description: Width of the polyon border in pixels.
+      strokeWeightStyler?: StyleFunction
+      strokeColor?:
+        type: string
+        description: 'Color of the polygon border in #RRGGBB format.'
+      strokeOpacity?:
+        type: number
+        format: double
+        description: 'Opacity of the polygon border: 0.0 (transparent) to 1.0 (opaque).'
+    description: Represents a PolygonStyle within a StyleSetting
+  Sqlresponse:
+    type: object
+    properties:
+      columns?:
+        type: array
+        description: Columns in the table.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: fusiontables#sqlresponse
+        description: The kind of item this is. For responses to SQL queries, this is always fusiontables#sqlresponse.
+      rows?:
+        type: array
+        description: The rows in the table. For each cell we print out whatever cell value (e.g., numeric, string) exists. Thus it is important that each cell contains only one value.
+        items:
+          type: array
+          items:
+            type: any
+    description: Represents a response to a SQL statement.
+  StyleFunction:
+    type: object
+    properties:
+      kind?:
+        type: string
+        description: 'Stylers can be one of three kinds: "fusiontables#fromColumn
+          if the column value is to be used as is, i.e., the column values can have
+          colors in #RRGGBBAA format or integer line widths or icon names; fusiontables#gradient
+          if the styling of the row is to be based on applying the gradient function
+          on the column value; or fusiontables#buckets if the styling is to based
+          on the bucket into which the the column value falls.'
+      buckets?:
+        type: array
+        description: Bucket function that assigns a style based on the range a column value falls into.
+        items: Bucket
+      gradient?:
+        type: object
+        properties:
+          min?:
+            type: number
+            format: double
+            description: 'Lower-end of the interpolation range: rows with this value
+              will be assigned to colors[0].'
+          max?:
+            type: number
+            format: double
+            description: 'Higher-end of the interpolation range: rows with this value
+              will be assigned to colors[n-1].'
+          colors?:
+            type: array
+            description: Array with two or more colors.
+            items:
+              type: object
+              properties:
+                color?:
+                  type: string
+                  description: 'Color in #RRGGBB format.'
+                opacity?:
+                  type: number
+                  format: double
+                  description: 'Opacity of the color: 0.0 (transparent) to 1.0 (opaque).'
+        description: Gradient function that interpolates a range of colors based on column value.
+      columnName?:
+        type: string
+        description: Name of the column whose value is used in the style.
+    description: Represents a StyleFunction within a StyleSetting
+  StyleSetting:
+    type: object
+    properties:
+      polylineOptions?: LineStyle
+      kind?:
+        type: string
+        default: fusiontables#styleSetting
+        description: The kind of item this is. A StyleSetting contains the style definitions for points, lines, and polygons in a table. Since a table can have any one or all of them, a style definition can have point, line and polygon style definitions.
+      styleId?:
+        type: integer
+        format: int32
+        description: Identifier for the style setting (unique only within tables).
+      name?:
+        type: string
+        description: Optional name for the style setting.
+      tableId?:
+        type: string
+        description: Identifier for the table.
+      markerOptions?: PointStyle
+      polygonOptions?: PolygonStyle
+    description: Represents a complete StyleSettings object. The primary key is a combination of the tableId and a styleId.
+  StyleSettingList:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: Total number of styles for the table.
+      kind?:
+        type: string
+        default: fusiontables#styleSettingList
+        description: The kind of item this is. For a style list, this is always fusiontables#styleSettingList .
+      nextPageToken?:
+        type: string
+        description: Token used to access the next page of this result. No token is displayed if there are no more styles left.
+      items?:
+        type: array
+        description: All requested style settings.
+        items: StyleSetting
+    description: Represents a list of styles for a given table.
+  Table:
+    type: object
+    properties:
+      columns?:
+        type: array
+        description: Columns in the table.
+        items: Column
+      kind?:
+        type: string
+        default: fusiontables#table
+        description: The kind of item this is. For a table, this is always fusiontables#table.
+      description?:
+        type: string
+        description: Description assigned to the table.
+      columnPropertiesJsonSchema?:
+        type: string
+        description: Default JSON schema for validating all JSON column properties.
+      sql?:
+        type: string
+        description: SQL that encodes the table definition for derived tables.
+      isExportable?:
+        type: boolean
+        description: Variable for whether table is exportable.
+      tablePropertiesJsonSchema?:
+        type: string
+        description: JSON schema for validating the JSON table properties.
+      attribution?:
+        type: string
+        description: Attribution assigned to the table.
+      attributionLink?:
+        type: string
+        description: Optional link for attribution.
+      name?:
+        type: string
+        description: Name assigned to a table.
+      tableId?:
+        type: string
+        description: Encrypted unique alphanumeric identifier for the table.
+      baseTableIds?:
+        type: array
+        description: Base table identifier if this table is a view or merged table.
+        items:
+          type: string
+      tablePropertiesJson?:
+        type: string
+        description: JSON object containing custom table properties.
+    description: Represents a table.
+  TableList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: fusiontables#tableList
+        description: The kind of item this is. For table list, this is always fusiontables#tableList.
+      nextPageToken?:
+        type: string
+        description: Token used to access the next page of this result. No token is displayed if there are no more pages left.
+      items?:
+        type: array
+        description: List of all requested tables.
+        items: Table
+    description: Represents a list of tables.
+  Task:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: fusiontables#task
+        description: Type of the resource. This is always "fusiontables#task".
+      progress?:
+        type: string
+        description: Task percentage completion.
+      started?:
+        type: boolean
+        description: false while the table is busy with some other task. true if this background task is currently running.
+      type?:
+        type: string
+        description: Type of background task.
+      taskId?:
+        type: integer
+        format: int64
+        description: Identifier for the task.
+    description: A background task on a table, initiated for time- or resource-consuming operations such as changing column types or deleting all rows.
+  TaskList:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: Total number of tasks for the table.
+      kind?:
+        type: string
+        default: fusiontables#taskList
+        description: Type of the resource. This is always "fusiontables#taskList".
+      nextPageToken?:
+        type: string
+        description: Token used to access the next page of this result. No token is displayed if there are no more pages left.
+      items?:
+        type: array
+        description: List of all requested tasks.
+        items: Task
+    description: Represents a list of tasks for a table.
+  Template:
+    type: object
+    properties:
+      automaticColumnNames?:
+        type: array
+        description: List of columns from which the template is to be automatically constructed. Only one of body or automaticColumns can be specified.
+        items:
+          type: string
+      kind?:
+        type: string
+        default: fusiontables#template
+        description: The kind of item this is. For a template, this is always fusiontables#template.
+      name?:
+        type: string
+        description: Optional name assigned to a template.
+      tableId?:
+        type: string
+        description: Identifier for the table for which the template is defined.
+      body?:
+        type: string
+        description: Body of the template. It contains HTML with {column_name} to insert values from a particular column. The body is sanitized to remove certain tags, e.g., script. Only one of body or automaticColumns can be specified.
+      templateId?:
+        type: integer
+        format: int32
+        description: Identifier for the template, unique within the context of a particular table.
+    description: Represents the contents of InfoWindow templates.
+  TemplateList:
+    type: object
+    properties:
+      totalItems?:
+        type: integer
+        format: int32
+        description: Total number of templates for the table.
+      kind?:
+        type: string
+        default: fusiontables#templateList
+        description: The kind of item this is. For a template list, this is always fusiontables#templateList .
+      nextPageToken?:
+        type: string
+        description: Token used to access the next page of this result. No token is displayed if there are no more pages left.
+      items?:
+        type: array
+        description: List of all requested templates.
+        items: Template
+    description: Represents a list of templates for a given table.
+/tables:
+  /{tableId}:
+    uriParameters:
+      tableId:
+        type: string
+        description: Table to which the updated template belongs
+    /templates:
+      /{templateId}:
+        uriParameters:
+          templateId:
+            type: integer
+            format: int32
+            description: Identifier for the template that is being updated
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Updates an existing template. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Template
+          responses:
+            200:
+              body:
+                application/json: Template
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+              - https://www.googleapis.com/auth/fusiontables.readonly
+          description: Retrieves a specific template by its id
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Template
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Updates an existing template
+          is:
+          - hasParameters
+          body:
+            application/json: Template
+          responses:
+            200:
+              body:
+                application/json: Template
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Deletes a template
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+        description: Creates a new template for the table.
+        is:
+        - hasParameters
+        body:
+          application/json: Template
+        responses:
+          200:
+            body:
+              application/json: Template
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+            - https://www.googleapis.com/auth/fusiontables.readonly
+        description: Retrieves a list of templates.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of templates to return. Optional. Default is 5.
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Continuation token specifying which results page to return. Optional.
+        responses:
+          200:
+            body:
+              application/json: TemplateList
+    /tasks:
+      /{taskId}:
+        uriParameters:
+          taskId:
+            type: string
+            description: The identifier of the task to get.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+              - https://www.googleapis.com/auth/fusiontables.readonly
+          description: Retrieves a specific task by its ID.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Task
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Deletes a specific task by its ID, unless that task has already started running.
+          is:
+          - hasParameters
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+            - https://www.googleapis.com/auth/fusiontables.readonly
+        description: Retrieves a list of tasks.
+        is:
+        - hasParameters
+        queryParameters:
+          startIndex?:
+            type: integer
+            format: int32
+            description: Index of the first result returned in the current page.
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of tasks to return. Default is 5.
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Continuation token specifying which result page to return.
+        responses:
+          200:
+            body:
+              application/json: TaskList
+    /columns:
+      /{columnId}:
+        uriParameters:
+          columnId:
+            type: string
+            description: Name or identifier for the column that is being updated.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Updates the name or type of an existing column. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: Column
+          responses:
+            200:
+              body:
+                application/json: Column
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+              - https://www.googleapis.com/auth/fusiontables.readonly
+          description: Retrieves a specific column by its ID.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Column
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Updates the name or type of an existing column.
+          is:
+          - hasParameters
+          body:
+            application/json: Column
+          responses:
+            200:
+              body:
+                application/json: Column
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Deletes the specified column.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+        description: Adds a new column to the table.
+        is:
+        - hasParameters
+        body:
+          application/json: Column
+        responses:
+          200:
+            body:
+              application/json: Column
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+            - https://www.googleapis.com/auth/fusiontables.readonly
+        description: Retrieves a list of columns.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of columns to return. Default is 5.
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Continuation token specifying which result page to return.
+        responses:
+          200:
+            body:
+              application/json: ColumnList
+    /styles:
+      /{styleId}:
+        uriParameters:
+          styleId:
+            type: integer
+            format: int32
+            description: Identifier (within a table) for the style being updated.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Updates an existing style. This method supports patch semantics.
+          is:
+          - hasParameters
+          body:
+            application/json: StyleSetting
+          responses:
+            200:
+              body:
+                application/json: StyleSetting
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+              - https://www.googleapis.com/auth/fusiontables.readonly
+          description: Gets a specific style.
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: StyleSetting
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Updates an existing style.
+          is:
+          - hasParameters
+          body:
+            application/json: StyleSetting
+          responses:
+            200:
+              body:
+                application/json: StyleSetting
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/fusiontables
+          description: Deletes a style.
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+        description: Adds a new style for the table.
+        is:
+        - hasParameters
+        body:
+          application/json: StyleSetting
+        responses:
+          200:
+            body:
+              application/json: StyleSetting
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+            - https://www.googleapis.com/auth/fusiontables.readonly
+        description: Retrieves a list of styles.
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: Maximum number of styles to return. Optional. Default is 5.
+            minimum: 0
+          pageToken?:
+            type: string
+            description: Continuation token specifying which result page to return. Optional.
+        responses:
+          200:
+            body:
+              application/json: StyleSettingList
+    /import:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+        description: Imports more rows into a table.
+        is:
+        - hasParameters
+        queryParameters:
+          endLine?:
+            type: integer
+            format: int32
+            description: The index of the line up to which data will be imported. Default is to import the entire file. If endLine is negative, it is an offset from the end of the file; the imported content will exclude the last endLine lines.
+          isStrict?:
+            type: boolean
+            description: Whether the imported CSV must have the same number of values for each row. If false, rows with fewer values will be padded with empty values. Default is true.
+          delimiter?:
+            type: string
+            description: The delimiter used to separate cell values. This can only consist of a single character. Default is ,.
+          startLine?:
+            type: integer
+            format: int32
+            description: The index of the first line from which to start importing, inclusive. Default is 0.
+          encoding?:
+            type: string
+            description: The encoding of the content. Default is UTF-8. Use auto-detect if you are unsure of the encoding.
+        responses:
+          200:
+            body:
+              application/json: Import
+    /copy:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+            - https://www.googleapis.com/auth/fusiontables.readonly
+        description: Copies a table.
+        is:
+        - hasParameters
+        queryParameters:
+          copyPresentation?:
+            type: boolean
+            description: Whether to also copy tabs, styles, and templates. Default is false.
+        responses:
+          200:
+            body:
+              application/json: Table
+    /replace:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/fusiontables
+        description: Replaces rows of an existing table. Current rows remain visible until all replacement rows are ready.
+        is:
+        - hasParameters
+        queryParameters:
+          endLine?:
+            type: integer
+            format: int32
+            description: The index of the line up to which data will be imported. Default is to import the entire file. If endLine is negative, it is an offset from the end of the file; the imported content will exclude the last endLine lines.
+          isStrict?:
+            type: boolean
+            description: Whether the imported CSV must have the same number of column values for each row. If true, throws an exception if the CSV does not have the same number of columns. If false, rows with fewer column values will be padded with empty values. Default is true.
+          delimiter?:
+            type: string
+            description: The delimiter used to separate cell values. This can only consist of a single character. Default is ,.
+          startLine?:
+            type: integer
+            format: int32
+            description: The index of the first line from which to start importing, inclusive. Default is 0.
+          encoding?:
+            type: string
+            description: The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.
+        responses:
+          200:
+            body:
+              application/json: Task
+    patch:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fusiontables
+      description: Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated. This method supports patch semantics.
+      is:
+      - hasParameters
+      queryParameters:
+        replaceViewDefinition?:
+          type: boolean
+          description: Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.
+      body:
+        application/json: Table
+      responses:
+        200:
+          body:
+            application/json: Table
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fusiontables
+          - https://www.googleapis.com/auth/fusiontables.readonly
+      description: Retrieves a specific table by its ID.
+      is:
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Table
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fusiontables
+      description: Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated.
+      is:
+      - hasParameters
+      queryParameters:
+        replaceViewDefinition?:
+          type: boolean
+          description: Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.
+      body:
+        application/json: Table
+      responses:
+        200:
+          body:
+            application/json: Table
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fusiontables
+      description: Deletes a table.
+      is:
+      - hasParameters
+  /import:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/fusiontables
+      description: Imports a new table.
+      is:
+      - hasParameters
+      queryParameters:
+        delimiter?:
+          type: string
+          description: The delimiter used to separate cell values. This can only consist of a single character. Default is ,.
+        name:
+          type: string
+          description: The name to be assigned to the new table.
+        encoding?:
+          type: string
+          description: The encoding of the content. Default is UTF-8. Use auto-detect if you are unsure of the encoding.
+      responses:
+        200:
+          body:
+            application/json: Table
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/fusiontables
+    description: Creates a new table.
+    is:
+    - hasParameters
+    body:
+      application/json: Table
+    responses:
+      200:
+        body:
+          application/json: Table
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/fusiontables
+        - https://www.googleapis.com/auth/fusiontables.readonly
+    description: Retrieves a list of tables a user owns.
+    is:
+    - hasParameters
+    queryParameters:
+      maxResults?:
+        type: integer
+        format: int32
+        description: Maximum number of tables to return. Default is 5.
+        minimum: 0
+      pageToken?:
+        type: string
+        description: Continuation token specifying which result page to return.
+    responses:
+      200:
+        body:
+          application/json: TableList
+/query:
+  post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/fusiontables
+        - https://www.googleapis.com/auth/fusiontables.readonly
+    description: "Executes a Fusion Tables SQL statement, which can be any of \n-\
+      \ SELECT\n- INSERT\n- UPDATE\n- DELETE\n- SHOW\n- DESCRIBE\n- CREATE statement."
+    is:
+    - hasParameters
+    queryParameters:
+      typed?:
+        type: boolean
+        description: 'Whether typed values are returned in the (JSON) response: numbers
+          for numeric values and parsed geometries for KML values. Default is true.'
+      hdrs?:
+        type: boolean
+        description: Whether column names are included in the first row. Default is true.
+      sql:
+        type: string
+        description: "A Fusion Tables SQL statement, which can be any of \n- SELECT\n\
+          - INSERT\n- UPDATE\n- DELETE\n- SHOW\n- DESCRIBE\n- CREATE"
+    responses:
+      200:
+        body:
+          application/json: Sqlresponse
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/fusiontables
+        - https://www.googleapis.com/auth/fusiontables.readonly
+    description: "Executes a SQL statement which can be any of \n- SELECT\n- SHOW\n\
+      - DESCRIBE"
+    is:
+    - hasParameters
+    queryParameters:
+      typed?:
+        type: boolean
+        description: 'Whether typed values are returned in the (JSON) response: numbers
+          for numeric values and parsed geometries for KML values. Default is true.'
+      hdrs?:
+        type: boolean
+        description: Whether column names are included (in the first row). Default is true.
+      sql:
+        type: string
+        description: "A SQL statement which can be any of \n- SELECT\n- SHOW\n- DESCRIBE"
+    responses:
+      200:
+        body:
+          application/json: Sqlresponse

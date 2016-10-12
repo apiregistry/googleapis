@@ -1,0 +1,544 @@
+#%RAML 1.0
+title: Cloud Monitoring API
+version: v2beta2
+baseUri: https://www.googleapis.com/cloudmonitoring/v2beta2/projects/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://cloud.google.com/monitoring/v2beta2/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): cloudmonitoring:v2beta2
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/monitoring
+      - https://www.googleapis.com/auth/cloud-platform
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  DeleteMetricDescriptorResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: cloudmonitoring#deleteMetricDescriptorResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#deleteMetricDescriptorResponse".'
+    description: The response of cloudmonitoring.metricDescriptors.delete.
+  ListMetricDescriptorsRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: cloudmonitoring#listMetricDescriptorsRequest
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#listMetricDescriptorsRequest".'
+    description: The request of cloudmonitoring.metricDescriptors.list.
+  ListMetricDescriptorsResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: cloudmonitoring#listMetricDescriptorsResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#listMetricDescriptorsResponse".'
+      nextPageToken?:
+        type: string
+        description: Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, pass this value to the pageToken query parameter.
+      metrics?:
+        type: array
+        description: The returned metric descriptors.
+        items: MetricDescriptor
+    description: The response of cloudmonitoring.metricDescriptors.list.
+  ListTimeseriesDescriptorsRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: cloudmonitoring#listTimeseriesDescriptorsRequest
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#listTimeseriesDescriptorsRequest".'
+    description: The request of cloudmonitoring.timeseriesDescriptors.list
+  ListTimeseriesDescriptorsResponse:
+    type: object
+    properties:
+      timeseries?:
+        type: array
+        description: The returned time series descriptors.
+        items: TimeseriesDescriptor
+      oldest?:
+        type: datetime
+        description: The oldest timestamp of the interval of this query, as an RFC 3339 string.
+      kind?:
+        type: string
+        default: cloudmonitoring#listTimeseriesDescriptorsResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#listTimeseriesDescriptorsResponse".'
+      nextPageToken?:
+        type: string
+        description: Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set this value to the pageToken query parameter.
+      youngest?:
+        type: datetime
+        description: The youngest timestamp of the interval of this query, as an RFC 3339 string.
+    description: The response of cloudmonitoring.timeseriesDescriptors.list
+  ListTimeseriesRequest:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: cloudmonitoring#listTimeseriesRequest
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#listTimeseriesRequest".'
+    description: The request of cloudmonitoring.timeseries.list
+  ListTimeseriesResponse:
+    type: object
+    properties:
+      timeseries?:
+        type: array
+        description: The returned time series.
+        items: Timeseries
+      oldest?:
+        type: datetime
+        description: The oldest timestamp of the interval of this query as an RFC 3339 string.
+      kind?:
+        type: string
+        default: cloudmonitoring#listTimeseriesResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#listTimeseriesResponse".'
+      nextPageToken?:
+        type: string
+        description: Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set the pageToken query parameter to this value. All of the points of a time series will be returned before returning any point of the subsequent time series.
+      youngest?:
+        type: datetime
+        description: The youngest timestamp of the interval of this query as an RFC 3339 string.
+    description: The response of cloudmonitoring.timeseries.list
+  MetricDescriptor:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of this metric.
+      description?:
+        type: string
+        description: Description of this metric.
+      project?:
+        type: string
+        description: The project ID to which the metric belongs.
+      labels?:
+        type: array
+        description: Labels defined for this metric.
+        items: MetricDescriptorLabelDescriptor
+      typeDescriptor?: MetricDescriptorTypeDescriptor
+    description: A metricDescriptor defines the name, label keys, and data type of a particular metric.
+  MetricDescriptorLabelDescriptor:
+    type: object
+    properties:
+      description?:
+        type: string
+        description: Label description.
+      key?:
+        type: string
+        description: Label key.
+    description: A label in a metric is a description of this metric, including the key of this description (what the description is), and the value for this description.
+  MetricDescriptorTypeDescriptor:
+    type: object
+    properties:
+      metricType?:
+        type: string
+        description: The method of collecting data for the metric. See Metric types.
+      valueType?:
+        type: string
+        description: The data type of of individual points in the metric's time series. See Metric value types.
+    description: A type in a metric contains information about how the metric is collected and what its data points look like.
+  Point:
+    type: object
+    properties:
+      int64Value?:
+        type: integer
+        format: int64
+        description: The value of this data point as a 64-bit integer.
+      stringValue?:
+        type: string
+        description: The value of this data point in string format.
+      start?:
+        type: string
+        description: The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings.
+      boolValue?:
+        type: boolean
+        description: The value of this data point. Either "true" or "false".
+      end?:
+        type: string
+        description: The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings.
+      doubleValue?:
+        type: number
+        format: double
+        description: The value of this data point as a double-precision floating-point number.
+      distributionValue?: PointDistribution
+    description: Point is a single point in a time series. It consists of a start time, an end time, and a value.
+  PointDistribution:
+    type: object
+    properties:
+      buckets?:
+        type: array
+        description: The finite buckets.
+        items: PointDistributionBucket
+      underflowBucket?: PointDistributionUnderflowBucket
+      overflowBucket?: PointDistributionOverflowBucket
+    description: Distribution data point value type. When writing distribution points, try to be consistent with the boundaries of your buckets. If you must modify the bucket boundaries, then do so by merging, partitioning, or appending rather than skewing them.
+  PointDistributionBucket:
+    type: object
+    properties:
+      upperBound?:
+        type: number
+        format: double
+        description: The upper bound of the value interval of this bucket (exclusive).
+      count?:
+        type: integer
+        format: int64
+        description: The number of events whose values are in the interval defined by this bucket.
+      lowerBound?:
+        type: number
+        format: double
+        description: The lower bound of the value interval of this bucket (inclusive).
+    description: The histogram's bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2).
+  PointDistributionOverflowBucket:
+    type: object
+    properties:
+      count?:
+        type: integer
+        format: int64
+        description: The number of events whose values are in the interval defined by this bucket.
+      lowerBound?:
+        type: number
+        format: double
+        description: The lower bound of the value interval of this bucket (inclusive).
+    description: The overflow bucket is a special bucket that does not have the upperBound field; it includes all of the events that are no less than its lower bound.
+  PointDistributionUnderflowBucket:
+    type: object
+    properties:
+      upperBound?:
+        type: number
+        format: double
+        description: The upper bound of the value interval of this bucket (exclusive).
+      count?:
+        type: integer
+        format: int64
+        description: The number of events whose values are in the interval defined by this bucket.
+    description: The underflow bucket is a special bucket that does not have the lowerBound field; it includes all of the events that are less than its upper bound.
+  Timeseries:
+    type: object
+    properties:
+      timeseriesDesc?: TimeseriesDescriptor
+      points?:
+        type: array
+        description: The data points of this time series. The points are listed in order of their end timestamp, from younger to older.
+        items: Point
+    description: The monitoring data is organized as metrics and stored as data points that are recorded over time. Each data point represents information like the CPU utilization of your virtual machine. A historical record of these data points is called a time series.
+  TimeseriesDescriptor:
+    type: object
+    properties:
+      metric?:
+        type: string
+        description: The name of the metric.
+      project?:
+        type: string
+        description: The Developers Console project number to which this time series belongs.
+      labels?:
+        type: object
+        description: The label's name.
+    description: TimeseriesDescriptor identifies a single time series.
+  TimeseriesDescriptorLabel:
+    type: object
+    properties:
+      value?:
+        type: string
+        description: The label's value.
+      key?:
+        type: string
+        description: The label's name.
+  TimeseriesPoint:
+    type: object
+    properties:
+      point?: Point
+      timeseriesDesc?: TimeseriesDescriptor
+    description: When writing time series, TimeseriesPoint should be used instead of Timeseries, to enforce single point for each time series in the timeseries.write request.
+  WriteTimeseriesRequest:
+    type: object
+    properties:
+      commonLabels?:
+        type: object
+        description: The label's name.
+      timeseries?:
+        type: array
+        description: Provide time series specific labels and the data points for each time series. The labels in timeseries and the common_labels should form a complete list of labels that required by the metric.
+        items: TimeseriesPoint
+    description: The request of cloudmonitoring.timeseries.write
+  WriteTimeseriesResponse:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: cloudmonitoring#writeTimeseriesResponse
+        description: 'Identifies what kind of resource this is. Value: the fixed string
+          "cloudmonitoring#writeTimeseriesResponse".'
+    description: The response of cloudmonitoring.timeseries.write
+/{project}:
+  uriParameters:
+    project:
+      type: string
+      description: The project ID to which this time series belongs. The value can be the numeric project ID or string-based project name.
+  /timeseriesDescriptors:
+    /{metric}:
+      uriParameters:
+        metric:
+          type: string
+          description: Metric names are protocol-free URLs as listed in the Supported Metrics page. For example, compute.googleapis.com/instance/disk/read_ops_count.
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+        description: List the descriptors of the time series that match the metric and labels values and that have data points in the interval. Large responses are paginated; use the nextPageToken returned in the response to request subsequent pages of results by setting the pageToken query parameter to the value of the nextPageToken.
+        is:
+        - hasParameters
+        queryParameters:
+          oldest?:
+            type: string
+            description: Start of the time interval (exclusive), which is expressed as an RFC 3339 timestamp. If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest]
+          aggregator?:
+            type: string
+            description: The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metrics with a value type of INT64 or DOUBLE.
+            enum:
+            - max
+            - mean
+            - min
+            - sum
+          count?:
+            type: integer
+            default: 100
+            format: int32
+            description: Maximum number of time series descriptors per page. Used for pagination. If not specified, count = 100.
+            maximum: 1000
+            minimum: 1
+          youngest:
+            type: string
+            description: End of the time interval (inclusive), which is expressed as an RFC 3339 timestamp.
+          pageToken?:
+            type: string
+            description: The pagination token, which is used to page through large result sets. Set this value to the value of the nextPageToken to retrieve the next page of results.
+          timespan?:
+            type: string
+            pattern: '[0-9]+[smhdw]?'
+            description: "Length of the time interval to query, which is an alternative\
+              \ way to declare the interval: (youngest - timespan, youngest]. The\
+              \ timespan and oldest parameters should not be used together. Units:\
+              \  \n- s: second \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples:\
+              \ 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed;\
+              \ you should use 17d instead.\n\nIf neither oldest nor timespan is specified,\
+              \ the default time interval will be (youngest - 4 hours, youngest]."
+          window?:
+            type: string
+            pattern: '[0-9]+[mhdw]?'
+            description: "The sampling window. At most one data point will be returned\
+              \ for each window in the requested time interval. This parameter is\
+              \ only valid for non-cumulative metric types. Units:  \n- m: minute\
+              \ \n- h: hour \n- d: day \n- w: week  Examples: 3m, 4w. Only one unit\
+              \ is allowed, for example: 2w3d is not allowed; you should use 17d instead."
+          labels?:
+            type: string
+            pattern: (.+?)(==|=~|!=|!~)(.+)
+            description: "A collection of labels for the matching time series, which\
+              \ are represented as:  \n- key==value: key equals the value \n- key=~value:\
+              \ key regex matches the value \n- key!=value: key does not equal the\
+              \ value \n- key!~value: key regex does not match the value  For example,\
+              \ to list all of the time series descriptors for the region us-central1,\
+              \ you could specify:\nlabel=cloud.googleapis.com%2Flocation=~us-central1.*"
+        body:
+          application/json: ListTimeseriesDescriptorsRequest
+        responses:
+          200:
+            body:
+              application/json: ListTimeseriesDescriptorsResponse
+  /timeseries:
+    /{metric}:
+      uriParameters:
+        metric:
+          type: string
+          description: Metric names are protocol-free URLs as listed in the Supported Metrics page. For example, compute.googleapis.com/instance/disk/read_ops_count.
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+        description: List the data points of the time series that match the metric and labels values and that have data points in the interval. Large responses are paginated; use the nextPageToken returned in the response to request subsequent pages of results by setting the pageToken query parameter to the value of the nextPageToken.
+        is:
+        - hasParameters
+        queryParameters:
+          oldest?:
+            type: string
+            description: Start of the time interval (exclusive), which is expressed as an RFC 3339 timestamp. If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest]
+          aggregator?:
+            type: string
+            description: The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metrics with a value type of INT64 or DOUBLE.
+            enum:
+            - max
+            - mean
+            - min
+            - sum
+          count?:
+            type: integer
+            default: 6000
+            format: int32
+            description: Maximum number of data points per page, which is used for pagination of results.
+            maximum: 12000
+            minimum: 1
+          youngest:
+            type: string
+            description: End of the time interval (inclusive), which is expressed as an RFC 3339 timestamp.
+          pageToken?:
+            type: string
+            description: The pagination token, which is used to page through large result sets. Set this value to the value of the nextPageToken to retrieve the next page of results.
+          timespan?:
+            type: string
+            pattern: '[0-9]+[smhdw]?'
+            description: "Length of the time interval to query, which is an alternative\
+              \ way to declare the interval: (youngest - timespan, youngest]. The\
+              \ timespan and oldest parameters should not be used together. Units:\
+              \  \n- s: second \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples:\
+              \ 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed;\
+              \ you should use 17d instead.\n\nIf neither oldest nor timespan is specified,\
+              \ the default time interval will be (youngest - 4 hours, youngest]."
+          window?:
+            type: string
+            pattern: '[0-9]+[mhdw]?'
+            description: "The sampling window. At most one data point will be returned\
+              \ for each window in the requested time interval. This parameter is\
+              \ only valid for non-cumulative metric types. Units:  \n- m: minute\
+              \ \n- h: hour \n- d: day \n- w: week  Examples: 3m, 4w. Only one unit\
+              \ is allowed, for example: 2w3d is not allowed; you should use 17d instead."
+          labels?:
+            type: string
+            pattern: (.+?)(==|=~|!=|!~)(.+)
+            description: "A collection of labels for the matching time series, which\
+              \ are represented as:  \n- key==value: key equals the value \n- key=~value:\
+              \ key regex matches the value \n- key!=value: key does not equal the\
+              \ value \n- key!~value: key regex does not match the value  For example,\
+              \ to list all of the time series descriptors for the region us-central1,\
+              \ you could specify:\nlabel=cloud.googleapis.com%2Flocation=~us-central1.*"
+        body:
+          application/json: ListTimeseriesRequest
+        responses:
+          200:
+            body:
+              application/json: ListTimeseriesResponse
+  /timeseries:write:
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/monitoring
+      description: Put data points to one or more time series for one or more metrics. If a time series does not exist, a new time series will be created. It is not allowed to write a time series point that is older than the existing youngest point of that time series. Points that are older than the existing youngest point of that time series will be discarded silently. Therefore, users should make sure that points of a time series are written sequentially in the order of their end time.
+      is:
+      - hasParameters
+      body:
+        application/json: WriteTimeseriesRequest
+      responses:
+        200:
+          body:
+            application/json: WriteTimeseriesResponse
+  /metricDescriptors:
+    /{metric}:
+      uriParameters:
+        metric:
+          type: string
+          description: Name of the metric.
+      delete:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/monitoring
+        description: Delete an existing metric.
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: DeleteMetricDescriptorResponse
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/monitoring
+      description: Create a new metric.
+      is:
+      - hasParameters
+      body:
+        application/json: MetricDescriptor
+      responses:
+        200:
+          body:
+            application/json: MetricDescriptor
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/monitoring
+      description: List metric descriptors that match the query. If the query is not set, then all of the metric descriptors will be returned. Large responses will be paginated, use the nextPageToken returned in the response to request subsequent pages of results by setting the pageToken query parameter to the value of the nextPageToken.
+      is:
+      - hasParameters
+      queryParameters:
+        query?:
+          type: string
+          description: The query used to search against existing metrics. Separate keywords with a space; the service joins all keywords with AND, meaning that all keywords must match for a metric to be returned. If this field is omitted, all metrics are returned. If an empty string is passed with this field, no metrics are returned.
+        count?:
+          type: integer
+          default: 100
+          format: int32
+          description: Maximum number of metric descriptors per page. Used for pagination. If not specified, count = 100.
+          maximum: 1000
+          minimum: 1
+        pageToken?:
+          type: string
+          description: The pagination token, which is used to page through large result sets. Set this value to the value of the nextPageToken to retrieve the next page of results.
+      body:
+        application/json: ListMetricDescriptorsRequest
+      responses:
+        200:
+          body:
+            application/json: ListMetricDescriptorsResponse

@@ -1,0 +1,206 @@
+#%RAML 1.0
+title: Groups Settings API
+version: v1
+baseUri: https://www.googleapis.com/groups/v1/groups/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/google-apps/groups-settings/get_started
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): groupssettings:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/apps.groups.settings
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      userIp?:
+        type: string
+        description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Groups:
+    type: object
+    properties:
+      spamModerationLevel?:
+        type: string
+        description: 'Moderation level for messages detected as spam. Possible values
+          are: ALLOW MODERATE SILENTLY_MODERATE REJECT'
+      archiveOnly?:
+        type: string
+        description: If the group is archive only
+      allowGoogleCommunication?:
+        type: string
+        description: Is google allowed to contact admins.
+      maxMessageBytes?:
+        type: integer
+        format: int32
+        description: Maximum message size allowed.
+      isArchived?:
+        type: string
+        description: If the contents of the group are archived.
+      messageDisplayFont?:
+        type: string
+        description: 'Default message display font. Possible values are: DEFAULT_FONT
+          FIXED_WIDTH_FONT'
+      description?:
+        type: string
+        description: Description of the group
+      defaultMessageDenyNotificationText?:
+        type: string
+        description: Default message deny notification message
+      showInGroupDirectory?:
+        type: string
+        description: Is the group listed in groups directory
+      whoCanInvite?:
+        type: string
+        description: 'Permissions to invite members. Possible values are: ALL_MEMBERS_CAN_INVITE
+          ALL_MANAGERS_CAN_INVITE NONE_CAN_INVITE'
+      allowWebPosting?:
+        type: string
+        description: If posting from web is allowed.
+      allowExternalMembers?:
+        type: string
+        description: Are external members allowed to join the group.
+      email?:
+        type: string
+        description: Email id of the group
+      includeInGlobalAddressList?:
+        type: string
+        description: If this groups should be included in global address list or not.
+      sendMessageDenyNotification?:
+        type: string
+        description: Should the member be notified if his message is denied by owner.
+      whoCanViewMembership?:
+        type: string
+        description: 'Permissions to view membership. Possible values are: ALL_IN_DOMAIN_CAN_VIEW
+          ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
+      kind?:
+        type: string
+        default: groupsSettings#groups
+        description: The type of the resource.
+      membersCanPostAsTheGroup?:
+        type: string
+        description: Can members post using the group email address.
+      messageModerationLevel?:
+        type: string
+        description: 'Moderation level for messages. Possible values are: MODERATE_ALL_MESSAGES
+          MODERATE_NON_MEMBERS MODERATE_NEW_MEMBERS MODERATE_NONE'
+      whoCanLeaveGroup?:
+        type: string
+        description: 'Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE
+          ALL_MEMBERS_CAN_LEAVE NONE_CAN_LEAVE'
+      customFooterText?:
+        type: string
+        description: Custom footer text.
+      includeCustomFooter?:
+        type: string
+        description: Whether to include custom footer.
+      whoCanContactOwner?:
+        type: string
+        description: 'Permission to contact owner of the group via web UI. Possible
+          values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT
+          ALL_MANAGERS_CAN_CONTACT'
+      whoCanPostMessage?:
+        type: string
+        description: 'Permissions to post messages to the group. Possible values are:
+          NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_IN_DOMAIN_CAN_POST
+          ANYONE_CAN_POST'
+      whoCanJoin?:
+        type: string
+        description: 'Permissions to join the group. Possible values are: ANYONE_CAN_JOIN
+          ALL_IN_DOMAIN_CAN_JOIN INVITED_CAN_JOIN CAN_REQUEST_TO_JOIN'
+      whoCanViewGroup?:
+        type: string
+        description: 'Permissions to view group. Possible values are: ANYONE_CAN_VIEW
+          ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
+      whoCanAdd?:
+        type: string
+        description: 'Permissions to add members. Possible values are: ALL_MANAGERS_CAN_ADD
+          ALL_MEMBERS_CAN_ADD NONE_CAN_ADD'
+      customReplyTo?:
+        type: string
+        description: Default email to which reply to any message should go.
+      name?:
+        type: string
+        description: Name of the Group
+      replyTo?:
+        type: string
+        description: 'Whome should the default reply to a message go to. Possible
+          values are: REPLY_TO_CUSTOM REPLY_TO_SENDER REPLY_TO_LIST REPLY_TO_OWNER
+          REPLY_TO_IGNORE REPLY_TO_MANAGERS'
+      primaryLanguage?:
+        type: string
+        description: Primary language for the group.
+    description: JSON template for Group resource
+/{groupUniqueId}:
+  uriParameters:
+    groupUniqueId:
+      type: string
+      description: The resource ID
+  patch:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/apps.groups.settings
+    description: Updates an existing resource. This method supports patch semantics.
+    is:
+    - hasParameters
+    body:
+      application/json: Groups
+    responses:
+      200:
+        body:
+          application/json: Groups
+  get:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/apps.groups.settings
+    description: Gets one resource by id.
+    is:
+    - hasParameters
+    responses:
+      200:
+        body:
+          application/json: Groups
+  put:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/apps.groups.settings
+    description: Updates an existing resource.
+    is:
+    - hasParameters
+    body:
+      application/json: Groups
+    responses:
+      200:
+        body:
+          application/json: Groups
