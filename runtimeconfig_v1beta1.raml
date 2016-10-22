@@ -426,7 +426,7 @@ types:
     uriParameters:
       name:
         type: string
-        pattern: ^projects/[^/]*/configs/[^/]*$
+        pattern: ^projects/[^/]+/configs/[^/]+$
         description: |-
           The name of the RuntimeConfig resource to retrieve, in the format:
 
@@ -438,6 +438,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Gets information about a RuntimeConfig resource.
+      displayName: Get Configs Projects
       is:
       - hasParameters
       responses:
@@ -451,6 +452,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Updates a RuntimeConfig resource. The configuration must exist beforehand.
+      displayName: Update Configs Projects
       is:
       - hasParameters
       body:
@@ -466,6 +468,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Deletes a RuntimeConfig resource.
+      displayName: Delete Configs Projects
       is:
       - hasParameters
       responses:
@@ -476,7 +479,7 @@ types:
     uriParameters:
       parent:
         type: string
-        pattern: ^projects/[^/]*$
+        pattern: ^projects/[^/]+$
         description: |-
           The [project ID](https://support.google.com/cloud/answer/6158840?hl=en&ref_topic=6158848)
           for this request, in the format `projects/[PROJECT_ID]`.
@@ -490,6 +493,7 @@ types:
         description: |-
           Creates a new RuntimeConfig resource. The configuration name must be
           unique within project.
+        displayName: Create Configs Projects
         is:
         - hasParameters
         queryParameters:
@@ -516,6 +520,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloudruntimeconfig
         description: Lists all the RuntimeConfig resources within project.
+        displayName: List Configs Projects
         is:
         - hasParameters
         queryParameters:

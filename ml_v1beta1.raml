@@ -482,7 +482,7 @@ types:
           Use this field if you want to use the default version for the specified
           model. The string must use the following format:
 
-          `"project/<var>[YOUR_PROJECT]</var>/models/<var>[YOUR_MODEL]</var>"`
+          `"projects/<var>[YOUR_PROJECT]</var>/models/<var>[YOUR_MODEL]</var>"`
       outputPath?:
         type: string
         description: Required. The output Google Cloud Storage location.
@@ -498,8 +498,8 @@ types:
         type: integer
         format: int64
         description: |-
-          Optional. The maximum amount of workers to be used for parallel processing.
-          Defaults to 10.
+          Optional. The maximum number of workers to be used for parallel processing.
+          Defaults to 10 if not specified.
       versionName?:
         type: string
         description: |-
@@ -507,7 +507,7 @@ types:
           string is formatted the same way as `model_version`, with the addition
           of the version information:
 
-          `"project/<var>[YOUR_PROJECT]</var>/models/<var>YOUR_MODEL/versions/<var>[YOUR_VERSION]</var>"`
+          `"projects/<var>[YOUR_PROJECT]</var>/models/<var>YOUR_MODEL/versions/<var>[YOUR_VERSION]</var>"`
       region?:
         type: string
         description: Required. The Google Compute Engine region to run the prediction job in.
@@ -846,7 +846,7 @@ types:
     uriParameters:
       name:
         type: string
-        pattern: ^projects/.*$
+        pattern: ^projects/.+$
         description: |-
           Required. The resource name of a model or a version.
 
@@ -904,6 +904,7 @@ types:
         <pre>
         {"error": "Divide by zero"}
         </pre>
+      displayName: Predict Projects
       is:
       - hasParameters
       body:
@@ -916,7 +917,7 @@ types:
     uriParameters:
       name:
         type: string
-        pattern: ^projects/[^/]*$
+        pattern: ^projects/[^/]+$
         description: |-
           Required. The project name.
 
@@ -931,6 +932,7 @@ types:
         this information in order to grant the service account persmissions for
         the Google Cloud Storage location where you put your model training code
         for training the model with Google Cloud Machine Learning.
+      displayName: GetConfig Projects
       is:
       - hasParameters
       responses:

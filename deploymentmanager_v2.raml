@@ -77,6 +77,8 @@ types:
 
           * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
 
+
+
           * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
 
           * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
@@ -392,8 +394,8 @@ types:
       targetLink?:
         type: string
         description: '[Output Only] The URL of the resource that the operation modifies.
-          If creating a persistent disk snapshot, this points to the persistent disk
-          that the snapshot was created from.'
+          For operations related to creating a snapshot, this points to the persistent
+          disk that the snapshot was created from.'
       creationTimestamp?:
         type: string
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -795,6 +797,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
+            displayName: Stop Deployments
             is:
             - hasParameters
             body:
@@ -811,6 +814,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Cancels and removes the preview currently associated with the deployment.
+            displayName: CancelPreview Deployments
             is:
             - hasParameters
             body:
@@ -835,6 +839,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: Gets information about a specific manifest.
+              displayName: Get Manifests
               is:
               - hasParameters
               responses:
@@ -850,6 +855,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Lists all manifests for a given deployment.
+            displayName: List Manifests
             is:
             - hasParameters
             queryParameters:
@@ -872,6 +878,14 @@ types:
                 description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
                 maximum: 500
                 minimum: 0
+              orderBy?:
+                type: string
+                description: |-
+                  Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+                  You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+                  Currently, only sorting by name or creationTimestamp desc is supported.
               pageToken?:
                 type: string
                 description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
@@ -894,6 +908,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: Gets information about a single resource.
+              displayName: Get Resources
               is:
               - hasParameters
               responses:
@@ -909,6 +924,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Lists all resources in a given deployment.
+            displayName: List Resources
             is:
             - hasParameters
             queryParameters:
@@ -931,6 +947,14 @@ types:
                 description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
                 maximum: 500
                 minimum: 0
+              orderBy?:
+                type: string
+                description: |-
+                  Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+                  You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+                  Currently, only sorting by name or creationTimestamp desc is supported.
               pageToken?:
                 type: string
                 description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
@@ -945,6 +969,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Updates a deployment and all of the resources described by the deployment manifest. This method supports patch semantics.
+          displayName: Patch Deployments
           is:
           - hasParameters
           queryParameters:
@@ -981,6 +1006,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: Gets information about a specific deployment.
+          displayName: Get Deployments
           is:
           - hasParameters
           responses:
@@ -994,6 +1020,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Updates a deployment and all of the resources described by the deployment manifest.
+          displayName: Update Deployments
           is:
           - hasParameters
           queryParameters:
@@ -1028,6 +1055,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Deletes a deployment and all of the resources in the deployment.
+          displayName: Delete Deployments
           is:
           - hasParameters
           responses:
@@ -1048,6 +1076,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Deployments
             is:
             - hasParameters
             body:
@@ -1064,6 +1093,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+            displayName: GetIamPolicy Deployments
             is:
             - hasParameters
             responses:
@@ -1078,6 +1108,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Sets the access control policy on the specified resource. Replaces any existing policy.
+            displayName: SetIamPolicy Deployments
             is:
             - hasParameters
             body:
@@ -1093,6 +1124,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.cloudman
         description: Creates a deployment and all of the resources described by the deployment manifest.
+        displayName: Insert Deployments
         is:
         - hasParameters
         queryParameters:
@@ -1114,6 +1146,7 @@ types:
             - https://www.googleapis.com/auth/ndev.cloudman
             - https://www.googleapis.com/auth/ndev.cloudman.readonly
         description: Lists all deployments for a given project.
+        displayName: List Deployments
         is:
         - hasParameters
         queryParameters:
@@ -1136,6 +1169,14 @@ types:
             description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
             maximum: 500
             minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
           pageToken?:
             type: string
             description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
@@ -1153,6 +1194,7 @@ types:
             - https://www.googleapis.com/auth/ndev.cloudman
             - https://www.googleapis.com/auth/ndev.cloudman.readonly
         description: Lists all resource types for Deployment Manager.
+        displayName: List Types
         is:
         - hasParameters
         queryParameters:
@@ -1175,6 +1217,14 @@ types:
             description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
             maximum: 500
             minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
           pageToken?:
             type: string
             description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
@@ -1197,6 +1247,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: Gets information about a specific operation.
+          displayName: Get Operations
           is:
           - hasParameters
           responses:
@@ -1212,6 +1263,7 @@ types:
             - https://www.googleapis.com/auth/ndev.cloudman
             - https://www.googleapis.com/auth/ndev.cloudman.readonly
         description: Lists all operations for a project.
+        displayName: List Operations
         is:
         - hasParameters
         queryParameters:
@@ -1234,6 +1286,14 @@ types:
             description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
             maximum: 500
             minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
           pageToken?:
             type: string
             description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.

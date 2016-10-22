@@ -154,7 +154,7 @@ types:
       maxPowerDBm?:
         type: number
         format: double
-        description: The maximum total power level (EIRP)—computed over the corresponding operating bandwidth—that is permitted within the frequency range. Depending on the context in which the frequency-range element appears, this value may be required. For example, it is required in the available-spectrum response, available-spectrum-batch response, and spectrum-use notification message, but it should not be present (it is not applicable) when the frequency range appears inside a device-capabilities message.
+        description: The maximum total power level (EIRP)â€”computed over the corresponding operating bandwidthâ€”that is permitted within the frequency range. Depending on the context in which the frequency-range element appears, this value may be required. For example, it is required in the available-spectrum response, available-spectrum-batch response, and spectrum-use notification message, but it should not be present (it is not applicable) when the frequency range appears inside a device-capabilities message.
       stopHz?:
         type: number
         format: double
@@ -642,6 +642,7 @@ types:
 /init:
   post:
     description: Initializes the connection between a white space device and the database.
+    displayName: Init Paws
     is:
     - hasParameters
     body:
@@ -653,6 +654,7 @@ types:
 /verifyDevice:
   post:
     description: Validates a device for white space use in accordance with regulatory rules. The Google Spectrum Database does not support master/slave configurations, so this always yields an UNIMPLEMENTED error.
+    displayName: VerifyDevice Paws
     is:
     - hasParameters
     body:
@@ -664,6 +666,7 @@ types:
 /getSpectrumBatch:
   post:
     description: The Google Spectrum Database does not support batch requests, so this method always yields an UNIMPLEMENTED error.
+    displayName: GetSpectrumBatch Paws
     is:
     - hasParameters
     body:
@@ -675,6 +678,7 @@ types:
 /getSpectrum:
   post:
     description: Requests information about the available spectrum for a device at a location. Requests from a fixed-mode device must include owner information so the device can be registered with the database.
+    displayName: GetSpectrum Paws
     is:
     - hasParameters
     body:
@@ -686,6 +690,7 @@ types:
 /notifySpectrumUse:
   post:
     description: Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.
+    displayName: NotifySpectrumUse Paws
     is:
     - hasParameters
     body:
@@ -697,6 +702,7 @@ types:
 /register:
   post:
     description: The Google Spectrum Database implements registration in the getSpectrum method. As such this always returns an UNIMPLEMENTED error.
+    displayName: Register Paws
     is:
     - hasParameters
     body:

@@ -257,6 +257,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate ResourceRecordSets that have been created but not yet deleted.
+          displayName: List ResourceRecordSets
           is:
           - hasParameters
           queryParameters:
@@ -292,6 +293,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.clouddns.readonly
                 - https://www.googleapis.com/auth/ndev.clouddns.readwrite
             description: Fetch the representation of an existing Change.
+            displayName: Get Changes
             is:
             - hasParameters
             responses:
@@ -305,6 +307,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Atomically update the ResourceRecordSet collection.
+          displayName: Create Changes
           is:
           - hasParameters
           body:
@@ -322,6 +325,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate Changes to a ResourceRecordSet collection.
+          displayName: List Changes
           is:
           - hasParameters
           queryParameters:
@@ -354,6 +358,7 @@ types:
             - https://www.googleapis.com/auth/ndev.clouddns.readonly
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Fetch the representation of an existing ManagedZone.
+        displayName: Get ManagedZones
         is:
         - hasParameters
         responses:
@@ -367,6 +372,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Delete a previously created ManagedZone.
+        displayName: Delete ManagedZones
         is:
         - hasParameters
     post:
@@ -376,6 +382,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       description: Create a new ManagedZone.
+      displayName: Create ManagedZones
       is:
       - hasParameters
       body:
@@ -393,6 +400,7 @@ types:
           - https://www.googleapis.com/auth/ndev.clouddns.readonly
           - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       description: Enumerate ManagedZones that have been created but not yet deleted.
+      displayName: List ManagedZones
       is:
       - hasParameters
       queryParameters:
@@ -419,6 +427,7 @@ types:
         - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - https://www.googleapis.com/auth/ndev.clouddns.readwrite
     description: Fetch the representation of an existing Project.
+    displayName: Get Projects
     is:
     - hasParameters
     responses:

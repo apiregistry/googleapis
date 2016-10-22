@@ -306,6 +306,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.reports.usage.readonly
         description: Retrieves a report which is a collection of properties / statistics for a specific customer.
+        displayName: Get CustomerUsageReports
         is:
         - hasParameters
         queryParameters:
@@ -343,6 +344,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.reports.usage.readonly
             description: Retrieves a report which is a collection of properties / statistics for a set of users.
+            displayName: Get UserUsageReport
             is:
             - hasParameters
             queryParameters:
@@ -381,6 +383,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.reports.audit.readonly
             description: Stop watching resources through this channel
+            displayName: Stop Channels
             is:
             - hasParameters
             body:
@@ -406,6 +409,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/admin.reports.audit.readonly
               description: Push changes to activities
+              displayName: Watch Activities
               is:
               - hasParameters
               queryParameters:
@@ -452,6 +456,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.reports.audit.readonly
             description: Retrieves a list of activities for a specific customer and application.
+            displayName: List Activities
             is:
             - hasParameters
             queryParameters:

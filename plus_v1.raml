@@ -866,6 +866,7 @@ types:
           - https://www.googleapis.com/auth/plus.login
           - https://www.googleapis.com/auth/plus.me
       description: Get a comment.
+      displayName: Get Comments
       is:
       - hasParameters
       responses:
@@ -886,6 +887,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: List all of the comments for an activity.
+        displayName: List Comments
         is:
         - hasParameters
         queryParameters:
@@ -926,6 +928,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the people in the specified collection for a particular activity.
+          displayName: ListByActivity People
           is:
           - hasParameters
           queryParameters:
@@ -950,6 +953,7 @@ types:
           - https://www.googleapis.com/auth/plus.login
           - https://www.googleapis.com/auth/plus.me
       description: Get an activity.
+      displayName: Get Activities
       is:
       - hasParameters
       responses:
@@ -963,6 +967,7 @@ types:
         - https://www.googleapis.com/auth/plus.login
         - https://www.googleapis.com/auth/plus.me
     description: Search public activities.
+    displayName: Search Activities
     is:
     - hasParameters
     queryParameters:
@@ -1015,6 +1020,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the activities in the specified collection for a particular user.
+          displayName: List Activities
           is:
           - hasParameters
           queryParameters:
@@ -1048,6 +1054,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the people in the specified collection.
+          displayName: List People
           is:
           - hasParameters
           queryParameters:
@@ -1080,6 +1087,7 @@ types:
           - https://www.googleapis.com/auth/userinfo.email
           - https://www.googleapis.com/auth/userinfo.profile
       description: Get a person's profile. If your app uses scope https://www.googleapis.com/auth/plus.login, this method is guaranteed to return ageRange and language.
+      displayName: Get People
       is:
       - hasParameters
       responses:
@@ -1093,6 +1101,7 @@ types:
         - https://www.googleapis.com/auth/plus.login
         - https://www.googleapis.com/auth/plus.me
     description: Search all public profiles.
+    displayName: Search People
     is:
     - hasParameters
     queryParameters:

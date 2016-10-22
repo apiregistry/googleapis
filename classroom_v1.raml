@@ -1,7 +1,7 @@
 #%RAML 1.0
 title: Google Classroom API
 version: v1
-baseUri: https://prod-day0-classroom.sandbox.googleapis.com/
+baseUri: https://classroom.googleapis.com/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
 (commons.Links):
@@ -744,6 +744,7 @@ types:
           if invalid fields are specified in the update mask or if no update mask
           is supplied. * `FAILED_PRECONDITION` for the following request errors: *
           CourseNotModifiable'
+        displayName: Patch Courses
         is:
         - hasParameters
         queryParameters:
@@ -770,6 +771,7 @@ types:
           * `PERMISSION_DENIED` if the requesting user is not permitted to access
           the requested course or for access errors. * `NOT_FOUND` if no course exists
           with the requested ID.'
+        displayName: Get Courses
         is:
         - hasParameters
         responses:
@@ -786,6 +788,7 @@ types:
           the requested course or for access errors. * `NOT_FOUND` if no course exists
           with the requested ID. * `FAILED_PRECONDITION` for the following request
           errors: * CourseNotModifiable'
+        displayName: Update Courses
         is:
         - hasParameters
         body:
@@ -803,6 +806,7 @@ types:
           * `PERMISSION_DENIED` if the requesting user is not permitted to delete
           the requested course or for access errors. * `NOT_FOUND` if no course exists
           with the requested ID.'
+        displayName: Delete Courses
         is:
         - hasParameters
         responses:
@@ -821,6 +825,7 @@ types:
         is not a valid user. * `FAILED_PRECONDITION` if the course owner''s account
         is disabled or for the following request errors: * UserGroupsMembershipLimitReached
         * `ALREADY_EXISTS` if an alias was specified in the `id` and already exists.'
+      displayName: Create Courses
       is:
       - hasParameters
       body:
@@ -840,6 +845,7 @@ types:
         following error codes: * `PERMISSION_DENIED` for access errors. * `INVALID_ARGUMENT`
         if the query argument is malformed. * `NOT_FOUND` if any users specified in
         the query arguments do not exist.'
+      displayName: List Courses
       is:
       - hasParameters
       queryParameters:
@@ -891,6 +897,7 @@ types:
           codes: * `PERMISSION_DENIED` if the requesting user is not permitted to
           view the requested invitation or for access errors. * `NOT_FOUND` if no
           invitation exists with the requested ID.'
+        displayName: Get Invitations
         is:
         - hasParameters
         responses:
@@ -906,6 +913,7 @@ types:
           codes: * `PERMISSION_DENIED` if the requesting user is not permitted to
           delete the requested invitation or for access errors. * `NOT_FOUND` if no
           invitation exists with the requested ID.'
+        displayName: Delete Invitations
         is:
         - hasParameters
         responses:
@@ -930,6 +938,7 @@ types:
           for the following request errors: * CourseMemberLimitReached * CourseNotModifiable
           * CourseTeacherLimitReached * UserGroupsMembershipLimitReached * `NOT_FOUND`
           if no invitation exists with the requested ID.'
+        displayName: Accept Invitations
         is:
         - hasParameters
         responses:
@@ -949,6 +958,7 @@ types:
         if the requested user''s account is disabled or if the user already has this
         role or a role with greater permissions. * `ALREADY_EXISTS` if an invitation
         for the specified user and course already exists.'
+      displayName: Create Invitations
       is:
       - hasParameters
       body:
@@ -968,6 +978,7 @@ types:
         one of `user_id` or `course_id` must be supplied. Both fields can be supplied.
         This method returns the following error codes: * `PERMISSION_DENIED` for access
         errors.'
+      displayName: List Invitations
       is:
       - hasParameters
       queryParameters:
@@ -1012,6 +1023,7 @@ types:
           codes: * `PERMISSION_DENIED` if the requesting user is not permitted to
           access this user profile or if no profile exists with the requested ID or
           for access errors.'
+        displayName: Get UserProfiles
         is:
         - hasParameters
         responses:

@@ -72,7 +72,7 @@ types:
     properties:
       androidLink?:
         type: string
-        description: If specified, this overrides the ‘link’ parameter on Android.
+        description: If specified, this overrides the â€˜linkâ€™ parameter on Android.
       androidPackageName?:
         type: string
         description: Android package name of the app.
@@ -82,7 +82,7 @@ types:
       androidMinPackageVersionCode?:
         type: string
         description: |-
-          Minimum version code for the Android app. If the installed app’s version
+          Minimum version code for the Android app. If the installed appâ€™s version
           code is lower, then the user is taken to the Play Store.
     description: Android related attributes to the Dynamic Link.
   CreateShortDynamicLinkRequest:
@@ -251,7 +251,7 @@ types:
       iosCustomScheme?:
         type: string
         description: |-
-          Custom (destination) scheme to use for iOS. By default, we’ll use the
+          Custom (destination) scheme to use for iOS. By default, weâ€™ll use the
           bundle ID as the custom scheme. Developer can override this behavior using
           this param.
       iosIpadFallbackLink?:
@@ -304,6 +304,7 @@ types:
 
         The Dynamic Link domain in the request must be owned by requester's
         Firebase project.
+      displayName: Create ShortLinks
       is:
       - hasParameters
       body:

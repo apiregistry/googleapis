@@ -433,7 +433,7 @@ types:
         description: Service-specific metadata. For example the available capacity at the given location.
       locationId?:
         type: string
-        description: 'The cononical id for this location. For example: `"us-east1"`.'
+        description: 'The canonical id for this location. For example: `"us-east1"`.'
       name?:
         type: string
         description: 'Resource name for the location, which may vary between implementations.
@@ -885,8 +885,100 @@ types:
         type: integer
         format: int32
         description: An estimate of the number of files in a zip for a zip deployment. If set, must be greater than or equal to the actual number of files. Used for optimizing performance; if not provided, deployment may be slow.
+    description: The zip file information for a zip deployment.
+/experimental:
+  /apps:
+    /{appsId}:
+      uriParameters:
+        appsId:
+          type: string
+          description: Part of `name`. The name of the operation resource.
+      /operations:
+        /{operationsId}:
+          uriParameters:
+            operationsId:
+              type: string
+              description: Part of `name`. See documentation of `appsId`.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+            displayName: Get Operations Apps Experimental
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+          description: 'Lists operations that match the specified filter in the request.
+            If the server doesn''t support this method, it returns `UNIMPLEMENTED`.
+            NOTE: the `name` binding below allows API services to override the binding
+            to use different resource name schemes, such as `users/*/operations`.'
+          displayName: List Operations Apps Experimental
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: The standard list filter.
+            pageSize?:
+              type: integer
+              format: int32
+              description: The standard list page size.
+            pageToken?:
+              type: string
+              description: The standard list page token.
+          responses:
+            200:
+              body:
+                application/json: ListOperationsResponse
 /v1:
   /apps:
+    /{appsId}:
+      uriParameters:
+        appsId:
+          type: string
+          description: 'Part of `name`. Name of the application to update. Example:
+            `apps/myapp`.'
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Updates application parameters.
+        displayName: Patch Apps
+        is:
+        - hasParameters
+        queryParameters:
+          updateMask?:
+            type: string
+            description: Standard field mask for the set of fields to be updated.
+        body:
+          application/json: Application
+        responses:
+          200:
+            body:
+              application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Gets information about an application.
+        displayName: Get Apps
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Application
     /{appsId}:repair:
       uriParameters:
         appsId:
@@ -899,6 +991,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Recreates the required App Engine features for the application in your project, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example "*Error retrieving the App Engine service account*".
+        displayName: Repair Apps
         is:
         - hasParameters
         body:
@@ -907,21 +1000,3 @@ types:
           200:
             body:
               application/json: Operation
-    /{appsId}:
-      uriParameters:
-        appsId:
-          type: string
-          description: 'Part of `name`. Name of the Application resource to get. Example:
-            `apps/myapp`.'
-      get:
-        securedBy:
-          oath2:
-            scopes:
-            - https://www.googleapis.com/auth/cloud-platform
-        description: Gets information about an application.
-        is:
-        - hasParameters
-        responses:
-          200:
-            body:
-              application/json: Application

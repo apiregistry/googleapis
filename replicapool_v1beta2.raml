@@ -394,6 +394,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the instance template to use when creating new instances in this group. Existing instances are not affected.
+              displayName: SetInstanceTemplate InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -410,6 +411,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
+              displayName: SetTargetPools InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -426,6 +428,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Recreates the specified instances. The instances are deleted, then recreated using the instance group manager's current instance template.
+              displayName: RecreateInstances InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -442,6 +445,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Deletes the specified instances. The instances are deleted, then removed from the instance group and any target pools of which they were a member. The targetSize of the instance group manager is reduced by the number of instances deleted.
+              displayName: DeleteInstances InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -458,6 +462,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Resizes the managed instance group up or down. If resized up, new instances are created using the current instance template. If resized down, instances are removed in the order outlined in Resizing a managed instance group.
+              displayName: Resize InstanceGroupManagers
               is:
               - hasParameters
               queryParameters:
@@ -478,6 +483,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes the specified instances from the managed instance group, and from any target pools of which they were members, without deleting the instances.
+              displayName: AbandonInstances InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -495,6 +501,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified Instance Group Manager resource.
+            displayName: Get InstanceGroupManagers
             is:
             - hasParameters
             responses:
@@ -508,6 +515,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the instance group manager and all instances contained within. If you'd like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group.
+            displayName: Delete InstanceGroupManagers
             is:
             - hasParameters
             responses:
@@ -521,6 +529,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an instance group manager, as well as the instance group and the specified number of instances.
+          displayName: Insert InstanceGroupManagers
           is:
           - hasParameters
           queryParameters:
@@ -544,6 +553,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of Instance Group Manager resources contained within the specified zone.
+          displayName: List InstanceGroupManagers
           is:
           - hasParameters
           queryParameters:
@@ -578,6 +588,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Retrieves the specified zone-specific operation resource.
+            displayName: Get ZoneOperations
             is:
             - hasParameters
             responses:
@@ -591,6 +602,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Retrieves the list of operation resources contained within the specified zone.
+          displayName: List ZoneOperations
           is:
           - hasParameters
           queryParameters:

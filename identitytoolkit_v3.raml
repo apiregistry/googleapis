@@ -14,6 +14,18 @@ uses:
 - url: http://www.google.com/images/icons/product/search-16.gif
   name: x16
 (commons.Id): identitytoolkit:v3
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/firebase
 traits:
   hasParameters:
     queryParameters:
@@ -30,6 +42,8 @@ traits:
       fields?:
         type: string
         description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
 types:
   CreateAuthUriResponse:
     type: object
@@ -164,7 +178,7 @@ types:
         description: 'The query parameter that client can customize by themselves
           in auth url. The following parameters are reserved for server so that they
           cannot be customized by clients: client_id, response_type, scope, redirect_uri,
-          state.'
+          state, oauth_token.'
       authFlowType?:
         type: string
         description: Explicitly specify the auth flow type. Currently only support "CODE_FLOW" type. The field is only used for Google provider.
@@ -469,6 +483,9 @@ types:
       saltSeparator?:
         type: string
         description: The salt separator.
+      targetProjectId?:
+        type: string
+        description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
       delegatedProjectNumber?:
         type: integer
         format: int64
@@ -1018,6 +1035,7 @@ types:
 /resetPassword:
   post:
     description: Reset password for a user.
+    displayName: ResetPassword Relyingparty
     is:
     - hasParameters
     body:
@@ -1029,6 +1047,7 @@ types:
 /verifyPassword:
   post:
     description: Verifies the user entered password.
+    displayName: VerifyPassword Relyingparty
     is:
     - hasParameters
     body:
@@ -1040,6 +1059,7 @@ types:
 /verifyCustomToken:
   post:
     description: Verifies the developer asserted ID token.
+    displayName: VerifyCustomToken Relyingparty
     is:
     - hasParameters
     body:
@@ -1050,7 +1070,12 @@ types:
           application/json: VerifyCustomTokenResponse
 /downloadAccount:
   post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/firebase
     description: Batch download user accounts.
+    displayName: DownloadAccount Relyingparty
     is:
     - hasParameters
     body:
@@ -1062,6 +1087,7 @@ types:
 /getProjectConfig:
   get:
     description: Get project configuration.
+    displayName: GetProjectConfig Relyingparty
     is:
     - hasParameters
     queryParameters:
@@ -1078,6 +1104,7 @@ types:
 /getOobConfirmationCode:
   post:
     description: Get a code for user action confirmation.
+    displayName: GetOobConfirmationCode Relyingparty
     is:
     - hasParameters
     body:
@@ -1089,6 +1116,7 @@ types:
 /setAccountInfo:
   post:
     description: Set account info for a user.
+    displayName: SetAccountInfo Relyingparty
     is:
     - hasParameters
     body:
@@ -1100,6 +1128,7 @@ types:
 /verifyAssertion:
   post:
     description: Verifies the assertion returned by the IdP.
+    displayName: VerifyAssertion Relyingparty
     is:
     - hasParameters
     body:
@@ -1110,7 +1139,12 @@ types:
           application/json: VerifyAssertionResponse
 /uploadAccount:
   post:
+    securedBy:
+      oath2:
+        scopes:
+        - https://www.googleapis.com/auth/firebase
     description: Batch upload existing user accounts.
+    displayName: UploadAccount Relyingparty
     is:
     - hasParameters
     body:
@@ -1122,6 +1156,7 @@ types:
 /publicKeys:
   get:
     description: Get token signing public key.
+    displayName: GetPublicKeys Relyingparty
     is:
     - hasParameters
     responses:
@@ -1131,6 +1166,7 @@ types:
 /getAccountInfo:
   post:
     description: Returns the account info.
+    displayName: GetAccountInfo Relyingparty
     is:
     - hasParameters
     body:
@@ -1142,6 +1178,7 @@ types:
 /createAuthUri:
   post:
     description: Creates the URI used by the IdP to authenticate the user.
+    displayName: CreateAuthUri Relyingparty
     is:
     - hasParameters
     body:
@@ -1153,6 +1190,7 @@ types:
 /signupNewUser:
   post:
     description: Signup new user.
+    displayName: SignupNewUser Relyingparty
     is:
     - hasParameters
     body:
@@ -1164,6 +1202,7 @@ types:
 /setProjectConfig:
   post:
     description: Set project configuration.
+    displayName: SetProjectConfig Relyingparty
     is:
     - hasParameters
     body:
@@ -1175,6 +1214,7 @@ types:
 /deleteAccount:
   post:
     description: Delete user account.
+    displayName: DeleteAccount Relyingparty
     is:
     - hasParameters
     body:
@@ -1186,6 +1226,7 @@ types:
 /getRecaptchaParam:
   get:
     description: Get recaptcha secure param.
+    displayName: GetRecaptchaParam Relyingparty
     is:
     - hasParameters
     responses:
@@ -1195,6 +1236,7 @@ types:
 /signOutUser:
   post:
     description: Sign out user.
+    displayName: SignOutUser Relyingparty
     is:
     - hasParameters
     body:

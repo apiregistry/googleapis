@@ -400,6 +400,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adsensehost
     description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
+    displayName: Generate Reports
     is:
     - hasParameters
     queryParameters:
@@ -465,6 +466,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Delete a URL channel from the host AdSense account.
+          displayName: Delete Urlchannels
           is:
           - hasParameters
           responses:
@@ -477,6 +479,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Add a new URL channel to the host AdSense account.
+        displayName: Insert Urlchannels
         is:
         - hasParameters
         body:
@@ -491,6 +494,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: List all host URL channels in the host AdSense account.
+        displayName: List Urlchannels
         is:
         - hasParameters
         queryParameters:
@@ -519,6 +523,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Get a specific custom channel from the host AdSense account.
+          displayName: Get Customchannels
           is:
           - hasParameters
           responses:
@@ -531,6 +536,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Delete a specific custom channel from the host AdSense account.
+          displayName: Delete Customchannels
           is:
           - hasParameters
           responses:
@@ -543,6 +549,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Update a custom channel in the host AdSense account. This method supports patch semantics.
+        displayName: Patch Customchannels
         is:
         - hasParameters
         queryParameters:
@@ -561,6 +568,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Add a new custom channel to the host AdSense account.
+        displayName: Insert Customchannels
         is:
         - hasParameters
         body:
@@ -575,6 +583,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Update a custom channel in the host AdSense account.
+        displayName: Update Customchannels
         is:
         - hasParameters
         body:
@@ -589,6 +598,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: List all host custom channels in this AdSense account.
+        displayName: List Customchannels
         is:
         - hasParameters
         queryParameters:
@@ -611,6 +621,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Get information about one of the ad clients in the Host AdSense account.
+      displayName: Get Adclients
       is:
       - hasParameters
       responses:
@@ -623,6 +634,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adsensehost
     description: List all host ad clients in this AdSense account.
+    displayName: List Adclients
     is:
     - hasParameters
     queryParameters:
@@ -647,6 +659,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Create an association session for initiating an association with an AdSense user.
+      displayName: Start Associationsessions
       is:
       - hasParameters
       queryParameters:
@@ -679,6 +692,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Verify an association session after the association callback returns from AdSense signup.
+      displayName: Verify Associationsessions
       is:
       - hasParameters
       queryParameters:
@@ -701,6 +715,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Get information about the selected associated AdSense account.
+      displayName: Get Accounts
       is:
       - hasParameters
       responses:
@@ -713,6 +728,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adsensehost
     description: List hosted accounts associated with this AdSense account by ad client id.
+    displayName: List Accounts
     is:
     - hasParameters
     queryParameters:

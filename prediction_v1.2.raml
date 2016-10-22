@@ -130,6 +130,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Submit data and request a prediction
+        displayName: Predict
         is:
         - hasParameters
         body:
@@ -144,6 +145,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Check training status of your model
+      displayName: Get Training
       is:
       - hasParameters
       responses:
@@ -156,6 +158,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Add new data to a trained model
+      displayName: Update Training
       is:
       - hasParameters
       body:
@@ -170,6 +173,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Delete a trained model
+      displayName: Delete Training
       is:
       - hasParameters
   post:
@@ -181,6 +185,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.read_write
         - https://www.googleapis.com/auth/prediction
     description: Begin training your model
+    displayName: Insert Training
     is:
     - hasParameters
     queryParameters:
@@ -206,6 +211,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Submit input and request an output against a hosted model
+        displayName: Predict Hostedmodels
         is:
         - hasParameters
         body:

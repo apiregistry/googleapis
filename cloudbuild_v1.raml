@@ -586,6 +586,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Cancels a requested build in progress.
+            displayName: Cancel Builds Projects
             is:
             - hasParameters
             body:
@@ -609,6 +610,7 @@ types:
 
               The Build that is returned includes its status (e.g., success or failure,
               or in-progress), and timing information.
+            displayName: Get Builds Projects
             is:
             - hasParameters
             responses:
@@ -626,6 +628,7 @@ types:
             The long-running Operation returned by this method will include the ID of
             the build, which can be passed to GetBuild to determine its status (e.g.,
             success or failure).
+          displayName: Create Builds Projects
           is:
           - hasParameters
           body:
@@ -644,6 +647,7 @@ types:
 
             Previously requested builds may still be in-progress, or may have finished
             successfully or unsuccessfully.
+          displayName: List Builds Projects
           is:
           - hasParameters
           queryParameters:
@@ -676,6 +680,7 @@ types:
               Updates an BuildTrigger by its project ID and trigger ID.
 
               This API is experimental.
+            displayName: Patch Triggers Projects
             is:
             - hasParameters
             body:
@@ -693,6 +698,7 @@ types:
               Gets information about a BuildTrigger.
 
               This API is experimental.
+            displayName: Get Triggers Projects
             is:
             - hasParameters
             responses:
@@ -708,6 +714,7 @@ types:
               Deletes an BuildTrigger by its project ID and trigger ID.
 
               This API is experimental.
+            displayName: Delete Triggers Projects
             is:
             - hasParameters
             responses:
@@ -723,6 +730,7 @@ types:
             Creates a new BuildTrigger.
 
             This API is experimental.
+          displayName: Create Triggers Projects
           is:
           - hasParameters
           body:
@@ -740,6 +748,7 @@ types:
             Lists existing BuildTrigger.
 
             This API is experimental.
+          displayName: List Triggers Projects
           is:
           - hasParameters
           responses:
@@ -763,6 +772,7 @@ types:
 
         NOTE: the `name` binding below allows API services to override the binding
         to use different resource name schemes, such as `users/*/operations`.
+      displayName: List Operations
       is:
       - hasParameters
       - hasParameters

@@ -416,6 +416,7 @@ types:
       /rest:
         get:
           description: Retrieve the description of a particular version of an api.
+          displayName: GetRest Apis
           is:
           - hasParameters
           responses:
@@ -424,6 +425,7 @@ types:
                 application/json: RestDescription
   get:
     description: Retrieve the list of APIs supported at this endpoint.
+    displayName: List Apis
     is:
     - hasParameters
     queryParameters:

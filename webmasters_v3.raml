@@ -299,7 +299,7 @@ types:
         uriParameters:
           url:
             type: string
-            description: The relative path (without the site) of the sample URL. It must be one of the URLs returned by list(). For example, for the URL https://www.example.com/pagename on the site https://www.example.com/, the url value is pagename
+            description: The relative path (without the site) of the sample URL. It must be one of the URLs returned by list(). For example, for the URL https://www.example.com/pagenameÂ on the site https://www.example.com/, the url value isÂ pagename
         get:
           securedBy:
             oath2:
@@ -307,6 +307,7 @@ types:
               - https://www.googleapis.com/auth/webmasters
               - https://www.googleapis.com/auth/webmasters.readonly
           description: Retrieves details about crawl errors for a site's sample URL.
+          displayName: Get Urlcrawlerrorssamples
           is:
           - hasParameters
           queryParameters:
@@ -341,6 +342,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/webmasters
           description: Marks the provided site's sample URL as fixed, and removes it from the samples list.
+          displayName: MarkAsFixed Urlcrawlerrorssamples
           is:
           - hasParameters
           queryParameters:
@@ -372,6 +374,7 @@ types:
             - https://www.googleapis.com/auth/webmasters
             - https://www.googleapis.com/auth/webmasters.readonly
         description: Lists a site's sample URLs for the specified crawl error category and platform.
+        displayName: List Urlcrawlerrorssamples
         is:
         - hasParameters
         queryParameters:
@@ -412,6 +415,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/webmasters
           description: Submits a sitemap for a site.
+          displayName: Submit Sitemaps
           is:
           - hasParameters
         get:
@@ -421,6 +425,7 @@ types:
               - https://www.googleapis.com/auth/webmasters
               - https://www.googleapis.com/auth/webmasters.readonly
           description: Retrieves information about a specific sitemap.
+          displayName: Get Sitemaps
           is:
           - hasParameters
           responses:
@@ -433,6 +438,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/webmasters
           description: Deletes a sitemap from this site.
+          displayName: Delete Sitemaps
           is:
           - hasParameters
       get:
@@ -442,6 +448,7 @@ types:
             - https://www.googleapis.com/auth/webmasters
             - https://www.googleapis.com/auth/webmasters.readonly
         description: Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).
+        displayName: List Sitemaps
         is:
         - hasParameters
         queryParameters:
@@ -461,6 +468,7 @@ types:
               - https://www.googleapis.com/auth/webmasters
               - https://www.googleapis.com/auth/webmasters.readonly
           description: Retrieves a time series of the number of URL crawl errors per error category and platform.
+          displayName: Query Urlcrawlerrorscounts
           is:
           - hasParameters
           queryParameters:
@@ -506,6 +514,7 @@ types:
             Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days.
 
             When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
+          displayName: Query Searchanalytics
           is:
           - hasParameters
           body:
@@ -520,6 +529,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/webmasters
       description: Adds a site to the set of the user's sites in Search Console.
+      displayName: Add Sites
       is:
       - hasParameters
     get:
@@ -529,6 +539,7 @@ types:
           - https://www.googleapis.com/auth/webmasters
           - https://www.googleapis.com/auth/webmasters.readonly
       description: Retrieves information about specific site.
+      displayName: Get Sites
       is:
       - hasParameters
       responses:
@@ -541,6 +552,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/webmasters
       description: Removes a site from the set of the user's Search Console sites.
+      displayName: Delete Sites
       is:
       - hasParameters
   get:
@@ -550,6 +562,7 @@ types:
         - https://www.googleapis.com/auth/webmasters
         - https://www.googleapis.com/auth/webmasters.readonly
     description: Lists the user's Search Console sites.
+    displayName: List Sites
     is:
     - hasParameters
     responses:

@@ -172,6 +172,7 @@ types:
   /v1:
     /raw_public_keys:
       get:
+        displayName: GetCertForOpenIdConnectRaw
         is:
         - hasParameters
         responses:
@@ -180,6 +181,7 @@ types:
               application/json: Raw
     /certs:
       get:
+        displayName: GetCertForOpenIdConnect
         is:
         - hasParameters
         responses:
@@ -189,6 +191,7 @@ types:
     /tokeninfo:
       post:
         description: Get token info
+        displayName: Tokeninfo
         is:
         - hasParameters
         queryParameters:
@@ -212,6 +215,7 @@ types:
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
         description: Get user info
+        displayName: Get Userinfo
         is:
         - hasParameters
         responses:
@@ -228,6 +232,7 @@ types:
               type: string
               description: The email of robot account.
           get:
+            displayName: GetRobotMetadataRaw
             is:
             - hasParameters
             responses:
@@ -241,6 +246,7 @@ types:
               type: string
               description: The email of robot account.
           get:
+            displayName: GetRobotMetadataX509
             is:
             - hasParameters
             responses:
@@ -254,6 +260,7 @@ types:
             type: string
             description: The email of robot account.
         get:
+          displayName: GetRobotJwk
           is:
           - hasParameters
           responses:

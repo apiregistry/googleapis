@@ -1038,6 +1038,7 @@ types:
     /reports:
       get:
         description: Retrieves stored reports.
+        displayName: Listreports Reports
         is:
         - hasParameters
         responses:
@@ -1046,6 +1047,7 @@ types:
               application/json: ListReportsResponse
   get:
     description: Retrieves stored queries.
+    displayName: Listqueries Queries
     is:
     - hasParameters
     responses:
@@ -1056,6 +1058,7 @@ types:
   /downloadlineitems:
     post:
       description: Retrieves line items in CSV format.
+      displayName: Downloadlineitems Lineitems
       is:
       - hasParameters
       body:
@@ -1067,6 +1070,7 @@ types:
   /uploadlineitems:
     post:
       description: Uploads line items in CSV format.
+      displayName: Uploadlineitems Lineitems
       is:
       - hasParameters
       body:
@@ -1079,6 +1083,7 @@ types:
   /download:
     post:
       description: Retrieves entities in SDF format.
+      displayName: Download Sdf
       is:
       - hasParameters
       body:
@@ -1096,10 +1101,12 @@ types:
         description: Query ID to delete.
     delete:
       description: Deletes a stored query as well as the associated stored reports.
+      displayName: Deletequery Queries
       is:
       - hasParameters
     get:
       description: Retrieves a stored query.
+      displayName: Getquery Queries
       is:
       - hasParameters
       responses:
@@ -1108,12 +1115,14 @@ types:
             application/json: Query
     post:
       description: Runs a stored query to generate a report.
+      displayName: Runquery Queries
       is:
       - hasParameters
       body:
         application/json: RunQueryRequest
   post:
     description: Creates a query.
+    displayName: Createquery Queries
     is:
     - hasParameters
     body:

@@ -584,6 +584,15 @@ types:
       load?: JobConfigurationLoad
       query?: JobConfigurationQuery
       copy?: JobConfigurationTableCopy
+      labels?:
+        type: object
+        description: '[Experimental] The labels associated with this job. You can
+          use these to organize and group your jobs. Label keys and values can be
+          no longer than 63 characters, can only contain letters, numeric characters,
+          underscores and dashes. International characters are allowed. Label values
+          are optional. Label keys must start with a letter and must be unique within
+          a dataset. Both keys and values are additionally constrained to be <= 128
+          bytes in size.'
   JobConfigurationExtract:
     type: object
     properties:
@@ -749,7 +758,7 @@ types:
     properties:
       schemaUpdateOptions?:
         type: array
-        description: '[Experimental] Allows the schema of the desitination table to
+        description: '[Experimental] Allows the schema of the destination table to
           be updated as a side effect of the query job. Schema update options are
           supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition
           is WRITE_TRUNCATE and the destination table is a partition of a table, specified
@@ -822,7 +831,7 @@ types:
           (?) or named (@myparam) query parameters in this query.'
       queryParameters?:
         type: array
-        description: '[Experimental] Query parameters for Standard SQL queries.'
+        description: Query parameters for standard SQL queries.
         items: QueryParameter
       destinationTable?: TableReference
       tableDefinitions?:
@@ -1561,6 +1570,7 @@ types:
                     - https://www.googleapis.com/auth/cloud-platform
                     - https://www.googleapis.com/auth/cloud-platform.read-only
                 description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
+                displayName: List Tabledata
                 is:
                 - hasParameters
                 queryParameters:
@@ -1588,6 +1598,7 @@ types:
                     - https://www.googleapis.com/auth/bigquery.insertdata
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
+                displayName: InsertAll Tabledata
                 is:
                 - hasParameters
                 body:
@@ -1603,6 +1614,7 @@ types:
                   - https://www.googleapis.com/auth/bigquery
                   - https://www.googleapis.com/auth/cloud-platform
               description: Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.
+              displayName: Patch Tables
               is:
               - hasParameters
               body:
@@ -1619,6 +1631,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/cloud-platform.read-only
               description: Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.
+              displayName: Get Tables
               is:
               - hasParameters
               responses:
@@ -1632,6 +1645,7 @@ types:
                   - https://www.googleapis.com/auth/bigquery
                   - https://www.googleapis.com/auth/cloud-platform
               description: Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.
+              displayName: Update Tables
               is:
               - hasParameters
               body:
@@ -1647,6 +1661,7 @@ types:
                   - https://www.googleapis.com/auth/bigquery
                   - https://www.googleapis.com/auth/cloud-platform
               description: Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.
+              displayName: Delete Tables
               is:
               - hasParameters
           post:
@@ -1656,6 +1671,7 @@ types:
                 - https://www.googleapis.com/auth/bigquery
                 - https://www.googleapis.com/auth/cloud-platform
             description: Creates a new, empty table in the dataset.
+            displayName: Insert Tables
             is:
             - hasParameters
             body:
@@ -1672,6 +1688,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud-platform.read-only
             description: Lists all tables in the specified dataset. Requires the READER dataset role.
+            displayName: List Tables
             is:
             - hasParameters
             queryParameters:
@@ -1693,6 +1710,7 @@ types:
               - https://www.googleapis.com/auth/bigquery
               - https://www.googleapis.com/auth/cloud-platform
           description: Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.
+          displayName: Patch Datasets
           is:
           - hasParameters
           body:
@@ -1709,6 +1727,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud-platform.read-only
           description: Returns the dataset specified by datasetID.
+          displayName: Get Datasets
           is:
           - hasParameters
           responses:
@@ -1722,6 +1741,7 @@ types:
               - https://www.googleapis.com/auth/bigquery
               - https://www.googleapis.com/auth/cloud-platform
           description: Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.
+          displayName: Update Datasets
           is:
           - hasParameters
           body:
@@ -1737,6 +1757,7 @@ types:
               - https://www.googleapis.com/auth/bigquery
               - https://www.googleapis.com/auth/cloud-platform
           description: Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
+          displayName: Delete Datasets
           is:
           - hasParameters
           queryParameters:
@@ -1750,6 +1771,7 @@ types:
             - https://www.googleapis.com/auth/bigquery
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a new empty dataset.
+        displayName: Insert Datasets
         is:
         - hasParameters
         body:
@@ -1766,6 +1788,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
+        displayName: List Datasets
         is:
         - hasParameters
         queryParameters:
@@ -1803,6 +1826,7 @@ types:
                 - https://www.googleapis.com/auth/bigquery
                 - https://www.googleapis.com/auth/cloud-platform
             description: Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
+            displayName: Cancel Jobs
             is:
             - hasParameters
             responses:
@@ -1817,6 +1841,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud-platform.read-only
           description: Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.
+          displayName: Get Jobs
           is:
           - hasParameters
           responses:
@@ -1833,6 +1858,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Starts a new asynchronous job. Requires the Can View project role.
+        displayName: Insert Jobs
         is:
         - hasParameters
         body:
@@ -1849,6 +1875,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
+        displayName: List Jobs
         is:
         - hasParameters
         queryParameters:
@@ -1893,6 +1920,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud-platform.read-only
           description: Retrieves the results of a query job.
+          displayName: GetQueryResults Jobs
           is:
           - hasParameters
           queryParameters:
@@ -1923,6 +1951,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
+        displayName: Query Jobs
         is:
         - hasParameters
         body:
@@ -1939,6 +1968,7 @@ types:
         - https://www.googleapis.com/auth/cloud-platform
         - https://www.googleapis.com/auth/cloud-platform.read-only
     description: Lists all projects to which you have been granted any project role.
+    displayName: List Projects
     is:
     - hasParameters
     queryParameters:

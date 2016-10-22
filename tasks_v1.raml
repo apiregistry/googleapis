@@ -178,6 +178,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the authenticated user's specified task list. This method supports patch semantics.
+          displayName: Patch Tasklists
           is:
           - hasParameters
           body:
@@ -193,6 +194,7 @@ types:
               - https://www.googleapis.com/auth/tasks
               - https://www.googleapis.com/auth/tasks.readonly
           description: Returns the authenticated user's specified task list.
+          displayName: Get Tasklists
           is:
           - hasParameters
           responses:
@@ -205,6 +207,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the authenticated user's specified task list.
+          displayName: Update Tasklists
           is:
           - hasParameters
           body:
@@ -219,6 +222,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Deletes the authenticated user's specified task list.
+          displayName: Delete Tasklists
           is:
           - hasParameters
       post:
@@ -227,6 +231,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Creates a new task list and adds it to the authenticated user's task lists.
+        displayName: Insert Tasklists
         is:
         - hasParameters
         body:
@@ -242,6 +247,7 @@ types:
             - https://www.googleapis.com/auth/tasks
             - https://www.googleapis.com/auth/tasks.readonly
         description: Returns all the authenticated user's task lists.
+        displayName: List Tasklists
         is:
         - hasParameters
         queryParameters:
@@ -275,6 +281,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/tasks
             description: Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks.
+            displayName: Move Tasks
             is:
             - hasParameters
             queryParameters:
@@ -294,6 +301,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the specified task. This method supports patch semantics.
+          displayName: Patch Tasks
           is:
           - hasParameters
           body:
@@ -309,6 +317,7 @@ types:
               - https://www.googleapis.com/auth/tasks
               - https://www.googleapis.com/auth/tasks.readonly
           description: Returns the specified task.
+          displayName: Get Tasks
           is:
           - hasParameters
           responses:
@@ -321,6 +330,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the specified task.
+          displayName: Update Tasks
           is:
           - hasParameters
           body:
@@ -335,6 +345,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Deletes the specified task from the task list.
+          displayName: Delete Tasks
           is:
           - hasParameters
       post:
@@ -343,6 +354,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Creates a new task on the specified task list.
+        displayName: Insert Tasks
         is:
         - hasParameters
         queryParameters:
@@ -365,6 +377,7 @@ types:
             - https://www.googleapis.com/auth/tasks
             - https://www.googleapis.com/auth/tasks.readonly
         description: Returns all tasks in the specified task list.
+        displayName: List Tasks
         is:
         - hasParameters
         queryParameters:
@@ -410,5 +423,6 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Clears all completed tasks from the specified task list. The affected tasks will be marked as 'hidden' and no longer be returned by default when retrieving all tasks for a task list.
+        displayName: Clear Tasks
         is:
         - hasParameters

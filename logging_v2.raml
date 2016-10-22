@@ -1,6 +1,6 @@
 #%RAML 1.0
 title: Stackdriver Logging API
-version: v2beta1
+version: v2
 baseUri: https://logging.googleapis.com/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
@@ -13,7 +13,7 @@ uses:
   name: x32
 - url: http://www.google.com/images/icons/product/search-16.gif
   name: x16
-(commons.Id): logging:v2beta1
+(commons.Id): logging:v2
 securitySchemes:
   oath2:
     type: OAuth 2.0
@@ -789,7 +789,7 @@ types:
     description: |-
       Result returned from WriteLogEntries.
       empty
-/v2beta1:
+/v2:
   /entries:list:
     post:
       securedBy:
@@ -849,8 +849,9 @@ types:
           - https://www.googleapis.com/auth/logging.admin
           - https://www.googleapis.com/auth/logging.read
       description: Gets a sink.
-      displayName: Get Sinks Projects
+      displayName: Get Sinks Organizations
       is:
+      - hasParameters
       - hasParameters
       responses:
         200:
@@ -863,8 +864,9 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/logging.admin
       description: Updates or creates a sink.
-      displayName: Update Sinks Projects
+      displayName: Update Sinks Organizations
       is:
+      - hasParameters
       - hasParameters
       body:
         application/json: LogSink
@@ -879,8 +881,9 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/logging.admin
       description: Deletes a sink.
-      displayName: Delete Sinks Projects
+      displayName: Delete Sinks Organizations
       is:
+      - hasParameters
       - hasParameters
       responses:
         200:
@@ -903,8 +906,9 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/logging.admin
         description: Creates a sink.
-        displayName: Create Sinks Projects
+        displayName: Create Sinks Organizations
         is:
+        - hasParameters
         - hasParameters
         body:
           application/json: LogSink
@@ -921,8 +925,9 @@ types:
             - https://www.googleapis.com/auth/logging.admin
             - https://www.googleapis.com/auth/logging.read
         description: Lists sinks.
-        displayName: List Sinks Projects
+        displayName: List Sinks Organizations
         is:
+        - hasParameters
         - hasParameters
         queryParameters:
           pageSize?:

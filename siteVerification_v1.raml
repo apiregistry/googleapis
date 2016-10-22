@@ -111,6 +111,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Modify the list of owners for your website or domain. This method supports patch semantics.
+      displayName: Patch WebResource
       is:
       - hasParameters
       body:
@@ -125,6 +126,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Get the most current data for a website or domain.
+      displayName: Get WebResource
       is:
       - hasParameters
       responses:
@@ -137,6 +139,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Modify the list of owners for your website or domain.
+      displayName: Update WebResource
       is:
       - hasParameters
       body:
@@ -151,6 +154,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Relinquish ownership of a website or domain.
+      displayName: Delete WebResource
       is:
       - hasParameters
   post:
@@ -160,6 +164,7 @@ types:
         - https://www.googleapis.com/auth/siteverification
         - https://www.googleapis.com/auth/siteverification.verify_only
     description: Attempt verification of a website or domain.
+    displayName: Insert WebResource
     is:
     - hasParameters
     queryParameters:
@@ -178,6 +183,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/siteverification
     description: Get the list of your verified websites and domains.
+    displayName: List WebResource
     is:
     - hasParameters
     responses:
@@ -192,6 +198,7 @@ types:
         - https://www.googleapis.com/auth/siteverification
         - https://www.googleapis.com/auth/siteverification.verify_only
     description: Get a verification token for placing on a website or domain.
+    displayName: GetToken WebResource
     is:
     - hasParameters
     body:

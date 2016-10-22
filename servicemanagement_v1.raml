@@ -75,6 +75,68 @@ types:
     description: |-
       Generated advice about this change, used for providing more
       information about how a change will affect the existing service.
+  Analytics:
+    type: object
+    properties:
+      producerDestinations?:
+        type: array
+        description: |-
+          Analytics configurations for sending metrics to the analytics backend.
+          There can be multiple producer destinations, each one must have a
+          different monitored resource type. A metric can be used in at most
+          one producer destination.
+        items: AnalyticsDestination
+    description: |-
+      Analytics configuration of the service.
+
+      The example below shows how to configure monitored resources and metrics
+      for analytics. In the example, a monitored resource and two metrics are
+      defined. The `library.googleapis.com/book/returned_count` and
+      `library.googleapis.com/book/overdue_count` metric are sent
+      to the analytics.
+
+          monitored_resources:
+          - type: library.googleapis.com/branch
+            labels:
+            - key: /city
+              description: The city where the library branch is located in.
+            - key: /name
+              description: The name of the branch.
+          metrics:
+          - name: library.googleapis.com/book/returned_count
+            metric_kind: DELTA
+            value_type: INT64
+            labels:
+            - key: /customer_id
+          - name: library.googleapis.com/book/overdue_count
+            metric_kind: GAUGE
+            value_type: INT64
+            labels:
+            - key: /customer_id
+          analytics:
+            producer_destinations:
+            - monitored_resource: library.googleapis.com/branch
+              metrics:
+              - library.googleapis.com/book/returned_count
+              - library.googleapis.com/book/overdue_count
+  AnalyticsDestination:
+    type: object
+    properties:
+      metrics?:
+        type: array
+        description: |-
+          Names of the metrics to report to this analytics destination.
+          Each name must be defined in Service.metrics section. Metrics
+          with value type BOOL and STRING must be of GUAGE kind, metrics with
+          value type INT64, DOUBLE and MONEY must be of DELTA kind.
+        items:
+          type: string
+      monitoredResource?:
+        type: string
+        description: |-
+          The monitored resource type. The type must be defined in
+          Service.monitored_resources section.
+    description: Configuration of a specific analytics destination.
   Api:
     type: object
     properties:
@@ -327,6 +389,7 @@ types:
 
           * `user:{emailid}`: An email address that represents a specific Google
              account. For example, `alice@gmail.com` or `joe@example.com`.
+
 
           * `serviceAccount:{emailid}`: An email address that represents a service
              account. For example, `my-other-app@appspot.gserviceaccount.com`.
@@ -1416,11 +1479,9 @@ types:
       Logging configuration of the service.
 
       The following example shows how to configure logs to be sent to the
-      producer and consumer projects. In the example,
-      the `library.googleapis.com/activity_history` log is
-      sent to both the producer and consumer projects, whereas
-      the `library.googleapis.com/purchase_history` log is only sent to the
-      producer project:
+      producer and consumer projects. In the example, the `activity_history`
+      log is sent to both the producer and consumer projects, whereas the
+      `purchase_history` log is only sent to the producer project.
 
           monitored_resources:
           - type: library.googleapis.com/branch
@@ -1430,33 +1491,35 @@ types:
             - key: /name
               description: The name of the branch.
           logs:
-          - name: library.googleapis.com/activity_history
+          - name: activity_history
             labels:
             - key: /customer_id
-          - name: library.googleapis.com/purchase_history
+          - name: purchase_history
           logging:
             producer_destinations:
             - monitored_resource: library.googleapis.com/branch
               logs:
-              - library.googleapis.com/activity_history
-              - library.googleapis.com/purchase_history
+              - activity_history
+              - purchase_history
             consumer_destinations:
             - monitored_resource: library.googleapis.com/branch
               logs:
-              - library.googleapis.com/activity_history
+              - activity_history
   LoggingDestination:
     type: object
     properties:
       monitoredResource?:
         type: string
         description: |-
-          The monitored resource type. The type must be defined in
+          The monitored resource type. The type must be defined in the
           Service.monitored_resources section.
       logs?:
         type: array
         description: |-
           Names of the logs to be sent to this destination. Each name must
-          be defined in the Service.logs section.
+          be defined in the Service.logs section. If the log name is
+          not a domain scoped name, it will be automatically prefixed with
+          the service name followed by "/".
         items:
           type: string
     description: |-
@@ -2198,6 +2261,7 @@ types:
       title?:
         type: string
         description: The product title associated with this service.
+      analytics?: Analytics
       enums?:
         type: array
         description: |-
@@ -2751,6 +2815,7 @@ types:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
+      displayName: Get Operations
       is:
       - hasParameters
       responses:
@@ -2776,6 +2841,7 @@ types:
         If GenerateConfigReportRequest.old_value is not specified, this method
         will compare GenerateConfigReportRequest.new_value with the last pushed
         service configuration.
+      displayName: GenerateConfigReport Services
       is:
       - hasParameters
       body:
@@ -2800,6 +2866,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/service.management
       description: Returns permissions that a caller has on the specified resource.
+      displayName: TestIamPermissions Services
       is:
       - hasParameters
       body:
@@ -2826,6 +2893,7 @@ types:
           Disable a managed service for a project.
 
           Operation<response: DisableServiceResponse>
+        displayName: Disable Services
         is:
         - hasParameters
         body:
@@ -2854,6 +2922,7 @@ types:
 
           google.rpc.Status errors may contain a
           google.rpc.PreconditionFailure error detail.
+        displayName: Enable Services
         is:
         - hasParameters
         body:
@@ -2879,6 +2948,7 @@ types:
               - https://www.googleapis.com/auth/service.management
               - https://www.googleapis.com/auth/service.management.readonly
           description: Gets a service configuration (version) for a managed service.
+          displayName: GetConfig Services
           is:
           - hasParameters
           queryParameters:
@@ -2897,6 +2967,7 @@ types:
             - https://www.googleapis.com/auth/service.management
             - https://www.googleapis.com/auth/service.management.readonly
         description: Gets a managed service.
+        displayName: Get Services
         is:
         - hasParameters
         responses:
@@ -2916,6 +2987,7 @@ types:
           After 30 days, the service will be permanently deleted.
 
           Operation<response: google.protobuf.Empty>
+        displayName: Delete Services
         is:
         - hasParameters
         responses:
@@ -2942,6 +3014,7 @@ types:
           last 30 days.
 
           Operation<response: UndeleteServiceResponse>
+        displayName: Undelete Services
         is:
         - hasParameters
         responses:
@@ -2959,6 +3032,7 @@ types:
         Please note one producer project can own no more than 20 services.
 
         Operation<response: ManagedService>
+      displayName: Create Services
       is:
       - hasParameters
       body:
@@ -2976,6 +3050,7 @@ types:
           - https://www.googleapis.com/auth/service.management
           - https://www.googleapis.com/auth/service.management.readonly
       description: Lists all managed services.
+      displayName: List Services
       is:
       - hasParameters
       queryParameters:
@@ -3014,6 +3089,7 @@ types:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
+      displayName: GetIamPolicy Services
       is:
       - hasParameters
       body:
@@ -3040,6 +3116,7 @@ types:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
+      displayName: SetIamPolicy Services
       is:
       - hasParameters
       body:

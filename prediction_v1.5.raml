@@ -340,6 +340,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Submit input and request an output against a hosted model.
+        displayName: Predict Hostedmodels
         is:
         - hasParameters
         body:
@@ -361,6 +362,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Get analysis of the model and the data the model was trained on.
+        displayName: Analyze Trainedmodels
         is:
         - hasParameters
         responses:
@@ -374,6 +376,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Submit model id and request a prediction.
+        displayName: Predict Trainedmodels
         is:
         - hasParameters
         body:
@@ -388,6 +391,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Check training status of your model.
+      displayName: Get Trainedmodels
       is:
       - hasParameters
       responses:
@@ -400,6 +404,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Add new data to a trained model.
+      displayName: Update Trainedmodels
       is:
       - hasParameters
       body:
@@ -414,6 +419,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Delete a trained model.
+      displayName: Delete Trainedmodels
       is:
       - hasParameters
   /list:
@@ -423,6 +429,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: List available models.
+      displayName: List Trainedmodels
       is:
       - hasParameters
       queryParameters:
@@ -447,6 +454,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.read_write
         - https://www.googleapis.com/auth/prediction
     description: Begin training your model.
+    displayName: Insert Trainedmodels
     is:
     - hasParameters
     body:

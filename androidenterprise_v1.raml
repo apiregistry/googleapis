@@ -807,6 +807,9 @@ types:
         default: androidenterprise#productSet
         description: 'Identifies what kind of resource this is. Value: the fixed string
           "androidenterprise#productSet".'
+      productSetBehavior?:
+        type: string
+        description: The interpretation of this product set. "unknown" should never be sent and ignored if received. "whitelist" means that this product set constitutes a whitelist. "includeAll" means that all products are accessible (the value of the productId field is therefore ignored). If a value is not supplied, it is interpreted to be "whitelist" for backwards compatibility.
     description: A set of products.
   ProductsApproveRequest:
     type: object
@@ -1077,6 +1080,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates an entitlement to an app for a user. This method supports patch semantics.
+              displayName: Patch Entitlements
               is:
               - hasParameters
               queryParameters:
@@ -1095,6 +1099,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves details of an entitlement.
+              displayName: Get Entitlements
               is:
               - hasParameters
               responses:
@@ -1107,6 +1112,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates an entitlement to an app for a user.
+              displayName: Update Entitlements
               is:
               - hasParameters
               queryParameters:
@@ -1125,6 +1131,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Removes an entitlement to an app for a user and uninstalls it.
+              displayName: Delete Entitlements
               is:
               - hasParameters
           get:
@@ -1133,6 +1140,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: List of all entitlements for the specified user. Only the ID is set.
+            displayName: List Entitlements
             is:
             - hasParameters
             responses:
@@ -1152,6 +1160,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Retrieves whether a device's access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.
+                displayName: GetState Devices
                 is:
                 - hasParameters
                 responses:
@@ -1164,6 +1173,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Sets whether a device's access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.
+                displayName: SetState Devices
                 is:
                 - hasParameters
                 body:
@@ -1184,6 +1194,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Requests to install the latest version of an app to a device. If the app is already installed then it is updated to the latest version if necessary. This method supports patch semantics.
+                  displayName: Patch Installs
                   is:
                   - hasParameters
                   body:
@@ -1198,6 +1209,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Retrieves details of an installation of an app on a device.
+                  displayName: Get Installs
                   is:
                   - hasParameters
                   responses:
@@ -1210,6 +1222,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Requests to install the latest version of an app to a device. If the app is already installed then it is updated to the latest version if necessary.
+                  displayName: Update Installs
                   is:
                   - hasParameters
                   body:
@@ -1224,6 +1237,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
+                  displayName: Delete Installs
                   is:
                   - hasParameters
               get:
@@ -1232,6 +1246,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Retrieves the details of all apps installed on the specified device.
+                displayName: List Installs
                 is:
                 - hasParameters
                 responses:
@@ -1250,6 +1265,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Adds or updates a per-device managed configuration for an app for the specified device. This method supports patch semantics.
+                  displayName: Patch Managedconfigurationsfordevice
                   is:
                   - hasParameters
                   body:
@@ -1264,6 +1280,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Retrieves details of a per-device managed configuration.
+                  displayName: Get Managedconfigurationsfordevice
                   is:
                   - hasParameters
                   responses:
@@ -1276,6 +1293,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Adds or updates a per-device managed configuration for an app for the specified device.
+                  displayName: Update Managedconfigurationsfordevice
                   is:
                   - hasParameters
                   body:
@@ -1290,6 +1308,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Removes a per-device managed configuration for an app for the specified device.
+                  displayName: Delete Managedconfigurationsfordevice
                   is:
                   - hasParameters
               get:
@@ -1298,6 +1317,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Lists all the per-device managed configurations for the specified device. Only the ID is set.
+                displayName: List Managedconfigurationsfordevice
                 is:
                 - hasParameters
                 responses:
@@ -1310,6 +1330,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves the details of a device.
+              displayName: Get Devices
               is:
               - hasParameters
               responses:
@@ -1322,6 +1343,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the IDs of all of a user's devices.
+            displayName: List Devices
             is:
             - hasParameters
             responses:
@@ -1338,6 +1360,7 @@ types:
               Generates a token (activation code) to allow this user to configure their work account in the Android Setup Wizard. Revokes any previously generated token.
 
               This call only works with Google managed accounts.
+            displayName: GenerateToken Users
             is:
             - hasParameters
             responses:
@@ -1350,6 +1373,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Revokes a previously generated token (activation code) for the user.
+            displayName: RevokeToken Users
             is:
             - hasParameters
         /availableProductSet:
@@ -1359,6 +1383,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Modifies the set of products a user is entitled to access.
+            displayName: SetAvailableProductSet Users
             is:
             - hasParameters
             body:
@@ -1373,6 +1398,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the set of products a user is entitled to access.
+            displayName: GetAvailableProductSet Users
             is:
             - hasParameters
             responses:
@@ -1389,6 +1415,7 @@ types:
               Generates an authentication token which the device policy client can use to provision the given EMM-managed user account on a device. The generated token is single-use and expires after a few minutes.
 
               This call only works with EMM-managed accounts.
+            displayName: GenerateAuthenticationToken Users
             is:
             - hasParameters
             responses:
@@ -1407,6 +1434,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates a per-user managed configuration for an app for the specified user. This method supports patch semantics.
+              displayName: Patch Managedconfigurationsforuser
               is:
               - hasParameters
               body:
@@ -1421,6 +1449,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves details of a per-user managed configuration for an app for the specified user.
+              displayName: Get Managedconfigurationsforuser
               is:
               - hasParameters
               responses:
@@ -1433,6 +1462,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates a per-user managed configuration for an app for the specified user.
+              displayName: Update Managedconfigurationsforuser
               is:
               - hasParameters
               body:
@@ -1447,6 +1477,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Removes a per-user managed configuration for an app for the specified user.
+              displayName: Delete Managedconfigurationsforuser
               is:
               - hasParameters
           get:
@@ -1455,6 +1486,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Lists all the per-user managed configurations for the specified user. Only the ID is set.
+            displayName: List Managedconfigurationsforuser
             is:
             - hasParameters
             responses:
@@ -1470,6 +1502,7 @@ types:
             Updates the details of an EMM-managed user.
 
             Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value. This method supports patch semantics.
+          displayName: Patch Users
           is:
           - hasParameters
           body:
@@ -1484,6 +1517,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves a user's details.
+          displayName: Get Users
           is:
           - hasParameters
           responses:
@@ -1499,6 +1533,7 @@ types:
             Updates the details of an EMM-managed user.
 
             Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value.
+          displayName: Update Users
           is:
           - hasParameters
           body:
@@ -1513,6 +1548,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Deleted an EMM-managed user.
+          displayName: Delete Users
           is:
           - hasParameters
       post:
@@ -1525,6 +1561,7 @@ types:
 
           The Users resource passed in the body of the request should include an accountIdentifier and an accountType.
           If a corresponding user already exists with the same account identifier, the user will be updated with the resource. In this case only the displayName field can be changed.
+        displayName: Insert Users
         is:
         - hasParameters
         body:
@@ -1539,6 +1576,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Looks up a user by primary email address. This is only supported for Google-managed users. Lookup of the id is not needed for EMM-managed users because the id is already returned in the result of the Users.insert call.
+        displayName: List Users
         is:
         - hasParameters
         queryParameters:
@@ -1568,6 +1606,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Updates a cluster. This method supports patch semantics.
+                displayName: Patch Storelayoutclusters
                 is:
                 - hasParameters
                 body:
@@ -1582,6 +1621,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Retrieves details of a cluster.
+                displayName: Get Storelayoutclusters
                 is:
                 - hasParameters
                 responses:
@@ -1594,6 +1634,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Updates a cluster.
+                displayName: Update Storelayoutclusters
                 is:
                 - hasParameters
                 body:
@@ -1608,6 +1649,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Deletes a cluster.
+                displayName: Delete Storelayoutclusters
                 is:
                 - hasParameters
             post:
@@ -1616,6 +1658,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Inserts a new cluster in a page.
+              displayName: Insert Storelayoutclusters
               is:
               - hasParameters
               body:
@@ -1630,6 +1673,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves the details of all clusters on the specified page.
+              displayName: List Storelayoutclusters
               is:
               - hasParameters
               responses:
@@ -1642,6 +1686,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Updates the content of a store page. This method supports patch semantics.
+            displayName: Patch Storelayoutpages
             is:
             - hasParameters
             body:
@@ -1656,6 +1701,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves details of a store page.
+            displayName: Get Storelayoutpages
             is:
             - hasParameters
             responses:
@@ -1668,6 +1714,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Updates the content of a store page.
+            displayName: Update Storelayoutpages
             is:
             - hasParameters
             body:
@@ -1682,6 +1729,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Deletes a store page.
+            displayName: Delete Storelayoutpages
             is:
             - hasParameters
         post:
@@ -1690,6 +1738,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Inserts a new store page.
+          displayName: Insert Storelayoutpages
           is:
           - hasParameters
           body:
@@ -1704,6 +1753,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves the details of all pages in the store.
+          displayName: List Storelayoutpages
           is:
           - hasParameters
           responses:
@@ -1716,6 +1766,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Sets the store layout for the enterprise.
+        displayName: SetStoreLayout Enterprises
         is:
         - hasParameters
         body:
@@ -1730,6 +1781,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Returns the store layout for the enterprise. If the store layout has not been set, or if the store layout has no homepageId set, returns a NOT_FOUND error.
+        displayName: GetStoreLayout Enterprises
         is:
         - hasParameters
         responses:
@@ -1748,6 +1800,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Removes and invalidates the specified credentials for the service account associated with this enterprise. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
+          displayName: Delete Serviceaccountkeys
           is:
           - hasParameters
       post:
@@ -1759,6 +1812,7 @@ types:
           Generates new credentials for the service account associated with this enterprise. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
 
           Only the type of the key should be populated in the resource to be inserted.
+        displayName: Insert Serviceaccountkeys
         is:
         - hasParameters
         body:
@@ -1773,6 +1827,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Lists all active credentials for the service account associated with this enterprise. Only the ID and key type are returned. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
+        displayName: List Serviceaccountkeys
         is:
         - hasParameters
         responses:
@@ -1793,6 +1848,7 @@ types:
           Subsequent calls after the first will generate a new, unique set of credentials, and invalidate the previously generated credentials.
 
           Once the service account is bound to the enterprise, it can be managed using the serviceAccountKeys resource.
+        displayName: GetServiceAccount Enterprises
         is:
         - hasParameters
         queryParameters:
@@ -1813,6 +1869,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Unenrolls an enterprise from the calling EMM.
+        displayName: Unenroll Enterprises
         is:
         - hasParameters
     /createWebToken:
@@ -1822,6 +1879,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the Play for Work javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.
+        displayName: CreateWebToken Enterprises
         is:
         - hasParameters
         body:
@@ -1837,6 +1895,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Sends a test push notification to validate the EMM integration with the Google Cloud Pub/Sub service for this enterprise.
+        displayName: SendTestPushNotification Enterprises
         is:
         - hasParameters
         responses:
@@ -1850,6 +1909,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Set the account that will be used to authenticate to the API as the enterprise.
+        displayName: SetAccount Enterprises
         is:
         - hasParameters
         body:
@@ -1871,6 +1931,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the IDs of the users who have been granted entitlements under the license.
+            displayName: List Grouplicenseusers
             is:
             - hasParameters
             responses:
@@ -1883,6 +1944,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves details of an enterprise's group license for a product.
+          displayName: Get Grouplicenses
           is:
           - hasParameters
           responses:
@@ -1895,6 +1957,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Retrieves IDs of all products for which the enterprise has a group license.
+        displayName: List Grouplicenses
         is:
         - hasParameters
         responses:
@@ -1914,6 +1977,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the schema that defines the configurable properties for this product. All products have a schema, but this schema may be empty if no managed configurations have been defined. This schema can be used to populate a UI that allows an administrator to configure the product. To apply a managed configuration based on the schema obtained using this API, see Managed Configurations through Play.
+            displayName: GetAppRestrictionsSchema Products
             is:
             - hasParameters
             queryParameters:
@@ -1934,6 +1998,7 @@ types:
               Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000.
 
               To learn how to use Google Play for Work to design and create a store layout to display approved products to your users, see Store Layout Design.
+            displayName: Approve Products
             is:
             - hasParameters
             body:
@@ -1945,6 +2010,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the Android app permissions required by this app.
+            displayName: GetPermissions Products
             is:
             - hasParameters
             responses:
@@ -1960,6 +2026,7 @@ types:
               This method has been deprecated. To programmatically approve applications, you must use the iframe mechanism via the  generateApprovalUrl and  approve methods of the Products resource. For more information, see the  Play EMM API usage requirements.
 
               The updatePermissions method (deprecated) updates the set of Android app permissions for this app that have been accepted by the enterprise.
+            displayName: UpdatePermissions Products
             is:
             - hasParameters
             body:
@@ -1975,6 +2042,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Unapproves the specified product (and the relevant app permissions, if any)
+            displayName: Unapprove Products
             is:
             - hasParameters
         /generateApprovalUrl:
@@ -1987,6 +2055,7 @@ types:
               Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product.
 
               Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day.
+            displayName: GenerateApprovalUrl Products
             is:
             - hasParameters
             queryParameters:
@@ -2003,6 +2072,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves details of a product for display to an enterprise admin.
+          displayName: Get Products
           is:
           - hasParameters
           queryParameters:
@@ -2019,6 +2089,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Finds approved products that match a query, or all approved products if there is no query.
+        displayName: List Products
         is:
         - hasParameters
         queryParameters:
@@ -2061,6 +2132,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection. This method supports patch semantics.
+              displayName: Patch Collectionviewers
               is:
               - hasParameters
               body:
@@ -2075,6 +2147,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves the ID of the user if they have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
+              displayName: Get Collectionviewers
               is:
               - hasParameters
               responses:
@@ -2087,6 +2160,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
+              displayName: Update Collectionviewers
               is:
               - hasParameters
               body:
@@ -2101,6 +2175,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Removes the user from the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
+              displayName: Delete Collectionviewers
               is:
               - hasParameters
           get:
@@ -2109,6 +2184,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the IDs of the users who have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
+            displayName: List Collectionviewers
             is:
             - hasParameters
             responses:
@@ -2121,6 +2197,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Updates a collection. This method supports patch semantics.
+          displayName: Patch Collections
           is:
           - hasParameters
           body:
@@ -2135,6 +2212,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves the details of a collection.
+          displayName: Get Collections
           is:
           - hasParameters
           responses:
@@ -2147,6 +2225,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Updates a collection.
+          displayName: Update Collections
           is:
           - hasParameters
           body:
@@ -2161,6 +2240,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Deletes a collection.
+          displayName: Delete Collections
           is:
           - hasParameters
       post:
@@ -2169,6 +2249,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Creates a new collection.
+        displayName: Insert Collections
         is:
         - hasParameters
         body:
@@ -2183,6 +2264,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Retrieves the IDs of all the collections for an enterprise.
+        displayName: List Collections
         is:
         - hasParameters
         responses:
@@ -2195,6 +2277,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Deletes the binding between the EMM and enterprise. This is now deprecated; use this to unenroll customers that were previously enrolled with the 'insert' call, then enroll them again with the 'enroll' call.
+      displayName: Delete Enterprises
       is:
       - hasParameters
     get:
@@ -2203,6 +2286,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Retrieves the name and domain of an enterprise.
+      displayName: Get Enterprises
       is:
       - hasParameters
       responses:
@@ -2216,6 +2300,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Completes the signup flow, by specifying the Completion token and Enterprise token. This request must not be called multiple times for a given Enterprise Token.
+      displayName: CompleteSignup Enterprises
       is:
       - hasParameters
       queryParameters:
@@ -2236,6 +2321,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Acknowledges notifications that were received from Enterprises.PullNotificationSet to prevent subsequent calls from returning the same notifications.
+      displayName: AcknowledgeNotificationSet Enterprises
       is:
       - hasParameters
       queryParameters:
@@ -2250,10 +2336,11 @@ types:
           - https://www.googleapis.com/auth/androidenterprise
       description: |-
         Pulls and returns a notification set for the enterprises associated with the service account authenticated for the request. The notification set may be empty if no notification are pending.
-        A notification set returned needs to be acknowledged within 20 seconds by calling Enterprises?.AcknowledgeNotificationSet, unless the notification set is empty.
+        A notification set returned needs to be acknowledged within 20 seconds by calling Enterprises​.AcknowledgeNotificationSet, unless the notification set is empty.
         Notifications that are not acknowledged within the 20 seconds will eventually be included again in the response to another PullNotificationSet request, and those that are never acknowledged will ultimately be deleted according to the Google Cloud Platform Pub/Sub system policy.
         Multiple requests might be performed concurrently to retrieve notifications, in which case the pending notifications (if any) will be split among each caller, if any are pending.
         If no notifications are present, an empty notification list is returned. Subsequent requests may return more notifications once they become available.
+      displayName: PullNotificationSet Enterprises
       is:
       - hasParameters
       queryParameters:
@@ -2278,6 +2365,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Generates a sign-up URL.
+      displayName: GenerateSignupUrl Enterprises
       is:
       - hasParameters
       queryParameters:
@@ -2297,6 +2385,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Enrolls an enterprise with the calling EMM.
+      displayName: Enroll Enterprises
       is:
       - hasParameters
       queryParameters:
@@ -2315,6 +2404,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/androidenterprise
     description: Establishes the binding between the EMM and an enterprise. This is now deprecated; use enroll instead.
+    displayName: Insert Enterprises
     is:
     - hasParameters
     queryParameters:
@@ -2333,6 +2423,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/androidenterprise
     description: Looks up an enterprise by domain name. This is only supported for enterprises created via the Google-initiated creation flow. Lookup of the id is not needed for enterprises created via the EMM-initiated flow since the EMM learns the enterprise ID in the callback specified in the Enterprises.generateSignupUrl call.
+    displayName: List Enterprises
     is:
     - hasParameters
     queryParameters:
@@ -2355,6 +2446,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Retrieves details of an Android app permission for display to an enterprise admin.
+      displayName: Get Permissions
       is:
       - hasParameters
       queryParameters:

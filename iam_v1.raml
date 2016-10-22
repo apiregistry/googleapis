@@ -348,6 +348,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Tests the specified permissions against the IAM access control policy for a ServiceAccount.
+      displayName: TestIamPermissions ServiceAccounts Projects
       is:
       - hasParameters
       body:
@@ -372,6 +373,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a ServiceAccount and returns it.
+        displayName: Create ServiceAccounts Projects
         is:
         - hasParameters
         body:
@@ -386,6 +388,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists ServiceAccounts for a project.
+        displayName: List ServiceAccounts Projects
         is:
         - hasParameters
         queryParameters:
@@ -406,6 +409,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Gets a ServiceAccount.
+      displayName: Get ServiceAccounts Projects
       is:
       - hasParameters
       responses:
@@ -419,6 +423,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
       description: 'Updates a ServiceAccount. Currently, only the following fields
         are updatable: `display_name` . The `etag` is mandatory.'
+      displayName: Update ServiceAccounts Projects
       is:
       - hasParameters
       body:
@@ -433,6 +438,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Deletes a ServiceAccount.
+      displayName: Delete ServiceAccounts Projects
       is:
       - hasParameters
       responses:
@@ -453,6 +459,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Returns the IAM access control policy for a ServiceAccount.
+      displayName: GetIamPolicy ServiceAccounts Projects
       is:
       - hasParameters
       responses:
@@ -473,6 +480,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Sets the IAM access control policy for a ServiceAccount.
+      displayName: SetIamPolicy ServiceAccounts Projects
       is:
       - hasParameters
       body:
@@ -496,6 +504,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Signs a blob using a service account's system-managed private key.
+      displayName: SignBlob ServiceAccounts Projects
       is:
       - hasParameters
       body:
@@ -511,6 +520,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Queries roles that can be granted on a particular resource. A role is grantable if it can be used as the role in a binding for a policy for that resource.
+      displayName: QueryGrantableRoles Roles
       is:
       - hasParameters
       body:

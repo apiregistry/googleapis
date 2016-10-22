@@ -695,6 +695,7 @@ types:
           description: The ID of the company to retrieve.
       get:
         description: Gets a company.
+        displayName: Get Companies
         is:
         - hasParameters
         queryParameters:
@@ -740,6 +741,7 @@ types:
               application/json: GetCompanyResponse
     get:
       description: Lists companies.
+      displayName: List Companies
       is:
       - hasParameters
       queryParameters:
@@ -854,6 +856,7 @@ types:
   /userStates:
     get:
       description: Lists states for current user.
+      displayName: List UserStates
       is:
       - hasParameters
       queryParameters:
@@ -885,6 +888,7 @@ types:
   /clientMessages:log:
     post:
       description: Logs a generic message from the client, such as `Failed to render component`, `Profile page is running slow`, `More than 500 users have accessed this result.`, etc.
+      displayName: Log ClientMessages
       is:
       - hasParameters
       body:
@@ -896,6 +900,7 @@ types:
   /userEvents:log:
     post:
       description: Logs a user event.
+      displayName: Log UserEvents
       is:
       - hasParameters
       body:

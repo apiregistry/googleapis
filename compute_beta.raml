@@ -1055,8 +1055,7 @@ types:
           \ with family/family-name:\n\nglobal/images/family/my-private-family"
       status?:
         type: string
-        description: '[Output Only] The status of disk creation. Applicable statuses
-          includes: CREATING, FAILED, READY, RESTORING.'
+        description: '[Output Only] The status of disk creation.'
         enum:
         - CREATING
         - FAILED
@@ -1463,6 +1462,7 @@ types:
         enum:
         - AH
         - ESP
+        - ICMP
         - SCTP
         - TCP
         - UDP
@@ -2036,8 +2036,8 @@ types:
         description: "URL of the The source disk used to create this image. This can\
           \ be a full or valid partial URL. You must provide either this property\
           \ or the rawDisk.source property but not both to create an image. For example,\
-          \ the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/disk/disk\
-          \ \n- projects/project/zones/zone/disk/disk \n- zones/zone/disks/disk"
+          \ the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk\
+          \ \n- projects/project/zones/zone/disks/disk \n- zones/zone/disks/disk"
       sourceDiskId?:
         type: string
         description: The ID value of the disk used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given disk name.
@@ -4315,7 +4315,7 @@ types:
     properties:
       interfaces?:
         type: array
-        description: Router interfaces. Each interface requires either one linked resource (e.g. linkedVpnTunnel) or IP address and IP address range (e.g. ipRange).
+        description: Router interfaces. Each interface requires either one linked resource (e.g. linkedVpnTunnel), or IP address and IP address range (e.g. ipRange), or both.
         items: RouterInterface
       kind?:
         type: string
@@ -6213,6 +6213,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
+          displayName: Patch HealthChecks
           is:
           - hasParameters
           body:
@@ -6229,6 +6230,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
+          displayName: Get HealthChecks
           is:
           - hasParameters
           responses:
@@ -6242,6 +6244,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HealthCheck resource in the specified project using the data included in the request.
+          displayName: Update HealthChecks
           is:
           - hasParameters
           body:
@@ -6257,6 +6260,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified HealthCheck resource.
+          displayName: Delete HealthChecks
           is:
           - hasParameters
           responses:
@@ -6278,6 +6282,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions HealthChecks
             is:
             - hasParameters
             body:
@@ -6293,6 +6298,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a HealthCheck resource in the specified project using the data included in the request.
+        displayName: Insert HealthChecks
         is:
         - hasParameters
         body:
@@ -6309,6 +6315,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of HealthCheck resources available to the specified project.
+        displayName: List HealthChecks
         is:
         - hasParameters
         queryParameters:
@@ -6360,6 +6367,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified firewall rule with the data included in the request. This method supports patch semantics.
+          displayName: Patch Firewalls
           is:
           - hasParameters
           body:
@@ -6376,6 +6384,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified firewall.
+          displayName: Get Firewalls
           is:
           - hasParameters
           responses:
@@ -6389,6 +6398,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified firewall rule with the data included in the request.
+          displayName: Update Firewalls
           is:
           - hasParameters
           body:
@@ -6404,6 +6414,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified firewall.
+          displayName: Delete Firewalls
           is:
           - hasParameters
           responses:
@@ -6425,6 +6436,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Firewalls
             is:
             - hasParameters
             body:
@@ -6440,6 +6452,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a firewall rule in the specified project using the data included in the request.
+        displayName: Insert Firewalls
         is:
         - hasParameters
         body:
@@ -6456,6 +6469,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of firewall rules available to the specified project.
+        displayName: List Firewalls
         is:
         - hasParameters
         queryParameters:
@@ -6509,6 +6523,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions TargetHttpsProxies
             is:
             - hasParameters
             body:
@@ -6531,6 +6546,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified TargetHttpsProxy resource. Get a list of available target HTTPS proxies by making a list() request.
+          displayName: Get TargetHttpsProxies
           is:
           - hasParameters
           responses:
@@ -6544,6 +6560,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified TargetHttpsProxy resource.
+          displayName: Delete TargetHttpsProxies
           is:
           - hasParameters
           responses:
@@ -6557,6 +6574,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a TargetHttpsProxy resource in the specified project using the data included in the request.
+        displayName: Insert TargetHttpsProxies
         is:
         - hasParameters
         body:
@@ -6573,6 +6591,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of TargetHttpsProxy resources available to the specified project.
+        displayName: List TargetHttpsProxies
         is:
         - hasParameters
         queryParameters:
@@ -6626,6 +6645,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Networks
             is:
             - hasParameters
             body:
@@ -6648,6 +6668,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Switches the network mode from auto subnet mode to custom subnet mode.
+            displayName: SwitchToCustomMode Networks
             is:
             - hasParameters
             responses:
@@ -6662,6 +6683,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified network. Get a list of available networks by making a list() request.
+          displayName: Get Networks
           is:
           - hasParameters
           responses:
@@ -6675,6 +6697,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified network.
+          displayName: Delete Networks
           is:
           - hasParameters
           responses:
@@ -6688,6 +6711,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a network in the specified project using the data included in the request.
+        displayName: Insert Networks
         is:
         - hasParameters
         body:
@@ -6704,6 +6728,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of networks available to the specified project.
+        displayName: List Networks
         is:
         - hasParameters
         queryParameters:
@@ -6757,6 +6782,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Routes
             is:
             - hasParameters
             body:
@@ -6779,6 +6805,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified Route resource. Get a list of available routes by making a list() request.
+          displayName: Get Routes
           is:
           - hasParameters
           responses:
@@ -6792,6 +6819,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified Route resource.
+          displayName: Delete Routes
           is:
           - hasParameters
           responses:
@@ -6805,6 +6833,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a Route resource in the specified project using the data included in the request.
+        displayName: Insert Routes
         is:
         - hasParameters
         body:
@@ -6821,6 +6850,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of Route resources available to the specified project.
+        displayName: List Routes
         is:
         - hasParameters
         queryParameters:
@@ -6874,6 +6904,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Gets the most recent health check results for this BackendService.
+            displayName: GetHealth BackendServices
             is:
             - hasParameters
             body:
@@ -6889,6 +6920,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+          displayName: Patch BackendServices
           is:
           - hasParameters
           body:
@@ -6905,6 +6937,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
+          displayName: Get BackendServices
           is:
           - hasParameters
           responses:
@@ -6918,6 +6951,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+          displayName: Update BackendServices
           is:
           - hasParameters
           body:
@@ -6933,6 +6967,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified BackendService resource.
+          displayName: Delete BackendServices
           is:
           - hasParameters
           responses:
@@ -6954,6 +6989,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions BackendServices
             is:
             - hasParameters
             body:
@@ -6969,6 +7005,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a BackendService resource in the specified project using the data included in the request. There are several restrictions and guidelines to keep in mind when creating a backend service. Read  Restrictions and Guidelines for more information.
+        displayName: Insert BackendServices
         is:
         - hasParameters
         body:
@@ -6985,6 +7022,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of BackendService resources available to the specified project.
+        displayName: List BackendServices
         is:
         - hasParameters
         queryParameters:
@@ -7037,6 +7075,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes SslCertificates for TargetSslProxy.
+            displayName: SetSslCertificates TargetSslProxies
             is:
             - hasParameters
             body:
@@ -7053,6 +7092,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes the BackendService for TargetSslProxy.
+            displayName: SetBackendService TargetSslProxies
             is:
             - hasParameters
             body:
@@ -7069,6 +7109,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes the ProxyHeaderType for TargetSslProxy.
+            displayName: SetProxyHeader TargetSslProxies
             is:
             - hasParameters
             body:
@@ -7085,6 +7126,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified TargetSslProxy resource. Get a list of available target SSL proxies by making a list() request.
+          displayName: Get TargetSslProxies
           is:
           - hasParameters
           responses:
@@ -7098,6 +7140,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified TargetSslProxy resource.
+          displayName: Delete TargetSslProxies
           is:
           - hasParameters
           responses:
@@ -7119,6 +7162,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions TargetSslProxies
             is:
             - hasParameters
             body:
@@ -7134,6 +7178,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a TargetSslProxy resource in the specified project using the data included in the request.
+        displayName: Insert TargetSslProxies
         is:
         - hasParameters
         body:
@@ -7150,6 +7195,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of TargetSslProxy resources available to the specified project.
+        displayName: List TargetSslProxies
         is:
         - hasParameters
         queryParameters:
@@ -7203,6 +7249,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions TargetHttpProxies
             is:
             - hasParameters
             body:
@@ -7225,6 +7272,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified TargetHttpProxy resource. Get a list of available target HTTP proxies by making a list() request.
+          displayName: Get TargetHttpProxies
           is:
           - hasParameters
           responses:
@@ -7238,6 +7286,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified TargetHttpProxy resource.
+          displayName: Delete TargetHttpProxies
           is:
           - hasParameters
           responses:
@@ -7251,6 +7300,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a TargetHttpProxy resource in the specified project using the data included in the request.
+        displayName: Insert TargetHttpProxies
         is:
         - hasParameters
         body:
@@ -7267,6 +7317,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of TargetHttpProxy resources available to the specified project.
+        displayName: List TargetHttpProxies
         is:
         - hasParameters
         queryParameters:
@@ -7319,6 +7370,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
+          displayName: Get GlobalOperations
           is:
           - hasParameters
           responses:
@@ -7332,6 +7384,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified Operations resource.
+          displayName: Delete GlobalOperations
           is:
           - hasParameters
       get:
@@ -7342,6 +7395,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of Operation resources contained within the specified project.
+        displayName: List GlobalOperations
         is:
         - hasParameters
         queryParameters:
@@ -7395,6 +7449,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions GlobalAddresses
             is:
             - hasParameters
             body:
@@ -7417,6 +7472,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified address resource. Get a list of available addresses by making a list() request.
+          displayName: Get GlobalAddresses
           is:
           - hasParameters
           responses:
@@ -7430,6 +7486,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified address resource.
+          displayName: Delete GlobalAddresses
           is:
           - hasParameters
           responses:
@@ -7443,6 +7500,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates an address resource in the specified project using the data included in the request.
+        displayName: Insert GlobalAddresses
         is:
         - hasParameters
         body:
@@ -7459,6 +7517,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of global addresses.
+        displayName: List GlobalAddresses
         is:
         - hasParameters
         queryParameters:
@@ -7512,6 +7571,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the latest image that is part of an image family and is not deprecated.
+            displayName: GetFromFamily Images
             is:
             - hasParameters
             responses:
@@ -7535,6 +7595,7 @@ types:
               Sets the deprecation status of an image.
 
               If an empty request body is given, clears the deprecation status instead.
+            displayName: Deprecate Images
             is:
             - hasParameters
             body:
@@ -7551,6 +7612,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified image. Get a list of available images by making a list() request.
+          displayName: Get Images
           is:
           - hasParameters
           responses:
@@ -7564,6 +7626,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified image.
+          displayName: Delete Images
           is:
           - hasParameters
           responses:
@@ -7585,6 +7648,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Images
             is:
             - hasParameters
             body:
@@ -7601,6 +7665,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Sets the labels on an image. To learn more about labels, read the Labeling or Tagging Resources documentation.
+            displayName: SetLabels Images
             is:
             - hasParameters
             body:
@@ -7619,6 +7684,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Creates an image in the specified project using the data included in the request.
+        displayName: Insert Images
         is:
         - hasParameters
         body:
@@ -7635,6 +7701,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.
+        displayName: List Images
         is:
         - hasParameters
         queryParameters:
@@ -7688,6 +7755,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions SslCertificates
             is:
             - hasParameters
             body:
@@ -7710,6 +7778,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified SslCertificate resource. Get a list of available SSL certificates by making a list() request.
+          displayName: Get SslCertificates
           is:
           - hasParameters
           responses:
@@ -7723,6 +7792,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified SslCertificate resource.
+          displayName: Delete SslCertificates
           is:
           - hasParameters
           responses:
@@ -7736,6 +7806,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a SslCertificate resource in the specified project using the data included in the request.
+        displayName: Insert SslCertificates
         is:
         - hasParameters
         body:
@@ -7752,6 +7823,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of SslCertificate resources available to the specified project.
+        displayName: List SslCertificates
         is:
         - hasParameters
         queryParameters:
@@ -7803,6 +7875,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpsHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
+          displayName: Patch HttpsHealthChecks
           is:
           - hasParameters
           body:
@@ -7819,6 +7892,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
+          displayName: Get HttpsHealthChecks
           is:
           - hasParameters
           responses:
@@ -7832,6 +7906,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpsHealthCheck resource in the specified project using the data included in the request.
+          displayName: Update HttpsHealthChecks
           is:
           - hasParameters
           body:
@@ -7847,6 +7922,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified HttpsHealthCheck resource.
+          displayName: Delete HttpsHealthChecks
           is:
           - hasParameters
           responses:
@@ -7868,6 +7944,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions HttpsHealthChecks
             is:
             - hasParameters
             body:
@@ -7883,6 +7960,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a HttpsHealthCheck resource in the specified project using the data included in the request.
+        displayName: Insert HttpsHealthChecks
         is:
         - hasParameters
         body:
@@ -7899,6 +7977,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of HttpsHealthCheck resources available to the specified project.
+        displayName: List HttpsHealthChecks
         is:
         - hasParameters
         queryParameters:
@@ -7952,6 +8031,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Snapshots
             is:
             - hasParameters
             body:
@@ -7968,6 +8048,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Sets the labels on a snapshot. To learn more about labels, read the Labeling or Tagging Resources documentation.
+            displayName: SetLabels Snapshots
             is:
             - hasParameters
             body:
@@ -7990,6 +8071,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified Snapshot resource. Get a list of available snapshots by making a list() request.
+          displayName: Get Snapshots
           is:
           - hasParameters
           responses:
@@ -8006,6 +8088,7 @@ types:
             Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot.
 
             For more information, see Deleting snaphots.
+          displayName: Delete Snapshots
           is:
           - hasParameters
           responses:
@@ -8020,6 +8103,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of Snapshot resources contained within the specified project.
+        displayName: List Snapshots
         is:
         - hasParameters
         queryParameters:
@@ -8072,6 +8156,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.
+            displayName: InvalidateCache UrlMaps
             is:
             - hasParameters
             body:
@@ -8088,6 +8173,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Runs static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.
+            displayName: Validate UrlMaps
             is:
             - hasParameters
             body:
@@ -8103,6 +8189,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
+          displayName: Patch UrlMaps
           is:
           - hasParameters
           body:
@@ -8119,6 +8206,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
+          displayName: Get UrlMaps
           is:
           - hasParameters
           responses:
@@ -8132,6 +8220,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified UrlMap resource with the data included in the request.
+          displayName: Update UrlMaps
           is:
           - hasParameters
           body:
@@ -8147,6 +8236,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified UrlMap resource.
+          displayName: Delete UrlMaps
           is:
           - hasParameters
           responses:
@@ -8168,6 +8258,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions UrlMaps
             is:
             - hasParameters
             body:
@@ -8183,6 +8274,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a UrlMap resource in the specified project using the data included in the request.
+        displayName: Insert UrlMaps
         is:
         - hasParameters
         body:
@@ -8199,6 +8291,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of UrlMap resources available to the specified project.
+        displayName: List UrlMaps
         is:
         - hasParameters
         queryParameters:
@@ -8251,6 +8344,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified License resource. Get a list of available licenses by making a list() request.
+          displayName: Get Licenses
           is:
           - hasParameters
           responses:
@@ -8273,6 +8367,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions GlobalForwardingRules
             is:
             - hasParameters
             body:
@@ -8295,6 +8390,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes target URL for forwarding rule. The new target should be of the same type as the old target.
+            displayName: SetTarget GlobalForwardingRules
             is:
             - hasParameters
             body:
@@ -8311,6 +8407,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified ForwardingRule resource. Get a list of available forwarding rules by making a list() request.
+          displayName: Get GlobalForwardingRules
           is:
           - hasParameters
           responses:
@@ -8324,6 +8421,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified ForwardingRule resource.
+          displayName: Delete GlobalForwardingRules
           is:
           - hasParameters
           responses:
@@ -8337,6 +8435,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a ForwardingRule resource in the specified project and region using the data included in the request.
+        displayName: Insert GlobalForwardingRules
         is:
         - hasParameters
         body:
@@ -8353,6 +8452,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of ForwardingRule resources available to the specified project.
+        displayName: List GlobalForwardingRules
         is:
         - hasParameters
         queryParameters:
@@ -8406,6 +8506,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions InstanceTemplates
             is:
             - hasParameters
             body:
@@ -8428,6 +8529,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified instance template. Get a list of available instance templates by making a list() request.
+          displayName: Get InstanceTemplates
           is:
           - hasParameters
           responses:
@@ -8441,6 +8543,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified instance template. If you delete an instance template that is being referenced from another instance group, the instance group will not be able to create or recreate virtual machine instances. Deleting an instance template is permanent and cannot be undone.
+          displayName: Delete InstanceTemplates
           is:
           - hasParameters
           responses:
@@ -8454,6 +8557,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates an instance template in the specified project using the data that is included in the request. If you are creating a new template to update an existing instance group, your new instance template must use the same network or, if applicable, the same subnetwork as the original template.
+        displayName: Insert InstanceTemplates
         is:
         - hasParameters
         body:
@@ -8470,6 +8574,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of instance templates that are contained within the specified project and zone.
+        displayName: List InstanceTemplates
         is:
         - hasParameters
         queryParameters:
@@ -8521,6 +8626,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
+          displayName: Patch HttpHealthChecks
           is:
           - hasParameters
           body:
@@ -8537,6 +8643,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
+          displayName: Get HttpHealthChecks
           is:
           - hasParameters
           responses:
@@ -8550,6 +8657,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpHealthCheck resource in the specified project using the data included in the request.
+          displayName: Update HttpHealthChecks
           is:
           - hasParameters
           body:
@@ -8565,6 +8673,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified HttpHealthCheck resource.
+          displayName: Delete HttpHealthChecks
           is:
           - hasParameters
           responses:
@@ -8586,6 +8695,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions HttpHealthChecks
             is:
             - hasParameters
             body:
@@ -8601,6 +8711,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a HttpHealthCheck resource in the specified project using the data included in the request.
+        displayName: Insert HttpHealthChecks
         is:
         - hasParameters
         body:
@@ -8617,6 +8728,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of HttpHealthCheck resources available to the specified project.
+        displayName: List HttpHealthChecks
         is:
         - hasParameters
         queryParameters:
@@ -8677,6 +8789,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions Addresses
               is:
               - hasParameters
               body:
@@ -8699,6 +8812,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified address resource.
+            displayName: Get Addresses
             is:
             - hasParameters
             responses:
@@ -8712,6 +8826,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified address resource.
+            displayName: Delete Addresses
             is:
             - hasParameters
             responses:
@@ -8725,6 +8840,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an address resource in the specified project using the data included in the request.
+          displayName: Insert Addresses
           is:
           - hasParameters
           body:
@@ -8741,6 +8857,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of addresses contained within the specified region.
+          displayName: List Addresses
           is:
           - hasParameters
           queryParameters:
@@ -8794,6 +8911,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions Subnetworks
               is:
               - hasParameters
               body:
@@ -8816,6 +8934,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Expands the IP CIDR range of the subnetwork to a specified value.
+              displayName: ExpandIpCidrRange Subnetworks
               is:
               - hasParameters
               body:
@@ -8832,6 +8951,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified subnetwork. Get a list of available subnetworks list() request.
+            displayName: Get Subnetworks
             is:
             - hasParameters
             responses:
@@ -8845,6 +8965,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified subnetwork.
+            displayName: Delete Subnetworks
             is:
             - hasParameters
             responses:
@@ -8858,6 +8979,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a subnetwork in the specified project using the data included in the request.
+          displayName: Insert Subnetworks
           is:
           - hasParameters
           body:
@@ -8874,6 +8996,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of subnetworks available to the specified project.
+          displayName: List Subnetworks
           is:
           - hasParameters
           queryParameters:
@@ -8927,6 +9050,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions TargetVpnGateways
               is:
               - hasParameters
               body:
@@ -8949,6 +9073,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified target VPN gateway. Get a list of available target VPN gateways by making a list() request.
+            displayName: Get TargetVpnGateways
             is:
             - hasParameters
             responses:
@@ -8962,6 +9087,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified target VPN gateway.
+            displayName: Delete TargetVpnGateways
             is:
             - hasParameters
             responses:
@@ -8975,6 +9101,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a target VPN gateway in the specified project and region using the data included in the request.
+          displayName: Insert TargetVpnGateways
           is:
           - hasParameters
           body:
@@ -8991,6 +9118,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of target VPN gateways available to the specified project and region.
+          displayName: List TargetVpnGateways
           is:
           - hasParameters
           queryParameters:
@@ -9044,6 +9172,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions ForwardingRules
               is:
               - hasParameters
               body:
@@ -9066,6 +9195,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes target URL for forwarding rule. The new target should be of the same type as the old target.
+              displayName: SetTarget ForwardingRules
               is:
               - hasParameters
               body:
@@ -9082,6 +9212,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified ForwardingRule resource.
+            displayName: Get ForwardingRules
             is:
             - hasParameters
             responses:
@@ -9095,6 +9226,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified ForwardingRule resource.
+            displayName: Delete ForwardingRules
             is:
             - hasParameters
             responses:
@@ -9108,6 +9240,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a ForwardingRule resource in the specified project and region using the data included in the request.
+          displayName: Insert ForwardingRules
           is:
           - hasParameters
           body:
@@ -9124,6 +9257,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of ForwardingRule resources available to the specified project and region.
+          displayName: List ForwardingRules
           is:
           - hasParameters
           queryParameters:
@@ -9176,6 +9310,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Retrieves the specified region-specific Operations resource.
+            displayName: Get RegionOperations
             is:
             - hasParameters
             responses:
@@ -9189,6 +9324,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified region-specific Operations resource.
+            displayName: Delete RegionOperations
             is:
             - hasParameters
         get:
@@ -9199,6 +9335,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of Operation resources contained within the specified region.
+          displayName: List RegionOperations
           is:
           - hasParameters
           queryParameters:
@@ -9252,6 +9389,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
+              displayName: Preview Routers
               is:
               - hasParameters
               body:
@@ -9269,6 +9407,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Retrieves runtime information of the specified router.
+              displayName: GetRouterStatus Routers
               is:
               - hasParameters
               responses:
@@ -9282,6 +9421,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
+            displayName: Patch Routers
             is:
             - hasParameters
             body:
@@ -9298,6 +9438,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified Router resource. Get a list of available routers by making a list() request.
+            displayName: Get Routers
             is:
             - hasParameters
             responses:
@@ -9311,6 +9452,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates the specified Router resource with the data included in the request.
+            displayName: Update Routers
             is:
             - hasParameters
             body:
@@ -9326,6 +9468,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified Router resource.
+            displayName: Delete Routers
             is:
             - hasParameters
             responses:
@@ -9347,6 +9490,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions Routers
               is:
               - hasParameters
               body:
@@ -9362,6 +9506,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a Router resource in the specified project and region using the data included in the request.
+          displayName: Insert Routers
           is:
           - hasParameters
           body:
@@ -9378,6 +9523,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of Router resources available to the specified project.
+          displayName: List Routers
           is:
           - hasParameters
           queryParameters:
@@ -9431,6 +9577,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions RegionAutoscalers
               is:
               - hasParameters
               body:
@@ -9453,6 +9600,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified autoscaler.
+            displayName: Get RegionAutoscalers
             is:
             - hasParameters
             responses:
@@ -9466,6 +9614,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified autoscaler.
+            displayName: Delete RegionAutoscalers
             is:
             - hasParameters
             responses:
@@ -9479,6 +9628,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
+          displayName: Patch RegionAutoscalers
           is:
           - hasParameters
           queryParameters:
@@ -9499,6 +9649,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an autoscaler in the specified project using the data included in the request.
+          displayName: Insert RegionAutoscalers
           is:
           - hasParameters
           body:
@@ -9514,6 +9665,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates an autoscaler in the specified project using the data included in the request.
+          displayName: Update RegionAutoscalers
           is:
           - hasParameters
           queryParameters:
@@ -9535,6 +9687,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of autoscalers contained within the specified region.
+          displayName: List RegionAutoscalers
           is:
           - hasParameters
           queryParameters:
@@ -9587,6 +9740,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes health check URL from a target pool.
+              displayName: RemoveHealthCheck TargetPools
               is:
               - hasParameters
               body:
@@ -9603,6 +9757,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds an instance to a target pool.
+              displayName: AddInstance TargetPools
               is:
               - hasParameters
               body:
@@ -9619,6 +9774,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes instance URL from a target pool.
+              displayName: RemoveInstance TargetPools
               is:
               - hasParameters
               body:
@@ -9635,6 +9791,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes a backup target pool's configurations.
+              displayName: SetBackup TargetPools
               is:
               - hasParameters
               queryParameters:
@@ -9656,6 +9813,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds health check URLs to a target pool.
+              displayName: AddHealthCheck TargetPools
               is:
               - hasParameters
               body:
@@ -9673,6 +9831,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Gets the most recent health check results for each IP for the instance that is referenced by the given target pool.
+              displayName: GetHealth TargetPools
               is:
               - hasParameters
               body:
@@ -9689,6 +9848,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified target pool. Get a list of available target pools by making a list() request.
+            displayName: Get TargetPools
             is:
             - hasParameters
             responses:
@@ -9702,6 +9862,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified target pool.
+            displayName: Delete TargetPools
             is:
             - hasParameters
             responses:
@@ -9723,6 +9884,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions TargetPools
               is:
               - hasParameters
               body:
@@ -9738,6 +9900,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a target pool in the specified project and region using the data included in the request.
+          displayName: Insert TargetPools
           is:
           - hasParameters
           body:
@@ -9754,6 +9917,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of target pools available to the specified project and region.
+          displayName: List TargetPools
           is:
           - hasParameters
           queryParameters:
@@ -9807,6 +9971,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions RegionInstanceGroups
               is:
               - hasParameters
               body:
@@ -9829,6 +9994,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Lists the instances in the specified instance group and displays information about the named ports. Depending on the specified options, this method can list all instances or only the instances that are running.
+              displayName: ListInstances RegionInstanceGroups
               is:
               - hasParameters
               queryParameters:
@@ -9876,6 +10042,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the named ports for the specified regional instance group.
+              displayName: SetNamedPorts RegionInstanceGroups
               is:
               - hasParameters
               body:
@@ -9892,6 +10059,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified instance group resource.
+            displayName: Get RegionInstanceGroups
             is:
             - hasParameters
             responses:
@@ -9906,6 +10074,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of instance group resources contained within the specified region.
+          displayName: List RegionInstanceGroups
           is:
           - hasParameters
           queryParameters:
@@ -9959,6 +10128,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Gets the most recent health check results for this regional BackendService.
+              displayName: GetHealth RegionBackendServices
               is:
               - hasParameters
               body:
@@ -9974,6 +10144,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+            displayName: Patch RegionBackendServices
             is:
             - hasParameters
             body:
@@ -9990,6 +10161,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified regional BackendService resource.
+            displayName: Get RegionBackendServices
             is:
             - hasParameters
             responses:
@@ -10003,6 +10175,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates the specified regional BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+            displayName: Update RegionBackendServices
             is:
             - hasParameters
             body:
@@ -10018,6 +10191,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified regional BackendService resource.
+            displayName: Delete RegionBackendServices
             is:
             - hasParameters
             responses:
@@ -10039,6 +10213,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions RegionBackendServices
               is:
               - hasParameters
               body:
@@ -10054,6 +10229,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a regional BackendService resource in the specified project using the data included in the request. There are several restrictions and guidelines to keep in mind when creating a regional backend service. Read  Restrictions and Guidelines for more information.
+          displayName: Insert RegionBackendServices
           is:
           - hasParameters
           body:
@@ -10070,6 +10246,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of regional BackendService resources available to the specified project in the given region.
+          displayName: List RegionBackendServices
           is:
           - hasParameters
           queryParameters:
@@ -10123,6 +10300,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions VpnTunnels
               is:
               - hasParameters
               body:
@@ -10145,6 +10323,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified VpnTunnel resource. Get a list of available VPN tunnels by making a list() request.
+            displayName: Get VpnTunnels
             is:
             - hasParameters
             responses:
@@ -10158,6 +10337,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified VpnTunnel resource.
+            displayName: Delete VpnTunnels
             is:
             - hasParameters
             responses:
@@ -10171,6 +10351,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a VpnTunnel resource in the specified project and region using the data included in the request.
+          displayName: Insert VpnTunnels
           is:
           - hasParameters
           body:
@@ -10187,6 +10368,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of VpnTunnel resources contained in the specified project and region.
+          displayName: List VpnTunnels
           is:
           - hasParameters
           queryParameters:
@@ -10238,6 +10420,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
+              displayName: SetTargetPools RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10254,6 +10437,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+              displayName: DeleteInstances RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10271,6 +10455,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances.
+              displayName: ListManagedInstances RegionInstanceGroupManagers
               is:
               - hasParameters
               responses:
@@ -10285,6 +10470,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+              displayName: AbandonInstances RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10301,6 +10487,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the instance template to use when creating new instances or recreating instances in this group. Existing instances are not affected.
+              displayName: SetInstanceTemplate RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10317,6 +10504,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the autohealing policy for the instances in this managed instance group.
+              displayName: SetAutoHealingPolicies RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10333,6 +10521,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+              displayName: RecreateInstances RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10349,6 +10538,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes the intended size for the managed instance group. If you increase the size, the group schedules actions to create new instances using the current instance template. If you decrease the size, the group schedules delete actions on one or more instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
+              displayName: Resize RegionInstanceGroupManagers
               is:
               - hasParameters
               queryParameters:
@@ -10368,6 +10558,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+            displayName: Update RegionInstanceGroupManagers
             is:
             - hasParameters
             body:
@@ -10383,6 +10574,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified managed instance group and all of the instances in that group.
+            displayName: Delete RegionInstanceGroupManagers
             is:
             - hasParameters
             responses:
@@ -10396,6 +10588,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+            displayName: Patch RegionInstanceGroupManagers
             is:
             - hasParameters
             body:
@@ -10412,6 +10605,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns all of the details about the specified managed instance group.
+            displayName: Get RegionInstanceGroupManagers
             is:
             - hasParameters
             responses:
@@ -10433,6 +10627,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions RegionInstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -10448,6 +10643,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+          displayName: Insert RegionInstanceGroupManagers
           is:
           - hasParameters
           body:
@@ -10464,6 +10660,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of managed instance groups that are contained within the specified region.
+          displayName: List RegionInstanceGroupManagers
           is:
           - hasParameters
           queryParameters:
@@ -10509,6 +10706,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Returns the specified Region resource. Get a list of available regions by making a list() request.
+        displayName: Get Regions
         is:
         - hasParameters
         responses:
@@ -10523,6 +10721,7 @@ types:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/compute.readonly
       description: Retrieves the list of region resources available to the specified project.
+      displayName: List Regions
       is:
       - hasParameters
       queryParameters:
@@ -10570,6 +10769,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of addresses.
+        displayName: AggregatedList Addresses
         is:
         - hasParameters
         queryParameters:
@@ -10616,6 +10816,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of persistent disks.
+        displayName: AggregatedList Disks
         is:
         - hasParameters
         queryParameters:
@@ -10662,6 +10863,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves aggregated list of instances.
+        displayName: AggregatedList Instances
         is:
         - hasParameters
         queryParameters:
@@ -10708,6 +10910,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of machine types.
+        displayName: AggregatedList MachineTypes
         is:
         - hasParameters
         queryParameters:
@@ -10754,6 +10957,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of subnetworks.
+        displayName: AggregatedList Subnetworks
         is:
         - hasParameters
         queryParameters:
@@ -10800,6 +11004,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of managed instance groups and groups them by zone.
+        displayName: AggregatedList InstanceGroupManagers
         is:
         - hasParameters
         queryParameters:
@@ -10846,6 +11051,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of all BackendService resources, regional and global, available to the specified project.
+        displayName: AggregatedList BackendServices
         is:
         - hasParameters
         queryParameters:
@@ -10892,6 +11098,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of target VPN gateways.
+        displayName: AggregatedList TargetVpnGateways
         is:
         - hasParameters
         queryParameters:
@@ -10938,6 +11145,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of target instances.
+        displayName: AggregatedList TargetInstances
         is:
         - hasParameters
         queryParameters:
@@ -10984,6 +11192,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of forwarding rules.
+        displayName: AggregatedList ForwardingRules
         is:
         - hasParameters
         queryParameters:
@@ -11030,6 +11239,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of routers.
+        displayName: AggregatedList Routers
         is:
         - hasParameters
         queryParameters:
@@ -11076,6 +11286,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of all operations.
+        displayName: AggregatedList GlobalOperations
         is:
         - hasParameters
         queryParameters:
@@ -11122,6 +11333,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of target pools.
+        displayName: AggregatedList TargetPools
         is:
         - hasParameters
         queryParameters:
@@ -11168,6 +11380,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of disk types.
+        displayName: AggregatedList DiskTypes
         is:
         - hasParameters
         queryParameters:
@@ -11214,6 +11427,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of instance groups and sorts them by zone.
+        displayName: AggregatedList InstanceGroups
         is:
         - hasParameters
         queryParameters:
@@ -11260,6 +11474,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of VPN tunnels.
+        displayName: AggregatedList VpnTunnels
         is:
         - hasParameters
         queryParameters:
@@ -11306,6 +11521,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of autoscalers.
+        displayName: AggregatedList Autoscalers
         is:
         - hasParameters
         queryParameters:
@@ -11351,6 +11567,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/compute
       description: Sets metadata common to all instances within the specified project using the data included in the request.
+      displayName: SetCommonInstanceMetadata Projects
       is:
       - hasParameters
       body:
@@ -11367,6 +11584,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/compute
       description: Moves a persistent disk from one zone to another.
+      displayName: MoveDisk Projects
       is:
       - hasParameters
       body:
@@ -11383,6 +11601,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/compute
       description: Moves an instance and its attached persistent disks from one zone to another.
+      displayName: MoveInstance Projects
       is:
       - hasParameters
       body:
@@ -11402,6 +11621,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Enables the usage export feature and sets the usage export bucket where reports are stored. If you provide an empty request body using this method, the usage export feature will be disabled.
+      displayName: SetUsageExportBucket Projects
       is:
       - hasParameters
       body:
@@ -11433,6 +11653,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions Disks
               is:
               - hasParameters
               body:
@@ -11449,6 +11670,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the labels on a disk. To learn more about labels, read the Labeling or Tagging Resources documentation.
+              displayName: SetLabels Disks
               is:
               - hasParameters
               body:
@@ -11471,8 +11693,12 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Creates a snapshot of a specified persistent disk.
+              displayName: CreateSnapshot Disks
               is:
               - hasParameters
+              queryParameters:
+                guestFlush?:
+                  type: boolean
               body:
                 application/json: Snapshot
               responses:
@@ -11487,6 +11713,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Resizes the specified persistent disk.
+              displayName: Resize Disks
               is:
               - hasParameters
               body:
@@ -11503,6 +11730,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
+            displayName: Get Disks
             is:
             - hasParameters
             responses:
@@ -11516,6 +11744,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
+            displayName: Delete Disks
             is:
             - hasParameters
             responses:
@@ -11529,6 +11758,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a persistent disk in the specified project using the data in the request. You can create a disk with a sourceImage, a sourceSnapshot, or create an empty 500 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.
+          displayName: Insert Disks
           is:
           - hasParameters
           queryParameters:
@@ -11549,6 +11779,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of persistent disks contained within the specified zone.
+          displayName: List Disks
           is:
           - hasParameters
           queryParameters:
@@ -11601,6 +11832,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes the machine type for a stopped instance to the machine type specified in the request.
+              displayName: SetMachineType Instances
               is:
               - hasParameters
               body:
@@ -11617,6 +11849,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Attaches a Disk resource to an instance.
+              displayName: AttachDisk Instances
               is:
               - hasParameters
               body:
@@ -11633,6 +11866,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Deletes an access config from an instance's network interface.
+              displayName: DeleteAccessConfig Instances
               is:
               - hasParameters
               queryParameters:
@@ -11655,6 +11889,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns the specified instance's serial port output.
+              displayName: GetSerialPortOutput Instances
               is:
               - hasParameters
               queryParameters:
@@ -11681,6 +11916,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets an instance's scheduling options.
+              displayName: SetScheduling Instances
               is:
               - hasParameters
               body:
@@ -11697,6 +11933,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.
+              displayName: Start Instances
               is:
               - hasParameters
               responses:
@@ -11711,6 +11948,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets tags for the specified instance to the data included in the request.
+              displayName: SetTags Instances
               is:
               - hasParameters
               body:
@@ -11727,6 +11965,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.
+              displayName: StartWithEncryptionKey Instances
               is:
               - hasParameters
               body:
@@ -11743,6 +11982,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Detaches a disk from an instance.
+              displayName: DetachDisk Instances
               is:
               - hasParameters
               queryParameters:
@@ -11761,6 +12001,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets metadata for the specified instance to the data included in the request.
+              displayName: SetMetadata Instances
               is:
               - hasParameters
               body:
@@ -11777,6 +12018,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time. Stopped instances do not incur per-minute, virtual machine usage charges while they are stopped, but any resources that the virtual machine is using, such as persistent disks and static IP addresses, will continue to be charged until they are deleted. For more information, see Stopping an instance.
+              displayName: Stop Instances
               is:
               - hasParameters
               responses:
@@ -11791,6 +12033,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds an access config to an instance's network interface.
+              displayName: AddAccessConfig Instances
               is:
               - hasParameters
               queryParameters:
@@ -11811,6 +12054,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Performs a hard reset on the instance.
+              displayName: Reset Instances
               is:
               - hasParameters
               responses:
@@ -11825,6 +12069,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets labels on an instance. To learn more about labels, read the Labeling or Tagging Resources documentation.
+              displayName: SetLabels Instances
               is:
               - hasParameters
               body:
@@ -11841,6 +12086,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the auto-delete flag for a disk attached to an instance.
+              displayName: SetDiskAutoDelete Instances
               is:
               - hasParameters
               queryParameters:
@@ -11862,6 +12108,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
+            displayName: Delete Instances
             is:
             - hasParameters
             responses:
@@ -11876,6 +12123,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
+            displayName: Get Instances
             is:
             - hasParameters
             responses:
@@ -11897,6 +12145,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions Instances
               is:
               - hasParameters
               body:
@@ -11912,6 +12161,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an instance resource in the specified project using the data included in the request.
+          displayName: Insert Instances
           is:
           - hasParameters
           body:
@@ -11928,6 +12178,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of instances contained within the specified zone.
+          displayName: List Instances
           is:
           - hasParameters
           queryParameters:
@@ -11980,6 +12231,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified machine type. Get a list of available machine types by making a list() request.
+            displayName: Get MachineTypes
             is:
             - hasParameters
             responses:
@@ -11994,6 +12246,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of machine types available to the specified project.
+          displayName: List MachineTypes
           is:
           - hasParameters
           queryParameters:
@@ -12045,6 +12298,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the target pools to which all instances in this managed instance group are assigned. The target pools automatically apply to all of the instances in the managed instance group. This operation is marked DONE when you make the request even if the instances have not yet been added to their target pools. The change might take some time to apply to all of the instances in the group depending on the size of the group.
+              displayName: SetTargetPools InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12064,6 +12318,7 @@ types:
                 Resizes the managed instance group with advanced configuration options like disabling creation retries. This is an extended version of the resize method.
 
                 If you increase the size of the instance group, the group creates new instances using the current instance template. If you decrease the size, the group deletes instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating, creatingWithoutRetries, or deleting actions with the get or listmanagedinstances method.
+              displayName: ResizeAdvanced InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12080,6 +12335,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
+              displayName: DeleteInstances InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12097,6 +12353,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action.
+              displayName: ListManagedInstances InstanceGroupManagers
               is:
               - hasParameters
               responses:
@@ -12111,6 +12368,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+              displayName: AbandonInstances InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12127,6 +12385,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you recreate them.
+              displayName: SetInstanceTemplate InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12143,6 +12402,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the autohealing policies.
+              displayName: SetAutoHealingPolicies InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12159,6 +12419,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+              displayName: RecreateInstances InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12175,6 +12436,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Resizes the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
+              displayName: Resize InstanceGroupManagers
               is:
               - hasParameters
               queryParameters:
@@ -12193,6 +12455,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified managed instance group and all of the instances in that group. Note that the instance group must not belong to a backend service. Read  Deleting an instance group for more information.
+            displayName: Delete InstanceGroupManagers
             is:
             - hasParameters
             responses:
@@ -12207,6 +12470,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns all of the details about the specified managed instance group. Get a list of available managed instance groups by making a list() request.
+            displayName: Get InstanceGroupManagers
             is:
             - hasParameters
             responses:
@@ -12228,6 +12492,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions InstanceGroupManagers
               is:
               - hasParameters
               body:
@@ -12243,6 +12508,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+          displayName: Insert InstanceGroupManagers
           is:
           - hasParameters
           body:
@@ -12259,6 +12525,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of managed instance groups that are contained within the specified project and zone.
+          displayName: List InstanceGroupManagers
           is:
           - hasParameters
           queryParameters:
@@ -12312,6 +12579,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions TargetInstances
               is:
               - hasParameters
               body:
@@ -12334,6 +12602,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified TargetInstance resource. Get a list of available target instances by making a list() request.
+            displayName: Get TargetInstances
             is:
             - hasParameters
             responses:
@@ -12347,6 +12616,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified TargetInstance resource.
+            displayName: Delete TargetInstances
             is:
             - hasParameters
             responses:
@@ -12360,6 +12630,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a TargetInstance resource in the specified project and zone using the data included in the request.
+          displayName: Insert TargetInstances
           is:
           - hasParameters
           body:
@@ -12376,6 +12647,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of TargetInstance resources available to the specified project and zone.
+          displayName: List TargetInstances
           is:
           - hasParameters
           queryParameters:
@@ -12428,6 +12700,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Retrieves the specified zone-specific Operations resource.
+            displayName: Get ZoneOperations
             is:
             - hasParameters
             responses:
@@ -12441,6 +12714,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified zone-specific Operations resource.
+            displayName: Delete ZoneOperations
             is:
             - hasParameters
         get:
@@ -12451,6 +12725,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of Operation resources contained within the specified zone.
+          displayName: List ZoneOperations
           is:
           - hasParameters
           queryParameters:
@@ -12503,6 +12778,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified disk type. Get a list of available disk types by making a list() request.
+            displayName: Get DiskTypes
             is:
             - hasParameters
             responses:
@@ -12517,6 +12793,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of disk types available to the specified project.
+          displayName: List DiskTypes
           is:
           - hasParameters
           queryParameters:
@@ -12568,6 +12845,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes one or more instances from the specified instance group, but does not delete those instances.
+              displayName: RemoveInstances InstanceGroups
               is:
               - hasParameters
               body:
@@ -12585,6 +12863,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Lists the instances in the specified instance group.
+              displayName: ListInstances InstanceGroups
               is:
               - hasParameters
               queryParameters:
@@ -12632,6 +12911,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the named ports for the specified instance group.
+              displayName: SetNamedPorts InstanceGroups
               is:
               - hasParameters
               body:
@@ -12648,6 +12928,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds a list of instances to the specified instance group. All of the instances in the instance group must be in the same network/subnetwork. Read  Adding instances for more information.
+              displayName: AddInstances InstanceGroups
               is:
               - hasParameters
               body:
@@ -12664,6 +12945,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
+            displayName: Get InstanceGroups
             is:
             - hasParameters
             responses:
@@ -12677,6 +12959,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified instance group. The instances in the group are not deleted. Note that instance group must not belong to a backend service. Read  Deleting an instance group for more information.
+            displayName: Delete InstanceGroups
             is:
             - hasParameters
             responses:
@@ -12698,6 +12981,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions InstanceGroups
               is:
               - hasParameters
               body:
@@ -12713,6 +12997,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an instance group in the specified project using the parameters that are included in the request.
+          displayName: Insert InstanceGroups
           is:
           - hasParameters
           body:
@@ -12729,6 +13014,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of instance groups that are located in the specified project and zone.
+          displayName: List InstanceGroups
           is:
           - hasParameters
           queryParameters:
@@ -12782,6 +13068,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns permissions that a caller has on the specified resource.
+              displayName: TestIamPermissions Autoscalers
               is:
               - hasParameters
               body:
@@ -12804,6 +13091,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
+            displayName: Get Autoscalers
             is:
             - hasParameters
             responses:
@@ -12817,6 +13105,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified autoscaler.
+            displayName: Delete Autoscalers
             is:
             - hasParameters
             responses:
@@ -12830,6 +13119,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
+          displayName: Patch Autoscalers
           is:
           - hasParameters
           queryParameters:
@@ -12850,6 +13140,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an autoscaler in the specified project using the data included in the request.
+          displayName: Insert Autoscalers
           is:
           - hasParameters
           body:
@@ -12865,6 +13156,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates an autoscaler in the specified project using the data included in the request.
+          displayName: Update Autoscalers
           is:
           - hasParameters
           queryParameters:
@@ -12886,6 +13178,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of autoscalers contained within the specified zone.
+          displayName: List Autoscalers
           is:
           - hasParameters
           queryParameters:
@@ -12931,6 +13224,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Returns the specified Zone resource. Get a list of available zones by making a list() request.
+        displayName: Get Zones
         is:
         - hasParameters
         responses:
@@ -12945,6 +13239,7 @@ types:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/compute.readonly
       description: Retrieves the list of Zone resources available to the specified project.
+      displayName: List Zones
       is:
       - hasParameters
       queryParameters:
@@ -12997,6 +13292,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Replaces SslCertificates for TargetHttpsProxy.
+          displayName: SetSslCertificates TargetHttpsProxies
           is:
           - hasParameters
           body:
@@ -13013,6 +13309,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Changes the URL map for TargetHttpsProxy.
+          displayName: SetUrlMap TargetHttpsProxies
           is:
           - hasParameters
           body:
@@ -13036,6 +13333,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Changes the URL map for TargetHttpProxy.
+          displayName: SetUrlMap TargetHttpProxies
           is:
           - hasParameters
           body:
@@ -13052,6 +13350,7 @@ types:
         - https://www.googleapis.com/auth/compute
         - https://www.googleapis.com/auth/compute.readonly
     description: Returns the specified Project resource.
+    displayName: Get Projects
     is:
     - hasParameters
     responses:

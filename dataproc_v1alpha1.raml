@@ -433,7 +433,7 @@ types:
       driverOutputUri?:
         type: string
         description: '[Output-only] A URI pointing to the location of the mixed stdout/stderr
-          of the job''s driver program—for example, gs://sysbucket123/foo-cluster/jobid-123/driver/output.'
+          of the job''s driver programâ€”for example, gs://sysbucket123/foo-cluster/jobid-123/driver/output.'
       driverOutputResourceUri?:
         type: string
         description: '[Output-only] A URI pointing to the location of the stdout of
@@ -965,6 +965,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Starts a job cancellation request. To access the job resource after cancellation, call regions/{region}/jobs:list or regions/{region}/jobs:get.
+                displayName: Cancel Jobs Regions Projects
                 is:
                 - hasParameters
                 body:
@@ -984,6 +985,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the resource representation for a job in a project.
+                displayName: Get Jobs Regions Projects
                 is:
                 - hasParameters
                 responses:
@@ -996,6 +998,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Deletes the job from the project. If the job is active, the delete fails, and the response returns `FAILED_PRECONDITION`.
+                displayName: Delete Jobs Regions Projects
                 is:
                 - hasParameters
                 responses:
@@ -1009,6 +1012,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Submits a job to a cluster.
+              displayName: Submit Jobs Regions Projects
               is:
               - hasParameters
               body:
@@ -1029,6 +1033,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Request to update a cluster in a project.
+                displayName: Patch Clusters Regions Projects
                 is:
                 - hasParameters
                 queryParameters:
@@ -1054,6 +1059,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Request to get the resource representation for a cluster in a project.
+                displayName: Get Clusters Regions Projects
                 is:
                 - hasParameters
                 responses:
@@ -1066,6 +1072,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Request to delete a cluster in a project.
+                displayName: Delete Clusters Regions Projects
                 is:
                 - hasParameters
                 responses:
@@ -1078,6 +1085,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Request to create a cluster in a project.
+              displayName: Create Clusters Regions Projects
               is:
               - hasParameters
               body:
@@ -1092,6 +1100,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Request a list of all regions/{region}/clusters in a project.
+              displayName: List Clusters Regions Projects
               is:
               - hasParameters
               queryParameters:
@@ -1118,6 +1127,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients may use [Operations.GetOperation] or other methods to check whether the cancellation succeeded or the operation completed despite cancellation.
+      displayName: Cancel Operations
       is:
       - hasParameters
       body:
@@ -1138,6 +1148,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      displayName: List Operations
       is:
       - hasParameters
       - hasParameters
@@ -1170,6 +1181,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Deletes a long-running operation. It indicates the client is no longer interested in the operation result. It does not cancel the operation.
+      displayName: Delete Operations
       is:
       - hasParameters
       responses:

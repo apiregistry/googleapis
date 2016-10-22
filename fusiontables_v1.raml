@@ -521,6 +521,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing template. This method supports patch semantics.
+          displayName: Patch Template
           is:
           - hasParameters
           body:
@@ -536,6 +537,7 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Retrieves a specific template by its id
+          displayName: Get Template
           is:
           - hasParameters
           responses:
@@ -548,6 +550,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing template
+          displayName: Update Template
           is:
           - hasParameters
           body:
@@ -562,6 +565,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes a template
+          displayName: Delete Template
           is:
           - hasParameters
       post:
@@ -570,6 +574,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Creates a new template for the table.
+        displayName: Insert Template
         is:
         - hasParameters
         body:
@@ -585,6 +590,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of templates.
+        displayName: List Template
         is:
         - hasParameters
         queryParameters:
@@ -612,6 +618,7 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Retrieves a specific task by its id.
+          displayName: Get Task
           is:
           - hasParameters
           responses:
@@ -624,6 +631,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes the task, unless already started.
+          displayName: Delete Task
           is:
           - hasParameters
       get:
@@ -633,6 +641,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of tasks.
+        displayName: List Task
         is:
         - hasParameters
         queryParameters:
@@ -662,6 +671,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates the name or type of an existing column. This method supports patch semantics.
+          displayName: Patch Column
           is:
           - hasParameters
           body:
@@ -677,6 +687,7 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Retrieves a specific column by its id.
+          displayName: Get Column
           is:
           - hasParameters
           responses:
@@ -689,6 +700,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates the name or type of an existing column.
+          displayName: Update Column
           is:
           - hasParameters
           body:
@@ -703,6 +715,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes the column.
+          displayName: Delete Column
           is:
           - hasParameters
       post:
@@ -711,6 +724,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Adds a new column to the table.
+        displayName: Insert Column
         is:
         - hasParameters
         body:
@@ -726,6 +740,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of columns.
+        displayName: List Column
         is:
         - hasParameters
         queryParameters:
@@ -754,6 +769,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing style. This method supports patch semantics.
+          displayName: Patch Style
           is:
           - hasParameters
           body:
@@ -769,6 +785,7 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Gets a specific style.
+          displayName: Get Style
           is:
           - hasParameters
           responses:
@@ -781,6 +798,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing style.
+          displayName: Update Style
           is:
           - hasParameters
           body:
@@ -795,6 +813,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes a style.
+          displayName: Delete Style
           is:
           - hasParameters
       post:
@@ -803,6 +822,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Adds a new style for the table.
+        displayName: Insert Style
         is:
         - hasParameters
         body:
@@ -818,6 +838,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of styles.
+        displayName: List Style
         is:
         - hasParameters
         queryParameters:
@@ -840,6 +861,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Import more rows into a table.
+        displayName: ImportRows Table
         is:
         - hasParameters
         queryParameters:
@@ -872,6 +894,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Copies a table.
+        displayName: Copy Table
         is:
         - hasParameters
         queryParameters:
@@ -888,6 +911,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated. This method supports patch semantics.
+      displayName: Patch Table
       is:
       - hasParameters
       queryParameters:
@@ -907,6 +931,7 @@ types:
           - https://www.googleapis.com/auth/fusiontables
           - https://www.googleapis.com/auth/fusiontables.readonly
       description: Retrieves a specific table by its id.
+      displayName: Get Table
       is:
       - hasParameters
       responses:
@@ -919,6 +944,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated.
+      displayName: Update Table
       is:
       - hasParameters
       queryParameters:
@@ -937,6 +963,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Deletes a table.
+      displayName: Delete Table
       is:
       - hasParameters
   /import:
@@ -946,6 +973,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Import a new table.
+      displayName: ImportTable Table
       is:
       - hasParameters
       queryParameters:
@@ -968,6 +996,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/fusiontables
     description: Creates a new table.
+    displayName: Insert Table
     is:
     - hasParameters
     body:
@@ -983,6 +1012,7 @@ types:
         - https://www.googleapis.com/auth/fusiontables
         - https://www.googleapis.com/auth/fusiontables.readonly
     description: Retrieves a list of tables a user owns.
+    displayName: List Table
     is:
     - hasParameters
     queryParameters:
@@ -1006,6 +1036,7 @@ types:
         - https://www.googleapis.com/auth/fusiontables
         - https://www.googleapis.com/auth/fusiontables.readonly
     description: Executes an SQL SELECT/INSERT/UPDATE/DELETE/SHOW/DESCRIBE/CREATE statement.
+    displayName: Sql Query
     is:
     - hasParameters
     queryParameters:
@@ -1029,6 +1060,7 @@ types:
         - https://www.googleapis.com/auth/fusiontables
         - https://www.googleapis.com/auth/fusiontables.readonly
     description: Executes an SQL SELECT/SHOW/DESCRIBE statement.
+    displayName: SqlGet Query
     is:
     - hasParameters
     queryParameters:

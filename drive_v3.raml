@@ -713,6 +713,9 @@ types:
         default: drive#revisionList
         description: 'Identifies what kind of resource this is. Value: the fixed string
           "drive#revisionList".'
+      nextPageToken?:
+        type: string
+        description: The page token for the next page of revisions. This will be absent if the end of the revisions list has been reached.
       revisions?:
         type: array
         description: The full list of revisions.
@@ -779,6 +782,7 @@ types:
                   - https://www.googleapis.com/auth/drive.file
                   - https://www.googleapis.com/auth/drive.readonly
               description: Gets a reply by ID.
+              displayName: Get Replies
               is:
               - hasParameters
               queryParameters:
@@ -797,6 +801,7 @@ types:
                   - https://www.googleapis.com/auth/drive
                   - https://www.googleapis.com/auth/drive.file
               description: Updates a reply with patch semantics.
+              displayName: Update Replies
               is:
               - hasParameters
               body:
@@ -812,6 +817,7 @@ types:
                   - https://www.googleapis.com/auth/drive
                   - https://www.googleapis.com/auth/drive.file
               description: Deletes a reply.
+              displayName: Delete Replies
               is:
               - hasParameters
           post:
@@ -821,6 +827,7 @@ types:
                 - https://www.googleapis.com/auth/drive
                 - https://www.googleapis.com/auth/drive.file
             description: Creates a new reply to a comment.
+            displayName: Create Replies
             is:
             - hasParameters
             body:
@@ -837,6 +844,7 @@ types:
                 - https://www.googleapis.com/auth/drive.file
                 - https://www.googleapis.com/auth/drive.readonly
             description: Lists a comment's replies.
+            displayName: List Replies
             is:
             - hasParameters
             queryParameters:
@@ -866,6 +874,7 @@ types:
               - https://www.googleapis.com/auth/drive.file
               - https://www.googleapis.com/auth/drive.readonly
           description: Gets a comment by ID.
+          displayName: Get Comments
           is:
           - hasParameters
           queryParameters:
@@ -884,6 +893,7 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Updates a comment with patch semantics.
+          displayName: Update Comments
           is:
           - hasParameters
           body:
@@ -899,6 +909,7 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Deletes a comment.
+          displayName: Delete Comments
           is:
           - hasParameters
       post:
@@ -908,6 +919,7 @@ types:
             - https://www.googleapis.com/auth/drive
             - https://www.googleapis.com/auth/drive.file
         description: Creates a new comment on a file.
+        displayName: Create Comments
         is:
         - hasParameters
         body:
@@ -924,6 +936,7 @@ types:
             - https://www.googleapis.com/auth/drive.file
             - https://www.googleapis.com/auth/drive.readonly
         description: Lists a file's comments.
+        displayName: List Comments
         is:
         - hasParameters
         queryParameters:
@@ -965,6 +978,7 @@ types:
               - https://www.googleapis.com/auth/drive.photos.readonly
               - https://www.googleapis.com/auth/drive.readonly
           description: Gets a permission by ID.
+          displayName: Get Permissions
           is:
           - hasParameters
           responses:
@@ -978,6 +992,7 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Updates a permission with patch semantics.
+          displayName: Update Permissions
           is:
           - hasParameters
           queryParameters:
@@ -1002,6 +1017,7 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Deletes a permission.
+          displayName: Delete Permissions
           is:
           - hasParameters
       post:
@@ -1011,6 +1027,7 @@ types:
             - https://www.googleapis.com/auth/drive
             - https://www.googleapis.com/auth/drive.file
         description: Creates a permission for a file.
+        displayName: Create Permissions
         is:
         - hasParameters
         queryParameters:
@@ -1041,6 +1058,7 @@ types:
             - https://www.googleapis.com/auth/drive.photos.readonly
             - https://www.googleapis.com/auth/drive.readonly
         description: Lists a file's permissions.
+        displayName: List Permissions
         is:
         - hasParameters
         responses:
@@ -1060,6 +1078,7 @@ types:
             - https://www.googleapis.com/auth/drive.photos.readonly
             - https://www.googleapis.com/auth/drive.readonly
         description: Subscribes to changes to a file
+        displayName: Watch Files
         is:
         - hasParameters
         queryParameters:
@@ -1083,6 +1102,7 @@ types:
             - https://www.googleapis.com/auth/drive.file
             - https://www.googleapis.com/auth/drive.photos.readonly
         description: Creates a copy of a file and applies any requested updates with patch semantics.
+        displayName: Copy Files
         is:
         - hasParameters
         queryParameters:
@@ -1112,6 +1132,7 @@ types:
             - https://www.googleapis.com/auth/drive.file
             - https://www.googleapis.com/auth/drive.readonly
         description: Exports a Google Doc to the requested MIME type and returns the exported content.
+        displayName: Export Files
         is:
         - hasParameters
         queryParameters:
@@ -1136,6 +1157,7 @@ types:
               - https://www.googleapis.com/auth/drive.photos.readonly
               - https://www.googleapis.com/auth/drive.readonly
           description: Gets a revision's metadata or content by ID.
+          displayName: Get Revisions
           is:
           - hasParameters
           queryParameters:
@@ -1155,6 +1177,7 @@ types:
               - https://www.googleapis.com/auth/drive.appdata
               - https://www.googleapis.com/auth/drive.file
           description: Updates a revision with patch semantics.
+          displayName: Update Revisions
           is:
           - hasParameters
           body:
@@ -1171,6 +1194,7 @@ types:
               - https://www.googleapis.com/auth/drive.appdata
               - https://www.googleapis.com/auth/drive.file
           description: Permanently deletes a revision. This method is only applicable to files with binary content in Drive.
+          displayName: Delete Revisions
           is:
           - hasParameters
       get:
@@ -1185,8 +1209,18 @@ types:
             - https://www.googleapis.com/auth/drive.photos.readonly
             - https://www.googleapis.com/auth/drive.readonly
         description: Lists a file's revisions.
+        displayName: List Revisions
         is:
         - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: The maximum number of revisions to return per page.
+            minimum: 1
+          pageToken?:
+            type: string
+            description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
         responses:
           200:
             body:
@@ -1203,6 +1237,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Gets a file's metadata or content by ID.
+      displayName: Get Files
       is:
       - hasParameters
       queryParameters:
@@ -1224,6 +1259,7 @@ types:
           - https://www.googleapis.com/auth/drive.metadata
           - https://www.googleapis.com/auth/drive.scripts
       description: Updates a file's metadata and/or content with patch semantics.
+      displayName: Update Files
       is:
       - hasParameters
       queryParameters:
@@ -1258,6 +1294,7 @@ types:
           - https://www.googleapis.com/auth/drive.appdata
           - https://www.googleapis.com/auth/drive.file
       description: Permanently deletes a file owned by the user without moving it to the trash. If the target is a folder, all descendants owned by the user are also deleted.
+      displayName: Delete Files
       is:
       - hasParameters
   /trash:
@@ -1267,6 +1304,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/drive
       description: Permanently deletes all of the user's trashed files.
+      displayName: EmptyTrash Files
       is:
       - hasParameters
   /generateIds:
@@ -1278,6 +1316,7 @@ types:
           - https://www.googleapis.com/auth/drive.appdata
           - https://www.googleapis.com/auth/drive.file
       description: Generates a set of file IDs which can be provided in create requests.
+      displayName: GenerateIds Files
       is:
       - hasParameters
       queryParameters:
@@ -1304,6 +1343,7 @@ types:
         - https://www.googleapis.com/auth/drive.appdata
         - https://www.googleapis.com/auth/drive.file
     description: Creates a new file.
+    displayName: Create Files
     is:
     - hasParameters
     queryParameters:
@@ -1340,6 +1380,7 @@ types:
         - https://www.googleapis.com/auth/drive.photos.readonly
         - https://www.googleapis.com/auth/drive.readonly
     description: Lists or searches files.
+    displayName: List Files
     is:
     - hasParameters
     queryParameters:
@@ -1394,6 +1435,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Stop watching resources through this channel
+      displayName: Stop Channels
       is:
       - hasParameters
       body:
@@ -1411,6 +1453,7 @@ types:
         - https://www.googleapis.com/auth/drive.photos.readonly
         - https://www.googleapis.com/auth/drive.readonly
     description: Gets information about the user, the user's Drive, and system capabilities.
+    displayName: Get About
     is:
     - hasParameters
     responses:
@@ -1431,6 +1474,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Gets the starting pageToken for listing future changes.
+      displayName: GetStartPageToken Changes
       is:
       - hasParameters
       responses:
@@ -1450,6 +1494,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Subscribes to changes for a user.
+      displayName: Watch Changes
       is:
       - hasParameters
       queryParameters:
@@ -1493,6 +1538,7 @@ types:
         - https://www.googleapis.com/auth/drive.photos.readonly
         - https://www.googleapis.com/auth/drive.readonly
     description: Lists changes for a user.
+    displayName: List Changes
     is:
     - hasParameters
     queryParameters:

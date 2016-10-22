@@ -1095,6 +1095,7 @@ types:
           - https://www.googleapis.com/auth/plus.login
           - https://www.googleapis.com/auth/plus.stream.read
       description: Get a comment.
+      displayName: Get Comments
       is:
       - hasParameters
       responses:
@@ -1115,6 +1116,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.stream.write
         description: Create a new comment in reply to an activity.
+        displayName: Insert Comments
         is:
         - hasParameters
         body:
@@ -1130,6 +1132,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.stream.read
         description: List all of the comments for an activity.
+        displayName: List Comments
         is:
         - hasParameters
         queryParameters:
@@ -1171,6 +1174,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.stream.read
           description: List all of the people in the specified collection for a particular activity.
+          displayName: ListByActivity People
           is:
           - hasParameters
           queryParameters:
@@ -1196,6 +1200,7 @@ types:
           - https://www.googleapis.com/auth/plus.me
           - https://www.googleapis.com/auth/plus.stream.read
       description: Get an activity.
+      displayName: Get Activities
       is:
       - hasParameters
       responses:
@@ -1224,6 +1229,7 @@ types:
               - https://www.googleapis.com/auth/plus.me
               - https://www.googleapis.com/auth/plus.stream.read
           description: List all of the activities in the specified collection for a particular user.
+          displayName: List Activities
           is:
           - hasParameters
           queryParameters:
@@ -1249,6 +1255,7 @@ types:
             - https://www.googleapis.com/auth/plus.me
             - https://www.googleapis.com/auth/plus.stream.write
         description: Create a new activity for the authenticated user.
+        displayName: Insert Activities
         is:
         - hasParameters
         queryParameters:
@@ -1270,6 +1277,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: List all of the audiences to which a user can share.
+        displayName: List Audiences
         is:
         - hasParameters
         queryParameters:
@@ -1296,6 +1304,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: Create a new circle for the authenticated user.
+        displayName: Insert Circles
         is:
         - hasParameters
         body:
@@ -1312,6 +1321,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: List all of the circles for a user.
+        displayName: List Circles
         is:
         - hasParameters
         queryParameters:
@@ -1344,6 +1354,7 @@ types:
               - https://www.googleapis.com/auth/plus.me
               - https://www.googleapis.com/auth/plus.media.upload
           description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
+          displayName: Insert Media
           is:
           - hasParameters
           body:
@@ -1368,6 +1379,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the people in the specified collection.
+          displayName: List People
           is:
           - hasParameters
           queryParameters:
@@ -1401,6 +1413,7 @@ types:
           - https://www.googleapis.com/auth/userinfo.email
           - https://www.googleapis.com/auth/userinfo.profile
       description: Get a person's profile.
+      displayName: Get People
       is:
       - hasParameters
       responses:
@@ -1421,6 +1434,7 @@ types:
             - https://www.googleapis.com/auth/plus.circles.write
             - https://www.googleapis.com/auth/plus.login
         description: Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.
+        displayName: AddPeople Circles
         is:
         - hasParameters
         queryParameters:
@@ -1441,6 +1455,7 @@ types:
             - https://www.googleapis.com/auth/plus.circles.write
             - https://www.googleapis.com/auth/plus.login
         description: Remove a person from a circle.
+        displayName: RemovePeople Circles
         is:
         - hasParameters
         queryParameters:
@@ -1457,6 +1472,7 @@ types:
             - https://www.googleapis.com/auth/plus.circles.read
             - https://www.googleapis.com/auth/plus.login
         description: List all of the people who are members of a circle.
+        displayName: ListByCircle People
         is:
         - hasParameters
         queryParameters:
@@ -1481,6 +1497,7 @@ types:
           - https://www.googleapis.com/auth/plus.circles.write
           - https://www.googleapis.com/auth/plus.login
       description: Update a circle's description. This method supports patch semantics.
+      displayName: Patch Circles
       is:
       - hasParameters
       body:
@@ -1496,6 +1513,7 @@ types:
           - https://www.googleapis.com/auth/plus.circles.read
           - https://www.googleapis.com/auth/plus.login
       description: Get a circle.
+      displayName: Get Circles
       is:
       - hasParameters
       responses:
@@ -1509,6 +1527,7 @@ types:
           - https://www.googleapis.com/auth/plus.circles.write
           - https://www.googleapis.com/auth/plus.login
       description: Update a circle's description.
+      displayName: Update Circles
       is:
       - hasParameters
       body:
@@ -1524,5 +1543,6 @@ types:
           - https://www.googleapis.com/auth/plus.circles.write
           - https://www.googleapis.com/auth/plus.login
       description: Delete a circle.
+      displayName: Remove Circles
       is:
       - hasParameters

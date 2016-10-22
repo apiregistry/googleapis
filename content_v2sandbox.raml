@@ -1020,6 +1020,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels all line items in an order.
+          displayName: Cancel Orders
           is:
           - hasParameters
           body:
@@ -1035,6 +1036,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks line item(s) as shipped.
+          displayName: Shiplineitems Orders
           is:
           - hasParameters
           body:
@@ -1050,6 +1052,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels a line item.
+          displayName: Cancellineitem Orders
           is:
           - hasParameters
           body:
@@ -1065,6 +1068,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Returns a line item.
+          displayName: Returnlineitem Orders
           is:
           - hasParameters
           body:
@@ -1080,6 +1084,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks an order as acknowledged.
+          displayName: Acknowledge Orders
           is:
           - hasParameters
           body:
@@ -1095,6 +1100,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates the merchant order ID for a given order.
+          displayName: Updatemerchantorderid Orders
           is:
           - hasParameters
           body:
@@ -1110,6 +1116,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Refund a portion of the order, up to the full amount paid.
+          displayName: Refund Orders
           is:
           - hasParameters
           body:
@@ -1125,6 +1132,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates a shipment's status, carrier, and/or tracking ID.
+          displayName: Updateshipment Orders
           is:
           - hasParameters
           body:
@@ -1139,6 +1147,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order from your Merchant Center account.
+        displayName: Get Orders
         is:
         - hasParameters
         responses:
@@ -1151,6 +1160,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the orders in your Merchant Center account.
+      displayName: List Orders
       is:
       - hasParameters
       queryParameters:
@@ -1212,6 +1222,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
+          displayName: Advancetestorder Orders
           is:
           - hasParameters
           responses:
@@ -1224,6 +1235,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Sandbox only. Creates a test order.
+      displayName: Createtestorder Orders
       is:
       - hasParameters
       body:
@@ -1244,6 +1256,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order using merchant order id.
+        displayName: Getbymerchantorderid Orders
         is:
         - hasParameters
         responses:
@@ -1267,6 +1280,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
+        displayName: Gettestordertemplate Orders
         is:
         - hasParameters
         responses:
@@ -1281,6 +1295,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves or modifies multiple orders in a single request.
+      displayName: Custombatch Orders
       is:
       - hasParameters
       body:

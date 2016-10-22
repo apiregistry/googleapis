@@ -108,7 +108,7 @@ types:
         description: The voice phone number for the candidate's campaign office.
       name?:
         type: string
-        description: The candidate's name.
+        description: The candidate's name. If this is a joint ticket it will indicate the name of the candidate at the top of a ticket followed by a / and that name of candidate at the bottom of the ticket. e.g. "Mitt Romney / Paul Ryan"
       orderOnBallot?:
         type: integer
         format: int64
@@ -221,6 +221,21 @@ types:
         type: string
         description: A statement in opposition to the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'.
     description: Information about a contest that appears on a voter's ballot.
+  ContextParams:
+    type: object
+    properties:
+      clientProfile?:
+        type: string
+  DivisionRepresentativeInfoRequest:
+    type: object
+    properties:
+      contextParams?: ContextParams
+    description: A request to look up representative information for a single division.
+  DivisionSearchRequest:
+    type: object
+    properties:
+      contextParams?: ContextParams
+    description: A search request for political geographies.
   DivisionSearchResponse:
     type: object
     properties:
@@ -282,6 +297,10 @@ types:
         type: string
         description: The title of the election official.
     description: Information about individual election officials.
+  ElectionsQueryRequest:
+    type: object
+    properties:
+      contextParams?: ContextParams
   ElectionsQueryResponse:
     type: object
     properties:
@@ -446,6 +465,11 @@ types:
       divisions?:
         type: object
         description: Political geographic divisions that contain the requested address.
+  RepresentativeInfoRequest:
+    type: object
+    properties:
+      contextParams?: ContextParams
+    description: A request for political geography and representative information for an address.
   RepresentativeInfoResponse:
     type: object
     properties:
@@ -502,6 +526,11 @@ types:
         type: boolean
         description: Whether this data comes from an official government source.
     description: Contains information about the data source for the element containing it.
+  VoterInfoRequest:
+    type: object
+    properties:
+      contextParams?: ContextParams
+    description: A request for information about a voter.
   VoterInfoResponse:
     type: object
     properties:
@@ -550,6 +579,7 @@ types:
         description: The Open Civic Data division identifier of the division to look up.
     get:
       description: Looks up representative information for a single geographic division.
+      displayName: RepresentativeInfoByDivision Representatives
       is:
       - hasParameters
       queryParameters:
@@ -584,12 +614,15 @@ types:
         recursive?:
           type: boolean
           description: If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC's wards and ANCs.
+      body:
+        application/json: DivisionRepresentativeInfoRequest
       responses:
         200:
           body:
             application/json: RepresentativeInfoData
   get:
     description: Looks up political geography and representative information for a single address.
+    displayName: RepresentativeInfoByAddress Representatives
     is:
     - hasParameters
     queryParameters:
@@ -628,6 +661,8 @@ types:
         - special
         - subLocality1
         - subLocality2
+    body:
+      application/json: RepresentativeInfoRequest
     responses:
       200:
         body:
@@ -635,8 +670,11 @@ types:
 /elections:
   get:
     description: List of available elections to query.
+    displayName: ElectionQuery Elections
     is:
     - hasParameters
+    body:
+      application/json: ElectionsQueryRequest
     responses:
       200:
         body:
@@ -644,6 +682,7 @@ types:
 /voterinfo:
   get:
     description: Looks up information relevant to a voter based on the voter's registered address.
+    displayName: VoterInfoQuery Elections
     is:
     - hasParameters
     queryParameters:
@@ -663,6 +702,8 @@ types:
         type: boolean
         default: false
         description: If set to true, only data from official state sources will be returned.
+    body:
+      application/json: VoterInfoRequest
     responses:
       200:
         body:
@@ -670,12 +711,15 @@ types:
 /divisions:
   get:
     description: Searches for political divisions by their natural name or OCD ID.
+    displayName: Search Divisions
     is:
     - hasParameters
     queryParameters:
       query?:
         type: string
         description: The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
+    body:
+      application/json: DivisionSearchRequest
     responses:
       200:
         body:

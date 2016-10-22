@@ -337,6 +337,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Updates an ACL entry on the specified object. This method supports patch semantics.
+              displayName: Patch ObjectAccessControls
               is:
               - hasParameters
               body:
@@ -351,6 +352,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Returns the ACL entry for the specified entity on the specified object.
+              displayName: Get ObjectAccessControls
               is:
               - hasParameters
               responses:
@@ -363,6 +365,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Updates an ACL entry on the specified object.
+              displayName: Update ObjectAccessControls
               is:
               - hasParameters
               body:
@@ -377,6 +380,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Deletes the ACL entry for the specified entity on the specified object.
+              displayName: Delete ObjectAccessControls
               is:
               - hasParameters
           post:
@@ -385,6 +389,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/devstorage.full_control
             description: Creates a new ACL entry on the specified object.
+            displayName: Insert ObjectAccessControls
             is:
             - hasParameters
             body:
@@ -399,6 +404,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/devstorage.full_control
             description: Retrieves ACL entries on the specified object.
+            displayName: List ObjectAccessControls
             is:
             - hasParameters
             responses:
@@ -412,6 +418,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Updates a data blob's associated metadata. This method supports patch semantics.
+          displayName: Patch Objects
           is:
           - hasParameters
           queryParameters:
@@ -435,6 +442,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.read_only
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Retrieves objects or their associated metadata.
+          displayName: Get Objects
           is:
           - hasParameters
           queryParameters:
@@ -455,6 +463,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Updates a data blob's associated metadata.
+          displayName: Update Objects
           is:
           - hasParameters
           queryParameters:
@@ -477,6 +486,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Deletes data blobs and associated metadata.
+          displayName: Delete Objects
           is:
           - hasParameters
       post:
@@ -486,6 +496,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.full_control
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Stores new data blobs and associated metadata.
+        displayName: Insert Objects
         is:
         - hasParameters
         queryParameters:
@@ -512,6 +523,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Retrieves a list of objects matching the criteria.
+        displayName: List Objects
         is:
         - hasParameters
         queryParameters:
@@ -551,6 +563,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
+          displayName: Patch BucketAccessControls
           is:
           - hasParameters
           body:
@@ -565,6 +578,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Returns the ACL entry for the specified entity on the specified bucket.
+          displayName: Get BucketAccessControls
           is:
           - hasParameters
           responses:
@@ -577,6 +591,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an ACL entry on the specified bucket.
+          displayName: Update BucketAccessControls
           is:
           - hasParameters
           body:
@@ -591,6 +606,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Deletes the ACL entry for the specified entity on the specified bucket.
+          displayName: Delete BucketAccessControls
           is:
           - hasParameters
       post:
@@ -599,6 +615,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Creates a new ACL entry on the specified bucket.
+        displayName: Insert BucketAccessControls
         is:
         - hasParameters
         body:
@@ -613,6 +630,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Retrieves ACL entries on the specified bucket.
+        displayName: List BucketAccessControls
         is:
         - hasParameters
         responses:
@@ -626,6 +644,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Updates a bucket. This method supports patch semantics.
+      displayName: Patch Buckets
       is:
       - hasParameters
       queryParameters:
@@ -649,6 +668,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Returns metadata for the specified bucket.
+      displayName: Get Buckets
       is:
       - hasParameters
       queryParameters:
@@ -669,6 +689,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Updates a bucket.
+      displayName: Update Buckets
       is:
       - hasParameters
       queryParameters:
@@ -691,6 +712,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Deletes an empty bucket.
+      displayName: Delete Buckets
       is:
       - hasParameters
   post:
@@ -700,6 +722,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.full_control
         - https://www.googleapis.com/auth/devstorage.read_write
     description: Creates a new bucket.
+    displayName: Insert Buckets
     is:
     - hasParameters
     queryParameters:
@@ -723,6 +746,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.read_only
         - https://www.googleapis.com/auth/devstorage.read_write
     description: Retrieves a list of buckets for a given project.
+    displayName: List Buckets
     is:
     - hasParameters
     queryParameters:

@@ -159,18 +159,26 @@ types:
                       type: integer
                       format: int32
                       description: Age of an object (in days). This condition is satisfied when an object reaches the specified age.
+                    matchesStorageClass?:
+                      type: array
+                      description: Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.
+                      items:
+                        type: string
                   description: The condition(s) under which the action will be taken.
                 action?:
                   type: object
                   properties:
+                    storageClass?:
+                      type: string
+                      description: Target storage class. Required iff the type of the action is SetStorageClass.
                     type?:
                       type: string
-                      description: Type of the action. Currently, only Delete is supported.
+                      description: Type of the action. Currently, only Delete and SetStorageClass are supported.
                   description: The action to take.
         description: The bucket's lifecycle configuration. See lifecycle management for more information.
       storageClass?:
         type: string
-        description: The bucket's storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. For more information, see storage classes.
+        description: The bucket's default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.
       name?:
         type: string
         description: The name of the bucket.
@@ -588,6 +596,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Updates an ACL entry on the specified object. This method supports patch semantics.
+              displayName: Patch ObjectAccessControls
               is:
               - hasParameters
               queryParameters:
@@ -608,6 +617,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Returns the ACL entry for the specified entity on the specified object.
+              displayName: Get ObjectAccessControls
               is:
               - hasParameters
               queryParameters:
@@ -626,6 +636,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Updates an ACL entry on the specified object.
+              displayName: Update ObjectAccessControls
               is:
               - hasParameters
               queryParameters:
@@ -646,6 +657,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Permanently deletes the ACL entry for the specified entity on the specified object.
+              displayName: Delete ObjectAccessControls
               is:
               - hasParameters
               queryParameters:
@@ -660,6 +672,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/devstorage.full_control
             description: Creates a new ACL entry on the specified object.
+            displayName: Insert ObjectAccessControls
             is:
             - hasParameters
             queryParameters:
@@ -680,6 +693,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/devstorage.full_control
             description: Retrieves ACL entries on the specified object.
+            displayName: List ObjectAccessControls
             is:
             - hasParameters
             queryParameters:
@@ -698,6 +712,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an object's metadata. This method supports patch semantics.
+          displayName: Patch Objects
           is:
           - hasParameters
           queryParameters:
@@ -753,6 +768,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.read_only
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Retrieves an object or its metadata.
+          displayName: Get Objects
           is:
           - hasParameters
           queryParameters:
@@ -793,6 +809,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an object's metadata.
+          displayName: Update Objects
           is:
           - hasParameters
           queryParameters:
@@ -846,6 +863,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Deletes an object and its metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
+          displayName: Delete Objects
           is:
           - hasParameters
           queryParameters:
@@ -880,6 +898,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.read_only
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Watch for changes on all objects in a bucket.
+          displayName: WatchAll Objects
           is:
           - hasParameters
           queryParameters:
@@ -920,6 +939,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.full_control
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Stores a new object and metadata.
+        displayName: Insert Objects
         is:
         - hasParameters
         queryParameters:
@@ -977,6 +997,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Retrieves a list of objects matching the criteria.
+        displayName: List Objects
         is:
         - hasParameters
         queryParameters:
@@ -1020,6 +1041,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates a default object ACL entry on the specified bucket. This method supports patch semantics.
+          displayName: Patch DefaultObjectAccessControls
           is:
           - hasParameters
           body:
@@ -1035,6 +1057,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Returns the default object ACL entry for the specified entity on the specified bucket.
+          displayName: Get DefaultObjectAccessControls
           is:
           - hasParameters
           responses:
@@ -1048,6 +1071,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates a default object ACL entry on the specified bucket.
+          displayName: Update DefaultObjectAccessControls
           is:
           - hasParameters
           body:
@@ -1063,6 +1087,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Permanently deletes the default object ACL entry for the specified entity on the specified bucket.
+          displayName: Delete DefaultObjectAccessControls
           is:
           - hasParameters
       post:
@@ -1072,6 +1097,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Creates a new default object ACL entry on the specified bucket.
+        displayName: Insert DefaultObjectAccessControls
         is:
         - hasParameters
         body:
@@ -1087,6 +1113,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Retrieves default object ACL entries on the specified bucket.
+        displayName: List DefaultObjectAccessControls
         is:
         - hasParameters
         queryParameters:
@@ -1115,6 +1142,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
+          displayName: Patch BucketAccessControls
           is:
           - hasParameters
           body:
@@ -1130,6 +1158,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Returns the ACL entry for the specified entity on the specified bucket.
+          displayName: Get BucketAccessControls
           is:
           - hasParameters
           responses:
@@ -1143,6 +1172,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an ACL entry on the specified bucket.
+          displayName: Update BucketAccessControls
           is:
           - hasParameters
           body:
@@ -1158,6 +1188,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Permanently deletes the ACL entry for the specified entity on the specified bucket.
+          displayName: Delete BucketAccessControls
           is:
           - hasParameters
       post:
@@ -1167,6 +1198,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Creates a new ACL entry on the specified bucket.
+        displayName: Insert BucketAccessControls
         is:
         - hasParameters
         body:
@@ -1182,6 +1214,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Retrieves ACL entries on the specified bucket.
+        displayName: List BucketAccessControls
         is:
         - hasParameters
         responses:
@@ -1194,7 +1227,8 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/devstorage.full_control
-      description: Updates a bucket. This method supports patch semantics.
+      description: Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate. This method supports patch semantics.
+      displayName: Patch Buckets
       is:
       - hasParameters
       queryParameters:
@@ -1247,6 +1281,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Returns metadata for the specified bucket.
+      displayName: Get Buckets
       is:
       - hasParameters
       queryParameters:
@@ -1274,7 +1309,8 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/devstorage.full_control
-      description: Updates a bucket.
+      description: Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.
+      displayName: Update Buckets
       is:
       - hasParameters
       queryParameters:
@@ -1325,6 +1361,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Permanently deletes an empty bucket.
+      displayName: Delete Buckets
       is:
       - hasParameters
       queryParameters:
@@ -1356,6 +1393,7 @@ types:
                 - https://www.googleapis.com/auth/devstorage.full_control
                 - https://www.googleapis.com/auth/devstorage.read_write
             description: Concatenates a list of existing objects into a new object in the same bucket.
+            displayName: Compose Objects
             is:
             - hasParameters
             queryParameters:
@@ -1415,6 +1453,7 @@ types:
                         - https://www.googleapis.com/auth/devstorage.full_control
                         - https://www.googleapis.com/auth/devstorage.read_write
                     description: Copies a source object to a destination object. Optionally overrides metadata.
+                    displayName: Copy Objects
                     is:
                     - hasParameters
                     queryParameters:
@@ -1497,6 +1536,7 @@ types:
                         - https://www.googleapis.com/auth/devstorage.full_control
                         - https://www.googleapis.com/auth/devstorage.read_write
                     description: Rewrites a source object to a destination object. Optionally overrides metadata.
+                    displayName: Rewrite Objects
                     is:
                     - hasParameters
                     queryParameters:
@@ -1573,6 +1613,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.full_control
         - https://www.googleapis.com/auth/devstorage.read_write
     description: Creates a new bucket.
+    displayName: Insert Buckets
     is:
     - hasParameters
     queryParameters:
@@ -1620,6 +1661,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.read_only
         - https://www.googleapis.com/auth/devstorage.read_write
     description: Retrieves a list of buckets for a given project.
+    displayName: List Buckets
     is:
     - hasParameters
     queryParameters:
@@ -1659,6 +1701,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Stop watching resources through this channel
+      displayName: Stop Channels
       is:
       - hasParameters
       body:

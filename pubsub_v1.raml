@@ -324,6 +324,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Returns permissions that a caller has on the specified resource.
+      displayName: TestIamPermissions Topics Projects
       is:
       - hasParameters
       - hasParameters
@@ -349,6 +350,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      displayName: SetIamPolicy Topics Projects
       is:
       - hasParameters
       - hasParameters
@@ -374,6 +376,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+      displayName: GetIamPolicy Topics Projects
       is:
       - hasParameters
       - hasParameters
@@ -395,6 +398,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Pulls messages from the server. Returns an empty list if there are no messages available in the backlog. The server may return `UNAVAILABLE` if there are too many concurrent pull requests pending for the given subscription.
+      displayName: Pull Subscriptions Projects
       is:
       - hasParameters
       body:
@@ -416,6 +420,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Acknowledges the messages associated with the `ack_ids` in the `AcknowledgeRequest`. The Pub/Sub system can remove the relevant messages from the subscription. Acknowledging a message whose ack deadline has expired may succeed, but such a message may be redelivered later. Acknowledging a message more than once will not result in an error.
+      displayName: Acknowledge Subscriptions Projects
       is:
       - hasParameters
       body:
@@ -437,6 +442,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Gets the configuration details of a subscription.
+      displayName: Get Subscriptions Projects
       is:
       - hasParameters
       responses:
@@ -450,6 +456,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Deletes an existing subscription. All messages retained in the subscription are immediately dropped. Calls to `Pull` after deletion will return `NOT_FOUND`. After a subscription is deleted, a new one may be created with the same name, but the new one has no association with the old subscription or its topic unless the same topic is specified.
+      displayName: Delete Subscriptions Projects
       is:
       - hasParameters
       responses:
@@ -469,6 +476,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Creates the given topic with the given name.
+      displayName: Create Topics Projects
       is:
       - hasParameters
       - hasParameters
@@ -491,6 +499,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Modifies the ack deadline for a specific message. This method is useful to indicate that more time is needed to process a message by the subscriber, or to make the message available for redelivery if the processing was interrupted. Note that this does not modify the subscription-level `ackDeadlineSeconds` used for subsequent messages.
+      displayName: ModifyAckDeadline Subscriptions Projects
       is:
       - hasParameters
       body:
@@ -512,6 +521,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Modifies the `PushConfig` for a specified subscription. This may be used to change a push subscription to a pull one (signified by an empty `PushConfig`) or vice versa, or change the endpoint URL and other attributes of a push subscription. Messages will accumulate for delivery continuously through the call regardless of changes to the `PushConfig`.
+      displayName: ModifyPushConfig Subscriptions Projects
       is:
       - hasParameters
       body:
@@ -534,6 +544,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Lists matching subscriptions.
+        displayName: List Subscriptions Projects
         is:
         - hasParameters
         queryParameters:
@@ -556,6 +567,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Lists matching topics.
+        displayName: List Topics Projects
         is:
         - hasParameters
         queryParameters:
@@ -583,6 +595,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic does not exist. The message payload must not be empty; it must contain either a non-empty data field, or at least one attribute.
+      displayName: Publish Topics Projects
       is:
       - hasParameters
       body:
@@ -604,6 +617,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Gets the configuration of a topic.
+      displayName: Get Topics Projects
       is:
       - hasParameters
       responses:
@@ -617,6 +631,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Deletes the topic with the given name. Returns `NOT_FOUND` if the topic does not exist. After a topic is deleted, a new topic may be created with the same name; this is an entirely new topic with none of the old configuration or subscriptions. Existing subscriptions to this topic are not deleted, but their `topic` field is set to `_deleted-topic_`.
+      displayName: Delete Topics Projects
       is:
       - hasParameters
       responses:

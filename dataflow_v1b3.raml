@@ -540,7 +540,7 @@ types:
       stages?:
         type: object
         description: A mapping from each stage to the information about that stage.
-    description: Additional information about how a Dataflow job will be executed which isn’t contained in the submitted job.
+    description: Additional information about how a Dataflow job will be executed which isnâ€™t contained in the submitted job.
   JobExecutionStageInfo:
     type: object
     properties:
@@ -1586,7 +1586,7 @@ types:
         type: object
         description: 'Labels are used to group WorkerMessages. For example, a worker_message
           about a particular container might have the labels: { "JOB_ID": "2015-04-22",
-          "WORKER_ID": "wordcount-vm-2015…" "CONTAINER_TYPE": "worker", "CONTAINER_ID":
+          "WORKER_ID": "wordcount-vm-2015â€¦" "CONTAINER_TYPE": "worker", "CONTAINER_ID":
           "ac1234def"} Label tags typically correspond to Label enum values. However,
           for ease of development other strings can be used as tags. LABEL_UNSPECIFIED
           should not be used here.'
@@ -1762,6 +1762,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/userinfo.email
           description: Send a worker_message to the service.
+          displayName: WorkerMessages Projects
           is:
           - hasParameters
           body:

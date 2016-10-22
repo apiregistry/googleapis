@@ -125,6 +125,17 @@ types:
     properties:
       userComment?: UserComment
       developerComment?: DeveloperComment
+  DeobfuscationFile:
+    type: object
+    properties:
+      symbolType?:
+        type: string
+        description: The type of the deobfuscation file.
+    description: Represents a deobfuscation file.
+  DeobfuscationFilesUploadResponse:
+    type: object
+    properties:
+      deobfuscationFile?: DeobfuscationFile
   DeveloperComment:
     type: object
     properties:
@@ -516,7 +527,7 @@ types:
       priceAmountMicros?:
         type: integer
         format: int64
-        description: Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is ˆ1.99, price_amount_micros is 1990000.
+        description: Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is â‚¬1.99, price_amount_micros is 1990000.
       startTimeMillis?:
         type: integer
         format: int64
@@ -649,6 +660,7 @@ types:
   /entitlements:
     get:
       description: Lists the user's current inapp item or subscription entitlements
+      displayName: List Entitlements
       is:
       - hasParameters
       queryParameters:
@@ -678,6 +690,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns a single review.
+        displayName: Get Reviews
         is:
         - hasParameters
         responses:
@@ -694,6 +707,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Reply to a single review, or update an existing reply.
+        displayName: Reply Reviews
         is:
         - hasParameters
         body:
@@ -708,6 +722,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Returns a list of reviews.
+      displayName: List Reviews
       is:
       - hasParameters
       queryParameters:
@@ -742,6 +757,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
+              displayName: Cancel Subscriptions Purchases
               is:
               - hasParameters
           /{token}:defer:
@@ -755,6 +771,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Defers a user's subscription purchase until a specified future expiration time.
+              displayName: Defer Subscriptions Purchases
               is:
               - hasParameters
               body:
@@ -774,6 +791,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Checks whether a user's subscription purchase is valid and returns its expiry time.
+              displayName: Get Subscriptions Purchases
               is:
               - hasParameters
               responses:
@@ -791,6 +809,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.
+              displayName: Revoke Subscriptions Purchases
               is:
               - hasParameters
           /{token}:refund:
@@ -804,6 +823,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.
+              displayName: Refund Subscriptions Purchases
               is:
               - hasParameters
     /products:
@@ -824,6 +844,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Checks the purchase and consumption status of an inapp item.
+              displayName: Get Products Purchases
               is:
               - hasParameters
               responses:
@@ -842,6 +863,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns information about the edit specified. Calls will fail if the edit is no long active (e.g. has been deleted, superseded or expired).
+        displayName: Get Edits
         is:
         - hasParameters
         responses:
@@ -854,6 +876,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Deletes an edit for an app. Creating a new edit will automatically delete any of your previous edits so this method need only be called if you want to preemptively abandon an edit.
+        displayName: Delete Edits
         is:
         - hasParameters
     /{editId}:commit:
@@ -867,6 +890,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Commits/applies the changes made in this edit back to the app.
+        displayName: Commit Edits
         is:
         - hasParameters
         responses:
@@ -884,6 +908,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.
+        displayName: Validate Edits
         is:
         - hasParameters
         responses:
@@ -896,6 +921,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Creates a new edit for an app, populated with the app's current state.
+      displayName: Insert Edits
       is:
       - hasParameters
       body:
@@ -916,6 +942,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Updates the details of an in-app product. This method supports patch semantics.
+        displayName: Patch Inappproducts
         is:
         - hasParameters
         queryParameters:
@@ -934,6 +961,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns information about the in-app product specified.
+        displayName: Get Inappproducts
         is:
         - hasParameters
         responses:
@@ -946,6 +974,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Updates the details of an in-app product.
+        displayName: Update Inappproducts
         is:
         - hasParameters
         queryParameters:
@@ -964,6 +993,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Delete an in-app product for an app.
+        displayName: Delete Inappproducts
         is:
         - hasParameters
     post:
@@ -972,6 +1002,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Creates a new in-app product for an app.
+      displayName: Insert Inappproducts
       is:
       - hasParameters
       queryParameters:
@@ -990,6 +1021,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: List all the in-app products for an Android app, both subscriptions and managed in-app products..
+      displayName: List Inappproducts
       is:
       - hasParameters
       queryParameters:
@@ -1012,6 +1044,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
+      displayName: Batch Inappproducts
       is:
       - hasParameters
       body:

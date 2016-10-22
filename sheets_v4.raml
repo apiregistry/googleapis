@@ -339,6 +339,31 @@ types:
           that column.
       range?: GridRange
     description: The default filter associated with a sheet.
+  BatchClearValuesRequest:
+    type: object
+    properties:
+      ranges?:
+        type: array
+        description: The ranges to clear, in A1 notation.
+        items:
+          type: string
+    description: The request for clearing more than one range of values in a spreadsheet.
+  BatchClearValuesResponse:
+    type: object
+    properties:
+      clearedRanges?:
+        type: array
+        description: |-
+          The ranges that were cleared, in A1 notation.
+          (If the requests were for an unbounded range or a ranger larger
+           than the bounds of the sheet, this will be the actual ranges
+           that were cleared, bounded to the sheet's limits.)
+        items:
+          type: string
+      spreadsheetId?:
+        type: string
+        description: The spreadsheet the updates were applied to.
+    description: The response when updating a range of values in a spreadsheet.
   BatchGetValuesResponse:
     type: object
     properties:
@@ -484,7 +509,7 @@ types:
         format: int32
         description: |-
           The width of the border, in pixels.
-          Border widths must be between 0 and 3 pixels, inclusive.
+          Deprecated; the width is determined by the "style" field.
       style?:
         type: string
         description: The style of the border.
@@ -493,6 +518,8 @@ types:
         - DOTTED
         - DASHED
         - SOLID
+        - SOLID_MEDIUM
+        - SOLID_THICK
         - NONE
         - DOUBLE
     description: A border along a cell.
@@ -645,6 +672,23 @@ types:
         format: int32
         description: The sheet ID on which the basic filter should be cleared.
     description: Clears the basic filter, if any exists on the sheet.
+  ClearValuesRequest:
+    type: object
+    description: The request for clearing a range of values in a spreadsheet.
+  ClearValuesResponse:
+    type: object
+    properties:
+      clearedRange?:
+        type: string
+        description: |-
+          The range (in A1 notation) that was cleared.
+          (If the request was for an unbounded range or a ranger larger
+           than the bounds of the sheet, this will be the actual range
+           that was cleared, bounded to the sheet's limits.)
+      spreadsheetId?:
+        type: string
+        description: The spreadsheet the updates were applied to.
+    description: The response when clearing a range of values in a spreadsheet.
   Color:
     type: object
     properties:
@@ -2436,6 +2480,7 @@ types:
           Multiple ranges can be specified.  Limiting the range will
           return only the portions of the spreadsheet that intersect the requested
           ranges. Ranges are specified using A1 notation.
+        displayName: Get Spreadsheets
         is:
         - hasParameters
         queryParameters:
@@ -2482,6 +2527,7 @@ types:
           applied together atomically. Your changes may be altered with respect to
           collaborator changes. If there are no collaborators, the spreadsheet
           should reflect your changes.
+        displayName: BatchUpdate Spreadsheets
         is:
         - hasParameters
         body:
@@ -2497,6 +2543,7 @@ types:
           - https://www.googleapis.com/auth/drive
           - https://www.googleapis.com/auth/spreadsheets
       description: Creates a spreadsheet, returning the newly created spreadsheet.
+      displayName: Create Spreadsheets
       is:
       - hasParameters
       body:

@@ -599,6 +599,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/blogger
                 description: Marks a comment as spam.
+                displayName: MarkAsSpam Comments
                 is:
                 - hasParameters
                 responses:
@@ -612,6 +613,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/blogger
                 description: Marks a comment as not spam.
+                displayName: Approve Comments
                 is:
                 - hasParameters
                 responses:
@@ -625,6 +627,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/blogger
                 description: Removes the content of a comment.
+                displayName: RemoveContent Comments
                 is:
                 - hasParameters
                 responses:
@@ -638,6 +641,7 @@ types:
                   - https://www.googleapis.com/auth/blogger
                   - https://www.googleapis.com/auth/blogger.readonly
               description: Gets one comment by ID.
+              displayName: Get Comments
               is:
               - hasParameters
               queryParameters:
@@ -661,6 +665,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/blogger
               description: Delete a comment by ID.
+              displayName: Delete Comments
               is:
               - hasParameters
           get:
@@ -670,6 +675,7 @@ types:
                 - https://www.googleapis.com/auth/blogger
                 - https://www.googleapis.com/auth/blogger.readonly
             description: Retrieves the comments for a post, possibly filtered.
+            displayName: List Comments
             is:
             - hasParameters
             queryParameters:
@@ -714,6 +720,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Publishes a draft post, optionally at the specific time of the given publishDate parameter.
+            displayName: Publish Posts
             is:
             - hasParameters
             queryParameters:
@@ -731,6 +738,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Revert a published or scheduled post to draft state.
+            displayName: Revert Posts
             is:
             - hasParameters
             responses:
@@ -743,6 +751,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a post. This method supports patch semantics.
+          displayName: Patch Posts
           is:
           - hasParameters
           queryParameters:
@@ -780,6 +789,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Get a post by ID.
+          displayName: Get Posts
           is:
           - hasParameters
           queryParameters:
@@ -814,6 +824,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a post.
+          displayName: Update Posts
           is:
           - hasParameters
           queryParameters:
@@ -850,6 +861,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Delete a post by ID.
+          displayName: Delete Posts
           is:
           - hasParameters
       /search:
@@ -860,6 +872,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Search for a post.
+          displayName: Search Posts
           is:
           - hasParameters
           queryParameters:
@@ -891,6 +904,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Retrieve a Post by Path.
+          displayName: GetByPath Posts
           is:
           - hasParameters
           queryParameters:
@@ -918,6 +932,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Add a post.
+        displayName: Insert Posts
         is:
         - hasParameters
         queryParameters:
@@ -946,6 +961,7 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves a list of posts, possibly filtered.
+        displayName: List Posts
         is:
         - hasParameters
         queryParameters:
@@ -1007,6 +1023,7 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves the comments for a blog, across all posts, possibly filtered.
+        displayName: ListByBlog Comments
         is:
         - hasParameters
         queryParameters:
@@ -1050,6 +1067,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Publishes a draft page.
+            displayName: Publish Pages
             is:
             - hasParameters
             responses:
@@ -1063,6 +1081,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Revert a published or scheduled page to draft state.
+            displayName: Revert Pages
             is:
             - hasParameters
             responses:
@@ -1075,6 +1094,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a page. This method supports patch semantics.
+          displayName: Patch Pages
           is:
           - hasParameters
           queryParameters:
@@ -1099,6 +1119,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Gets one blog page by ID.
+          displayName: Get Pages
           is:
           - hasParameters
           queryParameters:
@@ -1118,6 +1139,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a page.
+          displayName: Update Pages
           is:
           - hasParameters
           queryParameters:
@@ -1141,6 +1163,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Delete a page by ID.
+          displayName: Delete Pages
           is:
           - hasParameters
       post:
@@ -1149,6 +1172,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Add a page.
+        displayName: Insert Pages
         is:
         - hasParameters
         queryParameters:
@@ -1168,6 +1192,7 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves the pages for a blog, optionally including non-LIVE statuses.
+        displayName: List Pages
         is:
         - hasParameters
         queryParameters:
@@ -1204,6 +1229,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieve pageview stats for a Blog.
+        displayName: Get PageViews
         is:
         - hasParameters
         queryParameters:
@@ -1224,6 +1250,7 @@ types:
           - https://www.googleapis.com/auth/blogger
           - https://www.googleapis.com/auth/blogger.readonly
       description: Gets one blog by ID.
+      displayName: Get Blogs
       is:
       - hasParameters
       queryParameters:
@@ -1250,6 +1277,7 @@ types:
           - https://www.googleapis.com/auth/blogger
           - https://www.googleapis.com/auth/blogger.readonly
       description: Retrieve a Blog by URL.
+      displayName: GetByUrl Blogs
       is:
       - hasParameters
       queryParameters:
@@ -1292,6 +1320,7 @@ types:
                   - https://www.googleapis.com/auth/blogger
                   - https://www.googleapis.com/auth/blogger.readonly
               description: Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.
+              displayName: Get PostUserInfos
               is:
               - hasParameters
               queryParameters:
@@ -1310,6 +1339,7 @@ types:
                 - https://www.googleapis.com/auth/blogger
                 - https://www.googleapis.com/auth/blogger.readonly
             description: Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.
+            displayName: List PostUserInfos
             is:
             - hasParameters
             queryParameters:
@@ -1364,6 +1394,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Gets one blog and user info pair by blogId and userId.
+          displayName: Get BlogUserInfos
           is:
           - hasParameters
           queryParameters:
@@ -1382,6 +1413,7 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves a list of blogs, possibly filtered.
+        displayName: ListByUser Blogs
         is:
         - hasParameters
         queryParameters:
@@ -1421,6 +1453,7 @@ types:
           - https://www.googleapis.com/auth/blogger
           - https://www.googleapis.com/auth/blogger.readonly
       description: Gets one user by ID.
+      displayName: Get Users
       is:
       - hasParameters
       responses:

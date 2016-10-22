@@ -90,6 +90,7 @@ types:
   /languages:
     get:
       description: List the source/target languages supported by the API
+      displayName: List Languages
       is:
       - hasParameters
       queryParameters:
@@ -103,6 +104,7 @@ types:
   /detect:
     get:
       description: Detect the language of text.
+      displayName: List Detections
       is:
       - hasParameters
       queryParameters:
@@ -115,6 +117,7 @@ types:
             application/json: DetectionsListResponse
   get:
     description: Returns text translations from one language to another.
+    displayName: List Translations
     is:
     - hasParameters
     queryParameters:

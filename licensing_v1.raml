@@ -116,6 +116,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Assign License. This method supports patch semantics.
+            displayName: Patch LicenseAssignments
             is:
             - hasParameters
             body:
@@ -130,6 +131,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Get license assignment of a particular product and sku for a user
+            displayName: Get LicenseAssignments
             is:
             - hasParameters
             responses:
@@ -142,6 +144,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Assign License.
+            displayName: Update LicenseAssignments
             is:
             - hasParameters
             body:
@@ -156,6 +159,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Revoke License.
+            displayName: Delete LicenseAssignments
             is:
             - hasParameters
         post:
@@ -164,6 +168,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/apps.licensing
           description: Assign License.
+          displayName: Insert LicenseAssignments
           is:
           - hasParameters
           body:
@@ -179,6 +184,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/apps.licensing
           description: List license assignments for given product and sku of the customer.
+          displayName: ListForProductAndSku LicenseAssignments
           is:
           - hasParameters
           queryParameters:
@@ -207,6 +213,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/apps.licensing
       description: List license assignments for given product of the customer.
+      displayName: ListForProduct LicenseAssignments
       is:
       - hasParameters
       queryParameters:

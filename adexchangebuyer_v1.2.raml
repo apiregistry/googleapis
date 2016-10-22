@@ -280,6 +280,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
+        displayName: Get Creatives
         is:
         - hasParameters
         responses:
@@ -292,6 +293,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Submit a new creative.
+    displayName: Insert Creatives
     is:
     - hasParameters
     body:
@@ -306,6 +308,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
+    displayName: List Creatives
     is:
     - hasParameters
     queryParameters:
@@ -342,6 +345,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account. This method supports patch semantics.
+      displayName: Patch Accounts
       is:
       - hasParameters
       body:
@@ -356,6 +360,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets one account by ID.
+      displayName: Get Accounts
       is:
       - hasParameters
       responses:
@@ -368,6 +373,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account.
+      displayName: Update Accounts
       is:
       - hasParameters
       body:
@@ -382,6 +388,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves the authenticated user's list of accounts.
+    displayName: List Accounts
     is:
     - hasParameters
     responses:

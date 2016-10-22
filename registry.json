@@ -1,604 +1,922 @@
 {
   "apis": [
     {
-      "name": "Accelerated Mobile Pages (AMP) URL API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/acceleratedmobilepageurl_v1.raml"
+      "org": "Google",
+      "name": "Accelerated Mobile Pages (AMP) URL API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/acceleratedmobilepageurl_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Ad Exchange Buyer API(v1.2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer_v1.2.raml"
+      "org": "Google",
+      "name": "Ad Exchange Buyer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer_v1.2.raml",
+      "version": "v1.2"
     },
     {
-      "name": "Ad Exchange Buyer API(v1.3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer_v1.3.raml"
+      "org": "Google",
+      "name": "Ad Exchange Buyer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer_v1.3.raml",
+      "version": "v1.3"
     },
     {
-      "name": "Ad Exchange Buyer API(v1.4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer_v1.4.raml"
+      "org": "Google",
+      "name": "Ad Exchange Buyer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer_v1.4.raml",
+      "version": "v1.4"
     },
     {
-      "name": "Ad Exchange Buyer API II(v2beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer2_v2beta1.raml"
+      "org": "Google",
+      "name": "Ad Exchange Buyer API II",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangebuyer2_v2beta1.raml",
+      "version": "v2beta1"
     },
     {
-      "name": "Ad Exchange Seller API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangeseller_v1.raml"
+      "org": "Google",
+      "name": "Ad Exchange Seller API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangeseller_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Ad Exchange Seller API(v1.1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangeseller_v1.1.raml"
+      "org": "Google",
+      "name": "Ad Exchange Seller API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangeseller_v1.1.raml",
+      "version": "v1.1"
     },
     {
-      "name": "Ad Exchange Seller API(v2.0)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangeseller_v2.0.raml"
+      "org": "Google",
+      "name": "Ad Exchange Seller API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adexchangeseller_v2.0.raml",
+      "version": "v2.0"
     },
     {
-      "name": "Admin Data Transfer API(datatransfer_v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/admin_datatransfer_v1.raml"
+      "org": "Google",
+      "name": "Admin Data Transfer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/admin_datatransfer_v1.raml",
+      "version": "datatransfer_v1"
     },
     {
-      "name": "Admin Directory API(directory_v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/admin_directory_v1.raml"
+      "org": "Google",
+      "name": "Admin Directory API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/admin_directory_v1.raml",
+      "version": "directory_v1"
     },
     {
-      "name": "Admin Reports API(reports_v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/admin_reports_v1.raml"
+      "org": "Google",
+      "name": "Admin Reports API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/admin_reports_v1.raml",
+      "version": "reports_v1"
     },
     {
-      "name": "AdSense Management API(v1.3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adsense_v1.3.raml"
+      "org": "Google",
+      "name": "AdSense Management API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adsense_v1.3.raml",
+      "version": "v1.3"
     },
     {
-      "name": "AdSense Management API(v1.4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adsense_v1.4.raml"
+      "org": "Google",
+      "name": "AdSense Management API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adsense_v1.4.raml",
+      "version": "v1.4"
     },
     {
-      "name": "AdSense Host API(v4.1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adsensehost_v4.1.raml"
+      "org": "Google",
+      "name": "AdSense Host API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/adsensehost_v4.1.raml",
+      "version": "v4.1"
     },
     {
-      "name": "Google Analytics API(v2.4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/analytics_v2.4.raml"
+      "org": "Google",
+      "name": "Google Analytics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/analytics_v2.4.raml",
+      "version": "v2.4"
     },
     {
-      "name": "Google Analytics API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/analytics_v3.raml"
+      "org": "Google",
+      "name": "Google Analytics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/analytics_v3.raml",
+      "version": "v3"
     },
     {
-      "name": "Google Analytics Reporting API(v4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/analyticsreporting_v4.raml"
+      "org": "Google",
+      "name": "Google Analytics Reporting API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/analyticsreporting_v4.raml",
+      "version": "v4"
     },
     {
-      "name": "Google Play EMM API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidenterprise_v1.raml"
+      "org": "Google",
+      "name": "Google Play EMM API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidenterprise_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Play Developer API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidpublisher_v1.raml"
+      "org": "Google",
+      "name": "Google Play Developer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidpublisher_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Play Developer API(v1.1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidpublisher_v1.1.raml"
+      "org": "Google",
+      "name": "Google Play Developer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidpublisher_v1.1.raml",
+      "version": "v1.1"
     },
     {
-      "name": "Google Play Developer API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidpublisher_v2.raml"
+      "org": "Google",
+      "name": "Google Play Developer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/androidpublisher_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google Apps Activity API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appsactivity_v1.raml"
+      "org": "Google",
+      "name": "Google Apps Activity API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appsactivity_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google App State API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appstate_v1.raml"
+      "org": "Google",
+      "name": "Google App State API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appstate_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "BigQuery API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/bigquery_v2.raml"
+      "org": "Google",
+      "name": "BigQuery API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/bigquery_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Blogger API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/blogger_v2.raml"
+      "org": "Google",
+      "name": "Blogger API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/blogger_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Blogger API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/blogger_v3.raml"
+      "org": "Google",
+      "name": "Blogger API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/blogger_v3.raml",
+      "version": "v3"
     },
     {
-      "name": "Books API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/books_v1.raml"
+      "org": "Google",
+      "name": "Books API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/books_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Calendar API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/calendar_v3.raml"
+      "org": "Google",
+      "name": "Calendar API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/calendar_v3.raml",
+      "version": "v3"
     },
     {
-      "name": "Google Civic Information API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/civicinfo_v2.raml"
+      "org": "Google",
+      "name": "Google Civic Information API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/civicinfo_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google Cloud Container Builder API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudbuild_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud Container Builder API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudbuild_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Stackdriver Error Reporting API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouderrorreporting_v1beta1.raml"
+      "org": "Google",
+      "name": "Stackdriver Error Reporting API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouderrorreporting_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Cloud Monitoring API(v2beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudmonitoring_v2beta2.raml"
+      "org": "Google",
+      "name": "Cloud Monitoring API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudmonitoring_v2beta2.raml",
+      "version": "v2beta2"
     },
     {
-      "name": "Cloud User Accounts API(alpha)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_alpha.raml"
+      "org": "Google",
+      "name": "Cloud User Accounts API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_alpha.raml",
+      "version": "alpha"
     },
     {
-      "name": "Cloud User Accounts API(beta)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_beta.raml"
+      "org": "Google",
+      "name": "Cloud User Accounts API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_beta.raml",
+      "version": "beta"
     },
     {
-      "name": "Cloud User Accounts API(vm_alpha)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_vm_alpha.raml"
+      "org": "Google",
+      "name": "Cloud User Accounts API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_vm_alpha.raml",
+      "version": "vm_alpha"
     },
     {
-      "name": "Cloud User Accounts API(vm_beta)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_vm_beta.raml"
+      "org": "Google",
+      "name": "Cloud User Accounts API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouduseraccounts_vm_beta.raml",
+      "version": "vm_beta"
     },
     {
-      "name": "Compute Engine API(alpha)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/compute_alpha.raml"
+      "org": "Google",
+      "name": "Compute Engine API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/compute_alpha.raml",
+      "version": "alpha"
     },
     {
-      "name": "Compute Engine API(beta)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/compute_beta.raml"
+      "org": "Google",
+      "name": "Compute Engine API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/compute_beta.raml",
+      "version": "beta"
     },
     {
-      "name": "Compute Engine API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/compute_v1.raml"
+      "org": "Google",
+      "name": "Compute Engine API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/compute_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Consumer Surveys API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/consumersurveys_v2.raml"
+      "org": "Google",
+      "name": "Consumer Surveys API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/consumersurveys_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Content API for Shopping(v2sandbox)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/content_v2sandbox.raml"
+      "org": "Google",
+      "name": "Content API for Shopping",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/content_v2sandbox.raml",
+      "version": "v2sandbox"
     },
     {
-      "name": "Content API for Shopping(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/content_v2.raml"
+      "org": "Google",
+      "name": "Content API for Shopping",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/content_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "CustomSearch API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/customsearch_v1.raml"
+      "org": "Google",
+      "name": "CustomSearch API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/customsearch_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Datastore API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud Datastore API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Datastore API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Cloud Datastore API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google Cloud Datastore API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1beta2.raml"
+      "org": "Google",
+      "name": "Google Cloud Datastore API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "Google Cloud Datastore API(v1beta3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1beta3.raml"
+      "org": "Google",
+      "name": "Google Cloud Datastore API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/datastore_v1beta3.raml",
+      "version": "v1beta3"
     },
     {
-      "name": "Google Cloud Deployment Manager API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/deploymentmanager_v2.raml"
+      "org": "Google",
+      "name": "Google Cloud Deployment Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/deploymentmanager_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "DCM/DFA Reporting And Trafficking API(v2.4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.4.raml"
+      "org": "Google",
+      "name": "DCM/DFA Reporting And Trafficking API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.4.raml",
+      "version": "v2.4"
     },
     {
-      "name": "DCM/DFA Reporting And Trafficking API(v2.5)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.5.raml"
+      "org": "Google",
+      "name": "DCM/DFA Reporting And Trafficking API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.5.raml",
+      "version": "v2.5"
     },
     {
-      "name": "DCM/DFA Reporting And Trafficking API(v2.5beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.5beta1.raml"
+      "org": "Google",
+      "name": "DCM/DFA Reporting And Trafficking API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.5beta1.raml",
+      "version": "v2.5beta1"
     },
     {
-      "name": "DCM/DFA Reporting And Trafficking API(v2.6)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.6.raml"
+      "org": "Google",
+      "name": "DCM/DFA Reporting And Trafficking API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.6.raml",
+      "version": "v2.6"
     },
     {
-      "name": "APIs Discovery Service(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/discovery_v1.raml"
+      "org": "Google",
+      "name": "APIs Discovery Service",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/discovery_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud DNS API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dns_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud DNS API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dns_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud DNS API(v2beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dns_v2beta1.raml"
+      "org": "Google",
+      "name": "Google Cloud DNS API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dns_v2beta1.raml",
+      "version": "v2beta1"
     },
     {
-      "name": "DoubleClick Bid Manager API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/doubleclickbidmanager_v1.raml"
+      "org": "Google",
+      "name": "DoubleClick Bid Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/doubleclickbidmanager_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "DoubleClick Search API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/doubleclicksearch_v2.raml"
+      "org": "Google",
+      "name": "DoubleClick Search API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/doubleclicksearch_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Drive API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/drive_v2.raml"
+      "org": "Google",
+      "name": "Drive API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/drive_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Drive API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/drive_v3.raml"
+      "org": "Google",
+      "name": "Drive API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/drive_v3.raml",
+      "version": "v3"
     },
     {
-      "name": "Firebase Dynamic Links API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/firebasedynamiclinks_v1.raml"
+      "org": "Google",
+      "name": "Firebase Dynamic Links API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/firebasedynamiclinks_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Firebase Rules API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/firebaserules_v1.raml"
+      "org": "Google",
+      "name": "Firebase Rules API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/firebaserules_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Fitness(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/fitness_v1.raml"
+      "org": "Google",
+      "name": "Fitness",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/fitness_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Fusion Tables API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/fusiontables_v1.raml"
+      "org": "Google",
+      "name": "Fusion Tables API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/fusiontables_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Fusion Tables API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/fusiontables_v2.raml"
+      "org": "Google",
+      "name": "Fusion Tables API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/fusiontables_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google Play Game Services API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/games_v1.raml"
+      "org": "Google",
+      "name": "Google Play Game Services API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/games_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Play Game Services Publishing API(v1configuration)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/gamesConfiguration_v1configuration.raml"
+      "org": "Google",
+      "name": "Google Play Game Services Publishing API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/gamesConfiguration_v1configuration.raml",
+      "version": "v1configuration"
     },
     {
-      "name": "Google Play Game Services Management API(v1management)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/gamesManagement_v1management.raml"
+      "org": "Google",
+      "name": "Google Play Game Services Management API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/gamesManagement_v1management.raml",
+      "version": "v1management"
     },
     {
-      "name": "Genomics API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/genomics_v1beta2.raml"
+      "org": "Google",
+      "name": "Genomics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/genomics_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "Gmail API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/gmail_v1.raml"
+      "org": "Google",
+      "name": "Gmail API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/gmail_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Groups Migration API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/groupsmigration_v1.raml"
+      "org": "Google",
+      "name": "Groups Migration API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/groupsmigration_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Groups Settings API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/groupssettings_v1.raml"
+      "org": "Google",
+      "name": "Groups Settings API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/groupssettings_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google App Engine Admin API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appengine_v1.raml"
+      "org": "Google",
+      "name": "Google App Engine Admin API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appengine_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google App Engine Admin API(v1beta4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appengine_v1beta4.raml"
+      "org": "Google",
+      "name": "Google App Engine Admin API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appengine_v1beta4.raml",
+      "version": "v1beta4"
     },
     {
-      "name": "Google App Engine Admin API(v1beta5)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appengine_v1beta5.raml"
+      "org": "Google",
+      "name": "Google App Engine Admin API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/appengine_v1beta5.raml",
+      "version": "v1beta5"
     },
     {
-      "name": "Google Cloud Billing API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudbilling_v1.raml"
+      "org": "Google",
+      "name": "Google Classroom API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/classroom_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Stackdriver Debugger API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouddebugger_v2.raml"
+      "org": "Google",
+      "name": "Google Cloud Billing API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudbilling_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Resource Manager API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudresourcemanager_v1.raml"
+      "org": "Google",
+      "name": "Stackdriver Debugger API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/clouddebugger_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google Cloud Resource Manager API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudresourcemanager_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Cloud Resource Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudresourcemanager_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Trace API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudtrace_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud Resource Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudresourcemanager_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google Container Engine API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/container_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud Trace API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/cloudtrace_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Dataflow API(v1b3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataflow_v1b3.raml"
+      "org": "Google",
+      "name": "Google Container Engine API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/container_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Dataproc API(v1alpha1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataproc_v1alpha1.raml"
+      "org": "Google",
+      "name": "Google Dataflow API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataflow_v1b3.raml",
+      "version": "v1b3"
     },
     {
-      "name": "Google Cloud Dataproc API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataproc_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud Dataproc API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataproc_v1alpha1.raml",
+      "version": "v1alpha1"
     },
     {
-      "name": "Google Cloud Dataproc API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataproc_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Cloud Dataproc API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataproc_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Genomics API(v1alpha2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/genomics_v1alpha2.raml"
+      "org": "Google",
+      "name": "Google Cloud Dataproc API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dataproc_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Genomics API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/genomics_v1.raml"
+      "org": "Google",
+      "name": "Genomics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/genomics_v1alpha2.raml",
+      "version": "v1alpha2"
     },
     {
-      "name": "Google Identity and Access Management (IAM) API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/iam_v1.raml"
+      "org": "Google",
+      "name": "Genomics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/genomics_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Knowledge Graph Search API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/kgsearch_v1.raml"
+      "org": "Google",
+      "name": "Google Identity and Access Management (IAM) API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/iam_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Partners API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/partners_v2.raml"
+      "org": "Google",
+      "name": "Knowledge Graph Search API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/kgsearch_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google People API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/people_v1.raml"
+      "org": "Google",
+      "name": "Google Partners API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/partners_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google Play Movies Partner API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/playmoviespartner_v1.raml"
+      "org": "Google",
+      "name": "Google People API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/people_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Classroom API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/classroom_v1.raml"
+      "org": "Google",
+      "name": "Google Play Movies Partner API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/playmoviespartner_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Proximity Beacon API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/proximitybeacon_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Proximity Beacon API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/proximitybeacon_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google Cloud Pub/Sub API(v1beta1a)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pubsub_v1beta1a.raml"
+      "org": "Google",
+      "name": "Google Cloud Pub/Sub API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pubsub_v1beta1a.raml",
+      "version": "v1beta1a"
     },
     {
-      "name": "Google Cloud Pub/Sub API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pubsub_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud Pub/Sub API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pubsub_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Pub/Sub API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pubsub_v1beta2.raml"
+      "org": "Google",
+      "name": "Google Cloud Pub/Sub API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pubsub_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "Safe Browsing APIs(v4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/safebrowsing_v4.raml"
+      "org": "Google",
+      "name": "Safe Browsing APIs",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/safebrowsing_v4.raml",
+      "version": "v4"
     },
     {
-      "name": "Google Apps Script Execution API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/script_v1.raml"
+      "org": "Google",
+      "name": "Google Apps Script Execution API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/script_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Storage Transfer API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storagetransfer_v1.raml"
+      "org": "Google",
+      "name": "Google Storage Transfer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storagetransfer_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "YouTube Reporting API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtubereporting_v1.raml"
+      "org": "Google",
+      "name": "YouTube Reporting API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtubereporting_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Identity Toolkit API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/identitytoolkit_v3.raml"
+      "org": "Google",
+      "name": "Google Identity Toolkit API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/identitytoolkit_v3.raml",
+      "version": "v3"
     },
     {
-      "name": "Google Cloud Natural Language API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/language_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Cloud Natural Language API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/language_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Enterprise License Manager API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/licensing_v1.raml"
+      "org": "Google",
+      "name": "Enterprise License Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/licensing_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Stackdriver Logging API(v2beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/logging_v2beta1.raml"
+      "org": "Google",
+      "name": "Stackdriver Logging API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/logging_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google Mirror API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/mirror_v1.raml"
+      "org": "Google",
+      "name": "Stackdriver Logging API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/logging_v2beta1.raml",
+      "version": "v2beta1"
     },
     {
-      "name": "Google Cloud Machine Learning(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/ml_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Mirror API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/mirror_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Stackdriver Monitoring API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/monitoring_v3.raml"
+      "org": "Google",
+      "name": "Google Cloud Machine Learning",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/ml_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google OAuth2 API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/oauth2_v1.raml"
+      "org": "Google",
+      "name": "Stackdriver Monitoring API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/monitoring_v3.raml",
+      "version": "v3"
     },
     {
-      "name": "Google OAuth2 API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/oauth2_v2.raml"
+      "org": "Google",
+      "name": "Google OAuth2 API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/oauth2_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "PageSpeed Insights API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pagespeedonline_v1.raml"
+      "org": "Google",
+      "name": "Google OAuth2 API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/oauth2_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "PageSpeed Insights API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pagespeedonline_v2.raml"
+      "org": "Google",
+      "name": "PageSpeed Insights API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pagespeedonline_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google+ API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/plus_v1.raml"
+      "org": "Google",
+      "name": "PageSpeed Insights API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/pagespeedonline_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Google+ Domains API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/plusDomains_v1.raml"
+      "org": "Google",
+      "name": "Google+ API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/plus_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Prediction API(v1.2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.2.raml"
+      "org": "Google",
+      "name": "Google+ Domains API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/plusDomains_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Prediction API(v1.3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.3.raml"
+      "org": "Google",
+      "name": "Prediction API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.2.raml",
+      "version": "v1.2"
     },
     {
-      "name": "Prediction API(v1.4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.4.raml"
+      "org": "Google",
+      "name": "Prediction API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.3.raml",
+      "version": "v1.3"
     },
     {
-      "name": "Prediction API(v1.5)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.5.raml"
+      "org": "Google",
+      "name": "Prediction API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.4.raml",
+      "version": "v1.4"
     },
     {
-      "name": "Prediction API(v1.6)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.6.raml"
+      "org": "Google",
+      "name": "Prediction API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.5.raml",
+      "version": "v1.5"
     },
     {
-      "name": "QPX Express API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/qpxExpress_v1.raml"
+      "org": "Google",
+      "name": "Prediction API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/prediction_v1.6.raml",
+      "version": "v1.6"
     },
     {
-      "name": "Replica Pool API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/replicapool_v1beta1.raml"
+      "org": "Google",
+      "name": "QPX Express API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/qpxExpress_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Compute Engine Instance Group Manager API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/replicapool_v1beta2.raml"
+      "org": "Google",
+      "name": "Replica Pool API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/replicapool_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google Compute Engine Instance Group Updater API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/replicapoolupdater_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Compute Engine Instance Group Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/replicapool_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "Enterprise Apps Reseller API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/reseller_v1.raml"
+      "org": "Google",
+      "name": "Google Compute Engine Instance Group Updater API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/replicapoolupdater_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Resource Views API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/resourceviews_v1beta1.raml"
+      "org": "Google",
+      "name": "Enterprise Apps Reseller API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/reseller_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Compute Engine Instance Groups API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/resourceviews_v1beta2.raml"
+      "org": "Google",
+      "name": "Resource Views API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/resourceviews_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google Cloud RuntimeConfig API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/runtimeconfig_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Compute Engine Instance Groups API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/resourceviews_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "Google Service Control API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/servicecontrol_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud RuntimeConfig API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/runtimeconfig_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Service Management API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/servicemanagement_v1.raml"
+      "org": "Google",
+      "name": "Google Cloud RuntimeConfig API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/runtimeconfig_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Google Sheets API(v4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/sheets_v4.raml"
+      "org": "Google",
+      "name": "Google Service Control API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/servicecontrol_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Site Verification API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/siteVerification_v1.raml"
+      "org": "Google",
+      "name": "Google Service Management API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/servicemanagement_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Spectrum Database API(v1explorer)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/spectrum_v1explorer.raml"
+      "org": "Google",
+      "name": "Google Sheets API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/sheets_v4.raml",
+      "version": "v4"
     },
     {
-      "name": "Google Cloud Speech API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/speech_v1beta1.raml"
+      "org": "Google",
+      "name": "Google Site Verification API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/siteVerification_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Cloud SQL Administration API(v1beta3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/sqladmin_v1beta3.raml"
+      "org": "Google",
+      "name": "Google Spectrum Database API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/spectrum_v1explorer.raml",
+      "version": "v1explorer"
     },
     {
-      "name": "Cloud SQL Administration API(v1beta4)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/sqladmin_v1beta4.raml"
+      "org": "Google",
+      "name": "Google Cloud Speech API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/speech_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Cloud Storage JSON API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storage_v1.raml"
+      "org": "Google",
+      "name": "Cloud SQL Administration API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/sqladmin_v1beta3.raml",
+      "version": "v1beta3"
     },
     {
-      "name": "Cloud Storage JSON API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storage_v1beta1.raml"
+      "org": "Google",
+      "name": "Cloud SQL Administration API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/sqladmin_v1beta4.raml",
+      "version": "v1beta4"
     },
     {
-      "name": "Cloud Storage JSON API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storage_v1beta2.raml"
+      "org": "Google",
+      "name": "Cloud Storage JSON API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storage_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Tag Manager API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/tagmanager_v1.raml"
+      "org": "Google",
+      "name": "Cloud Storage JSON API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storage_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "TaskQueue API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/taskqueue_v1beta1.raml"
+      "org": "Google",
+      "name": "Cloud Storage JSON API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/storage_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "TaskQueue API(v1beta2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/taskqueue_v1beta2.raml"
+      "org": "Google",
+      "name": "Surveys API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/surveys_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Tasks API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/tasks_v1.raml"
+      "org": "Google",
+      "name": "Tag Manager API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/tagmanager_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Cloud Tool Results API(v1beta3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/toolresults_v1beta3.raml"
+      "org": "Google",
+      "name": "TaskQueue API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/taskqueue_v1beta1.raml",
+      "version": "v1beta1"
     },
     {
-      "name": "Translate API(v2)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/translate_v2.raml"
+      "org": "Google",
+      "name": "TaskQueue API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/taskqueue_v1beta2.raml",
+      "version": "v1beta2"
     },
     {
-      "name": "URL Shortener API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/urlshortener_v1.raml"
+      "org": "Google",
+      "name": "Tasks API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/tasks_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "Google Cloud Vision API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/vision_v1.raml"
+      "org": "Google",
+      "name": "Cloud Tool Results API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/toolresults_v1beta3.raml",
+      "version": "v1beta3"
     },
     {
-      "name": "Google Fonts Developer API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/webfonts_v1.raml"
+      "org": "Google",
+      "name": "Translate API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/translate_v2.raml",
+      "version": "v2"
     },
     {
-      "name": "Search Console API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/webmasters_v3.raml"
+      "org": "Google",
+      "name": "URL Shortener API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/urlshortener_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "YouTube Data API(v3)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtube_v3.raml"
+      "org": "Google",
+      "name": "Google Cloud Vision API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/vision_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "YouTube Analytics API(v1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtubeAnalytics_v1.raml"
+      "org": "Google",
+      "name": "Google Fonts Developer API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/webfonts_v1.raml",
+      "version": "v1"
     },
     {
-      "name": "YouTube Analytics API(v1beta1)",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtubeAnalytics_v1beta1.raml"
+      "org": "Google",
+      "name": "Search Console API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/webmasters_v3.raml",
+      "version": "v3"
+    },
+    {
+      "org": "Google",
+      "name": "YouTube Data API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtube_v3.raml",
+      "version": "v3"
+    },
+    {
+      "org": "Google",
+      "name": "YouTube Analytics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtubeAnalytics_v1.raml",
+      "version": "v1"
+    },
+    {
+      "org": "Google",
+      "name": "YouTube Analytics API",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/youtubeAnalytics_v1beta1.raml",
+      "version": "v1beta1"
     }
   ],
   "title": "Gooogle APIS"

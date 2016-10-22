@@ -257,6 +257,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the achievement configuration with the given ID. This method supports patch semantics.
+      displayName: Patch AchievementConfigurations
       is:
       - hasParameters
       body:
@@ -271,6 +272,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Retrieves the metadata of the achievement configuration with the given ID.
+      displayName: Get AchievementConfigurations
       is:
       - hasParameters
       responses:
@@ -283,6 +285,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the achievement configuration with the given ID.
+      displayName: Update AchievementConfigurations
       is:
       - hasParameters
       body:
@@ -297,6 +300,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Delete the achievement configuration with the given ID.
+      displayName: Delete AchievementConfigurations
       is:
       - hasParameters
 /applications:
@@ -312,6 +316,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Insert a new achievement configuration in this application.
+        displayName: Insert AchievementConfigurations
         is:
         - hasParameters
         body:
@@ -326,6 +331,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns a list of the achievement configurations in this application.
+        displayName: List AchievementConfigurations
         is:
         - hasParameters
         queryParameters:
@@ -349,6 +355,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Insert a new leaderboard configuration in this application.
+        displayName: Insert LeaderboardConfigurations
         is:
         - hasParameters
         body:
@@ -363,6 +370,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns a list of the leaderboard configurations in this application.
+        displayName: List LeaderboardConfigurations
         is:
         - hasParameters
         queryParameters:
@@ -400,6 +408,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Uploads an image for a resource with the given ID and image type.
+          displayName: Upload ImageConfigurations
           is:
           - hasParameters
           responses:
@@ -418,6 +427,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the leaderboard configuration with the given ID. This method supports patch semantics.
+      displayName: Patch LeaderboardConfigurations
       is:
       - hasParameters
       body:
@@ -432,6 +442,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Retrieves the metadata of the leaderboard configuration with the given ID.
+      displayName: Get LeaderboardConfigurations
       is:
       - hasParameters
       responses:
@@ -444,6 +455,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the leaderboard configuration with the given ID.
+      displayName: Update LeaderboardConfigurations
       is:
       - hasParameters
       body:
@@ -458,5 +470,6 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Delete the leaderboard configuration with the given ID.
+      displayName: Delete LeaderboardConfigurations
       is:
       - hasParameters

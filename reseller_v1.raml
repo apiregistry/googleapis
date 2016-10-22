@@ -293,6 +293,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.order
             description: Suspends an active subscription
+            displayName: Suspend Subscriptions
             is:
             - hasParameters
             responses:
@@ -306,6 +307,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.order
             description: Changes the plan of a subscription
+            displayName: ChangePlan Subscriptions
             is:
             - hasParameters
             body:
@@ -321,6 +323,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.order
             description: Starts paid service of a trial subscription
+            displayName: StartPaidService Subscriptions
             is:
             - hasParameters
             responses:
@@ -334,6 +337,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.order
             description: Activates a subscription previously suspended by the reseller
+            displayName: Activate Subscriptions
             is:
             - hasParameters
             responses:
@@ -347,6 +351,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.order
             description: Changes the renewal settings of a subscription
+            displayName: ChangeRenewalSettings Subscriptions
             is:
             - hasParameters
             body:
@@ -362,6 +367,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.order
             description: Changes the seats configuration of a subscription
+            displayName: ChangeSeats Subscriptions
             is:
             - hasParameters
             body:
@@ -377,6 +383,7 @@ types:
               - https://www.googleapis.com/auth/apps.order
               - https://www.googleapis.com/auth/apps.order.readonly
           description: Gets a subscription of the customer.
+          displayName: Get Subscriptions
           is:
           - hasParameters
           responses:
@@ -389,6 +396,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/apps.order
           description: Cancels/Downgrades a subscription.
+          displayName: Delete Subscriptions
           is:
           - hasParameters
           queryParameters:
@@ -406,6 +414,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/apps.order
         description: Creates/Transfers a subscription for the customer.
+        displayName: Insert Subscriptions
         is:
         - hasParameters
         queryParameters:
@@ -424,6 +433,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/apps.order
       description: Update a customer resource if one it exists and is owned by the reseller. This method supports patch semantics.
+      displayName: Patch Customers
       is:
       - hasParameters
       body:
@@ -439,6 +449,7 @@ types:
           - https://www.googleapis.com/auth/apps.order
           - https://www.googleapis.com/auth/apps.order.readonly
       description: Gets a customer resource if one exists and is owned by the reseller.
+      displayName: Get Customers
       is:
       - hasParameters
       responses:
@@ -451,6 +462,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/apps.order
       description: Update a customer resource if one it exists and is owned by the reseller.
+      displayName: Update Customers
       is:
       - hasParameters
       body:
@@ -465,6 +477,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/apps.order
     description: Creates a customer resource if one does not already exist.
+    displayName: Insert Customers
     is:
     - hasParameters
     queryParameters:
@@ -485,6 +498,7 @@ types:
         - https://www.googleapis.com/auth/apps.order
         - https://www.googleapis.com/auth/apps.order.readonly
     description: Lists subscriptions of a reseller, optionally filtered by a customer name prefix.
+    displayName: List Subscriptions
     is:
     - hasParameters
     queryParameters:

@@ -507,6 +507,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/doubleclicksearch
           description: Downloads a report file encoded in UTF-8.
+          displayName: GetFile Reports
           is:
           - hasParameters
     get:
@@ -515,6 +516,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/doubleclicksearch
       description: Polls for the status of a report request.
+      displayName: Get Reports
       is:
       - hasParameters
       responses:
@@ -528,6 +530,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/doubleclicksearch
       description: Generates and returns a report immediately.
+      displayName: Generate Reports
       is:
       - hasParameters
       body:
@@ -542,6 +545,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Inserts a report request into the reporting system.
+    displayName: Request Reports
     is:
     - hasParameters
     body:
@@ -571,6 +575,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/doubleclicksearch
             description: Retrieve the list of saved columns for a specified advertiser.
+            displayName: List SavedColumns
             is:
             - hasParameters
             responses:
@@ -591,6 +596,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/doubleclicksearch
                 description: Retrieves a list of conversions from a DoubleClick Search engine account.
+                displayName: Get Conversion
                 is:
                 - hasParameters
                 queryParameters:
@@ -644,6 +650,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/doubleclicksearch
       description: Updates the availabilities of a batch of floodlight activities in DoubleClick Search.
+      displayName: UpdateAvailability Conversion
       is:
       - hasParameters
       body:
@@ -658,6 +665,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Updates a batch of conversions in DoubleClick Search. This method supports patch semantics.
+    displayName: Patch Conversion
     is:
     - hasParameters
     queryParameters:
@@ -707,6 +715,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Inserts a batch of new conversions into DoubleClick Search.
+    displayName: Insert Conversion
     is:
     - hasParameters
     body:
@@ -721,6 +730,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Updates a batch of conversions in DoubleClick Search.
+    displayName: Update Conversion
     is:
     - hasParameters
     body:

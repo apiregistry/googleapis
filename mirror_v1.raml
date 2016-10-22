@@ -328,9 +328,9 @@ types:
       id?:
         type: string
         description: "The setting's ID. The following IDs are valid:  \n- locale -\
-          \ The key to the user’s language/locale (BCP 47 identifier) that Glassware\
+          \ The key to the userâ€™s language/locale (BCP 47 identifier) that Glassware\
           \ should use to render localized content.  \n- timezone - The key to the\
-          \ user’s current time zone region as defined in the tz database. Example:\
+          \ userâ€™s current time zone region as defined in the tz database. Example:\
           \ America/Los_Angeles."
       value?:
         type: string
@@ -405,7 +405,7 @@ types:
         description: "Whether this item is a bundle cover.\n\nIf an item is marked\
           \ as a bundle cover, it will be the entry point to the bundle of items that\
           \ have the same bundleId as that item. It will be shown only on the main\
-          \ timeline — not within the opened bundle.\n\nOn the main timeline, items\
+          \ timeline â€” not within the opened bundle.\n\nOn the main timeline, items\
           \ that are shown are:  \n- Items that have isBundleCover set to true  \n\
           - Items that do not have a bundleId  In a bundle sub-timeline, items that\
           \ are shown are:  \n- Items that have the bundleId in question AND isBundleCover\
@@ -548,9 +548,9 @@ types:
       id:
         type: string
         description: "The ID of the setting. The following IDs are valid: \n- locale\
-          \ - The key to the user’s language/locale (BCP 47 identifier) that Glassware\
+          \ - The key to the userâ€™s language/locale (BCP 47 identifier) that Glassware\
           \ should use to render localized content. \n- timezone - The key to the\
-          \ user’s current time zone region as defined in the tz database. Example:\
+          \ userâ€™s current time zone region as defined in the tz database. Example:\
           \ America/Los_Angeles."
     get:
       securedBy:
@@ -558,6 +558,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single setting by ID.
+      displayName: Get Settings
       is:
       - hasParameters
       responses:
@@ -576,6 +577,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates an existing subscription in place.
+      displayName: Update Subscriptions
       is:
       - hasParameters
       body:
@@ -590,6 +592,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Deletes a subscription.
+      displayName: Delete Subscriptions
       is:
       - hasParameters
   post:
@@ -598,6 +601,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Creates a new subscription.
+    displayName: Insert Subscriptions
     is:
     - hasParameters
     body:
@@ -612,6 +616,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of subscriptions for the authenticated user and service.
+    displayName: List Subscriptions
     is:
     - hasParameters
     responses:
@@ -631,6 +636,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a timeline item in place. This method supports patch semantics.
+      displayName: Patch Timeline
       is:
       - hasParameters
       body:
@@ -646,6 +652,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single timeline item by ID.
+      displayName: Get Timeline
       is:
       - hasParameters
       responses:
@@ -659,6 +666,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a timeline item in place.
+      displayName: Update Timeline
       is:
       - hasParameters
       body:
@@ -674,6 +682,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Deletes a timeline item.
+      displayName: Delete Timeline
       is:
       - hasParameters
   post:
@@ -683,6 +692,7 @@ types:
         - https://www.googleapis.com/auth/glass.location
         - https://www.googleapis.com/auth/glass.timeline
     description: Inserts a new item into the timeline.
+    displayName: Insert Timeline
     is:
     - hasParameters
     body:
@@ -698,6 +708,7 @@ types:
         - https://www.googleapis.com/auth/glass.location
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of timeline items for the authenticated user.
+    displayName: List Timeline
     is:
     - hasParameters
     queryParameters:
@@ -743,6 +754,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single location by ID.
+      displayName: Get Locations
       is:
       - hasParameters
       responses:
@@ -756,6 +768,7 @@ types:
         - https://www.googleapis.com/auth/glass.location
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of locations for the user.
+    displayName: List Locations
     is:
     - hasParameters
     responses:
@@ -780,6 +793,7 @@ types:
             description: The name of the account to be passed to the Android Account Manager.
         post:
           description: Inserts a new account for a user
+          displayName: Insert Accounts
           is:
           - hasParameters
           body:
@@ -800,6 +814,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a contact in place. This method supports patch semantics.
+      displayName: Patch Contacts
       is:
       - hasParameters
       body:
@@ -814,6 +829,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single contact by ID.
+      displayName: Get Contacts
       is:
       - hasParameters
       responses:
@@ -826,6 +842,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a contact in place.
+      displayName: Update Contacts
       is:
       - hasParameters
       body:
@@ -840,6 +857,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Deletes a contact.
+      displayName: Delete Contacts
       is:
       - hasParameters
   post:
@@ -848,6 +866,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Inserts a new contact.
+    displayName: Insert Contacts
     is:
     - hasParameters
     body:
@@ -862,6 +881,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of contacts for the authenticated user.
+    displayName: List Contacts
     is:
     - hasParameters
     responses:

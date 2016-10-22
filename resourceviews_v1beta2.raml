@@ -383,6 +383,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Add resources to the view.
+              displayName: AddResources ZoneViews
               is:
               - hasParameters
               body:
@@ -400,6 +401,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Update the service information of a resource view or a resource.
+              displayName: SetService ZoneViews
               is:
               - hasParameters
               body:
@@ -420,6 +422,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: List the resources of the resource view.
+              displayName: ListResources ZoneViews
               is:
               - hasParameters
               queryParameters:
@@ -464,6 +467,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Remove resources from the view.
+              displayName: RemoveResources ZoneViews
               is:
               - hasParameters
               body:
@@ -481,6 +485,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Get the service information of a resource view or a resource.
+              displayName: GetService ZoneViews
               is:
               - hasParameters
               queryParameters:
@@ -502,6 +507,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Get the information of a zonal resource view.
+            displayName: Get ZoneViews
             is:
             - hasParameters
             responses:
@@ -516,6 +522,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Delete a resource view.
+            displayName: Delete ZoneViews
             is:
             - hasParameters
             responses:
@@ -530,6 +537,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Create a resource view.
+          displayName: Insert ZoneViews
           is:
           - hasParameters
           body:
@@ -549,6 +557,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: List resource views.
+          displayName: List ZoneViews
           is:
           - hasParameters
           queryParameters:
@@ -585,6 +594,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Retrieves the specified zone-specific operation resource.
+            displayName: Get ZoneOperations
             is:
             - hasParameters
             responses:
@@ -602,6 +612,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: Retrieves the list of operation resources contained within the specified zone.
+          displayName: List ZoneOperations
           is:
           - hasParameters
           queryParameters:

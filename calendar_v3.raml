@@ -819,6 +819,7 @@ types:
         - https://www.googleapis.com/auth/calendar
         - https://www.googleapis.com/auth/calendar.readonly
     description: Returns free/busy information for a set of calendars.
+    displayName: Query Freebusy
     is:
     - hasParameters
     body:
@@ -838,6 +839,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Watch for changes to Settings resources.
+          displayName: Watch Settings
           is:
           - hasParameters
           queryParameters:
@@ -874,6 +876,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns a single user setting.
+          displayName: Get Settings
           is:
           - hasParameters
           responses:
@@ -887,6 +890,7 @@ types:
             - https://www.googleapis.com/auth/calendar
             - https://www.googleapis.com/auth/calendar.readonly
         description: Returns all user settings for the authenticated user.
+        displayName: List Settings
         is:
         - hasParameters
         queryParameters:
@@ -921,6 +925,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an entry on the user's calendar list. This method supports patch semantics.
+          displayName: Patch CalendarList
           is:
           - hasParameters
           queryParameters:
@@ -940,6 +945,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns an entry on the user's calendar list.
+          displayName: Get CalendarList
           is:
           - hasParameters
           responses:
@@ -952,6 +958,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an entry on the user's calendar list.
+          displayName: Update CalendarList
           is:
           - hasParameters
           queryParameters:
@@ -970,6 +977,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Deletes an entry on the user's calendar list.
+          displayName: Delete CalendarList
           is:
           - hasParameters
       /watch:
@@ -980,6 +988,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Watch for changes to CalendarList resources.
+          displayName: Watch CalendarList
           is:
           - hasParameters
           queryParameters:
@@ -1025,6 +1034,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Adds an entry to the user's calendar list.
+        displayName: Insert CalendarList
         is:
         - hasParameters
         queryParameters:
@@ -1044,6 +1054,7 @@ types:
             - https://www.googleapis.com/auth/calendar
             - https://www.googleapis.com/auth/calendar.readonly
         description: Returns entries on the user's calendar list.
+        displayName: List CalendarList
         is:
         - hasParameters
         queryParameters:
@@ -1090,6 +1101,7 @@ types:
           - https://www.googleapis.com/auth/calendar
           - https://www.googleapis.com/auth/calendar.readonly
       description: Stop watching resources through this channel
+      displayName: Stop Channels
       is:
       - hasParameters
       body:
@@ -1107,6 +1119,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.
+        displayName: Clear Calendars
         is:
         - hasParameters
     /acl:
@@ -1121,6 +1134,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an access control rule. This method supports patch semantics.
+          displayName: Patch Acl
           is:
           - hasParameters
           body:
@@ -1136,6 +1150,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns an access control rule.
+          displayName: Get Acl
           is:
           - hasParameters
           responses:
@@ -1148,6 +1163,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an access control rule.
+          displayName: Update Acl
           is:
           - hasParameters
           body:
@@ -1162,6 +1178,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Deletes an access control rule.
+          displayName: Delete Acl
           is:
           - hasParameters
       /watch:
@@ -1171,6 +1188,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Watch for changes to ACL resources.
+          displayName: Watch Acl
           is:
           - hasParameters
           queryParameters:
@@ -1204,6 +1222,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Creates an access control rule.
+        displayName: Insert Acl
         is:
         - hasParameters
         body:
@@ -1218,6 +1237,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Returns the rules in the access control list for the calendar.
+        displayName: List Acl
         is:
         - hasParameters
         queryParameters:
@@ -1256,6 +1276,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/calendar
             description: Moves an event to another calendar, i.e. changes an event's organizer.
+            displayName: Move Events
             is:
             - hasParameters
             queryParameters:
@@ -1277,6 +1298,7 @@ types:
                 - https://www.googleapis.com/auth/calendar
                 - https://www.googleapis.com/auth/calendar.readonly
             description: Returns instances of the specified recurring event.
+            displayName: Instances Events
             is:
             - hasParameters
             queryParameters:
@@ -1321,6 +1343,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an event. This method supports patch semantics.
+          displayName: Patch Events
           is:
           - hasParameters
           queryParameters:
@@ -1351,6 +1374,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns an event.
+          displayName: Get Events
           is:
           - hasParameters
           queryParameters:
@@ -1375,6 +1399,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an event.
+          displayName: Update Events
           is:
           - hasParameters
           queryParameters:
@@ -1404,6 +1429,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Deletes an event.
+          displayName: Delete Events
           is:
           - hasParameters
           queryParameters:
@@ -1417,6 +1443,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Imports an event. This operation is used to add a private copy of an existing event to a calendar.
+          displayName: Import Events
           is:
           - hasParameters
           queryParameters:
@@ -1437,6 +1464,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Watch for changes to Events resources.
+          displayName: Watch Events
           is:
           - hasParameters
           queryParameters:
@@ -1525,6 +1553,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Creates an event based on a simple text string.
+          displayName: QuickAdd Events
           is:
           - hasParameters
           queryParameters:
@@ -1544,6 +1573,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Creates an event.
+        displayName: Insert Events
         is:
         - hasParameters
         queryParameters:
@@ -1571,6 +1601,7 @@ types:
             - https://www.googleapis.com/auth/calendar
             - https://www.googleapis.com/auth/calendar.readonly
         description: Returns events on the specified calendar.
+        displayName: List Events
         is:
         - hasParameters
         queryParameters:
@@ -1655,6 +1686,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/calendar
       description: Updates metadata for a calendar. This method supports patch semantics.
+      displayName: Patch Calendars
       is:
       - hasParameters
       body:
@@ -1670,6 +1702,7 @@ types:
           - https://www.googleapis.com/auth/calendar
           - https://www.googleapis.com/auth/calendar.readonly
       description: Returns metadata for a calendar.
+      displayName: Get Calendars
       is:
       - hasParameters
       responses:
@@ -1682,6 +1715,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/calendar
       description: Updates metadata for a calendar.
+      displayName: Update Calendars
       is:
       - hasParameters
       body:
@@ -1696,6 +1730,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/calendar
       description: Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.
+      displayName: Delete Calendars
       is:
       - hasParameters
   post:
@@ -1704,6 +1739,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/calendar
     description: Creates a secondary calendar.
+    displayName: Insert Calendars
     is:
     - hasParameters
     body:
@@ -1720,6 +1756,7 @@ types:
         - https://www.googleapis.com/auth/calendar
         - https://www.googleapis.com/auth/calendar.readonly
     description: Returns the color definitions for calendars and events.
+    displayName: Get Colors
     is:
     - hasParameters
     responses:

@@ -1610,6 +1610,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.
+        displayName: Patch Budget
         is:
         - hasParameters
         body:
@@ -1624,6 +1625,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Returns the budget information for the adgroup specified by the accountId and billingId.
+        displayName: Get Budget
         is:
         - hasParameters
         responses:
@@ -1636,6 +1638,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.
+        displayName: Update Budget
         is:
         - hasParameters
         body:
@@ -1650,6 +1653,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Returns the billing information for one account specified by account ID.
+      displayName: Get BillingInfo
       is:
       - hasParameters
       responses:
@@ -1662,6 +1666,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves a list of billing information for all accounts of the authenticated user.
+    displayName: List BillingInfo
     is:
     - hasParameters
     responses:
@@ -1682,6 +1687,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Add notes to the proposal
+          displayName: Insert Marketplacenotes
           is:
           - hasParameters
           body:
@@ -1696,6 +1702,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Get all the notes associated with a proposal
+        displayName: List Marketplacenotes
         is:
         - hasParameters
         queryParameters:
@@ -1730,6 +1737,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Update the given proposal. This method supports patch semantics.
+          displayName: Patch Proposals
           is:
           - hasParameters
           body:
@@ -1744,6 +1752,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Update the given proposal
+          displayName: Update Proposals
           is:
           - hasParameters
           body:
@@ -1759,6 +1768,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Update the given proposal to indicate that setup has been completed.
+        displayName: Setupcomplete Proposals
         is:
         - hasParameters
     /deals:
@@ -1769,6 +1779,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Add new deals for the specified proposal
+          displayName: Insert Marketplacedeals
           is:
           - hasParameters
           body:
@@ -1784,6 +1795,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Replaces all the deals in the proposal with the passed in deals
+          displayName: Update Marketplacedeals
           is:
           - hasParameters
           body:
@@ -1799,6 +1811,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Delete the specified deals from the proposal
+          displayName: Delete Marketplacedeals
           is:
           - hasParameters
           body:
@@ -1813,6 +1826,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: List all the deals for a given proposal
+        displayName: List Marketplacedeals
         is:
         - hasParameters
         queryParameters:
@@ -1829,6 +1843,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Get a proposal given its id
+      displayName: Get Proposals
       is:
       - hasParameters
       responses:
@@ -1842,6 +1857,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Search for proposals using pql query
+      displayName: Search Proposals
       is:
       - hasParameters
       queryParameters:
@@ -1859,6 +1875,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Create the given list of proposals
+      displayName: Insert Proposals
       is:
       - hasParameters
       body:
@@ -1881,6 +1898,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets the requested publisher profile(s) by publisher accountId.
+        displayName: List Pubprofiles
         is:
         - hasParameters
         responses:
@@ -1894,6 +1912,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves the authenticated user's list of performance metrics.
+    displayName: List PerformanceReport
     is:
     - hasParameters
     queryParameters:
@@ -1939,6 +1958,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates an existing pretargeting config. This method supports patch semantics.
+        displayName: Patch PretargetingConfig
         is:
         - hasParameters
         body:
@@ -1953,6 +1973,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets a specific pretargeting configuration
+        displayName: Get PretargetingConfig
         is:
         - hasParameters
         responses:
@@ -1965,6 +1986,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates an existing pretargeting config.
+        displayName: Update PretargetingConfig
         is:
         - hasParameters
         body:
@@ -1979,6 +2001,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Deletes an existing pretargeting config.
+        displayName: Delete PretargetingConfig
         is:
         - hasParameters
     post:
@@ -1987,6 +2010,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Inserts a new pretargeting configuration.
+      displayName: Insert PretargetingConfig
       is:
       - hasParameters
       body:
@@ -2001,6 +2025,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Retrieves a list of the authenticated user's pretargeting configurations.
+      displayName: List PretargetingConfig
       is:
       - hasParameters
       responses:
@@ -2032,6 +2057,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/adexchange.buyer
             description: Remove a deal id associated with the creative.
+            displayName: RemoveDeal Creatives
             is:
             - hasParameters
       /addDeal:
@@ -2047,6 +2073,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/adexchange.buyer
             description: Add a deal id association for the creative.
+            displayName: AddDeal Creatives
             is:
             - hasParameters
       /listDeals:
@@ -2056,6 +2083,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Lists the external deal ids associated with the creative.
+          displayName: ListDeals Creatives
           is:
           - hasParameters
           responses:
@@ -2068,6 +2096,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
+        displayName: Get Creatives
         is:
         - hasParameters
         responses:
@@ -2080,6 +2109,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Submit a new creative.
+    displayName: Insert Creatives
     is:
     - hasParameters
     body:
@@ -2094,6 +2124,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
+    displayName: List Creatives
     is:
     - hasParameters
     queryParameters:
@@ -2146,6 +2177,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account. This method supports patch semantics.
+      displayName: Patch Accounts
       is:
       - hasParameters
       queryParameters:
@@ -2164,6 +2196,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets one account by ID.
+      displayName: Get Accounts
       is:
       - hasParameters
       responses:
@@ -2176,6 +2209,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account.
+      displayName: Update Accounts
       is:
       - hasParameters
       queryParameters:
@@ -2194,6 +2228,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves the authenticated user's list of accounts.
+    displayName: List Accounts
     is:
     - hasParameters
     responses:
@@ -2213,6 +2248,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Update a given private auction proposal
+        displayName: Updateproposal Marketplaceprivateauction
         is:
         - hasParameters
         body:
@@ -2225,6 +2261,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets the requested product.
+      displayName: Search Products
       is:
       - hasParameters
       queryParameters:
@@ -2246,6 +2283,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets the requested product by id.
+      displayName: Get Products
       is:
       - hasParameters
       responses:

@@ -436,7 +436,7 @@ types:
         description: Service-specific metadata. For example the available capacity at the given location.
       locationId?:
         type: string
-        description: 'The cononical id for this location. For example: `"us-east1"`.'
+        description: 'The canonical id for this location. For example: `"us-east1"`.'
       name?:
         type: string
         description: 'Resource name for the location, which may vary between implementations.
@@ -908,13 +908,34 @@ types:
       uriParameters:
         appsId:
           type: string
-          description: 'Part of `name`. Name of the application to get. Example: `apps/myapp`.'
+          description: 'Part of `name`. Name of the application to update. For example:
+            "apps/myapp".'
+      patch:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Updates application parameters.
+        displayName: Patch Apps
+        is:
+        - hasParameters
+        queryParameters:
+          mask?:
+            type: string
+            description: Standard field mask for the set of fields to be updated.
+        body:
+          application/json: Application
+        responses:
+          200:
+            body:
+              application/json: Operation
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Gets information about an application.
+        displayName: Get Apps
         is:
         - hasParameters
         queryParameters:
@@ -931,6 +952,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Creates an App Engine application for a Google Cloud Platform project. This requires a project that excludes an App Engine application. For details about creating a project without an application, see the [Google Cloud Resource Manager create project topic](https://cloud.google.com/resource-manager/docs/creating-project).
+      displayName: Create Apps
       is:
       - hasParameters
       body:

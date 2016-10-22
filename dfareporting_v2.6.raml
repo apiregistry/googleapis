@@ -5592,7 +5592,7 @@ types:
                 description: Include conversions of users with a DoubleClick cookie but without an exposure. That means the user did not click or see an ad from the advertiser within the Floodlight group, or that the interaction happened outside the lookback window.
               includeUnattributedIPConversions?:
                 type: boolean
-                description: Include conversions that have no associated cookies and no exposures. It’s therefore impossible to know how the user was exposed to your ads during the lookback window prior to a conversion.
+                description: Include conversions that have no associated cookies and no exposures. Itâ€™s therefore impossible to know how the user was exposed to your ads during the lookback window prior to a conversion.
               impressionsLookbackWindow?:
                 type: integer
                 format: int32
@@ -5739,7 +5739,7 @@ types:
                 description: Include conversions of users with a DoubleClick cookie but without an exposure. That means the user did not click or see an ad from the advertiser within the Floodlight group, or that the interaction happened outside the lookback window.
               includeUnattributedIPConversions?:
                 type: boolean
-                description: Include conversions that have no associated cookies and no exposures. It’s therefore impossible to know how the user was exposed to your ads during the lookback window prior to a conversion.
+                description: Include conversions that have no associated cookies and no exposures. Itâ€™s therefore impossible to know how the user was exposed to your ads during the lookback window prior to a conversion.
             description: The properties of the report.
           dimensions?:
             type: array
@@ -6635,6 +6635,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Runs a report.
+            displayName: Run Reports
             is:
             - hasParameters
             queryParameters:
@@ -6651,6 +6652,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Updates a report. This method supports patch semantics.
+          displayName: Patch Reports
           is:
           - hasParameters
           body:
@@ -6665,6 +6667,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves a report by its ID.
+          displayName: Get Reports
           is:
           - hasParameters
           responses:
@@ -6677,6 +6680,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Updates a report.
+          displayName: Update Reports
           is:
           - hasParameters
           body:
@@ -6691,6 +6695,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Deletes a report by its ID.
+          displayName: Delete Reports
           is:
           - hasParameters
       post:
@@ -6699,6 +6704,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Creates a report.
+        displayName: Insert Reports
         is:
         - hasParameters
         body:
@@ -6713,6 +6719,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Retrieves list of reports.
+        displayName: List Reports
         is:
         - hasParameters
         queryParameters:
@@ -6764,6 +6771,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one content category by ID.
+          displayName: Get ContentCategories
           is:
           - hasParameters
           responses:
@@ -6776,6 +6784,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing content category.
+          displayName: Delete ContentCategories
           is:
           - hasParameters
       patch:
@@ -6784,6 +6793,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing content category. This method supports patch semantics.
+        displayName: Patch ContentCategories
         is:
         - hasParameters
         queryParameters:
@@ -6803,6 +6813,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new content category.
+        displayName: Insert ContentCategories
         is:
         - hasParameters
         body:
@@ -6817,6 +6828,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing content category.
+        displayName: Update ContentCategories
         is:
         - hasParameters
         body:
@@ -6831,6 +6843,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of content categories, possibly filtered.
+        displayName: List ContentCategories
         is:
         - hasParameters
         queryParameters:
@@ -6876,6 +6889,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one postal code by ID.
+          displayName: Get PostalCodes
           is:
           - hasParameters
           responses:
@@ -6888,6 +6902,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of postal codes.
+        displayName: List PostalCodes
         is:
         - hasParameters
         responses:
@@ -6907,6 +6922,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one project by ID.
+          displayName: Get Projects
           is:
           - hasParameters
           responses:
@@ -6932,6 +6948,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one order document by ID.
+              displayName: Get OrderDocuments
               is:
               - hasParameters
               responses:
@@ -6944,6 +6961,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of order documents, possibly filtered.
+            displayName: List OrderDocuments
             is:
             - hasParameters
             queryParameters:
@@ -7001,6 +7019,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one inventory item by ID.
+              displayName: Get InventoryItems
               is:
               - hasParameters
               responses:
@@ -7013,6 +7032,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of inventory items, possibly filtered.
+            displayName: List InventoryItems
             is:
             - hasParameters
             queryParameters:
@@ -7073,6 +7093,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one order by ID.
+              displayName: Get Orders
               is:
               - hasParameters
               responses:
@@ -7085,6 +7106,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of orders, possibly filtered.
+            displayName: List Orders
             is:
             - hasParameters
             queryParameters:
@@ -7128,6 +7150,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of projects, possibly filtered.
+        displayName: List Projects
         is:
         - hasParameters
         queryParameters:
@@ -7178,6 +7201,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account user profile by ID.
+          displayName: Get AccountUserProfiles
           is:
           - hasParameters
           responses:
@@ -7190,6 +7214,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account user profile. This method supports patch semantics.
+        displayName: Patch AccountUserProfiles
         is:
         - hasParameters
         queryParameters:
@@ -7209,6 +7234,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new account user profile.
+        displayName: Insert AccountUserProfiles
         is:
         - hasParameters
         body:
@@ -7223,6 +7249,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account user profile.
+        displayName: Update AccountUserProfiles
         is:
         - hasParameters
         body:
@@ -7237,6 +7264,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of account user profiles, possibly filtered.
+        displayName: List AccountUserProfiles
         is:
         - hasParameters
         queryParameters:
@@ -7294,6 +7322,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one advertiser by ID.
+          displayName: Get Advertisers
           is:
           - hasParameters
           responses:
@@ -7306,6 +7335,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser. This method supports patch semantics.
+        displayName: Patch Advertisers
         is:
         - hasParameters
         queryParameters:
@@ -7325,6 +7355,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new advertiser.
+        displayName: Insert Advertisers
         is:
         - hasParameters
         body:
@@ -7339,6 +7370,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser.
+        displayName: Update Advertisers
         is:
         - hasParameters
         body:
@@ -7353,6 +7385,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of advertisers, possibly filtered.
+        displayName: List Advertisers
         is:
         - hasParameters
         queryParameters:
@@ -7423,6 +7456,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement group by ID.
+          displayName: Get PlacementGroups
           is:
           - hasParameters
           responses:
@@ -7435,6 +7469,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement group. This method supports patch semantics.
+        displayName: Patch PlacementGroups
         is:
         - hasParameters
         queryParameters:
@@ -7454,6 +7489,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement group.
+        displayName: Insert PlacementGroups
         is:
         - hasParameters
         body:
@@ -7468,6 +7504,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement group.
+        displayName: Update PlacementGroups
         is:
         - hasParameters
         body:
@@ -7482,6 +7519,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placement groups, possibly filtered.
+        displayName: List PlacementGroups
         is:
         - hasParameters
         queryParameters:
@@ -7583,6 +7621,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative by ID.
+          displayName: Get Creatives
           is:
           - hasParameters
           responses:
@@ -7595,6 +7634,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative. This method supports patch semantics.
+        displayName: Patch Creatives
         is:
         - hasParameters
         queryParameters:
@@ -7614,6 +7654,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative.
+        displayName: Insert Creatives
         is:
         - hasParameters
         body:
@@ -7628,6 +7669,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative.
+        displayName: Update Creatives
         is:
         - hasParameters
         body:
@@ -7642,6 +7684,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creatives, possibly filtered.
+        displayName: List Creatives
         is:
         - hasParameters
         queryParameters:
@@ -7750,6 +7793,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one mobile carrier by ID.
+          displayName: Get MobileCarriers
           is:
           - hasParameters
           responses:
@@ -7762,6 +7806,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of mobile carriers.
+        displayName: List MobileCarriers
         is:
         - hasParameters
         responses:
@@ -7781,6 +7826,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list share by remarketing list ID.
+          displayName: Get RemarketingListShares
           is:
           - hasParameters
           responses:
@@ -7793,6 +7839,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list share. This method supports patch semantics.
+        displayName: Patch RemarketingListShares
         is:
         - hasParameters
         queryParameters:
@@ -7812,6 +7859,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list share.
+        displayName: Update RemarketingListShares
         is:
         - hasParameters
         body:
@@ -7833,6 +7881,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one site by ID.
+          displayName: Get Sites
           is:
           - hasParameters
           responses:
@@ -7845,6 +7894,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing site. This method supports patch semantics.
+        displayName: Patch Sites
         is:
         - hasParameters
         queryParameters:
@@ -7864,6 +7914,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new site.
+        displayName: Insert Sites
         is:
         - hasParameters
         body:
@@ -7878,6 +7929,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing site.
+        displayName: Update Sites
         is:
         - hasParameters
         body:
@@ -7892,6 +7944,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of sites, possibly filtered.
+        displayName: List Sites
         is:
         - hasParameters
         queryParameters:
@@ -7968,6 +8021,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one event tag by ID.
+          displayName: Get EventTags
           is:
           - hasParameters
           responses:
@@ -7980,6 +8034,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing event tag.
+          displayName: Delete EventTags
           is:
           - hasParameters
       patch:
@@ -7988,6 +8043,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing event tag. This method supports patch semantics.
+        displayName: Patch EventTags
         is:
         - hasParameters
         queryParameters:
@@ -8007,6 +8063,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new event tag.
+        displayName: Insert EventTags
         is:
         - hasParameters
         body:
@@ -8021,6 +8078,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing event tag.
+        displayName: Update EventTags
         is:
         - hasParameters
         body:
@@ -8035,6 +8093,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of event tags, possibly filtered.
+        displayName: List EventTags
         is:
         - hasParameters
         queryParameters:
@@ -8099,6 +8158,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing dynamic targeting key.
+          displayName: Delete DynamicTargetingKeys
           is:
           - hasParameters
           queryParameters:
@@ -8119,6 +8179,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser's ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.
+        displayName: Insert DynamicTargetingKeys
         is:
         - hasParameters
         body:
@@ -8133,6 +8194,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of dynamic targeting keys.
+        displayName: List DynamicTargetingKeys
         is:
         - hasParameters
         queryParameters:
@@ -8167,6 +8229,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves list of report dimension values for a list of filters.
+          displayName: Query DimensionValues
           is:
           - hasParameters
           queryParameters:
@@ -8198,6 +8261,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one campaign by ID.
+          displayName: Get Campaigns
           is:
           - hasParameters
           responses:
@@ -8217,6 +8281,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
+            displayName: Insert CampaignCreativeAssociations
             is:
             - hasParameters
             body:
@@ -8231,6 +8296,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves the list of creative IDs associated with the specified campaign.
+            displayName: List CampaignCreativeAssociations
             is:
             - hasParameters
             queryParameters:
@@ -8264,6 +8330,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one campaign landing page by ID.
+              displayName: Get LandingPages
               is:
               - hasParameters
               responses:
@@ -8276,6 +8343,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Deletes an existing campaign landing page.
+              displayName: Delete LandingPages
               is:
               - hasParameters
           patch:
@@ -8284,6 +8352,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing campaign landing page. This method supports patch semantics.
+            displayName: Patch LandingPages
             is:
             - hasParameters
             queryParameters:
@@ -8303,6 +8372,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new landing page for the specified campaign.
+            displayName: Insert LandingPages
             is:
             - hasParameters
             body:
@@ -8317,6 +8387,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing campaign landing page.
+            displayName: Update LandingPages
             is:
             - hasParameters
             body:
@@ -8331,6 +8402,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves the list of landing pages for the specified campaign.
+            displayName: List LandingPages
             is:
             - hasParameters
             responses:
@@ -8343,6 +8415,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing campaign. This method supports patch semantics.
+        displayName: Patch Campaigns
         is:
         - hasParameters
         queryParameters:
@@ -8362,6 +8435,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new campaign.
+        displayName: Insert Campaigns
         is:
         - hasParameters
         queryParameters:
@@ -8383,6 +8457,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing campaign.
+        displayName: Update Campaigns
         is:
         - hasParameters
         body:
@@ -8397,6 +8472,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of campaigns, possibly filtered.
+        displayName: List Campaigns
         is:
         - hasParameters
         queryParameters:
@@ -8469,6 +8545,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative group by ID.
+          displayName: Get CreativeGroups
           is:
           - hasParameters
           responses:
@@ -8481,6 +8558,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative group. This method supports patch semantics.
+        displayName: Patch CreativeGroups
         is:
         - hasParameters
         queryParameters:
@@ -8500,6 +8578,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative group.
+        displayName: Insert CreativeGroups
         is:
         - hasParameters
         body:
@@ -8514,6 +8593,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative group.
+        displayName: Update CreativeGroups
         is:
         - hasParameters
         body:
@@ -8528,6 +8608,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creative groups, possibly filtered.
+        displayName: List CreativeGroups
         is:
         - hasParameters
         queryParameters:
@@ -8582,6 +8663,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one size by ID.
+          displayName: Get Sizes
           is:
           - hasParameters
           responses:
@@ -8594,6 +8676,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new size.
+        displayName: Insert Sizes
         is:
         - hasParameters
         body:
@@ -8608,6 +8691,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of sizes, possibly filtered.
+        displayName: List Sizes
         is:
         - hasParameters
         queryParameters:
@@ -8643,6 +8727,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one change log by ID.
+          displayName: Get ChangeLogs
           is:
           - hasParameters
           responses:
@@ -8655,6 +8740,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of change logs.
+        displayName: List ChangeLogs
         is:
         - hasParameters
         queryParameters:
@@ -8766,6 +8852,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one directory site by ID.
+          displayName: Get DirectorySites
           is:
           - hasParameters
           responses:
@@ -8778,6 +8865,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new directory site.
+        displayName: Insert DirectorySites
         is:
         - hasParameters
         body:
@@ -8792,6 +8880,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of directory sites, possibly filtered.
+        displayName: List DirectorySites
         is:
         - hasParameters
         queryParameters:
@@ -8861,6 +8950,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list by ID.
+          displayName: Get TargetableRemarketingLists
           is:
           - hasParameters
           responses:
@@ -8873,6 +8963,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of targetable remarketing lists, possibly filtered.
+        displayName: List TargetableRemarketingLists
         is:
         - hasParameters
         queryParameters:
@@ -8922,6 +9013,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement strategy by ID.
+          displayName: Get PlacementStrategies
           is:
           - hasParameters
           responses:
@@ -8934,6 +9026,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing placement strategy.
+          displayName: Delete PlacementStrategies
           is:
           - hasParameters
       patch:
@@ -8942,6 +9035,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement strategy. This method supports patch semantics.
+        displayName: Patch PlacementStrategies
         is:
         - hasParameters
         queryParameters:
@@ -8961,6 +9055,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement strategy.
+        displayName: Insert PlacementStrategies
         is:
         - hasParameters
         body:
@@ -8975,6 +9070,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement strategy.
+        displayName: Update PlacementStrategies
         is:
         - hasParameters
         body:
@@ -8989,6 +9085,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placement strategies, possibly filtered.
+        displayName: List PlacementStrategies
         is:
         - hasParameters
         queryParameters:
@@ -9035,6 +9132,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets the account's active ad summary by account ID.
+          displayName: Get AccountActiveAdSummaries
           is:
           - hasParameters
           responses:
@@ -9048,6 +9146,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of cities, possibly filtered.
+        displayName: List Cities
         is:
         - hasParameters
         queryParameters:
@@ -9083,6 +9182,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one directory site contact by ID.
+          displayName: Get DirectorySiteContacts
           is:
           - hasParameters
           responses:
@@ -9095,6 +9195,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of directory site contacts, possibly filtered.
+        displayName: List DirectorySiteContacts
         is:
         - hasParameters
         queryParameters:
@@ -9145,6 +9246,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one operating system version by ID.
+          displayName: Get OperatingSystemVersions
           is:
           - hasParameters
           responses:
@@ -9157,6 +9259,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of operating system versions.
+        displayName: List OperatingSystemVersions
         is:
         - hasParameters
         responses:
@@ -9176,6 +9279,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one country by ID.
+          displayName: Get Countries
           is:
           - hasParameters
           responses:
@@ -9188,6 +9292,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of countries.
+        displayName: List Countries
         is:
         - hasParameters
         responses:
@@ -9201,6 +9306,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of browsers.
+        displayName: List Browsers
         is:
         - hasParameters
         responses:
@@ -9220,6 +9326,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role permission group by ID.
+          displayName: Get UserRolePermissionGroups
           is:
           - hasParameters
           responses:
@@ -9232,6 +9339,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of all supported user role permission groups.
+        displayName: List UserRolePermissionGroups
         is:
         - hasParameters
         responses:
@@ -9251,6 +9359,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one ad by ID.
+          displayName: Get Ads
           is:
           - hasParameters
           responses:
@@ -9263,6 +9372,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing ad. This method supports patch semantics.
+        displayName: Patch Ads
         is:
         - hasParameters
         queryParameters:
@@ -9282,6 +9392,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new ad.
+        displayName: Insert Ads
         is:
         - hasParameters
         body:
@@ -9296,6 +9407,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing ad.
+        displayName: Update Ads
         is:
         - hasParameters
         body:
@@ -9310,6 +9422,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of ads, possibly filtered.
+        displayName: List Ads
         is:
         - hasParameters
         queryParameters:
@@ -9456,6 +9569,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role by ID.
+          displayName: Get UserRoles
           is:
           - hasParameters
           responses:
@@ -9468,6 +9582,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing user role.
+          displayName: Delete UserRoles
           is:
           - hasParameters
       patch:
@@ -9476,6 +9591,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing user role. This method supports patch semantics.
+        displayName: Patch UserRoles
         is:
         - hasParameters
         queryParameters:
@@ -9495,6 +9611,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new user role.
+        displayName: Insert UserRoles
         is:
         - hasParameters
         body:
@@ -9509,6 +9626,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing user role.
+        displayName: Update UserRoles
         is:
         - hasParameters
         body:
@@ -9523,6 +9641,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of user roles, possibly filtered.
+        displayName: List UserRoles
         is:
         - hasParameters
         queryParameters:
@@ -9576,6 +9695,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list by ID.
+          displayName: Get RemarketingLists
           is:
           - hasParameters
           responses:
@@ -9588,6 +9708,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list. This method supports patch semantics.
+        displayName: Patch RemarketingLists
         is:
         - hasParameters
         queryParameters:
@@ -9607,6 +9728,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new remarketing list.
+        displayName: Insert RemarketingLists
         is:
         - hasParameters
         body:
@@ -9621,6 +9743,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list.
+        displayName: Update RemarketingLists
         is:
         - hasParameters
         body:
@@ -9635,6 +9758,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of remarketing lists, possibly filtered.
+        displayName: List RemarketingLists
         is:
         - hasParameters
         queryParameters:
@@ -9682,6 +9806,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Lists files for a user profile.
+        displayName: List Files
         is:
         - hasParameters
         queryParameters:
@@ -9733,6 +9858,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account permission group by ID.
+          displayName: Get AccountPermissionGroups
           is:
           - hasParameters
           responses:
@@ -9745,6 +9871,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of account permission groups.
+        displayName: List AccountPermissionGroups
         is:
         - hasParameters
         responses:
@@ -9764,6 +9891,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight activity group by ID.
+          displayName: Get FloodlightActivityGroups
           is:
           - hasParameters
           responses:
@@ -9776,6 +9904,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity group. This method supports patch semantics.
+        displayName: Patch FloodlightActivityGroups
         is:
         - hasParameters
         queryParameters:
@@ -9795,6 +9924,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new floodlight activity group.
+        displayName: Insert FloodlightActivityGroups
         is:
         - hasParameters
         body:
@@ -9809,6 +9939,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity group.
+        displayName: Update FloodlightActivityGroups
         is:
         - hasParameters
         body:
@@ -9823,6 +9954,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight activity groups, possibly filtered.
+        displayName: List FloodlightActivityGroups
         is:
         - hasParameters
         queryParameters:
@@ -9883,6 +10015,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one subaccount by ID.
+          displayName: Get Subaccounts
           is:
           - hasParameters
           responses:
@@ -9895,6 +10028,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing subaccount. This method supports patch semantics.
+        displayName: Patch Subaccounts
         is:
         - hasParameters
         queryParameters:
@@ -9914,6 +10048,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new subaccount.
+        displayName: Insert Subaccounts
         is:
         - hasParameters
         body:
@@ -9928,6 +10063,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing subaccount.
+        displayName: Update Subaccounts
         is:
         - hasParameters
         body:
@@ -9942,6 +10078,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of subaccounts, possibly filtered.
+        displayName: List Subaccounts
         is:
         - hasParameters
         queryParameters:
@@ -9988,6 +10125,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one connection type by ID.
+          displayName: Get ConnectionTypes
           is:
           - hasParameters
           responses:
@@ -10000,6 +10138,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of connection types.
+        displayName: List ConnectionTypes
         is:
         - hasParameters
         responses:
@@ -10019,6 +10158,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account permission by ID.
+          displayName: Get AccountPermissions
           is:
           - hasParameters
           responses:
@@ -10031,6 +10171,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of account permissions.
+        displayName: List AccountPermissions
         is:
         - hasParameters
         responses:
@@ -10044,6 +10185,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of metros.
+        displayName: List Metros
         is:
         - hasParameters
         responses:
@@ -10063,6 +10205,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one platform type by ID.
+          displayName: Get PlatformTypes
           is:
           - hasParameters
           responses:
@@ -10075,6 +10218,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of platform types.
+        displayName: List PlatformTypes
         is:
         - hasParameters
         responses:
@@ -10089,6 +10233,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/ddmconversions
           description: Inserts conversions.
+          displayName: Batchinsert Conversions
           is:
           - hasParameters
           body:
@@ -10104,6 +10249,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of regions.
+        displayName: List Regions
         is:
         - hasParameters
         responses:
@@ -10118,6 +10264,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Generates tags for a placement.
+          displayName: Generatetags Placements
           is:
           - hasParameters
           queryParameters:
@@ -10167,6 +10314,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement by ID.
+          displayName: Get Placements
           is:
           - hasParameters
           responses:
@@ -10179,6 +10327,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement. This method supports patch semantics.
+        displayName: Patch Placements
         is:
         - hasParameters
         queryParameters:
@@ -10198,6 +10347,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement.
+        displayName: Insert Placements
         is:
         - hasParameters
         body:
@@ -10212,6 +10362,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement.
+        displayName: Update Placements
         is:
         - hasParameters
         body:
@@ -10226,6 +10377,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placements, possibly filtered.
+        displayName: List Placements
         is:
         - hasParameters
         queryParameters:
@@ -10344,6 +10496,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role permission by ID.
+          displayName: Get UserRolePermissions
           is:
           - hasParameters
           responses:
@@ -10356,6 +10509,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of user role permissions, possibly filtered.
+        displayName: List UserRolePermissions
         is:
         - hasParameters
         queryParameters:
@@ -10381,6 +10535,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new creative asset.
+            displayName: Insert CreativeAssets
             is:
             - hasParameters
             body:
@@ -10402,6 +10557,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one targeting template by ID.
+          displayName: Get TargetingTemplates
           is:
           - hasParameters
           responses:
@@ -10414,6 +10570,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing targeting template. This method supports patch semantics.
+        displayName: Patch TargetingTemplates
         is:
         - hasParameters
         queryParameters:
@@ -10433,6 +10590,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new targeting template.
+        displayName: Insert TargetingTemplates
         is:
         - hasParameters
         body:
@@ -10447,6 +10605,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing targeting template.
+        displayName: Update TargetingTemplates
         is:
         - hasParameters
         body:
@@ -10461,6 +10620,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of targeting templates, optionally filtered.
+        displayName: List TargetingTemplates
         is:
         - hasParameters
         queryParameters:
@@ -10511,6 +10671,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight activity by ID.
+          displayName: Get FloodlightActivities
           is:
           - hasParameters
           responses:
@@ -10523,6 +10684,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing floodlight activity.
+          displayName: Delete FloodlightActivities
           is:
           - hasParameters
       /generatetag:
@@ -10532,6 +10694,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Generates a tag for a floodlight activity.
+          displayName: Generatetag FloodlightActivities
           is:
           - hasParameters
           queryParameters:
@@ -10549,6 +10712,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity. This method supports patch semantics.
+        displayName: Patch FloodlightActivities
         is:
         - hasParameters
         queryParameters:
@@ -10568,6 +10732,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new floodlight activity.
+        displayName: Insert FloodlightActivities
         is:
         - hasParameters
         body:
@@ -10582,6 +10747,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity.
+        displayName: Update FloodlightActivities
         is:
         - hasParameters
         body:
@@ -10596,6 +10762,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight activities, possibly filtered.
+        displayName: List FloodlightActivities
         is:
         - hasParameters
         queryParameters:
@@ -10669,6 +10836,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one advertiser group by ID.
+          displayName: Get AdvertiserGroups
           is:
           - hasParameters
           responses:
@@ -10681,6 +10849,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing advertiser group.
+          displayName: Delete AdvertiserGroups
           is:
           - hasParameters
       patch:
@@ -10689,6 +10858,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser group. This method supports patch semantics.
+        displayName: Patch AdvertiserGroups
         is:
         - hasParameters
         queryParameters:
@@ -10708,6 +10878,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new advertiser group.
+        displayName: Insert AdvertiserGroups
         is:
         - hasParameters
         body:
@@ -10722,6 +10893,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser group.
+        displayName: Update AdvertiserGroups
         is:
         - hasParameters
         body:
@@ -10736,6 +10908,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of advertiser groups, possibly filtered.
+        displayName: List AdvertiserGroups
         is:
         - hasParameters
         queryParameters:
@@ -10782,6 +10955,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight configuration by ID.
+          displayName: Get FloodlightConfigurations
           is:
           - hasParameters
           responses:
@@ -10794,6 +10968,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight configuration. This method supports patch semantics.
+        displayName: Patch FloodlightConfigurations
         is:
         - hasParameters
         queryParameters:
@@ -10813,6 +10988,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight configuration.
+        displayName: Update FloodlightConfigurations
         is:
         - hasParameters
         body:
@@ -10827,6 +11003,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight configurations, possibly filtered.
+        displayName: List FloodlightConfigurations
         is:
         - hasParameters
         queryParameters:
@@ -10845,6 +11022,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of languages.
+        displayName: List Languages
         is:
         - hasParameters
         responses:
@@ -10871,6 +11049,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one creative field value by ID.
+              displayName: Get CreativeFieldValues
               is:
               - hasParameters
               responses:
@@ -10883,6 +11062,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Deletes an existing creative field value.
+              displayName: Delete CreativeFieldValues
               is:
               - hasParameters
           patch:
@@ -10891,6 +11071,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing creative field value. This method supports patch semantics.
+            displayName: Patch CreativeFieldValues
             is:
             - hasParameters
             queryParameters:
@@ -10910,6 +11091,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new creative field value.
+            displayName: Insert CreativeFieldValues
             is:
             - hasParameters
             body:
@@ -10924,6 +11106,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing creative field value.
+            displayName: Update CreativeFieldValues
             is:
             - hasParameters
             body:
@@ -10938,6 +11121,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of creative field values, possibly filtered.
+            displayName: List CreativeFieldValues
             is:
             - hasParameters
             queryParameters:
@@ -10983,6 +11167,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative field by ID.
+          displayName: Get CreativeFields
           is:
           - hasParameters
           responses:
@@ -10995,6 +11180,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing creative field.
+          displayName: Delete CreativeFields
           is:
           - hasParameters
       patch:
@@ -11003,6 +11189,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative field. This method supports patch semantics.
+        displayName: Patch CreativeFields
         is:
         - hasParameters
         queryParameters:
@@ -11022,6 +11209,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative field.
+        displayName: Insert CreativeFields
         is:
         - hasParameters
         body:
@@ -11036,6 +11224,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative field.
+        displayName: Update CreativeFields
         is:
         - hasParameters
         body:
@@ -11050,6 +11239,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creative fields, possibly filtered.
+        displayName: List CreativeFields
         is:
         - hasParameters
         queryParameters:
@@ -11100,6 +11290,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one operating system by DART ID.
+          displayName: Get OperatingSystems
           is:
           - hasParameters
           responses:
@@ -11112,6 +11303,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of operating systems.
+        displayName: List OperatingSystems
         is:
         - hasParameters
         responses:
@@ -11131,6 +11323,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account by ID.
+          displayName: Get Accounts
           is:
           - hasParameters
           responses:
@@ -11143,6 +11336,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account. This method supports patch semantics.
+        displayName: Patch Accounts
         is:
         - hasParameters
         queryParameters:
@@ -11162,6 +11356,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account.
+        displayName: Update Accounts
         is:
         - hasParameters
         body:
@@ -11176,6 +11371,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of accounts, possibly filtered.
+        displayName: List Accounts
         is:
         - hasParameters
         queryParameters:
@@ -11219,6 +11415,7 @@ types:
           - https://www.googleapis.com/auth/dfareporting
           - https://www.googleapis.com/auth/dfatrafficking
       description: Gets one user profile by ID.
+      displayName: Get UserProfiles
       is:
       - hasParameters
       responses:
@@ -11232,6 +11429,7 @@ types:
         - https://www.googleapis.com/auth/dfareporting
         - https://www.googleapis.com/auth/dfatrafficking
     description: Retrieves list of user profiles for a user.
+    displayName: List UserProfiles
     is:
     - hasParameters
     responses:
@@ -11258,6 +11456,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves a report file by its report ID and file ID.
+          displayName: Get Files
           is:
           - hasParameters
           responses:

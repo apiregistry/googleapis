@@ -2191,6 +2191,7 @@ types:
                 - https://www.googleapis.com/auth/games
                 - https://www.googleapis.com/auth/plus.login
             description: Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
+            displayName: Claim QuestMilestones
             is:
             - hasParameters
             queryParameters:
@@ -2210,6 +2211,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Indicates that the currently authorized user will participate in the quest.
+        displayName: Accept Quests
         is:
         - hasParameters
         queryParameters:
@@ -2238,6 +2240,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Leave a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+        displayName: Leave Rooms
         is:
         - hasParameters
         queryParameters:
@@ -2262,6 +2265,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+        displayName: Decline Rooms
         is:
         - hasParameters
         queryParameters:
@@ -2284,6 +2288,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+        displayName: Dismiss Rooms
         is:
         - hasParameters
         queryParameters:
@@ -2299,6 +2304,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Updates sent by a client reporting the status of peers in a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+        displayName: ReportStatus Rooms
         is:
         - hasParameters
         queryParameters:
@@ -2323,6 +2329,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+        displayName: Join Rooms
         is:
         - hasParameters
         queryParameters:
@@ -2346,6 +2353,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Get the data for a room.
+      displayName: Get Rooms
       is:
       - hasParameters
       queryParameters:
@@ -2368,6 +2376,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      displayName: Create Rooms
       is:
       - hasParameters
       queryParameters:
@@ -2391,6 +2400,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns invitations to join rooms.
+    displayName: List Rooms
     is:
     - hasParameters
     queryParameters:
@@ -2428,6 +2438,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.
+        displayName: SetStepsAtLeast Achievements
         is:
         - hasParameters
         queryParameters:
@@ -2452,6 +2463,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Sets the state of the achievement with the given ID to REVEALED for the currently authenticated player.
+        displayName: Reveal Achievements
         is:
         - hasParameters
         queryParameters:
@@ -2471,6 +2483,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Unlocks this achievement for the currently authenticated player.
+        displayName: Unlock Achievements
         is:
         - hasParameters
         queryParameters:
@@ -2490,6 +2503,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Increments the steps of the achievement with the given ID for the currently authenticated player.
+        displayName: Increment Achievements
         is:
         - hasParameters
         queryParameters:
@@ -2518,6 +2532,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Updates multiple achievements for the currently authenticated player.
+      displayName: UpdateMultiple Achievements
       is:
       - hasParameters
       queryParameters:
@@ -2538,6 +2553,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Lists all the achievement definitions for your application.
+    displayName: List AchievementDefinitions
     is:
     - hasParameters
     queryParameters:
@@ -2575,6 +2591,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Lists the progress for all your application's achievements for the currently authenticated player.
+        displayName: List Achievements
         is:
         - hasParameters
         queryParameters:
@@ -2614,6 +2631,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Get a list of quests for your application and the currently authenticated player.
+        displayName: List Quests
         is:
         - hasParameters
         queryParameters:
@@ -2666,6 +2684,7 @@ types:
               description: |-
                 Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, leaderboardId can be set to ALL to retrieve data for all leaderboards in a given time span.
                 NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
+              displayName: Get Scores
               is:
               - hasParameters
               queryParameters:
@@ -2705,6 +2724,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
+        displayName: List Snapshots
         is:
         - hasParameters
         queryParameters:
@@ -2743,6 +2763,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: List play data aggregated per category for the player corresponding to playerId.
+          displayName: ListCategoriesByPlayer Metagame
           is:
           - hasParameters
           queryParameters:
@@ -2773,6 +2794,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.
+      displayName: Get Players
       is:
       - hasParameters
       queryParameters:
@@ -2806,6 +2828,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Get the collection of players for the currently authenticated user.
+          displayName: List Players
           is:
           - hasParameters
           queryParameters:
@@ -2838,6 +2861,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Removes a push token for the current user and application. Removing a non-existent push token will report success.
+      displayName: Remove Pushtokens
       is:
       - hasParameters
       queryParameters:
@@ -2854,6 +2878,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Registers a push token for the current user and application.
+    displayName: Update Pushtokens
     is:
     - hasParameters
     queryParameters:
@@ -2872,6 +2897,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Submits multiple scores to leaderboards.
+      displayName: SubmitMultiple Scores
       is:
       - hasParameters
       queryParameters:
@@ -2910,6 +2936,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Lists the scores in a leaderboard, starting from the top.
+          displayName: List Scores
           is:
           - hasParameters
           queryParameters:
@@ -2947,6 +2974,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Submits a score to the specified leaderboard.
+        displayName: Submit Scores
         is:
         - hasParameters
         queryParameters:
@@ -2986,6 +3014,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Lists the scores in a leaderboard around (and including) a player's score.
+          displayName: ListWindow Scores
           is:
           - hasParameters
           queryParameters:
@@ -3030,6 +3059,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the metadata of the leaderboard with the given ID.
+      displayName: Get Leaderboards
       is:
       - hasParameters
       queryParameters:
@@ -3051,6 +3081,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Lists all the leaderboard metadata for your application.
+    displayName: List Leaderboards
     is:
     - hasParameters
     queryParameters:
@@ -3088,6 +3119,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the metadata for a given snapshot ID.
+      displayName: Get Snapshots
       is:
       - hasParameters
       queryParameters:
@@ -3116,6 +3148,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Cancel a turn-based match.
+        displayName: Cancel TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3131,6 +3164,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.
+        displayName: Dismiss TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3146,6 +3180,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Leave a turn-based match during the current player's turn, without canceling the match.
+        displayName: LeaveTurn TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3175,6 +3210,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Leave a turn-based match when it is not the current player's turn, without canceling the match.
+        displayName: Leave TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3197,6 +3233,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Commit the results of a player turn.
+        displayName: TakeTurn TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3221,6 +3258,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Decline an invitation to play a turn-based match.
+        displayName: Decline TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3243,6 +3281,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Finish a turn-based match. Each player should make this call once, after all results are in. Only the player whose turn it is may make the first call to Finish, and can pass in the final match state.
+        displayName: Finish TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3267,6 +3306,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Join a turn-based match.
+        displayName: Join TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3289,6 +3329,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller's turn.
+        displayName: Rematch TurnBasedMatches
         is:
         - hasParameters
         queryParameters:
@@ -3314,6 +3355,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Get the data for a turn-based match.
+      displayName: Get TurnBasedMatches
       is:
       - hasParameters
       queryParameters:
@@ -3339,6 +3381,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.
+      displayName: Sync TurnBasedMatches
       is:
       - hasParameters
       queryParameters:
@@ -3379,6 +3422,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Create a turn-based match.
+      displayName: Create TurnBasedMatches
       is:
       - hasParameters
       queryParameters:
@@ -3402,6 +3446,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns turn-based matches the player is or was involved in.
+    displayName: List TurnBasedMatches
     is:
     - hasParameters
     queryParameters:
@@ -3442,6 +3487,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Return the metagame configuration data for the calling application.
+    displayName: GetMetagameConfig Metagame
     is:
     - hasParameters
     queryParameters:
@@ -3462,6 +3508,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Checks whether the games client is out of date.
+      displayName: Check Revisions
       is:
       - hasParameters
       queryParameters:
@@ -3488,6 +3535,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns a list showing the current progress on events in this application for the currently authenticated user.
+    displayName: ListByPlayer Events
     is:
     - hasParameters
     queryParameters:
@@ -3518,6 +3566,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Records a batch of changes to the number of times events have occurred for the currently authenticated user of this application.
+    displayName: Record Events
     is:
     - hasParameters
     queryParameters:
@@ -3542,6 +3591,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns a list of the event definitions in this application.
+    displayName: ListDefinitions Events
     is:
     - hasParameters
     queryParameters:
@@ -3579,6 +3629,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Verifies the auth token provided with this request is for the application with the specified ID, and returns the ID of the player it was granted for.
+        displayName: Verify Applications
         is:
         - hasParameters
         queryParameters:
@@ -3597,6 +3648,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the metadata of the application with the given ID. If the requested application is not available for the specified platformType, the returned response will not include any instance data.
+      displayName: Get Applications
       is:
       - hasParameters
       queryParameters:
@@ -3626,6 +3678,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Indicate that the the currently authenticated user is playing your application.
+      displayName: Played Applications
       is:
       - hasParameters
       queryParameters:

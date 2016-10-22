@@ -175,6 +175,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Update tasks that are leased out of a TaskQueue. This method supports patch semantics.
+            displayName: Patch Tasks
             is:
             - hasParameters
             queryParameters:
@@ -195,6 +196,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Get a particular task from a TaskQueue.
+            displayName: Get Tasks
             is:
             - hasParameters
             responses:
@@ -208,6 +210,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Update tasks that are leased out of a TaskQueue.
+            displayName: Update Tasks
             is:
             - hasParameters
             queryParameters:
@@ -228,6 +231,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Delete a task from a TaskQueue.
+            displayName: Delete Tasks
             is:
             - hasParameters
         /lease:
@@ -238,6 +242,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Lease 1 or more tasks from a TaskQueue.
+            displayName: Lease Tasks
             is:
             - hasParameters
             queryParameters:
@@ -266,6 +271,7 @@ types:
               - https://www.googleapis.com/auth/taskqueue
               - https://www.googleapis.com/auth/taskqueue.consumer
           description: Insert a new task in a TaskQueue
+          displayName: Insert Tasks
           is:
           - hasParameters
           body:
@@ -281,6 +287,7 @@ types:
               - https://www.googleapis.com/auth/taskqueue
               - https://www.googleapis.com/auth/taskqueue.consumer
           description: List Tasks in a TaskQueue
+          displayName: List Tasks
           is:
           - hasParameters
           responses:
@@ -294,6 +301,7 @@ types:
             - https://www.googleapis.com/auth/taskqueue
             - https://www.googleapis.com/auth/taskqueue.consumer
         description: Get detailed information about a TaskQueue.
+        displayName: Get Taskqueues
         is:
         - hasParameters
         queryParameters:

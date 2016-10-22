@@ -2911,6 +2911,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account. This method supports patch semantics.
+        displayName: Patch Accountshipping
         is:
         - hasParameters
         queryParameters:
@@ -2929,6 +2930,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the shipping settings of the account.
+        displayName: Get Accountshipping
         is:
         - hasParameters
         responses:
@@ -2941,6 +2943,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account.
+        displayName: Update Accountshipping
         is:
         - hasParameters
         queryParameters:
@@ -2959,6 +2962,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
+      displayName: List Accountshipping
       is:
       - hasParameters
       queryParameters:
@@ -2986,6 +2990,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the tax settings of the account. This method supports patch semantics.
+        displayName: Patch Accounttax
         is:
         - hasParameters
         queryParameters:
@@ -3004,6 +3009,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the tax settings of the account.
+        displayName: Get Accounttax
         is:
         - hasParameters
         responses:
@@ -3016,6 +3022,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the tax settings of the account.
+        displayName: Update Accounttax
         is:
         - hasParameters
         queryParameters:
@@ -3034,6 +3041,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the tax settings of the sub-accounts in your Merchant Center account.
+      displayName: List Accounttax
       is:
       - hasParameters
       queryParameters:
@@ -3060,6 +3068,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Gets the status of a product from your Merchant Center account.
+        displayName: Get Productstatuses
         is:
         - hasParameters
         responses:
@@ -3072,6 +3081,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the statuses of the products in your Merchant Center account.
+      displayName: List Productstatuses
       is:
       - hasParameters
       queryParameters:
@@ -3102,6 +3112,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account. This method supports patch semantics.
+        displayName: Patch Shippingsettings
         is:
         - hasParameters
         queryParameters:
@@ -3120,6 +3131,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the shipping settings of the account.
+        displayName: Get Shippingsettings
         is:
         - hasParameters
         responses:
@@ -3132,6 +3144,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account.
+        displayName: Update Shippingsettings
         is:
         - hasParameters
         queryParameters:
@@ -3150,6 +3163,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
+      displayName: List Shippingsettings
       is:
       - hasParameters
       queryParameters:
@@ -3171,6 +3185,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves supported carriers and carrier services for an account.
+      displayName: Getsupportedcarriers Shippingsettings
       is:
       - hasParameters
       responses:
@@ -3190,6 +3205,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the status of a Merchant Center account.
+        displayName: Get Accountstatuses
         is:
         - hasParameters
         responses:
@@ -3202,6 +3218,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
+      displayName: List Accountstatuses
       is:
       - hasParameters
       queryParameters:
@@ -3228,6 +3245,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a datafeed of your Merchant Center account. This method supports patch semantics.
+        displayName: Patch Datafeeds
         is:
         - hasParameters
         queryParameters:
@@ -3246,6 +3264,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves a datafeed from your Merchant Center account.
+        displayName: Get Datafeeds
         is:
         - hasParameters
         responses:
@@ -3258,6 +3277,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a datafeed of your Merchant Center account.
+        displayName: Update Datafeeds
         is:
         - hasParameters
         queryParameters:
@@ -3276,6 +3296,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Deletes a datafeed from your Merchant Center account.
+        displayName: Delete Datafeeds
         is:
         - hasParameters
         queryParameters:
@@ -3288,6 +3309,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Registers a datafeed with your Merchant Center account.
+      displayName: Insert Datafeeds
       is:
       - hasParameters
       queryParameters:
@@ -3306,6 +3328,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the datafeeds in your Merchant Center account.
+      displayName: List Datafeeds
       is:
       - hasParameters
       queryParameters:
@@ -3333,6 +3356,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels all line items in an order.
+          displayName: Cancel Orders
           is:
           - hasParameters
           body:
@@ -3348,6 +3372,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks line item(s) as shipped.
+          displayName: Shiplineitems Orders
           is:
           - hasParameters
           body:
@@ -3363,6 +3388,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels a line item.
+          displayName: Cancellineitem Orders
           is:
           - hasParameters
           body:
@@ -3378,6 +3404,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Returns a line item.
+          displayName: Returnlineitem Orders
           is:
           - hasParameters
           body:
@@ -3393,6 +3420,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks an order as acknowledged.
+          displayName: Acknowledge Orders
           is:
           - hasParameters
           body:
@@ -3408,6 +3436,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates the merchant order ID for a given order.
+          displayName: Updatemerchantorderid Orders
           is:
           - hasParameters
           body:
@@ -3423,6 +3452,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Refund a portion of the order, up to the full amount paid.
+          displayName: Refund Orders
           is:
           - hasParameters
           body:
@@ -3438,6 +3468,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates a shipment's status, carrier, and/or tracking ID.
+          displayName: Updateshipment Orders
           is:
           - hasParameters
           body:
@@ -3452,6 +3483,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order from your Merchant Center account.
+        displayName: Get Orders
         is:
         - hasParameters
         responses:
@@ -3464,6 +3496,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the orders in your Merchant Center account.
+      displayName: List Orders
       is:
       - hasParameters
       queryParameters:
@@ -3525,6 +3558,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
+          displayName: Advancetestorder Orders
           is:
           - hasParameters
           responses:
@@ -3537,6 +3571,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Sandbox only. Creates a test order.
+      displayName: Createtestorder Orders
       is:
       - hasParameters
       body:
@@ -3557,6 +3592,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order using merchant order id.
+        displayName: Getbymerchantorderid Orders
         is:
         - hasParameters
         responses:
@@ -3580,6 +3616,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
+        displayName: Gettestordertemplate Orders
         is:
         - hasParameters
         responses:
@@ -3599,6 +3636,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a Merchant Center account. This method supports patch semantics.
+        displayName: Patch Accounts
         is:
         - hasParameters
         queryParameters:
@@ -3617,6 +3655,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves a Merchant Center account.
+        displayName: Get Accounts
         is:
         - hasParameters
         responses:
@@ -3629,6 +3668,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a Merchant Center account.
+        displayName: Update Accounts
         is:
         - hasParameters
         queryParameters:
@@ -3647,6 +3687,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Deletes a Merchant Center sub-account.
+        displayName: Delete Accounts
         is:
         - hasParameters
         queryParameters:
@@ -3659,6 +3700,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Creates a Merchant Center sub-account.
+      displayName: Insert Accounts
       is:
       - hasParameters
       queryParameters:
@@ -3677,6 +3719,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the sub-accounts in your Merchant Center account.
+      displayName: List Accounts
       is:
       - hasParameters
       queryParameters:
@@ -3703,6 +3746,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the status of a datafeed from your Merchant Center account.
+        displayName: Get Datafeedstatuses
         is:
         - hasParameters
         responses:
@@ -3715,6 +3759,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the statuses of the datafeeds in your Merchant Center account.
+      displayName: List Datafeedstatuses
       is:
       - hasParameters
       queryParameters:
@@ -3747,6 +3792,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/content
             description: Updates price and availability of a product in your Merchant Center account. This operation does not update the expiration date of the product.
+            displayName: Set Inventory
             is:
             - hasParameters
             queryParameters:
@@ -3771,6 +3817,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves a product from your Merchant Center account.
+        displayName: Get Products
         is:
         - hasParameters
         responses:
@@ -3783,6 +3830,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Deletes a product from your Merchant Center account.
+        displayName: Delete Products
         is:
         - hasParameters
         queryParameters:
@@ -3795,6 +3843,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Uploads a product to your Merchant Center account.
+      displayName: Insert Products
       is:
       - hasParameters
       queryParameters:
@@ -3813,6 +3862,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the products in your Merchant Center account.
+      displayName: List Products
       is:
       - hasParameters
       queryParameters:
@@ -3838,6 +3888,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves and updates the shipping settings of multiple accounts in a single request.
+      displayName: Custombatch Accountshipping
       is:
       - hasParameters
       queryParameters:
@@ -3858,6 +3909,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves and updates tax settings of multiple accounts in a single request.
+      displayName: Custombatch Accounttax
       is:
       - hasParameters
       queryParameters:
@@ -3878,6 +3930,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Gets the statuses of multiple products in a single request.
+      displayName: Custombatch Productstatuses
       is:
       - hasParameters
       body:
@@ -3894,6 +3947,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves and updates the shipping settings of multiple accounts in a single request.
+      displayName: Custombatch Shippingsettings
       is:
       - hasParameters
       queryParameters:
@@ -3913,6 +3967,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
+      displayName: Custombatch Accountstatuses
       is:
       - hasParameters
       body:
@@ -3928,6 +3983,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
+      displayName: Custombatch Datafeeds
       is:
       - hasParameters
       queryParameters:
@@ -3948,6 +4004,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves or modifies multiple orders in a single request.
+      displayName: Custombatch Orders
       is:
       - hasParameters
       body:
@@ -3964,6 +4021,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.
+      displayName: Custombatch Accounts
       is:
       - hasParameters
       queryParameters:
@@ -3983,6 +4041,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Returns information about the authenticated user.
+      displayName: Authinfo Accounts
       is:
       - hasParameters
       responses:
@@ -3996,6 +4055,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
+      displayName: Custombatch Datafeedstatuses
       is:
       - hasParameters
       body:
@@ -4012,6 +4072,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.
+      displayName: Custombatch Inventory
       is:
       - hasParameters
       queryParameters:
@@ -4032,6 +4093,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves, inserts, and deletes multiple products in a single request.
+      displayName: Custombatch Products
       is:
       - hasParameters
       queryParameters:

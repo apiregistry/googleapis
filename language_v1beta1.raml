@@ -389,7 +389,9 @@ types:
         format: float
         description: |-
           Polarity of the sentiment in the [-1.0, 1.0] range. Larger numbers
-          represent more positive sentiments.
+          represent more positive sentiments.  This field is being deprecated in
+          favor of score. Please refer to our documentation at
+          https://cloud.google.com/natural-language/docs for more information.
     description: |-
       Represents the feeling associated with the entire text or entities in
       the text.
@@ -501,6 +503,7 @@ types:
       description: |-
         Finds named entities (currently finds proper names) in the text,
         entity types, salience, mentions for each entity, and other properties.
+      displayName: AnalyzeEntities Documents
       is:
       - hasParameters
       body:
@@ -518,6 +521,7 @@ types:
       description: |-
         A convenience method that provides all the features that analyzeSentiment,
         analyzeEntities, and analyzeSyntax provide in one call.
+      displayName: AnnotateText Documents
       is:
       - hasParameters
       body:
@@ -533,6 +537,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Analyzes the sentiment of the provided text.
+      displayName: AnalyzeSentiment Documents
       is:
       - hasParameters
       body:

@@ -539,6 +539,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation.
+      displayName: Cancel Operations
       is:
       - hasParameters
       body:
@@ -560,6 +561,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Lists operations that match the specified filter in the request.
+      displayName: List Operations
       is:
       - hasParameters
       - hasParameters
@@ -590,6 +592,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Sets status of a given operation. Any new timestamps (as determined by description) are appended to TimestampEvents. Should only be called by VMs created by the Pipelines Service and not by end users.
+      displayName: SetOperationStatus Pipelines
       is:
       - hasParameters
       body:
@@ -606,6 +609,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Gets controller configuration information. Should only be called by VMs created by the Pipelines Service and not by end users.
+      displayName: GetControllerConfig Pipelines
       is:
       - hasParameters
       queryParameters:
@@ -632,6 +636,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Retrieves a pipeline based on ID. Caller must have READ permission to the project.
+        displayName: Get Pipelines
         is:
         - hasParameters
         responses:
@@ -645,6 +650,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Deletes a pipeline based on ID. Caller must have WRITE permission to the project.
+        displayName: Delete Pipelines
         is:
         - hasParameters
         responses:
@@ -658,6 +664,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Creates a pipeline that can be run later. Create takes a Pipeline that has all fields other than `pipelineId` populated, and then returns the same pipeline with `pipelineId` populated. This id can be used to run the pipeline. Caller must have WRITE permission to the project.
+      displayName: Create Pipelines
       is:
       - hasParameters
       body:
@@ -673,6 +680,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Lists pipelines. Caller must have READ permission to the project.
+      displayName: List Pipelines
       is:
       - hasParameters
       queryParameters:
@@ -702,6 +710,7 @@ types:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/genomics
       description: Runs a pipeline. If `pipelineId` is specified in the request, then run a saved pipeline. If `ephemeralPipeline` is specified, then run that pipeline once without saving a copy. The caller must have READ permission to the project where the pipeline is stored and WRITE permission to the project where the pipeline will be run, as VMs will be created and storage will be used.
+      displayName: Run Pipelines
       is:
       - hasParameters
       body:

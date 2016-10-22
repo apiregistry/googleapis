@@ -705,6 +705,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Returns a list of authorized public keys for a specific user account.
+            displayName: GetAuthorizedKeysView Linux
             is:
             - hasParameters
             queryParameters:
@@ -728,6 +729,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Retrieves a list of user accounts for an instance within a specific project.
+          displayName: GetLinuxAccountViews Linux
           is:
           - hasParameters
           queryParameters:
@@ -784,6 +786,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Removes users from the specified group.
+            displayName: RemoveMember Groups
             is:
             - hasParameters
             body:
@@ -800,6 +803,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Adds users to the specified group.
+            displayName: AddMember Groups
             is:
             - hasParameters
             body:
@@ -817,6 +821,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Returns the specified Group resource.
+          displayName: Get Groups
           is:
           - hasParameters
           responses:
@@ -830,6 +835,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud.useraccounts
           description: Deletes the specified Group resource.
+          displayName: Delete Groups
           is:
           - hasParameters
           responses:
@@ -852,6 +858,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Groups
             is:
             - hasParameters
             body:
@@ -870,6 +877,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+            displayName: GetIamPolicy Groups
             is:
             - hasParameters
             responses:
@@ -886,6 +894,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Sets the access control policy on the specified resource. Replaces any existing policy.
+            displayName: SetIamPolicy Groups
             is:
             - hasParameters
             body:
@@ -901,6 +910,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud.useraccounts
         description: Creates a Group resource in the specified project using the data included in the request.
+        displayName: Insert Groups
         is:
         - hasParameters
         body:
@@ -918,6 +928,7 @@ types:
             - https://www.googleapis.com/auth/cloud.useraccounts
             - https://www.googleapis.com/auth/cloud.useraccounts.readonly
         description: Retrieves the list of groups contained within the specified project.
+        displayName: List Groups
         is:
         - hasParameters
         queryParameters:
@@ -971,6 +982,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Retrieves the specified operation resource.
+          displayName: Get GlobalAccountsOperations
           is:
           - hasParameters
           responses:
@@ -984,6 +996,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud.useraccounts
           description: Deletes the specified operation resource.
+          displayName: Delete GlobalAccountsOperations
           is:
           - hasParameters
       get:
@@ -995,6 +1008,7 @@ types:
             - https://www.googleapis.com/auth/cloud.useraccounts
             - https://www.googleapis.com/auth/cloud.useraccounts.readonly
         description: Retrieves the list of operation resources contained within the specified project.
+        displayName: List GlobalAccountsOperations
         is:
         - hasParameters
         queryParameters:
@@ -1047,6 +1061,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Adds a public key to the specified User resource with the data included in the request.
+            displayName: AddPublicKey Users
             is:
             - hasParameters
             body:
@@ -1063,6 +1078,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Removes the specified public key from the user.
+            displayName: RemovePublicKey Users
             is:
             - hasParameters
             queryParameters:
@@ -1083,6 +1099,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Returns the specified User resource.
+          displayName: Get Users
           is:
           - hasParameters
           responses:
@@ -1096,6 +1113,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud.useraccounts
           description: Deletes the specified User resource.
+          displayName: Delete Users
           is:
           - hasParameters
           responses:
@@ -1118,6 +1136,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Returns permissions that a caller has on the specified resource.
+            displayName: TestIamPermissions Users
             is:
             - hasParameters
             body:
@@ -1136,6 +1155,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+            displayName: GetIamPolicy Users
             is:
             - hasParameters
             responses:
@@ -1152,6 +1172,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Sets the access control policy on the specified resource. Replaces any existing policy.
+            displayName: SetIamPolicy Users
             is:
             - hasParameters
             body:
@@ -1167,6 +1188,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud.useraccounts
         description: Creates a User resource in the specified project using the data included in the request.
+        displayName: Insert Users
         is:
         - hasParameters
         body:
@@ -1184,6 +1206,7 @@ types:
             - https://www.googleapis.com/auth/cloud.useraccounts
             - https://www.googleapis.com/auth/cloud.useraccounts.readonly
         description: Retrieves a list of users contained within the specified project.
+        displayName: List Users
         is:
         - hasParameters
         queryParameters:

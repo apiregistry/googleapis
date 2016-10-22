@@ -395,6 +395,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Cancels an update. The update must be PAUSED before it can be cancelled. This has no effect if the update is already CANCELLED.
+              displayName: Cancel RollingUpdates
               is:
               - hasParameters
               responses:
@@ -409,6 +410,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Continues an update in PAUSED state. Has no effect if invoked when the state of the update is ROLLED_OUT.
+              displayName: Resume RollingUpdates
               is:
               - hasParameters
               responses:
@@ -423,6 +425,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no effect if invoked when the state of the update is ROLLED_BACK.
+              displayName: Rollback RollingUpdates
               is:
               - hasParameters
               responses:
@@ -439,6 +442,7 @@ types:
                   - https://www.googleapis.com/auth/replicapool
                   - https://www.googleapis.com/auth/replicapool.readonly
               description: Lists the current status for each instance within a given update.
+              displayName: ListInstanceUpdates RollingUpdates
               is:
               - hasParameters
               queryParameters:
@@ -467,6 +471,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no effect if invoked when the state of the update is PAUSED.
+              displayName: Pause RollingUpdates
               is:
               - hasParameters
               responses:
@@ -482,6 +487,7 @@ types:
                 - https://www.googleapis.com/auth/replicapool
                 - https://www.googleapis.com/auth/replicapool.readonly
             description: Returns information about an update.
+            displayName: Get RollingUpdates
             is:
             - hasParameters
             responses:
@@ -495,6 +501,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/replicapool
           description: Inserts and starts a new update.
+          displayName: Insert RollingUpdates
           is:
           - hasParameters
           body:
@@ -512,6 +519,7 @@ types:
               - https://www.googleapis.com/auth/replicapool
               - https://www.googleapis.com/auth/replicapool.readonly
           description: Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.
+          displayName: List RollingUpdates
           is:
           - hasParameters
           queryParameters:
@@ -545,6 +553,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/replicapool
             description: Retrieves the specified zone-specific operation resource.
+            displayName: Get ZoneOperations
             is:
             - hasParameters
             responses:
@@ -558,6 +567,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/replicapool
           description: Retrieves the list of Operation resources contained within the specified zone.
+          displayName: List ZoneOperations
           is:
           - hasParameters
           queryParameters:

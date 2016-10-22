@@ -597,6 +597,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsense
       description: Dismiss (delete) the specified alert from the publisher's AdSense account.
+      displayName: Delete Alerts
       is:
       - hasParameters
   get:
@@ -606,6 +607,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List the alerts for this AdSense account.
+    displayName: List Alerts
     is:
     - hasParameters
     queryParameters:
@@ -624,6 +626,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
+    displayName: Generate Reports
     is:
     - hasParameters
     queryParameters:
@@ -690,6 +693,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: List the metadata for the metrics available to this AdSense account.
+      displayName: List Metrics Metadata
       is:
       - hasParameters
       responses:
@@ -704,6 +708,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: List the metadata for the dimensions available to this AdSense account.
+      displayName: List Dimensions Metadata
       is:
       - hasParameters
       responses:
@@ -724,6 +729,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all URL channels in the specified ad client for this AdSense account.
+        displayName: List Urlchannels
         is:
         - hasParameters
         queryParameters:
@@ -753,6 +759,7 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: Get the specified custom channel from the specified ad client.
+          displayName: Get Customchannels
           is:
           - hasParameters
           responses:
@@ -766,6 +773,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all custom channels in the specified ad client for this AdSense account.
+        displayName: List Customchannels
         is:
         - hasParameters
         queryParameters:
@@ -796,6 +804,7 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: Get ad code for the specified ad unit.
+            displayName: GetAdCode Adunits
             is:
             - hasParameters
             responses:
@@ -809,6 +818,7 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: Gets the specified ad unit in the specified ad client.
+          displayName: Get Adunits
           is:
           - hasParameters
           responses:
@@ -822,6 +832,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all ad units in the specified ad client for this AdSense account.
+        displayName: List Adunits
         is:
         - hasParameters
         queryParameters:
@@ -848,6 +859,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List all ad clients in this AdSense account.
+    displayName: List Adclients
     is:
     - hasParameters
     queryParameters:
@@ -872,6 +884,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List the payments for this AdSense account.
+    displayName: List Payments
     is:
     - hasParameters
     responses:
@@ -891,6 +904,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: Get a specific saved ad style from the user's account.
+      displayName: Get Savedadstyles
       is:
       - hasParameters
       responses:
@@ -904,6 +918,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List all saved ad styles in the user's account.
+    displayName: List Savedadstyles
     is:
     - hasParameters
     queryParameters:
@@ -933,6 +948,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: Get information about the selected AdSense account.
+      displayName: Get Accounts
       is:
       - hasParameters
       queryParameters:
@@ -950,6 +966,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List all accounts available to this AdSense account.
+    displayName: List Accounts
     is:
     - hasParameters
     queryParameters:

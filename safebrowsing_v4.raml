@@ -450,6 +450,7 @@ types:
   /threatMatches:find:
     post:
       description: Finds the threat entries that match the Safe Browsing lists.
+      displayName: Find ThreatMatches
       is:
       - hasParameters
       body:
@@ -461,6 +462,7 @@ types:
   /fullHashes:find:
     post:
       description: Finds the full hashes that match the requested hash prefixes.
+      displayName: Find FullHashes
       is:
       - hasParameters
       body:
@@ -472,6 +474,7 @@ types:
   /threatListUpdates:fetch:
     post:
       description: Fetches the most recent threat list updates. A client can request updates for multiple lists at once.
+      displayName: Fetch ThreatListUpdates
       is:
       - hasParameters
       body:
@@ -483,6 +486,7 @@ types:
   /threatLists:
     get:
       description: Lists the Safe Browsing threat lists available for download.
+      displayName: List ThreatLists
       is:
       - hasParameters
       responses:

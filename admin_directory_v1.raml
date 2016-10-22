@@ -1564,6 +1564,7 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.rolemanagement
                 - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
             description: Retrieves a paginated list of all privileges for a customer.
+            displayName: List Privileges
             is:
             - hasParameters
             responses:
@@ -1581,6 +1582,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Updates a role. This method supports patch semantics.
+          displayName: Patch Roles
           is:
           - hasParameters
           body:
@@ -1596,6 +1598,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
               - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
           description: Retrieves a role.
+          displayName: Get Roles
           is:
           - hasParameters
           responses:
@@ -1608,6 +1611,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Updates a role.
+          displayName: Update Roles
           is:
           - hasParameters
           body:
@@ -1622,6 +1626,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Deletes a role.
+          displayName: Delete Roles
           is:
           - hasParameters
       post:
@@ -1630,6 +1635,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
         description: Creates a role.
+        displayName: Insert Roles
         is:
         - hasParameters
         body:
@@ -1645,6 +1651,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
             - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
         description: Retrieves a paginated list of all the roles in a domain.
+        displayName: List Roles
         is:
         - hasParameters
         queryParameters:
@@ -1674,6 +1681,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.domain
               - https://www.googleapis.com/auth/admin.directory.domain.readonly
           description: Retrieves a domain of the customer.
+          displayName: Get Domains
           is:
           - hasParameters
           responses:
@@ -1686,6 +1694,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.domain
           description: Deletes a domain of the customer.
+          displayName: Delete Domains
           is:
           - hasParameters
       post:
@@ -1694,6 +1703,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.domain
         description: Inserts a domain of the customer.
+        displayName: Insert Domains
         is:
         - hasParameters
         body:
@@ -1709,6 +1719,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.domain
             - https://www.googleapis.com/auth/admin.directory.domain.readonly
         description: Lists the domains of the customer.
+        displayName: List Domains
         is:
         - hasParameters
         responses:
@@ -1728,6 +1739,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
             description: Updates a calendar resource. This method supports patch semantics.
+            displayName: Patch Calendars Resources
             is:
             - hasParameters
             body:
@@ -1743,6 +1755,7 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
             description: Retrieves a calendar resource.
+            displayName: Get Calendars Resources
             is:
             - hasParameters
             responses:
@@ -1755,6 +1768,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
             description: Updates a calendar resource.
+            displayName: Update Calendars Resources
             is:
             - hasParameters
             body:
@@ -1769,6 +1783,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
             description: Deletes a calendar resource.
+            displayName: Delete Calendars Resources
             is:
             - hasParameters
         post:
@@ -1777,6 +1792,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.resource.calendar
           description: Inserts a calendar resource.
+          displayName: Insert Calendars Resources
           is:
           - hasParameters
           body:
@@ -1792,6 +1808,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.resource.calendar
               - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
           description: Retrieves a list of calendar resources for an account.
+          displayName: List Calendars Resources
           is:
           - hasParameters
           queryParameters:
@@ -1821,6 +1838,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.domain
               - https://www.googleapis.com/auth/admin.directory.domain.readonly
           description: Retrieves a domain alias of the customer.
+          displayName: Get DomainAliases
           is:
           - hasParameters
           responses:
@@ -1833,6 +1851,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.domain
           description: Deletes a Domain Alias of the customer.
+          displayName: Delete DomainAliases
           is:
           - hasParameters
       post:
@@ -1841,6 +1860,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.domain
         description: Inserts a Domain alias of the customer.
+        displayName: Insert DomainAliases
         is:
         - hasParameters
         body:
@@ -1856,6 +1876,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.domain
             - https://www.googleapis.com/auth/admin.directory.domain.readonly
         description: Lists the domain aliases of the customer.
+        displayName: List DomainAliases
         is:
         - hasParameters
         queryParameters:
@@ -1879,6 +1900,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
               - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
           description: Retrieve a role assignment.
+          displayName: Get RoleAssignments
           is:
           - hasParameters
           responses:
@@ -1891,6 +1913,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Deletes a role assignment.
+          displayName: Delete RoleAssignments
           is:
           - hasParameters
       post:
@@ -1899,6 +1922,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
         description: Creates a role assignment.
+        displayName: Insert RoleAssignments
         is:
         - hasParameters
         body:
@@ -1914,6 +1938,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
             - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
         description: Retrieves a paginated list of all roleAssignments.
+        displayName: List RoleAssignments
         is:
         - hasParameters
         queryParameters:
@@ -1948,6 +1973,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Updates a notification. This method supports patch semantics.
+          displayName: Patch Notifications
           is:
           - hasParameters
           body:
@@ -1962,6 +1988,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Retrieves a notification.
+          displayName: Get Notifications
           is:
           - hasParameters
           responses:
@@ -1974,6 +2001,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Updates a notification.
+          displayName: Update Notifications
           is:
           - hasParameters
           body:
@@ -1988,6 +2016,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Deletes a notification
+          displayName: Delete Notifications
           is:
           - hasParameters
       get:
@@ -1996,6 +2025,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.notifications
         description: Retrieves a list of notifications.
+        displayName: List Notifications
         is:
         - hasParameters
         queryParameters:
@@ -2031,6 +2061,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos
             description: Update Chrome OS Device. This method supports patch semantics.
+            displayName: Patch Chromeosdevices
             is:
             - hasParameters
             queryParameters:
@@ -2053,6 +2084,7 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
             description: Retrieve Chrome OS Device
+            displayName: Get Chromeosdevices
             is:
             - hasParameters
             queryParameters:
@@ -2072,6 +2104,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos
             description: Update Chrome OS Device
+            displayName: Update Chromeosdevices
             is:
             - hasParameters
             queryParameters:
@@ -2099,6 +2132,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/admin.directory.device.chromeos
               description: Take action on Chrome OS Device
+              displayName: Action Chromeosdevices
               is:
               - hasParameters
               body:
@@ -2110,6 +2144,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.device.chromeos
               - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
           description: Retrieve all Chrome OS Devices of a customer (paginated)
+          displayName: List Chromeosdevices
           is:
           - hasParameters
           queryParameters:
@@ -2165,6 +2200,7 @@ types:
                   - https://www.googleapis.com/auth/admin.directory.device.mobile
                   - https://www.googleapis.com/auth/admin.directory.device.mobile.action
               description: Take action on Mobile Device
+              displayName: Action Mobiledevices
               is:
               - hasParameters
               body:
@@ -2177,6 +2213,7 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.device.mobile.action
                 - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
             description: Retrieve Mobile Device
+            displayName: Get Mobiledevices
             is:
             - hasParameters
             queryParameters:
@@ -2196,6 +2233,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.device.mobile
             description: Delete Mobile Device
+            displayName: Delete Mobiledevices
             is:
             - hasParameters
         get:
@@ -2206,6 +2244,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.device.mobile.action
               - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
           description: Retrieve all Mobile Devices of a customer (paginated)
+          displayName: List Mobiledevices
           is:
           - hasParameters
           queryParameters:
@@ -2260,6 +2299,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.userschema
           description: Update schema. This method supports patch semantics.
+          displayName: Patch Schemas
           is:
           - hasParameters
           body:
@@ -2275,6 +2315,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.userschema
               - https://www.googleapis.com/auth/admin.directory.userschema.readonly
           description: Retrieve schema
+          displayName: Get Schemas
           is:
           - hasParameters
           responses:
@@ -2287,6 +2328,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.userschema
           description: Update schema
+          displayName: Update Schemas
           is:
           - hasParameters
           body:
@@ -2301,6 +2343,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.userschema
           description: Delete schema
+          displayName: Delete Schemas
           is:
           - hasParameters
       post:
@@ -2309,6 +2352,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.userschema
         description: Create schema.
+        displayName: Insert Schemas
         is:
         - hasParameters
         body:
@@ -2324,6 +2368,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.userschema
             - https://www.googleapis.com/auth/admin.directory.userschema.readonly
         description: Retrieve all schemas for a customer
+        displayName: List Schemas
         is:
         - hasParameters
         responses:
@@ -2341,6 +2386,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Update Organization Unit. This method supports patch semantics.
+        displayName: Patch Orgunits
         is:
         - hasParameters
         body:
@@ -2356,6 +2402,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.orgunit
             - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
         description: Retrieve Organization Unit
+        displayName: Get Orgunits
         is:
         - hasParameters
         responses:
@@ -2368,6 +2415,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Update Organization Unit
+        displayName: Update Orgunits
         is:
         - hasParameters
         body:
@@ -2382,6 +2430,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Remove Organization Unit
+        displayName: Delete Orgunits
         is:
         - hasParameters
     /orgunits:
@@ -2391,6 +2440,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Add Organization Unit
+        displayName: Insert Orgunits
         is:
         - hasParameters
         body:
@@ -2406,6 +2456,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.orgunit
             - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
         description: Retrieve all Organization Units
+        displayName: List Orgunits
         is:
         - hasParameters
         queryParameters:
@@ -2442,6 +2493,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group
               - https://www.googleapis.com/auth/admin.directory.group.member
           description: Update membership of a user in the specified group. This method supports patch semantics.
+          displayName: Patch Members
           is:
           - hasParameters
           body:
@@ -2459,6 +2511,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group.member.readonly
               - https://www.googleapis.com/auth/admin.directory.group.readonly
           description: Retrieve Group Member
+          displayName: Get Members
           is:
           - hasParameters
           responses:
@@ -2472,6 +2525,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group
               - https://www.googleapis.com/auth/admin.directory.group.member
           description: Update membership of a user in the specified group.
+          displayName: Update Members
           is:
           - hasParameters
           body:
@@ -2487,6 +2541,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group
               - https://www.googleapis.com/auth/admin.directory.group.member
           description: Remove membership.
+          displayName: Delete Members
           is:
           - hasParameters
       post:
@@ -2496,6 +2551,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.group
             - https://www.googleapis.com/auth/admin.directory.group.member
         description: Add user to the specified group.
+        displayName: Insert Members
         is:
         - hasParameters
         body:
@@ -2513,6 +2569,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.group.member.readonly
             - https://www.googleapis.com/auth/admin.directory.group.readonly
         description: Retrieve all members in a group (paginated)
+        displayName: List Members
         is:
         - hasParameters
         queryParameters:
@@ -2537,6 +2594,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.group
       description: Update Group. This method supports patch semantics.
+      displayName: Patch Groups
       is:
       - hasParameters
       body:
@@ -2552,6 +2610,7 @@ types:
           - https://www.googleapis.com/auth/admin.directory.group
           - https://www.googleapis.com/auth/admin.directory.group.readonly
       description: Retrieve Group
+      displayName: Get Groups
       is:
       - hasParameters
       responses:
@@ -2564,6 +2623,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.group
       description: Update Group
+      displayName: Update Groups
       is:
       - hasParameters
       body:
@@ -2578,6 +2638,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.group
       description: Delete Group
+      displayName: Delete Groups
       is:
       - hasParameters
   post:
@@ -2586,6 +2647,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/admin.directory.group
     description: Create Group
+    displayName: Insert Groups
     is:
     - hasParameters
     body:
@@ -2601,6 +2663,7 @@ types:
         - https://www.googleapis.com/auth/admin.directory.group
         - https://www.googleapis.com/auth/admin.directory.group.readonly
     description: Retrieve all groups in a domain (paginated)
+    displayName: List Groups
     is:
     - hasParameters
     queryParameters:
@@ -2639,6 +2702,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Invalidate the current backup verification codes for the user.
+          displayName: Invalidate VerificationCodes
           is:
           - hasParameters
       /generate:
@@ -2648,6 +2712,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Generate new backup verification codes for the user.
+          displayName: Generate VerificationCodes
           is:
           - hasParameters
       get:
@@ -2656,6 +2721,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user.security
         description: Returns the current set of valid backup verification codes for the specified user.
+        displayName: List VerificationCodes
         is:
         - hasParameters
         responses:
@@ -2669,6 +2735,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user
         description: Undelete a deleted user
+        displayName: Undelete Users
         is:
         - hasParameters
         body:
@@ -2680,6 +2747,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user
         description: change admin status of a user
+        displayName: MakeAdmin Users
         is:
         - hasParameters
         body:
@@ -2697,6 +2765,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Get information about an ASP issued by a user.
+          displayName: Get Asps
           is:
           - hasParameters
           responses:
@@ -2709,6 +2778,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Delete an ASP issued by a user.
+          displayName: Delete Asps
           is:
           - hasParameters
       get:
@@ -2717,6 +2787,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user.security
         description: List the ASPs issued by a user.
+        displayName: List Asps
         is:
         - hasParameters
         responses:
@@ -2735,6 +2806,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Get information about an access token issued by a user.
+          displayName: Get Tokens
           is:
           - hasParameters
           responses:
@@ -2747,6 +2819,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Delete all access tokens issued by a user for an application.
+          displayName: Delete Tokens
           is:
           - hasParameters
       get:
@@ -2755,6 +2828,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user.security
         description: Returns the set of tokens specified user has issued to 3rd party applications.
+        displayName: List Tokens
         is:
         - hasParameters
         responses:
@@ -2767,6 +2841,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.user
       description: update user. This method supports patch semantics.
+      displayName: Patch Users
       is:
       - hasParameters
       body:
@@ -2782,6 +2857,7 @@ types:
           - https://www.googleapis.com/auth/admin.directory.user
           - https://www.googleapis.com/auth/admin.directory.user.readonly
       description: retrieve user
+      displayName: Get Users
       is:
       - hasParameters
       queryParameters:
@@ -2813,6 +2889,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.user
       description: update user
+      displayName: Update Users
       is:
       - hasParameters
       body:
@@ -2827,6 +2904,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.user
       description: Delete user
+      displayName: Delete Users
       is:
       - hasParameters
   /watch:
@@ -2837,6 +2915,7 @@ types:
           - https://www.googleapis.com/auth/admin.directory.user
           - https://www.googleapis.com/auth/admin.directory.user.readonly
       description: Watch for changes in users list
+      displayName: Watch Users
       is:
       - hasParameters
       queryParameters:
@@ -2913,6 +2992,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/admin.directory.user
     description: create user.
+    displayName: Insert Users
     is:
     - hasParameters
     body:
@@ -2928,6 +3008,7 @@ types:
         - https://www.googleapis.com/auth/admin.directory.user
         - https://www.googleapis.com/auth/admin.directory.user.readonly
     description: Retrieve either deleted users or all users in a domain (paginated)
+    displayName: List Users
     is:
     - hasParameters
     queryParameters:
@@ -3010,6 +3091,7 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
                 - https://www.googleapis.com/auth/admin.directory.user.readonly
             description: Stop watching resources through this channel
+            displayName: Stop Channels
             is:
             - hasParameters
             body:
@@ -3026,6 +3108,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.customer
       description: Updates a customer. This method supports patch semantics.
+      displayName: Patch Customers
       is:
       - hasParameters
       body:
@@ -3041,6 +3124,7 @@ types:
           - https://www.googleapis.com/auth/admin.directory.customer
           - https://www.googleapis.com/auth/admin.directory.customer.readonly
       description: Retrieves a customer.
+      displayName: Get Customers
       is:
       - hasParameters
       responses:
@@ -3053,6 +3137,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.customer
       description: Updates a customer.
+      displayName: Update Customers
       is:
       - hasParameters
       body:

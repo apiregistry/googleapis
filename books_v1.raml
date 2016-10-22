@@ -1537,6 +1537,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns notification details for a given notification id.
+      displayName: Get Notification
       is:
       - hasParameters
       queryParameters:
@@ -1562,6 +1563,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns a list of offline dictionary metadata available
+      displayName: ListOfflineMetadata Dictionary
       is:
       - hasParameters
       queryParameters:
@@ -1580,6 +1582,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Remove the book and its contents
+      displayName: DeleteBook Cloudloading
       is:
       - hasParameters
       queryParameters:
@@ -1593,6 +1596,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
+      displayName: UpdateBook Cloudloading
       is:
       - hasParameters
       body:
@@ -1608,6 +1612,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
+      displayName: AddBook Cloudloading
       is:
       - hasParameters
       queryParameters:
@@ -1640,6 +1645,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Sets my reading position information for a volume.
+          displayName: SetPosition Readingpositions Mylibrary
           is:
           - hasParameters
           queryParameters:
@@ -1674,6 +1680,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Retrieves my reading position information for a volume.
+        displayName: Get Readingpositions Mylibrary
         is:
         - hasParameters
         queryParameters:
@@ -1695,6 +1702,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Gets the summary of specified layers.
+        displayName: Summary Annotations Mylibrary
         is:
         - hasParameters
         queryParameters:
@@ -1719,6 +1727,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Updates an existing annotation.
+        displayName: Update Annotations Mylibrary
         is:
         - hasParameters
         queryParameters:
@@ -1737,6 +1746,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Deletes an annotation.
+        displayName: Delete Annotations Mylibrary
         is:
         - hasParameters
         queryParameters:
@@ -1749,6 +1759,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Inserts a new annotation.
+      displayName: Insert Annotations Mylibrary
       is:
       - hasParameters
       queryParameters:
@@ -1773,6 +1784,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Retrieves a list of annotations, possibly filtered.
+      displayName: List Annotations Mylibrary
       is:
       - hasParameters
       queryParameters:
@@ -1826,6 +1838,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Adds a volume to a bookshelf.
+          displayName: AddVolume Bookshelves Mylibrary
           is:
           - hasParameters
           queryParameters:
@@ -1849,6 +1862,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Removes a volume from a bookshelf.
+          displayName: RemoveVolume Bookshelves Mylibrary
           is:
           - hasParameters
           queryParameters:
@@ -1870,6 +1884,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Clears all volumes from a bookshelf.
+          displayName: ClearVolumes Bookshelves Mylibrary
           is:
           - hasParameters
           queryParameters:
@@ -1883,6 +1898,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Moves a volume within a bookshelf.
+          displayName: MoveVolume Bookshelves Mylibrary
           is:
           - hasParameters
           queryParameters:
@@ -1902,6 +1918,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Retrieves metadata for a specific bookshelf belonging to the authenticated user.
+        displayName: Get Bookshelves Mylibrary
         is:
         - hasParameters
         queryParameters:
@@ -1918,6 +1935,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Retrieves a list of bookshelves belonging to the authenticated user.
+      displayName: List Bookshelves Mylibrary
       is:
       - hasParameters
       queryParameters:
@@ -1936,6 +1954,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns a stream of personalized book clusters
+      displayName: Get Personalizedstream
       is:
       - hasParameters
       queryParameters:
@@ -1964,6 +1983,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns Series metadata for the given series ids.
+      displayName: Get Series
       is:
       - hasParameters
       queryParameters:
@@ -1982,6 +2002,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns a list of promo offers available to the user
+      displayName: Get Promooffer
       is:
       - hasParameters
       queryParameters:
@@ -2014,6 +2035,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
+      displayName: Dismiss Promooffer
       is:
       - hasParameters
       queryParameters:
@@ -2045,6 +2067,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
+      displayName: Accept Promooffer
       is:
       - hasParameters
       queryParameters:
@@ -2089,6 +2112,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Gets the layer summary for a volume.
+          displayName: Get Layers
           is:
           - hasParameters
           queryParameters:
@@ -2108,6 +2132,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: List the layer summaries for a volume.
+        displayName: List Layers
         is:
         - hasParameters
         queryParameters:
@@ -2136,6 +2161,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Gets volume information for a single volume.
+      displayName: Get Volumes
       is:
       - hasParameters
       queryParameters:
@@ -2169,6 +2195,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/books
     description: Performs a book search.
+    displayName: List Volumes
     is:
     - hasParameters
     queryParameters:
@@ -2255,6 +2282,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: List available volumes under categories for onboarding experience.
+      displayName: ListCategoryVolumes Onboarding
       is:
       - hasParameters
       queryParameters:
@@ -2288,6 +2316,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: List categories for onboarding experience.
+      displayName: ListCategories Onboarding
       is:
       - hasParameters
       queryParameters:
@@ -2316,6 +2345,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Retrieves metadata for a specific bookshelf for the specified user.
+          displayName: Get Bookshelves
           is:
           - hasParameters
           queryParameters:
@@ -2332,6 +2362,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Retrieves a list of public bookshelves for the specified user.
+        displayName: List Bookshelves
         is:
         - hasParameters
         queryParameters:
@@ -2350,6 +2381,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Release downloaded content access restriction.
+      displayName: ReleaseDownloadAccess Myconfig
       is:
       - hasParameters
       queryParameters:
@@ -2376,6 +2408,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Sets the settings for the user. If a sub-object is specified, it will overwrite the existing sub-object stored in the server. Unspecified sub-objects will retain the existing value.
+      displayName: UpdateUserSettings Myconfig
       is:
       - hasParameters
       body:
@@ -2391,6 +2424,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Request downloaded content access for specified volumes on the My eBooks shelf.
+      displayName: SyncVolumeLicenses Myconfig
       is:
       - hasParameters
       queryParameters:
@@ -2431,6 +2465,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Request concurrent and download access restrictions.
+      displayName: RequestAccess Myconfig
       is:
       - hasParameters
       queryParameters:
@@ -2467,6 +2502,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Gets the current settings for the user.
+      displayName: GetUserSettings Myconfig
       is:
       - hasParameters
       responses:

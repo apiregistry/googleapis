@@ -123,6 +123,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Gets the billing information for a project. The current authenticated user must have [permission to view the project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo ).
+        displayName: GetBillingInfo Projects
         is:
         - hasParameters
         responses:
@@ -157,6 +158,7 @@ types:
           on the project: any paid resources used by the project will be shut down.
           Thus, unless you wish to disable billing, you should always call this method
           with the name of an *open* billing account.'
+        displayName: UpdateBillingInfo Projects
         is:
         - hasParameters
         body:
@@ -171,6 +173,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Gets information about a billing account. The current authenticated user must be an [owner of the billing account](https://support.google.com/cloud/answer/4430947).
+      displayName: Get BillingAccounts
       is:
       - hasParameters
       responses:
@@ -184,6 +187,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Lists the billing accounts that the current authenticated user [owns](https://support.google.com/cloud/answer/4430947).
+      displayName: List BillingAccounts
       is:
       - hasParameters
       queryParameters:

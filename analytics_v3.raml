@@ -1089,6 +1089,10 @@ types:
   GaData:
     type: object
     properties:
+      dataLastRefreshed?:
+        type: integer
+        format: int64
+        description: The last refreshed time in seconds for Analytics data.
       profileInfo?:
         type: object
         properties:
@@ -1430,7 +1434,7 @@ types:
       membershipDurationDays?:
         type: integer
         format: int32
-        description: Number of days a user remains in the audience. Use any integer from 1-540. In remarketing audiences for search ads, membership duration is truncated to 180 days.
+        description: Number of days (in the range 1 to 540) a user remains in the audience.
       isSmartList?:
         type: boolean
         description: Boolean indicating whether this segment is a smart list. https://support.google.com/analytics/answer/4628577
@@ -1662,7 +1666,7 @@ types:
         type: string
         description: |-
           The currency type associated with this view (profile), defaults to USD. The supported values are:
-          ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, INR, JPY, KRW, LTL, MXN, NOK, NZD, PHP, PLN, RUB, SEK, THB, TRY, TWD, USD, VND, ZAR
+          USD, JPY, EUR, GBP, AUD, KRW, BRL, CNY, DKK, RUB, SEK, NOK, PLN, TRY, TWD, HKD, THB, IDR, ARS, MXN, VND, PHP, INR, CHF, CAD, CZK, NZD, HUF, BGN, LTL, ZAR, UAH, AED, BOB, CLP, COP, EGP, HRK, ILS, MAD, MYR, PEN, PKR, RON, RSD, SAR, SGD, VEF, LVL
       id?:
         type: string
         description: View (Profile) ID.
@@ -2471,6 +2475,7 @@ types:
             - https://www.googleapis.com/auth/analytics.edit
             - https://www.googleapis.com/auth/analytics.readonly
         description: Lists all columns for a report type
+        displayName: List Columns Metadata
         is:
         - hasParameters
         responses:
@@ -2486,6 +2491,7 @@ types:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Returns Analytics Multi-Channel Funnels data for a view (profile).
+      displayName: Get Mcf Data
       is:
       - hasParameters
       queryParameters:
@@ -2545,6 +2551,7 @@ types:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Returns real time data for a view (profile).
+      displayName: Get Realtime Data
       is:
       - hasParameters
       queryParameters:
@@ -2584,6 +2591,7 @@ types:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Returns Analytics data for a view (profile).
+      displayName: Get Ga Data
       is:
       - hasParameters
       queryParameters:
@@ -2672,6 +2680,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing webProperty-AdWords link. This method supports patch semantics.
+                displayName: Patch WebPropertyAdWordsLinks Management
                 is:
                 - hasParameters
                 body:
@@ -2687,6 +2696,7 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Returns a web property-AdWords link to which the user has access.
+                displayName: Get WebPropertyAdWordsLinks Management
                 is:
                 - hasParameters
                 responses:
@@ -2699,6 +2709,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing webProperty-AdWords link.
+                displayName: Update WebPropertyAdWordsLinks Management
                 is:
                 - hasParameters
                 body:
@@ -2713,6 +2724,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Deletes a web property-AdWords link.
+                displayName: Delete WebPropertyAdWordsLinks Management
                 is:
                 - hasParameters
             post:
@@ -2721,6 +2733,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Creates a webProperty-AdWords link.
+              displayName: Insert WebPropertyAdWordsLinks Management
               is:
               - hasParameters
               body:
@@ -2736,6 +2749,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists webProperty-AdWords links for a given web property.
+              displayName: List WebPropertyAdWordsLinks Management
               is:
               - hasParameters
               queryParameters:
@@ -2764,6 +2778,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom dimension. This method supports patch semantics.
+                displayName: Patch CustomDimensions Management
                 is:
                 - hasParameters
                 queryParameters:
@@ -2784,6 +2799,7 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Get a custom dimension to which the user has access.
+                displayName: Get CustomDimensions Management
                 is:
                 - hasParameters
                 responses:
@@ -2796,6 +2812,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom dimension.
+                displayName: Update CustomDimensions Management
                 is:
                 - hasParameters
                 queryParameters:
@@ -2815,6 +2832,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Create a new custom dimension.
+              displayName: Insert CustomDimensions Management
               is:
               - hasParameters
               body:
@@ -2830,6 +2848,7 @@ types:
                   - https://www.googleapis.com/auth/analytics
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists custom dimensions to which the user has access.
+              displayName: List CustomDimensions Management
               is:
               - hasParameters
               queryParameters:
@@ -2867,6 +2886,7 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: List uploads to which the user has access.
+                    displayName: Get Uploads Management
                     is:
                     - hasParameters
                     responses:
@@ -2880,6 +2900,7 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Upload data for a custom data source.
+                  displayName: UploadData Uploads Management
                   is:
                   - hasParameters
                   responses:
@@ -2894,6 +2915,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: List uploads to which the user has access.
+                  displayName: List Uploads Management
                   is:
                   - hasParameters
                   queryParameters:
@@ -2919,6 +2941,7 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Delete data associated with a previous upload.
+                  displayName: DeleteUploadData Uploads Management
                   is:
                   - hasParameters
                   body:
@@ -2931,6 +2954,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: List custom data sources to which the user has access.
+              displayName: List CustomDataSources Management
               is:
               - hasParameters
               queryParameters:
@@ -2967,6 +2991,7 @@ types:
                         - https://www.googleapis.com/auth/analytics
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing experiment. This method supports patch semantics.
+                    displayName: Patch Experiments Management
                     is:
                     - hasParameters
                     body:
@@ -2983,6 +3008,7 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Returns an experiment to which the user has access.
+                    displayName: Get Experiments Management
                     is:
                     - hasParameters
                     responses:
@@ -2996,6 +3022,7 @@ types:
                         - https://www.googleapis.com/auth/analytics
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing experiment.
+                    displayName: Update Experiments Management
                     is:
                     - hasParameters
                     body:
@@ -3011,6 +3038,7 @@ types:
                         - https://www.googleapis.com/auth/analytics
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Delete an experiment.
+                    displayName: Delete Experiments Management
                     is:
                     - hasParameters
                 post:
@@ -3020,6 +3048,7 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new experiment.
+                  displayName: Insert Experiments Management
                   is:
                   - hasParameters
                   body:
@@ -3036,6 +3065,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists experiments to which the user has access.
+                  displayName: List Experiments Management
                   is:
                   - hasParameters
                   queryParameters:
@@ -3066,6 +3096,7 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Returns a single unsampled report.
+                    displayName: Get UnsampledReports Management
                     is:
                     - hasParameters
                     responses:
@@ -3078,6 +3109,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Deletes an unsampled report.
+                    displayName: Delete UnsampledReports Management
                     is:
                     - hasParameters
                 post:
@@ -3087,6 +3119,7 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new unsampled report.
+                  displayName: Insert UnsampledReports Management
                   is:
                   - hasParameters
                   body:
@@ -3103,6 +3136,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists unsampled reports to which the user has access.
+                  displayName: List UnsampledReports Management
                   is:
                   - hasParameters
                   queryParameters:
@@ -3131,6 +3165,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.manage.users
                     description: Updates permissions for an existing user on the given view (profile).
+                    displayName: Update ProfileUserLinks Management
                     is:
                     - hasParameters
                     body:
@@ -3145,6 +3180,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.manage.users
                     description: Removes a user from the given view (profile).
+                    displayName: Delete ProfileUserLinks Management
                     is:
                     - hasParameters
                 post:
@@ -3153,6 +3189,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/analytics.manage.users
                   description: Adds a new user to the given view (profile).
+                  displayName: Insert ProfileUserLinks Management
                   is:
                   - hasParameters
                   body:
@@ -3168,6 +3205,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.manage.users
                       - https://www.googleapis.com/auth/analytics.manage.users.readonly
                   description: Lists profile-user links for a given view (profile).
+                  displayName: List ProfileUserLinks Management
                   is:
                   - hasParameters
                   queryParameters:
@@ -3197,6 +3235,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing profile filter link. This method supports patch semantics.
+                    displayName: Patch ProfileFilterLinks Management
                     is:
                     - hasParameters
                     body:
@@ -3212,6 +3251,7 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Returns a single profile filter link.
+                    displayName: Get ProfileFilterLinks Management
                     is:
                     - hasParameters
                     responses:
@@ -3224,6 +3264,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing profile filter link.
+                    displayName: Update ProfileFilterLinks Management
                     is:
                     - hasParameters
                     body:
@@ -3238,6 +3279,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Delete a profile filter link.
+                    displayName: Delete ProfileFilterLinks Management
                     is:
                     - hasParameters
                 post:
@@ -3246,6 +3288,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new profile filter link.
+                  displayName: Insert ProfileFilterLinks Management
                   is:
                   - hasParameters
                   body:
@@ -3261,6 +3304,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists all profile filter links for a profile.
+                  displayName: List ProfileFilterLinks Management
                   is:
                   - hasParameters
                   queryParameters:
@@ -3289,6 +3333,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Updates an existing goal. This method supports patch semantics.
+                    displayName: Patch Goals Management
                     is:
                     - hasParameters
                     body:
@@ -3304,6 +3349,7 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Gets a goal to which the user has access.
+                    displayName: Get Goals Management
                     is:
                     - hasParameters
                     responses:
@@ -3316,6 +3362,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Updates an existing goal.
+                    displayName: Update Goals Management
                     is:
                     - hasParameters
                     body:
@@ -3330,6 +3377,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new goal.
+                  displayName: Insert Goals Management
                   is:
                   - hasParameters
                   body:
@@ -3346,6 +3394,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists goals to which the user has access.
+                  displayName: List Goals Management
                   is:
                   - hasParameters
                   queryParameters:
@@ -3368,6 +3417,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing view (profile). This method supports patch semantics.
+                displayName: Patch Profiles Management
                 is:
                 - hasParameters
                 body:
@@ -3383,6 +3433,7 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Gets a view (profile) to which the user has access.
+                displayName: Get Profiles Management
                 is:
                 - hasParameters
                 responses:
@@ -3395,6 +3446,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing view (profile).
+                displayName: Update Profiles Management
                 is:
                 - hasParameters
                 body:
@@ -3409,6 +3461,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Deletes a view (profile).
+                displayName: Delete Profiles Management
                 is:
                 - hasParameters
             post:
@@ -3417,6 +3470,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Create a new view (profile).
+              displayName: Insert Profiles Management
               is:
               - hasParameters
               body:
@@ -3433,6 +3487,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists views (profiles) to which the user has access.
+              displayName: List Profiles Management
               is:
               - hasParameters
               queryParameters:
@@ -3461,6 +3516,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom metric. This method supports patch semantics.
+                displayName: Patch CustomMetrics Management
                 is:
                 - hasParameters
                 queryParameters:
@@ -3481,6 +3537,7 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Get a custom metric to which the user has access.
+                displayName: Get CustomMetrics Management
                 is:
                 - hasParameters
                 responses:
@@ -3493,6 +3550,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom metric.
+                displayName: Update CustomMetrics Management
                 is:
                 - hasParameters
                 queryParameters:
@@ -3512,6 +3570,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Create a new custom metric.
+              displayName: Insert CustomMetrics Management
               is:
               - hasParameters
               body:
@@ -3527,6 +3586,7 @@ types:
                   - https://www.googleapis.com/auth/analytics
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists custom metrics to which the user has access.
+              displayName: List CustomMetrics Management
               is:
               - hasParameters
               queryParameters:
@@ -3548,13 +3608,14 @@ types:
               uriParameters:
                 remarketingAudienceId:
                   type: string
-                  description: Remarketing audience ID of the remarketing audience to update.
+                  description: The ID of the remarketing audience to update.
               patch:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
-                description: Updates an existing remarketing audiences. This method supports patch semantics.
+                description: Updates an existing remarketing audience. This method supports patch semantics.
+                displayName: Patch RemarketingAudience Management
                 is:
                 - hasParameters
                 body:
@@ -3569,7 +3630,8 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
-                description: Gets remarketing audiences to which the user has access.
+                description: Gets a remarketing audience to which the user has access.
+                displayName: Get RemarketingAudience Management
                 is:
                 - hasParameters
                 responses:
@@ -3581,7 +3643,8 @@ types:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
-                description: Updates an existing remarketing audiences.
+                description: Updates an existing remarketing audience.
+                displayName: Update RemarketingAudience Management
                 is:
                 - hasParameters
                 body:
@@ -3595,7 +3658,8 @@ types:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
-              description: Creates a new remarketing audiences.
+              description: Creates a new remarketing audience.
+              displayName: Insert RemarketingAudience Management
               is:
               - hasParameters
               body:
@@ -3611,6 +3675,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists remarketing audiences to which the user has access.
+              displayName: List RemarketingAudience Management
               is:
               - hasParameters
               queryParameters:
@@ -3642,6 +3707,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.manage.users
                 description: Updates permissions for an existing user on the given web property.
+                displayName: Update WebpropertyUserLinks Management
                 is:
                 - hasParameters
                 body:
@@ -3656,6 +3722,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.manage.users
                 description: Removes a user from the given web property.
+                displayName: Delete WebpropertyUserLinks Management
                 is:
                 - hasParameters
             post:
@@ -3664,6 +3731,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.manage.users
               description: Adds a new user to the given web property.
+              displayName: Insert WebpropertyUserLinks Management
               is:
               - hasParameters
               body:
@@ -3679,6 +3747,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.manage.users
                   - https://www.googleapis.com/auth/analytics.manage.users.readonly
               description: Lists webProperty-user links for a given web property.
+              displayName: List WebpropertyUserLinks Management
               is:
               - hasParameters
               queryParameters:
@@ -3701,6 +3770,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing web property. This method supports patch semantics.
+            displayName: Patch Webproperties Management
             is:
             - hasParameters
             body:
@@ -3716,6 +3786,7 @@ types:
                 - https://www.googleapis.com/auth/analytics.edit
                 - https://www.googleapis.com/auth/analytics.readonly
             description: Gets a web property to which the user has access.
+            displayName: Get Webproperties Management
             is:
             - hasParameters
             responses:
@@ -3728,6 +3799,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing web property.
+            displayName: Update Webproperties Management
             is:
             - hasParameters
             body:
@@ -3742,6 +3814,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/analytics.edit
           description: Create a new property if the account has fewer than 20 properties. Web properties are visible in the Google Analytics interface only if they have at least one profile.
+          displayName: Insert Webproperties Management
           is:
           - hasParameters
           body:
@@ -3758,6 +3831,7 @@ types:
               - https://www.googleapis.com/auth/analytics.edit
               - https://www.googleapis.com/auth/analytics.readonly
           description: Lists web properties to which the user has access.
+          displayName: List Webproperties Management
           is:
           - hasParameters
           queryParameters:
@@ -3786,6 +3860,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing filter. This method supports patch semantics.
+            displayName: Patch Filters Management
             is:
             - hasParameters
             body:
@@ -3801,6 +3876,7 @@ types:
                 - https://www.googleapis.com/auth/analytics.edit
                 - https://www.googleapis.com/auth/analytics.readonly
             description: Returns a filters to which the user has access.
+            displayName: Get Filters Management
             is:
             - hasParameters
             responses:
@@ -3813,6 +3889,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing filter.
+            displayName: Update Filters Management
             is:
             - hasParameters
             body:
@@ -3827,6 +3904,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Delete a filter.
+            displayName: Delete Filters Management
             is:
             - hasParameters
             responses:
@@ -3839,6 +3917,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/analytics.edit
           description: Create a new filter.
+          displayName: Insert Filters Management
           is:
           - hasParameters
           body:
@@ -3854,6 +3933,7 @@ types:
               - https://www.googleapis.com/auth/analytics.edit
               - https://www.googleapis.com/auth/analytics.readonly
           description: Lists all filters for an account
+          displayName: List Filters Management
           is:
           - hasParameters
           queryParameters:
@@ -3882,6 +3962,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.manage.users
             description: Updates permissions for an existing user on the given account.
+            displayName: Update AccountUserLinks Management
             is:
             - hasParameters
             body:
@@ -3896,6 +3977,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.manage.users
             description: Removes a user from the given account.
+            displayName: Delete AccountUserLinks Management
             is:
             - hasParameters
         post:
@@ -3904,6 +3986,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/analytics.manage.users
           description: Adds a new user to the given account.
+          displayName: Insert AccountUserLinks Management
           is:
           - hasParameters
           body:
@@ -3919,6 +4002,7 @@ types:
               - https://www.googleapis.com/auth/analytics.manage.users
               - https://www.googleapis.com/auth/analytics.manage.users.readonly
           description: Lists account-user links for a given account.
+          displayName: List AccountUserLinks Management
           is:
           - hasParameters
           queryParameters:
@@ -3943,6 +4027,7 @@ types:
           - https://www.googleapis.com/auth/analytics.edit
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists all accounts to which the user has access.
+      displayName: List Accounts Management
       is:
       - hasParameters
       queryParameters:
@@ -3967,6 +4052,7 @@ types:
           - https://www.googleapis.com/auth/analytics.edit
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists account summaries (lightweight tree comprised of accounts/properties/profiles) to which the user has access.
+      displayName: List AccountSummaries Management
       is:
       - hasParameters
       queryParameters:
@@ -3992,6 +4078,7 @@ types:
           - https://www.googleapis.com/auth/analytics.edit
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists segments to which the user has access.
+      displayName: List Segments Management
       is:
       - hasParameters
       queryParameters:
@@ -4016,6 +4103,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/analytics.provision
       description: Creates an account ticket.
+      displayName: CreateAccountTicket Provisioning
       is:
       - hasParameters
       body:
