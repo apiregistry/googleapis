@@ -75,68 +75,6 @@ types:
     description: |-
       Generated advice about this change, used for providing more
       information about how a change will affect the existing service.
-  Analytics:
-    type: object
-    properties:
-      producerDestinations?:
-        type: array
-        description: |-
-          Analytics configurations for sending metrics to the analytics backend.
-          There can be multiple producer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one producer destination.
-        items: AnalyticsDestination
-    description: |-
-      Analytics configuration of the service.
-
-      The example below shows how to configure monitored resources and metrics
-      for analytics. In the example, a monitored resource and two metrics are
-      defined. The `library.googleapis.com/book/returned_count` and
-      `library.googleapis.com/book/overdue_count` metric are sent
-      to the analytics.
-
-          monitored_resources:
-          - type: library.googleapis.com/branch
-            labels:
-            - key: /city
-              description: The city where the library branch is located in.
-            - key: /name
-              description: The name of the branch.
-          metrics:
-          - name: library.googleapis.com/book/returned_count
-            metric_kind: DELTA
-            value_type: INT64
-            labels:
-            - key: /customer_id
-          - name: library.googleapis.com/book/overdue_count
-            metric_kind: GAUGE
-            value_type: INT64
-            labels:
-            - key: /customer_id
-          analytics:
-            producer_destinations:
-            - monitored_resource: library.googleapis.com/branch
-              metrics:
-              - library.googleapis.com/book/returned_count
-              - library.googleapis.com/book/overdue_count
-  AnalyticsDestination:
-    type: object
-    properties:
-      metrics?:
-        type: array
-        description: |-
-          Names of the metrics to report to this analytics destination.
-          Each name must be defined in Service.metrics section. Metrics
-          with value type BOOL and STRING must be of GUAGE kind, metrics with
-          value type INT64, DOUBLE and MONEY must be of DELTA kind.
-        items:
-          type: string
-      monitoredResource?:
-        type: string
-        description: |-
-          The monitored resource type. The type must be defined in
-          Service.monitored_resources section.
-    description: Configuration of a specific analytics destination.
   Api:
     type: object
     properties:
@@ -212,6 +150,22 @@ types:
   AuthProvider:
     type: object
     properties:
+      audiences?:
+        type: string
+        description: |-
+          The list of JWT
+          [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+          that are allowed to access. A JWT containing any of these audiences will
+          be accepted. When this setting is absent, only JWTs with audience
+          "https://Service_name/API_name"
+          will be accepted. For example, if no audiences are in the setting,
+          LibraryService API will only accept JWTs with the following audience
+          "https://library-example.googleapis.com/google.example.library.v1.LibraryService".
+
+          Example:
+
+              audiences: bookstore_android.apps.googleusercontent.com,
+                         bookstore_web.apps.googleusercontent.com
       jwksUri?:
         type: string
         description: |-
@@ -257,6 +211,9 @@ types:
       audiences?:
         type: string
         description: |-
+          NOTE: This will be deprecated soon, once AuthProvider.audiences is
+          implemented and accepted in all the runtime components.
+
           The list of JWT
           [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
           that are allowed to access. A JWT containing any of these audiences will
@@ -2261,7 +2218,6 @@ types:
       title?:
         type: string
         description: The product title associated with this service.
-      analytics?: Analytics
       enums?:
         type: array
         description: |-
@@ -2803,7 +2759,7 @@ types:
     uriParameters:
       name:
         type: string
-        pattern: ^operations/.*$
+        pattern: ^operations/.+$
         description: The name of the operation resource.
     get:
       securedBy:
@@ -2854,7 +2810,7 @@ types:
     uriParameters:
       resource:
         type: string
-        pattern: ^services/[^/]*$
+        pattern: ^services/[^/]+$
         description: |-
           REQUIRED: The resource for which the policy detail is being requested.
           `resource` is usually specified as a path. For example, a Project
@@ -3054,6 +3010,9 @@ types:
       is:
       - hasParameters
       queryParameters:
+        consumerProjectId?:
+          type: string
+          description: Include services consumed by the specified project.
         pageSize?:
           type: integer
           format: int32
@@ -3074,7 +3033,7 @@ types:
     uriParameters:
       resource:
         type: string
-        pattern: ^services/[^/]*$
+        pattern: ^services/[^/]+$
         description: |-
           REQUIRED: The resource for which the policy is being requested.
           `resource` is usually specified as a path. For example, a Project
@@ -3102,7 +3061,7 @@ types:
     uriParameters:
       resource:
         type: string
-        pattern: ^services/[^/]*$
+        pattern: ^services/[^/]+$
         description: |-
           REQUIRED: The resource for which the policy is being specified.
           `resource` is usually specified as a path. For example, a Project
