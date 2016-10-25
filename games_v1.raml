@@ -2191,7 +2191,7 @@ types:
                 - https://www.googleapis.com/auth/games
                 - https://www.googleapis.com/auth/plus.login
             description: Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
-            displayName: claim
+            displayName: Claim
             is:
             - hasParameters
             queryParameters:
@@ -2204,7 +2204,7 @@ types:
                 format: int64
                 description: The last-seen mutation timestamp.
             (commons.Id): games.questMilestones.claim
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Quest Milestones
     /accept:
       post:
@@ -2214,7 +2214,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Indicates that the currently authorized user will participate in the quest.
-        displayName: accept
+        displayName: Accept
         is:
         - hasParameters
         queryParameters:
@@ -2230,7 +2230,7 @@ types:
             body:
               application/json: Quest
         (commons.Id): games.quests.accept
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Quests
 /rooms:
   /{roomId}:
@@ -2246,7 +2246,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Leave a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-        displayName: leave
+        displayName: Leave
         is:
         - hasParameters
         queryParameters:
@@ -2264,7 +2264,7 @@ types:
             body:
               application/json: Room
         (commons.Id): games.rooms.leave
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Rooms
     /decline:
       post:
@@ -2274,7 +2274,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-        displayName: decline
+        displayName: Decline
         is:
         - hasParameters
         queryParameters:
@@ -2290,7 +2290,7 @@ types:
             body:
               application/json: Room
         (commons.Id): games.rooms.decline
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Rooms
     /dismiss:
       post:
@@ -2300,7 +2300,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-        displayName: dismiss
+        displayName: Dismiss
         is:
         - hasParameters
         queryParameters:
@@ -2309,7 +2309,7 @@ types:
             format: int64
             description: The last-seen mutation timestamp.
         (commons.Id): games.rooms.dismiss
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Rooms
     /reportstatus:
       post:
@@ -2319,7 +2319,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Updates sent by a client reporting the status of peers in a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-        displayName: report Status
+        displayName: Report Status
         is:
         - hasParameters
         queryParameters:
@@ -2337,7 +2337,7 @@ types:
             body:
               application/json: RoomStatus
         (commons.Id): games.rooms.reportStatus
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Rooms
     /join:
       post:
@@ -2347,7 +2347,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-        displayName: join
+        displayName: Join
         is:
         - hasParameters
         queryParameters:
@@ -2365,7 +2365,7 @@ types:
             body:
               application/json: Room
         (commons.Id): games.rooms.join
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Rooms
     get:
       securedBy:
@@ -2374,7 +2374,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Get the data for a room.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -2390,7 +2390,7 @@ types:
           body:
             application/json: Room
       (commons.Id): games.rooms.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Rooms
   /create:
     post:
@@ -2400,7 +2400,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       queryParameters:
@@ -2418,7 +2418,7 @@ types:
           body:
             application/json: Room
       (commons.Id): games.rooms.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Rooms
   get:
     securedBy:
@@ -2427,7 +2427,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns invitations to join rooms.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -2452,7 +2452,7 @@ types:
         body:
           application/json: RoomList
     (commons.Id): games.rooms.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Rooms
 /achievements:
   /{achievementId}:
@@ -2468,7 +2468,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.
-        displayName: set Steps At Least
+        displayName: Set Steps At Least
         is:
         - hasParameters
         queryParameters:
@@ -2486,7 +2486,7 @@ types:
             body:
               application/json: AchievementSetStepsAtLeastResponse
         (commons.Id): games.achievements.setStepsAtLeast
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
     /reveal:
       post:
@@ -2496,7 +2496,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Sets the state of the achievement with the given ID to REVEALED for the currently authenticated player.
-        displayName: reveal
+        displayName: Reveal
         is:
         - hasParameters
         queryParameters:
@@ -2509,7 +2509,7 @@ types:
             body:
               application/json: AchievementRevealResponse
         (commons.Id): games.achievements.reveal
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
     /unlock:
       post:
@@ -2519,7 +2519,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Unlocks this achievement for the currently authenticated player.
-        displayName: unlock
+        displayName: Unlock
         is:
         - hasParameters
         queryParameters:
@@ -2532,7 +2532,7 @@ types:
             body:
               application/json: AchievementUnlockResponse
         (commons.Id): games.achievements.unlock
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
     /increment:
       post:
@@ -2542,7 +2542,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Increments the steps of the achievement with the given ID for the currently authenticated player.
-        displayName: increment
+        displayName: Increment
         is:
         - hasParameters
         queryParameters:
@@ -2564,7 +2564,7 @@ types:
             body:
               application/json: AchievementIncrementResponse
         (commons.Id): games.achievements.increment
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
   /updateMultiple:
     post:
@@ -2574,7 +2574,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Updates multiple achievements for the currently authenticated player.
-      displayName: update Multiple
+      displayName: Update Multiple
       is:
       - hasParameters
       queryParameters:
@@ -2589,7 +2589,7 @@ types:
           body:
             application/json: AchievementUpdateMultipleResponse
       (commons.Id): games.achievements.updateMultiple
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Achievements
   get:
     securedBy:
@@ -2598,7 +2598,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Lists all the achievement definitions for your application.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -2623,7 +2623,7 @@ types:
         body:
           application/json: AchievementDefinitionsListResponse
     (commons.Id): games.achievementDefinitions.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Achievement Definitions
 /players:
   /{playerId}:
@@ -2639,7 +2639,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Lists the progress for all your application's achievements for the currently authenticated player.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -2677,7 +2677,7 @@ types:
             body:
               application/json: PlayerAchievementListResponse
         (commons.Id): games.achievements.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
     /quests:
       get:
@@ -2687,7 +2687,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Get a list of quests for your application and the currently authenticated player.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -2715,7 +2715,7 @@ types:
             body:
               application/json: QuestListResponse
         (commons.Id): games.quests.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Quests
     /leaderboards:
       /{leaderboardId}:
@@ -2748,7 +2748,7 @@ types:
               description: |-
                 Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, leaderboardId can be set to ALL to retrieve data for all leaderboards in a given time span.
                 NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               queryParameters:
@@ -2784,7 +2784,7 @@ types:
                   body:
                     application/json: PlayerLeaderboardScoreListResponse
               (commons.Id): games.scores.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Scores
     /snapshots:
       get:
@@ -2795,7 +2795,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -2820,7 +2820,7 @@ types:
             body:
               application/json: SnapshotListResponse
         (commons.Id): games.snapshots.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Snapshots
     /categories:
       /{collection}:
@@ -2839,7 +2839,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: List play data aggregated per category for the player corresponding to playerId.
-          displayName: list Categories By Player
+          displayName: List Categories By Player
           is:
           - hasParameters
           queryParameters:
@@ -2864,7 +2864,7 @@ types:
               body:
                 application/json: CategoryListResponse
           (commons.Id): games.metagame.listCategoriesByPlayer
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Metagame
     get:
       securedBy:
@@ -2873,7 +2873,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -2889,7 +2889,7 @@ types:
           body:
             application/json: Player
       (commons.Id): games.players.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Players
   /me:
     /players:
@@ -2916,7 +2916,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Get the collection of players for the currently authenticated user.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -2941,7 +2941,7 @@ types:
               body:
                 application/json: PlayerListResponse
           (commons.Id): games.players.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Players
 /pushtokens:
   /remove:
@@ -2952,7 +2952,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Removes a push token for the current user and application. Removing a non-existent push token will report success.
-      displayName: remove
+      displayName: Remove
       is:
       - hasParameters
       queryParameters:
@@ -2963,7 +2963,7 @@ types:
       body:
         application/json: PushTokenId
       (commons.Id): games.pushtokens.remove
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pushtokens
   put:
     securedBy:
@@ -2972,7 +2972,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Registers a push token for the current user and application.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -2983,7 +2983,7 @@ types:
     body:
       application/json: PushToken
     (commons.Id): games.pushtokens.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Pushtokens
 /leaderboards:
   /scores:
@@ -2994,7 +2994,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Submits multiple scores to leaderboards.
-      displayName: submit Multiple
+      displayName: Submit Multiple
       is:
       - hasParameters
       queryParameters:
@@ -3012,7 +3012,7 @@ types:
           body:
             application/json: PlayerScoreListResponse
       (commons.Id): games.scores.submitMultiple
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Scores
   /{leaderboardId}:
     uriParameters:
@@ -3040,7 +3040,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Lists the scores in a leaderboard, starting from the top.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -3076,7 +3076,7 @@ types:
               body:
                 application/json: LeaderboardScores
           (commons.Id): games.scores.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Scores
       post:
         securedBy:
@@ -3085,7 +3085,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Submits a score to the specified leaderboard.
-        displayName: submit
+        displayName: Submit
         is:
         - hasParameters
         queryParameters:
@@ -3109,7 +3109,7 @@ types:
             body:
               application/json: PlayerScoreResponse
         (commons.Id): games.scores.submit
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Scores
     /window:
       /{collection}:
@@ -3132,7 +3132,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Lists the scores in a leaderboard around (and including) a player's score.
-          displayName: list Window
+          displayName: List Window
           is:
           - hasParameters
           queryParameters:
@@ -3175,7 +3175,7 @@ types:
               body:
                 application/json: LeaderboardScores
           (commons.Id): games.scores.listWindow
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Scores
     get:
       securedBy:
@@ -3184,7 +3184,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the metadata of the leaderboard with the given ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -3200,7 +3200,7 @@ types:
           body:
             application/json: Leaderboard
       (commons.Id): games.leaderboards.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Leaderboards
   get:
     securedBy:
@@ -3209,7 +3209,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Lists all the leaderboard metadata for your application.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -3234,7 +3234,7 @@ types:
         body:
           application/json: LeaderboardListResponse
     (commons.Id): games.leaderboards.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Leaderboards
 /snapshots:
   /{snapshotId}:
@@ -3250,7 +3250,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the metadata for a given snapshot ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -3266,7 +3266,7 @@ types:
           body:
             application/json: Snapshot
       (commons.Id): games.snapshots.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Snapshots
 /turnbasedmatches:
   /{matchId}:
@@ -3282,7 +3282,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Cancel a turn-based match.
-        displayName: cancel
+        displayName: Cancel
         is:
         - hasParameters
         queryParameters:
@@ -3291,7 +3291,7 @@ types:
             format: int64
             description: The last-seen mutation timestamp.
         (commons.Id): games.turnBasedMatches.cancel
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /dismiss:
       put:
@@ -3301,7 +3301,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.
-        displayName: dismiss
+        displayName: Dismiss
         is:
         - hasParameters
         queryParameters:
@@ -3310,7 +3310,7 @@ types:
             format: int64
             description: The last-seen mutation timestamp.
         (commons.Id): games.turnBasedMatches.dismiss
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /leaveTurn:
       put:
@@ -3320,7 +3320,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Leave a turn-based match during the current player's turn, without canceling the match.
-        displayName: leave Turn
+        displayName: Leave Turn
         is:
         - hasParameters
         queryParameters:
@@ -3343,7 +3343,7 @@ types:
             body:
               application/json: TurnBasedMatch
         (commons.Id): games.turnBasedMatches.leaveTurn
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /leave:
       put:
@@ -3353,7 +3353,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Leave a turn-based match when it is not the current player's turn, without canceling the match.
-        displayName: leave
+        displayName: Leave
         is:
         - hasParameters
         queryParameters:
@@ -3369,7 +3369,7 @@ types:
             body:
               application/json: TurnBasedMatch
         (commons.Id): games.turnBasedMatches.leave
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /turn:
       put:
@@ -3379,7 +3379,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Commit the results of a player turn.
-        displayName: take Turn
+        displayName: Take Turn
         is:
         - hasParameters
         queryParameters:
@@ -3397,7 +3397,7 @@ types:
             body:
               application/json: TurnBasedMatch
         (commons.Id): games.turnBasedMatches.takeTurn
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /decline:
       put:
@@ -3407,7 +3407,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Decline an invitation to play a turn-based match.
-        displayName: decline
+        displayName: Decline
         is:
         - hasParameters
         queryParameters:
@@ -3423,7 +3423,7 @@ types:
             body:
               application/json: TurnBasedMatch
         (commons.Id): games.turnBasedMatches.decline
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /finish:
       put:
@@ -3433,7 +3433,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Finish a turn-based match. Each player should make this call once, after all results are in. Only the player whose turn it is may make the first call to Finish, and can pass in the final match state.
-        displayName: finish
+        displayName: Finish
         is:
         - hasParameters
         queryParameters:
@@ -3451,7 +3451,7 @@ types:
             body:
               application/json: TurnBasedMatch
         (commons.Id): games.turnBasedMatches.finish
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /join:
       put:
@@ -3461,7 +3461,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Join a turn-based match.
-        displayName: join
+        displayName: Join
         is:
         - hasParameters
         queryParameters:
@@ -3477,7 +3477,7 @@ types:
             body:
               application/json: TurnBasedMatch
         (commons.Id): games.turnBasedMatches.join
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     /rematch:
       post:
@@ -3487,7 +3487,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller's turn.
-        displayName: rematch
+        displayName: Rematch
         is:
         - hasParameters
         queryParameters:
@@ -3507,7 +3507,7 @@ types:
             body:
               application/json: TurnBasedMatchRematch
         (commons.Id): games.turnBasedMatches.rematch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Turn Based Matches
     get:
       securedBy:
@@ -3516,7 +3516,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Get the data for a turn-based match.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -3535,7 +3535,7 @@ types:
           body:
             application/json: TurnBasedMatch
       (commons.Id): games.turnBasedMatches.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Turn Based Matches
   /sync:
     get:
@@ -3545,7 +3545,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.
-      displayName: sync
+      displayName: Sync
       is:
       - hasParameters
       queryParameters:
@@ -3579,7 +3579,7 @@ types:
           body:
             application/json: TurnBasedMatchSync
       (commons.Id): games.turnBasedMatches.sync
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Turn Based Matches
   /create:
     post:
@@ -3589,7 +3589,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Create a turn-based match.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       queryParameters:
@@ -3607,7 +3607,7 @@ types:
           body:
             application/json: TurnBasedMatch
       (commons.Id): games.turnBasedMatches.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Turn Based Matches
   get:
     securedBy:
@@ -3616,7 +3616,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns turn-based matches the player is or was involved in.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -3650,7 +3650,7 @@ types:
         body:
           application/json: TurnBasedMatchList
     (commons.Id): games.turnBasedMatches.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Turn Based Matches
 /metagameConfig:
   get:
@@ -3660,7 +3660,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Return the metagame configuration data for the calling application.
-    displayName: get Metagame Config
+    displayName: Get Metagame Config
     is:
     - hasParameters
     queryParameters:
@@ -3673,7 +3673,7 @@ types:
         body:
           application/json: MetagameConfig
     (commons.Id): games.metagame.getMetagameConfig
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Metagame
 /revisions:
   /check:
@@ -3684,7 +3684,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Checks whether the games client is out of date.
-      displayName: check
+      displayName: Check
       is:
       - hasParameters
       queryParameters:
@@ -3704,7 +3704,7 @@ types:
           body:
             application/json: RevisionCheckResponse
       (commons.Id): games.revisions.check
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Revisions
 /events:
   get:
@@ -3714,7 +3714,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns a list showing the current progress on events in this application for the currently authenticated user.
-    displayName: list ByPlayer
+    displayName: List ByPlayer
     is:
     - hasParameters
     queryParameters:
@@ -3739,7 +3739,7 @@ types:
         body:
           application/json: PlayerEventListResponse
     (commons.Id): games.events.listByPlayer
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Events
   post:
     securedBy:
@@ -3748,7 +3748,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Records a batch of changes to the number of times events have occurred for the currently authenticated user of this application.
-    displayName: record
+    displayName: Record
     is:
     - hasParameters
     queryParameters:
@@ -3766,7 +3766,7 @@ types:
         body:
           application/json: EventUpdateResponse
     (commons.Id): games.events.record
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Events
 /eventDefinitions:
   get:
@@ -3776,7 +3776,7 @@ types:
         - https://www.googleapis.com/auth/games
         - https://www.googleapis.com/auth/plus.login
     description: Returns a list of the event definitions in this application.
-    displayName: list Definitions
+    displayName: List Definitions
     is:
     - hasParameters
     queryParameters:
@@ -3801,7 +3801,7 @@ types:
         body:
           application/json: EventDefinitionListResponse
     (commons.Id): games.events.listDefinitions
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Events
 /applications:
   /{applicationId}:
@@ -3817,7 +3817,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Verifies the auth token provided with this request is for the application with the specified ID, and returns the ID of the player it was granted for.
-        displayName: verify
+        displayName: Verify
         is:
         - hasParameters
         queryParameters:
@@ -3830,7 +3830,7 @@ types:
             body:
               application/json: ApplicationVerifyResponse
         (commons.Id): games.applications.verify
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Applications
     get:
       securedBy:
@@ -3839,7 +3839,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Retrieves the metadata of the application with the given ID. If the requested application is not available for the specified platformType, the returned response will not include any instance data.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -3866,7 +3866,7 @@ types:
           body:
             application/json: Application
       (commons.Id): games.applications.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Applications
   /played:
     post:
@@ -3876,7 +3876,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Indicate that the the currently authenticated user is playing your application.
-      displayName: played
+      displayName: Played
       is:
       - hasParameters
       queryParameters:
@@ -3885,5 +3885,5 @@ types:
           format: int64
           description: The last-seen mutation timestamp.
       (commons.Id): games.applications.played
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Applications

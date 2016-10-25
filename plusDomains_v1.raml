@@ -1095,7 +1095,7 @@ types:
           - https://www.googleapis.com/auth/plus.login
           - https://www.googleapis.com/auth/plus.stream.read
       description: Get a comment.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1103,7 +1103,7 @@ types:
           body:
             application/json: Comment
       (commons.Id): plusDomains.comments.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Comments
 /activities:
   /{activityId}:
@@ -1119,7 +1119,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.stream.write
         description: Create a new comment in reply to an activity.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -1129,7 +1129,7 @@ types:
             body:
               application/json: Comment
         (commons.Id): plusDomains.comments.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Comments
       get:
         securedBy:
@@ -1138,7 +1138,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.stream.read
         description: List all of the comments for an activity.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1167,7 +1167,7 @@ types:
             body:
               application/json: CommentFeed
         (commons.Id): plusDomains.comments.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Comments
     /people:
       /{collection}:
@@ -1190,7 +1190,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.stream.read
           description: List all of the people in the specified collection for a particular activity.
-          displayName: list ByActivity
+          displayName: List ByActivity
           is:
           - hasParameters
           queryParameters:
@@ -1209,7 +1209,7 @@ types:
               body:
                 application/json: PeopleFeed
           (commons.Id): plusDomains.people.listByActivity
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - People
     get:
       securedBy:
@@ -1219,7 +1219,7 @@ types:
           - https://www.googleapis.com/auth/plus.me
           - https://www.googleapis.com/auth/plus.stream.read
       description: Get an activity.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1227,7 +1227,7 @@ types:
           body:
             application/json: Activity
       (commons.Id): plusDomains.activities.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Activities
 /people:
   /{userId}:
@@ -1253,7 +1253,7 @@ types:
               - https://www.googleapis.com/auth/plus.me
               - https://www.googleapis.com/auth/plus.stream.read
           description: List all of the activities in the specified collection for a particular user.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1272,7 +1272,7 @@ types:
               body:
                 application/json: ActivityFeed
           (commons.Id): plusDomains.activities.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Activities
       post:
         securedBy:
@@ -1282,7 +1282,7 @@ types:
             - https://www.googleapis.com/auth/plus.me
             - https://www.googleapis.com/auth/plus.stream.write
         description: Create a new activity for the authenticated user.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         queryParameters:
@@ -1296,7 +1296,7 @@ types:
             body:
               application/json: Activity
         (commons.Id): plusDomains.activities.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Activities
     /audiences:
       get:
@@ -1307,7 +1307,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: List all of the audiences to which a user can share.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1326,7 +1326,7 @@ types:
             body:
               application/json: AudiencesFeed
         (commons.Id): plusDomains.audiences.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Audiences
     /circles:
       post:
@@ -1337,7 +1337,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: Create a new circle for the authenticated user.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -1347,7 +1347,7 @@ types:
             body:
               application/json: Circle
         (commons.Id): plusDomains.circles.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Circles
       get:
         securedBy:
@@ -1357,7 +1357,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: List all of the circles for a user.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1376,7 +1376,7 @@ types:
             body:
               application/json: CircleFeed
         (commons.Id): plusDomains.circles.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Circles
     /media:
       /{collection}:
@@ -1395,7 +1395,7 @@ types:
               - https://www.googleapis.com/auth/plus.me
               - https://www.googleapis.com/auth/plus.media.upload
           description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -1405,7 +1405,7 @@ types:
               body:
                 application/json: Media
           (commons.Id): plusDomains.media.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Media
     /people:
       /{collection}:
@@ -1425,7 +1425,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the people in the specified collection.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1453,7 +1453,7 @@ types:
               body:
                 application/json: PeopleFeed
           (commons.Id): plusDomains.people.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - People
     get:
       securedBy:
@@ -1465,7 +1465,7 @@ types:
           - https://www.googleapis.com/auth/userinfo.email
           - https://www.googleapis.com/auth/userinfo.profile
       description: Get a person's profile.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1473,7 +1473,7 @@ types:
           body:
             application/json: Person
       (commons.Id): plusDomains.people.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - People
 /circles:
   /{circleId}:
@@ -1489,7 +1489,7 @@ types:
             - https://www.googleapis.com/auth/plus.circles.write
             - https://www.googleapis.com/auth/plus.login
         description: Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.
-        displayName: add People
+        displayName: Add People
         is:
         - hasParameters
         queryParameters:
@@ -1504,7 +1504,7 @@ types:
             body:
               application/json: Circle
         (commons.Id): plusDomains.circles.addPeople
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Circles
       delete:
         securedBy:
@@ -1513,7 +1513,7 @@ types:
             - https://www.googleapis.com/auth/plus.circles.write
             - https://www.googleapis.com/auth/plus.login
         description: Remove a person from a circle.
-        displayName: remove People
+        displayName: Remove People
         is:
         - hasParameters
         queryParameters:
@@ -1524,7 +1524,7 @@ types:
             type: string
             description: Email of the people to add to the circle. Optional, can be repeated.
         (commons.Id): plusDomains.circles.removePeople
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Circles
       get:
         securedBy:
@@ -1533,7 +1533,7 @@ types:
             - https://www.googleapis.com/auth/plus.circles.read
             - https://www.googleapis.com/auth/plus.login
         description: List all of the people who are members of a circle.
-        displayName: list ByCircle
+        displayName: List ByCircle
         is:
         - hasParameters
         queryParameters:
@@ -1552,7 +1552,7 @@ types:
             body:
               application/json: PeopleFeed
         (commons.Id): plusDomains.people.listByCircle
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - People
     patch:
       securedBy:
@@ -1561,7 +1561,7 @@ types:
           - https://www.googleapis.com/auth/plus.circles.write
           - https://www.googleapis.com/auth/plus.login
       description: Update a circle's description. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -1571,7 +1571,7 @@ types:
           body:
             application/json: Circle
       (commons.Id): plusDomains.circles.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Circles
     get:
       securedBy:
@@ -1580,7 +1580,7 @@ types:
           - https://www.googleapis.com/auth/plus.circles.read
           - https://www.googleapis.com/auth/plus.login
       description: Get a circle.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1588,7 +1588,7 @@ types:
           body:
             application/json: Circle
       (commons.Id): plusDomains.circles.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Circles
     put:
       securedBy:
@@ -1597,7 +1597,7 @@ types:
           - https://www.googleapis.com/auth/plus.circles.write
           - https://www.googleapis.com/auth/plus.login
       description: Update a circle's description.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -1607,7 +1607,7 @@ types:
           body:
             application/json: Circle
       (commons.Id): plusDomains.circles.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Circles
     delete:
       securedBy:
@@ -1616,9 +1616,9 @@ types:
           - https://www.googleapis.com/auth/plus.circles.write
           - https://www.googleapis.com/auth/plus.login
       description: Delete a circle.
-      displayName: remove
+      displayName: Remove
       is:
       - hasParameters
       (commons.Id): plusDomains.circles.remove
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Circles

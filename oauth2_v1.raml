@@ -172,7 +172,7 @@ types:
   /v1:
     /raw_public_keys:
       get:
-        displayName: get Cert ForOpen Id Connect Raw
+        displayName: Get Cert ForOpen Id Connect Raw
         is:
         - hasParameters
         responses:
@@ -180,11 +180,11 @@ types:
             body:
               application/json: Raw
         (commons.Id): oauth2.getCertForOpenIdConnectRaw
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Get Cert ForOpen Id Connect Raw
     /certs:
       get:
-        displayName: get Cert ForOpen Id Connect
+        displayName: Get Cert ForOpen Id Connect
         is:
         - hasParameters
         responses:
@@ -192,12 +192,12 @@ types:
             body:
               application/json: X509
         (commons.Id): oauth2.getCertForOpenIdConnect
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Get Cert ForOpen Id Connect
     /tokeninfo:
       post:
         description: Get token info
-        displayName: tokeninfo
+        displayName: Tokeninfo
         is:
         - hasParameters
         queryParameters:
@@ -212,7 +212,7 @@ types:
             body:
               application/json: Tokeninfo
         (commons.Id): oauth2.tokeninfo
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Tokeninfo
     /userinfo:
       get:
@@ -224,7 +224,7 @@ types:
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
         description: Get user info
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -232,7 +232,7 @@ types:
             body:
               application/json: Userinfoplus
         (commons.Id): oauth2.userinfo.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Userinfo
 /service_accounts:
   /v1:
@@ -244,7 +244,7 @@ types:
               type: string
               description: The email of robot account.
           get:
-            displayName: get Robot Metadata Raw
+            displayName: Get Robot Metadata Raw
             is:
             - hasParameters
             responses:
@@ -252,7 +252,7 @@ types:
                 body:
                   application/json: Raw
             (commons.Id): oauth2.getRobotMetadataRaw
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Get Robot Metadata Raw
       /x509:
         /{robotEmail}:
@@ -261,7 +261,7 @@ types:
               type: string
               description: The email of robot account.
           get:
-            displayName: get Robot Metadata X509
+            displayName: Get Robot Metadata X509
             is:
             - hasParameters
             responses:
@@ -269,7 +269,7 @@ types:
                 body:
                   application/json: X509
             (commons.Id): oauth2.getRobotMetadataX509
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Get Robot Metadata X509
     /jwk:
       /{robotEmail}:
@@ -278,7 +278,7 @@ types:
             type: string
             description: The email of robot account.
         get:
-          displayName: get Robot Jwk
+          displayName: Get Robot Jwk
           is:
           - hasParameters
           responses:
@@ -286,7 +286,7 @@ types:
               body:
                 application/json: Jwk
           (commons.Id): oauth2.getRobotJwk
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Get Robot Jwk
 /userinfo:
   /v2:
@@ -300,7 +300,7 @@ types:
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
         description: Get user info
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -308,7 +308,7 @@ types:
             body:
               application/json: Userinfoplus
         (commons.Id): oauth2.userinfo.v2.me.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Userinfo
         - V2
         - Me

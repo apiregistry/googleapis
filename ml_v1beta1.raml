@@ -907,7 +907,7 @@ types:
         <pre>
         {"error": "Divide by zero"}
         </pre>
-      displayName: predict
+      displayName: Predict
       is:
       - hasParameters
       body:
@@ -917,7 +917,7 @@ types:
           body:
             application/json: GoogleApi__HttpBody
       (commons.Id): ml.projects.predict
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /{name}:getConfig:
     uriParameters:
@@ -938,7 +938,7 @@ types:
         this information in order to grant the service account persmissions for
         the Google Cloud Storage location where you put your model training code
         for training the model with Google Cloud Machine Learning.
-      displayName: get Config
+      displayName: Get Config
       is:
       - hasParameters
       responses:
@@ -946,7 +946,7 @@ types:
           body:
             application/json: GoogleCloudMlV1beta1__GetConfigResponse
       (commons.Id): ml.projects.getConfig
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /{name}:
     uriParameters:
@@ -969,7 +969,7 @@ types:
 
           NOTE: the `name` binding below allows API services to override the binding
           to use different resource name schemes, such as `users/*/operations`.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -988,7 +988,7 @@ types:
             body:
               application/json: GoogleLongrunning__ListOperationsResponse
         (commons.Id): ml.projects.operations.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Operations
     get:
@@ -997,7 +997,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Describes a job.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       - hasParameters
@@ -1008,7 +1008,7 @@ types:
           body:
             application/json: GoogleCloudMlV1beta1__Job
       (commons.Id): ml.projects.jobs.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Jobs
     delete:
@@ -1021,7 +1021,7 @@ types:
         no longer interested in the operation result. It does not cancel the
         operation. If the server doesn't support this method, it returns
         `google.rpc.Code.UNIMPLEMENTED`.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       - hasParameters
@@ -1031,7 +1031,7 @@ types:
           body:
             application/json: GoogleProtobuf__Empty
       (commons.Id): ml.projects.operations.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Operations
   /{parent}:
@@ -1055,7 +1055,7 @@ types:
           You must add at least one version before you can request predictions from
           the model. Add versions by calling
           [projects.models.versions.create](/ml/reference/rest/v1beta1/projects.models.versions/create).
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -1065,7 +1065,7 @@ types:
             body:
               application/json: GoogleCloudMlV1beta1__Model
         (commons.Id): ml.projects.models.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Models
       get:
@@ -1078,7 +1078,7 @@ types:
 
           Each project can contain multiple models, and each model can have multiple
           versions.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1103,7 +1103,7 @@ types:
             body:
               application/json: GoogleCloudMlV1beta1__ListModelsResponse
         (commons.Id): ml.projects.models.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Models
     /versions:
@@ -1121,7 +1121,7 @@ types:
           versions, the default version does not automatically change. If you want a
           new version to be the default, you must call
           [projects.models.versions.setDefault](/ml/reference/rest/v1beta1/projects.models.versions/setDefault).
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -1131,7 +1131,7 @@ types:
             body:
               application/json: GoogleLongrunning__Operation
         (commons.Id): ml.projects.models.versions.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Models
         - Versions
@@ -1146,7 +1146,7 @@ types:
           If you expect that a model has a lot of versions, or if you need to handle
           only a limited number of results at a time, you can request that the list
           be retrieved in batches (called pages):
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1171,7 +1171,7 @@ types:
             body:
               application/json: GoogleCloudMlV1beta1__ListVersionsResponse
         (commons.Id): ml.projects.models.versions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Models
         - Versions
@@ -1182,7 +1182,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a training or a batch prediction job.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -1192,7 +1192,7 @@ types:
             body:
               application/json: GoogleCloudMlV1beta1__Job
         (commons.Id): ml.projects.jobs.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Jobs
       get:
@@ -1201,7 +1201,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists the jobs in the project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1229,7 +1229,7 @@ types:
             body:
               application/json: GoogleCloudMlV1beta1__ListJobsResponse
         (commons.Id): ml.projects.jobs.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Jobs
   /{name}:setDefault:
@@ -1257,7 +1257,7 @@ types:
         The first version to be created for a model is automatically set as the
         default. You must make any subsequent changes to the default version
         setting manually using this method.
-      displayName: set Default
+      displayName: Set Default
       is:
       - hasParameters
       body:
@@ -1267,7 +1267,7 @@ types:
           body:
             application/json: GoogleCloudMlV1beta1__Version
       (commons.Id): ml.projects.models.versions.setDefault
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Models
       - Versions
@@ -1283,7 +1283,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Cancels a running job.
-      displayName: cancel
+      displayName: Cancel
       is:
       - hasParameters
       - hasParameters
@@ -1294,6 +1294,6 @@ types:
           body:
             application/json: GoogleProtobuf__Empty
       (commons.Id): ml.projects.jobs.cancel
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Jobs

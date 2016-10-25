@@ -6635,7 +6635,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Runs a report.
-            displayName: run
+            displayName: Run
             is:
             - hasParameters
             queryParameters:
@@ -6647,7 +6647,7 @@ types:
                 body:
                   application/json: File
             (commons.Id): dfareporting.reports.run
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Reports
         /files:
           /{fileId}:
@@ -6662,7 +6662,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfareporting
               description: Retrieves a report file.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -6670,7 +6670,7 @@ types:
                   body:
                     application/json: File
               (commons.Id): dfareporting.reports.files.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Reports
               - Files
           get:
@@ -6679,7 +6679,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Lists files for a report.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -6717,7 +6717,7 @@ types:
                 body:
                   application/json: FileList
             (commons.Id): dfareporting.reports.files.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Reports
             - Files
         patch:
@@ -6726,7 +6726,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Updates a report. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -6736,7 +6736,7 @@ types:
               body:
                 application/json: Report
           (commons.Id): dfareporting.reports.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Reports
         get:
           securedBy:
@@ -6744,7 +6744,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves a report by its ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6752,7 +6752,7 @@ types:
               body:
                 application/json: Report
           (commons.Id): dfareporting.reports.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Reports
         put:
           securedBy:
@@ -6760,7 +6760,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Updates a report.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -6770,7 +6770,7 @@ types:
               body:
                 application/json: Report
           (commons.Id): dfareporting.reports.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Reports
         delete:
           securedBy:
@@ -6778,11 +6778,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Deletes a report by its ID.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.reports.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Reports
       /compatiblefields:
         /query:
@@ -6792,7 +6792,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.
-            displayName: query
+            displayName: Query
             is:
             - hasParameters
             body:
@@ -6802,7 +6802,7 @@ types:
                 body:
                   application/json: CompatibleFields
             (commons.Id): dfareporting.reports.compatibleFields.query
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Reports
             - Compatible Fields
       post:
@@ -6811,7 +6811,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Creates a report.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6821,7 +6821,7 @@ types:
             body:
               application/json: Report
         (commons.Id): dfareporting.reports.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Reports
       get:
         securedBy:
@@ -6829,7 +6829,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Retrieves list of reports.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6879,7 +6879,7 @@ types:
             body:
               application/json: ReportList
         (commons.Id): dfareporting.reports.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Reports
     /contentCategories:
       /{id}:
@@ -6894,7 +6894,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one content category by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6902,7 +6902,7 @@ types:
               body:
                 application/json: ContentCategory
           (commons.Id): dfareporting.contentCategories.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Content Categories
         delete:
           securedBy:
@@ -6910,11 +6910,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing content category.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.contentCategories.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Content Categories
       patch:
         securedBy:
@@ -6922,7 +6922,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing content category. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -6937,7 +6937,7 @@ types:
             body:
               application/json: ContentCategory
         (commons.Id): dfareporting.contentCategories.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Content Categories
       post:
         securedBy:
@@ -6945,7 +6945,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new content category.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6955,7 +6955,7 @@ types:
             body:
               application/json: ContentCategory
         (commons.Id): dfareporting.contentCategories.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Content Categories
       put:
         securedBy:
@@ -6963,7 +6963,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing content category.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -6973,7 +6973,7 @@ types:
             body:
               application/json: ContentCategory
         (commons.Id): dfareporting.contentCategories.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Content Categories
       get:
         securedBy:
@@ -6981,7 +6981,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of content categories, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7022,7 +7022,7 @@ types:
             body:
               application/json: ContentCategoriesListResponse
         (commons.Id): dfareporting.contentCategories.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Content Categories
     /postalCodes:
       /{code}:
@@ -7036,7 +7036,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one postal code by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7044,7 +7044,7 @@ types:
               body:
                 application/json: PostalCode
           (commons.Id): dfareporting.postalCodes.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Postal Codes
       get:
         securedBy:
@@ -7052,7 +7052,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of postal codes.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -7060,7 +7060,7 @@ types:
             body:
               application/json: PostalCodesListResponse
         (commons.Id): dfareporting.postalCodes.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Postal Codes
     /projects:
       /{id}:
@@ -7075,7 +7075,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one project by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7083,7 +7083,7 @@ types:
               body:
                 application/json: Project
           (commons.Id): dfareporting.projects.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
       /{projectId}:
         uriParameters:
@@ -7104,7 +7104,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one order document by ID.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -7112,7 +7112,7 @@ types:
                   body:
                     application/json: OrderDocument
               (commons.Id): dfareporting.orderDocuments.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Order Documents
           get:
             securedBy:
@@ -7120,7 +7120,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of order documents, possibly filtered.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -7172,7 +7172,7 @@ types:
                 body:
                   application/json: OrderDocumentsListResponse
             (commons.Id): dfareporting.orderDocuments.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Order Documents
         /inventoryItems:
           /{id}:
@@ -7187,7 +7187,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one inventory item by ID.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -7195,7 +7195,7 @@ types:
                   body:
                     application/json: InventoryItem
               (commons.Id): dfareporting.inventoryItems.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Inventory Items
           get:
             securedBy:
@@ -7203,7 +7203,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of inventory items, possibly filtered.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -7261,7 +7261,7 @@ types:
                 body:
                   application/json: InventoryItemsListResponse
             (commons.Id): dfareporting.inventoryItems.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Inventory Items
         /orders:
           /{id}:
@@ -7276,7 +7276,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one order by ID.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -7284,7 +7284,7 @@ types:
                   body:
                     application/json: Order
               (commons.Id): dfareporting.orders.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Orders
           get:
             securedBy:
@@ -7292,7 +7292,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of orders, possibly filtered.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -7337,7 +7337,7 @@ types:
                 body:
                   application/json: OrdersListResponse
             (commons.Id): dfareporting.orders.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Orders
       get:
         securedBy:
@@ -7345,7 +7345,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of projects, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7390,7 +7390,7 @@ types:
             body:
               application/json: ProjectsListResponse
         (commons.Id): dfareporting.projects.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /accountUserProfiles:
       /{id}:
@@ -7405,7 +7405,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account user profile by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7413,7 +7413,7 @@ types:
               body:
                 application/json: AccountUserProfile
           (commons.Id): dfareporting.accountUserProfiles.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Account User Profiles
       patch:
         securedBy:
@@ -7421,7 +7421,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account user profile. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -7436,7 +7436,7 @@ types:
             body:
               application/json: AccountUserProfile
         (commons.Id): dfareporting.accountUserProfiles.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Account User Profiles
       post:
         securedBy:
@@ -7444,7 +7444,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new account user profile.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7454,7 +7454,7 @@ types:
             body:
               application/json: AccountUserProfile
         (commons.Id): dfareporting.accountUserProfiles.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Account User Profiles
       put:
         securedBy:
@@ -7462,7 +7462,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account user profile.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -7472,7 +7472,7 @@ types:
             body:
               application/json: AccountUserProfile
         (commons.Id): dfareporting.accountUserProfiles.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Account User Profiles
       get:
         securedBy:
@@ -7480,7 +7480,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of account user profiles, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7532,7 +7532,7 @@ types:
             body:
               application/json: AccountUserProfilesListResponse
         (commons.Id): dfareporting.accountUserProfiles.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Account User Profiles
     /advertisers:
       /{id}:
@@ -7547,7 +7547,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one advertiser by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7555,7 +7555,7 @@ types:
               body:
                 application/json: Advertiser
           (commons.Id): dfareporting.advertisers.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Advertisers
       patch:
         securedBy:
@@ -7563,7 +7563,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -7578,7 +7578,7 @@ types:
             body:
               application/json: Advertiser
         (commons.Id): dfareporting.advertisers.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertisers
       post:
         securedBy:
@@ -7586,7 +7586,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new advertiser.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7596,7 +7596,7 @@ types:
             body:
               application/json: Advertiser
         (commons.Id): dfareporting.advertisers.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertisers
       put:
         securedBy:
@@ -7604,7 +7604,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -7614,7 +7614,7 @@ types:
             body:
               application/json: Advertiser
         (commons.Id): dfareporting.advertisers.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertisers
       get:
         securedBy:
@@ -7622,7 +7622,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of advertisers, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7690,7 +7690,7 @@ types:
             body:
               application/json: AdvertisersListResponse
         (commons.Id): dfareporting.advertisers.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertisers
     /placementGroups:
       /{id}:
@@ -7705,7 +7705,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement group by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7713,7 +7713,7 @@ types:
               body:
                 application/json: PlacementGroup
           (commons.Id): dfareporting.placementGroups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Placement Groups
       patch:
         securedBy:
@@ -7721,7 +7721,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement group. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -7736,7 +7736,7 @@ types:
             body:
               application/json: PlacementGroup
         (commons.Id): dfareporting.placementGroups.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Groups
       post:
         securedBy:
@@ -7744,7 +7744,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement group.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7754,7 +7754,7 @@ types:
             body:
               application/json: PlacementGroup
         (commons.Id): dfareporting.placementGroups.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Groups
       put:
         securedBy:
@@ -7762,7 +7762,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement group.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -7772,7 +7772,7 @@ types:
             body:
               application/json: PlacementGroup
         (commons.Id): dfareporting.placementGroups.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Groups
       get:
         securedBy:
@@ -7780,7 +7780,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placement groups, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7886,7 +7886,7 @@ types:
             body:
               application/json: PlacementGroupsListResponse
         (commons.Id): dfareporting.placementGroups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Groups
     /creatives:
       /{id}:
@@ -7901,7 +7901,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7909,7 +7909,7 @@ types:
               body:
                 application/json: Creative
           (commons.Id): dfareporting.creatives.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Creatives
       patch:
         securedBy:
@@ -7917,7 +7917,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -7932,7 +7932,7 @@ types:
             body:
               application/json: Creative
         (commons.Id): dfareporting.creatives.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creatives
       post:
         securedBy:
@@ -7940,7 +7940,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7950,7 +7950,7 @@ types:
             body:
               application/json: Creative
         (commons.Id): dfareporting.creatives.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creatives
       put:
         securedBy:
@@ -7958,7 +7958,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -7968,7 +7968,7 @@ types:
             body:
               application/json: Creative
         (commons.Id): dfareporting.creatives.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creatives
       get:
         securedBy:
@@ -7976,7 +7976,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creatives, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -8104,7 +8104,7 @@ types:
             body:
               application/json: CreativesListResponse
         (commons.Id): dfareporting.creatives.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creatives
     /mobileCarriers:
       /{id}:
@@ -8119,7 +8119,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one mobile carrier by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -8127,7 +8127,7 @@ types:
               body:
                 application/json: MobileCarrier
           (commons.Id): dfareporting.mobileCarriers.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Mobile Carriers
       get:
         securedBy:
@@ -8135,7 +8135,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of mobile carriers.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -8143,7 +8143,7 @@ types:
             body:
               application/json: MobileCarriersListResponse
         (commons.Id): dfareporting.mobileCarriers.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Mobile Carriers
     /remarketingListShares:
       /{remarketingListId}:
@@ -8158,7 +8158,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list share by remarketing list ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -8166,7 +8166,7 @@ types:
               body:
                 application/json: RemarketingListShare
           (commons.Id): dfareporting.remarketingListShares.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Remarketing List Shares
       patch:
         securedBy:
@@ -8174,7 +8174,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list share. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -8189,7 +8189,7 @@ types:
             body:
               application/json: RemarketingListShare
         (commons.Id): dfareporting.remarketingListShares.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Remarketing List Shares
       put:
         securedBy:
@@ -8197,7 +8197,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list share.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -8207,7 +8207,7 @@ types:
             body:
               application/json: RemarketingListShare
         (commons.Id): dfareporting.remarketingListShares.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Remarketing List Shares
     /sites:
       /{id}:
@@ -8222,7 +8222,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one site by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -8230,7 +8230,7 @@ types:
               body:
                 application/json: Site
           (commons.Id): dfareporting.sites.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Sites
       patch:
         securedBy:
@@ -8238,7 +8238,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing site. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -8253,7 +8253,7 @@ types:
             body:
               application/json: Site
         (commons.Id): dfareporting.sites.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sites
       post:
         securedBy:
@@ -8261,7 +8261,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new site.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -8271,7 +8271,7 @@ types:
             body:
               application/json: Site
         (commons.Id): dfareporting.sites.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sites
       put:
         securedBy:
@@ -8279,7 +8279,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing site.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -8289,7 +8289,7 @@ types:
             body:
               application/json: Site
         (commons.Id): dfareporting.sites.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sites
       get:
         securedBy:
@@ -8297,7 +8297,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of sites, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -8368,7 +8368,7 @@ types:
             body:
               application/json: SitesListResponse
         (commons.Id): dfareporting.sites.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sites
     /eventTags:
       /{id}:
@@ -8383,7 +8383,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one event tag by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -8391,7 +8391,7 @@ types:
               body:
                 application/json: EventTag
           (commons.Id): dfareporting.eventTags.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Event Tags
         delete:
           securedBy:
@@ -8399,11 +8399,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing event tag.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.eventTags.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Event Tags
       patch:
         securedBy:
@@ -8411,7 +8411,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing event tag. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -8426,7 +8426,7 @@ types:
             body:
               application/json: EventTag
         (commons.Id): dfareporting.eventTags.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Event Tags
       post:
         securedBy:
@@ -8434,7 +8434,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new event tag.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -8444,7 +8444,7 @@ types:
             body:
               application/json: EventTag
         (commons.Id): dfareporting.eventTags.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Event Tags
       put:
         securedBy:
@@ -8452,7 +8452,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing event tag.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -8462,7 +8462,7 @@ types:
             body:
               application/json: EventTag
         (commons.Id): dfareporting.eventTags.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Event Tags
       get:
         securedBy:
@@ -8470,7 +8470,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of event tags, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -8533,7 +8533,7 @@ types:
             body:
               application/json: EventTagsListResponse
         (commons.Id): dfareporting.eventTags.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Event Tags
     /dynamicTargetingKeys:
       /{objectId}:
@@ -8548,7 +8548,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing dynamic targeting key.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           queryParameters:
@@ -8569,7 +8569,7 @@ types:
               - OBJECT_CREATIVE
               - OBJECT_PLACEMENT
           (commons.Id): dfareporting.dynamicTargetingKeys.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Dynamic Targeting Keys
       post:
         securedBy:
@@ -8577,7 +8577,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser's ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -8587,7 +8587,7 @@ types:
             body:
               application/json: DynamicTargetingKey
         (commons.Id): dfareporting.dynamicTargetingKeys.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Dynamic Targeting Keys
       get:
         securedBy:
@@ -8595,7 +8595,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of dynamic targeting keys.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -8628,7 +8628,7 @@ types:
             body:
               application/json: DynamicTargetingKeysListResponse
         (commons.Id): dfareporting.dynamicTargetingKeys.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Dynamic Targeting Keys
     /dimensionvalues:
       /query:
@@ -8638,7 +8638,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves list of report dimension values for a list of filters.
-          displayName: query
+          displayName: Query
           is:
           - hasParameters
           queryParameters:
@@ -8658,7 +8658,7 @@ types:
               body:
                 application/json: DimensionValueList
           (commons.Id): dfareporting.dimensionValues.query
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Dimension Values
     /campaigns:
       /{id}:
@@ -8673,7 +8673,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one campaign by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -8681,7 +8681,7 @@ types:
               body:
                 application/json: Campaign
           (commons.Id): dfareporting.campaigns.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Campaigns
       /{campaignId}:
         uriParameters:
@@ -8696,7 +8696,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
-            displayName: insert
+            displayName: Insert
             is:
             - hasParameters
             body:
@@ -8706,7 +8706,7 @@ types:
                 body:
                   application/json: CampaignCreativeAssociation
             (commons.Id): dfareporting.campaignCreativeAssociations.insert
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Campaign Creative Associations
           get:
             securedBy:
@@ -8714,7 +8714,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves the list of creative IDs associated with the specified campaign.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -8739,7 +8739,7 @@ types:
                 body:
                   application/json: CampaignCreativeAssociationsListResponse
             (commons.Id): dfareporting.campaignCreativeAssociations.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Campaign Creative Associations
         /landingPages:
           /{id}:
@@ -8754,7 +8754,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one campaign landing page by ID.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -8762,7 +8762,7 @@ types:
                   body:
                     application/json: LandingPage
               (commons.Id): dfareporting.landingPages.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Landing Pages
             delete:
               securedBy:
@@ -8770,11 +8770,11 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Deletes an existing campaign landing page.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               (commons.Id): dfareporting.landingPages.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Landing Pages
           patch:
             securedBy:
@@ -8782,7 +8782,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing campaign landing page. This method supports patch semantics.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             queryParameters:
@@ -8797,7 +8797,7 @@ types:
                 body:
                   application/json: LandingPage
             (commons.Id): dfareporting.landingPages.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Landing Pages
           post:
             securedBy:
@@ -8805,7 +8805,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new landing page for the specified campaign.
-            displayName: insert
+            displayName: Insert
             is:
             - hasParameters
             body:
@@ -8815,7 +8815,7 @@ types:
                 body:
                   application/json: LandingPage
             (commons.Id): dfareporting.landingPages.insert
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Landing Pages
           put:
             securedBy:
@@ -8823,7 +8823,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing campaign landing page.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             body:
@@ -8833,7 +8833,7 @@ types:
                 body:
                   application/json: LandingPage
             (commons.Id): dfareporting.landingPages.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Landing Pages
           get:
             securedBy:
@@ -8841,7 +8841,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves the list of landing pages for the specified campaign.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             responses:
@@ -8849,7 +8849,7 @@ types:
                 body:
                   application/json: LandingPagesListResponse
             (commons.Id): dfareporting.landingPages.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Landing Pages
       patch:
         securedBy:
@@ -8857,7 +8857,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing campaign. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -8872,7 +8872,7 @@ types:
             body:
               application/json: Campaign
         (commons.Id): dfareporting.campaigns.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Campaigns
       post:
         securedBy:
@@ -8880,7 +8880,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new campaign.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         queryParameters:
@@ -8897,7 +8897,7 @@ types:
             body:
               application/json: Campaign
         (commons.Id): dfareporting.campaigns.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Campaigns
       put:
         securedBy:
@@ -8905,7 +8905,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing campaign.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -8915,7 +8915,7 @@ types:
             body:
               application/json: Campaign
         (commons.Id): dfareporting.campaigns.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Campaigns
       get:
         securedBy:
@@ -8923,7 +8923,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of campaigns, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -8990,7 +8990,7 @@ types:
             body:
               application/json: CampaignsListResponse
         (commons.Id): dfareporting.campaigns.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Campaigns
     /creativeGroups:
       /{id}:
@@ -9005,7 +9005,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative group by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9013,7 +9013,7 @@ types:
               body:
                 application/json: CreativeGroup
           (commons.Id): dfareporting.creativeGroups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Creative Groups
       patch:
         securedBy:
@@ -9021,7 +9021,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative group. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -9036,7 +9036,7 @@ types:
             body:
               application/json: CreativeGroup
         (commons.Id): dfareporting.creativeGroups.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Groups
       post:
         securedBy:
@@ -9044,7 +9044,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative group.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -9054,7 +9054,7 @@ types:
             body:
               application/json: CreativeGroup
         (commons.Id): dfareporting.creativeGroups.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Groups
       put:
         securedBy:
@@ -9062,7 +9062,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative group.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -9072,7 +9072,7 @@ types:
             body:
               application/json: CreativeGroup
         (commons.Id): dfareporting.creativeGroups.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Groups
       get:
         securedBy:
@@ -9080,7 +9080,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creative groups, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9129,7 +9129,7 @@ types:
             body:
               application/json: CreativeGroupsListResponse
         (commons.Id): dfareporting.creativeGroups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Groups
     /sizes:
       /{id}:
@@ -9144,7 +9144,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one size by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9152,7 +9152,7 @@ types:
               body:
                 application/json: Size
           (commons.Id): dfareporting.sizes.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Sizes
       post:
         securedBy:
@@ -9160,7 +9160,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new size.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -9170,7 +9170,7 @@ types:
             body:
               application/json: Size
         (commons.Id): dfareporting.sizes.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sizes
       get:
         securedBy:
@@ -9178,7 +9178,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of sizes, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9202,7 +9202,7 @@ types:
             body:
               application/json: SizesListResponse
         (commons.Id): dfareporting.sizes.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sizes
     /changeLogs:
       /{id}:
@@ -9217,7 +9217,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one change log by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9225,7 +9225,7 @@ types:
               body:
                 application/json: ChangeLog
           (commons.Id): dfareporting.changeLogs.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Change Logs
       get:
         securedBy:
@@ -9233,7 +9233,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of change logs.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9390,7 +9390,7 @@ types:
             body:
               application/json: ChangeLogsListResponse
         (commons.Id): dfareporting.changeLogs.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Change Logs
     /directorySites:
       /{id}:
@@ -9405,7 +9405,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one directory site by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9413,7 +9413,7 @@ types:
               body:
                 application/json: DirectorySite
           (commons.Id): dfareporting.directorySites.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Directory Sites
       post:
         securedBy:
@@ -9421,7 +9421,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new directory site.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -9431,7 +9431,7 @@ types:
             body:
               application/json: DirectorySite
         (commons.Id): dfareporting.directorySites.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Directory Sites
       get:
         securedBy:
@@ -9439,7 +9439,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of directory sites, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9503,7 +9503,7 @@ types:
             body:
               application/json: DirectorySitesListResponse
         (commons.Id): dfareporting.directorySites.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Directory Sites
     /targetableRemarketingLists:
       /{id}:
@@ -9518,7 +9518,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9526,7 +9526,7 @@ types:
               body:
                 application/json: TargetableRemarketingList
           (commons.Id): dfareporting.targetableRemarketingLists.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Targetable Remarketing Lists
       get:
         securedBy:
@@ -9534,7 +9534,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of targetable remarketing lists, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9578,7 +9578,7 @@ types:
             body:
               application/json: TargetableRemarketingListsListResponse
         (commons.Id): dfareporting.targetableRemarketingLists.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Targetable Remarketing Lists
     /placementStrategies:
       /{id}:
@@ -9593,7 +9593,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement strategy by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9601,7 +9601,7 @@ types:
               body:
                 application/json: PlacementStrategy
           (commons.Id): dfareporting.placementStrategies.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Placement Strategies
         delete:
           securedBy:
@@ -9609,11 +9609,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing placement strategy.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.placementStrategies.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Placement Strategies
       patch:
         securedBy:
@@ -9621,7 +9621,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement strategy. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -9636,7 +9636,7 @@ types:
             body:
               application/json: PlacementStrategy
         (commons.Id): dfareporting.placementStrategies.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Strategies
       post:
         securedBy:
@@ -9644,7 +9644,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement strategy.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -9654,7 +9654,7 @@ types:
             body:
               application/json: PlacementStrategy
         (commons.Id): dfareporting.placementStrategies.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Strategies
       put:
         securedBy:
@@ -9662,7 +9662,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement strategy.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -9672,7 +9672,7 @@ types:
             body:
               application/json: PlacementStrategy
         (commons.Id): dfareporting.placementStrategies.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Strategies
       get:
         securedBy:
@@ -9680,7 +9680,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placement strategies, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9721,7 +9721,7 @@ types:
             body:
               application/json: PlacementStrategiesListResponse
         (commons.Id): dfareporting.placementStrategies.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placement Strategies
     /accountActiveAdSummaries:
       /{summaryAccountId}:
@@ -9736,7 +9736,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets the account's active ad summary by account ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9744,7 +9744,7 @@ types:
               body:
                 application/json: AccountActiveAdSummary
           (commons.Id): dfareporting.accountActiveAdSummaries.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Account Active Ad Summaries
     /cities:
       get:
@@ -9753,7 +9753,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of cities, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9777,7 +9777,7 @@ types:
             body:
               application/json: CitiesListResponse
         (commons.Id): dfareporting.cities.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Cities
     /directorySiteContacts:
       /{id}:
@@ -9792,7 +9792,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one directory site contact by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9800,7 +9800,7 @@ types:
               body:
                 application/json: DirectorySiteContact
           (commons.Id): dfareporting.directorySiteContacts.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Directory Site Contacts
       get:
         securedBy:
@@ -9808,7 +9808,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of directory site contacts, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -9853,7 +9853,7 @@ types:
             body:
               application/json: DirectorySiteContactsListResponse
         (commons.Id): dfareporting.directorySiteContacts.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Directory Site Contacts
     /operatingSystemVersions:
       /{id}:
@@ -9868,7 +9868,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one operating system version by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9876,7 +9876,7 @@ types:
               body:
                 application/json: OperatingSystemVersion
           (commons.Id): dfareporting.operatingSystemVersions.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Operating System Versions
       get:
         securedBy:
@@ -9884,7 +9884,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of operating system versions.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -9892,7 +9892,7 @@ types:
             body:
               application/json: OperatingSystemVersionsListResponse
         (commons.Id): dfareporting.operatingSystemVersions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Operating System Versions
     /countries:
       /{dartId}:
@@ -9907,7 +9907,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one country by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9915,7 +9915,7 @@ types:
               body:
                 application/json: Country
           (commons.Id): dfareporting.countries.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Countries
       get:
         securedBy:
@@ -9923,7 +9923,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of countries.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -9931,7 +9931,7 @@ types:
             body:
               application/json: CountriesListResponse
         (commons.Id): dfareporting.countries.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Countries
     /browsers:
       get:
@@ -9940,7 +9940,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of browsers.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -9948,7 +9948,7 @@ types:
             body:
               application/json: BrowsersListResponse
         (commons.Id): dfareporting.browsers.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Browsers
     /userRolePermissionGroups:
       /{id}:
@@ -9963,7 +9963,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role permission group by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -9971,7 +9971,7 @@ types:
               body:
                 application/json: UserRolePermissionGroup
           (commons.Id): dfareporting.userRolePermissionGroups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - User Role Permission Groups
       get:
         securedBy:
@@ -9979,7 +9979,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of all supported user role permission groups.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -9987,7 +9987,7 @@ types:
             body:
               application/json: UserRolePermissionGroupsListResponse
         (commons.Id): dfareporting.userRolePermissionGroups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - User Role Permission Groups
     /ads:
       /{id}:
@@ -10002,7 +10002,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one ad by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10010,7 +10010,7 @@ types:
               body:
                 application/json: Ad
           (commons.Id): dfareporting.ads.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Ads
       patch:
         securedBy:
@@ -10018,7 +10018,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing ad. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -10033,7 +10033,7 @@ types:
             body:
               application/json: Ad
         (commons.Id): dfareporting.ads.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Ads
       post:
         securedBy:
@@ -10041,7 +10041,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new ad.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -10051,7 +10051,7 @@ types:
             body:
               application/json: Ad
         (commons.Id): dfareporting.ads.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Ads
       put:
         securedBy:
@@ -10059,7 +10059,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing ad.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -10069,7 +10069,7 @@ types:
             body:
               application/json: Ad
         (commons.Id): dfareporting.ads.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Ads
       get:
         securedBy:
@@ -10077,7 +10077,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of ads, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -10254,7 +10254,7 @@ types:
             body:
               application/json: AdsListResponse
         (commons.Id): dfareporting.ads.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Ads
     /userRoles:
       /{id}:
@@ -10269,7 +10269,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10277,7 +10277,7 @@ types:
               body:
                 application/json: UserRole
           (commons.Id): dfareporting.userRoles.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - User Roles
         delete:
           securedBy:
@@ -10285,11 +10285,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing user role.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.userRoles.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - User Roles
       patch:
         securedBy:
@@ -10297,7 +10297,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing user role. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -10312,7 +10312,7 @@ types:
             body:
               application/json: UserRole
         (commons.Id): dfareporting.userRoles.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - User Roles
       post:
         securedBy:
@@ -10320,7 +10320,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new user role.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -10330,7 +10330,7 @@ types:
             body:
               application/json: UserRole
         (commons.Id): dfareporting.userRoles.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - User Roles
       put:
         securedBy:
@@ -10338,7 +10338,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing user role.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -10348,7 +10348,7 @@ types:
             body:
               application/json: UserRole
         (commons.Id): dfareporting.userRoles.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - User Roles
       get:
         securedBy:
@@ -10356,7 +10356,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of user roles, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -10404,7 +10404,7 @@ types:
             body:
               application/json: UserRolesListResponse
         (commons.Id): dfareporting.userRoles.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - User Roles
     /remarketingLists:
       /{id}:
@@ -10419,7 +10419,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10427,7 +10427,7 @@ types:
               body:
                 application/json: RemarketingList
           (commons.Id): dfareporting.remarketingLists.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Remarketing Lists
       patch:
         securedBy:
@@ -10435,7 +10435,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -10450,7 +10450,7 @@ types:
             body:
               application/json: RemarketingList
         (commons.Id): dfareporting.remarketingLists.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Remarketing Lists
       post:
         securedBy:
@@ -10458,7 +10458,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new remarketing list.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -10468,7 +10468,7 @@ types:
             body:
               application/json: RemarketingList
         (commons.Id): dfareporting.remarketingLists.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Remarketing Lists
       put:
         securedBy:
@@ -10476,7 +10476,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -10486,7 +10486,7 @@ types:
             body:
               application/json: RemarketingList
         (commons.Id): dfareporting.remarketingLists.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Remarketing Lists
       get:
         securedBy:
@@ -10494,7 +10494,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of remarketing lists, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -10542,7 +10542,7 @@ types:
             body:
               application/json: RemarketingListsListResponse
         (commons.Id): dfareporting.remarketingLists.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Remarketing Lists
     /files:
       get:
@@ -10551,7 +10551,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Lists files for a user profile.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -10601,7 +10601,7 @@ types:
             body:
               application/json: FileList
         (commons.Id): dfareporting.files.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Files
     /accountPermissionGroups:
       /{id}:
@@ -10616,7 +10616,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account permission group by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10624,7 +10624,7 @@ types:
               body:
                 application/json: AccountPermissionGroup
           (commons.Id): dfareporting.accountPermissionGroups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Account Permission Groups
       get:
         securedBy:
@@ -10632,7 +10632,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of account permission groups.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -10640,7 +10640,7 @@ types:
             body:
               application/json: AccountPermissionGroupsListResponse
         (commons.Id): dfareporting.accountPermissionGroups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Account Permission Groups
     /floodlightActivityGroups:
       /{id}:
@@ -10655,7 +10655,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight activity group by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10663,7 +10663,7 @@ types:
               body:
                 application/json: FloodlightActivityGroup
           (commons.Id): dfareporting.floodlightActivityGroups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Floodlight Activity Groups
       patch:
         securedBy:
@@ -10671,7 +10671,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity group. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -10686,7 +10686,7 @@ types:
             body:
               application/json: FloodlightActivityGroup
         (commons.Id): dfareporting.floodlightActivityGroups.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activity Groups
       post:
         securedBy:
@@ -10694,7 +10694,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new floodlight activity group.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -10704,7 +10704,7 @@ types:
             body:
               application/json: FloodlightActivityGroup
         (commons.Id): dfareporting.floodlightActivityGroups.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activity Groups
       put:
         securedBy:
@@ -10712,7 +10712,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity group.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -10722,7 +10722,7 @@ types:
             body:
               application/json: FloodlightActivityGroup
         (commons.Id): dfareporting.floodlightActivityGroups.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activity Groups
       get:
         securedBy:
@@ -10730,7 +10730,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight activity groups, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -10788,7 +10788,7 @@ types:
             body:
               application/json: FloodlightActivityGroupsListResponse
         (commons.Id): dfareporting.floodlightActivityGroups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activity Groups
     /subaccounts:
       /{id}:
@@ -10803,7 +10803,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one subaccount by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10811,7 +10811,7 @@ types:
               body:
                 application/json: Subaccount
           (commons.Id): dfareporting.subaccounts.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Subaccounts
       patch:
         securedBy:
@@ -10819,7 +10819,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing subaccount. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -10834,7 +10834,7 @@ types:
             body:
               application/json: Subaccount
         (commons.Id): dfareporting.subaccounts.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Subaccounts
       post:
         securedBy:
@@ -10842,7 +10842,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new subaccount.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -10852,7 +10852,7 @@ types:
             body:
               application/json: Subaccount
         (commons.Id): dfareporting.subaccounts.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Subaccounts
       put:
         securedBy:
@@ -10860,7 +10860,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing subaccount.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -10870,7 +10870,7 @@ types:
             body:
               application/json: Subaccount
         (commons.Id): dfareporting.subaccounts.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Subaccounts
       get:
         securedBy:
@@ -10878,7 +10878,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of subaccounts, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -10919,7 +10919,7 @@ types:
             body:
               application/json: SubaccountsListResponse
         (commons.Id): dfareporting.subaccounts.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Subaccounts
     /connectionTypes:
       /{id}:
@@ -10934,7 +10934,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one connection type by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10942,7 +10942,7 @@ types:
               body:
                 application/json: ConnectionType
           (commons.Id): dfareporting.connectionTypes.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Connection Types
       get:
         securedBy:
@@ -10950,7 +10950,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of connection types.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -10958,7 +10958,7 @@ types:
             body:
               application/json: ConnectionTypesListResponse
         (commons.Id): dfareporting.connectionTypes.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Connection Types
     /accountPermissions:
       /{id}:
@@ -10973,7 +10973,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account permission by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -10981,7 +10981,7 @@ types:
               body:
                 application/json: AccountPermission
           (commons.Id): dfareporting.accountPermissions.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Account Permissions
       get:
         securedBy:
@@ -10989,7 +10989,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of account permissions.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -10997,7 +10997,7 @@ types:
             body:
               application/json: AccountPermissionsListResponse
         (commons.Id): dfareporting.accountPermissions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Account Permissions
     /metros:
       get:
@@ -11006,7 +11006,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of metros.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -11014,7 +11014,7 @@ types:
             body:
               application/json: MetrosListResponse
         (commons.Id): dfareporting.metros.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Metros
     /platformTypes:
       /{id}:
@@ -11029,7 +11029,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one platform type by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11037,7 +11037,7 @@ types:
               body:
                 application/json: PlatformType
           (commons.Id): dfareporting.platformTypes.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Platform Types
       get:
         securedBy:
@@ -11045,7 +11045,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of platform types.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -11053,7 +11053,7 @@ types:
             body:
               application/json: PlatformTypesListResponse
         (commons.Id): dfareporting.platformTypes.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Platform Types
     /conversions:
       /batchinsert:
@@ -11063,7 +11063,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/ddmconversions
           description: Inserts conversions.
-          displayName: batchinsert
+          displayName: Batchinsert
           is:
           - hasParameters
           body:
@@ -11073,7 +11073,7 @@ types:
               body:
                 application/json: ConversionsBatchInsertResponse
           (commons.Id): dfareporting.conversions.batchinsert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Conversions
     /regions:
       get:
@@ -11082,7 +11082,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of regions.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -11090,7 +11090,7 @@ types:
             body:
               application/json: RegionsListResponse
         (commons.Id): dfareporting.regions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Regions
     /placements:
       /generatetags:
@@ -11100,7 +11100,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Generates tags for a placement.
-          displayName: generatetags
+          displayName: Generatetags
           is:
           - hasParameters
           queryParameters:
@@ -11158,7 +11158,7 @@ types:
               body:
                 application/json: PlacementsGenerateTagsResponse
           (commons.Id): dfareporting.placements.generatetags
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Placements
       /{id}:
         uriParameters:
@@ -11172,7 +11172,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11180,7 +11180,7 @@ types:
               body:
                 application/json: Placement
           (commons.Id): dfareporting.placements.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Placements
       patch:
         securedBy:
@@ -11188,7 +11188,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -11203,7 +11203,7 @@ types:
             body:
               application/json: Placement
         (commons.Id): dfareporting.placements.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placements
       post:
         securedBy:
@@ -11211,7 +11211,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -11221,7 +11221,7 @@ types:
             body:
               application/json: Placement
         (commons.Id): dfareporting.placements.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placements
       put:
         securedBy:
@@ -11229,7 +11229,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -11239,7 +11239,7 @@ types:
             body:
               application/json: Placement
         (commons.Id): dfareporting.placements.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placements
       get:
         securedBy:
@@ -11247,7 +11247,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placements, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -11376,7 +11376,7 @@ types:
             body:
               application/json: PlacementsListResponse
         (commons.Id): dfareporting.placements.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Placements
     /userRolePermissions:
       /{id}:
@@ -11391,7 +11391,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role permission by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11399,7 +11399,7 @@ types:
               body:
                 application/json: UserRolePermission
           (commons.Id): dfareporting.userRolePermissions.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - User Role Permissions
       get:
         securedBy:
@@ -11407,7 +11407,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of user role permissions, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -11420,7 +11420,7 @@ types:
             body:
               application/json: UserRolePermissionsListResponse
         (commons.Id): dfareporting.userRolePermissions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - User Role Permissions
     /creativeAssets:
       /{advertiserId}:
@@ -11436,7 +11436,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new creative asset.
-            displayName: insert
+            displayName: Insert
             is:
             - hasParameters
             body:
@@ -11446,7 +11446,7 @@ types:
                 body:
                   application/json: CreativeAssetMetadata
             (commons.Id): dfareporting.creativeAssets.insert
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creative Assets
     /targetingTemplates:
       /{id}:
@@ -11461,7 +11461,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one targeting template by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11469,7 +11469,7 @@ types:
               body:
                 application/json: TargetingTemplate
           (commons.Id): dfareporting.targetingTemplates.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Targeting Templates
       patch:
         securedBy:
@@ -11477,7 +11477,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing targeting template. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -11492,7 +11492,7 @@ types:
             body:
               application/json: TargetingTemplate
         (commons.Id): dfareporting.targetingTemplates.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Targeting Templates
       post:
         securedBy:
@@ -11500,7 +11500,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new targeting template.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -11510,7 +11510,7 @@ types:
             body:
               application/json: TargetingTemplate
         (commons.Id): dfareporting.targetingTemplates.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Targeting Templates
       put:
         securedBy:
@@ -11518,7 +11518,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing targeting template.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -11528,7 +11528,7 @@ types:
             body:
               application/json: TargetingTemplate
         (commons.Id): dfareporting.targetingTemplates.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Targeting Templates
       get:
         securedBy:
@@ -11536,7 +11536,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of targeting templates, optionally filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -11581,7 +11581,7 @@ types:
             body:
               application/json: TargetingTemplatesListResponse
         (commons.Id): dfareporting.targetingTemplates.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Targeting Templates
     /floodlightActivities:
       /{id}:
@@ -11596,7 +11596,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight activity by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11604,7 +11604,7 @@ types:
               body:
                 application/json: FloodlightActivity
           (commons.Id): dfareporting.floodlightActivities.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Floodlight Activities
         delete:
           securedBy:
@@ -11612,11 +11612,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing floodlight activity.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.floodlightActivities.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Floodlight Activities
       /generatetag:
         post:
@@ -11625,7 +11625,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Generates a tag for a floodlight activity.
-          displayName: generatetag
+          displayName: Generatetag
           is:
           - hasParameters
           queryParameters:
@@ -11638,7 +11638,7 @@ types:
               body:
                 application/json: FloodlightActivitiesGenerateTagResponse
           (commons.Id): dfareporting.floodlightActivities.generatetag
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Floodlight Activities
       patch:
         securedBy:
@@ -11646,7 +11646,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -11661,7 +11661,7 @@ types:
             body:
               application/json: FloodlightActivity
         (commons.Id): dfareporting.floodlightActivities.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activities
       post:
         securedBy:
@@ -11669,7 +11669,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new floodlight activity.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -11679,7 +11679,7 @@ types:
             body:
               application/json: FloodlightActivity
         (commons.Id): dfareporting.floodlightActivities.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activities
       put:
         securedBy:
@@ -11687,7 +11687,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -11697,7 +11697,7 @@ types:
             body:
               application/json: FloodlightActivity
         (commons.Id): dfareporting.floodlightActivities.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activities
       get:
         securedBy:
@@ -11705,7 +11705,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight activities, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -11776,7 +11776,7 @@ types:
             body:
               application/json: FloodlightActivitiesListResponse
         (commons.Id): dfareporting.floodlightActivities.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Activities
     /advertiserGroups:
       /{id}:
@@ -11791,7 +11791,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one advertiser group by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11799,7 +11799,7 @@ types:
               body:
                 application/json: AdvertiserGroup
           (commons.Id): dfareporting.advertiserGroups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Advertiser Groups
         delete:
           securedBy:
@@ -11807,11 +11807,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing advertiser group.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.advertiserGroups.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Advertiser Groups
       patch:
         securedBy:
@@ -11819,7 +11819,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser group. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -11834,7 +11834,7 @@ types:
             body:
               application/json: AdvertiserGroup
         (commons.Id): dfareporting.advertiserGroups.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertiser Groups
       post:
         securedBy:
@@ -11842,7 +11842,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new advertiser group.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -11852,7 +11852,7 @@ types:
             body:
               application/json: AdvertiserGroup
         (commons.Id): dfareporting.advertiserGroups.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertiser Groups
       put:
         securedBy:
@@ -11860,7 +11860,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser group.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -11870,7 +11870,7 @@ types:
             body:
               application/json: AdvertiserGroup
         (commons.Id): dfareporting.advertiserGroups.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertiser Groups
       get:
         securedBy:
@@ -11878,7 +11878,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of advertiser groups, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -11919,7 +11919,7 @@ types:
             body:
               application/json: AdvertiserGroupsListResponse
         (commons.Id): dfareporting.advertiserGroups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Advertiser Groups
     /floodlightConfigurations:
       /{id}:
@@ -11934,7 +11934,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight configuration by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -11942,7 +11942,7 @@ types:
               body:
                 application/json: FloodlightConfiguration
           (commons.Id): dfareporting.floodlightConfigurations.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Floodlight Configurations
       patch:
         securedBy:
@@ -11950,7 +11950,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight configuration. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -11965,7 +11965,7 @@ types:
             body:
               application/json: FloodlightConfiguration
         (commons.Id): dfareporting.floodlightConfigurations.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Configurations
       put:
         securedBy:
@@ -11973,7 +11973,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight configuration.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -11983,7 +11983,7 @@ types:
             body:
               application/json: FloodlightConfiguration
         (commons.Id): dfareporting.floodlightConfigurations.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Configurations
       get:
         securedBy:
@@ -11991,7 +11991,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight configurations, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -12004,7 +12004,7 @@ types:
             body:
               application/json: FloodlightConfigurationsListResponse
         (commons.Id): dfareporting.floodlightConfigurations.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Floodlight Configurations
     /languages:
       get:
@@ -12013,7 +12013,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of languages.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -12021,7 +12021,7 @@ types:
             body:
               application/json: LanguagesListResponse
         (commons.Id): dfareporting.languages.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Languages
     /creativeFields:
       /{creativeFieldId}:
@@ -12043,7 +12043,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one creative field value by ID.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -12051,7 +12051,7 @@ types:
                   body:
                     application/json: CreativeFieldValue
               (commons.Id): dfareporting.creativeFieldValues.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Creative Field Values
             delete:
               securedBy:
@@ -12059,11 +12059,11 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Deletes an existing creative field value.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               (commons.Id): dfareporting.creativeFieldValues.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Creative Field Values
           patch:
             securedBy:
@@ -12071,7 +12071,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing creative field value. This method supports patch semantics.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             queryParameters:
@@ -12086,7 +12086,7 @@ types:
                 body:
                   application/json: CreativeFieldValue
             (commons.Id): dfareporting.creativeFieldValues.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creative Field Values
           post:
             securedBy:
@@ -12094,7 +12094,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new creative field value.
-            displayName: insert
+            displayName: Insert
             is:
             - hasParameters
             body:
@@ -12104,7 +12104,7 @@ types:
                 body:
                   application/json: CreativeFieldValue
             (commons.Id): dfareporting.creativeFieldValues.insert
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creative Field Values
           put:
             securedBy:
@@ -12112,7 +12112,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing creative field value.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             body:
@@ -12122,7 +12122,7 @@ types:
                 body:
                   application/json: CreativeFieldValue
             (commons.Id): dfareporting.creativeFieldValues.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creative Field Values
           get:
             securedBy:
@@ -12130,7 +12130,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of creative field values, possibly filtered.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -12171,7 +12171,7 @@ types:
                 body:
                   application/json: CreativeFieldValuesListResponse
             (commons.Id): dfareporting.creativeFieldValues.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creative Field Values
       /{id}:
         uriParameters:
@@ -12185,7 +12185,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative field by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -12193,7 +12193,7 @@ types:
               body:
                 application/json: CreativeField
           (commons.Id): dfareporting.creativeFields.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Creative Fields
         delete:
           securedBy:
@@ -12201,11 +12201,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing creative field.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): dfareporting.creativeFields.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Creative Fields
       patch:
         securedBy:
@@ -12213,7 +12213,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative field. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -12228,7 +12228,7 @@ types:
             body:
               application/json: CreativeField
         (commons.Id): dfareporting.creativeFields.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Fields
       post:
         securedBy:
@@ -12236,7 +12236,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative field.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -12246,7 +12246,7 @@ types:
             body:
               application/json: CreativeField
         (commons.Id): dfareporting.creativeFields.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Fields
       put:
         securedBy:
@@ -12254,7 +12254,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative field.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -12264,7 +12264,7 @@ types:
             body:
               application/json: CreativeField
         (commons.Id): dfareporting.creativeFields.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Fields
       get:
         securedBy:
@@ -12272,7 +12272,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creative fields, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -12317,7 +12317,7 @@ types:
             body:
               application/json: CreativeFieldsListResponse
         (commons.Id): dfareporting.creativeFields.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creative Fields
     /operatingSystems:
       /{dartId}:
@@ -12332,7 +12332,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one operating system by DART ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -12340,7 +12340,7 @@ types:
               body:
                 application/json: OperatingSystem
           (commons.Id): dfareporting.operatingSystems.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Operating Systems
       get:
         securedBy:
@@ -12348,7 +12348,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of operating systems.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -12356,7 +12356,7 @@ types:
             body:
               application/json: OperatingSystemsListResponse
         (commons.Id): dfareporting.operatingSystems.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Operating Systems
     /accounts:
       /{id}:
@@ -12371,7 +12371,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -12379,7 +12379,7 @@ types:
               body:
                 application/json: Account
           (commons.Id): dfareporting.accounts.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
       patch:
         securedBy:
@@ -12387,7 +12387,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -12402,7 +12402,7 @@ types:
             body:
               application/json: Account
         (commons.Id): dfareporting.accounts.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
       put:
         securedBy:
@@ -12410,7 +12410,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -12420,7 +12420,7 @@ types:
             body:
               application/json: Account
         (commons.Id): dfareporting.accounts.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
       get:
         securedBy:
@@ -12428,7 +12428,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of accounts, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -12472,7 +12472,7 @@ types:
             body:
               application/json: AccountsListResponse
         (commons.Id): dfareporting.accounts.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
     get:
       securedBy:
@@ -12481,7 +12481,7 @@ types:
           - https://www.googleapis.com/auth/dfareporting
           - https://www.googleapis.com/auth/dfatrafficking
       description: Gets one user profile by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -12489,7 +12489,7 @@ types:
           body:
             application/json: UserProfile
       (commons.Id): dfareporting.userProfiles.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - User Profiles
   get:
     securedBy:
@@ -12498,7 +12498,7 @@ types:
         - https://www.googleapis.com/auth/dfareporting
         - https://www.googleapis.com/auth/dfatrafficking
     description: Retrieves list of user profiles for a user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -12506,7 +12506,7 @@ types:
         body:
           application/json: UserProfileList
     (commons.Id): dfareporting.userProfiles.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - User Profiles
 /reports:
   /{reportId}:
@@ -12528,7 +12528,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves a report file by its report ID and file ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -12536,5 +12536,5 @@ types:
               body:
                 application/json: File
           (commons.Id): dfareporting.files.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Files

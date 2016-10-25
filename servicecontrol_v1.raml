@@ -590,7 +590,7 @@ types:
           This method requires the `servicemanagement.services.report` permission
           on the specified service. For more information, see
           [Google Cloud IAM](https://cloud.google.com/iam).
-        displayName: report
+        displayName: Report
         is:
         - hasParameters
         body:
@@ -600,7 +600,7 @@ types:
             body:
               application/json: ReportResponse
         (commons.Id): servicecontrol.services.report
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services
     /{serviceName}:check:
       uriParameters:
@@ -625,7 +625,7 @@ types:
           This method requires the `servicemanagement.services.check` permission
           on the specified service. For more information, see
           [Google Cloud IAM](https://cloud.google.com/iam).
-        displayName: check
+        displayName: Check
         is:
         - hasParameters
         body:
@@ -635,5 +635,5 @@ types:
             body:
               application/json: CheckResponse
         (commons.Id): servicecontrol.services.check
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services

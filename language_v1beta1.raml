@@ -506,7 +506,7 @@ types:
       description: |-
         Finds named entities (currently finds proper names) in the text,
         entity types, salience, mentions for each entity, and other properties.
-      displayName: analyze Entities
+      displayName: Analyze Entities
       is:
       - hasParameters
       body:
@@ -516,7 +516,7 @@ types:
           body:
             application/json: AnalyzeEntitiesResponse
       (commons.Id): language.documents.analyzeEntities
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Documents
   /documents:annotateText:
     post:
@@ -527,7 +527,7 @@ types:
       description: |-
         A convenience method that provides all the features that analyzeSentiment,
         analyzeEntities, and analyzeSyntax provide in one call.
-      displayName: annotate Text
+      displayName: Annotate Text
       is:
       - hasParameters
       body:
@@ -537,7 +537,7 @@ types:
           body:
             application/json: AnnotateTextResponse
       (commons.Id): language.documents.annotateText
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Documents
   /documents:analyzeSentiment:
     post:
@@ -546,7 +546,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Analyzes the sentiment of the provided text.
-      displayName: analyze Sentiment
+      displayName: Analyze Sentiment
       is:
       - hasParameters
       body:
@@ -556,5 +556,5 @@ types:
           body:
             application/json: AnalyzeSentimentResponse
       (commons.Id): language.documents.analyzeSentiment
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Documents

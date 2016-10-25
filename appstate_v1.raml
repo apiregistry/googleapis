@@ -121,7 +121,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/appstate
         description: Clears (sets to empty) the data for the passed key if and only if the passed version matches the currently stored version. This method results in a conflict error on version mismatch.
-        displayName: clear
+        displayName: Clear
         is:
         - hasParameters
         queryParameters:
@@ -133,7 +133,7 @@ types:
             body:
               application/json: WriteResult
         (commons.Id): appstate.states.clear
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - States
     get:
       securedBy:
@@ -141,7 +141,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/appstate
       description: Retrieves the data corresponding to the passed key. If the key does not exist on the server, an HTTP 404 will be returned.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -149,7 +149,7 @@ types:
           body:
             application/json: GetResponse
       (commons.Id): appstate.states.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - States
     put:
       securedBy:
@@ -157,7 +157,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/appstate
       description: Update the data associated with the input key if and only if the passed version matches the currently stored version. This method is safe in the face of concurrent writes. Maximum per-key size is 128KB.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       queryParameters:
@@ -171,7 +171,7 @@ types:
           body:
             application/json: WriteResult
       (commons.Id): appstate.states.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - States
     delete:
       securedBy:
@@ -179,11 +179,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/appstate
       description: Deletes a key and the data associated with it. The key is removed and no longer counts against the key quota. Note that since this method is not safe in the face of concurrent modifications, it should only be used for development and testing purposes. Invoking this method in shipping code can result in data loss and data corruption.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): appstate.states.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - States
   get:
     securedBy:
@@ -191,7 +191,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/appstate
     description: Lists all the states keys, and optionally the state data.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -204,5 +204,5 @@ types:
         body:
           application/json: ListResponse
     (commons.Id): appstate.states.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - States

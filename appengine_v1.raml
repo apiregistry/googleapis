@@ -908,7 +908,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -916,7 +916,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): appengine.experimental.apps.operations.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Experimental
             - Apps
             - Operations
@@ -929,7 +929,7 @@ types:
             If the server doesn''t support this method, it returns `UNIMPLEMENTED`.
             NOTE: the `name` binding below allows API services to override the binding
             to use different resource name schemes, such as `users/*/operations`.'
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -948,7 +948,7 @@ types:
               body:
                 application/json: ListOperationsResponse
           (commons.Id): appengine.experimental.apps.operations.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Experimental
           - Apps
           - Operations
@@ -972,7 +972,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -980,7 +980,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): appengine.apps.operations.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Apps
             - Operations
         get:
@@ -992,7 +992,7 @@ types:
             If the server doesn''t support this method, it returns `UNIMPLEMENTED`.
             NOTE: the `name` binding below allows API services to override the binding
             to use different resource name schemes, such as `users/*/operations`.'
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1011,7 +1011,7 @@ types:
               body:
                 application/json: ListOperationsResponse
           (commons.Id): appengine.apps.operations.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Apps
           - Operations
       /locations:
@@ -1026,7 +1026,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Get information about a location.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -1034,7 +1034,7 @@ types:
                 body:
                   application/json: Location
             (commons.Id): appengine.apps.locations.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Apps
             - Locations
         get:
@@ -1043,7 +1043,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Lists information about the supported locations for this service.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1062,7 +1062,7 @@ types:
               body:
                 application/json: ListLocationsResponse
           (commons.Id): appengine.apps.locations.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Apps
           - Locations
       /services:
@@ -1089,7 +1089,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started. Only applicable for instances in App Engine flexible environment.
-                    displayName: debug
+                    displayName: Debug
                     is:
                     - hasParameters
                     body:
@@ -1099,7 +1099,7 @@ types:
                         body:
                           application/json: Operation
                     (commons.Id): appengine.apps.services.versions.instances.debug
-                    (commons.LogicalStucture):
+                    (commons.LogicalStructure):
                     - Apps
                     - Services
                     - Versions
@@ -1115,7 +1115,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Gets instance information.
-                    displayName: get
+                    displayName: Get
                     is:
                     - hasParameters
                     responses:
@@ -1123,7 +1123,7 @@ types:
                         body:
                           application/json: Instance
                     (commons.Id): appengine.apps.services.versions.instances.get
-                    (commons.LogicalStucture):
+                    (commons.LogicalStructure):
                     - Apps
                     - Services
                     - Versions
@@ -1134,7 +1134,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Stops a running instance.
-                    displayName: delete
+                    displayName: Delete
                     is:
                     - hasParameters
                     responses:
@@ -1142,7 +1142,7 @@ types:
                         body:
                           application/json: Operation
                     (commons.Id): appengine.apps.services.versions.instances.delete
-                    (commons.LogicalStucture):
+                    (commons.LogicalStructure):
                     - Apps
                     - Services
                     - Versions
@@ -1153,7 +1153,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/cloud-platform
                   description: Lists the instances of a version.
-                  displayName: list
+                  displayName: List
                   is:
                   - hasParameters
                   queryParameters:
@@ -1169,7 +1169,7 @@ types:
                       body:
                         application/json: ListInstancesResponse
                   (commons.Id): appengine.apps.services.versions.instances.list
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Apps
                   - Services
                   - Versions
@@ -1190,7 +1190,7 @@ types:
                   App Engine standard environment. * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling):
                   For Version resources that use automatic scaling and run in the
                   App Engine standard environment.'
-                displayName: patch
+                displayName: Patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -1204,7 +1204,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): appengine.apps.services.versions.patch
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Apps
                 - Services
                 - Versions
@@ -1214,7 +1214,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the specified Version resource. By default, only a `BASIC_VIEW` will be returned. Specify the `FULL_VIEW` parameter to get the full resource.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 queryParameters:
@@ -1229,7 +1229,7 @@ types:
                     body:
                       application/json: Version
                 (commons.Id): appengine.apps.services.versions.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Apps
                 - Services
                 - Versions
@@ -1239,7 +1239,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Deletes an existing Version resource.
-                displayName: delete
+                displayName: Delete
                 is:
                 - hasParameters
                 responses:
@@ -1247,7 +1247,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): appengine.apps.services.versions.delete
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Apps
                 - Services
                 - Versions
@@ -1257,7 +1257,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Deploys code and resource files to a new version.
-              displayName: create
+              displayName: Create
               is:
               - hasParameters
               body:
@@ -1267,7 +1267,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): appengine.apps.services.versions.create
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Apps
               - Services
               - Versions
@@ -1277,7 +1277,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Lists the versions of a service.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -1299,7 +1299,7 @@ types:
                   body:
                     application/json: ListVersionsResponse
               (commons.Id): appengine.apps.services.versions.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Apps
               - Services
               - Versions
@@ -1309,7 +1309,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Updates the configuration of the specified service.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             queryParameters:
@@ -1326,7 +1326,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): appengine.apps.services.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Apps
             - Services
           get:
@@ -1335,7 +1335,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the current configuration of the specified service.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -1343,7 +1343,7 @@ types:
                 body:
                   application/json: Service
             (commons.Id): appengine.apps.services.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Apps
             - Services
           delete:
@@ -1352,7 +1352,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Deletes the specified service and all enclosed versions.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -1360,7 +1360,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): appengine.apps.services.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Apps
             - Services
         get:
@@ -1369,7 +1369,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Lists all the services in the application.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1385,7 +1385,7 @@ types:
               body:
                 application/json: ListServicesResponse
           (commons.Id): appengine.apps.services.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Apps
           - Services
       patch:
@@ -1394,7 +1394,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Updates application parameters.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -1408,7 +1408,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): appengine.apps.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Apps
       get:
         securedBy:
@@ -1416,7 +1416,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Gets information about an application.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -1424,7 +1424,7 @@ types:
             body:
               application/json: Application
         (commons.Id): appengine.apps.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Apps
     /{appsId}:repair:
       uriParameters:
@@ -1438,7 +1438,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Recreates the required App Engine features for the application in your project, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example "*Error retrieving the App Engine service account*".
-        displayName: repair
+        displayName: Repair
         is:
         - hasParameters
         body:
@@ -1448,5 +1448,5 @@ types:
             body:
               application/json: Operation
         (commons.Id): appengine.apps.repair
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Apps

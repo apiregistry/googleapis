@@ -175,7 +175,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Update tasks that are leased out of a TaskQueue. This method supports patch semantics.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             queryParameters:
@@ -190,7 +190,7 @@ types:
                 body:
                   application/json: Task
             (commons.Id): taskqueue.tasks.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Tasks
           get:
             securedBy:
@@ -199,7 +199,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Get a particular task from a TaskQueue.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -207,7 +207,7 @@ types:
                 body:
                   application/json: Task
             (commons.Id): taskqueue.tasks.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Tasks
           post:
             securedBy:
@@ -216,7 +216,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Update tasks that are leased out of a TaskQueue.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             queryParameters:
@@ -231,7 +231,7 @@ types:
                 body:
                   application/json: Task
             (commons.Id): taskqueue.tasks.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Tasks
           delete:
             securedBy:
@@ -240,11 +240,11 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Delete a task from a TaskQueue.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             (commons.Id): taskqueue.tasks.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Tasks
         /lease:
           post:
@@ -254,7 +254,7 @@ types:
                 - https://www.googleapis.com/auth/taskqueue
                 - https://www.googleapis.com/auth/taskqueue.consumer
             description: Lease 1 or more tasks from a TaskQueue.
-            displayName: lease
+            displayName: Lease
             is:
             - hasParameters
             queryParameters:
@@ -277,7 +277,7 @@ types:
                 body:
                   application/json: Tasks
             (commons.Id): taskqueue.tasks.lease
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Tasks
         post:
           securedBy:
@@ -286,7 +286,7 @@ types:
               - https://www.googleapis.com/auth/taskqueue
               - https://www.googleapis.com/auth/taskqueue.consumer
           description: Insert a new task in a TaskQueue
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -296,7 +296,7 @@ types:
               body:
                 application/json: Task
           (commons.Id): taskqueue.tasks.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasks
         get:
           securedBy:
@@ -305,7 +305,7 @@ types:
               - https://www.googleapis.com/auth/taskqueue
               - https://www.googleapis.com/auth/taskqueue.consumer
           description: List Tasks in a TaskQueue
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           responses:
@@ -313,7 +313,7 @@ types:
               body:
                 application/json: Tasks2
           (commons.Id): taskqueue.tasks.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasks
       get:
         securedBy:
@@ -322,7 +322,7 @@ types:
             - https://www.googleapis.com/auth/taskqueue
             - https://www.googleapis.com/auth/taskqueue.consumer
         description: Get detailed information about a TaskQueue.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         queryParameters:
@@ -334,5 +334,5 @@ types:
             body:
               application/json: TaskQueue
         (commons.Id): taskqueue.taskqueues.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Taskqueues

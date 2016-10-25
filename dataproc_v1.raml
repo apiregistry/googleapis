@@ -820,7 +820,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation.
-      displayName: cancel
+      displayName: Cancel
       is:
       - hasParameters
       responses:
@@ -828,7 +828,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): dataproc.projects.regions.operations.cancel
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Regions
       - Operations
@@ -847,7 +847,7 @@ types:
         If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE:
         the `name` binding below allows API services to override the binding to use
         different resource name schemes, such as `users/*/operations`.'
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       - hasParameters
@@ -867,7 +867,7 @@ types:
           body:
             application/json: ListOperationsResponse
       (commons.Id): dataproc.projects.regions.operations.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Regions
       - Operations
@@ -877,7 +877,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       responses:
@@ -885,7 +885,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): dataproc.projects.regions.operations.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Regions
       - Operations
@@ -915,7 +915,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Starts a job cancellation request. To access the job resource after cancellation, call [regions/{region}/jobs.list](/dataproc/reference/rest/v1/projects.regions.jobs/list) or [regions/{region}/jobs.get](/dataproc/reference/rest/v1/projects.regions.jobs/get).
-                displayName: cancel
+                displayName: Cancel
                 is:
                 - hasParameters
                 body:
@@ -925,7 +925,7 @@ types:
                     body:
                       application/json: Job
                 (commons.Id): dataproc.projects.regions.jobs.cancel
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Jobs
@@ -940,7 +940,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the resource representation for a job in a project.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -948,7 +948,7 @@ types:
                     body:
                       application/json: Job
                 (commons.Id): dataproc.projects.regions.jobs.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Jobs
@@ -958,7 +958,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Deletes the job from the project. If the job is active, the delete fails, and the response returns `FAILED_PRECONDITION`.
-                displayName: delete
+                displayName: Delete
                 is:
                 - hasParameters
                 responses:
@@ -966,7 +966,7 @@ types:
                     body:
                       application/json: Empty
                 (commons.Id): dataproc.projects.regions.jobs.delete
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Jobs
@@ -976,7 +976,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Lists regions/{region}/jobs in a project.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -1006,7 +1006,7 @@ types:
                   body:
                     application/json: ListJobsResponse
               (commons.Id): dataproc.projects.regions.jobs.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Regions
               - Jobs
@@ -1017,7 +1017,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Submits a job to a cluster.
-              displayName: submit
+              displayName: Submit
               is:
               - hasParameters
               body:
@@ -1027,7 +1027,7 @@ types:
                   body:
                     application/json: Job
               (commons.Id): dataproc.projects.regions.jobs.submit
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Regions
               - Jobs
@@ -1043,7 +1043,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Updates a cluster in a project.
-                displayName: patch
+                displayName: Patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -1068,7 +1068,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): dataproc.projects.regions.clusters.patch
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Clusters
@@ -1078,7 +1078,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the resource representation for a cluster in a project.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -1086,7 +1086,7 @@ types:
                     body:
                       application/json: Cluster
                 (commons.Id): dataproc.projects.regions.clusters.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Clusters
@@ -1096,7 +1096,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Deletes a cluster in a project.
-                displayName: delete
+                displayName: Delete
                 is:
                 - hasParameters
                 responses:
@@ -1104,7 +1104,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): dataproc.projects.regions.clusters.delete
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Clusters
@@ -1119,7 +1119,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets cluster diagnostic information. After the operation completes, the Operation.response field contains `DiagnoseClusterOutputLocation`.
-                displayName: diagnose
+                displayName: Diagnose
                 is:
                 - hasParameters
                 body:
@@ -1129,7 +1129,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): dataproc.projects.regions.clusters.diagnose
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Regions
                 - Clusters
@@ -1139,7 +1139,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Creates a cluster in a project.
-              displayName: create
+              displayName: Create
               is:
               - hasParameters
               body:
@@ -1149,7 +1149,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): dataproc.projects.regions.clusters.create
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Regions
               - Clusters
@@ -1159,7 +1159,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Lists all regions/{region}/clusters in a project.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -1175,7 +1175,7 @@ types:
                   body:
                     application/json: ListClustersResponse
               (commons.Id): dataproc.projects.regions.clusters.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Regions
               - Clusters

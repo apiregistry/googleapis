@@ -782,7 +782,7 @@ types:
                   - https://www.googleapis.com/auth/drive.file
                   - https://www.googleapis.com/auth/drive.readonly
               description: Gets a reply by ID.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               queryParameters:
@@ -795,7 +795,7 @@ types:
                   body:
                     application/json: Reply
               (commons.Id): drive.replies.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Replies
             patch:
               securedBy:
@@ -804,7 +804,7 @@ types:
                   - https://www.googleapis.com/auth/drive
                   - https://www.googleapis.com/auth/drive.file
               description: Updates a reply with patch semantics.
-              displayName: update
+              displayName: Update
               is:
               - hasParameters
               body:
@@ -814,7 +814,7 @@ types:
                   body:
                     application/json: Reply
               (commons.Id): drive.replies.update
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Replies
             delete:
               securedBy:
@@ -823,11 +823,11 @@ types:
                   - https://www.googleapis.com/auth/drive
                   - https://www.googleapis.com/auth/drive.file
               description: Deletes a reply.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               (commons.Id): drive.replies.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Replies
           post:
             securedBy:
@@ -836,7 +836,7 @@ types:
                 - https://www.googleapis.com/auth/drive
                 - https://www.googleapis.com/auth/drive.file
             description: Creates a new reply to a comment.
-            displayName: create
+            displayName: Create
             is:
             - hasParameters
             body:
@@ -846,7 +846,7 @@ types:
                 body:
                   application/json: Reply
             (commons.Id): drive.replies.create
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Replies
           get:
             securedBy:
@@ -856,7 +856,7 @@ types:
                 - https://www.googleapis.com/auth/drive.file
                 - https://www.googleapis.com/auth/drive.readonly
             description: Lists a comment's replies.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -879,7 +879,7 @@ types:
                 body:
                   application/json: ReplyList
             (commons.Id): drive.replies.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Replies
         get:
           securedBy:
@@ -889,7 +889,7 @@ types:
               - https://www.googleapis.com/auth/drive.file
               - https://www.googleapis.com/auth/drive.readonly
           description: Gets a comment by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           queryParameters:
@@ -902,7 +902,7 @@ types:
               body:
                 application/json: Comment
           (commons.Id): drive.comments.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Comments
         patch:
           securedBy:
@@ -911,7 +911,7 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Updates a comment with patch semantics.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -921,7 +921,7 @@ types:
               body:
                 application/json: Comment
           (commons.Id): drive.comments.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Comments
         delete:
           securedBy:
@@ -930,11 +930,11 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Deletes a comment.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): drive.comments.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Comments
       post:
         securedBy:
@@ -943,7 +943,7 @@ types:
             - https://www.googleapis.com/auth/drive
             - https://www.googleapis.com/auth/drive.file
         description: Creates a new comment on a file.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -953,7 +953,7 @@ types:
             body:
               application/json: Comment
         (commons.Id): drive.comments.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Comments
       get:
         securedBy:
@@ -963,7 +963,7 @@ types:
             - https://www.googleapis.com/auth/drive.file
             - https://www.googleapis.com/auth/drive.readonly
         description: Lists a file's comments.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -989,7 +989,7 @@ types:
             body:
               application/json: CommentList
         (commons.Id): drive.comments.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Comments
     /permissions:
       /{permissionId}:
@@ -1008,7 +1008,7 @@ types:
               - https://www.googleapis.com/auth/drive.photos.readonly
               - https://www.googleapis.com/auth/drive.readonly
           description: Gets a permission by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1016,7 +1016,7 @@ types:
               body:
                 application/json: Permission
           (commons.Id): drive.permissions.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Permissions
         patch:
           securedBy:
@@ -1025,7 +1025,7 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Updates a permission with patch semantics.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           queryParameters:
@@ -1044,7 +1044,7 @@ types:
               body:
                 application/json: Permission
           (commons.Id): drive.permissions.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Permissions
         delete:
           securedBy:
@@ -1053,11 +1053,11 @@ types:
               - https://www.googleapis.com/auth/drive
               - https://www.googleapis.com/auth/drive.file
           description: Deletes a permission.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): drive.permissions.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Permissions
       post:
         securedBy:
@@ -1066,7 +1066,7 @@ types:
             - https://www.googleapis.com/auth/drive
             - https://www.googleapis.com/auth/drive.file
         description: Creates a permission for a file.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         queryParameters:
@@ -1087,7 +1087,7 @@ types:
             body:
               application/json: Permission
         (commons.Id): drive.permissions.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Permissions
       get:
         securedBy:
@@ -1100,7 +1100,7 @@ types:
             - https://www.googleapis.com/auth/drive.photos.readonly
             - https://www.googleapis.com/auth/drive.readonly
         description: Lists a file's permissions.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -1108,7 +1108,7 @@ types:
             body:
               application/json: PermissionList
         (commons.Id): drive.permissions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Permissions
     /watch:
       post:
@@ -1123,7 +1123,7 @@ types:
             - https://www.googleapis.com/auth/drive.photos.readonly
             - https://www.googleapis.com/auth/drive.readonly
         description: Subscribes to changes to a file
-        displayName: watch
+        displayName: Watch
         is:
         - hasParameters
         queryParameters:
@@ -1138,7 +1138,7 @@ types:
             body:
               application/json: Channel
         (commons.Id): drive.files.watch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Files
     /copy:
       post:
@@ -1150,7 +1150,7 @@ types:
             - https://www.googleapis.com/auth/drive.file
             - https://www.googleapis.com/auth/drive.photos.readonly
         description: Creates a copy of a file and applies any requested updates with patch semantics.
-        displayName: copy
+        displayName: Copy
         is:
         - hasParameters
         queryParameters:
@@ -1172,7 +1172,7 @@ types:
             body:
               application/json: File
         (commons.Id): drive.files.copy
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Files
     /export:
       get:
@@ -1183,7 +1183,7 @@ types:
             - https://www.googleapis.com/auth/drive.file
             - https://www.googleapis.com/auth/drive.readonly
         description: Exports a Google Doc to the requested MIME type and returns the exported content.
-        displayName: export
+        displayName: Export
         is:
         - hasParameters
         queryParameters:
@@ -1191,7 +1191,7 @@ types:
             type: string
             description: The MIME type of the format requested for this export.
         (commons.Id): drive.files.export
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Files
     /revisions:
       /{revisionId}:
@@ -1211,7 +1211,7 @@ types:
               - https://www.googleapis.com/auth/drive.photos.readonly
               - https://www.googleapis.com/auth/drive.readonly
           description: Gets a revision's metadata or content by ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           queryParameters:
@@ -1224,7 +1224,7 @@ types:
               body:
                 application/json: Revision
           (commons.Id): drive.revisions.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Revisions
         patch:
           securedBy:
@@ -1234,7 +1234,7 @@ types:
               - https://www.googleapis.com/auth/drive.appdata
               - https://www.googleapis.com/auth/drive.file
           description: Updates a revision with patch semantics.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -1244,7 +1244,7 @@ types:
               body:
                 application/json: Revision
           (commons.Id): drive.revisions.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Revisions
         delete:
           securedBy:
@@ -1254,11 +1254,11 @@ types:
               - https://www.googleapis.com/auth/drive.appdata
               - https://www.googleapis.com/auth/drive.file
           description: Permanently deletes a revision. This method is only applicable to files with binary content in Drive.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): drive.revisions.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Revisions
       get:
         securedBy:
@@ -1272,7 +1272,7 @@ types:
             - https://www.googleapis.com/auth/drive.photos.readonly
             - https://www.googleapis.com/auth/drive.readonly
         description: Lists a file's revisions.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1289,7 +1289,7 @@ types:
             body:
               application/json: RevisionList
         (commons.Id): drive.revisions.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Revisions
     get:
       securedBy:
@@ -1303,7 +1303,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Gets a file's metadata or content by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -1316,7 +1316,7 @@ types:
           body:
             application/json: File
       (commons.Id): drive.files.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Files
     patch:
       securedBy:
@@ -1328,7 +1328,7 @@ types:
           - https://www.googleapis.com/auth/drive.metadata
           - https://www.googleapis.com/auth/drive.scripts
       description: Updates a file's metadata and/or content with patch semantics.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       queryParameters:
@@ -1356,7 +1356,7 @@ types:
           body:
             application/json: File
       (commons.Id): drive.files.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Files
     delete:
       securedBy:
@@ -1366,11 +1366,11 @@ types:
           - https://www.googleapis.com/auth/drive.appdata
           - https://www.googleapis.com/auth/drive.file
       description: Permanently deletes a file owned by the user without moving it to the trash. If the target is a folder, all descendants owned by the user are also deleted.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): drive.files.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Files
   /trash:
     delete:
@@ -1379,11 +1379,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/drive
       description: Permanently deletes all of the user's trashed files.
-      displayName: empty Trash
+      displayName: Empty Trash
       is:
       - hasParameters
       (commons.Id): drive.files.emptyTrash
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Files
   /generateIds:
     get:
@@ -1394,7 +1394,7 @@ types:
           - https://www.googleapis.com/auth/drive.appdata
           - https://www.googleapis.com/auth/drive.file
       description: Generates a set of file IDs which can be provided in create requests.
-      displayName: generate Ids
+      displayName: Generate Ids
       is:
       - hasParameters
       queryParameters:
@@ -1414,7 +1414,7 @@ types:
           body:
             application/json: GeneratedIds
       (commons.Id): drive.files.generateIds
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Files
   post:
     securedBy:
@@ -1424,7 +1424,7 @@ types:
         - https://www.googleapis.com/auth/drive.appdata
         - https://www.googleapis.com/auth/drive.file
     description: Creates a new file.
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     queryParameters:
@@ -1450,7 +1450,7 @@ types:
         body:
           application/json: File
     (commons.Id): drive.files.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Files
   get:
     securedBy:
@@ -1464,7 +1464,7 @@ types:
         - https://www.googleapis.com/auth/drive.photos.readonly
         - https://www.googleapis.com/auth/drive.readonly
     description: Lists or searches files.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -1509,7 +1509,7 @@ types:
         body:
           application/json: FileList
     (commons.Id): drive.files.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Files
 /channels:
   /stop:
@@ -1525,13 +1525,13 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Stop watching resources through this channel
-      displayName: stop
+      displayName: Stop
       is:
       - hasParameters
       body:
         application/json: Channel
       (commons.Id): drive.channels.stop
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Channels
 /about:
   get:
@@ -1546,7 +1546,7 @@ types:
         - https://www.googleapis.com/auth/drive.photos.readonly
         - https://www.googleapis.com/auth/drive.readonly
     description: Gets information about the user, the user's Drive, and system capabilities.
-    displayName: get
+    displayName: Get
     is:
     - hasParameters
     responses:
@@ -1554,7 +1554,7 @@ types:
         body:
           application/json: About
     (commons.Id): drive.about.get
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - About
 /changes:
   /startPageToken:
@@ -1570,7 +1570,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Gets the starting pageToken for listing future changes.
-      displayName: get Start Page Token
+      displayName: Get Start Page Token
       is:
       - hasParameters
       responses:
@@ -1578,7 +1578,7 @@ types:
           body:
             application/json: StartPageToken
       (commons.Id): drive.changes.getStartPageToken
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Changes
   /watch:
     post:
@@ -1593,7 +1593,7 @@ types:
           - https://www.googleapis.com/auth/drive.photos.readonly
           - https://www.googleapis.com/auth/drive.readonly
       description: Subscribes to changes for a user.
-      displayName: watch
+      displayName: Watch
       is:
       - hasParameters
       queryParameters:
@@ -1626,7 +1626,7 @@ types:
           body:
             application/json: Channel
       (commons.Id): drive.changes.watch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Changes
   get:
     securedBy:
@@ -1640,7 +1640,7 @@ types:
         - https://www.googleapis.com/auth/drive.photos.readonly
         - https://www.googleapis.com/auth/drive.readonly
     description: Lists changes for a user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -1671,5 +1671,5 @@ types:
         body:
           application/json: ChangeList
     (commons.Id): drive.changes.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Changes

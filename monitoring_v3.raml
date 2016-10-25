@@ -701,7 +701,7 @@ types:
             - https://www.googleapis.com/auth/monitoring
             - https://www.googleapis.com/auth/monitoring.write
         description: Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -711,7 +711,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): monitoring.projects.timeSeries.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Time Series
       get:
@@ -722,7 +722,7 @@ types:
             - https://www.googleapis.com/auth/monitoring
             - https://www.googleapis.com/auth/monitoring.read
         description: Lists time series that match a filter. This method does not require a Stackdriver account.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -803,7 +803,7 @@ types:
             body:
               application/json: ListTimeSeriesResponse
         (commons.Id): monitoring.projects.timeSeries.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Time Series
     /groups:
@@ -814,7 +814,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/monitoring
         description: Creates a new group.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         queryParameters:
@@ -828,7 +828,7 @@ types:
             body:
               application/json: Group
         (commons.Id): monitoring.projects.groups.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Groups
       get:
@@ -839,7 +839,7 @@ types:
             - https://www.googleapis.com/auth/monitoring
             - https://www.googleapis.com/auth/monitoring.read
         description: Lists the existing groups.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -873,7 +873,7 @@ types:
             body:
               application/json: ListGroupsResponse
         (commons.Id): monitoring.projects.groups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Groups
     /members:
@@ -885,7 +885,7 @@ types:
             - https://www.googleapis.com/auth/monitoring
             - https://www.googleapis.com/auth/monitoring.read
         description: Lists the monitored resources that are members of a group.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -912,7 +912,7 @@ types:
             body:
               application/json: ListGroupMembersResponse
         (commons.Id): monitoring.projects.groups.members.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Groups
         - Members
@@ -926,7 +926,7 @@ types:
             - https://www.googleapis.com/auth/monitoring.read
             - https://www.googleapis.com/auth/monitoring.write
         description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -947,7 +947,7 @@ types:
             body:
               application/json: ListMonitoredResourceDescriptorsResponse
         (commons.Id): monitoring.projects.monitoredResourceDescriptors.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Monitored Resource Descriptors
     /metricDescriptors:
@@ -959,7 +959,7 @@ types:
             - https://www.googleapis.com/auth/monitoring
             - https://www.googleapis.com/auth/monitoring.write
         description: Creates a new metric descriptor. User-created metric descriptors define custom metrics (/monitoring/custom-metrics).
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -969,7 +969,7 @@ types:
             body:
               application/json: MetricDescriptor
         (commons.Id): monitoring.projects.metricDescriptors.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Metric Descriptors
       get:
@@ -981,7 +981,7 @@ types:
             - https://www.googleapis.com/auth/monitoring.read
             - https://www.googleapis.com/auth/monitoring.write
         description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1002,7 +1002,7 @@ types:
             body:
               application/json: ListMetricDescriptorsResponse
         (commons.Id): monitoring.projects.metricDescriptors.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Metric Descriptors
     /collectdTimeSeries:
@@ -1016,7 +1016,7 @@ types:
         description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside
           class="caution">This method is only for use by the Stackdriver Monitoring
           Agent. Use projects.timeSeries.create instead.</aside>'
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -1026,7 +1026,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): monitoring.projects.collectdTimeSeries.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Collectd Time Series
     get:
@@ -1038,7 +1038,7 @@ types:
           - https://www.googleapis.com/auth/monitoring.read
           - https://www.googleapis.com/auth/monitoring.write
       description: Gets a single metric descriptor. This method does not require a Stackdriver account.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       - hasParameters
@@ -1048,7 +1048,7 @@ types:
           body:
             application/json: MetricDescriptor
       (commons.Id): monitoring.projects.metricDescriptors.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Metric Descriptors
     put:
@@ -1058,7 +1058,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/monitoring
       description: Updates an existing group. You can change any group attributes except name.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       queryParameters:
@@ -1072,7 +1072,7 @@ types:
           body:
             application/json: Group
       (commons.Id): monitoring.projects.groups.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Groups
     delete:
@@ -1082,7 +1082,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/monitoring
       description: Deletes a metric descriptor. Only user-created custom metrics (/monitoring/custom-metrics) can be deleted.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       - hasParameters
@@ -1091,6 +1091,6 @@ types:
           body:
             application/json: Empty
       (commons.Id): monitoring.projects.metricDescriptors.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Metric Descriptors

@@ -876,7 +876,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Starts a job cancellation request. To access the job resource after cancellation, call [jobs.list](/dataproc/reference/rest/v1beta1/projects.jobs/list) or [jobs.get](/dataproc/reference/rest/v1beta1/projects.jobs/get).
-            displayName: cancel
+            displayName: Cancel
             is:
             - hasParameters
             body:
@@ -886,7 +886,7 @@ types:
                 body:
                   application/json: Job
             (commons.Id): dataproc.projects.jobs.cancel
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Jobs
         /{jobId}:
@@ -900,7 +900,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the resource representation for a job in a project.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -908,7 +908,7 @@ types:
                 body:
                   application/json: Job
             (commons.Id): dataproc.projects.jobs.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Jobs
           delete:
@@ -917,7 +917,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Deletes the job from the project. If the job is active, the delete fails, and the response returns `FAILED_PRECONDITION`.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -925,7 +925,7 @@ types:
                 body:
                   application/json: Empty
             (commons.Id): dataproc.projects.jobs.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Jobs
         get:
@@ -934,7 +934,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Lists jobs in a project.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -963,7 +963,7 @@ types:
               body:
                 application/json: ListJobsResponse
           (commons.Id): dataproc.projects.jobs.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Jobs
       /jobs:submit:
@@ -973,7 +973,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Submits a job to a cluster.
-          displayName: submit
+          displayName: Submit
           is:
           - hasParameters
           body:
@@ -983,7 +983,7 @@ types:
               body:
                 application/json: Job
           (commons.Id): dataproc.projects.jobs.submit
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Jobs
       /clusters:
@@ -998,7 +998,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Updates a cluster in a project.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             queryParameters:
@@ -1023,7 +1023,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): dataproc.projects.clusters.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Clusters
           get:
@@ -1032,7 +1032,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the resource representation for a cluster in a project.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -1040,7 +1040,7 @@ types:
                 body:
                   application/json: Cluster
             (commons.Id): dataproc.projects.clusters.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Clusters
           delete:
@@ -1049,7 +1049,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Deletes a cluster in a project.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -1057,7 +1057,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): dataproc.projects.clusters.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Clusters
         /{clusterName}:diagnose:
@@ -1071,7 +1071,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets cluster diagnostic information. After the operation completes, the Operation.response field contains `DiagnoseClusterOutputLocation`.
-            displayName: diagnose
+            displayName: Diagnose
             is:
             - hasParameters
             body:
@@ -1081,7 +1081,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): dataproc.projects.clusters.diagnose
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Clusters
         post:
@@ -1090,7 +1090,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Creates a cluster in a project.
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           body:
@@ -1100,7 +1100,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): dataproc.projects.clusters.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Clusters
         get:
@@ -1109,7 +1109,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Lists all clusters in a project.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1125,7 +1125,7 @@ types:
               body:
                 application/json: ListClustersResponse
           (commons.Id): dataproc.projects.clusters.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Clusters
   /{name}:cancel:
@@ -1140,7 +1140,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use [operations.get](/dataproc/reference/rest/v1beta1/operations/get) or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation.
-      displayName: cancel
+      displayName: Cancel
       is:
       - hasParameters
       body:
@@ -1150,7 +1150,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): dataproc.operations.cancel
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations
   /{name}:
     uriParameters:
@@ -1167,7 +1167,7 @@ types:
         If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE:
         the `name` binding below allows API services to override the binding to use
         different resource name schemes, such as `users/*/operations`.'
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       - hasParameters
@@ -1187,7 +1187,7 @@ types:
           body:
             application/json: ListOperationsResponse
       (commons.Id): dataproc.operations.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations
     delete:
       securedBy:
@@ -1195,7 +1195,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       responses:
@@ -1203,5 +1203,5 @@ types:
           body:
             application/json: Empty
       (commons.Id): dataproc.operations.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations

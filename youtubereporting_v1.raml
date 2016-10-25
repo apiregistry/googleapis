@@ -181,7 +181,7 @@ types:
           - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
           - https://www.googleapis.com/auth/yt-analytics.readonly
       description: Lists report types.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -203,7 +203,7 @@ types:
           body:
             application/json: ListReportTypesResponse
       (commons.Id): youtubereporting.reportTypes.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Report Types
   /jobs:
     /{jobId}:
@@ -224,7 +224,7 @@ types:
                 - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
                 - https://www.googleapis.com/auth/yt-analytics.readonly
             description: Gets the metadata of a specific report.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             queryParameters:
@@ -236,7 +236,7 @@ types:
                 body:
                   application/json: Report
             (commons.Id): youtubereporting.jobs.reports.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Jobs
             - Reports
         get:
@@ -246,7 +246,7 @@ types:
               - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
               - https://www.googleapis.com/auth/yt-analytics.readonly
           description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -274,7 +274,7 @@ types:
               body:
                 application/json: ListReportsResponse
           (commons.Id): youtubereporting.jobs.reports.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Jobs
           - Reports
       get:
@@ -284,7 +284,7 @@ types:
             - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
             - https://www.googleapis.com/auth/yt-analytics.readonly
         description: Gets a job.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         queryParameters:
@@ -296,7 +296,7 @@ types:
             body:
               application/json: Job
         (commons.Id): youtubereporting.jobs.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Jobs
       delete:
         securedBy:
@@ -305,7 +305,7 @@ types:
             - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
             - https://www.googleapis.com/auth/yt-analytics.readonly
         description: Deletes a job.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         queryParameters:
@@ -317,7 +317,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): youtubereporting.jobs.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Jobs
     post:
       securedBy:
@@ -326,7 +326,7 @@ types:
           - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
           - https://www.googleapis.com/auth/yt-analytics.readonly
       description: Creates a job and returns it.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       queryParameters:
@@ -340,7 +340,7 @@ types:
           body:
             application/json: Job
       (commons.Id): youtubereporting.jobs.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Jobs
     get:
       securedBy:
@@ -349,7 +349,7 @@ types:
           - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
           - https://www.googleapis.com/auth/yt-analytics.readonly
       description: Lists jobs.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -371,7 +371,7 @@ types:
           body:
             application/json: ListJobsResponse
       (commons.Id): youtubereporting.jobs.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Jobs
   /media:
     /{resourceName}:
@@ -387,7 +387,7 @@ types:
             - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
             - https://www.googleapis.com/auth/yt-analytics.readonly
         description: Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.
-        displayName: download
+        displayName: Download
         is:
         - hasParameters
         responses:
@@ -395,5 +395,5 @@ types:
             body:
               application/json: Media
         (commons.Id): youtubereporting.media.download
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Media

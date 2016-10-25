@@ -797,7 +797,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
-            displayName: stop
+            displayName: Stop
             is:
             - hasParameters
             body:
@@ -807,7 +807,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): deploymentmanager.deployments.stop
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Deployments
         /cancelPreview:
           post:
@@ -817,7 +817,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Cancels and removes the preview currently associated with the deployment.
-            displayName: cancel Preview
+            displayName: Cancel Preview
             is:
             - hasParameters
             body:
@@ -827,7 +827,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): deploymentmanager.deployments.cancelPreview
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Deployments
         /manifests:
           /{manifest}:
@@ -845,7 +845,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: Gets information about a specific manifest.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -853,7 +853,7 @@ types:
                   body:
                     application/json: Manifest
               (commons.Id): deploymentmanager.manifests.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Manifests
           get:
             securedBy:
@@ -864,7 +864,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Lists all manifests for a given deployment.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -903,7 +903,7 @@ types:
                 body:
                   application/json: ManifestsListResponse
             (commons.Id): deploymentmanager.manifests.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Manifests
         /resources:
           /{resource}:
@@ -920,7 +920,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: Gets information about a single resource.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -928,7 +928,7 @@ types:
                   body:
                     application/json: Resource
               (commons.Id): deploymentmanager.resources.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Resources
           get:
             securedBy:
@@ -939,7 +939,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Lists all resources in a given deployment.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -978,7 +978,7 @@ types:
                 body:
                   application/json: ResourcesListResponse
             (commons.Id): deploymentmanager.resources.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Resources
         patch:
           securedBy:
@@ -987,7 +987,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Updates a deployment and all of the resources described by the deployment manifest. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           queryParameters:
@@ -1022,7 +1022,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): deploymentmanager.deployments.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Deployments
         get:
           securedBy:
@@ -1033,7 +1033,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: Gets information about a specific deployment.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1041,7 +1041,7 @@ types:
               body:
                 application/json: Deployment
           (commons.Id): deploymentmanager.deployments.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Deployments
         put:
           securedBy:
@@ -1050,7 +1050,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Updates a deployment and all of the resources described by the deployment manifest.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           queryParameters:
@@ -1085,7 +1085,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): deploymentmanager.deployments.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Deployments
         delete:
           securedBy:
@@ -1094,7 +1094,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Deletes a deployment and all of the resources in the deployment.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -1102,7 +1102,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): deploymentmanager.deployments.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Deployments
       /{resource}:
         uriParameters:
@@ -1118,7 +1118,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Returns permissions that a caller has on the specified resource.
-            displayName: test Iam Permissions
+            displayName: Test Iam Permissions
             is:
             - hasParameters
             body:
@@ -1128,7 +1128,7 @@ types:
                 body:
                   application/json: TestPermissionsResponse
             (commons.Id): deploymentmanager.deployments.testIamPermissions
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Deployments
         /getIamPolicy:
           get:
@@ -1138,7 +1138,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            displayName: get Iam Policy
+            displayName: Get Iam Policy
             is:
             - hasParameters
             responses:
@@ -1146,7 +1146,7 @@ types:
                 body:
                   application/json: Policy
             (commons.Id): deploymentmanager.deployments.getIamPolicy
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Deployments
         /setIamPolicy:
           post:
@@ -1156,7 +1156,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Sets the access control policy on the specified resource. Replaces any existing policy.
-            displayName: set Iam Policy
+            displayName: Set Iam Policy
             is:
             - hasParameters
             body:
@@ -1166,7 +1166,7 @@ types:
                 body:
                   application/json: Policy
             (commons.Id): deploymentmanager.deployments.setIamPolicy
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Deployments
       post:
         securedBy:
@@ -1175,7 +1175,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.cloudman
         description: Creates a deployment and all of the resources described by the deployment manifest.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         queryParameters:
@@ -1189,7 +1189,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): deploymentmanager.deployments.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Deployments
       get:
         securedBy:
@@ -1200,7 +1200,7 @@ types:
             - https://www.googleapis.com/auth/ndev.cloudman
             - https://www.googleapis.com/auth/ndev.cloudman.readonly
         description: Lists all deployments for a given project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1239,7 +1239,7 @@ types:
             body:
               application/json: DeploymentsListResponse
         (commons.Id): deploymentmanager.deployments.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Deployments
     /types:
       get:
@@ -1251,7 +1251,7 @@ types:
             - https://www.googleapis.com/auth/ndev.cloudman
             - https://www.googleapis.com/auth/ndev.cloudman.readonly
         description: Lists all resource types for Deployment Manager.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1290,7 +1290,7 @@ types:
             body:
               application/json: TypesListResponse
         (commons.Id): deploymentmanager.types.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Types
     /operations:
       /{operation}:
@@ -1307,7 +1307,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: Gets information about a specific operation.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1315,7 +1315,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): deploymentmanager.operations.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Operations
       get:
         securedBy:
@@ -1326,7 +1326,7 @@ types:
             - https://www.googleapis.com/auth/ndev.cloudman
             - https://www.googleapis.com/auth/ndev.cloudman.readonly
         description: Lists all operations for a project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1365,5 +1365,5 @@ types:
             body:
               application/json: OperationsListResponse
         (commons.Id): deploymentmanager.operations.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Operations

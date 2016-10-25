@@ -445,7 +445,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Returns configuration info about the Container Engine service.
-              displayName: get Serverconfig
+              displayName: Get Serverconfig
               is:
               - hasParameters
               responses:
@@ -453,7 +453,7 @@ types:
                   body:
                     application/json: ServerConfig
               (commons.Id): container.projects.zones.getServerconfig
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Zones
           /operations:
@@ -468,7 +468,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the specified operation.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -476,7 +476,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): container.projects.zones.operations.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Zones
                 - Operations
@@ -486,7 +486,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Lists all operations in a project in a specific zone or all zones.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               responses:
@@ -494,7 +494,7 @@ types:
                   body:
                     application/json: ListOperationsResponse
               (commons.Id): container.projects.zones.operations.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Zones
               - Operations
@@ -516,7 +516,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Retrieves the node pool requested.
-                    displayName: get
+                    displayName: Get
                     is:
                     - hasParameters
                     responses:
@@ -524,7 +524,7 @@ types:
                         body:
                           application/json: NodePool
                     (commons.Id): container.projects.zones.clusters.nodePools.get
-                    (commons.LogicalStucture):
+                    (commons.LogicalStructure):
                     - Projects
                     - Zones
                     - Clusters
@@ -535,7 +535,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Deletes a node pool from a cluster.
-                    displayName: delete
+                    displayName: Delete
                     is:
                     - hasParameters
                     responses:
@@ -543,7 +543,7 @@ types:
                         body:
                           application/json: Operation
                     (commons.Id): container.projects.zones.clusters.nodePools.delete
-                    (commons.LogicalStucture):
+                    (commons.LogicalStructure):
                     - Projects
                     - Zones
                     - Clusters
@@ -554,7 +554,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/cloud-platform
                   description: Creates a node pool for a cluster.
-                  displayName: create
+                  displayName: Create
                   is:
                   - hasParameters
                   body:
@@ -564,7 +564,7 @@ types:
                       body:
                         application/json: Operation
                   (commons.Id): container.projects.zones.clusters.nodePools.create
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Projects
                   - Zones
                   - Clusters
@@ -575,7 +575,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/cloud-platform
                   description: Lists the node pools for a cluster.
-                  displayName: list
+                  displayName: List
                   is:
                   - hasParameters
                   responses:
@@ -583,7 +583,7 @@ types:
                       body:
                         application/json: ListNodePoolsResponse
                   (commons.Id): container.projects.zones.clusters.nodePools.list
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Projects
                   - Zones
                   - Clusters
@@ -594,7 +594,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the details of a specific cluster.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -602,7 +602,7 @@ types:
                     body:
                       application/json: Cluster
                 (commons.Id): container.projects.zones.clusters.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Zones
                 - Clusters
@@ -612,7 +612,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Updates the settings of a specific cluster.
-                displayName: update
+                displayName: Update
                 is:
                 - hasParameters
                 body:
@@ -622,7 +622,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): container.projects.zones.clusters.update
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Zones
                 - Clusters
@@ -632,7 +632,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster (e.g. load balancer resources) will not be deleted if they weren't present at the initial create time.
-                displayName: delete
+                displayName: Delete
                 is:
                 - hasParameters
                 responses:
@@ -640,7 +640,7 @@ types:
                     body:
                       application/json: Operation
                 (commons.Id): container.projects.zones.clusters.delete
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Zones
                 - Clusters
@@ -650,7 +650,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the cluster creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range is being used by the cluster.
-              displayName: create
+              displayName: Create
               is:
               - hasParameters
               body:
@@ -660,7 +660,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): container.projects.zones.clusters.create
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Zones
               - Clusters
@@ -670,7 +670,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Lists all clusters owned by a project in either the specified zone or all zones.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               responses:
@@ -678,7 +678,7 @@ types:
                   body:
                     application/json: ListClustersResponse
               (commons.Id): container.projects.zones.clusters.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Zones
               - Clusters

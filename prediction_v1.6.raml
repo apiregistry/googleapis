@@ -356,7 +356,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/prediction
           description: Submit input and request an output against a hosted model.
-          displayName: predict
+          displayName: Predict
           is:
           - hasParameters
           body:
@@ -366,7 +366,7 @@ types:
               body:
                 application/json: Output
           (commons.Id): prediction.hostedmodels.predict
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Hostedmodels
   /trainedmodels:
     /{id}:
@@ -382,7 +382,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/prediction
           description: Get analysis of the model and the data the model was trained on.
-          displayName: analyze
+          displayName: Analyze
           is:
           - hasParameters
           responses:
@@ -390,7 +390,7 @@ types:
               body:
                 application/json: Analyze
           (commons.Id): prediction.trainedmodels.analyze
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Trainedmodels
       /predict:
         post:
@@ -400,7 +400,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/prediction
           description: Submit model id and request a prediction.
-          displayName: predict
+          displayName: Predict
           is:
           - hasParameters
           body:
@@ -410,7 +410,7 @@ types:
               body:
                 application/json: Output
           (commons.Id): prediction.trainedmodels.predict
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Trainedmodels
       get:
         securedBy:
@@ -419,7 +419,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/prediction
         description: Check training status of your model.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -427,7 +427,7 @@ types:
             body:
               application/json: Insert2
         (commons.Id): prediction.trainedmodels.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Trainedmodels
       put:
         securedBy:
@@ -436,7 +436,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/prediction
         description: Add new data to a trained model.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -446,7 +446,7 @@ types:
             body:
               application/json: Insert2
         (commons.Id): prediction.trainedmodels.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Trainedmodels
       delete:
         securedBy:
@@ -455,11 +455,11 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/prediction
         description: Delete a trained model.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         (commons.Id): prediction.trainedmodels.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Trainedmodels
     /list:
       get:
@@ -469,7 +469,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/prediction
         description: List available models.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -486,7 +486,7 @@ types:
             body:
               application/json: List
         (commons.Id): prediction.trainedmodels.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Trainedmodels
     post:
       securedBy:
@@ -498,7 +498,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_write
           - https://www.googleapis.com/auth/prediction
       description: Train a Prediction API model.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       body:
@@ -508,5 +508,5 @@ types:
           body:
             application/json: Insert2
       (commons.Id): prediction.trainedmodels.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Trainedmodels

@@ -441,7 +441,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Gets information about a single waiter.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       - hasParameters
@@ -452,7 +452,7 @@ types:
           body:
             application/json: Waiter
       (commons.Id): runtimeconfig.projects.configs.waiters.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Configs
       - Waiters
@@ -463,7 +463,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Updates an existing variable with a new value.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       - hasParameters
@@ -474,7 +474,7 @@ types:
           body:
             application/json: Variable
       (commons.Id): runtimeconfig.projects.configs.variables.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Configs
       - Variables
@@ -485,7 +485,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Deletes the waiter with the specified name.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       - hasParameters
@@ -501,7 +501,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): runtimeconfig.projects.configs.waiters.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Configs
       - Waiters
@@ -523,7 +523,7 @@ types:
         description: |-
           Creates a new RuntimeConfig resource. The configuration name must be
           unique within project.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         queryParameters:
@@ -544,7 +544,7 @@ types:
             body:
               application/json: RuntimeConfig
         (commons.Id): runtimeconfig.projects.configs.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Configs
       get:
@@ -554,7 +554,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloudruntimeconfig
         description: Lists all the RuntimeConfig resources within project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -574,7 +574,7 @@ types:
             body:
               application/json: ListConfigsResponse
         (commons.Id): runtimeconfig.projects.configs.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Configs
     /variables:
@@ -592,7 +592,7 @@ types:
           To learn more about creating a variable, read the
           [Setting and Getting Data](/deployment-manager/runtime-configurator/set-and-get-variables)
           documentation.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         queryParameters:
@@ -613,7 +613,7 @@ types:
             body:
               application/json: Variable
         (commons.Id): runtimeconfig.projects.configs.variables.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Configs
         - Variables
@@ -626,7 +626,7 @@ types:
         description: |-
           Lists variables within given a configuration, matching any provided filters.
           This only lists variable names, not the values.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -652,7 +652,7 @@ types:
             body:
               application/json: ListVariablesResponse
         (commons.Id): runtimeconfig.projects.configs.variables.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Configs
         - Variables
@@ -669,7 +669,7 @@ types:
           given name will exist (and can be retrieved) prior to the operation
           completing. If the operation fails, the failed Waiter resource will
           still exist and must be deleted prior to subsequent creation attempts.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         queryParameters:
@@ -690,7 +690,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): runtimeconfig.projects.configs.waiters.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Configs
         - Waiters
@@ -701,7 +701,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloudruntimeconfig
         description: List waiters within the given configuration.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -721,7 +721,7 @@ types:
             body:
               application/json: ListWaitersResponse
         (commons.Id): runtimeconfig.projects.configs.waiters.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Configs
         - Waiters
@@ -754,7 +754,7 @@ types:
         To learn more about creating a watcher, read the
         [Watching a Variable for Changes](/deployment-manager/runtime-configurator/watching-a-variable)
         documentation.
-      displayName: watch
+      displayName: Watch
       is:
       - hasParameters
       body:
@@ -764,7 +764,7 @@ types:
           body:
             application/json: Variable
       (commons.Id): runtimeconfig.projects.configs.variables.watch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Configs
       - Variables

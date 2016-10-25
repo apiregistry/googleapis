@@ -1480,7 +1480,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -1490,7 +1490,7 @@ types:
           body:
             application/json: AnnotationSet
       (commons.Id): genomics.annotationSets.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotation Sets
     get:
       securedBy:
@@ -1500,7 +1500,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets an annotation set. Caller must have READ permission for the associated dataset.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1508,7 +1508,7 @@ types:
           body:
             application/json: AnnotationSet
       (commons.Id): genomics.annotationSets.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotation Sets
     put:
       securedBy:
@@ -1517,7 +1517,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -1527,7 +1527,7 @@ types:
           body:
             application/json: AnnotationSet
       (commons.Id): genomics.annotationSets.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotation Sets
     delete:
       securedBy:
@@ -1536,11 +1536,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes an annotation set. Caller must have WRITE permission for the associated annotation set.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.annotationSets.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotation Sets
   /search:
     post:
@@ -1551,7 +1551,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Searches for annotation sets that match the given criteria. Annotation sets are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotation sets in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried datasets.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -1561,7 +1561,7 @@ types:
           body:
             application/json: SearchAnnotationSetsResponse
       (commons.Id): genomics.annotationSets.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotation Sets
   post:
     securedBy:
@@ -1574,7 +1574,7 @@ types:
       \ creating an annotation set:  \n- datasetId \n- referenceSetId  \nAll other\
       \ fields may be optionally specified, unless documented as being server-generated\
       \ (for example, the id field)."
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     body:
@@ -1584,7 +1584,7 @@ types:
         body:
           application/json: AnnotationSet
     (commons.Id): genomics.annotationSets.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Annotation Sets
 /references:
   /search:
@@ -1599,7 +1599,7 @@ types:
         Searches for references which match the given criteria.
 
         Implements GlobalAllianceApi.searchReferences.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -1609,7 +1609,7 @@ types:
           body:
             application/json: SearchReferencesResponse
       (commons.Id): genomics.references.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - References
   /{referenceId}:
     uriParameters:
@@ -1628,7 +1628,7 @@ types:
           Lists the bases in a reference, optionally restricted to a range.
 
           Implements GlobalAllianceApi.getReferenceBases.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1652,7 +1652,7 @@ types:
             body:
               application/json: ListBasesResponse
         (commons.Id): genomics.references.bases.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - References
         - Bases
     get:
@@ -1666,7 +1666,7 @@ types:
         Gets a reference.
 
         Implements GlobalAllianceApi.getReference.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1674,7 +1674,7 @@ types:
           body:
             application/json: Reference
       (commons.Id): genomics.references.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - References
 /referencesets:
   /search:
@@ -1689,7 +1689,7 @@ types:
         Searches for reference sets which match the given criteria.
 
         Implements GlobalAllianceApi.searchReferenceSets.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -1699,7 +1699,7 @@ types:
           body:
             application/json: SearchReferenceSetsResponse
       (commons.Id): genomics.referencesets.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Referencesets
   /{referenceSetId}:
     uriParameters:
@@ -1717,7 +1717,7 @@ types:
         Gets a reference set.
 
         Implements GlobalAllianceApi.getReferenceSet.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1725,7 +1725,7 @@ types:
           body:
             application/json: ReferenceSet
       (commons.Id): genomics.referencesets.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Referencesets
 /jobs:
   /{jobId}:
@@ -1741,11 +1741,11 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Cancels a job by ID. Note that it is possible for partial results to be generated and stored for cancelled jobs.
-        displayName: cancel
+        displayName: Cancel
         is:
         - hasParameters
         (commons.Id): genomics.jobs.cancel
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Jobs
     get:
       securedBy:
@@ -1755,7 +1755,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a job by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1763,7 +1763,7 @@ types:
           body:
             application/json: Job
       (commons.Id): genomics.jobs.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Jobs
   /search:
     post:
@@ -1774,7 +1774,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a list of jobs matching the criteria.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -1784,7 +1784,7 @@ types:
           body:
             application/json: SearchJobsResponse
       (commons.Id): genomics.jobs.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Jobs
 /reads:
   /search:
@@ -1803,7 +1803,7 @@ types:
         All reads returned (including reads on subsequent pages) are ordered by genomic coordinate (by reference sequence, then position). Reads with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield reads in the same order across their respective streams of paginated responses.
 
         Implements GlobalAllianceApi.searchReads.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -1813,7 +1813,7 @@ types:
           body:
             application/json: SearchReadsResponse
       (commons.Id): genomics.reads.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Reads
 /annotations:
   /{annotationId}:
@@ -1828,7 +1828,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates an annotation. The update must respect all mutability restrictions and other invariants described on the annotation resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -1838,7 +1838,7 @@ types:
           body:
             application/json: Annotation
       (commons.Id): genomics.annotations.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotations
     get:
       securedBy:
@@ -1848,7 +1848,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets an annotation. Caller must have READ permission for the associated annotation set.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1856,7 +1856,7 @@ types:
           body:
             application/json: Annotation
       (commons.Id): genomics.annotations.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotations
     put:
       securedBy:
@@ -1865,7 +1865,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates an annotation. The update must respect all mutability restrictions and other invariants described on the annotation resource. Caller must have WRITE permission for the associated dataset.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -1875,7 +1875,7 @@ types:
           body:
             application/json: Annotation
       (commons.Id): genomics.annotations.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotations
     delete:
       securedBy:
@@ -1884,11 +1884,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes an annotation. Caller must have WRITE permission for the associated annotation set.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.annotations.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotations
   /search:
     post:
@@ -1899,7 +1899,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Searches for annotations that match the given criteria. Results are ordered by genomic coordinate (by reference sequence, then position). Annotations with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotations in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried annotation sets.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -1909,7 +1909,7 @@ types:
           body:
             application/json: SearchAnnotationsResponse
       (commons.Id): genomics.annotations.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Annotations
   post:
     securedBy:
@@ -1926,7 +1926,7 @@ types:
       \ as being server-generated (for example, the id field). The annotated range\
       \ must be no longer than 100Mbp (mega base pairs). See the annotation resource\
       \ for additional restrictions on each field."
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     body:
@@ -1936,7 +1936,7 @@ types:
         body:
           application/json: Annotation
     (commons.Id): genomics.annotations.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Annotations
 /annotations:batchCreate:
   post:
@@ -1953,7 +1953,7 @@ types:
 
 
       For details on the requirements for each individual annotation resource, see annotations.create.
-    displayName: batch Create
+    displayName: Batch Create
     is:
     - hasParameters
     body:
@@ -1963,7 +1963,7 @@ types:
         body:
           application/json: BatchAnnotationsResponse
     (commons.Id): genomics.annotations.batchCreate
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Annotations
 /experimental:
   /jobs:
@@ -1976,7 +1976,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_write
             - https://www.googleapis.com/auth/genomics
         description: Creates and asynchronously runs an ad-hoc job. This is an experimental call and may be removed or changed at any time.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -1986,7 +1986,7 @@ types:
             body:
               application/json: ExperimentalCreateJobResponse
         (commons.Id): genomics.experimental.jobs.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Experimental
         - Jobs
 /readgroupsets:
@@ -2007,7 +2007,7 @@ types:
           Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range.
 
           Coverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage 'zoom levels'. The caller must have READ permissions for the target read group set.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -2038,7 +2038,7 @@ types:
             body:
               application/json: ListCoverageBucketsResponse
         (commons.Id): genomics.readgroupsets.coveragebuckets.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Readgroupsets
         - Coveragebuckets
     patch:
@@ -2048,7 +2048,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a read group set. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -2058,7 +2058,7 @@ types:
           body:
             application/json: ReadGroupSet
       (commons.Id): genomics.readgroupsets.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
     get:
       securedBy:
@@ -2068,7 +2068,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a read group set by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2076,7 +2076,7 @@ types:
           body:
             application/json: ReadGroupSet
       (commons.Id): genomics.readgroupsets.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
     put:
       securedBy:
@@ -2085,7 +2085,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a read group set.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -2095,7 +2095,7 @@ types:
           body:
             application/json: ReadGroupSet
       (commons.Id): genomics.readgroupsets.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
     delete:
       securedBy:
@@ -2104,11 +2104,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes a read group set.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.readgroupsets.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
   /search:
     post:
@@ -2122,7 +2122,7 @@ types:
         Searches for read group sets matching the criteria.
 
         Implements GlobalAllianceApi.searchReadGroupSets.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -2132,7 +2132,7 @@ types:
           body:
             application/json: SearchReadGroupSetsResponse
       (commons.Id): genomics.readgroupsets.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
   /import:
     post:
@@ -2150,7 +2150,7 @@ types:
         \ unmapped reads will be reverse complemented, and their qualities (also the\
         \ \"BQ\" and \"OQ\" tags, if any) will be reversed\n- Unmapped reads will\
         \ be stripped of positional information (referenceName and position)"
-      displayName: import
+      displayName: Import
       is:
       - hasParameters
       body:
@@ -2160,7 +2160,7 @@ types:
           body:
             application/json: ImportReadGroupSetsResponse
       (commons.Id): genomics.readgroupsets.import
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
   /export:
     post:
@@ -2174,7 +2174,7 @@ types:
         Exports read group sets to a BAM file in Google Cloud Storage.
 
         Note that currently there may be some differences between exported BAM files and the original BAM file at the time of import. See ImportReadGroupSets for details.
-      displayName: export
+      displayName: Export
       is:
       - hasParameters
       body:
@@ -2184,7 +2184,7 @@ types:
           body:
             application/json: ExportReadGroupSetsResponse
       (commons.Id): genomics.readgroupsets.export
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Readgroupsets
 /datasets:
   /{datasetId}:
@@ -2200,7 +2200,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Undeletes a dataset by restoring a dataset which was deleted via this API. This operation is only possible for a week after the deletion occurred.
-        displayName: undelete
+        displayName: Undelete
         is:
         - hasParameters
         responses:
@@ -2208,7 +2208,7 @@ types:
             body:
               application/json: Dataset
         (commons.Id): genomics.datasets.undelete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Datasets
     patch:
       securedBy:
@@ -2217,7 +2217,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a dataset. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -2227,7 +2227,7 @@ types:
           body:
             application/json: Dataset
       (commons.Id): genomics.datasets.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
     get:
       securedBy:
@@ -2237,7 +2237,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a dataset by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2245,7 +2245,7 @@ types:
           body:
             application/json: Dataset
       (commons.Id): genomics.datasets.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
     put:
       securedBy:
@@ -2254,7 +2254,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a dataset.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -2264,7 +2264,7 @@ types:
           body:
             application/json: Dataset
       (commons.Id): genomics.datasets.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
     delete:
       securedBy:
@@ -2273,11 +2273,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes a dataset and all of its contents (all read group sets, reference sets, variant sets, call sets, annotation sets, etc.) This is reversible (up to one week after the deletion) via the UndeleteDataset operation.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.datasets.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
   post:
     securedBy:
@@ -2286,7 +2286,7 @@ types:
         - https://www.googleapis.com/auth/cloud-platform
         - https://www.googleapis.com/auth/genomics
     description: Creates a new dataset.
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     body:
@@ -2296,7 +2296,7 @@ types:
         body:
           application/json: Dataset
     (commons.Id): genomics.datasets.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Datasets
   get:
     securedBy:
@@ -2306,7 +2306,7 @@ types:
         - https://www.googleapis.com/auth/genomics
         - https://www.googleapis.com/auth/genomics.readonly
     description: Lists datasets within a project.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -2326,7 +2326,7 @@ types:
         body:
           application/json: ListDatasetsResponse
     (commons.Id): genomics.datasets.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Datasets
 /variants:
   /search:
@@ -2341,7 +2341,7 @@ types:
         Gets a list of variants matching the criteria.
 
         Implements GlobalAllianceApi.searchVariants.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -2351,7 +2351,7 @@ types:
           body:
             application/json: SearchVariantsResponse
       (commons.Id): genomics.variants.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variants
   /{variantId}:
     uriParameters:
@@ -2366,7 +2366,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a variant by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2374,7 +2374,7 @@ types:
           body:
             application/json: Variant
       (commons.Id): genomics.variants.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variants
     put:
       securedBy:
@@ -2383,7 +2383,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a variant's names and info fields. All other modifications are silently ignored. Returns the modified variant without its calls.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -2393,7 +2393,7 @@ types:
           body:
             application/json: Variant
       (commons.Id): genomics.variants.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variants
     delete:
       securedBy:
@@ -2402,11 +2402,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes a variant.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.variants.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variants
   post:
     securedBy:
@@ -2415,7 +2415,7 @@ types:
         - https://www.googleapis.com/auth/cloud-platform
         - https://www.googleapis.com/auth/genomics
     description: Creates a new variant.
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     body:
@@ -2425,7 +2425,7 @@ types:
         body:
           application/json: Variant
     (commons.Id): genomics.variants.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Variants
 /variantsets:
   /{variantSetId}:
@@ -2444,13 +2444,13 @@ types:
           Merges the given variants with existing variants. Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created.
 
           When variants are merged, the call information from the new variant is added to the existing variant. Variant info fields are merged as specified in the InfoMergeConfig field of the MergeVariantsRequest.
-        displayName: merge Variants
+        displayName: Merge Variants
         is:
         - hasParameters
         body:
           application/json: MergeVariantsRequest
         (commons.Id): genomics.variantsets.mergeVariants
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Variantsets
     /importVariants:
       post:
@@ -2464,7 +2464,7 @@ types:
           Creates variant data by asynchronously importing the provided information.
 
           The variants for import will be merged with any existing data and each other according to the behavior of mergeVariants. In particular, this means for merged VCF variants that have conflicting info fields, some data will be arbitrarily discarded unless otherwise specified in the InfoMergeConfig field of ImportVariantsRequest. As a special case, for single-sample VCF files, QUAL and FILTER fields will be moved to the call level; these are sometimes interpreted in a call-specific context. Imported VCF headers are appended to the metadata already in a variant set.
-        displayName: import Variants
+        displayName: Import Variants
         is:
         - hasParameters
         body:
@@ -2474,7 +2474,7 @@ types:
             body:
               application/json: ImportVariantsResponse
         (commons.Id): genomics.variantsets.importVariants
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Variantsets
     /export:
       post:
@@ -2485,7 +2485,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Exports variant set data to an external destination.
-        displayName: export
+        displayName: Export
         is:
         - hasParameters
         body:
@@ -2495,7 +2495,7 @@ types:
             body:
               application/json: ExportVariantSetResponse
         (commons.Id): genomics.variantsets.export
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Variantsets
     patch:
       securedBy:
@@ -2504,7 +2504,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a variant set's metadata. All other modifications are silently ignored. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -2514,7 +2514,7 @@ types:
           body:
             application/json: VariantSet
       (commons.Id): genomics.variantsets.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variantsets
     get:
       securedBy:
@@ -2524,7 +2524,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a variant set by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2532,7 +2532,7 @@ types:
           body:
             application/json: VariantSet
       (commons.Id): genomics.variantsets.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variantsets
     put:
       securedBy:
@@ -2541,7 +2541,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a variant set's metadata. All other modifications are silently ignored.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -2551,7 +2551,7 @@ types:
           body:
             application/json: VariantSet
       (commons.Id): genomics.variantsets.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variantsets
     delete:
       securedBy:
@@ -2560,11 +2560,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes a variant set including all variants, call sets, and calls within. This is not reversible.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.variantsets.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variantsets
   /search:
     post:
@@ -2578,7 +2578,7 @@ types:
         Returns a list of all variant sets matching search criteria.
 
         Implements GlobalAllianceApi.searchVariantSets.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -2588,7 +2588,7 @@ types:
           body:
             application/json: SearchVariantSetsResponse
       (commons.Id): genomics.variantsets.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Variantsets
   post:
     securedBy:
@@ -2600,7 +2600,7 @@ types:
       Creates a new variant set (only necessary in v1).
 
       The provided variant set must have a valid datasetId set - all other fields are optional. Note that the id field will be ignored, as this is assigned by the server.
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     body:
@@ -2610,7 +2610,7 @@ types:
         body:
           application/json: VariantSet
     (commons.Id): genomics.variantsets.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Variantsets
 /callsets:
   /{callSetId}:
@@ -2625,7 +2625,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a call set. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -2635,7 +2635,7 @@ types:
           body:
             application/json: CallSet
       (commons.Id): genomics.callsets.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Callsets
     get:
       securedBy:
@@ -2645,7 +2645,7 @@ types:
           - https://www.googleapis.com/auth/genomics
           - https://www.googleapis.com/auth/genomics.readonly
       description: Gets a call set by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2653,7 +2653,7 @@ types:
           body:
             application/json: CallSet
       (commons.Id): genomics.callsets.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Callsets
     put:
       securedBy:
@@ -2662,7 +2662,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Updates a call set.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -2672,7 +2672,7 @@ types:
           body:
             application/json: CallSet
       (commons.Id): genomics.callsets.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Callsets
     delete:
       securedBy:
@@ -2681,11 +2681,11 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Deletes a call set.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): genomics.callsets.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Callsets
   /search:
     post:
@@ -2699,7 +2699,7 @@ types:
         Gets a list of call sets matching the criteria.
 
         Implements GlobalAllianceApi.searchCallSets.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -2709,7 +2709,7 @@ types:
           body:
             application/json: SearchCallSetsResponse
       (commons.Id): genomics.callsets.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Callsets
   post:
     securedBy:
@@ -2718,7 +2718,7 @@ types:
         - https://www.googleapis.com/auth/cloud-platform
         - https://www.googleapis.com/auth/genomics
     description: Creates a new call set.
-    displayName: create
+    displayName: Create
     is:
     - hasParameters
     body:
@@ -2728,5 +2728,5 @@ types:
         body:
           application/json: CallSet
     (commons.Id): genomics.callsets.create
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Callsets

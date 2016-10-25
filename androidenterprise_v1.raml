@@ -1080,7 +1080,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates an entitlement to an app for a user. This method supports patch semantics.
-              displayName: patch
+              displayName: Patch
               is:
               - hasParameters
               queryParameters:
@@ -1094,7 +1094,7 @@ types:
                   body:
                     application/json: Entitlement
               (commons.Id): androidenterprise.entitlements.patch
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Entitlements
             get:
               securedBy:
@@ -1102,7 +1102,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves details of an entitlement.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -1110,7 +1110,7 @@ types:
                   body:
                     application/json: Entitlement
               (commons.Id): androidenterprise.entitlements.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Entitlements
             put:
               securedBy:
@@ -1118,7 +1118,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates an entitlement to an app for a user.
-              displayName: update
+              displayName: Update
               is:
               - hasParameters
               queryParameters:
@@ -1132,7 +1132,7 @@ types:
                   body:
                     application/json: Entitlement
               (commons.Id): androidenterprise.entitlements.update
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Entitlements
             delete:
               securedBy:
@@ -1140,11 +1140,11 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Removes an entitlement to an app for a user and uninstalls it.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               (commons.Id): androidenterprise.entitlements.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Entitlements
           get:
             securedBy:
@@ -1152,7 +1152,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: List of all entitlements for the specified user. Only the ID is set.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             responses:
@@ -1160,7 +1160,7 @@ types:
                 body:
                   application/json: EntitlementsListResponse
             (commons.Id): androidenterprise.entitlements.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Entitlements
         /devices:
           /{deviceId}:
@@ -1175,7 +1175,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Retrieves whether a device's access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.
-                displayName: get State
+                displayName: Get State
                 is:
                 - hasParameters
                 responses:
@@ -1183,7 +1183,7 @@ types:
                     body:
                       application/json: DeviceState
                 (commons.Id): androidenterprise.devices.getState
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Devices
               put:
                 securedBy:
@@ -1191,7 +1191,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Sets whether a device's access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.
-                displayName: set State
+                displayName: Set State
                 is:
                 - hasParameters
                 body:
@@ -1201,7 +1201,7 @@ types:
                     body:
                       application/json: DeviceState
                 (commons.Id): androidenterprise.devices.setState
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Devices
             /installs:
               /{installId}:
@@ -1215,7 +1215,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Requests to install the latest version of an app to a device. If the app is already installed then it is updated to the latest version if necessary. This method supports patch semantics.
-                  displayName: patch
+                  displayName: Patch
                   is:
                   - hasParameters
                   body:
@@ -1225,7 +1225,7 @@ types:
                       body:
                         application/json: Install
                   (commons.Id): androidenterprise.installs.patch
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Installs
                 get:
                   securedBy:
@@ -1233,7 +1233,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Retrieves details of an installation of an app on a device.
-                  displayName: get
+                  displayName: Get
                   is:
                   - hasParameters
                   responses:
@@ -1241,7 +1241,7 @@ types:
                       body:
                         application/json: Install
                   (commons.Id): androidenterprise.installs.get
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Installs
                 put:
                   securedBy:
@@ -1249,7 +1249,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Requests to install the latest version of an app to a device. If the app is already installed then it is updated to the latest version if necessary.
-                  displayName: update
+                  displayName: Update
                   is:
                   - hasParameters
                   body:
@@ -1259,7 +1259,7 @@ types:
                       body:
                         application/json: Install
                   (commons.Id): androidenterprise.installs.update
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Installs
                 delete:
                   securedBy:
@@ -1267,11 +1267,11 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
-                  displayName: delete
+                  displayName: Delete
                   is:
                   - hasParameters
                   (commons.Id): androidenterprise.installs.delete
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Installs
               get:
                 securedBy:
@@ -1279,7 +1279,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Retrieves the details of all apps installed on the specified device.
-                displayName: list
+                displayName: List
                 is:
                 - hasParameters
                 responses:
@@ -1287,7 +1287,7 @@ types:
                     body:
                       application/json: InstallsListResponse
                 (commons.Id): androidenterprise.installs.list
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Installs
             /managedConfigurationsForDevice:
               /{managedConfigurationForDeviceId}:
@@ -1301,7 +1301,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Adds or updates a per-device managed configuration for an app for the specified device. This method supports patch semantics.
-                  displayName: patch
+                  displayName: Patch
                   is:
                   - hasParameters
                   body:
@@ -1311,7 +1311,7 @@ types:
                       body:
                         application/json: ManagedConfiguration
                   (commons.Id): androidenterprise.managedconfigurationsfordevice.patch
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Managedconfigurationsfordevice
                 get:
                   securedBy:
@@ -1319,7 +1319,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Retrieves details of a per-device managed configuration.
-                  displayName: get
+                  displayName: Get
                   is:
                   - hasParameters
                   responses:
@@ -1327,7 +1327,7 @@ types:
                       body:
                         application/json: ManagedConfiguration
                   (commons.Id): androidenterprise.managedconfigurationsfordevice.get
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Managedconfigurationsfordevice
                 put:
                   securedBy:
@@ -1335,7 +1335,7 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Adds or updates a per-device managed configuration for an app for the specified device.
-                  displayName: update
+                  displayName: Update
                   is:
                   - hasParameters
                   body:
@@ -1345,7 +1345,7 @@ types:
                       body:
                         application/json: ManagedConfiguration
                   (commons.Id): androidenterprise.managedconfigurationsfordevice.update
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Managedconfigurationsfordevice
                 delete:
                   securedBy:
@@ -1353,11 +1353,11 @@ types:
                       scopes:
                       - https://www.googleapis.com/auth/androidenterprise
                   description: Removes a per-device managed configuration for an app for the specified device.
-                  displayName: delete
+                  displayName: Delete
                   is:
                   - hasParameters
                   (commons.Id): androidenterprise.managedconfigurationsfordevice.delete
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Managedconfigurationsfordevice
               get:
                 securedBy:
@@ -1365,7 +1365,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Lists all the per-device managed configurations for the specified device. Only the ID is set.
-                displayName: list
+                displayName: List
                 is:
                 - hasParameters
                 responses:
@@ -1373,7 +1373,7 @@ types:
                     body:
                       application/json: ManagedConfigurationsForDeviceListResponse
                 (commons.Id): androidenterprise.managedconfigurationsfordevice.list
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Managedconfigurationsfordevice
             get:
               securedBy:
@@ -1381,7 +1381,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves the details of a device.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -1389,7 +1389,7 @@ types:
                   body:
                     application/json: Device
               (commons.Id): androidenterprise.devices.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Devices
           get:
             securedBy:
@@ -1397,7 +1397,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the IDs of all of a user's devices.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             responses:
@@ -1405,7 +1405,7 @@ types:
                 body:
                   application/json: DevicesListResponse
             (commons.Id): androidenterprise.devices.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Devices
         /token:
           post:
@@ -1417,7 +1417,7 @@ types:
               Generates a token (activation code) to allow this user to configure their work account in the Android Setup Wizard. Revokes any previously generated token.
 
               This call only works with Google managed accounts.
-            displayName: generate Token
+            displayName: Generate Token
             is:
             - hasParameters
             responses:
@@ -1425,7 +1425,7 @@ types:
                 body:
                   application/json: UserToken
             (commons.Id): androidenterprise.users.generateToken
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
           delete:
             securedBy:
@@ -1433,11 +1433,11 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Revokes a previously generated token (activation code) for the user.
-            displayName: revoke Token
+            displayName: Revoke Token
             is:
             - hasParameters
             (commons.Id): androidenterprise.users.revokeToken
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         /availableProductSet:
           put:
@@ -1446,7 +1446,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Modifies the set of products a user is entitled to access.
-            displayName: set Available Product Set
+            displayName: Set Available Product Set
             is:
             - hasParameters
             body:
@@ -1456,7 +1456,7 @@ types:
                 body:
                   application/json: ProductSet
             (commons.Id): androidenterprise.users.setAvailableProductSet
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
           get:
             securedBy:
@@ -1464,7 +1464,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the set of products a user is entitled to access.
-            displayName: get Available Product Set
+            displayName: Get Available Product Set
             is:
             - hasParameters
             responses:
@@ -1472,7 +1472,7 @@ types:
                 body:
                   application/json: ProductSet
             (commons.Id): androidenterprise.users.getAvailableProductSet
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         /authenticationToken:
           post:
@@ -1484,7 +1484,7 @@ types:
               Generates an authentication token which the device policy client can use to provision the given EMM-managed user account on a device. The generated token is single-use and expires after a few minutes.
 
               This call only works with EMM-managed accounts.
-            displayName: generate Authentication Token
+            displayName: Generate Authentication Token
             is:
             - hasParameters
             responses:
@@ -1492,7 +1492,7 @@ types:
                 body:
                   application/json: AuthenticationToken
             (commons.Id): androidenterprise.users.generateAuthenticationToken
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         /managedConfigurationsForUser:
           /{managedConfigurationForUserId}:
@@ -1506,7 +1506,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates a per-user managed configuration for an app for the specified user. This method supports patch semantics.
-              displayName: patch
+              displayName: Patch
               is:
               - hasParameters
               body:
@@ -1516,7 +1516,7 @@ types:
                   body:
                     application/json: ManagedConfiguration
               (commons.Id): androidenterprise.managedconfigurationsforuser.patch
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Managedconfigurationsforuser
             get:
               securedBy:
@@ -1524,7 +1524,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves details of a per-user managed configuration for an app for the specified user.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -1532,7 +1532,7 @@ types:
                   body:
                     application/json: ManagedConfiguration
               (commons.Id): androidenterprise.managedconfigurationsforuser.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Managedconfigurationsforuser
             put:
               securedBy:
@@ -1540,7 +1540,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds or updates a per-user managed configuration for an app for the specified user.
-              displayName: update
+              displayName: Update
               is:
               - hasParameters
               body:
@@ -1550,7 +1550,7 @@ types:
                   body:
                     application/json: ManagedConfiguration
               (commons.Id): androidenterprise.managedconfigurationsforuser.update
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Managedconfigurationsforuser
             delete:
               securedBy:
@@ -1558,11 +1558,11 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Removes a per-user managed configuration for an app for the specified user.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               (commons.Id): androidenterprise.managedconfigurationsforuser.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Managedconfigurationsforuser
           get:
             securedBy:
@@ -1570,7 +1570,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Lists all the per-user managed configurations for the specified user. Only the ID is set.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             responses:
@@ -1578,7 +1578,7 @@ types:
                 body:
                   application/json: ManagedConfigurationsForUserListResponse
             (commons.Id): androidenterprise.managedconfigurationsforuser.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Managedconfigurationsforuser
         patch:
           securedBy:
@@ -1589,7 +1589,7 @@ types:
             Updates the details of an EMM-managed user.
 
             Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -1599,7 +1599,7 @@ types:
               body:
                 application/json: User
           (commons.Id): androidenterprise.users.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Users
         get:
           securedBy:
@@ -1607,7 +1607,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves a user's details.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1615,7 +1615,7 @@ types:
               body:
                 application/json: User
           (commons.Id): androidenterprise.users.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Users
         put:
           securedBy:
@@ -1626,7 +1626,7 @@ types:
             Updates the details of an EMM-managed user.
 
             Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -1636,7 +1636,7 @@ types:
               body:
                 application/json: User
           (commons.Id): androidenterprise.users.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Users
         delete:
           securedBy:
@@ -1644,11 +1644,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Deleted an EMM-managed user.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): androidenterprise.users.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Users
       post:
         securedBy:
@@ -1660,7 +1660,7 @@ types:
 
           The Users resource passed in the body of the request should include an accountIdentifier and an accountType.
           If a corresponding user already exists with the same account identifier, the user will be updated with the resource. In this case only the displayName field can be changed.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -1670,7 +1670,7 @@ types:
             body:
               application/json: User
         (commons.Id): androidenterprise.users.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Users
       get:
         securedBy:
@@ -1678,7 +1678,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Looks up a user by primary email address. This is only supported for Google-managed users. Lookup of the id is not needed for EMM-managed users because the id is already returned in the result of the Users.insert call.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1690,7 +1690,7 @@ types:
             body:
               application/json: UsersListResponse
         (commons.Id): androidenterprise.users.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Users
     /storeLayout:
       /pages:
@@ -1711,7 +1711,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Updates a cluster. This method supports patch semantics.
-                displayName: patch
+                displayName: Patch
                 is:
                 - hasParameters
                 body:
@@ -1721,7 +1721,7 @@ types:
                     body:
                       application/json: StoreCluster
                 (commons.Id): androidenterprise.storelayoutclusters.patch
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Storelayoutclusters
               get:
                 securedBy:
@@ -1729,7 +1729,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Retrieves details of a cluster.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -1737,7 +1737,7 @@ types:
                     body:
                       application/json: StoreCluster
                 (commons.Id): androidenterprise.storelayoutclusters.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Storelayoutclusters
               put:
                 securedBy:
@@ -1745,7 +1745,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Updates a cluster.
-                displayName: update
+                displayName: Update
                 is:
                 - hasParameters
                 body:
@@ -1755,7 +1755,7 @@ types:
                     body:
                       application/json: StoreCluster
                 (commons.Id): androidenterprise.storelayoutclusters.update
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Storelayoutclusters
               delete:
                 securedBy:
@@ -1763,11 +1763,11 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidenterprise
                 description: Deletes a cluster.
-                displayName: delete
+                displayName: Delete
                 is:
                 - hasParameters
                 (commons.Id): androidenterprise.storelayoutclusters.delete
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Storelayoutclusters
             post:
               securedBy:
@@ -1775,7 +1775,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Inserts a new cluster in a page.
-              displayName: insert
+              displayName: Insert
               is:
               - hasParameters
               body:
@@ -1785,7 +1785,7 @@ types:
                   body:
                     application/json: StoreCluster
               (commons.Id): androidenterprise.storelayoutclusters.insert
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Storelayoutclusters
             get:
               securedBy:
@@ -1793,7 +1793,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves the details of all clusters on the specified page.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               responses:
@@ -1801,7 +1801,7 @@ types:
                   body:
                     application/json: StoreLayoutClustersListResponse
               (commons.Id): androidenterprise.storelayoutclusters.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Storelayoutclusters
           patch:
             securedBy:
@@ -1809,7 +1809,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Updates the content of a store page. This method supports patch semantics.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             body:
@@ -1819,7 +1819,7 @@ types:
                 body:
                   application/json: StorePage
             (commons.Id): androidenterprise.storelayoutpages.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Storelayoutpages
           get:
             securedBy:
@@ -1827,7 +1827,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves details of a store page.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -1835,7 +1835,7 @@ types:
                 body:
                   application/json: StorePage
             (commons.Id): androidenterprise.storelayoutpages.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Storelayoutpages
           put:
             securedBy:
@@ -1843,7 +1843,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Updates the content of a store page.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             body:
@@ -1853,7 +1853,7 @@ types:
                 body:
                   application/json: StorePage
             (commons.Id): androidenterprise.storelayoutpages.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Storelayoutpages
           delete:
             securedBy:
@@ -1861,11 +1861,11 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Deletes a store page.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             (commons.Id): androidenterprise.storelayoutpages.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Storelayoutpages
         post:
           securedBy:
@@ -1873,7 +1873,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Inserts a new store page.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -1883,7 +1883,7 @@ types:
               body:
                 application/json: StorePage
           (commons.Id): androidenterprise.storelayoutpages.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Storelayoutpages
         get:
           securedBy:
@@ -1891,7 +1891,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves the details of all pages in the store.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           responses:
@@ -1899,7 +1899,7 @@ types:
               body:
                 application/json: StoreLayoutPagesListResponse
           (commons.Id): androidenterprise.storelayoutpages.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Storelayoutpages
       put:
         securedBy:
@@ -1907,7 +1907,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Sets the store layout for the enterprise.
-        displayName: set Store Layout
+        displayName: Set Store Layout
         is:
         - hasParameters
         body:
@@ -1917,7 +1917,7 @@ types:
             body:
               application/json: StoreLayout
         (commons.Id): androidenterprise.enterprises.setStoreLayout
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
       get:
         securedBy:
@@ -1925,7 +1925,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Returns the store layout for the enterprise. If the store layout has not been set, or if the store layout has no homepageId set, returns a NOT_FOUND error.
-        displayName: get Store Layout
+        displayName: Get Store Layout
         is:
         - hasParameters
         responses:
@@ -1933,7 +1933,7 @@ types:
             body:
               application/json: StoreLayout
         (commons.Id): androidenterprise.enterprises.getStoreLayout
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
     /serviceAccountKeys:
       /{keyId}:
@@ -1947,11 +1947,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Removes and invalidates the specified credentials for the service account associated with this enterprise. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): androidenterprise.serviceaccountkeys.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Serviceaccountkeys
       post:
         securedBy:
@@ -1962,7 +1962,7 @@ types:
           Generates new credentials for the service account associated with this enterprise. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
 
           Only the type of the key should be populated in the resource to be inserted.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -1972,7 +1972,7 @@ types:
             body:
               application/json: ServiceAccountKey
         (commons.Id): androidenterprise.serviceaccountkeys.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Serviceaccountkeys
       get:
         securedBy:
@@ -1980,7 +1980,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Lists all active credentials for the service account associated with this enterprise. Only the ID and key type are returned. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -1988,7 +1988,7 @@ types:
             body:
               application/json: ServiceAccountKeysListResponse
         (commons.Id): androidenterprise.serviceaccountkeys.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Serviceaccountkeys
     /serviceAccount:
       get:
@@ -2004,7 +2004,7 @@ types:
           Subsequent calls after the first will generate a new, unique set of credentials, and invalidate the previously generated credentials.
 
           Once the service account is bound to the enterprise, it can be managed using the serviceAccountKeys resource.
-        displayName: get Service Account
+        displayName: Get Service Account
         is:
         - hasParameters
         queryParameters:
@@ -2022,7 +2022,7 @@ types:
             body:
               application/json: ServiceAccount
         (commons.Id): androidenterprise.enterprises.getServiceAccount
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
     /unenroll:
       post:
@@ -2031,11 +2031,11 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Unenrolls an enterprise from the calling EMM.
-        displayName: unenroll
+        displayName: Unenroll
         is:
         - hasParameters
         (commons.Id): androidenterprise.enterprises.unenroll
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
     /createWebToken:
       post:
@@ -2044,7 +2044,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the Play for Work javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.
-        displayName: create Web Token
+        displayName: Create Web Token
         is:
         - hasParameters
         body:
@@ -2054,7 +2054,7 @@ types:
             body:
               application/json: AdministratorWebToken
         (commons.Id): androidenterprise.enterprises.createWebToken
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
     /sendTestPushNotification:
       post:
@@ -2063,7 +2063,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Sends a test push notification to validate the EMM integration with the Google Cloud Pub/Sub service for this enterprise.
-        displayName: send Test Push Notification
+        displayName: Send Test Push Notification
         is:
         - hasParameters
         responses:
@@ -2071,7 +2071,7 @@ types:
             body:
               application/json: EnterprisesSendTestPushNotificationResponse
         (commons.Id): androidenterprise.enterprises.sendTestPushNotification
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
     /account:
       put:
@@ -2080,7 +2080,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Set the account that will be used to authenticate to the API as the enterprise.
-        displayName: set Account
+        displayName: Set Account
         is:
         - hasParameters
         body:
@@ -2090,7 +2090,7 @@ types:
             body:
               application/json: EnterpriseAccount
         (commons.Id): androidenterprise.enterprises.setAccount
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Enterprises
     /groupLicenses:
       /{groupLicenseId}:
@@ -2105,7 +2105,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the IDs of the users who have been granted entitlements under the license.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             responses:
@@ -2113,7 +2113,7 @@ types:
                 body:
                   application/json: GroupLicenseUsersListResponse
             (commons.Id): androidenterprise.grouplicenseusers.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Grouplicenseusers
         get:
           securedBy:
@@ -2121,7 +2121,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves details of an enterprise's group license for a product.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -2129,7 +2129,7 @@ types:
               body:
                 application/json: GroupLicense
           (commons.Id): androidenterprise.grouplicenses.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Grouplicenses
       get:
         securedBy:
@@ -2137,7 +2137,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Retrieves IDs of all products for which the enterprise has a group license.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -2145,7 +2145,7 @@ types:
             body:
               application/json: GroupLicensesListResponse
         (commons.Id): androidenterprise.grouplicenses.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Grouplicenses
     /products:
       /{productId}:
@@ -2160,7 +2160,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the schema that defines the configurable properties for this product. All products have a schema, but this schema may be empty if no managed configurations have been defined. This schema can be used to populate a UI that allows an administrator to configure the product. To apply a managed configuration based on the schema obtained using this API, see Managed Configurations through Play.
-            displayName: get App Restrictions Schema
+            displayName: Get App Restrictions Schema
             is:
             - hasParameters
             queryParameters:
@@ -2172,7 +2172,7 @@ types:
                 body:
                   application/json: AppRestrictionsSchema
             (commons.Id): androidenterprise.products.getAppRestrictionsSchema
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Products
         /approve:
           post:
@@ -2184,13 +2184,13 @@ types:
               Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000.
 
               To learn how to use Google Play for Work to design and create a store layout to display approved products to your users, see Store Layout Design.
-            displayName: approve
+            displayName: Approve
             is:
             - hasParameters
             body:
               application/json: ProductsApproveRequest
             (commons.Id): androidenterprise.products.approve
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Products
         /permissions:
           get:
@@ -2199,7 +2199,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the Android app permissions required by this app.
-            displayName: get Permissions
+            displayName: Get Permissions
             is:
             - hasParameters
             responses:
@@ -2207,7 +2207,7 @@ types:
                 body:
                   application/json: ProductPermissions
             (commons.Id): androidenterprise.products.getPermissions
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Products
           put:
             securedBy:
@@ -2218,7 +2218,7 @@ types:
               This method has been deprecated. To programmatically approve applications, you must use the iframe mechanism via the  generateApprovalUrl and  approve methods of the Products resource. For more information, see the  Play EMM API usage requirements.
 
               The updatePermissions method (deprecated) updates the set of Android app permissions for this app that have been accepted by the enterprise.
-            displayName: update Permissions
+            displayName: Update Permissions
             is:
             - hasParameters
             body:
@@ -2228,7 +2228,7 @@ types:
                 body:
                   application/json: ProductPermissions
             (commons.Id): androidenterprise.products.updatePermissions
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Products
         /unapprove:
           post:
@@ -2237,11 +2237,11 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Unapproves the specified product (and the relevant app permissions, if any)
-            displayName: unapprove
+            displayName: Unapprove
             is:
             - hasParameters
             (commons.Id): androidenterprise.products.unapprove
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Products
         /generateApprovalUrl:
           post:
@@ -2253,7 +2253,7 @@ types:
               Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product.
 
               Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day.
-            displayName: generate Approval Url
+            displayName: Generate Approval Url
             is:
             - hasParameters
             queryParameters:
@@ -2265,7 +2265,7 @@ types:
                 body:
                   application/json: ProductsGenerateApprovalUrlResponse
             (commons.Id): androidenterprise.products.generateApprovalUrl
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Products
         get:
           securedBy:
@@ -2273,7 +2273,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves details of a product for display to an enterprise admin.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           queryParameters:
@@ -2285,7 +2285,7 @@ types:
               body:
                 application/json: Product
           (commons.Id): androidenterprise.products.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Products
       get:
         securedBy:
@@ -2293,7 +2293,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Finds approved products that match a query, or all approved products if there is no query.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -2319,7 +2319,7 @@ types:
             body:
               application/json: ProductsListResponse
         (commons.Id): androidenterprise.products.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Products
     /collections:
       /{collectionId}:
@@ -2339,7 +2339,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection. This method supports patch semantics.
-              displayName: patch
+              displayName: Patch
               is:
               - hasParameters
               body:
@@ -2349,7 +2349,7 @@ types:
                   body:
                     application/json: User
               (commons.Id): androidenterprise.collectionviewers.patch
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Collectionviewers
             get:
               securedBy:
@@ -2357,7 +2357,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Retrieves the ID of the user if they have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -2365,7 +2365,7 @@ types:
                   body:
                     application/json: User
               (commons.Id): androidenterprise.collectionviewers.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Collectionviewers
             put:
               securedBy:
@@ -2373,7 +2373,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
-              displayName: update
+              displayName: Update
               is:
               - hasParameters
               body:
@@ -2383,7 +2383,7 @@ types:
                   body:
                     application/json: User
               (commons.Id): androidenterprise.collectionviewers.update
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Collectionviewers
             delete:
               securedBy:
@@ -2391,11 +2391,11 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidenterprise
               description: Removes the user from the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               (commons.Id): androidenterprise.collectionviewers.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Collectionviewers
           get:
             securedBy:
@@ -2403,7 +2403,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidenterprise
             description: Retrieves the IDs of the users who have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             responses:
@@ -2411,7 +2411,7 @@ types:
                 body:
                   application/json: CollectionViewersListResponse
             (commons.Id): androidenterprise.collectionviewers.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Collectionviewers
         patch:
           securedBy:
@@ -2419,7 +2419,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Updates a collection. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -2429,7 +2429,7 @@ types:
               body:
                 application/json: Collection
           (commons.Id): androidenterprise.collections.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Collections
         get:
           securedBy:
@@ -2437,7 +2437,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Retrieves the details of a collection.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -2445,7 +2445,7 @@ types:
               body:
                 application/json: Collection
           (commons.Id): androidenterprise.collections.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Collections
         put:
           securedBy:
@@ -2453,7 +2453,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Updates a collection.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -2463,7 +2463,7 @@ types:
               body:
                 application/json: Collection
           (commons.Id): androidenterprise.collections.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Collections
         delete:
           securedBy:
@@ -2471,11 +2471,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidenterprise
           description: Deletes a collection.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): androidenterprise.collections.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Collections
       post:
         securedBy:
@@ -2483,7 +2483,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Creates a new collection.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -2493,7 +2493,7 @@ types:
             body:
               application/json: Collection
         (commons.Id): androidenterprise.collections.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Collections
       get:
         securedBy:
@@ -2501,7 +2501,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidenterprise
         description: Retrieves the IDs of all the collections for an enterprise.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -2509,7 +2509,7 @@ types:
             body:
               application/json: CollectionsListResponse
         (commons.Id): androidenterprise.collections.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Collections
     delete:
       securedBy:
@@ -2517,11 +2517,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Deletes the binding between the EMM and enterprise. This is now deprecated; use this to unenroll customers that were previously enrolled with the 'insert' call, then enroll them again with the 'enroll' call.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): androidenterprise.enterprises.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
     get:
       securedBy:
@@ -2529,7 +2529,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Retrieves the name and domain of an enterprise.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2537,7 +2537,7 @@ types:
           body:
             application/json: Enterprise
       (commons.Id): androidenterprise.enterprises.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
   /completeSignup:
     post:
@@ -2546,7 +2546,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Completes the signup flow, by specifying the Completion token and Enterprise token. This request must not be called multiple times for a given Enterprise Token.
-      displayName: complete Signup
+      displayName: Complete Signup
       is:
       - hasParameters
       queryParameters:
@@ -2561,7 +2561,7 @@ types:
           body:
             application/json: Enterprise
       (commons.Id): androidenterprise.enterprises.completeSignup
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
   /acknowledgeNotificationSet:
     post:
@@ -2570,7 +2570,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Acknowledges notifications that were received from Enterprises.PullNotificationSet to prevent subsequent calls from returning the same notifications.
-      displayName: acknowledge Notification Set
+      displayName: Acknowledge Notification Set
       is:
       - hasParameters
       queryParameters:
@@ -2578,7 +2578,7 @@ types:
           type: string
           description: The notification set ID as returned by Enterprises.PullNotificationSet. This must be provided.
       (commons.Id): androidenterprise.enterprises.acknowledgeNotificationSet
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
   /pullNotificationSet:
     post:
@@ -2592,7 +2592,7 @@ types:
         Notifications that are not acknowledged within the 20 seconds will eventually be included again in the response to another PullNotificationSet request, and those that are never acknowledged will ultimately be deleted according to the Google Cloud Platform Pub/Sub system policy.
         Multiple requests might be performed concurrently to retrieve notifications, in which case the pending notifications (if any) will be split among each caller, if any are pending.
         If no notifications are present, an empty notification list is returned. Subsequent requests may return more notifications once they become available.
-      displayName: pull Notification Set
+      displayName: Pull Notification Set
       is:
       - hasParameters
       queryParameters:
@@ -2614,7 +2614,7 @@ types:
           body:
             application/json: NotificationSet
       (commons.Id): androidenterprise.enterprises.pullNotificationSet
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
   /signupUrl:
     post:
@@ -2623,7 +2623,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Generates a sign-up URL.
-      displayName: generate Signup Url
+      displayName: Generate Signup Url
       is:
       - hasParameters
       queryParameters:
@@ -2637,7 +2637,7 @@ types:
           body:
             application/json: SignupInfo
       (commons.Id): androidenterprise.enterprises.generateSignupUrl
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
   /enroll:
     post:
@@ -2646,7 +2646,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Enrolls an enterprise with the calling EMM.
-      displayName: enroll
+      displayName: Enroll
       is:
       - hasParameters
       queryParameters:
@@ -2660,7 +2660,7 @@ types:
           body:
             application/json: Enterprise
       (commons.Id): androidenterprise.enterprises.enroll
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Enterprises
   post:
     securedBy:
@@ -2668,7 +2668,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/androidenterprise
     description: Establishes the binding between the EMM and an enterprise. This is now deprecated; use enroll instead.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -2682,7 +2682,7 @@ types:
         body:
           application/json: Enterprise
     (commons.Id): androidenterprise.enterprises.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Enterprises
   get:
     securedBy:
@@ -2690,7 +2690,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/androidenterprise
     description: Looks up an enterprise by domain name. This is only supported for enterprises created via the Google-initiated creation flow. Lookup of the id is not needed for enterprises created via the EMM-initiated flow since the EMM learns the enterprise ID in the callback specified in the Enterprises.generateSignupUrl call.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -2702,7 +2702,7 @@ types:
         body:
           application/json: EnterprisesListResponse
     (commons.Id): androidenterprise.enterprises.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Enterprises
 /permissions:
   /{permissionId}:
@@ -2716,7 +2716,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidenterprise
       description: Retrieves details of an Android app permission for display to an enterprise admin.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -2728,5 +2728,5 @@ types:
           body:
             application/json: Permission
       (commons.Id): androidenterprise.permissions.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Permissions

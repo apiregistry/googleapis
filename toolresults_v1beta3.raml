@@ -802,7 +802,7 @@ types:
         May return any of the following canonical error codes:
 
         - PERMISSION_DENIED - if the user is not authorized to read from project
-      displayName: get Settings
+      displayName: Get Settings
       is:
       - hasParameters
       responses:
@@ -810,7 +810,7 @@ types:
           body:
             application/json: ProjectSettings
       (commons.Id): toolresults.projects.getSettings
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /histories:
     /{historyId}:
@@ -846,7 +846,7 @@ types:
                     Lists thumbnails of images attached to a step.
 
                     May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read from the project, or from any of the images - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the step does not exist, or if any of the images do not exist
-                  displayName: list
+                  displayName: List
                   is:
                   - hasParameters
                   queryParameters:
@@ -870,7 +870,7 @@ types:
                       body:
                         application/json: ListStepThumbnailsResponse
                   (commons.Id): toolresults.projects.histories.executions.steps.thumbnails.list
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Projects
                   - Histories
                   - Executions
@@ -887,7 +887,7 @@ types:
                   May return any of the following canonical error codes:
 
                   - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
-                displayName: patch
+                displayName: Patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -904,7 +904,7 @@ types:
                     body:
                       application/json: Step
                 (commons.Id): toolresults.projects.histories.executions.steps.patch
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Histories
                 - Executions
@@ -920,7 +920,7 @@ types:
                   May return any of the following canonical error codes:
 
                   - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Step does not exist
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -928,7 +928,7 @@ types:
                     body:
                       application/json: Step
                 (commons.Id): toolresults.projects.histories.executions.steps.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Histories
                 - Executions
@@ -952,7 +952,7 @@ types:
                   May return any of the following canonical error codes:
 
                   - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal, e.g try to upload a duplicate xml file or a file too large. - NOT_FOUND - if the containing Execution does not exist
-                displayName: publish Xunit XmlFiles
+                displayName: Publish Xunit XmlFiles
                 is:
                 - hasParameters
                 body:
@@ -962,7 +962,7 @@ types:
                     body:
                       application/json: Step
                 (commons.Id): toolresults.projects.histories.executions.steps.publishXunitXmlFiles
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Histories
                 - Executions
@@ -980,7 +980,7 @@ types:
                 May return any of the following canonical error codes:
 
                 - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
-              displayName: create
+              displayName: Create
               is:
               - hasParameters
               queryParameters:
@@ -997,7 +997,7 @@ types:
                   body:
                     application/json: Step
               (commons.Id): toolresults.projects.histories.executions.steps.create
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Histories
               - Executions
@@ -1015,7 +1015,7 @@ types:
                 May return any of the following canonical error codes:
 
                 - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if an argument in the request happens to be invalid; e.g. if an attempt is made to list the children of a nonexistent Step - NOT_FOUND - if the containing Execution does not exist
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -1039,7 +1039,7 @@ types:
                   body:
                     application/json: ListStepsResponse
               (commons.Id): toolresults.projects.histories.executions.steps.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Histories
               - Executions
@@ -1055,7 +1055,7 @@ types:
               May return any of the following canonical error codes:
 
               - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal - NOT_FOUND - if the containing History does not exist
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             queryParameters:
@@ -1072,7 +1072,7 @@ types:
                 body:
                   application/json: Execution
             (commons.Id): toolresults.projects.histories.executions.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Histories
             - Executions
@@ -1087,7 +1087,7 @@ types:
               May return any of the following canonical error codes:
 
               - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Execution does not exist
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -1095,7 +1095,7 @@ types:
                 body:
                   application/json: Execution
             (commons.Id): toolresults.projects.histories.executions.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Histories
             - Executions
@@ -1112,7 +1112,7 @@ types:
             May return any of the following canonical error codes:
 
             - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           queryParameters:
@@ -1129,7 +1129,7 @@ types:
               body:
                 application/json: Execution
           (commons.Id): toolresults.projects.histories.executions.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Histories
           - Executions
@@ -1146,7 +1146,7 @@ types:
             May return any of the following canonical error codes:
 
             - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1170,7 +1170,7 @@ types:
               body:
                 application/json: ListExecutionsResponse
           (commons.Id): toolresults.projects.histories.executions.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Histories
           - Executions
@@ -1185,7 +1185,7 @@ types:
           May return any of the following canonical error codes:
 
           - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -1193,7 +1193,7 @@ types:
             body:
               application/json: History
         (commons.Id): toolresults.projects.histories.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Histories
     post:
@@ -1209,7 +1209,7 @@ types:
         May return any of the following canonical error codes:
 
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing project does not exist
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       queryParameters:
@@ -1226,7 +1226,7 @@ types:
           body:
             application/json: History
       (commons.Id): toolresults.projects.histories.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Histories
     get:
@@ -1242,7 +1242,7 @@ types:
         May return any of the following canonical error codes:
 
         - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -1272,7 +1272,7 @@ types:
           body:
             application/json: ListHistoriesResponse
       (commons.Id): toolresults.projects.histories.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Histories
 /{projectId}:initializeSettings:
@@ -1300,7 +1300,7 @@ types:
       May return any canonical error codes, including the following:
 
       - PERMISSION_DENIED - if the user is not authorized to write to project - Any error code raised by Google Cloud Storage
-    displayName: initialize Settings
+    displayName: Initialize Settings
     is:
     - hasParameters
     responses:
@@ -1308,5 +1308,5 @@ types:
         body:
           application/json: ProjectSettings
     (commons.Id): toolresults.projects.initializeSettings
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Projects

@@ -2538,7 +2538,7 @@ types:
             description: |-
               Copies a single sheet from a spreadsheet to another spreadsheet.
               Returns the properties of the newly created sheet.
-            displayName: copy To
+            displayName: Copy To
             is:
             - hasParameters
             body:
@@ -2548,7 +2548,7 @@ types:
                 body:
                   application/json: SheetProperties
             (commons.Id): sheets.spreadsheets.sheets.copyTo
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Spreadsheets
             - Sheets
       /values:batchClear:
@@ -2563,7 +2563,7 @@ types:
             The caller must specify the spreadsheet ID and one or more ranges.
             Only values are cleared -- all other properties of the cell (such as
             formatting, data validation, etc..) are kept.
-          displayName: batch Clear
+          displayName: Batch Clear
           is:
           - hasParameters
           body:
@@ -2573,7 +2573,7 @@ types:
               body:
                 application/json: BatchClearValuesResponse
           (commons.Id): sheets.spreadsheets.values.batchClear
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Spreadsheets
           - Values
       /values:batchUpdate:
@@ -2588,7 +2588,7 @@ types:
             The caller must specify the spreadsheet ID,
             a valueInputOption, and one or more
             ValueRanges.
-          displayName: batch Update
+          displayName: Batch Update
           is:
           - hasParameters
           body:
@@ -2598,7 +2598,7 @@ types:
               body:
                 application/json: BatchUpdateValuesResponse
           (commons.Id): sheets.spreadsheets.values.batchUpdate
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Spreadsheets
           - Values
       /values:
@@ -2618,7 +2618,7 @@ types:
             description: |-
               Returns a range of values from a spreadsheet.
               The caller must specify the spreadsheet ID and a range.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             queryParameters:
@@ -2657,7 +2657,7 @@ types:
                 body:
                   application/json: ValueRange
             (commons.Id): sheets.spreadsheets.values.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Spreadsheets
             - Values
           put:
@@ -2670,7 +2670,7 @@ types:
               Sets values in a range of a spreadsheet.
               The caller must specify the spreadsheet ID, range, and
               a valueInputOption.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             queryParameters:
@@ -2688,7 +2688,7 @@ types:
                 body:
                   application/json: UpdateValuesResponse
             (commons.Id): sheets.spreadsheets.values.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Spreadsheets
             - Values
         /{range}:clear:
@@ -2707,7 +2707,7 @@ types:
               The caller must specify the spreadsheet ID and range.
               Only values are cleared -- all other properties of the cell (such as
               formatting, data validation, etc..) are kept.
-            displayName: clear
+            displayName: Clear
             is:
             - hasParameters
             body:
@@ -2717,7 +2717,7 @@ types:
                 body:
                   application/json: ClearValuesResponse
             (commons.Id): sheets.spreadsheets.values.clear
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Spreadsheets
             - Values
         /{range}:append:
@@ -2748,7 +2748,7 @@ types:
               controls how the input data will be added to the sheet (column-wise or
               row-wise), it does not influence what cell the data starts being written
               to.
-            displayName: append
+            displayName: Append
             is:
             - hasParameters
             queryParameters:
@@ -2772,7 +2772,7 @@ types:
                 body:
                   application/json: AppendValuesResponse
             (commons.Id): sheets.spreadsheets.values.append
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Spreadsheets
             - Values
       /values:batchGet:
@@ -2787,7 +2787,7 @@ types:
           description: |-
             Returns one or more ranges of values from a spreadsheet.
             The caller must specify the spreadsheet ID and one or more ranges.
-          displayName: batch Get
+          displayName: Batch Get
           is:
           - hasParameters
           queryParameters:
@@ -2829,7 +2829,7 @@ types:
               body:
                 application/json: BatchGetValuesResponse
           (commons.Id): sheets.spreadsheets.values.batchGet
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Spreadsheets
           - Values
       get:
@@ -2862,7 +2862,7 @@ types:
           Multiple ranges can be specified.  Limiting the range will
           return only the portions of the spreadsheet that intersect the requested
           ranges. Ranges are specified using A1 notation.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         queryParameters:
@@ -2879,7 +2879,7 @@ types:
             body:
               application/json: Spreadsheet
         (commons.Id): sheets.spreadsheets.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Spreadsheets
     /{spreadsheetId}:batchUpdate:
       uriParameters:
@@ -2912,7 +2912,7 @@ types:
           applied together atomically. Your changes may be altered with respect to
           collaborator changes. If there are no collaborators, the spreadsheet
           should reflect your changes.
-        displayName: batch Update
+        displayName: Batch Update
         is:
         - hasParameters
         body:
@@ -2922,7 +2922,7 @@ types:
             body:
               application/json: BatchUpdateSpreadsheetResponse
         (commons.Id): sheets.spreadsheets.batchUpdate
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Spreadsheets
     post:
       securedBy:
@@ -2931,7 +2931,7 @@ types:
           - https://www.googleapis.com/auth/drive
           - https://www.googleapis.com/auth/spreadsheets
       description: Creates a spreadsheet, returning the newly created spreadsheet.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       body:
@@ -2941,5 +2941,5 @@ types:
           body:
             application/json: Spreadsheet
       (commons.Id): sheets.spreadsheets.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Spreadsheets

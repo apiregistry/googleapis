@@ -425,7 +425,7 @@ types:
         - https://www.googleapis.com/auth/adexchange.seller
         - https://www.googleapis.com/auth/adexchange.seller.readonly
     description: List the alerts for this Ad Exchange account.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -437,7 +437,7 @@ types:
         body:
           application/json: Alerts
     (commons.Id): adexchangeseller.alerts.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Alerts
 /reports:
   /saved:
@@ -448,7 +448,7 @@ types:
           - https://www.googleapis.com/auth/adexchange.seller
           - https://www.googleapis.com/auth/adexchange.seller.readonly
       description: List all saved reports in this Ad Exchange account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -466,7 +466,7 @@ types:
           body:
             application/json: SavedReports
       (commons.Id): adexchangeseller.reports.saved.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Reports
       - Saved
   /{savedReportId}:
@@ -481,7 +481,7 @@ types:
           - https://www.googleapis.com/auth/adexchange.seller
           - https://www.googleapis.com/auth/adexchange.seller.readonly
       description: Generate an Ad Exchange report based on the saved report ID sent in the query parameters.
-      displayName: generate
+      displayName: Generate
       is:
       - hasParameters
       queryParameters:
@@ -506,7 +506,7 @@ types:
           body:
             application/json: Report
       (commons.Id): adexchangeseller.reports.saved.generate
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Reports
       - Saved
   get:
@@ -516,7 +516,7 @@ types:
         - https://www.googleapis.com/auth/adexchange.seller
         - https://www.googleapis.com/auth/adexchange.seller.readonly
     description: Generate an Ad Exchange report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
-    displayName: generate
+    displayName: Generate
     is:
     - hasParameters
     queryParameters:
@@ -565,7 +565,7 @@ types:
         body:
           application/json: Report
     (commons.Id): adexchangeseller.reports.generate
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Reports
 /metadata:
   /metrics:
@@ -576,7 +576,7 @@ types:
           - https://www.googleapis.com/auth/adexchange.seller
           - https://www.googleapis.com/auth/adexchange.seller.readonly
       description: List the metadata for the metrics available to this AdExchange account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       responses:
@@ -584,7 +584,7 @@ types:
           body:
             application/json: Metadata
       (commons.Id): adexchangeseller.metadata.metrics.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Metadata
       - Metrics
   /dimensions:
@@ -595,7 +595,7 @@ types:
           - https://www.googleapis.com/auth/adexchange.seller
           - https://www.googleapis.com/auth/adexchange.seller.readonly
       description: List the metadata for the dimensions available to this AdExchange account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       responses:
@@ -603,7 +603,7 @@ types:
           body:
             application/json: Metadata
       (commons.Id): adexchangeseller.metadata.dimensions.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Metadata
       - Dimensions
 /adclients:
@@ -620,7 +620,7 @@ types:
             - https://www.googleapis.com/auth/adexchange.seller
             - https://www.googleapis.com/auth/adexchange.seller.readonly
         description: List all URL channels in the specified ad client for this Ad Exchange account.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -638,7 +638,7 @@ types:
             body:
               application/json: UrlChannels
         (commons.Id): adexchangeseller.urlchannels.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Urlchannels
     /customchannels:
       /{customChannelId}:
@@ -654,7 +654,7 @@ types:
                 - https://www.googleapis.com/auth/adexchange.seller
                 - https://www.googleapis.com/auth/adexchange.seller.readonly
             description: List all ad units in the specified custom channel.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -675,7 +675,7 @@ types:
                 body:
                   application/json: AdUnits
             (commons.Id): adexchangeseller.customchannels.adunits.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Customchannels
             - Adunits
         get:
@@ -685,7 +685,7 @@ types:
               - https://www.googleapis.com/auth/adexchange.seller
               - https://www.googleapis.com/auth/adexchange.seller.readonly
           description: Get the specified custom channel from the specified ad client.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -693,7 +693,7 @@ types:
               body:
                 application/json: CustomChannel
           (commons.Id): adexchangeseller.customchannels.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Customchannels
       get:
         securedBy:
@@ -702,7 +702,7 @@ types:
             - https://www.googleapis.com/auth/adexchange.seller
             - https://www.googleapis.com/auth/adexchange.seller.readonly
         description: List all custom channels in the specified ad client for this Ad Exchange account.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -720,7 +720,7 @@ types:
             body:
               application/json: CustomChannels
         (commons.Id): adexchangeseller.customchannels.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Customchannels
     /adunits:
       /{adUnitId}:
@@ -736,7 +736,7 @@ types:
                 - https://www.googleapis.com/auth/adexchange.seller
                 - https://www.googleapis.com/auth/adexchange.seller.readonly
             description: List all custom channels which the specified ad unit belongs to.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -754,7 +754,7 @@ types:
                 body:
                   application/json: CustomChannels
             (commons.Id): adexchangeseller.adunits.customchannels.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Adunits
             - Customchannels
         get:
@@ -764,7 +764,7 @@ types:
               - https://www.googleapis.com/auth/adexchange.seller
               - https://www.googleapis.com/auth/adexchange.seller.readonly
           description: Gets the specified ad unit in the specified ad client.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -772,7 +772,7 @@ types:
               body:
                 application/json: AdUnit
           (commons.Id): adexchangeseller.adunits.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Adunits
       get:
         securedBy:
@@ -781,7 +781,7 @@ types:
             - https://www.googleapis.com/auth/adexchange.seller
             - https://www.googleapis.com/auth/adexchange.seller.readonly
         description: List all ad units in the specified ad client for this Ad Exchange account.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -802,7 +802,7 @@ types:
             body:
               application/json: AdUnits
         (commons.Id): adexchangeseller.adunits.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Adunits
   get:
     securedBy:
@@ -811,7 +811,7 @@ types:
         - https://www.googleapis.com/auth/adexchange.seller
         - https://www.googleapis.com/auth/adexchange.seller.readonly
     description: List all ad clients in this Ad Exchange account.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -829,7 +829,7 @@ types:
         body:
           application/json: AdClients
     (commons.Id): adexchangeseller.adclients.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Adclients
 /accounts:
   /{accountId}:
@@ -845,7 +845,7 @@ types:
           - https://www.googleapis.com/auth/adexchange.seller
           - https://www.googleapis.com/auth/adexchange.seller.readonly
       description: Get information about the selected Ad Exchange account.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -853,7 +853,7 @@ types:
           body:
             application/json: Account
       (commons.Id): adexchangeseller.accounts.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
 /preferreddeals:
   /{dealId}:
@@ -868,7 +868,7 @@ types:
           - https://www.googleapis.com/auth/adexchange.seller
           - https://www.googleapis.com/auth/adexchange.seller.readonly
       description: Get information about the selected Ad Exchange Preferred Deal.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -876,7 +876,7 @@ types:
           body:
             application/json: PreferredDeal
       (commons.Id): adexchangeseller.preferreddeals.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Preferreddeals
   get:
     securedBy:
@@ -885,7 +885,7 @@ types:
         - https://www.googleapis.com/auth/adexchange.seller
         - https://www.googleapis.com/auth/adexchange.seller.readonly
     description: List the preferred deals for this Ad Exchange account.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -893,5 +893,5 @@ types:
         body:
           application/json: PreferredDeals
     (commons.Id): adexchangeseller.preferreddeals.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Preferreddeals

@@ -400,7 +400,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloud-platform.read-only
       description: Fetches an Organization resource identified by the specified resource name.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       - hasParameters
@@ -409,7 +409,7 @@ types:
           body:
             application/json: Organization
       (commons.Id): cloudresourcemanager.organizations.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Organizations
   /projects:
     /{resource}:testIamPermissions:
@@ -426,7 +426,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Returns permissions that a caller has on the specified Project.
-        displayName: test Iam Permissions
+        displayName: Test Iam Permissions
         is:
         - hasParameters
         body:
@@ -436,7 +436,7 @@ types:
             body:
               application/json: TestIamPermissionsResponse
         (commons.Id): cloudresourcemanager.projects.testIamPermissions
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:
       uriParameters:
@@ -450,7 +450,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Retrieves the Project identified by the specified `project_id` (for example, `my-project-123`). The caller must have read permissions for this Project.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -458,7 +458,7 @@ types:
             body:
               application/json: Project
         (commons.Id): cloudresourcemanager.projects.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
       put:
         securedBy:
@@ -466,7 +466,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Updates the attributes of the Project identified by the specified `project_id` (for example, `my-project-123`). The caller must have modify permissions for this Project.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -476,7 +476,7 @@ types:
             body:
               application/json: Project
         (commons.Id): cloudresourcemanager.projects.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
       delete:
         securedBy:
@@ -495,7 +495,7 @@ types:
           cannot update the project. After the deletion completes, the Project is
           not retrievable by the GetProject and ListProjects methods. The caller must
           have modify permissions for this Project.'
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         responses:
@@ -503,7 +503,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): cloudresourcemanager.projects.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:undelete:
       uriParameters:
@@ -516,7 +516,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Restores the Project identified by the specified `project_id` (for example, `my-project-123`). You can only use this method for a Project that has a lifecycle state of DELETE_REQUESTED. After deletion starts, the Project cannot be restored. The caller must have modify permissions for this Project.
-        displayName: undelete
+        displayName: Undelete
         is:
         - hasParameters
         body:
@@ -526,7 +526,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): cloudresourcemanager.projects.undelete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{resource}:getIamPolicy:
       uriParameters:
@@ -542,7 +542,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Returns the IAM access control policy for the specified Project. Permission is denied if the policy or the resource does not exist.
-        displayName: get Iam Policy
+        displayName: Get Iam Policy
         is:
         - hasParameters
         body:
@@ -552,7 +552,7 @@ types:
             body:
               application/json: Policy
         (commons.Id): cloudresourcemanager.projects.getIamPolicy
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{resource}:setIamPolicy:
       uriParameters:
@@ -588,7 +588,7 @@ types:
           Admin API. Note: Removing service accounts from policies or changing their
           roles can render services completely inoperable. It is important to understand
           how the service account is being used before removing or updating its roles.'
-        displayName: set Iam Policy
+        displayName: Set Iam Policy
         is:
         - hasParameters
         body:
@@ -598,7 +598,7 @@ types:
             body:
               application/json: Policy
         (commons.Id): cloudresourcemanager.projects.setIamPolicy
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     post:
       securedBy:
@@ -606,7 +606,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Request that a new Project be created. The result is an Operation which can be used to track the creation process. It is automatically deleted after a few hours, so there is no need to call DeleteOperation. Our SLO permits Project creation to take up to 30 seconds at the 90th percentile. As of 2016-08-29, we are observing 6 seconds 50th percentile latency. 95th percentile latency is around 11 seconds. We recommend polling at the 5th second with an exponential backoff.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       body:
@@ -616,7 +616,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): cloudresourcemanager.projects.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
     get:
       securedBy:
@@ -625,7 +625,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloud-platform.read-only
       description: Lists Projects that are visible to the user and satisfy the specified filter. This method returns Projects in an unspecified order. New Projects do not necessarily appear at the end of the list.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -653,7 +653,7 @@ types:
           body:
             application/json: ListProjectsResponse
       (commons.Id): cloudresourcemanager.projects.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /organizations:search:
     post:
@@ -663,7 +663,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloud-platform.read-only
       description: Searches Organization resources that are visible to the user and satisfy the specified filter. This method returns Organizations in an unspecified order. New Organizations do not necessarily appear at the end of the results.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       body:
@@ -673,7 +673,7 @@ types:
           body:
             application/json: SearchOrganizationsResponse
       (commons.Id): cloudresourcemanager.organizations.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Organizations
   /{resource}:testIamPermissions:
     uriParameters:
@@ -690,7 +690,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloud-platform.read-only
       description: Returns permissions that a caller has on the specified Organization. The `resource` field should be the organization's resource name, e.g. "organizations/123".
-      displayName: test Iam Permissions
+      displayName: Test Iam Permissions
       is:
       - hasParameters
       body:
@@ -700,7 +700,7 @@ types:
           body:
             application/json: TestIamPermissionsResponse
       (commons.Id): cloudresourcemanager.organizations.testIamPermissions
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Organizations
   /{resource}:setIamPolicy:
     uriParameters:
@@ -716,7 +716,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Sets the access control policy on an Organization resource. Replaces any existing policy. The `resource` field should be the organization's resource name, e.g. "organizations/123".
-      displayName: set Iam Policy
+      displayName: Set Iam Policy
       is:
       - hasParameters
       body:
@@ -726,7 +726,7 @@ types:
           body:
             application/json: Policy
       (commons.Id): cloudresourcemanager.organizations.setIamPolicy
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Organizations
   /{resource}:getIamPolicy:
     uriParameters:
@@ -743,7 +743,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloud-platform.read-only
       description: Gets the access control policy for an Organization resource. May be empty if no such policy or resource exists. The `resource` field should be the organization's resource name, e.g. "organizations/123".
-      displayName: get Iam Policy
+      displayName: Get Iam Policy
       is:
       - hasParameters
       body:
@@ -753,5 +753,5 @@ types:
           body:
             application/json: Policy
       (commons.Id): cloudresourcemanager.organizations.getIamPolicy
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Organizations

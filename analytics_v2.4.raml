@@ -53,7 +53,7 @@ securedBy:
         - https://www.googleapis.com/auth/analytics
         - https://www.googleapis.com/auth/analytics.readonly
     description: Returns Analytics report data for a view (profile).
-    displayName: get
+    displayName: Get
     is:
     - hasParameters
     queryParameters:
@@ -98,7 +98,7 @@ securedBy:
         pattern: (ga:.+)?
         description: A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.
     (commons.Id): analytics.data.get
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Data
 /management:
   /accounts:
@@ -127,7 +127,7 @@ securedBy:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists goals to which the user has access.
-                  displayName: list
+                  displayName: List
                   is:
                   - hasParameters
                   queryParameters:
@@ -141,7 +141,7 @@ securedBy:
                       description: An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
                       minimum: 1
                   (commons.Id): analytics.management.goals.list
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Management
                   - Goals
             get:
@@ -151,7 +151,7 @@ securedBy:
                   - https://www.googleapis.com/auth/analytics
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists views (profiles) to which the user has access.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -165,7 +165,7 @@ securedBy:
                   description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
                   minimum: 1
               (commons.Id): analytics.management.profiles.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Management
               - Profiles
         get:
@@ -175,7 +175,7 @@ securedBy:
               - https://www.googleapis.com/auth/analytics
               - https://www.googleapis.com/auth/analytics.readonly
           description: Lists web properties to which the user has access.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -189,7 +189,7 @@ securedBy:
               description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
               minimum: 1
           (commons.Id): analytics.management.webproperties.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Management
           - Webproperties
     get:
@@ -199,7 +199,7 @@ securedBy:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists all accounts to which the user has access.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -213,7 +213,7 @@ securedBy:
           description: An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           minimum: 1
       (commons.Id): analytics.management.accounts.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Management
       - Accounts
   /segments:
@@ -224,7 +224,7 @@ securedBy:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists advanced segments to which the user has access.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -238,6 +238,6 @@ securedBy:
           description: An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           minimum: 1
       (commons.Id): analytics.management.segments.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Management
       - Segments

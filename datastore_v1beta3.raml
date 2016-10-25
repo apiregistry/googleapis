@@ -734,7 +734,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/datastore
         description: Rolls back a transaction.
-        displayName: rollback
+        displayName: Rollback
         is:
         - hasParameters
         body:
@@ -744,7 +744,7 @@ types:
             body:
               application/json: RollbackResponse
         (commons.Id): datastore.projects.rollback
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:lookup:
       uriParameters:
@@ -758,7 +758,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/datastore
         description: Looks up entities by key.
-        displayName: lookup
+        displayName: Lookup
         is:
         - hasParameters
         body:
@@ -768,7 +768,7 @@ types:
             body:
               application/json: LookupResponse
         (commons.Id): datastore.projects.lookup
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:beginTransaction:
       uriParameters:
@@ -782,7 +782,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/datastore
         description: Begins a new transaction.
-        displayName: begin Transaction
+        displayName: Begin Transaction
         is:
         - hasParameters
         body:
@@ -792,7 +792,7 @@ types:
             body:
               application/json: BeginTransactionResponse
         (commons.Id): datastore.projects.beginTransaction
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:commit:
       uriParameters:
@@ -808,7 +808,7 @@ types:
         description: |-
           Commits a transaction, optionally creating, deleting or modifying some
           entities.
-        displayName: commit
+        displayName: Commit
         is:
         - hasParameters
         body:
@@ -818,7 +818,7 @@ types:
             body:
               application/json: CommitResponse
         (commons.Id): datastore.projects.commit
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:runQuery:
       uriParameters:
@@ -832,7 +832,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/datastore
         description: Queries for entities.
-        displayName: run Query
+        displayName: Run Query
         is:
         - hasParameters
         body:
@@ -842,7 +842,7 @@ types:
             body:
               application/json: RunQueryResponse
         (commons.Id): datastore.projects.runQuery
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
     /{projectId}:allocateIds:
       uriParameters:
@@ -858,7 +858,7 @@ types:
         description: |-
           Allocates IDs for the given keys, which is useful for referencing an entity
           before it is inserted.
-        displayName: allocate Ids
+        displayName: Allocate Ids
         is:
         - hasParameters
         body:
@@ -868,5 +868,5 @@ types:
             body:
               application/json: AllocateIdsResponse
         (commons.Id): datastore.projects.allocateIds
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects

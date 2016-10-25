@@ -787,7 +787,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/playmovies_partner.readonly
                 description: Get a Component given its id.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -795,7 +795,7 @@ types:
                     body:
                       application/json: Component
                 (commons.Id): playmoviespartner.accounts.components.type.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Accounts
                 - Components
                 - Type
@@ -805,7 +805,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/playmovies_partner.readonly
           description: List Components owned or managed by the partner. See _Authentication and Authorization rules_ and _List methods rules_ for more information about this method.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -864,7 +864,7 @@ types:
               body:
                 application/json: ListComponentsResponse
           (commons.Id): playmoviespartner.accounts.components.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
           - Components
       /avails:
@@ -879,7 +879,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/playmovies_partner.readonly
             description: Get an Avail given its avail group id and avail id.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -887,7 +887,7 @@ types:
                 body:
                   application/json: Avail
             (commons.Id): playmoviespartner.accounts.avails.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Accounts
             - Avails
         get:
@@ -896,7 +896,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/playmovies_partner.readonly
           description: List Avails owned or managed by the partner. See _Authentication and Authorization rules_ and _List methods rules_ for more information about this method.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -937,7 +937,7 @@ types:
               body:
                 application/json: ListAvailsResponse
           (commons.Id): playmoviespartner.accounts.avails.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
           - Avails
       /orders:
@@ -952,7 +952,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/playmovies_partner.readonly
             description: Get an Order given its id. See _Authentication and Authorization rules_ and _Get methods rules_ for more information about this method.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -960,7 +960,7 @@ types:
                 body:
                   application/json: Order
             (commons.Id): playmoviespartner.accounts.orders.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Accounts
             - Orders
         get:
@@ -969,7 +969,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/playmovies_partner.readonly
           description: List Orders owned or managed by the partner. See _Authentication and Authorization rules_ and _List methods rules_ for more information about this method.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1010,7 +1010,7 @@ types:
               body:
                 application/json: ListOrdersResponse
           (commons.Id): playmoviespartner.accounts.orders.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
           - Orders
       /experienceLocales:
@@ -1025,7 +1025,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/playmovies_partner.readonly
             description: Get an ExperienceLocale given its id. See _Authentication and Authorization rules_ and _Get methods rules_ for more information about this method.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -1033,7 +1033,7 @@ types:
                 body:
                   application/json: ExperienceLocale
             (commons.Id): playmoviespartner.accounts.experienceLocales.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Accounts
             - Experience Locales
         get:
@@ -1042,7 +1042,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/playmovies_partner.readonly
           description: List ExperienceLocales owned or managed by the partner. See _Authentication and Authorization rules_ and _List methods rules_ for more information about this method.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1086,7 +1086,7 @@ types:
               body:
                 application/json: ListExperienceLocalesResponse
           (commons.Id): playmoviespartner.accounts.experienceLocales.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
           - Experience Locales
       /storeInfos:
@@ -1107,7 +1107,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/playmovies_partner.readonly
                 description: Get a StoreInfo given its video id and country. See _Authentication and Authorization rules_ and _Get methods rules_ for more information about this method.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -1115,7 +1115,7 @@ types:
                     body:
                       application/json: StoreInfo
                 (commons.Id): playmoviespartner.accounts.storeInfos.country.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Accounts
                 - Store Infos
                 - Country
@@ -1125,7 +1125,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/playmovies_partner.readonly
           description: List StoreInfos owned or managed by the partner. See _Authentication and Authorization rules_ and _List methods rules_ for more information about this method.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -1169,6 +1169,6 @@ types:
               body:
                 application/json: ListStoreInfosResponse
           (commons.Id): playmoviespartner.accounts.storeInfos.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
           - Store Infos

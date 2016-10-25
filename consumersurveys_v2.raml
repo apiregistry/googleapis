@@ -347,7 +347,7 @@ types:
             - https://www.googleapis.com/auth/consumersurveys
             - https://www.googleapis.com/auth/userinfo.email
         description: Stops a running survey.
-        displayName: stop
+        displayName: Stop
         is:
         - hasParameters
         responses:
@@ -355,7 +355,7 @@ types:
             body:
               application/json: SurveysStopResponse
         (commons.Id): consumersurveys.surveys.stop
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Surveys
     /start:
       post:
@@ -365,7 +365,7 @@ types:
             - https://www.googleapis.com/auth/consumersurveys
             - https://www.googleapis.com/auth/userinfo.email
         description: Begins running a survey.
-        displayName: start
+        displayName: Start
         is:
         - hasParameters
         body:
@@ -375,7 +375,7 @@ types:
             body:
               application/json: SurveysStartResponse
         (commons.Id): consumersurveys.surveys.start
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Surveys
   /{surveyUrlId}:
     uriParameters:
@@ -391,7 +391,7 @@ types:
             - https://www.googleapis.com/auth/consumersurveys.readonly
             - https://www.googleapis.com/auth/userinfo.email
         description: Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add "?alt=media" to the URL as an argument to get results.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         body:
@@ -401,7 +401,7 @@ types:
             body:
               application/json: SurveyResults
         (commons.Id): consumersurveys.results.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Results
     get:
       securedBy:
@@ -411,7 +411,7 @@ types:
           - https://www.googleapis.com/auth/consumersurveys.readonly
           - https://www.googleapis.com/auth/userinfo.email
       description: Retrieves information about the specified survey.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -419,7 +419,7 @@ types:
           body:
             application/json: Survey
       (commons.Id): consumersurveys.surveys.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Surveys
     put:
       securedBy:
@@ -428,7 +428,7 @@ types:
           - https://www.googleapis.com/auth/consumersurveys
           - https://www.googleapis.com/auth/userinfo.email
       description: Updates a survey. Currently the only property that can be updated is the owners property.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -438,7 +438,7 @@ types:
           body:
             application/json: Survey
       (commons.Id): consumersurveys.surveys.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Surveys
     delete:
       securedBy:
@@ -447,7 +447,7 @@ types:
           - https://www.googleapis.com/auth/consumersurveys
           - https://www.googleapis.com/auth/userinfo.email
       description: Removes a survey from view in all user GET requests.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       responses:
@@ -455,7 +455,7 @@ types:
           body:
             application/json: SurveysDeleteResponse
       (commons.Id): consumersurveys.surveys.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Surveys
   post:
     securedBy:
@@ -464,7 +464,7 @@ types:
         - https://www.googleapis.com/auth/consumersurveys
         - https://www.googleapis.com/auth/userinfo.email
     description: Creates a survey.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -474,7 +474,7 @@ types:
         body:
           application/json: Survey
     (commons.Id): consumersurveys.surveys.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Surveys
   get:
     securedBy:
@@ -484,7 +484,7 @@ types:
         - https://www.googleapis.com/auth/consumersurveys.readonly
         - https://www.googleapis.com/auth/userinfo.email
     description: Lists the surveys owned by the authenticated user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -501,7 +501,7 @@ types:
         body:
           application/json: SurveysListResponse
     (commons.Id): consumersurveys.surveys.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Surveys
 /mobileAppPanels:
   /{panelId}:
@@ -517,7 +517,7 @@ types:
           - https://www.googleapis.com/auth/consumersurveys.readonly
           - https://www.googleapis.com/auth/userinfo.email
       description: Retrieves a MobileAppPanel that is available to the authenticated user.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -525,7 +525,7 @@ types:
           body:
             application/json: MobileAppPanel
       (commons.Id): consumersurveys.mobileapppanels.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Mobileapppanels
     put:
       securedBy:
@@ -534,7 +534,7 @@ types:
           - https://www.googleapis.com/auth/consumersurveys
           - https://www.googleapis.com/auth/userinfo.email
       description: Updates a MobileAppPanel. Currently the only property that can be updated is the owners property.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -544,7 +544,7 @@ types:
           body:
             application/json: MobileAppPanel
       (commons.Id): consumersurveys.mobileapppanels.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Mobileapppanels
   get:
     securedBy:
@@ -554,7 +554,7 @@ types:
         - https://www.googleapis.com/auth/consumersurveys.readonly
         - https://www.googleapis.com/auth/userinfo.email
     description: Lists the MobileAppPanels available to the authenticated user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -571,5 +571,5 @@ types:
         body:
           application/json: MobileAppPanelsListResponse
     (commons.Id): consumersurveys.mobileapppanels.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Mobileapppanels

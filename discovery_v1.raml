@@ -416,7 +416,7 @@ types:
       /rest:
         get:
           description: Retrieve the description of a particular version of an api.
-          displayName: get Rest
+          displayName: Get Rest
           is:
           - hasParameters
           responses:
@@ -424,11 +424,11 @@ types:
               body:
                 application/json: RestDescription
           (commons.Id): discovery.apis.getRest
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Apis
   get:
     description: Retrieve the list of APIs supported at this endpoint.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -444,5 +444,5 @@ types:
         body:
           application/json: DirectoryList
     (commons.Id): discovery.apis.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Apis

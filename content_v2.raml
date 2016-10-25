@@ -2922,7 +2922,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -2936,7 +2936,7 @@ types:
             body:
               application/json: AccountShipping
         (commons.Id): content.accountshipping.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accountshipping
       get:
         securedBy:
@@ -2944,7 +2944,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the shipping settings of the account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -2952,7 +2952,7 @@ types:
             body:
               application/json: AccountShipping
         (commons.Id): content.accountshipping.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accountshipping
       put:
         securedBy:
@@ -2960,7 +2960,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         queryParameters:
@@ -2974,7 +2974,7 @@ types:
             body:
               application/json: AccountShipping
         (commons.Id): content.accountshipping.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accountshipping
     get:
       securedBy:
@@ -2982,7 +2982,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -2998,7 +2998,7 @@ types:
           body:
             application/json: AccountshippingListResponse
       (commons.Id): content.accountshipping.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accountshipping
   /accounttax:
     /{accountId}:
@@ -3013,7 +3013,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the tax settings of the account. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -3027,7 +3027,7 @@ types:
             body:
               application/json: AccountTax
         (commons.Id): content.accounttax.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounttax
       get:
         securedBy:
@@ -3035,7 +3035,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the tax settings of the account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3043,7 +3043,7 @@ types:
             body:
               application/json: AccountTax
         (commons.Id): content.accounttax.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounttax
       put:
         securedBy:
@@ -3051,7 +3051,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the tax settings of the account.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         queryParameters:
@@ -3065,7 +3065,7 @@ types:
             body:
               application/json: AccountTax
         (commons.Id): content.accounttax.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounttax
     get:
       securedBy:
@@ -3073,7 +3073,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the tax settings of the sub-accounts in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3089,7 +3089,7 @@ types:
           body:
             application/json: AccounttaxListResponse
       (commons.Id): content.accounttax.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounttax
   /productstatuses:
     /{productId}:
@@ -3103,7 +3103,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Gets the status of a product from your Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3111,7 +3111,7 @@ types:
             body:
               application/json: ProductStatus
         (commons.Id): content.productstatuses.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Productstatuses
     get:
       securedBy:
@@ -3119,7 +3119,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the statuses of the products in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3138,7 +3138,7 @@ types:
           body:
             application/json: ProductstatusesListResponse
       (commons.Id): content.productstatuses.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Productstatuses
   /shippingsettings:
     /{accountId}:
@@ -3153,7 +3153,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -3167,7 +3167,7 @@ types:
             body:
               application/json: ShippingSettings
         (commons.Id): content.shippingsettings.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Shippingsettings
       get:
         securedBy:
@@ -3175,7 +3175,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the shipping settings of the account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3183,7 +3183,7 @@ types:
             body:
               application/json: ShippingSettings
         (commons.Id): content.shippingsettings.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Shippingsettings
       put:
         securedBy:
@@ -3191,7 +3191,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates the shipping settings of the account.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         queryParameters:
@@ -3205,7 +3205,7 @@ types:
             body:
               application/json: ShippingSettings
         (commons.Id): content.shippingsettings.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Shippingsettings
     get:
       securedBy:
@@ -3213,7 +3213,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3229,7 +3229,7 @@ types:
           body:
             application/json: ShippingsettingsListResponse
       (commons.Id): content.shippingsettings.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Shippingsettings
   /supportedCarriers:
     get:
@@ -3238,7 +3238,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves supported carriers and carrier services for an account.
-      displayName: getsupportedcarriers
+      displayName: Getsupportedcarriers
       is:
       - hasParameters
       responses:
@@ -3246,7 +3246,7 @@ types:
           body:
             application/json: ShippingsettingsGetSupportedCarriersResponse
       (commons.Id): content.shippingsettings.getsupportedcarriers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Shippingsettings
   /accountstatuses:
     /{accountId}:
@@ -3261,7 +3261,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the status of a Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3269,7 +3269,7 @@ types:
             body:
               application/json: AccountStatus
         (commons.Id): content.accountstatuses.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accountstatuses
     get:
       securedBy:
@@ -3277,7 +3277,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3293,7 +3293,7 @@ types:
           body:
             application/json: AccountstatusesListResponse
       (commons.Id): content.accountstatuses.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accountstatuses
   /datafeeds:
     /{datafeedId}:
@@ -3307,7 +3307,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a datafeed of your Merchant Center account. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -3321,7 +3321,7 @@ types:
             body:
               application/json: Datafeed
         (commons.Id): content.datafeeds.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Datafeeds
       get:
         securedBy:
@@ -3329,7 +3329,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves a datafeed from your Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3337,7 +3337,7 @@ types:
             body:
               application/json: Datafeed
         (commons.Id): content.datafeeds.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Datafeeds
       put:
         securedBy:
@@ -3345,7 +3345,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a datafeed of your Merchant Center account.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         queryParameters:
@@ -3359,7 +3359,7 @@ types:
             body:
               application/json: Datafeed
         (commons.Id): content.datafeeds.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Datafeeds
       delete:
         securedBy:
@@ -3367,7 +3367,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Deletes a datafeed from your Merchant Center account.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         queryParameters:
@@ -3375,7 +3375,7 @@ types:
             type: boolean
             description: Flag to run the request in dry-run mode.
         (commons.Id): content.datafeeds.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Datafeeds
     post:
       securedBy:
@@ -3383,7 +3383,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Registers a datafeed with your Merchant Center account.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -3397,7 +3397,7 @@ types:
           body:
             application/json: Datafeed
       (commons.Id): content.datafeeds.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datafeeds
     get:
       securedBy:
@@ -3405,7 +3405,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the datafeeds in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3421,7 +3421,7 @@ types:
           body:
             application/json: DatafeedsListResponse
       (commons.Id): content.datafeeds.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datafeeds
   /orders:
     /{orderId}:
@@ -3436,7 +3436,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels all line items in an order.
-          displayName: cancel
+          displayName: Cancel
           is:
           - hasParameters
           body:
@@ -3446,7 +3446,7 @@ types:
               body:
                 application/json: OrdersCancelResponse
           (commons.Id): content.orders.cancel
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /shipLineItems:
         post:
@@ -3455,7 +3455,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks line item(s) as shipped.
-          displayName: shiplineitems
+          displayName: Shiplineitems
           is:
           - hasParameters
           body:
@@ -3465,7 +3465,7 @@ types:
               body:
                 application/json: OrdersShipLineItemsResponse
           (commons.Id): content.orders.shiplineitems
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /cancelLineItem:
         post:
@@ -3474,7 +3474,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels a line item.
-          displayName: cancellineitem
+          displayName: Cancellineitem
           is:
           - hasParameters
           body:
@@ -3484,7 +3484,7 @@ types:
               body:
                 application/json: OrdersCancelLineItemResponse
           (commons.Id): content.orders.cancellineitem
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /returnLineItem:
         post:
@@ -3493,7 +3493,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Returns a line item.
-          displayName: returnlineitem
+          displayName: Returnlineitem
           is:
           - hasParameters
           body:
@@ -3503,7 +3503,7 @@ types:
               body:
                 application/json: OrdersReturnLineItemResponse
           (commons.Id): content.orders.returnlineitem
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /acknowledge:
         post:
@@ -3512,7 +3512,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks an order as acknowledged.
-          displayName: acknowledge
+          displayName: Acknowledge
           is:
           - hasParameters
           body:
@@ -3522,7 +3522,7 @@ types:
               body:
                 application/json: OrdersAcknowledgeResponse
           (commons.Id): content.orders.acknowledge
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /updateMerchantOrderId:
         post:
@@ -3531,7 +3531,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates the merchant order ID for a given order.
-          displayName: updatemerchantorderid
+          displayName: Updatemerchantorderid
           is:
           - hasParameters
           body:
@@ -3541,7 +3541,7 @@ types:
               body:
                 application/json: OrdersUpdateMerchantOrderIdResponse
           (commons.Id): content.orders.updatemerchantorderid
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /refund:
         post:
@@ -3550,7 +3550,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Refund a portion of the order, up to the full amount paid.
-          displayName: refund
+          displayName: Refund
           is:
           - hasParameters
           body:
@@ -3560,7 +3560,7 @@ types:
               body:
                 application/json: OrdersRefundResponse
           (commons.Id): content.orders.refund
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       /updateShipment:
         post:
@@ -3569,7 +3569,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates a shipment's status, carrier, and/or tracking ID.
-          displayName: updateshipment
+          displayName: Updateshipment
           is:
           - hasParameters
           body:
@@ -3579,7 +3579,7 @@ types:
               body:
                 application/json: OrdersUpdateShipmentResponse
           (commons.Id): content.orders.updateshipment
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
       get:
         securedBy:
@@ -3587,7 +3587,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order from your Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3595,7 +3595,7 @@ types:
             body:
               application/json: Order
         (commons.Id): content.orders.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Orders
     get:
       securedBy:
@@ -3603,7 +3603,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the orders in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3668,7 +3668,7 @@ types:
           body:
             application/json: OrdersListResponse
       (commons.Id): content.orders.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Orders
   /testorders:
     /{orderId}:
@@ -3683,7 +3683,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
-          displayName: advancetestorder
+          displayName: Advancetestorder
           is:
           - hasParameters
           responses:
@@ -3691,7 +3691,7 @@ types:
               body:
                 application/json: OrdersAdvanceTestOrderResponse
           (commons.Id): content.orders.advancetestorder
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Orders
     post:
       securedBy:
@@ -3699,7 +3699,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Sandbox only. Creates a test order.
-      displayName: createtestorder
+      displayName: Createtestorder
       is:
       - hasParameters
       body:
@@ -3709,7 +3709,7 @@ types:
           body:
             application/json: OrdersCreateTestOrderResponse
       (commons.Id): content.orders.createtestorder
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Orders
   /ordersbymerchantid:
     /{merchantOrderId}:
@@ -3723,7 +3723,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order using merchant order id.
-        displayName: getbymerchantorderid
+        displayName: Getbymerchantorderid
         is:
         - hasParameters
         responses:
@@ -3731,7 +3731,7 @@ types:
             body:
               application/json: OrdersGetByMerchantOrderIdResponse
         (commons.Id): content.orders.getbymerchantorderid
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Orders
   /testordertemplates:
     /{templateName}:
@@ -3755,7 +3755,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
-        displayName: gettestordertemplate
+        displayName: Gettestordertemplate
         is:
         - hasParameters
         responses:
@@ -3763,7 +3763,7 @@ types:
             body:
               application/json: OrdersGetTestOrderTemplateResponse
         (commons.Id): content.orders.gettestordertemplate
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Orders
   /accounts:
     /{accountId}:
@@ -3778,7 +3778,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a Merchant Center account. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         queryParameters:
@@ -3792,7 +3792,7 @@ types:
             body:
               application/json: Account
         (commons.Id): content.accounts.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
       get:
         securedBy:
@@ -3800,7 +3800,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves a Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3808,7 +3808,7 @@ types:
             body:
               application/json: Account
         (commons.Id): content.accounts.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
       put:
         securedBy:
@@ -3816,7 +3816,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Updates a Merchant Center account.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         queryParameters:
@@ -3830,7 +3830,7 @@ types:
             body:
               application/json: Account
         (commons.Id): content.accounts.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
       delete:
         securedBy:
@@ -3838,7 +3838,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Deletes a Merchant Center sub-account.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         queryParameters:
@@ -3846,7 +3846,7 @@ types:
             type: boolean
             description: Flag to run the request in dry-run mode.
         (commons.Id): content.accounts.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Accounts
     post:
       securedBy:
@@ -3854,7 +3854,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Creates a Merchant Center sub-account.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -3868,7 +3868,7 @@ types:
           body:
             application/json: Account
       (commons.Id): content.accounts.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
     get:
       securedBy:
@@ -3876,7 +3876,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the sub-accounts in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3892,7 +3892,7 @@ types:
           body:
             application/json: AccountsListResponse
       (commons.Id): content.accounts.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
   /datafeedstatuses:
     /{datafeedId}:
@@ -3906,7 +3906,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves the status of a datafeed from your Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3914,7 +3914,7 @@ types:
             body:
               application/json: DatafeedStatus
         (commons.Id): content.datafeedstatuses.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Datafeedstatuses
     get:
       securedBy:
@@ -3922,7 +3922,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the statuses of the datafeeds in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3938,7 +3938,7 @@ types:
           body:
             application/json: DatafeedstatusesListResponse
       (commons.Id): content.datafeedstatuses.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datafeedstatuses
   /inventory:
     /{storeCode}:
@@ -3958,7 +3958,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/content
             description: Updates price and availability of a product in your Merchant Center account. This operation does not update the expiration date of the product.
-            displayName: set
+            displayName: Set
             is:
             - hasParameters
             queryParameters:
@@ -3972,7 +3972,7 @@ types:
                 body:
                   application/json: InventorySetResponse
             (commons.Id): content.inventory.set
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Inventory
   /products:
     /{productId}:
@@ -3986,7 +3986,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves a product from your Merchant Center account.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3994,7 +3994,7 @@ types:
             body:
               application/json: Product
         (commons.Id): content.products.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Products
       delete:
         securedBy:
@@ -4002,7 +4002,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Deletes a product from your Merchant Center account.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         queryParameters:
@@ -4010,7 +4010,7 @@ types:
             type: boolean
             description: Flag to run the request in dry-run mode.
         (commons.Id): content.products.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Products
     post:
       securedBy:
@@ -4018,7 +4018,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Uploads a product to your Merchant Center account.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -4032,7 +4032,7 @@ types:
           body:
             application/json: Product
       (commons.Id): content.products.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Products
     get:
       securedBy:
@@ -4040,7 +4040,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the products in your Merchant Center account.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -4059,7 +4059,7 @@ types:
           body:
             application/json: ProductsListResponse
       (commons.Id): content.products.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Products
 /accountshipping:
   /batch:
@@ -4069,7 +4069,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves and updates the shipping settings of multiple accounts in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4083,7 +4083,7 @@ types:
           body:
             application/json: AccountshippingCustomBatchResponse
       (commons.Id): content.accountshipping.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accountshipping
 /accounttax:
   /batch:
@@ -4093,7 +4093,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves and updates tax settings of multiple accounts in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4107,7 +4107,7 @@ types:
           body:
             application/json: AccounttaxCustomBatchResponse
       (commons.Id): content.accounttax.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounttax
 /productstatuses:
   /batch:
@@ -4117,7 +4117,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Gets the statuses of multiple products in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       body:
@@ -4127,7 +4127,7 @@ types:
           body:
             application/json: ProductstatusesCustomBatchResponse
       (commons.Id): content.productstatuses.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Productstatuses
 /shippingsettings:
   /batch:
@@ -4137,7 +4137,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves and updates the shipping settings of multiple accounts in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4151,7 +4151,7 @@ types:
           body:
             application/json: ShippingsettingsCustomBatchResponse
       (commons.Id): content.shippingsettings.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Shippingsettings
 /accountstatuses:
   /batch:
@@ -4160,7 +4160,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       body:
@@ -4170,7 +4170,7 @@ types:
           body:
             application/json: AccountstatusesCustomBatchResponse
       (commons.Id): content.accountstatuses.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accountstatuses
 /datafeeds:
   /batch:
@@ -4179,7 +4179,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4193,7 +4193,7 @@ types:
           body:
             application/json: DatafeedsCustomBatchResponse
       (commons.Id): content.datafeeds.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datafeeds
 /orders:
   /batch:
@@ -4203,7 +4203,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves or modifies multiple orders in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       body:
@@ -4213,7 +4213,7 @@ types:
           body:
             application/json: OrdersCustomBatchResponse
       (commons.Id): content.orders.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Orders
 /accounts:
   /batch:
@@ -4223,7 +4223,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4237,7 +4237,7 @@ types:
           body:
             application/json: AccountsCustomBatchResponse
       (commons.Id): content.accounts.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
   /authinfo:
     get:
@@ -4246,7 +4246,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Returns information about the authenticated user.
-      displayName: authinfo
+      displayName: Authinfo
       is:
       - hasParameters
       responses:
@@ -4254,7 +4254,7 @@ types:
           body:
             application/json: AccountsAuthInfoResponse
       (commons.Id): content.accounts.authinfo
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
 /datafeedstatuses:
   /batch:
@@ -4263,7 +4263,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       body:
@@ -4273,7 +4273,7 @@ types:
           body:
             application/json: DatafeedstatusesCustomBatchResponse
       (commons.Id): content.datafeedstatuses.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datafeedstatuses
 /inventory:
   /batch:
@@ -4283,7 +4283,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4297,7 +4297,7 @@ types:
           body:
             application/json: InventoryCustomBatchResponse
       (commons.Id): content.inventory.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Inventory
 /products:
   /batch:
@@ -4307,7 +4307,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves, inserts, and deletes multiple products in a single request.
-      displayName: custombatch
+      displayName: Custombatch
       is:
       - hasParameters
       queryParameters:
@@ -4321,5 +4321,5 @@ types:
           body:
             application/json: ProductsCustomBatchResponse
       (commons.Id): content.products.custombatch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Products

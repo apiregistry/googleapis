@@ -433,7 +433,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/blogger
               description: Gets one comment by id.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               responses:
@@ -441,7 +441,7 @@ types:
                   body:
                     application/json: Comment
               (commons.Id): blogger.comments.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Comments
           get:
             securedBy:
@@ -449,7 +449,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Retrieves the comments for a blog, possibly filtered.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -471,7 +471,7 @@ types:
                 body:
                   application/json: CommentList
             (commons.Id): blogger.comments.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Comments
         get:
           securedBy:
@@ -479,7 +479,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Get a post by id.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -487,7 +487,7 @@ types:
               body:
                 application/json: Post
           (commons.Id): blogger.posts.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Posts
       get:
         securedBy:
@@ -495,7 +495,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieves a list of posts, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -517,7 +517,7 @@ types:
             body:
               application/json: PostList
         (commons.Id): blogger.posts.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Posts
     /pages:
       /{pageId}:
@@ -531,7 +531,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Gets one blog page by id.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -539,7 +539,7 @@ types:
               body:
                 application/json: Page
           (commons.Id): blogger.pages.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Pages
       get:
         securedBy:
@@ -547,7 +547,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieves pages for a blog, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -559,7 +559,7 @@ types:
             body:
               application/json: PageList
         (commons.Id): blogger.pages.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pages
     get:
       securedBy:
@@ -567,7 +567,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/blogger
       description: Gets one blog by id.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -575,7 +575,7 @@ types:
           body:
             application/json: Blog
       (commons.Id): blogger.blogs.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Blogs
 /users:
   /{userId}:
@@ -590,7 +590,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieves a list of blogs, possibly filtered.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -598,7 +598,7 @@ types:
             body:
               application/json: BlogList
         (commons.Id): blogger.users.blogs.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Users
         - Blogs
     get:
@@ -607,7 +607,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/blogger
       description: Gets one user by id.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -615,5 +615,5 @@ types:
           body:
             application/json: User
       (commons.Id): blogger.users.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Users

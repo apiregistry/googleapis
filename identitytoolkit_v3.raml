@@ -1035,7 +1035,7 @@ types:
 /resetPassword:
   post:
     description: Reset password for a user.
-    displayName: reset Password
+    displayName: Reset Password
     is:
     - hasParameters
     body:
@@ -1045,12 +1045,12 @@ types:
         body:
           application/json: ResetPasswordResponse
     (commons.Id): identitytoolkit.relyingparty.resetPassword
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /verifyPassword:
   post:
     description: Verifies the user entered password.
-    displayName: verify Password
+    displayName: Verify Password
     is:
     - hasParameters
     body:
@@ -1060,12 +1060,12 @@ types:
         body:
           application/json: VerifyPasswordResponse
     (commons.Id): identitytoolkit.relyingparty.verifyPassword
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /verifyCustomToken:
   post:
     description: Verifies the developer asserted ID token.
-    displayName: verify Custom Token
+    displayName: Verify Custom Token
     is:
     - hasParameters
     body:
@@ -1075,7 +1075,7 @@ types:
         body:
           application/json: VerifyCustomTokenResponse
     (commons.Id): identitytoolkit.relyingparty.verifyCustomToken
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /downloadAccount:
   post:
@@ -1084,7 +1084,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/firebase
     description: Batch download user accounts.
-    displayName: download Account
+    displayName: Download Account
     is:
     - hasParameters
     body:
@@ -1094,12 +1094,12 @@ types:
         body:
           application/json: DownloadAccountResponse
     (commons.Id): identitytoolkit.relyingparty.downloadAccount
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /getProjectConfig:
   get:
     description: Get project configuration.
-    displayName: get Project Config
+    displayName: Get Project Config
     is:
     - hasParameters
     queryParameters:
@@ -1114,12 +1114,12 @@ types:
         body:
           application/json: IdentitytoolkitRelyingpartyGetProjectConfigResponse
     (commons.Id): identitytoolkit.relyingparty.getProjectConfig
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /getOobConfirmationCode:
   post:
     description: Get a code for user action confirmation.
-    displayName: get Oob Confirmation Code
+    displayName: Get Oob Confirmation Code
     is:
     - hasParameters
     body:
@@ -1129,12 +1129,12 @@ types:
         body:
           application/json: GetOobConfirmationCodeResponse
     (commons.Id): identitytoolkit.relyingparty.getOobConfirmationCode
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /setAccountInfo:
   post:
     description: Set account info for a user.
-    displayName: set Account Info
+    displayName: Set Account Info
     is:
     - hasParameters
     body:
@@ -1144,12 +1144,12 @@ types:
         body:
           application/json: SetAccountInfoResponse
     (commons.Id): identitytoolkit.relyingparty.setAccountInfo
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /verifyAssertion:
   post:
     description: Verifies the assertion returned by the IdP.
-    displayName: verify Assertion
+    displayName: Verify Assertion
     is:
     - hasParameters
     body:
@@ -1159,7 +1159,7 @@ types:
         body:
           application/json: VerifyAssertionResponse
     (commons.Id): identitytoolkit.relyingparty.verifyAssertion
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /uploadAccount:
   post:
@@ -1168,7 +1168,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/firebase
     description: Batch upload existing user accounts.
-    displayName: upload Account
+    displayName: Upload Account
     is:
     - hasParameters
     body:
@@ -1178,12 +1178,12 @@ types:
         body:
           application/json: UploadAccountResponse
     (commons.Id): identitytoolkit.relyingparty.uploadAccount
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /publicKeys:
   get:
     description: Get token signing public key.
-    displayName: get Public Keys
+    displayName: Get Public Keys
     is:
     - hasParameters
     responses:
@@ -1191,12 +1191,12 @@ types:
         body:
           application/json: IdentitytoolkitRelyingpartyGetPublicKeysResponse
     (commons.Id): identitytoolkit.relyingparty.getPublicKeys
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /getAccountInfo:
   post:
     description: Returns the account info.
-    displayName: get Account Info
+    displayName: Get Account Info
     is:
     - hasParameters
     body:
@@ -1206,12 +1206,12 @@ types:
         body:
           application/json: GetAccountInfoResponse
     (commons.Id): identitytoolkit.relyingparty.getAccountInfo
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /createAuthUri:
   post:
     description: Creates the URI used by the IdP to authenticate the user.
-    displayName: create Auth Uri
+    displayName: Create Auth Uri
     is:
     - hasParameters
     body:
@@ -1221,12 +1221,12 @@ types:
         body:
           application/json: CreateAuthUriResponse
     (commons.Id): identitytoolkit.relyingparty.createAuthUri
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /signupNewUser:
   post:
     description: Signup new user.
-    displayName: signup New User
+    displayName: Signup New User
     is:
     - hasParameters
     body:
@@ -1236,12 +1236,12 @@ types:
         body:
           application/json: SignupNewUserResponse
     (commons.Id): identitytoolkit.relyingparty.signupNewUser
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /setProjectConfig:
   post:
     description: Set project configuration.
-    displayName: set Project Config
+    displayName: Set Project Config
     is:
     - hasParameters
     body:
@@ -1251,12 +1251,12 @@ types:
         body:
           application/json: IdentitytoolkitRelyingpartySetProjectConfigResponse
     (commons.Id): identitytoolkit.relyingparty.setProjectConfig
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /deleteAccount:
   post:
     description: Delete user account.
-    displayName: delete Account
+    displayName: Delete Account
     is:
     - hasParameters
     body:
@@ -1266,12 +1266,12 @@ types:
         body:
           application/json: DeleteAccountResponse
     (commons.Id): identitytoolkit.relyingparty.deleteAccount
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /getRecaptchaParam:
   get:
     description: Get recaptcha secure param.
-    displayName: get Recaptcha Param
+    displayName: Get Recaptcha Param
     is:
     - hasParameters
     responses:
@@ -1279,12 +1279,12 @@ types:
         body:
           application/json: GetRecaptchaParamResponse
     (commons.Id): identitytoolkit.relyingparty.getRecaptchaParam
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty
 /signOutUser:
   post:
     description: Sign out user.
-    displayName: sign Out User
+    displayName: Sign Out User
     is:
     - hasParameters
     body:
@@ -1294,5 +1294,5 @@ types:
         body:
           application/json: IdentitytoolkitRelyingpartySignOutUserResponse
     (commons.Id): identitytoolkit.relyingparty.signOutUser
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Relyingparty

@@ -1619,7 +1619,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         body:
@@ -1629,7 +1629,7 @@ types:
             body:
               application/json: Budget
         (commons.Id): adexchangebuyer.budget.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Budget
       get:
         securedBy:
@@ -1637,7 +1637,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Returns the budget information for the adgroup specified by the accountId and billingId.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -1645,7 +1645,7 @@ types:
             body:
               application/json: Budget
         (commons.Id): adexchangebuyer.budget.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Budget
       put:
         securedBy:
@@ -1653,7 +1653,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -1663,7 +1663,7 @@ types:
             body:
               application/json: Budget
         (commons.Id): adexchangebuyer.budget.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Budget
     get:
       securedBy:
@@ -1671,7 +1671,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Returns the billing information for one account specified by account ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1679,7 +1679,7 @@ types:
           body:
             application/json: BillingInfo
       (commons.Id): adexchangebuyer.billingInfo.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Billing Info
   get:
     securedBy:
@@ -1687,7 +1687,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves a list of billing information for all accounts of the authenticated user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -1695,7 +1695,7 @@ types:
         body:
           application/json: BillingInfoList
     (commons.Id): adexchangebuyer.billingInfo.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Billing Info
 /proposals:
   /{proposalId}:
@@ -1711,7 +1711,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Add notes to the proposal
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -1721,7 +1721,7 @@ types:
               body:
                 application/json: AddOrderNotesResponse
           (commons.Id): adexchangebuyer.marketplacenotes.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Marketplacenotes
       get:
         securedBy:
@@ -1729,7 +1729,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Get all the notes associated with a proposal
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1741,7 +1741,7 @@ types:
             body:
               application/json: GetOrderNotesResponse
         (commons.Id): adexchangebuyer.marketplacenotes.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Marketplacenotes
     /{revisionNumber}:
       uriParameters:
@@ -1774,7 +1774,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Update the given proposal. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -1784,7 +1784,7 @@ types:
               body:
                 application/json: Proposal
           (commons.Id): adexchangebuyer.proposals.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Proposals
         put:
           securedBy:
@@ -1792,7 +1792,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Update the given proposal
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -1802,7 +1802,7 @@ types:
               body:
                 application/json: Proposal
           (commons.Id): adexchangebuyer.proposals.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Proposals
     /setupcomplete:
       post:
@@ -1811,11 +1811,11 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Update the given proposal to indicate that setup has been completed.
-        displayName: setupcomplete
+        displayName: Setupcomplete
         is:
         - hasParameters
         (commons.Id): adexchangebuyer.proposals.setupcomplete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Proposals
     /deals:
       /insert:
@@ -1825,7 +1825,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Add new deals for the specified proposal
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -1835,7 +1835,7 @@ types:
               body:
                 application/json: AddOrderDealsResponse
           (commons.Id): adexchangebuyer.marketplacedeals.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Marketplacedeals
       /update:
         post:
@@ -1844,7 +1844,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Replaces all the deals in the proposal with the passed in deals
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -1854,7 +1854,7 @@ types:
               body:
                 application/json: EditAllOrderDealsResponse
           (commons.Id): adexchangebuyer.marketplacedeals.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Marketplacedeals
       /delete:
         post:
@@ -1863,7 +1863,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Delete the specified deals from the proposal
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           body:
@@ -1873,7 +1873,7 @@ types:
               body:
                 application/json: DeleteOrderDealsResponse
           (commons.Id): adexchangebuyer.marketplacedeals.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Marketplacedeals
       get:
         securedBy:
@@ -1881,7 +1881,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: List all the deals for a given proposal
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1893,7 +1893,7 @@ types:
             body:
               application/json: GetOrderDealsResponse
         (commons.Id): adexchangebuyer.marketplacedeals.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Marketplacedeals
     get:
       securedBy:
@@ -1901,7 +1901,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Get a proposal given its id
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1909,7 +1909,7 @@ types:
           body:
             application/json: Proposal
       (commons.Id): adexchangebuyer.proposals.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Proposals
   /search:
     get:
@@ -1918,7 +1918,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Search for proposals using pql query
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       queryParameters:
@@ -1930,7 +1930,7 @@ types:
           body:
             application/json: GetOrdersResponse
       (commons.Id): adexchangebuyer.proposals.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Proposals
   /insert:
     post:
@@ -1939,7 +1939,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Create the given list of proposals
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       body:
@@ -1949,7 +1949,7 @@ types:
           body:
             application/json: CreateOrdersResponse
       (commons.Id): adexchangebuyer.proposals.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Proposals
 /publisher:
   /{accountId}:
@@ -1965,7 +1965,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets the requested publisher profile(s) by publisher accountId.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -1973,7 +1973,7 @@ types:
             body:
               application/json: GetPublisherProfilesByAccountIdResponse
         (commons.Id): adexchangebuyer.pubprofiles.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pubprofiles
 /performancereport:
   get:
@@ -1982,7 +1982,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves the authenticated user's list of performance metrics.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -2010,7 +2010,7 @@ types:
         body:
           application/json: PerformanceReportList
     (commons.Id): adexchangebuyer.performanceReport.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Performance Report
 /pretargetingconfigs:
   /{accountId}:
@@ -2031,7 +2031,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates an existing pretargeting config. This method supports patch semantics.
-        displayName: patch
+        displayName: Patch
         is:
         - hasParameters
         body:
@@ -2041,7 +2041,7 @@ types:
             body:
               application/json: PretargetingConfig
         (commons.Id): adexchangebuyer.pretargetingConfig.patch
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pretargeting Config
       get:
         securedBy:
@@ -2049,7 +2049,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets a specific pretargeting configuration
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -2057,7 +2057,7 @@ types:
             body:
               application/json: PretargetingConfig
         (commons.Id): adexchangebuyer.pretargetingConfig.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pretargeting Config
       put:
         securedBy:
@@ -2065,7 +2065,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Updates an existing pretargeting config.
-        displayName: update
+        displayName: Update
         is:
         - hasParameters
         body:
@@ -2075,7 +2075,7 @@ types:
             body:
               application/json: PretargetingConfig
         (commons.Id): adexchangebuyer.pretargetingConfig.update
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pretargeting Config
       delete:
         securedBy:
@@ -2083,11 +2083,11 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Deletes an existing pretargeting config.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         (commons.Id): adexchangebuyer.pretargetingConfig.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pretargeting Config
     post:
       securedBy:
@@ -2095,7 +2095,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Inserts a new pretargeting configuration.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       body:
@@ -2105,7 +2105,7 @@ types:
           body:
             application/json: PretargetingConfig
       (commons.Id): adexchangebuyer.pretargetingConfig.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pretargeting Config
     get:
       securedBy:
@@ -2113,7 +2113,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Retrieves a list of the authenticated user's pretargeting configurations.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       responses:
@@ -2121,7 +2121,7 @@ types:
           body:
             application/json: PretargetingConfigList
       (commons.Id): adexchangebuyer.pretargetingConfig.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pretargeting Config
 /creatives:
   /{accountId}:
@@ -2148,11 +2148,11 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/adexchange.buyer
             description: Remove a deal id associated with the creative.
-            displayName: remove Deal
+            displayName: Remove Deal
             is:
             - hasParameters
             (commons.Id): adexchangebuyer.creatives.removeDeal
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creatives
       /addDeal:
         /{dealId}:
@@ -2167,11 +2167,11 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/adexchange.buyer
             description: Add a deal id association for the creative.
-            displayName: add Deal
+            displayName: Add Deal
             is:
             - hasParameters
             (commons.Id): adexchangebuyer.creatives.addDeal
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Creatives
       /listDeals:
         get:
@@ -2180,7 +2180,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Lists the external deal ids associated with the creative.
-          displayName: list Deals
+          displayName: List Deals
           is:
           - hasParameters
           responses:
@@ -2188,7 +2188,7 @@ types:
               body:
                 application/json: CreativeDealIds
           (commons.Id): adexchangebuyer.creatives.listDeals
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Creatives
       get:
         securedBy:
@@ -2196,7 +2196,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -2204,7 +2204,7 @@ types:
             body:
               application/json: Creative
         (commons.Id): adexchangebuyer.creatives.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Creatives
   post:
     securedBy:
@@ -2212,7 +2212,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Submit a new creative.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -2222,7 +2222,7 @@ types:
         body:
           application/json: Creative
     (commons.Id): adexchangebuyer.creatives.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Creatives
   get:
     securedBy:
@@ -2230,7 +2230,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -2281,7 +2281,7 @@ types:
         body:
           application/json: CreativesList
     (commons.Id): adexchangebuyer.creatives.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Creatives
 /accounts:
   /{id}:
@@ -2296,7 +2296,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       queryParameters:
@@ -2310,7 +2310,7 @@ types:
           body:
             application/json: Account
       (commons.Id): adexchangebuyer.accounts.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
     get:
       securedBy:
@@ -2318,7 +2318,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets one account by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2326,7 +2326,7 @@ types:
           body:
             application/json: Account
       (commons.Id): adexchangebuyer.accounts.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
     put:
       securedBy:
@@ -2334,7 +2334,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       queryParameters:
@@ -2348,7 +2348,7 @@ types:
           body:
             application/json: Account
       (commons.Id): adexchangebuyer.accounts.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Accounts
   get:
     securedBy:
@@ -2356,7 +2356,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves the authenticated user's list of accounts.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -2364,7 +2364,7 @@ types:
         body:
           application/json: AccountsList
     (commons.Id): adexchangebuyer.accounts.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Accounts
 /privateauction:
   /{privateAuctionId}:
@@ -2379,13 +2379,13 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Update a given private auction proposal
-        displayName: updateproposal
+        displayName: Updateproposal
         is:
         - hasParameters
         body:
           application/json: UpdatePrivateAuctionProposalRequest
         (commons.Id): adexchangebuyer.marketplaceprivateauction.updateproposal
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Marketplaceprivateauction
 /products:
   /search:
@@ -2395,7 +2395,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets the requested product.
-      displayName: search
+      displayName: Search
       is:
       - hasParameters
       queryParameters:
@@ -2407,7 +2407,7 @@ types:
           body:
             application/json: GetOffersResponse
       (commons.Id): adexchangebuyer.products.search
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Products
   /{productId}:
     uriParameters:
@@ -2420,7 +2420,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets the requested product by id.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2428,5 +2428,5 @@ types:
           body:
             application/json: Product
       (commons.Id): adexchangebuyer.products.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Products

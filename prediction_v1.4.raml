@@ -193,7 +193,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Submit input and request an output against a hosted model.
-        displayName: predict
+        displayName: Predict
         is:
         - hasParameters
         body:
@@ -203,7 +203,7 @@ types:
             body:
               application/json: Output
         (commons.Id): prediction.hostedmodels.predict
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Hostedmodels
 /trainedmodels:
   /{id}:
@@ -218,7 +218,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/prediction
         description: Submit model id and request a prediction
-        displayName: predict
+        displayName: Predict
         is:
         - hasParameters
         body:
@@ -228,7 +228,7 @@ types:
             body:
               application/json: Output
         (commons.Id): prediction.trainedmodels.predict
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Trainedmodels
     get:
       securedBy:
@@ -236,7 +236,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Check training status of your model.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -244,7 +244,7 @@ types:
           body:
             application/json: Training
       (commons.Id): prediction.trainedmodels.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Trainedmodels
     put:
       securedBy:
@@ -252,7 +252,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Add new data to a trained model.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -262,7 +262,7 @@ types:
           body:
             application/json: Training
       (commons.Id): prediction.trainedmodels.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Trainedmodels
     delete:
       securedBy:
@@ -270,11 +270,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/prediction
       description: Delete a trained model.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): prediction.trainedmodels.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Trainedmodels
   post:
     securedBy:
@@ -285,7 +285,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.read_write
         - https://www.googleapis.com/auth/prediction
     description: Begin training your model.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -295,5 +295,5 @@ types:
         body:
           application/json: Training
     (commons.Id): prediction.trainedmodels.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Trainedmodels

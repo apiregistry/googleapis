@@ -4191,7 +4191,7 @@ types:
         - Call the channelBanners.insert method to upload the binary image data to YouTube. The image must have a 16:9 aspect ratio and be at least 2120x1192 pixels.
         - Extract the url property's value from the response that the API returns for step 1.
         - Call the channels.update method to update the channel's branding settings. Set the brandingSettings.image.bannerExternalUrl property's value to the URL obtained in step 2.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -4208,7 +4208,7 @@ types:
           body:
             application/json: ChannelBannerResource
       (commons.Id): youtube.channelBanners.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Channel Banners
 /subscriptions:
   post:
@@ -4219,7 +4219,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Adds a subscription for the authenticated user's channel.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -4233,7 +4233,7 @@ types:
         body:
           application/json: Subscription
     (commons.Id): youtube.subscriptions.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Subscriptions
   get:
     securedBy:
@@ -4244,7 +4244,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns subscription resources that match the API request criteria.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -4313,7 +4313,7 @@ types:
         body:
           application/json: SubscriptionListResponse
     (commons.Id): youtube.subscriptions.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Subscriptions
   delete:
     securedBy:
@@ -4323,7 +4323,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a subscription.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -4331,7 +4331,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube subscription ID for the resource that is being deleted. In a subscription resource, the id property specifies the YouTube subscription ID.
     (commons.Id): youtube.subscriptions.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Subscriptions
 /videoAbuseReportReasons:
   get:
@@ -4342,7 +4342,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtube.readonly
     description: Returns a list of abuse reasons that can be used for reporting abusive videos.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -4358,7 +4358,7 @@ types:
         body:
           application/json: VideoAbuseReportReasonListResponse
     (commons.Id): youtube.videoAbuseReportReasons.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Video Abuse Report Reasons
 /fanFundingEvents:
   get:
@@ -4369,7 +4369,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtube.readonly
     description: Lists fan funding events for a channel.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -4397,7 +4397,7 @@ types:
         body:
           application/json: FanFundingEventListResponse
     (commons.Id): youtube.fanFundingEvents.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Fan Funding Events
 /videos:
   /rate:
@@ -4409,7 +4409,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtubepartner
       description: Add a like or dislike rating to a video or remove a rating from a video.
-      displayName: rate
+      displayName: Rate
       is:
       - hasParameters
       queryParameters:
@@ -4428,7 +4428,7 @@ types:
           type: string
           description: The id parameter specifies the YouTube video ID of the video that is being rated or having its rating removed.
       (commons.Id): youtube.videos.rate
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Videos
   /reportAbuse:
     post:
@@ -4439,7 +4439,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtubepartner
       description: Report abuse for a video.
-      displayName: report Abuse
+      displayName: Report Abuse
       is:
       - hasParameters
       queryParameters:
@@ -4452,7 +4452,7 @@ types:
       body:
         application/json: VideoAbuseReport
       (commons.Id): youtube.videos.reportAbuse
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Videos
   /getRating:
     get:
@@ -4463,7 +4463,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtubepartner
       description: Retrieves the ratings that the authorized user gave to a list of specified videos.
-      displayName: get Rating
+      displayName: Get Rating
       is:
       - hasParameters
       queryParameters:
@@ -4481,7 +4481,7 @@ types:
           body:
             application/json: VideoGetRatingResponse
       (commons.Id): youtube.videos.getRating
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Videos
   post:
     securedBy:
@@ -4492,7 +4492,7 @@ types:
         - https://www.googleapis.com/auth/youtube.upload
         - https://www.googleapis.com/auth/youtubepartner
     description: Uploads a video to YouTube and optionally sets the video's metadata.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -4533,7 +4533,7 @@ types:
         body:
           application/json: Video
     (commons.Id): youtube.videos.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Videos
   put:
     securedBy:
@@ -4543,7 +4543,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Updates a video's metadata.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -4568,7 +4568,7 @@ types:
         body:
           application/json: Video
     (commons.Id): youtube.videos.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Videos
   get:
     securedBy:
@@ -4579,7 +4579,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a list of videos that match the API request parameters.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -4663,7 +4663,7 @@ types:
         body:
           application/json: VideoListResponse
     (commons.Id): youtube.videos.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Videos
   delete:
     securedBy:
@@ -4673,7 +4673,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a YouTube video.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -4687,7 +4687,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube video ID for the resource that is being deleted. In a video resource, the id property specifies the video's ID.
     (commons.Id): youtube.videos.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Videos
 /i18nRegions:
   get:
@@ -4699,7 +4699,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a list of content regions that the YouTube website supports.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -4715,7 +4715,7 @@ types:
         body:
           application/json: I18nRegionListResponse
     (commons.Id): youtube.i18nRegions.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - I18n Regions
 /liveChat:
   /moderators:
@@ -4726,7 +4726,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Adds a new moderator for the chat.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -4740,7 +4740,7 @@ types:
           body:
             application/json: LiveChatModerator
       (commons.Id): youtube.liveChatModerators.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Moderators
     get:
       securedBy:
@@ -4750,7 +4750,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtube.readonly
       description: Lists moderators for a live chat.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -4775,7 +4775,7 @@ types:
           body:
             application/json: LiveChatModeratorListResponse
       (commons.Id): youtube.liveChatModerators.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Moderators
     delete:
       securedBy:
@@ -4784,7 +4784,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Removes a chat moderator.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       queryParameters:
@@ -4792,7 +4792,7 @@ types:
           type: string
           description: The id parameter identifies the chat moderator to remove. The value uniquely identifies both the moderator and the chat.
       (commons.Id): youtube.liveChatModerators.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Moderators
   /bans:
     post:
@@ -4802,7 +4802,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Adds a new ban to the chat.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -4816,7 +4816,7 @@ types:
           body:
             application/json: LiveChatBan
       (commons.Id): youtube.liveChatBans.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Bans
     delete:
       securedBy:
@@ -4825,7 +4825,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Removes a chat ban.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       queryParameters:
@@ -4833,7 +4833,7 @@ types:
           type: string
           description: The id parameter identifies the chat ban to remove. The value uniquely identifies both the ban and the chat.
       (commons.Id): youtube.liveChatBans.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Bans
   /messages:
     post:
@@ -4843,7 +4843,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Adds a message to a live chat.
-      displayName: insert
+      displayName: Insert
       is:
       - hasParameters
       queryParameters:
@@ -4857,7 +4857,7 @@ types:
           body:
             application/json: LiveChatMessage
       (commons.Id): youtube.liveChatMessages.insert
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Messages
     get:
       securedBy:
@@ -4867,7 +4867,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtube.readonly
       description: Lists live chat messages for a specific chat.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -4905,7 +4905,7 @@ types:
           body:
             application/json: LiveChatMessageListResponse
       (commons.Id): youtube.liveChatMessages.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Messages
     delete:
       securedBy:
@@ -4914,7 +4914,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Deletes a chat message.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       queryParameters:
@@ -4922,7 +4922,7 @@ types:
           type: string
           description: The id parameter specifies the YouTube chat message ID of the resource that is being deleted.
       (commons.Id): youtube.liveChatMessages.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Chat Messages
 /captions:
   /{id}:
@@ -4937,7 +4937,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtubepartner
       description: Downloads a caption track. The caption track is returned in its original format unless the request specifies a value for the tfmt parameter and in its original language unless the request specifies a value for the tlang parameter.
-      displayName: download
+      displayName: Download
       is:
       - hasParameters
       queryParameters:
@@ -4969,7 +4969,7 @@ types:
           - ttml
           - vtt
       (commons.Id): youtube.captions.download
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Captions
   post:
     securedBy:
@@ -4978,7 +4978,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Uploads a caption track.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -5007,7 +5007,7 @@ types:
         body:
           application/json: Caption
     (commons.Id): youtube.captions.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Captions
   put:
     securedBy:
@@ -5016,7 +5016,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Updates a caption track. When updating a caption track, you can change the track's draft status, upload a new caption file for the track, or both.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -5045,7 +5045,7 @@ types:
         body:
           application/json: Caption
     (commons.Id): youtube.captions.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Captions
   get:
     securedBy:
@@ -5054,7 +5054,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a list of caption tracks that are associated with a specified video. Note that the API response does not contain the actual captions and that the captions.download method provides the ability to retrieve a caption track.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5081,7 +5081,7 @@ types:
         body:
           application/json: CaptionListResponse
     (commons.Id): youtube.captions.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Captions
   delete:
     securedBy:
@@ -5090,7 +5090,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a specified caption track.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -5107,7 +5107,7 @@ types:
         type: string
         description: The id parameter identifies the caption track that is being deleted. The value is a caption track ID as identified by the id property in a caption resource.
     (commons.Id): youtube.captions.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Captions
 /search:
   get:
@@ -5119,7 +5119,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and playlist resources, but you can also configure queries to only retrieve a specific type of resource.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5344,7 +5344,7 @@ types:
         body:
           application/json: SearchListResponse
     (commons.Id): youtube.search.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Search
 /videoCategories:
   get:
@@ -5356,7 +5356,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a list of categories that can be associated with YouTube videos.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5378,7 +5378,7 @@ types:
         body:
           application/json: VideoCategoryListResponse
     (commons.Id): youtube.videoCategories.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Video Categories
 /sponsors:
   get:
@@ -5389,7 +5389,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtube.readonly
     description: Lists sponsors for a channel.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5421,7 +5421,7 @@ types:
         body:
           application/json: SponsorListResponse
     (commons.Id): youtube.sponsors.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Sponsors
 /i18nLanguages:
   get:
@@ -5433,7 +5433,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a list of application languages that the YouTube website supports.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5449,7 +5449,7 @@ types:
         body:
           application/json: I18nLanguageListResponse
     (commons.Id): youtube.i18nLanguages.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - I18n Languages
 /guideCategories:
   get:
@@ -5461,7 +5461,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a list of categories that can be associated with YouTube channels.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5483,7 +5483,7 @@ types:
         body:
           application/json: GuideCategoryListResponse
     (commons.Id): youtube.guideCategories.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Guide Categories
 /comments:
   /markAsSpam:
@@ -5493,7 +5493,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Expresses the caller's opinion that one or more comments should be flagged as spam.
-      displayName: mark AsSpam
+      displayName: Mark AsSpam
       is:
       - hasParameters
       queryParameters:
@@ -5501,7 +5501,7 @@ types:
           type: string
           description: The id parameter specifies a comma-separated list of IDs of comments that the caller believes should be classified as spam.
       (commons.Id): youtube.comments.markAsSpam
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Comments
   /setModerationStatus:
     post:
@@ -5510,7 +5510,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Sets the moderation status of one or more comments. The API request must be authorized by the owner of the channel or video associated with the comments.
-      displayName: set Moderation Status
+      displayName: Set Moderation Status
       is:
       - hasParameters
       queryParameters:
@@ -5539,7 +5539,7 @@ types:
 
             Note: This parameter is only valid if the moderationStatus parameter is also set to rejected.
       (commons.Id): youtube.comments.setModerationStatus
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Comments
   post:
     securedBy:
@@ -5548,7 +5548,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: 'Creates a reply to an existing comment. Note: To create a top-level
       comment, use the commentThreads.insert method.'
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -5562,7 +5562,7 @@ types:
         body:
           application/json: Comment
     (commons.Id): youtube.comments.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comments
   put:
     securedBy:
@@ -5570,7 +5570,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Modifies a comment.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -5584,7 +5584,7 @@ types:
         body:
           application/json: Comment
     (commons.Id): youtube.comments.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comments
   get:
     securedBy:
@@ -5592,7 +5592,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Returns a list of comments that match the API request parameters.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5639,7 +5639,7 @@ types:
         body:
           application/json: CommentListResponse
     (commons.Id): youtube.comments.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comments
   delete:
     securedBy:
@@ -5647,7 +5647,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Deletes a comment.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -5655,7 +5655,7 @@ types:
         type: string
         description: The id parameter specifies the comment ID for the resource that is being deleted.
     (commons.Id): youtube.comments.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comments
 /liveBroadcasts:
   /bind:
@@ -5666,7 +5666,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream. A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
-      displayName: bind
+      displayName: Bind
       is:
       - hasParameters
       queryParameters:
@@ -5698,7 +5698,7 @@ types:
           body:
             application/json: LiveBroadcast
       (commons.Id): youtube.liveBroadcasts.bind
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Broadcasts
   /control:
     post:
@@ -5708,7 +5708,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Controls the settings for a slate that can be displayed in the broadcast stream.
-      displayName: control
+      displayName: Control
       is:
       - hasParameters
       queryParameters:
@@ -5752,7 +5752,7 @@ types:
           body:
             application/json: LiveBroadcast
       (commons.Id): youtube.liveBroadcasts.control
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Broadcasts
   /transition:
     post:
@@ -5762,7 +5762,7 @@ types:
           - https://www.googleapis.com/auth/youtube
           - https://www.googleapis.com/auth/youtube.force-ssl
       description: Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast's status to testing, YouTube starts to transmit video to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the status.streamStatus property for the stream bound to your broadcast is active.
-      displayName: transition
+      displayName: Transition
       is:
       - hasParameters
       queryParameters:
@@ -5802,7 +5802,7 @@ types:
           body:
             application/json: LiveBroadcast
       (commons.Id): youtube.liveBroadcasts.transition
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Live Broadcasts
   post:
     securedBy:
@@ -5811,7 +5811,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Creates a broadcast.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -5842,7 +5842,7 @@ types:
         body:
           application/json: LiveBroadcast
     (commons.Id): youtube.liveBroadcasts.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Broadcasts
   put:
     securedBy:
@@ -5851,7 +5851,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource's contentDetails object.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -5884,7 +5884,7 @@ types:
         body:
           application/json: LiveBroadcast
     (commons.Id): youtube.liveBroadcasts.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Broadcasts
   get:
     securedBy:
@@ -5894,7 +5894,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtube.readonly
     description: Returns a list of YouTube broadcasts that match the API request parameters.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -5961,7 +5961,7 @@ types:
         body:
           application/json: LiveBroadcastListResponse
     (commons.Id): youtube.liveBroadcasts.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Broadcasts
   delete:
     securedBy:
@@ -5970,7 +5970,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Deletes a broadcast.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -5992,7 +5992,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube live broadcast ID for the resource that is being deleted.
     (commons.Id): youtube.liveBroadcasts.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Broadcasts
 /playlists:
   post:
@@ -6003,7 +6003,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Creates a playlist.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -6031,7 +6031,7 @@ types:
         body:
           application/json: Playlist
     (commons.Id): youtube.playlists.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlists
   put:
     securedBy:
@@ -6041,7 +6041,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -6064,7 +6064,7 @@ types:
         body:
           application/json: Playlist
     (commons.Id): youtube.playlists.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlists
   get:
     securedBy:
@@ -6075,7 +6075,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6126,7 +6126,7 @@ types:
         body:
           application/json: PlaylistListResponse
     (commons.Id): youtube.playlists.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlists
   delete:
     securedBy:
@@ -6136,7 +6136,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a playlist.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -6150,7 +6150,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube playlist ID for the playlist that is being deleted. In a playlist resource, the id property specifies the playlist's ID.
     (commons.Id): youtube.playlists.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlists
 /watermarks:
   /set:
@@ -6163,7 +6163,7 @@ types:
           - https://www.googleapis.com/auth/youtube.upload
           - https://www.googleapis.com/auth/youtubepartner
       description: Uploads a watermark image to YouTube and sets it for a channel.
-      displayName: set
+      displayName: Set
       is:
       - hasParameters
       queryParameters:
@@ -6179,7 +6179,7 @@ types:
       body:
         application/json: InvideoBranding
       (commons.Id): youtube.watermarks.set
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Watermarks
   /unset:
     post:
@@ -6190,7 +6190,7 @@ types:
           - https://www.googleapis.com/auth/youtube.force-ssl
           - https://www.googleapis.com/auth/youtubepartner
       description: Deletes a channel's watermark image.
-      displayName: unset
+      displayName: Unset
       is:
       - hasParameters
       queryParameters:
@@ -6204,7 +6204,7 @@ types:
           type: string
           description: The channelId parameter specifies the YouTube channel ID for which the watermark is being unset.
       (commons.Id): youtube.watermarks.unset
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Watermarks
 /liveStreams:
   post:
@@ -6214,7 +6214,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -6245,7 +6245,7 @@ types:
         body:
           application/json: LiveStream
     (commons.Id): youtube.liveStreams.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Streams
   put:
     securedBy:
@@ -6254,7 +6254,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -6287,7 +6287,7 @@ types:
         body:
           application/json: LiveStream
     (commons.Id): youtube.liveStreams.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Streams
   get:
     securedBy:
@@ -6297,7 +6297,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtube.readonly
     description: Returns a list of video streams that match the API request parameters.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6339,7 +6339,7 @@ types:
         body:
           application/json: LiveStreamListResponse
     (commons.Id): youtube.liveStreams.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Streams
   delete:
     securedBy:
@@ -6348,7 +6348,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Deletes a video stream.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -6370,7 +6370,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube live stream ID for the resource that is being deleted.
     (commons.Id): youtube.liveStreams.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Live Streams
 /commentThreads:
   post:
@@ -6379,7 +6379,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Creates a new top-level comment. To add a reply to an existing comment, use the comments.insert method instead.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -6393,7 +6393,7 @@ types:
         body:
           application/json: CommentThread
     (commons.Id): youtube.commentThreads.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comment Threads
   put:
     securedBy:
@@ -6401,7 +6401,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Modifies the top-level comment in a comment thread.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -6415,7 +6415,7 @@ types:
         body:
           application/json: CommentThread
     (commons.Id): youtube.commentThreads.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comment Threads
   get:
     securedBy:
@@ -6423,7 +6423,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/youtube.force-ssl
     description: Returns a list of comment threads that match the API request parameters.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6508,7 +6508,7 @@ types:
         body:
           application/json: CommentThreadListResponse
     (commons.Id): youtube.commentThreads.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Comment Threads
 /channels:
   put:
@@ -6519,7 +6519,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -6541,7 +6541,7 @@ types:
         body:
           application/json: Channel
     (commons.Id): youtube.channels.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Channels
   get:
     securedBy:
@@ -6553,7 +6553,7 @@ types:
         - https://www.googleapis.com/auth/youtubepartner
         - https://www.googleapis.com/auth/youtubepartner-channel-audit
     description: Returns a collection of zero or more channel resources that match the request criteria.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6608,7 +6608,7 @@ types:
         body:
           application/json: ChannelListResponse
     (commons.Id): youtube.channels.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Channels
 /activities:
   post:
@@ -6621,7 +6621,7 @@ types:
       Posts a bulletin for a specific channel. (The user submitting the request must be authorized to act on the channel's behalf.)
 
       Note: Even though an activity resource can contain information about actions like a user rating a video or marking a video as a favorite, you need to use other API methods to generate those activity resources. For example, you would use the API's videos.rate() method to rate a video and the playlistItems.insert() method to mark a video as a favorite.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -6635,7 +6635,7 @@ types:
         body:
           application/json: Activity
     (commons.Id): youtube.activities.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Activities
   get:
     securedBy:
@@ -6645,7 +6645,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtube.readonly
     description: Returns a list of channel activity events that match the request criteria. For example, you can retrieve events associated with a particular channel, events associated with the user's subscriptions and Google+ friends, or the YouTube home page feed, which is customized for each user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6688,7 +6688,7 @@ types:
         body:
           application/json: ActivityListResponse
     (commons.Id): youtube.activities.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Activities
 /channelSections:
   post:
@@ -6699,7 +6699,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Adds a channelSection for the authenticated user's channel.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -6730,7 +6730,7 @@ types:
         body:
           application/json: ChannelSection
     (commons.Id): youtube.channelSections.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Channel Sections
   put:
     securedBy:
@@ -6740,7 +6740,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Update a channelSection.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -6763,7 +6763,7 @@ types:
         body:
           application/json: ChannelSection
     (commons.Id): youtube.channelSections.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Channel Sections
   get:
     securedBy:
@@ -6774,7 +6774,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns channelSection resources that match the API request criteria.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6807,7 +6807,7 @@ types:
         body:
           application/json: ChannelSectionListResponse
     (commons.Id): youtube.channelSections.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Channel Sections
   delete:
     securedBy:
@@ -6817,7 +6817,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a channelSection.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -6831,7 +6831,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube channelSection ID for the resource that is being deleted. In a channelSection resource, the id property specifies the YouTube channelSection ID.
     (commons.Id): youtube.channelSections.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Channel Sections
 /playlistItems:
   post:
@@ -6842,7 +6842,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Adds a resource to a playlist.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -6862,7 +6862,7 @@ types:
         body:
           application/json: PlaylistItem
     (commons.Id): youtube.playlistItems.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlist Items
   put:
     securedBy:
@@ -6872,7 +6872,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Modifies a playlist item. For example, you could update the item's position in the playlist.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     queryParameters:
@@ -6895,7 +6895,7 @@ types:
         body:
           application/json: PlaylistItem
     (commons.Id): youtube.playlistItems.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlist Items
   get:
     securedBy:
@@ -6906,7 +6906,7 @@ types:
         - https://www.googleapis.com/auth/youtube.readonly
         - https://www.googleapis.com/auth/youtubepartner
     description: Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -6946,7 +6946,7 @@ types:
         body:
           application/json: PlaylistItemListResponse
     (commons.Id): youtube.playlistItems.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlist Items
   delete:
     securedBy:
@@ -6956,7 +6956,7 @@ types:
         - https://www.googleapis.com/auth/youtube.force-ssl
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a playlist item.
-    displayName: delete
+    displayName: Delete
     is:
     - hasParameters
     queryParameters:
@@ -6970,7 +6970,7 @@ types:
         type: string
         description: The id parameter specifies the YouTube playlist item ID for the playlist item that is being deleted. In a playlistItem resource, the id property specifies the playlist item's ID.
     (commons.Id): youtube.playlistItems.delete
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Playlist Items
 /thumbnails:
   /set:
@@ -6983,7 +6983,7 @@ types:
           - https://www.googleapis.com/auth/youtube.upload
           - https://www.googleapis.com/auth/youtubepartner
       description: Uploads a custom video thumbnail to YouTube and sets it for a video.
-      displayName: set
+      displayName: Set
       is:
       - hasParameters
       queryParameters:
@@ -7001,5 +7001,5 @@ types:
           body:
             application/json: ThumbnailSetResponse
       (commons.Id): youtube.thumbnails.set
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Thumbnails

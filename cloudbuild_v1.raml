@@ -589,7 +589,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Cancels a requested build in progress.
-            displayName: cancel
+            displayName: Cancel
             is:
             - hasParameters
             body:
@@ -599,7 +599,7 @@ types:
                 body:
                   application/json: Build
             (commons.Id): cloudbuild.projects.builds.cancel
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Builds
         /{id}:
@@ -617,7 +617,7 @@ types:
 
               The Build that is returned includes its status (e.g., success or failure,
               or in-progress), and timing information.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -625,7 +625,7 @@ types:
                 body:
                   application/json: Build
             (commons.Id): cloudbuild.projects.builds.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Builds
         post:
@@ -639,7 +639,7 @@ types:
             The long-running Operation returned by this method will include the ID of
             the build, which can be passed to GetBuild to determine its status (e.g.,
             success or failure).
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           body:
@@ -649,7 +649,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): cloudbuild.projects.builds.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Builds
         get:
@@ -662,7 +662,7 @@ types:
 
             Previously requested builds may still be in-progress, or may have finished
             successfully or unsuccessfully.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -681,7 +681,7 @@ types:
               body:
                 application/json: ListBuildsResponse
           (commons.Id): cloudbuild.projects.builds.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Builds
       /triggers:
@@ -699,7 +699,7 @@ types:
               Updates an BuildTrigger by its project ID and trigger ID.
 
               This API is experimental.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             body:
@@ -709,7 +709,7 @@ types:
                 body:
                   application/json: BuildTrigger
             (commons.Id): cloudbuild.projects.triggers.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Triggers
           get:
@@ -721,7 +721,7 @@ types:
               Gets information about a BuildTrigger.
 
               This API is experimental.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -729,7 +729,7 @@ types:
                 body:
                   application/json: BuildTrigger
             (commons.Id): cloudbuild.projects.triggers.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Triggers
           delete:
@@ -741,7 +741,7 @@ types:
               Deletes an BuildTrigger by its project ID and trigger ID.
 
               This API is experimental.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -749,7 +749,7 @@ types:
                 body:
                   application/json: Empty
             (commons.Id): cloudbuild.projects.triggers.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Triggers
         post:
@@ -761,7 +761,7 @@ types:
             Creates a new BuildTrigger.
 
             This API is experimental.
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           body:
@@ -771,7 +771,7 @@ types:
               body:
                 application/json: BuildTrigger
           (commons.Id): cloudbuild.projects.triggers.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Triggers
         get:
@@ -783,7 +783,7 @@ types:
             Lists existing BuildTrigger.
 
             This API is experimental.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           responses:
@@ -791,7 +791,7 @@ types:
               body:
                 application/json: ListBuildTriggersResponse
           (commons.Id): cloudbuild.projects.triggers.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Triggers
   /{name}:
@@ -811,7 +811,7 @@ types:
 
         NOTE: the `name` binding below allows API services to override the binding
         to use different resource name schemes, such as `users/*/operations`.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       - hasParameters
@@ -831,5 +831,5 @@ types:
           body:
             application/json: ListOperationsResponse
       (commons.Id): cloudbuild.operations.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations

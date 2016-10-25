@@ -436,7 +436,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud_debugger
           description: Registers the debuggee with the controller service. All agents attached to the same application should call this method with the same request content to get back the same stable `debuggee_id`. Agents should call this method again whenever `google.rpc.Code.NOT_FOUND` is returned from any controller method. This allows the controller service to disable the agent or recover from any data loss. If the debuggee is disabled by the server, the response will have `is_disabled` set to `true`.
-          displayName: register
+          displayName: Register
           is:
           - hasParameters
           body:
@@ -446,7 +446,7 @@ types:
               body:
                 application/json: RegisterDebuggeeResponse
           (commons.Id): clouddebugger.controller.debuggees.register
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Controller
           - Debuggees
       /{debuggeeId}:
@@ -467,7 +467,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/cloud_debugger
               description: Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the `location`, `condition` and `expression` fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.
-              displayName: update
+              displayName: Update
               is:
               - hasParameters
               body:
@@ -477,7 +477,7 @@ types:
                   body:
                     application/json: UpdateActiveBreakpointResponse
               (commons.Id): clouddebugger.controller.debuggees.breakpoints.update
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Controller
               - Debuggees
               - Breakpoints
@@ -488,7 +488,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud_debugger
             description: Returns the list of all active breakpoints for the debuggee. The breakpoint specification (location, condition, and expression fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn't change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -503,7 +503,7 @@ types:
                 body:
                   application/json: ListActiveBreakpointsResponse
             (commons.Id): clouddebugger.controller.debuggees.breakpoints.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Controller
             - Debuggees
             - Breakpoints
@@ -523,7 +523,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/cloud_debugger
               description: Sets the breakpoint to the debuggee.
-              displayName: set
+              displayName: Set
               is:
               - hasParameters
               queryParameters:
@@ -538,7 +538,7 @@ types:
                   body:
                     application/json: SetBreakpointResponse
               (commons.Id): clouddebugger.debugger.debuggees.breakpoints.set
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Debugger
               - Debuggees
               - Breakpoints
@@ -554,7 +554,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/cloud_debugger
               description: Gets breakpoint information.
-              displayName: get
+              displayName: Get
               is:
               - hasParameters
               queryParameters:
@@ -567,7 +567,7 @@ types:
                   body:
                     application/json: GetBreakpointResponse
               (commons.Id): clouddebugger.debugger.debuggees.breakpoints.get
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Debugger
               - Debuggees
               - Breakpoints
@@ -578,7 +578,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/cloud_debugger
               description: Deletes the breakpoint from the debuggee.
-              displayName: delete
+              displayName: Delete
               is:
               - hasParameters
               queryParameters:
@@ -591,7 +591,7 @@ types:
                   body:
                     application/json: Empty
               (commons.Id): clouddebugger.debugger.debuggees.breakpoints.delete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Debugger
               - Debuggees
               - Breakpoints
@@ -602,7 +602,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud_debugger
             description: Lists all breakpoints for the debuggee.
-            displayName: list
+            displayName: List
             is:
             - hasParameters
             queryParameters:
@@ -635,7 +635,7 @@ types:
                 body:
                   application/json: ListBreakpointsResponse
             (commons.Id): clouddebugger.debugger.debuggees.breakpoints.list
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Debugger
             - Debuggees
             - Breakpoints
@@ -646,7 +646,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud_debugger
         description: Lists all the debuggees that the user can set breakpoints to.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -665,6 +665,6 @@ types:
             body:
               application/json: ListDebuggeesResponse
         (commons.Id): clouddebugger.debugger.debuggees.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Debugger
         - Debuggees

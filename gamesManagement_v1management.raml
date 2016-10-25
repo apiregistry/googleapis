@@ -291,11 +291,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Reset all rooms for the currently authenticated player for your application. This method is only accessible to whitelisted tester accounts for your application.
-      displayName: reset
+      displayName: Reset
       is:
       - hasParameters
       (commons.Id): gamesManagement.rooms.reset
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Rooms
   /resetForAllPlayers:
     post:
@@ -305,11 +305,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Deletes rooms where the only room participants are from whitelisted tester accounts for your application. This method is only available to user accounts for your developer console.
-      displayName: reset For AllPlayers
+      displayName: Reset For AllPlayers
       is:
       - hasParameters
       (commons.Id): gamesManagement.rooms.resetForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Rooms
 /turnbasedmatches:
   /reset:
@@ -320,11 +320,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Reset all turn-based match data for a user. This method is only accessible to whitelisted tester accounts for your application.
-      displayName: reset
+      displayName: Reset
       is:
       - hasParameters
       (commons.Id): gamesManagement.turnBasedMatches.reset
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Turn Based Matches
   /resetForAllPlayers:
     post:
@@ -334,11 +334,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Deletes turn-based matches where the only match participants are from whitelisted tester accounts for your application. This method is only available to user accounts for your developer console.
-      displayName: reset For AllPlayers
+      displayName: Reset For AllPlayers
       is:
       - hasParameters
       (commons.Id): gamesManagement.turnBasedMatches.resetForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Turn Based Matches
 /achievements:
   /resetMultipleForAllPlayers:
@@ -349,13 +349,13 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets achievements with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft achievements may be reset.
-      displayName: reset Multiple ForAllPlayers
+      displayName: Reset Multiple ForAllPlayers
       is:
       - hasParameters
       body:
         application/json: AchievementResetMultipleForAllRequest
       (commons.Id): gamesManagement.achievements.resetMultipleForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Achievements
   /{achievementId}:
     uriParameters:
@@ -370,7 +370,7 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
-        displayName: reset
+        displayName: Reset
         is:
         - hasParameters
         responses:
@@ -378,7 +378,7 @@ types:
             body:
               application/json: AchievementResetResponse
         (commons.Id): gamesManagement.achievements.reset
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
     /resetForAllPlayers:
       post:
@@ -388,11 +388,11 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.
-        displayName: reset For AllPlayers
+        displayName: Reset For AllPlayers
         is:
         - hasParameters
         (commons.Id): gamesManagement.achievements.resetForAllPlayers
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Achievements
   /resetAllForAllPlayers:
     post:
@@ -402,11 +402,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all draft achievements for all players. This method is only available to user accounts for your developer console.
-      displayName: reset All ForAllPlayers
+      displayName: Reset All ForAllPlayers
       is:
       - hasParameters
       (commons.Id): gamesManagement.achievements.resetAllForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Achievements
   /reset:
     post:
@@ -416,7 +416,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all achievements for the currently authenticated player for your application. This method is only accessible to whitelisted tester accounts for your application.
-      displayName: reset All
+      displayName: Reset All
       is:
       - hasParameters
       responses:
@@ -424,7 +424,7 @@ types:
           body:
             application/json: AchievementResetAllResponse
       (commons.Id): gamesManagement.achievements.resetAll
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Achievements
 /quests:
   /resetMultipleForAllPlayers:
@@ -435,13 +435,13 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets quests with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft quests may be reset.
-      displayName: reset Multiple ForAllPlayers
+      displayName: Reset Multiple ForAllPlayers
       is:
       - hasParameters
       body:
         application/json: QuestsResetMultipleForAllRequest
       (commons.Id): gamesManagement.quests.resetMultipleForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Quests
   /{questId}:
     uriParameters:
@@ -456,11 +456,11 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Resets all player progress on the quest with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
-        displayName: reset
+        displayName: Reset
         is:
         - hasParameters
         (commons.Id): gamesManagement.quests.reset
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Quests
     /resetForAllPlayers:
       post:
@@ -470,11 +470,11 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Resets all player progress on the quest with the given ID for all players. This method is only available to user accounts for your developer console. Only draft quests can be reset.
-        displayName: reset For AllPlayers
+        displayName: Reset For AllPlayers
         is:
         - hasParameters
         (commons.Id): gamesManagement.quests.resetForAllPlayers
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Quests
   /resetAllForAllPlayers:
     post:
@@ -484,11 +484,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all draft quests for all players. This method is only available to user accounts for your developer console.
-      displayName: reset All ForAllPlayers
+      displayName: Reset All ForAllPlayers
       is:
       - hasParameters
       (commons.Id): gamesManagement.quests.resetAllForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Quests
   /reset:
     post:
@@ -498,11 +498,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all player progress on all quests for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
-      displayName: reset All
+      displayName: Reset All
       is:
       - hasParameters
       (commons.Id): gamesManagement.quests.resetAll
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Quests
 /scores:
   /resetMultipleForAllPlayers:
@@ -513,13 +513,13 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets scores for the leaderboards with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft leaderboards may be reset.
-      displayName: reset Multiple ForAllPlayers
+      displayName: Reset Multiple ForAllPlayers
       is:
       - hasParameters
       body:
         application/json: ScoresResetMultipleForAllRequest
       (commons.Id): gamesManagement.scores.resetMultipleForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Scores
   /resetAllForAllPlayers:
     post:
@@ -529,11 +529,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
-      displayName: reset All ForAllPlayers
+      displayName: Reset All ForAllPlayers
       is:
       - hasParameters
       (commons.Id): gamesManagement.scores.resetAllForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Scores
   /reset:
     post:
@@ -543,7 +543,7 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all scores for all leaderboards for the currently authenticated players. This method is only accessible to whitelisted tester accounts for your application.
-      displayName: reset All
+      displayName: Reset All
       is:
       - hasParameters
       responses:
@@ -551,7 +551,7 @@ types:
           body:
             application/json: PlayerScoreResetAllResponse
       (commons.Id): gamesManagement.scores.resetAll
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Scores
 /leaderboards:
   /{leaderboardId}:
@@ -568,7 +568,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Resets scores for the leaderboard with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
-          displayName: reset
+          displayName: Reset
           is:
           - hasParameters
           responses:
@@ -576,7 +576,7 @@ types:
               body:
                 application/json: PlayerScoreResetResponse
           (commons.Id): gamesManagement.scores.reset
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Scores
       /resetForAllPlayers:
         post:
@@ -586,11 +586,11 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Resets scores for the leaderboard with the given ID for all players. This method is only available to user accounts for your developer console. Only draft leaderboards can be reset.
-          displayName: reset For AllPlayers
+          displayName: Reset For AllPlayers
           is:
           - hasParameters
           (commons.Id): gamesManagement.scores.resetForAllPlayers
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Scores
 /applications:
   /{applicationId}:
@@ -612,11 +612,11 @@ types:
                 - https://www.googleapis.com/auth/games
                 - https://www.googleapis.com/auth/plus.login
             description: Hide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
-            displayName: hide
+            displayName: Hide
             is:
             - hasParameters
             (commons.Id): gamesManagement.players.hide
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Players
           delete:
             securedBy:
@@ -625,11 +625,11 @@ types:
                 - https://www.googleapis.com/auth/games
                 - https://www.googleapis.com/auth/plus.login
             description: Unhide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
-            displayName: unhide
+            displayName: Unhide
             is:
             - hasParameters
             (commons.Id): gamesManagement.players.unhide
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Players
         get:
           securedBy:
@@ -638,7 +638,7 @@ types:
               - https://www.googleapis.com/auth/games
               - https://www.googleapis.com/auth/plus.login
           description: Get the list of players hidden from the given application. This method is only available to user accounts for your developer console.
-          displayName: list Hidden
+          displayName: List Hidden
           is:
           - hasParameters
           queryParameters:
@@ -656,7 +656,7 @@ types:
               body:
                 application/json: HiddenPlayerList
           (commons.Id): gamesManagement.applications.listHidden
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Applications
 /events:
   /resetMultipleForAllPlayers:
@@ -667,13 +667,13 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset. All quests that use any of the events will also be reset.
-      displayName: reset Multiple ForAllPlayers
+      displayName: Reset Multiple ForAllPlayers
       is:
       - hasParameters
       body:
         application/json: EventsResetMultipleForAllRequest
       (commons.Id): gamesManagement.events.resetMultipleForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Events
   /{eventId}:
     uriParameters:
@@ -688,11 +688,11 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player that use the event will also be reset.
-        displayName: reset
+        displayName: Reset
         is:
         - hasParameters
         (commons.Id): gamesManagement.events.reset
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Events
     /resetForAllPlayers:
       post:
@@ -702,11 +702,11 @@ types:
             - https://www.googleapis.com/auth/games
             - https://www.googleapis.com/auth/plus.login
         description: Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset. All quests that use the event will also be reset.
-        displayName: reset For AllPlayers
+        displayName: Reset For AllPlayers
         is:
         - hasParameters
         (commons.Id): gamesManagement.events.resetForAllPlayers
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Events
   /resetAllForAllPlayers:
     post:
@@ -716,11 +716,11 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all draft events for all players. This method is only available to user accounts for your developer console. All quests that use any of these events will also be reset.
-      displayName: reset All ForAllPlayers
+      displayName: Reset All ForAllPlayers
       is:
       - hasParameters
       (commons.Id): gamesManagement.events.resetAllForAllPlayers
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Events
   /reset:
     post:
@@ -730,9 +730,9 @@ types:
           - https://www.googleapis.com/auth/games
           - https://www.googleapis.com/auth/plus.login
       description: Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player will also be reset.
-      displayName: reset All
+      displayName: Reset All
       is:
       - hasParameters
       (commons.Id): gamesManagement.events.resetAll
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Events

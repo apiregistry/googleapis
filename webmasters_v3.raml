@@ -307,7 +307,7 @@ types:
               - https://www.googleapis.com/auth/webmasters
               - https://www.googleapis.com/auth/webmasters.readonly
           description: Retrieves details about crawl errors for a site's sample URL.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           queryParameters:
@@ -351,7 +351,7 @@ types:
               body:
                 application/json: UrlCrawlErrorsSample
           (commons.Id): webmasters.urlcrawlerrorssamples.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Urlcrawlerrorssamples
         delete:
           securedBy:
@@ -359,7 +359,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/webmasters
           description: Marks the provided site's sample URL as fixed, and removes it from the samples list.
-          displayName: mark AsFixed
+          displayName: Mark AsFixed
           is:
           - hasParameters
           queryParameters:
@@ -399,7 +399,7 @@ types:
               - smartphoneOnly
               - web
           (commons.Id): webmasters.urlcrawlerrorssamples.markAsFixed
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Urlcrawlerrorssamples
       get:
         securedBy:
@@ -408,7 +408,7 @@ types:
             - https://www.googleapis.com/auth/webmasters
             - https://www.googleapis.com/auth/webmasters.readonly
         description: Lists a site's sample URLs for the specified crawl error category and platform.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -452,7 +452,7 @@ types:
             body:
               application/json: UrlCrawlErrorsSamplesListResponse
         (commons.Id): webmasters.urlcrawlerrorssamples.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Urlcrawlerrorssamples
     /sitemaps:
       /{feedpath}:
@@ -466,11 +466,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/webmasters
           description: Submits a sitemap for a site.
-          displayName: submit
+          displayName: Submit
           is:
           - hasParameters
           (commons.Id): webmasters.sitemaps.submit
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Sitemaps
         get:
           securedBy:
@@ -479,7 +479,7 @@ types:
               - https://www.googleapis.com/auth/webmasters
               - https://www.googleapis.com/auth/webmasters.readonly
           description: Retrieves information about a specific sitemap.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -487,7 +487,7 @@ types:
               body:
                 application/json: WmxSitemap
           (commons.Id): webmasters.sitemaps.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Sitemaps
         delete:
           securedBy:
@@ -495,11 +495,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/webmasters
           description: Deletes a sitemap from this site.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): webmasters.sitemaps.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Sitemaps
       get:
         securedBy:
@@ -508,7 +508,7 @@ types:
             - https://www.googleapis.com/auth/webmasters
             - https://www.googleapis.com/auth/webmasters.readonly
         description: Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -520,7 +520,7 @@ types:
             body:
               application/json: SitemapsListResponse
         (commons.Id): webmasters.sitemaps.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Sitemaps
     /urlCrawlErrorsCounts:
       /query:
@@ -531,7 +531,7 @@ types:
               - https://www.googleapis.com/auth/webmasters
               - https://www.googleapis.com/auth/webmasters.readonly
           description: Retrieves a time series of the number of URL crawl errors per error category and platform.
-          displayName: query
+          displayName: Query
           is:
           - hasParameters
           queryParameters:
@@ -580,7 +580,7 @@ types:
               body:
                 application/json: UrlCrawlErrorsCountsQueryResponse
           (commons.Id): webmasters.urlcrawlerrorscounts.query
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Urlcrawlerrorscounts
     /searchAnalytics:
       /query:
@@ -594,7 +594,7 @@ types:
             Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days.
 
             When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
-          displayName: query
+          displayName: Query
           is:
           - hasParameters
           body:
@@ -604,7 +604,7 @@ types:
               body:
                 application/json: SearchAnalyticsQueryResponse
           (commons.Id): webmasters.searchanalytics.query
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Searchanalytics
     put:
       securedBy:
@@ -612,11 +612,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/webmasters
       description: Adds a site to the set of the user's sites in Search Console.
-      displayName: add
+      displayName: Add
       is:
       - hasParameters
       (commons.Id): webmasters.sites.add
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Sites
     get:
       securedBy:
@@ -625,7 +625,7 @@ types:
           - https://www.googleapis.com/auth/webmasters
           - https://www.googleapis.com/auth/webmasters.readonly
       description: Retrieves information about specific site.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -633,7 +633,7 @@ types:
           body:
             application/json: WmxSite
       (commons.Id): webmasters.sites.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Sites
     delete:
       securedBy:
@@ -641,11 +641,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/webmasters
       description: Removes a site from the set of the user's Search Console sites.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): webmasters.sites.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Sites
   get:
     securedBy:
@@ -654,7 +654,7 @@ types:
         - https://www.googleapis.com/auth/webmasters
         - https://www.googleapis.com/auth/webmasters.readonly
     description: Lists the user's Search Console sites.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -662,5 +662,5 @@ types:
         body:
           application/json: SitesListResponse
     (commons.Id): webmasters.sites.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Sites

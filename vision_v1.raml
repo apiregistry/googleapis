@@ -815,7 +815,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Run image detection and annotation for a batch of images.
-      displayName: annotate
+      displayName: Annotate
       is:
       - hasParameters
       body:
@@ -825,5 +825,5 @@ types:
           body:
             application/json: BatchAnnotateImagesResponse
       (commons.Id): vision.images.annotate
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Images

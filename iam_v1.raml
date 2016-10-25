@@ -351,7 +351,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Tests the specified permissions against the IAM access control policy for a ServiceAccount.
-      displayName: test Iam Permissions
+      displayName: Test Iam Permissions
       is:
       - hasParameters
       body:
@@ -361,7 +361,7 @@ types:
           body:
             application/json: TestIamPermissionsResponse
       (commons.Id): iam.projects.serviceAccounts.testIamPermissions
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
   /{name}:
@@ -380,7 +380,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a ServiceAccount and returns it.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -390,7 +390,7 @@ types:
             body:
               application/json: ServiceAccount
         (commons.Id): iam.projects.serviceAccounts.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Service Accounts
       get:
@@ -399,7 +399,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists ServiceAccounts for a project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -415,7 +415,7 @@ types:
             body:
               application/json: ListServiceAccountsResponse
         (commons.Id): iam.projects.serviceAccounts.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Service Accounts
     /keys:
@@ -425,7 +425,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a ServiceAccountKey and returns it.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -435,7 +435,7 @@ types:
             body:
               application/json: ServiceAccountKey
         (commons.Id): iam.projects.serviceAccounts.keys.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Service Accounts
         - Keys
@@ -445,7 +445,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists ServiceAccountKeys.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -461,7 +461,7 @@ types:
             body:
               application/json: ListServiceAccountKeysResponse
         (commons.Id): iam.projects.serviceAccounts.keys.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Service Accounts
         - Keys
@@ -471,7 +471,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Gets the ServiceAccountKey by key id.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       - hasParameters
@@ -488,7 +488,7 @@ types:
           body:
             application/json: ServiceAccountKey
       (commons.Id): iam.projects.serviceAccounts.keys.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
       - Keys
@@ -499,7 +499,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
       description: 'Updates a ServiceAccount. Currently, only the following fields
         are updatable: `display_name` . The `etag` is mandatory.'
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -509,7 +509,7 @@ types:
           body:
             application/json: ServiceAccount
       (commons.Id): iam.projects.serviceAccounts.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
     delete:
@@ -518,7 +518,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Deletes a ServiceAccountKey.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       - hasParameters
@@ -527,7 +527,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): iam.projects.serviceAccounts.keys.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
       - Keys
@@ -545,7 +545,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Returns the IAM access control policy for a ServiceAccount.
-      displayName: get Iam Policy
+      displayName: Get Iam Policy
       is:
       - hasParameters
       responses:
@@ -553,7 +553,7 @@ types:
           body:
             application/json: Policy
       (commons.Id): iam.projects.serviceAccounts.getIamPolicy
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
   /{resource}:setIamPolicy:
@@ -570,7 +570,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Sets the IAM access control policy for a ServiceAccount.
-      displayName: set Iam Policy
+      displayName: Set Iam Policy
       is:
       - hasParameters
       body:
@@ -580,7 +580,7 @@ types:
           body:
             application/json: Policy
       (commons.Id): iam.projects.serviceAccounts.setIamPolicy
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
   /{name}:signBlob:
@@ -598,7 +598,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Signs a blob using a service account's system-managed private key.
-      displayName: sign Blob
+      displayName: Sign Blob
       is:
       - hasParameters
       body:
@@ -608,7 +608,7 @@ types:
           body:
             application/json: SignBlobResponse
       (commons.Id): iam.projects.serviceAccounts.signBlob
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Service Accounts
   /roles:queryGrantableRoles:
@@ -618,7 +618,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Queries roles that can be granted on a particular resource. A role is grantable if it can be used as the role in a binding for a policy for that resource.
-      displayName: query Grantable Roles
+      displayName: Query Grantable Roles
       is:
       - hasParameters
       body:
@@ -628,5 +628,5 @@ types:
           body:
             application/json: QueryGrantableRolesResponse
       (commons.Id): iam.roles.queryGrantableRoles
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Roles

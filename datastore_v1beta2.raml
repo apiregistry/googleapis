@@ -533,7 +533,7 @@ types:
           - https://www.googleapis.com/auth/datastore
           - https://www.googleapis.com/auth/userinfo.email
       description: Roll back a transaction.
-      displayName: rollback
+      displayName: Rollback
       is:
       - hasParameters
       body:
@@ -543,7 +543,7 @@ types:
           body:
             application/json: RollbackResponse
       (commons.Id): datastore.datasets.rollback
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
   /lookup:
     post:
@@ -554,7 +554,7 @@ types:
           - https://www.googleapis.com/auth/datastore
           - https://www.googleapis.com/auth/userinfo.email
       description: Look up some entities by key.
-      displayName: lookup
+      displayName: Lookup
       is:
       - hasParameters
       body:
@@ -564,7 +564,7 @@ types:
           body:
             application/json: LookupResponse
       (commons.Id): datastore.datasets.lookup
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
   /beginTransaction:
     post:
@@ -575,7 +575,7 @@ types:
           - https://www.googleapis.com/auth/datastore
           - https://www.googleapis.com/auth/userinfo.email
       description: Begin a new transaction.
-      displayName: begin Transaction
+      displayName: Begin Transaction
       is:
       - hasParameters
       body:
@@ -585,7 +585,7 @@ types:
           body:
             application/json: BeginTransactionResponse
       (commons.Id): datastore.datasets.beginTransaction
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
   /commit:
     post:
@@ -596,7 +596,7 @@ types:
           - https://www.googleapis.com/auth/datastore
           - https://www.googleapis.com/auth/userinfo.email
       description: Commit a transaction, optionally creating, deleting or modifying some entities.
-      displayName: commit
+      displayName: Commit
       is:
       - hasParameters
       body:
@@ -606,7 +606,7 @@ types:
           body:
             application/json: CommitResponse
       (commons.Id): datastore.datasets.commit
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
   /runQuery:
     post:
@@ -617,7 +617,7 @@ types:
           - https://www.googleapis.com/auth/datastore
           - https://www.googleapis.com/auth/userinfo.email
       description: Query for entities.
-      displayName: run Query
+      displayName: Run Query
       is:
       - hasParameters
       body:
@@ -627,7 +627,7 @@ types:
           body:
             application/json: RunQueryResponse
       (commons.Id): datastore.datasets.runQuery
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets
   /allocateIds:
     post:
@@ -638,7 +638,7 @@ types:
           - https://www.googleapis.com/auth/datastore
           - https://www.googleapis.com/auth/userinfo.email
       description: Allocate IDs for incomplete keys (useful for referencing an entity before it is inserted).
-      displayName: allocate Ids
+      displayName: Allocate Ids
       is:
       - hasParameters
       body:
@@ -648,5 +648,5 @@ types:
           body:
             application/json: AllocateIdsResponse
       (commons.Id): datastore.datasets.allocateIds
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Datasets

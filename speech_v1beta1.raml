@@ -372,7 +372,7 @@ types:
           the operation is not deleted; instead, it becomes an operation with
           an Operation.error value with a google.rpc.Status.code of 1,
           corresponding to `Code.CANCELLED`.
-        displayName: cancel
+        displayName: Cancel
         is:
         - hasParameters
         body:
@@ -382,7 +382,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): speech.operations.cancel
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Operations
     /{name}:
       uriParameters:
@@ -399,7 +399,7 @@ types:
           Gets the latest state of a long-running operation.  Clients can use this
           method to poll the operation result at intervals as recommended by the API
           service.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -407,7 +407,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): speech.operations.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Operations
       delete:
         securedBy:
@@ -419,7 +419,7 @@ types:
           no longer interested in the operation result. It does not cancel the
           operation. If the server doesn't support this method, it returns
           `google.rpc.Code.UNIMPLEMENTED`.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         responses:
@@ -427,7 +427,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): speech.operations.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Operations
     get:
       securedBy:
@@ -440,7 +440,7 @@ types:
 
         NOTE: the `name` binding below allows API services to override the binding
         to use different resource name schemes, such as `users/*/operations`.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -462,7 +462,7 @@ types:
           body:
             application/json: ListOperationsResponse
       (commons.Id): speech.operations.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations
   /speech:syncrecognize:
     post:
@@ -473,7 +473,7 @@ types:
       description: |-
         Perform synchronous speech-recognition: receive results after all audio
         has been sent and processed.
-      displayName: syncrecognize
+      displayName: Syncrecognize
       is:
       - hasParameters
       body:
@@ -483,7 +483,7 @@ types:
           body:
             application/json: SyncRecognizeResponse
       (commons.Id): speech.speech.syncrecognize
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Speech
   /speech:asyncrecognize:
     post:
@@ -496,7 +496,7 @@ types:
         google.longrunning.Operations interface. Returns either an
         `Operation.error` or an `Operation.response` which contains
         an `AsyncRecognizeResponse` message.
-      displayName: asyncrecognize
+      displayName: Asyncrecognize
       is:
       - hasParameters
       body:
@@ -506,5 +506,5 @@ types:
           body:
             application/json: Operation
       (commons.Id): speech.speech.asyncrecognize
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Speech

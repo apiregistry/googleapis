@@ -5693,7 +5693,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -5703,7 +5703,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.healthChecks.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Health Checks
         get:
           securedBy:
@@ -5713,7 +5713,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -5721,7 +5721,7 @@ types:
               body:
                 application/json: HealthCheck
           (commons.Id): compute.healthChecks.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Health Checks
         put:
           securedBy:
@@ -5730,7 +5730,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HealthCheck resource in the specified project using the data included in the request.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -5740,7 +5740,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.healthChecks.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Health Checks
         delete:
           securedBy:
@@ -5749,7 +5749,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified HealthCheck resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -5757,7 +5757,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.healthChecks.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Health Checks
       post:
         securedBy:
@@ -5766,7 +5766,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a HealthCheck resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -5776,7 +5776,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.healthChecks.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Health Checks
       get:
         securedBy:
@@ -5786,7 +5786,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of HealthCheck resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -5825,7 +5825,7 @@ types:
             body:
               application/json: HealthCheckList
         (commons.Id): compute.healthChecks.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Health Checks
     /firewalls:
       /{firewall}:
@@ -5841,7 +5841,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified firewall rule with the data included in the request. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -5851,7 +5851,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.firewalls.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Firewalls
         get:
           securedBy:
@@ -5861,7 +5861,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified firewall.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -5869,7 +5869,7 @@ types:
               body:
                 application/json: Firewall
           (commons.Id): compute.firewalls.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Firewalls
         put:
           securedBy:
@@ -5878,7 +5878,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified firewall rule with the data included in the request.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -5888,7 +5888,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.firewalls.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Firewalls
         delete:
           securedBy:
@@ -5897,7 +5897,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified firewall.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -5905,7 +5905,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.firewalls.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Firewalls
       post:
         securedBy:
@@ -5914,7 +5914,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a firewall rule in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -5924,7 +5924,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.firewalls.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Firewalls
       get:
         securedBy:
@@ -5934,7 +5934,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of firewall rules available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -5973,7 +5973,7 @@ types:
             body:
               application/json: FirewallList
         (commons.Id): compute.firewalls.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Firewalls
     /targetHttpsProxies:
       /{targetHttpsProxy}:
@@ -5990,7 +5990,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified TargetHttpsProxy resource. Get a list of available target HTTPS proxies by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -5998,7 +5998,7 @@ types:
               body:
                 application/json: TargetHttpsProxy
           (commons.Id): compute.targetHttpsProxies.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Https Proxies
         delete:
           securedBy:
@@ -6007,7 +6007,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified TargetHttpsProxy resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6015,7 +6015,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetHttpsProxies.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Https Proxies
       post:
         securedBy:
@@ -6024,7 +6024,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a TargetHttpsProxy resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6034,7 +6034,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.targetHttpsProxies.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Https Proxies
       get:
         securedBy:
@@ -6044,7 +6044,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of TargetHttpsProxy resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6083,7 +6083,7 @@ types:
             body:
               application/json: TargetHttpsProxyList
         (commons.Id): compute.targetHttpsProxies.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Https Proxies
     /networks:
       /{network}:
@@ -6100,7 +6100,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified network. Get a list of available networks by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6108,7 +6108,7 @@ types:
               body:
                 application/json: Network
           (commons.Id): compute.networks.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Networks
         delete:
           securedBy:
@@ -6117,7 +6117,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified network.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6125,7 +6125,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.networks.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Networks
       post:
         securedBy:
@@ -6134,7 +6134,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a network in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6144,7 +6144,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.networks.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Networks
       get:
         securedBy:
@@ -6154,7 +6154,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of networks available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6193,7 +6193,7 @@ types:
             body:
               application/json: NetworkList
         (commons.Id): compute.networks.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Networks
     /routes:
       /{route}:
@@ -6210,7 +6210,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified Route resource. Get a list of available routes by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6218,7 +6218,7 @@ types:
               body:
                 application/json: Route
           (commons.Id): compute.routes.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Routes
         delete:
           securedBy:
@@ -6227,7 +6227,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified Route resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6235,7 +6235,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.routes.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Routes
       post:
         securedBy:
@@ -6244,7 +6244,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a Route resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6254,7 +6254,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.routes.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Routes
       get:
         securedBy:
@@ -6264,7 +6264,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of Route resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6303,7 +6303,7 @@ types:
             body:
               application/json: RouteList
         (commons.Id): compute.routes.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Routes
     /backendServices:
       /{backendService}:
@@ -6321,7 +6321,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Gets the most recent health check results for this BackendService.
-            displayName: get Health
+            displayName: Get Health
             is:
             - hasParameters
             body:
@@ -6331,7 +6331,7 @@ types:
                 body:
                   application/json: BackendServiceGroupHealth
             (commons.Id): compute.backendServices.getHealth
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Backend Services
         patch:
           securedBy:
@@ -6340,7 +6340,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -6350,7 +6350,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.backendServices.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Backend Services
         get:
           securedBy:
@@ -6360,7 +6360,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6368,7 +6368,7 @@ types:
               body:
                 application/json: BackendService
           (commons.Id): compute.backendServices.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Backend Services
         put:
           securedBy:
@@ -6377,7 +6377,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified BackendService resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -6387,7 +6387,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.backendServices.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Backend Services
         delete:
           securedBy:
@@ -6396,7 +6396,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified BackendService resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6404,7 +6404,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.backendServices.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Backend Services
       post:
         securedBy:
@@ -6413,7 +6413,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a BackendService resource in the specified project using the data included in the request. There are several restrictions and guidelines to keep in mind when creating a backend service. Read  Restrictions and Guidelines for more information.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6423,7 +6423,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.backendServices.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Backend Services
       get:
         securedBy:
@@ -6433,7 +6433,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of BackendService resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6472,7 +6472,7 @@ types:
             body:
               application/json: BackendServiceList
         (commons.Id): compute.backendServices.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Backend Services
     /targetSslProxies:
       /{targetSslProxy}:
@@ -6489,7 +6489,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes SslCertificates for TargetSslProxy.
-            displayName: set Ssl Certificates
+            displayName: Set Ssl Certificates
             is:
             - hasParameters
             body:
@@ -6499,7 +6499,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.targetSslProxies.setSslCertificates
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Ssl Proxies
         /setBackendService:
           post:
@@ -6509,7 +6509,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes the BackendService for TargetSslProxy.
-            displayName: set Backend Service
+            displayName: Set Backend Service
             is:
             - hasParameters
             body:
@@ -6519,7 +6519,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.targetSslProxies.setBackendService
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Ssl Proxies
         /setProxyHeader:
           post:
@@ -6529,7 +6529,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes the ProxyHeaderType for TargetSslProxy.
-            displayName: set Proxy Header
+            displayName: Set Proxy Header
             is:
             - hasParameters
             body:
@@ -6539,7 +6539,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.targetSslProxies.setProxyHeader
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Ssl Proxies
         get:
           securedBy:
@@ -6549,7 +6549,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified TargetSslProxy resource. Get a list of available target SSL proxies by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6557,7 +6557,7 @@ types:
               body:
                 application/json: TargetSslProxy
           (commons.Id): compute.targetSslProxies.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Ssl Proxies
         delete:
           securedBy:
@@ -6566,7 +6566,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified TargetSslProxy resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6574,7 +6574,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetSslProxies.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Ssl Proxies
       post:
         securedBy:
@@ -6583,7 +6583,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a TargetSslProxy resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6593,7 +6593,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.targetSslProxies.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Ssl Proxies
       get:
         securedBy:
@@ -6603,7 +6603,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of TargetSslProxy resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6642,7 +6642,7 @@ types:
             body:
               application/json: TargetSslProxyList
         (commons.Id): compute.targetSslProxies.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Ssl Proxies
     /targetHttpProxies:
       /{targetHttpProxy}:
@@ -6659,7 +6659,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified TargetHttpProxy resource. Get a list of available target HTTP proxies by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6667,7 +6667,7 @@ types:
               body:
                 application/json: TargetHttpProxy
           (commons.Id): compute.targetHttpProxies.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Http Proxies
         delete:
           securedBy:
@@ -6676,7 +6676,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified TargetHttpProxy resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6684,7 +6684,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetHttpProxies.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Http Proxies
       post:
         securedBy:
@@ -6693,7 +6693,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a TargetHttpProxy resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6703,7 +6703,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.targetHttpProxies.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Http Proxies
       get:
         securedBy:
@@ -6713,7 +6713,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of TargetHttpProxy resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6752,7 +6752,7 @@ types:
             body:
               application/json: TargetHttpProxyList
         (commons.Id): compute.targetHttpProxies.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Http Proxies
     /operations:
       /{operation}:
@@ -6769,7 +6769,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6777,7 +6777,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.globalOperations.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Operations
         delete:
           securedBy:
@@ -6786,11 +6786,11 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified Operations resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): compute.globalOperations.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Operations
       get:
         securedBy:
@@ -6800,7 +6800,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of Operation resources contained within the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6839,7 +6839,7 @@ types:
             body:
               application/json: OperationList
         (commons.Id): compute.globalOperations.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Operations
     /addresses:
       /{address}:
@@ -6856,7 +6856,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified address resource. Get a list of available addresses by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -6864,7 +6864,7 @@ types:
               body:
                 application/json: Address
           (commons.Id): compute.globalAddresses.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Addresses
         delete:
           securedBy:
@@ -6873,7 +6873,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified address resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -6881,7 +6881,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.globalAddresses.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Addresses
       post:
         securedBy:
@@ -6890,7 +6890,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates an address resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -6900,7 +6900,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.globalAddresses.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Addresses
       get:
         securedBy:
@@ -6910,7 +6910,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of global addresses.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -6949,7 +6949,7 @@ types:
             body:
               application/json: AddressList
         (commons.Id): compute.globalAddresses.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Addresses
     /images:
       /family:
@@ -6967,7 +6967,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the latest image that is part of an image family and is not deprecated.
-            displayName: get From Family
+            displayName: Get From Family
             is:
             - hasParameters
             responses:
@@ -6975,7 +6975,7 @@ types:
                 body:
                   application/json: Image
             (commons.Id): compute.images.getFromFamily
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Images
       /{image}:
         uriParameters:
@@ -6994,7 +6994,7 @@ types:
               Sets the deprecation status of an image.
 
               If an empty request body is given, clears the deprecation status instead.
-            displayName: deprecate
+            displayName: Deprecate
             is:
             - hasParameters
             body:
@@ -7004,7 +7004,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.images.deprecate
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Images
         get:
           securedBy:
@@ -7014,7 +7014,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified image. Get a list of available images by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7022,7 +7022,7 @@ types:
               body:
                 application/json: Image
           (commons.Id): compute.images.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Images
         delete:
           securedBy:
@@ -7031,7 +7031,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified image.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7039,7 +7039,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.images.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Images
       post:
         securedBy:
@@ -7051,7 +7051,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Creates an image in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7061,7 +7061,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.images.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Images
       get:
         securedBy:
@@ -7071,7 +7071,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7110,7 +7110,7 @@ types:
             body:
               application/json: ImageList
         (commons.Id): compute.images.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Images
     /sslCertificates:
       /{sslCertificate}:
@@ -7127,7 +7127,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified SslCertificate resource. Get a list of available SSL certificates by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7135,7 +7135,7 @@ types:
               body:
                 application/json: SslCertificate
           (commons.Id): compute.sslCertificates.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Ssl Certificates
         delete:
           securedBy:
@@ -7144,7 +7144,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified SslCertificate resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7152,7 +7152,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.sslCertificates.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Ssl Certificates
       post:
         securedBy:
@@ -7161,7 +7161,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a SslCertificate resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7171,7 +7171,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.sslCertificates.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Ssl Certificates
       get:
         securedBy:
@@ -7181,7 +7181,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of SslCertificate resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7220,7 +7220,7 @@ types:
             body:
               application/json: SslCertificateList
         (commons.Id): compute.sslCertificates.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Ssl Certificates
     /httpsHealthChecks:
       /{httpsHealthCheck}:
@@ -7236,7 +7236,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpsHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -7246,7 +7246,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.httpsHealthChecks.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Https Health Checks
         get:
           securedBy:
@@ -7256,7 +7256,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7264,7 +7264,7 @@ types:
               body:
                 application/json: HttpsHealthCheck
           (commons.Id): compute.httpsHealthChecks.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Https Health Checks
         put:
           securedBy:
@@ -7273,7 +7273,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpsHealthCheck resource in the specified project using the data included in the request.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -7283,7 +7283,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.httpsHealthChecks.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Https Health Checks
         delete:
           securedBy:
@@ -7292,7 +7292,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified HttpsHealthCheck resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7300,7 +7300,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.httpsHealthChecks.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Https Health Checks
       post:
         securedBy:
@@ -7309,7 +7309,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a HttpsHealthCheck resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7319,7 +7319,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.httpsHealthChecks.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Https Health Checks
       get:
         securedBy:
@@ -7329,7 +7329,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of HttpsHealthCheck resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7368,7 +7368,7 @@ types:
             body:
               application/json: HttpsHealthCheckList
         (commons.Id): compute.httpsHealthChecks.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Https Health Checks
     /snapshots:
       /{snapshot}:
@@ -7385,7 +7385,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified Snapshot resource. Get a list of available snapshots by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7393,7 +7393,7 @@ types:
               body:
                 application/json: Snapshot
           (commons.Id): compute.snapshots.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Snapshots
         delete:
           securedBy:
@@ -7405,7 +7405,7 @@ types:
             Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot.
 
             For more information, see Deleting snaphots.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7413,7 +7413,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.snapshots.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Snapshots
       get:
         securedBy:
@@ -7423,7 +7423,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of Snapshot resources contained within the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7462,7 +7462,7 @@ types:
             body:
               application/json: SnapshotList
         (commons.Id): compute.snapshots.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Snapshots
     /urlMaps:
       /{urlMap}:
@@ -7479,7 +7479,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.
-            displayName: invalidate Cache
+            displayName: Invalidate Cache
             is:
             - hasParameters
             body:
@@ -7489,7 +7489,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.urlMaps.invalidateCache
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Url Maps
         /validate:
           post:
@@ -7499,7 +7499,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Runs static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.
-            displayName: validate
+            displayName: Validate
             is:
             - hasParameters
             body:
@@ -7509,7 +7509,7 @@ types:
                 body:
                   application/json: UrlMapsValidateResponse
             (commons.Id): compute.urlMaps.validate
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Url Maps
         patch:
           securedBy:
@@ -7518,7 +7518,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified UrlMap resource with the data included in the request. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -7528,7 +7528,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.urlMaps.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Url Maps
         get:
           securedBy:
@@ -7538,7 +7538,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7546,7 +7546,7 @@ types:
               body:
                 application/json: UrlMap
           (commons.Id): compute.urlMaps.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Url Maps
         put:
           securedBy:
@@ -7555,7 +7555,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates the specified UrlMap resource with the data included in the request.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -7565,7 +7565,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.urlMaps.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Url Maps
         delete:
           securedBy:
@@ -7574,7 +7574,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified UrlMap resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7582,7 +7582,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.urlMaps.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Url Maps
       post:
         securedBy:
@@ -7591,7 +7591,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a UrlMap resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7601,7 +7601,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.urlMaps.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Url Maps
       get:
         securedBy:
@@ -7611,7 +7611,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of UrlMap resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7650,7 +7650,7 @@ types:
             body:
               application/json: UrlMapList
         (commons.Id): compute.urlMaps.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Url Maps
     /licenses:
       /{license}:
@@ -7667,7 +7667,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified License resource. Get a list of available licenses by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7675,7 +7675,7 @@ types:
               body:
                 application/json: License
           (commons.Id): compute.licenses.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Licenses
     /forwardingRules:
       /{forwardingRule}:
@@ -7692,7 +7692,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Changes target URL for forwarding rule. The new target should be of the same type as the old target.
-            displayName: set Target
+            displayName: Set Target
             is:
             - hasParameters
             body:
@@ -7702,7 +7702,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.globalForwardingRules.setTarget
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Global Forwarding Rules
         get:
           securedBy:
@@ -7712,7 +7712,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified ForwardingRule resource. Get a list of available forwarding rules by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7720,7 +7720,7 @@ types:
               body:
                 application/json: ForwardingRule
           (commons.Id): compute.globalForwardingRules.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Forwarding Rules
         delete:
           securedBy:
@@ -7729,7 +7729,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified ForwardingRule resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7737,7 +7737,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.globalForwardingRules.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Forwarding Rules
       post:
         securedBy:
@@ -7746,7 +7746,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a ForwardingRule resource in the specified project and region using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7756,7 +7756,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.globalForwardingRules.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Forwarding Rules
       get:
         securedBy:
@@ -7766,7 +7766,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of ForwardingRule resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7805,7 +7805,7 @@ types:
             body:
               application/json: ForwardingRuleList
         (commons.Id): compute.globalForwardingRules.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Forwarding Rules
     /instanceTemplates:
       /{instanceTemplate}:
@@ -7822,7 +7822,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified instance template. Get a list of available instance templates by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7830,7 +7830,7 @@ types:
               body:
                 application/json: InstanceTemplate
           (commons.Id): compute.instanceTemplates.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Templates
         delete:
           securedBy:
@@ -7839,7 +7839,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified instance template. If you delete an instance template that is being referenced from another instance group, the instance group will not be able to create or recreate virtual machine instances. Deleting an instance template is permanent and cannot be undone.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7847,7 +7847,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.instanceTemplates.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Templates
       post:
         securedBy:
@@ -7856,7 +7856,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates an instance template in the specified project using the data that is included in the request. If you are creating a new template to update an existing instance group, your new instance template must use the same network or, if applicable, the same subnetwork as the original template.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -7866,7 +7866,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.instanceTemplates.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Instance Templates
       get:
         securedBy:
@@ -7876,7 +7876,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves a list of instance templates that are contained within the specified project and zone.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -7915,7 +7915,7 @@ types:
             body:
               application/json: InstanceTemplateList
         (commons.Id): compute.instanceTemplates.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Instance Templates
     /httpHealthChecks:
       /{httpHealthCheck}:
@@ -7931,7 +7931,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -7941,7 +7941,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.httpHealthChecks.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Http Health Checks
         get:
           securedBy:
@@ -7951,7 +7951,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -7959,7 +7959,7 @@ types:
               body:
                 application/json: HttpHealthCheck
           (commons.Id): compute.httpHealthChecks.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Http Health Checks
         put:
           securedBy:
@@ -7968,7 +7968,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates a HttpHealthCheck resource in the specified project using the data included in the request.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -7978,7 +7978,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.httpHealthChecks.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Http Health Checks
         delete:
           securedBy:
@@ -7987,7 +7987,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Deletes the specified HttpHealthCheck resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -7995,7 +7995,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.httpHealthChecks.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Http Health Checks
       post:
         securedBy:
@@ -8004,7 +8004,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/compute
         description: Creates a HttpHealthCheck resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -8014,7 +8014,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): compute.httpHealthChecks.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Http Health Checks
       get:
         securedBy:
@@ -8024,7 +8024,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of HttpHealthCheck resources available to the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -8063,7 +8063,7 @@ types:
             body:
               application/json: HttpHealthCheckList
         (commons.Id): compute.httpHealthChecks.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Http Health Checks
   /regions:
     /{region}:
@@ -8087,7 +8087,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified address resource.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8095,7 +8095,7 @@ types:
                 body:
                   application/json: Address
             (commons.Id): compute.addresses.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Addresses
           delete:
             securedBy:
@@ -8104,7 +8104,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified address resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -8112,7 +8112,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.addresses.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Addresses
         post:
           securedBy:
@@ -8121,7 +8121,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an address resource in the specified project using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -8131,7 +8131,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.addresses.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Addresses
         get:
           securedBy:
@@ -8141,7 +8141,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of addresses contained within the specified region.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -8180,7 +8180,7 @@ types:
               body:
                 application/json: AddressList
           (commons.Id): compute.addresses.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Addresses
       /subnetworks:
         /{subnetwork}:
@@ -8197,7 +8197,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified subnetwork. Get a list of available subnetworks list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8205,7 +8205,7 @@ types:
                 body:
                   application/json: Subnetwork
             (commons.Id): compute.subnetworks.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Subnetworks
           delete:
             securedBy:
@@ -8214,7 +8214,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified subnetwork.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -8222,7 +8222,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.subnetworks.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Subnetworks
         post:
           securedBy:
@@ -8231,7 +8231,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a subnetwork in the specified project using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -8241,7 +8241,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.subnetworks.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Subnetworks
         get:
           securedBy:
@@ -8251,7 +8251,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of subnetworks available to the specified project.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -8290,7 +8290,7 @@ types:
               body:
                 application/json: SubnetworkList
           (commons.Id): compute.subnetworks.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Subnetworks
       /targetVpnGateways:
         /{targetVpnGateway}:
@@ -8307,7 +8307,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified target VPN gateway. Get a list of available target VPN gateways by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8315,7 +8315,7 @@ types:
                 body:
                   application/json: TargetVpnGateway
             (commons.Id): compute.targetVpnGateways.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Vpn Gateways
           delete:
             securedBy:
@@ -8324,7 +8324,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified target VPN gateway.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -8332,7 +8332,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.targetVpnGateways.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Vpn Gateways
         post:
           securedBy:
@@ -8341,7 +8341,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a target VPN gateway in the specified project and region using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -8351,7 +8351,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetVpnGateways.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Vpn Gateways
         get:
           securedBy:
@@ -8361,7 +8361,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of target VPN gateways available to the specified project and region.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -8400,7 +8400,7 @@ types:
               body:
                 application/json: TargetVpnGatewayList
           (commons.Id): compute.targetVpnGateways.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Vpn Gateways
       /forwardingRules:
         /{forwardingRule}:
@@ -8417,7 +8417,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes target URL for forwarding rule. The new target should be of the same type as the old target.
-              displayName: set Target
+              displayName: Set Target
               is:
               - hasParameters
               body:
@@ -8427,7 +8427,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.forwardingRules.setTarget
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Forwarding Rules
           get:
             securedBy:
@@ -8437,7 +8437,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified ForwardingRule resource.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8445,7 +8445,7 @@ types:
                 body:
                   application/json: ForwardingRule
             (commons.Id): compute.forwardingRules.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Forwarding Rules
           delete:
             securedBy:
@@ -8454,7 +8454,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified ForwardingRule resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -8462,7 +8462,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.forwardingRules.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Forwarding Rules
         post:
           securedBy:
@@ -8471,7 +8471,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a ForwardingRule resource in the specified project and region using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -8481,7 +8481,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.forwardingRules.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Forwarding Rules
         get:
           securedBy:
@@ -8491,7 +8491,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of ForwardingRule resources available to the specified project and region.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -8530,7 +8530,7 @@ types:
               body:
                 application/json: ForwardingRuleList
           (commons.Id): compute.forwardingRules.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Forwarding Rules
       /operations:
         /{operation}:
@@ -8547,7 +8547,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Retrieves the specified region-specific Operations resource.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8555,7 +8555,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.regionOperations.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Region Operations
           delete:
             securedBy:
@@ -8564,11 +8564,11 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified region-specific Operations resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             (commons.Id): compute.regionOperations.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Region Operations
         get:
           securedBy:
@@ -8578,7 +8578,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of Operation resources contained within the specified region.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -8617,7 +8617,7 @@ types:
               body:
                 application/json: OperationList
           (commons.Id): compute.regionOperations.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Region Operations
       /routers:
         /{router}:
@@ -8635,7 +8635,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
-              displayName: preview
+              displayName: Preview
               is:
               - hasParameters
               body:
@@ -8645,7 +8645,7 @@ types:
                   body:
                     application/json: RoutersPreviewResponse
               (commons.Id): compute.routers.preview
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Routers
           /getRouterStatus:
             get:
@@ -8656,7 +8656,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Retrieves runtime information of the specified router.
-              displayName: get Router Status
+              displayName: Get Router Status
               is:
               - hasParameters
               responses:
@@ -8664,7 +8664,7 @@ types:
                   body:
                     application/json: RouterStatusResponse
               (commons.Id): compute.routers.getRouterStatus
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Routers
           patch:
             securedBy:
@@ -8673,7 +8673,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates the specified Router resource with the data included in the request. This method supports patch semantics.
-            displayName: patch
+            displayName: Patch
             is:
             - hasParameters
             body:
@@ -8683,7 +8683,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.routers.patch
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Routers
           get:
             securedBy:
@@ -8693,7 +8693,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified Router resource. Get a list of available routers by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8701,7 +8701,7 @@ types:
                 body:
                   application/json: Router
             (commons.Id): compute.routers.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Routers
           put:
             securedBy:
@@ -8710,7 +8710,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Updates the specified Router resource with the data included in the request.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             body:
@@ -8720,7 +8720,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.routers.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Routers
           delete:
             securedBy:
@@ -8729,7 +8729,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified Router resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -8737,7 +8737,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.routers.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Routers
         post:
           securedBy:
@@ -8746,7 +8746,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a Router resource in the specified project and region using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -8756,7 +8756,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.routers.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Routers
         get:
           securedBy:
@@ -8766,7 +8766,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of Router resources available to the specified project.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -8805,7 +8805,7 @@ types:
               body:
                 application/json: RouterList
           (commons.Id): compute.routers.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Routers
       /targetPools:
         /{targetPool}:
@@ -8822,7 +8822,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes health check URL from a target pool.
-              displayName: remove Health Check
+              displayName: Remove Health Check
               is:
               - hasParameters
               body:
@@ -8832,7 +8832,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.targetPools.removeHealthCheck
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Target Pools
           /addInstance:
             post:
@@ -8842,7 +8842,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds an instance to a target pool.
-              displayName: add Instance
+              displayName: Add Instance
               is:
               - hasParameters
               body:
@@ -8852,7 +8852,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.targetPools.addInstance
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Target Pools
           /removeInstance:
             post:
@@ -8862,7 +8862,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes instance URL from a target pool.
-              displayName: remove Instance
+              displayName: Remove Instance
               is:
               - hasParameters
               body:
@@ -8872,7 +8872,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.targetPools.removeInstance
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Target Pools
           /setBackup:
             post:
@@ -8882,7 +8882,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes a backup target pool's configurations.
-              displayName: set Backup
+              displayName: Set Backup
               is:
               - hasParameters
               queryParameters:
@@ -8897,7 +8897,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.targetPools.setBackup
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Target Pools
           /addHealthCheck:
             post:
@@ -8907,7 +8907,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds health check URLs to a target pool.
-              displayName: add Health Check
+              displayName: Add Health Check
               is:
               - hasParameters
               body:
@@ -8917,7 +8917,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.targetPools.addHealthCheck
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Target Pools
           /getHealth:
             post:
@@ -8928,7 +8928,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Gets the most recent health check results for each IP for the instance that is referenced by the given target pool.
-              displayName: get Health
+              displayName: Get Health
               is:
               - hasParameters
               body:
@@ -8938,7 +8938,7 @@ types:
                   body:
                     application/json: TargetPoolInstanceHealth
               (commons.Id): compute.targetPools.getHealth
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Target Pools
           get:
             securedBy:
@@ -8948,7 +8948,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified target pool. Get a list of available target pools by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -8956,7 +8956,7 @@ types:
                 body:
                   application/json: TargetPool
             (commons.Id): compute.targetPools.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Pools
           delete:
             securedBy:
@@ -8965,7 +8965,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified target pool.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -8973,7 +8973,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.targetPools.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Pools
         post:
           securedBy:
@@ -8982,7 +8982,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a target pool in the specified project and region using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -8992,7 +8992,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetPools.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Pools
         get:
           securedBy:
@@ -9002,7 +9002,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of target pools available to the specified project and region.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -9041,7 +9041,7 @@ types:
               body:
                 application/json: TargetPoolList
           (commons.Id): compute.targetPools.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Pools
       /vpnTunnels:
         /{vpnTunnel}:
@@ -9058,7 +9058,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified VpnTunnel resource. Get a list of available VPN tunnels by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -9066,7 +9066,7 @@ types:
                 body:
                   application/json: VpnTunnel
             (commons.Id): compute.vpnTunnels.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Vpn Tunnels
           delete:
             securedBy:
@@ -9075,7 +9075,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified VpnTunnel resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -9083,7 +9083,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.vpnTunnels.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Vpn Tunnels
         post:
           securedBy:
@@ -9092,7 +9092,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a VpnTunnel resource in the specified project and region using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -9102,7 +9102,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.vpnTunnels.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Vpn Tunnels
         get:
           securedBy:
@@ -9112,7 +9112,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of VpnTunnel resources contained in the specified project and region.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -9151,7 +9151,7 @@ types:
               body:
                 application/json: VpnTunnelList
           (commons.Id): compute.vpnTunnels.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Vpn Tunnels
       get:
         securedBy:
@@ -9161,7 +9161,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Returns the specified Region resource. Get a list of available regions by making a list() request.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -9169,7 +9169,7 @@ types:
             body:
               application/json: Region
         (commons.Id): compute.regions.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Regions
     get:
       securedBy:
@@ -9179,7 +9179,7 @@ types:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/compute.readonly
       description: Retrieves the list of region resources available to the specified project.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -9218,7 +9218,7 @@ types:
           body:
             application/json: RegionList
       (commons.Id): compute.regions.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Regions
   /aggregated:
     /addresses:
@@ -9230,7 +9230,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of addresses.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9269,7 +9269,7 @@ types:
             body:
               application/json: AddressAggregatedList
         (commons.Id): compute.addresses.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Addresses
     /disks:
       get:
@@ -9280,7 +9280,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of persistent disks.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9319,7 +9319,7 @@ types:
             body:
               application/json: DiskAggregatedList
         (commons.Id): compute.disks.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Disks
     /instances:
       get:
@@ -9330,7 +9330,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves aggregated list of instances.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9369,7 +9369,7 @@ types:
             body:
               application/json: InstanceAggregatedList
         (commons.Id): compute.instances.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Instances
     /machineTypes:
       get:
@@ -9380,7 +9380,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of machine types.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9419,7 +9419,7 @@ types:
             body:
               application/json: MachineTypeAggregatedList
         (commons.Id): compute.machineTypes.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Machine Types
     /subnetworks:
       get:
@@ -9430,7 +9430,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of subnetworks.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9469,7 +9469,7 @@ types:
             body:
               application/json: SubnetworkAggregatedList
         (commons.Id): compute.subnetworks.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Subnetworks
     /instanceGroupManagers:
       get:
@@ -9480,7 +9480,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of managed instance groups and groups them by zone.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9519,7 +9519,7 @@ types:
             body:
               application/json: InstanceGroupManagerAggregatedList
         (commons.Id): compute.instanceGroupManagers.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Instance Group Managers
     /targetVpnGateways:
       get:
@@ -9530,7 +9530,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of target VPN gateways.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9569,7 +9569,7 @@ types:
             body:
               application/json: TargetVpnGatewayAggregatedList
         (commons.Id): compute.targetVpnGateways.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Vpn Gateways
     /targetInstances:
       get:
@@ -9580,7 +9580,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of target instances.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9619,7 +9619,7 @@ types:
             body:
               application/json: TargetInstanceAggregatedList
         (commons.Id): compute.targetInstances.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Instances
     /forwardingRules:
       get:
@@ -9630,7 +9630,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of forwarding rules.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9669,7 +9669,7 @@ types:
             body:
               application/json: ForwardingRuleAggregatedList
         (commons.Id): compute.forwardingRules.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Forwarding Rules
     /routers:
       get:
@@ -9680,7 +9680,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of routers.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9719,7 +9719,7 @@ types:
             body:
               application/json: RouterAggregatedList
         (commons.Id): compute.routers.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Routers
     /operations:
       get:
@@ -9730,7 +9730,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of all operations.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9769,7 +9769,7 @@ types:
             body:
               application/json: OperationAggregatedList
         (commons.Id): compute.globalOperations.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Operations
     /targetPools:
       get:
@@ -9780,7 +9780,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of target pools.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9819,7 +9819,7 @@ types:
             body:
               application/json: TargetPoolAggregatedList
         (commons.Id): compute.targetPools.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Target Pools
     /diskTypes:
       get:
@@ -9830,7 +9830,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of disk types.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9869,7 +9869,7 @@ types:
             body:
               application/json: DiskTypeAggregatedList
         (commons.Id): compute.diskTypes.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Disk Types
     /instanceGroups:
       get:
@@ -9880,7 +9880,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves the list of instance groups and sorts them by zone.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9919,7 +9919,7 @@ types:
             body:
               application/json: InstanceGroupAggregatedList
         (commons.Id): compute.instanceGroups.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Instance Groups
     /vpnTunnels:
       get:
@@ -9930,7 +9930,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of VPN tunnels.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -9969,7 +9969,7 @@ types:
             body:
               application/json: VpnTunnelAggregatedList
         (commons.Id): compute.vpnTunnels.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Vpn Tunnels
     /autoscalers:
       get:
@@ -9980,7 +9980,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Retrieves an aggregated list of autoscalers.
-        displayName: aggregated List
+        displayName: Aggregated List
         is:
         - hasParameters
         queryParameters:
@@ -10019,7 +10019,7 @@ types:
             body:
               application/json: AutoscalerAggregatedList
         (commons.Id): compute.autoscalers.aggregatedList
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Autoscalers
   /setCommonInstanceMetadata:
     post:
@@ -10029,7 +10029,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/compute
       description: Sets metadata common to all instances within the specified project using the data included in the request.
-      displayName: set Common Instance Metadata
+      displayName: Set Common Instance Metadata
       is:
       - hasParameters
       body:
@@ -10039,7 +10039,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): compute.projects.setCommonInstanceMetadata
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /moveDisk:
     post:
@@ -10049,7 +10049,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/compute
       description: Moves a persistent disk from one zone to another.
-      displayName: move Disk
+      displayName: Move Disk
       is:
       - hasParameters
       body:
@@ -10059,7 +10059,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): compute.projects.moveDisk
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /moveInstance:
     post:
@@ -10069,7 +10069,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/compute
       description: Moves an instance and its attached persistent disks from one zone to another.
-      displayName: move Instance
+      displayName: Move Instance
       is:
       - hasParameters
       body:
@@ -10079,7 +10079,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): compute.projects.moveInstance
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /setUsageExportBucket:
     post:
@@ -10092,7 +10092,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Enables the usage export feature and sets the usage export bucket where reports are stored. If you provide an empty request body using this method, the usage export feature will be disabled.
-      displayName: set Usage Export Bucket
+      displayName: Set Usage Export Bucket
       is:
       - hasParameters
       body:
@@ -10102,7 +10102,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): compute.projects.setUsageExportBucket
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /zones:
     /{zone}:
@@ -10126,7 +10126,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Creates a snapshot of a specified persistent disk.
-              displayName: create Snapshot
+              displayName: Create Snapshot
               is:
               - hasParameters
               body:
@@ -10136,7 +10136,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.disks.createSnapshot
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Disks
           /resize:
             post:
@@ -10146,7 +10146,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Resizes the specified persistent disk.
-              displayName: resize
+              displayName: Resize
               is:
               - hasParameters
               body:
@@ -10156,7 +10156,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.disks.resize
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Disks
           get:
             securedBy:
@@ -10166,7 +10166,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -10174,7 +10174,7 @@ types:
                 body:
                   application/json: Disk
             (commons.Id): compute.disks.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Disks
           delete:
             securedBy:
@@ -10183,7 +10183,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -10191,7 +10191,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.disks.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Disks
         post:
           securedBy:
@@ -10200,7 +10200,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a persistent disk in the specified project using the data in the request. You can create a disk with a sourceImage, a sourceSnapshot, or create an empty 500 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           queryParameters:
@@ -10214,7 +10214,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.disks.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Disks
         get:
           securedBy:
@@ -10224,7 +10224,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of persistent disks contained within the specified zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -10263,7 +10263,7 @@ types:
               body:
                 application/json: DiskList
           (commons.Id): compute.disks.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Disks
       /instances:
         /{instance}:
@@ -10280,7 +10280,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Changes the machine type for a stopped instance to the machine type specified in the request.
-              displayName: set Machine Type
+              displayName: Set Machine Type
               is:
               - hasParameters
               body:
@@ -10290,7 +10290,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.setMachineType
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /attachDisk:
             post:
@@ -10300,7 +10300,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Attaches a Disk resource to an instance.
-              displayName: attach Disk
+              displayName: Attach Disk
               is:
               - hasParameters
               body:
@@ -10310,7 +10310,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.attachDisk
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /deleteAccessConfig:
             post:
@@ -10320,7 +10320,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Deletes an access config from an instance's network interface.
-              displayName: delete Access Config
+              displayName: Delete Access Config
               is:
               - hasParameters
               queryParameters:
@@ -10335,7 +10335,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.deleteAccessConfig
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /serialPort:
             get:
@@ -10346,7 +10346,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Returns the specified instance's serial port output.
-              displayName: get Serial Port Output
+              displayName: Get Serial Port Output
               is:
               - hasParameters
               queryParameters:
@@ -10362,7 +10362,7 @@ types:
                   body:
                     application/json: SerialPortOutput
               (commons.Id): compute.instances.getSerialPortOutput
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /setScheduling:
             post:
@@ -10372,7 +10372,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets an instance's scheduling options.
-              displayName: set Scheduling
+              displayName: Set Scheduling
               is:
               - hasParameters
               body:
@@ -10382,7 +10382,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.setScheduling
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /start:
             post:
@@ -10392,7 +10392,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.
-              displayName: start
+              displayName: Start
               is:
               - hasParameters
               responses:
@@ -10400,7 +10400,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.start
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /setTags:
             post:
@@ -10410,7 +10410,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets tags for the specified instance to the data included in the request.
-              displayName: set Tags
+              displayName: Set Tags
               is:
               - hasParameters
               body:
@@ -10420,7 +10420,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.setTags
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /startWithEncryptionKey:
             post:
@@ -10430,7 +10430,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Starts an instance that was stopped using the using the instances().stop method. For more information, see Restart an instance.
-              displayName: start With Encryption Key
+              displayName: Start With Encryption Key
               is:
               - hasParameters
               body:
@@ -10440,7 +10440,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.startWithEncryptionKey
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /detachDisk:
             post:
@@ -10450,7 +10450,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Detaches a disk from an instance.
-              displayName: detach Disk
+              displayName: Detach Disk
               is:
               - hasParameters
               queryParameters:
@@ -10462,7 +10462,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.detachDisk
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /setMetadata:
             post:
@@ -10472,7 +10472,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets metadata for the specified instance to the data included in the request.
-              displayName: set Metadata
+              displayName: Set Metadata
               is:
               - hasParameters
               body:
@@ -10482,7 +10482,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.setMetadata
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /stop:
             post:
@@ -10492,7 +10492,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time. Stopped instances do not incur per-minute, virtual machine usage charges while they are stopped, but any resources that the virtual machine is using, such as persistent disks and static IP addresses, will continue to be charged until they are deleted. For more information, see Stopping an instance.
-              displayName: stop
+              displayName: Stop
               is:
               - hasParameters
               responses:
@@ -10500,7 +10500,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.stop
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /addAccessConfig:
             post:
@@ -10510,7 +10510,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds an access config to an instance's network interface.
-              displayName: add Access Config
+              displayName: Add Access Config
               is:
               - hasParameters
               queryParameters:
@@ -10524,7 +10524,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.addAccessConfig
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /reset:
             post:
@@ -10534,7 +10534,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Performs a hard reset on the instance.
-              displayName: reset
+              displayName: Reset
               is:
               - hasParameters
               responses:
@@ -10542,7 +10542,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.reset
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           /setDiskAutoDelete:
             post:
@@ -10552,7 +10552,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the auto-delete flag for a disk attached to an instance.
-              displayName: set Disk Auto Delete
+              displayName: Set Disk Auto Delete
               is:
               - hasParameters
               queryParameters:
@@ -10568,7 +10568,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instances.setDiskAutoDelete
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instances
           delete:
             securedBy:
@@ -10577,7 +10577,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -10585,7 +10585,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.instances.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instances
           get:
             securedBy:
@@ -10595,7 +10595,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -10603,7 +10603,7 @@ types:
                 body:
                   application/json: Instance
             (commons.Id): compute.instances.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instances
         post:
           securedBy:
@@ -10612,7 +10612,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an instance resource in the specified project using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -10622,7 +10622,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.instances.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instances
         get:
           securedBy:
@@ -10632,7 +10632,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of instances contained within the specified zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -10671,7 +10671,7 @@ types:
               body:
                 application/json: InstanceList
           (commons.Id): compute.instances.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instances
       /machineTypes:
         /{machineType}:
@@ -10688,7 +10688,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified machine type. Get a list of available machine types by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -10696,7 +10696,7 @@ types:
                 body:
                   application/json: MachineType
             (commons.Id): compute.machineTypes.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Machine Types
         get:
           securedBy:
@@ -10706,7 +10706,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of machine types available to the specified project.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -10745,7 +10745,7 @@ types:
               body:
                 application/json: MachineTypeList
           (commons.Id): compute.machineTypes.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Machine Types
       /instanceGroupManagers:
         /{instanceGroupManager}:
@@ -10761,7 +10761,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you recreate them.
-              displayName: set Instance Template
+              displayName: Set Instance Template
               is:
               - hasParameters
               body:
@@ -10771,7 +10771,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroupManagers.setInstanceTemplate
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /setTargetPools:
             post:
@@ -10781,7 +10781,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the target pools to which all instances in this managed instance group are assigned. The target pools automatically apply to all of the instances in the managed instance group. This operation is marked DONE when you make the request even if the instances have not yet been added to their target pools. The change might take some time to apply to all of the instances in the group depending on the size of the group.
-              displayName: set Target Pools
+              displayName: Set Target Pools
               is:
               - hasParameters
               body:
@@ -10791,7 +10791,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroupManagers.setTargetPools
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /recreateInstances:
             post:
@@ -10801,7 +10801,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to recreate the specified instances in the managed instance group. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the action is scheduled even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
-              displayName: recreate Instances
+              displayName: Recreate Instances
               is:
               - hasParameters
               body:
@@ -10811,7 +10811,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroupManagers.recreateInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /deleteInstances:
             post:
@@ -10821,7 +10821,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to delete the specified instances in the managed instance group. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
-              displayName: delete Instances
+              displayName: Delete Instances
               is:
               - hasParameters
               body:
@@ -10831,7 +10831,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroupManagers.deleteInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /resize:
             post:
@@ -10841,7 +10841,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Resizes the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
-              displayName: resize
+              displayName: Resize
               is:
               - hasParameters
               queryParameters:
@@ -10854,7 +10854,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroupManagers.resize
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /listManagedInstances:
             post:
@@ -10865,7 +10865,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action.
-              displayName: list Managed Instances
+              displayName: List Managed Instances
               is:
               - hasParameters
               responses:
@@ -10873,7 +10873,7 @@ types:
                   body:
                     application/json: InstanceGroupManagersListManagedInstancesResponse
               (commons.Id): compute.instanceGroupManagers.listManagedInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /abandonInstances:
             post:
@@ -10883,7 +10883,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Schedules a group action to remove the specified instances from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
-              displayName: abandon Instances
+              displayName: Abandon Instances
               is:
               - hasParameters
               body:
@@ -10893,7 +10893,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroupManagers.abandonInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           get:
             securedBy:
@@ -10903,7 +10903,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns all of the details about the specified managed instance group. Get a list of available managed instance groups by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -10911,7 +10911,7 @@ types:
                 body:
                   application/json: InstanceGroupManager
             (commons.Id): compute.instanceGroupManagers.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instance Group Managers
           delete:
             securedBy:
@@ -10920,7 +10920,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified managed instance group and all of the instances in that group. Note that the instance group must not belong to a backend service. Read  Deleting an instance group for more information.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -10928,7 +10928,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.instanceGroupManagers.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instance Group Managers
         post:
           securedBy:
@@ -10937,7 +10937,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a managed instance group using the information that you specify in the request. After the group is created, it schedules an action to create instances in the group using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -10947,7 +10947,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.instanceGroupManagers.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Group Managers
         get:
           securedBy:
@@ -10957,7 +10957,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of managed instance groups that are contained within the specified project and zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -10996,7 +10996,7 @@ types:
               body:
                 application/json: InstanceGroupManagerList
           (commons.Id): compute.instanceGroupManagers.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Group Managers
       /targetInstances:
         /{targetInstance}:
@@ -11013,7 +11013,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified TargetInstance resource. Get a list of available target instances by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -11021,7 +11021,7 @@ types:
                 body:
                   application/json: TargetInstance
             (commons.Id): compute.targetInstances.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Instances
           delete:
             securedBy:
@@ -11030,7 +11030,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified TargetInstance resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -11038,7 +11038,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.targetInstances.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Target Instances
         post:
           securedBy:
@@ -11047,7 +11047,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates a TargetInstance resource in the specified project and zone using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -11057,7 +11057,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetInstances.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Instances
         get:
           securedBy:
@@ -11067,7 +11067,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of TargetInstance resources available to the specified project and zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -11106,7 +11106,7 @@ types:
               body:
                 application/json: TargetInstanceList
           (commons.Id): compute.targetInstances.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Instances
       /operations:
         /{operation}:
@@ -11123,7 +11123,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Retrieves the specified zone-specific Operations resource.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -11131,7 +11131,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.zoneOperations.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Zone Operations
           delete:
             securedBy:
@@ -11140,11 +11140,11 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified zone-specific Operations resource.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             (commons.Id): compute.zoneOperations.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Zone Operations
         get:
           securedBy:
@@ -11154,7 +11154,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of Operation resources contained within the specified zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -11193,7 +11193,7 @@ types:
               body:
                 application/json: OperationList
           (commons.Id): compute.zoneOperations.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Zone Operations
       /diskTypes:
         /{diskType}:
@@ -11210,7 +11210,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified disk type. Get a list of available disk types by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -11218,7 +11218,7 @@ types:
                 body:
                   application/json: DiskType
             (commons.Id): compute.diskTypes.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Disk Types
         get:
           securedBy:
@@ -11228,7 +11228,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of disk types available to the specified project.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -11267,7 +11267,7 @@ types:
               body:
                 application/json: DiskTypeList
           (commons.Id): compute.diskTypes.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Disk Types
       /instanceGroups:
         /{instanceGroup}:
@@ -11283,7 +11283,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes one or more instances from the specified instance group, but does not delete those instances.
-              displayName: remove Instances
+              displayName: Remove Instances
               is:
               - hasParameters
               body:
@@ -11293,7 +11293,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroups.removeInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Groups
           /listInstances:
             post:
@@ -11304,7 +11304,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/compute.readonly
               description: Lists the instances in the specified instance group.
-              displayName: list Instances
+              displayName: List Instances
               is:
               - hasParameters
               queryParameters:
@@ -11345,7 +11345,7 @@ types:
                   body:
                     application/json: InstanceGroupsListInstances
               (commons.Id): compute.instanceGroups.listInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Groups
           /setNamedPorts:
             post:
@@ -11355,7 +11355,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the named ports for the specified instance group.
-              displayName: set Named Ports
+              displayName: Set Named Ports
               is:
               - hasParameters
               body:
@@ -11365,7 +11365,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroups.setNamedPorts
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Groups
           /addInstances:
             post:
@@ -11375,7 +11375,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Adds a list of instances to the specified instance group. All of the instances in the instance group must be in the same network/subnetwork. Read  Adding instances for more information.
-              displayName: add Instances
+              displayName: Add Instances
               is:
               - hasParameters
               body:
@@ -11385,7 +11385,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): compute.instanceGroups.addInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Groups
           get:
             securedBy:
@@ -11395,7 +11395,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -11403,7 +11403,7 @@ types:
                 body:
                   application/json: InstanceGroup
             (commons.Id): compute.instanceGroups.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instance Groups
           delete:
             securedBy:
@@ -11412,7 +11412,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified instance group. The instances in the group are not deleted. Note that instance group must not belong to a backend service. Read  Deleting an instance group for more information.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -11420,7 +11420,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.instanceGroups.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instance Groups
         post:
           securedBy:
@@ -11429,7 +11429,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an instance group in the specified project using the parameters that are included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -11439,7 +11439,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.instanceGroups.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Groups
         get:
           securedBy:
@@ -11449,7 +11449,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of instance groups that are located in the specified project and zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -11488,7 +11488,7 @@ types:
               body:
                 application/json: InstanceGroupList
           (commons.Id): compute.instanceGroups.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Groups
       /autoscalers:
         /{autoscaler}:
@@ -11505,7 +11505,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -11513,7 +11513,7 @@ types:
                 body:
                   application/json: Autoscaler
             (commons.Id): compute.autoscalers.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Autoscalers
           delete:
             securedBy:
@@ -11522,7 +11522,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the specified autoscaler.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -11530,7 +11530,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): compute.autoscalers.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Autoscalers
         patch:
           securedBy:
@@ -11539,7 +11539,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           queryParameters:
@@ -11554,7 +11554,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.autoscalers.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Autoscalers
         post:
           securedBy:
@@ -11563,7 +11563,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an autoscaler in the specified project using the data included in the request.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -11573,7 +11573,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.autoscalers.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Autoscalers
         put:
           securedBy:
@@ -11582,7 +11582,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Updates an autoscaler in the specified project using the data included in the request.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           queryParameters:
@@ -11597,7 +11597,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.autoscalers.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Autoscalers
         get:
           securedBy:
@@ -11607,7 +11607,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves a list of autoscalers contained within the specified zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -11646,7 +11646,7 @@ types:
               body:
                 application/json: AutoscalerList
           (commons.Id): compute.autoscalers.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Autoscalers
       get:
         securedBy:
@@ -11656,7 +11656,7 @@ types:
             - https://www.googleapis.com/auth/compute
             - https://www.googleapis.com/auth/compute.readonly
         description: Returns the specified Zone resource. Get a list of available zones by making a list() request.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -11664,7 +11664,7 @@ types:
             body:
               application/json: Zone
         (commons.Id): compute.zones.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Zones
     get:
       securedBy:
@@ -11674,7 +11674,7 @@ types:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/compute.readonly
       description: Retrieves the list of Zone resources available to the specified project.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -11713,7 +11713,7 @@ types:
           body:
             application/json: ZoneList
       (commons.Id): compute.zones.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Zones
   /targetHttpsProxies:
     /{targetHttpsProxy}:
@@ -11730,7 +11730,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Replaces SslCertificates for TargetHttpsProxy.
-          displayName: set Ssl Certificates
+          displayName: Set Ssl Certificates
           is:
           - hasParameters
           body:
@@ -11740,7 +11740,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetHttpsProxies.setSslCertificates
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Https Proxies
       /setUrlMap:
         post:
@@ -11750,7 +11750,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Changes the URL map for TargetHttpsProxy.
-          displayName: set Url Map
+          displayName: Set Url Map
           is:
           - hasParameters
           body:
@@ -11760,7 +11760,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetHttpsProxies.setUrlMap
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Https Proxies
   /targetHttpProxies:
     /{targetHttpProxy}:
@@ -11777,7 +11777,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Changes the URL map for TargetHttpProxy.
-          displayName: set Url Map
+          displayName: Set Url Map
           is:
           - hasParameters
           body:
@@ -11787,7 +11787,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): compute.targetHttpProxies.setUrlMap
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Target Http Proxies
   get:
     securedBy:
@@ -11797,7 +11797,7 @@ types:
         - https://www.googleapis.com/auth/compute
         - https://www.googleapis.com/auth/compute.readonly
     description: Returns the specified Project resource.
-    displayName: get
+    displayName: Get
     is:
     - hasParameters
     responses:
@@ -11805,5 +11805,5 @@ types:
         body:
           application/json: Project
     (commons.Id): compute.projects.get
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Projects

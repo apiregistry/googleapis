@@ -280,7 +280,7 @@ types:
                       && resource.mimeType.startsWith('image/')
               }
             }
-      displayName: test
+      displayName: Test
       is:
       - hasParameters
       body:
@@ -290,7 +290,7 @@ types:
           body:
             application/json: TestRulesetResponse
       (commons.Id): firebaserules.projects.test
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
   /{name}:
     uriParameters:
@@ -315,7 +315,7 @@ types:
           caller. `Source` containing syntactic or semantics errors will result in an
           error response indicating the first error encountered. For a detailed view
           of `Source` issues, use TestRuleset.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -325,7 +325,7 @@ types:
             body:
               application/json: Ruleset
         (commons.Id): firebaserules.projects.rulesets.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Rulesets
       get:
@@ -341,7 +341,7 @@ types:
 
           The full `Source` contents of a `Ruleset` may be retrieved with
           GetRuleset.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -361,7 +361,7 @@ types:
             body:
               application/json: ListRulesetsResponse
         (commons.Id): firebaserules.projects.rulesets.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Rulesets
     /releases:
@@ -395,7 +395,7 @@ types:
           refers to a new `Ruleset`. The `Ruleset` reference for a `Release` may be
           updated using the UpdateRelease method, and the custom `Release` name
           may be referenced by specifying the `X-Firebase-Rules-Release-Name` header.
-        displayName: create
+        displayName: Create
         is:
         - hasParameters
         body:
@@ -405,7 +405,7 @@ types:
             body:
               application/json: Release
         (commons.Id): firebaserules.projects.releases.create
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Releases
       get:
@@ -418,7 +418,7 @@ types:
         description: |-
           List the `Release` values for a project. This list may optionally be
           filtered by `Release` name or `Ruleset` id or both.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -466,7 +466,7 @@ types:
             body:
               application/json: ListReleasesResponse
         (commons.Id): firebaserules.projects.releases.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Releases
     get:
@@ -477,7 +477,7 @@ types:
           - https://www.googleapis.com/auth/firebase
           - https://www.googleapis.com/auth/firebase.readonly
       description: Get a `Release` by name.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       - hasParameters
@@ -486,7 +486,7 @@ types:
           body:
             application/json: Release
       (commons.Id): firebaserules.projects.releases.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Releases
     delete:
@@ -496,7 +496,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/firebase
       description: Delete a `Release` by resource name.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       - hasParameters
@@ -505,7 +505,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): firebaserules.projects.releases.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Releases
     put:
@@ -520,7 +520,7 @@ types:
         Only updates to the `ruleset_name` field will be honored. `Release` rename
         is not supported. To create a `Release` use the CreateRelease method
         instead.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -530,6 +530,6 @@ types:
           body:
             application/json: Release
       (commons.Id): firebaserules.projects.releases.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Releases

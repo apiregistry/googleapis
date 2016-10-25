@@ -819,7 +819,7 @@ types:
         - https://www.googleapis.com/auth/calendar
         - https://www.googleapis.com/auth/calendar.readonly
     description: Returns free/busy information for a set of calendars.
-    displayName: query
+    displayName: Query
     is:
     - hasParameters
     body:
@@ -829,7 +829,7 @@ types:
         body:
           application/json: FreeBusyResponse
     (commons.Id): calendar.freebusy.query
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Freebusy
 /users:
   /me:
@@ -842,7 +842,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Watch for changes to Settings resources.
-          displayName: watch
+          displayName: Watch
           is:
           - hasParameters
           queryParameters:
@@ -868,7 +868,7 @@ types:
               body:
                 application/json: Channel
           (commons.Id): calendar.settings.watch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Settings
       /{setting}:
         uriParameters:
@@ -882,7 +882,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns a single user setting.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -890,7 +890,7 @@ types:
               body:
                 application/json: Setting
           (commons.Id): calendar.settings.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Settings
       get:
         securedBy:
@@ -899,7 +899,7 @@ types:
             - https://www.googleapis.com/auth/calendar
             - https://www.googleapis.com/auth/calendar.readonly
         description: Returns all user settings for the authenticated user.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -923,7 +923,7 @@ types:
             body:
               application/json: Settings
         (commons.Id): calendar.settings.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Settings
     /calendarList:
       /{calendarId}:
@@ -937,7 +937,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an entry on the user's calendar list. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           queryParameters:
@@ -951,7 +951,7 @@ types:
               body:
                 application/json: CalendarListEntry
           (commons.Id): calendar.calendarList.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Calendar List
         get:
           securedBy:
@@ -960,7 +960,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns an entry on the user's calendar list.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -968,7 +968,7 @@ types:
               body:
                 application/json: CalendarListEntry
           (commons.Id): calendar.calendarList.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Calendar List
         put:
           securedBy:
@@ -976,7 +976,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an entry on the user's calendar list.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           queryParameters:
@@ -990,7 +990,7 @@ types:
               body:
                 application/json: CalendarListEntry
           (commons.Id): calendar.calendarList.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Calendar List
         delete:
           securedBy:
@@ -998,11 +998,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Deletes an entry on the user's calendar list.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): calendar.calendarList.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Calendar List
       /watch:
         post:
@@ -1012,7 +1012,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Watch for changes to CalendarList resources.
-          displayName: watch
+          displayName: Watch
           is:
           - hasParameters
           queryParameters:
@@ -1058,7 +1058,7 @@ types:
               body:
                 application/json: Channel
           (commons.Id): calendar.calendarList.watch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Calendar List
       post:
         securedBy:
@@ -1066,7 +1066,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Adds an entry to the user's calendar list.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         queryParameters:
@@ -1080,7 +1080,7 @@ types:
             body:
               application/json: CalendarListEntry
         (commons.Id): calendar.calendarList.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Calendar List
       get:
         securedBy:
@@ -1089,7 +1089,7 @@ types:
             - https://www.googleapis.com/auth/calendar
             - https://www.googleapis.com/auth/calendar.readonly
         description: Returns entries on the user's calendar list.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1133,7 +1133,7 @@ types:
             body:
               application/json: CalendarList
         (commons.Id): calendar.calendarList.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Calendar List
 /channels:
   /stop:
@@ -1144,13 +1144,13 @@ types:
           - https://www.googleapis.com/auth/calendar
           - https://www.googleapis.com/auth/calendar.readonly
       description: Stop watching resources through this channel
-      displayName: stop
+      displayName: Stop
       is:
       - hasParameters
       body:
         application/json: Channel
       (commons.Id): calendar.channels.stop
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Channels
 /calendars:
   /{calendarId}:
@@ -1165,11 +1165,11 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.
-        displayName: clear
+        displayName: Clear
         is:
         - hasParameters
         (commons.Id): calendar.calendars.clear
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Calendars
     /acl:
       /{ruleId}:
@@ -1183,7 +1183,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an access control rule. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -1193,7 +1193,7 @@ types:
               body:
                 application/json: AclRule
           (commons.Id): calendar.acl.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Acl
         get:
           securedBy:
@@ -1202,7 +1202,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns an access control rule.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1210,7 +1210,7 @@ types:
               body:
                 application/json: AclRule
           (commons.Id): calendar.acl.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Acl
         put:
           securedBy:
@@ -1218,7 +1218,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an access control rule.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -1228,7 +1228,7 @@ types:
               body:
                 application/json: AclRule
           (commons.Id): calendar.acl.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Acl
         delete:
           securedBy:
@@ -1236,11 +1236,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Deletes an access control rule.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): calendar.acl.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Acl
       /watch:
         post:
@@ -1249,7 +1249,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Watch for changes to ACL resources.
-          displayName: watch
+          displayName: Watch
           is:
           - hasParameters
           queryParameters:
@@ -1278,7 +1278,7 @@ types:
               body:
                 application/json: Channel
           (commons.Id): calendar.acl.watch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Acl
       post:
         securedBy:
@@ -1286,7 +1286,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Creates an access control rule.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -1296,7 +1296,7 @@ types:
             body:
               application/json: AclRule
         (commons.Id): calendar.acl.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Acl
       get:
         securedBy:
@@ -1304,7 +1304,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Returns the rules in the access control list for the calendar.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1331,7 +1331,7 @@ types:
             body:
               application/json: Acl
         (commons.Id): calendar.acl.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Acl
     /events:
       /{eventId}:
@@ -1346,7 +1346,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/calendar
             description: Moves an event to another calendar, i.e. changes an event's organizer.
-            displayName: move
+            displayName: Move
             is:
             - hasParameters
             queryParameters:
@@ -1361,7 +1361,7 @@ types:
                 body:
                   application/json: Event
             (commons.Id): calendar.events.move
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Events
         /instances:
           get:
@@ -1371,7 +1371,7 @@ types:
                 - https://www.googleapis.com/auth/calendar
                 - https://www.googleapis.com/auth/calendar.readonly
             description: Returns instances of the specified recurring event.
-            displayName: instances
+            displayName: Instances
             is:
             - hasParameters
             queryParameters:
@@ -1411,7 +1411,7 @@ types:
                 body:
                   application/json: Events
             (commons.Id): calendar.events.instances
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Events
         patch:
           securedBy:
@@ -1419,7 +1419,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an event. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           queryParameters:
@@ -1444,7 +1444,7 @@ types:
               body:
                 application/json: Event
           (commons.Id): calendar.events.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
         get:
           securedBy:
@@ -1453,7 +1453,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Returns an event.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           queryParameters:
@@ -1473,7 +1473,7 @@ types:
               body:
                 application/json: Event
           (commons.Id): calendar.events.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
         put:
           securedBy:
@@ -1481,7 +1481,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Updates an event.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           queryParameters:
@@ -1506,7 +1506,7 @@ types:
               body:
                 application/json: Event
           (commons.Id): calendar.events.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
         delete:
           securedBy:
@@ -1514,7 +1514,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Deletes an event.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           queryParameters:
@@ -1522,7 +1522,7 @@ types:
               type: boolean
               description: Whether to send notifications about the deletion of the event. Optional. The default is False.
           (commons.Id): calendar.events.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
       /import:
         post:
@@ -1531,7 +1531,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Imports an event. This operation is used to add a private copy of an existing event to a calendar.
-          displayName: import
+          displayName: Import
           is:
           - hasParameters
           queryParameters:
@@ -1545,7 +1545,7 @@ types:
               body:
                 application/json: Event
           (commons.Id): calendar.events.import
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
       /watch:
         post:
@@ -1555,7 +1555,7 @@ types:
               - https://www.googleapis.com/auth/calendar
               - https://www.googleapis.com/auth/calendar.readonly
           description: Watch for changes to Events resources.
-          displayName: watch
+          displayName: Watch
           is:
           - hasParameters
           queryParameters:
@@ -1641,7 +1641,7 @@ types:
               body:
                 application/json: Channel
           (commons.Id): calendar.events.watch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
       /quickAdd:
         post:
@@ -1650,7 +1650,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/calendar
           description: Creates an event based on a simple text string.
-          displayName: quick Add
+          displayName: Quick Add
           is:
           - hasParameters
           queryParameters:
@@ -1665,7 +1665,7 @@ types:
               body:
                 application/json: Event
           (commons.Id): calendar.events.quickAdd
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Events
       post:
         securedBy:
@@ -1673,7 +1673,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/calendar
         description: Creates an event.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         queryParameters:
@@ -1695,7 +1695,7 @@ types:
             body:
               application/json: Event
         (commons.Id): calendar.events.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Events
       get:
         securedBy:
@@ -1704,7 +1704,7 @@ types:
             - https://www.googleapis.com/auth/calendar
             - https://www.googleapis.com/auth/calendar.readonly
         description: Returns events on the specified calendar.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1787,7 +1787,7 @@ types:
             body:
               application/json: Events
         (commons.Id): calendar.events.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Events
     patch:
       securedBy:
@@ -1795,7 +1795,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/calendar
       description: Updates metadata for a calendar. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -1805,7 +1805,7 @@ types:
           body:
             application/json: Calendar
       (commons.Id): calendar.calendars.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Calendars
     get:
       securedBy:
@@ -1814,7 +1814,7 @@ types:
           - https://www.googleapis.com/auth/calendar
           - https://www.googleapis.com/auth/calendar.readonly
       description: Returns metadata for a calendar.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -1822,7 +1822,7 @@ types:
           body:
             application/json: Calendar
       (commons.Id): calendar.calendars.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Calendars
     put:
       securedBy:
@@ -1830,7 +1830,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/calendar
       description: Updates metadata for a calendar.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -1840,7 +1840,7 @@ types:
           body:
             application/json: Calendar
       (commons.Id): calendar.calendars.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Calendars
     delete:
       securedBy:
@@ -1848,11 +1848,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/calendar
       description: Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): calendar.calendars.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Calendars
   post:
     securedBy:
@@ -1860,7 +1860,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/calendar
     description: Creates a secondary calendar.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -1870,7 +1870,7 @@ types:
         body:
           application/json: Calendar
     (commons.Id): calendar.calendars.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Calendars
 /colors:
   get:
@@ -1880,7 +1880,7 @@ types:
         - https://www.googleapis.com/auth/calendar
         - https://www.googleapis.com/auth/calendar.readonly
     description: Returns the color definitions for calendars and events.
-    displayName: get
+    displayName: Get
     is:
     - hasParameters
     responses:
@@ -1888,5 +1888,5 @@ types:
         body:
           application/json: Colors
     (commons.Id): calendar.colors.get
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Colors

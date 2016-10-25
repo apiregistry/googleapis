@@ -142,7 +142,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/urlshortener
       description: Retrieves a list of URLs shortened by a user.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -163,7 +163,7 @@ types:
           body:
             application/json: UrlHistory
       (commons.Id): urlshortener.url.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Url
   get:
     securedBy:
@@ -171,7 +171,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/urlshortener
     description: Expands a short URL or gets creation time and analytics.
-    displayName: get
+    displayName: Get
     is:
     - hasParameters
     queryParameters:
@@ -194,7 +194,7 @@ types:
         body:
           application/json: Url
     (commons.Id): urlshortener.url.get
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Url
   post:
     securedBy:
@@ -202,7 +202,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/urlshortener
     description: Creates a new short URL.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -212,5 +212,5 @@ types:
         body:
           application/json: Url
     (commons.Id): urlshortener.url.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Url

@@ -394,7 +394,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Sets the instance template to use when creating new instances in this group. Existing instances are not affected.
-              displayName: set Instance Template
+              displayName: Set Instance Template
               is:
               - hasParameters
               body:
@@ -404,7 +404,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): replicapool.instanceGroupManagers.setInstanceTemplate
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /setTargetPools:
             post:
@@ -414,7 +414,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
-              displayName: set Target Pools
+              displayName: Set Target Pools
               is:
               - hasParameters
               body:
@@ -424,7 +424,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): replicapool.instanceGroupManagers.setTargetPools
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /recreateInstances:
             post:
@@ -434,7 +434,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Recreates the specified instances. The instances are deleted, then recreated using the instance group manager's current instance template.
-              displayName: recreate Instances
+              displayName: Recreate Instances
               is:
               - hasParameters
               body:
@@ -444,7 +444,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): replicapool.instanceGroupManagers.recreateInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /deleteInstances:
             post:
@@ -454,7 +454,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Deletes the specified instances. The instances are deleted, then removed from the instance group and any target pools of which they were a member. The targetSize of the instance group manager is reduced by the number of instances deleted.
-              displayName: delete Instances
+              displayName: Delete Instances
               is:
               - hasParameters
               body:
@@ -464,7 +464,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): replicapool.instanceGroupManagers.deleteInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /resize:
             post:
@@ -474,7 +474,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Resizes the managed instance group up or down. If resized up, new instances are created using the current instance template. If resized down, instances are removed in the order outlined in Resizing a managed instance group.
-              displayName: resize
+              displayName: Resize
               is:
               - hasParameters
               queryParameters:
@@ -488,7 +488,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): replicapool.instanceGroupManagers.resize
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           /abandonInstances:
             post:
@@ -498,7 +498,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/compute
               description: Removes the specified instances from the managed instance group, and from any target pools of which they were members, without deleting the instances.
-              displayName: abandon Instances
+              displayName: Abandon Instances
               is:
               - hasParameters
               body:
@@ -508,7 +508,7 @@ types:
                   body:
                     application/json: Operation
               (commons.Id): replicapool.instanceGroupManagers.abandonInstances
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Instance Group Managers
           get:
             securedBy:
@@ -519,7 +519,7 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/compute.readonly
             description: Returns the specified Instance Group Manager resource.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -527,7 +527,7 @@ types:
                 body:
                   application/json: InstanceGroupManager
             (commons.Id): replicapool.instanceGroupManagers.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instance Group Managers
           delete:
             securedBy:
@@ -536,7 +536,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Deletes the instance group manager and all instances contained within. If you'd like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             responses:
@@ -544,7 +544,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): replicapool.instanceGroupManagers.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Instance Group Managers
         post:
           securedBy:
@@ -553,7 +553,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Creates an instance group manager, as well as the instance group and the specified number of instances.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           queryParameters:
@@ -569,7 +569,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): replicapool.instanceGroupManagers.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Group Managers
         get:
           securedBy:
@@ -580,7 +580,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/compute.readonly
           description: Retrieves the list of Instance Group Manager resources contained within the specified zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -602,7 +602,7 @@ types:
               body:
                 application/json: InstanceGroupManagerList
           (commons.Id): replicapool.instanceGroupManagers.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Instance Group Managers
       /operations:
         /{operation}:
@@ -618,7 +618,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/compute
             description: Retrieves the specified zone-specific operation resource.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -626,7 +626,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): replicapool.zoneOperations.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Zone Operations
         get:
           securedBy:
@@ -635,7 +635,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/compute
           description: Retrieves the list of operation resources contained within the specified zone.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -657,5 +657,5 @@ types:
               body:
                 application/json: OperationList
           (commons.Id): replicapool.zoneOperations.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Zone Operations

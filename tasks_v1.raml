@@ -178,7 +178,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the authenticated user's specified task list. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -188,7 +188,7 @@ types:
               body:
                 application/json: TaskList
           (commons.Id): tasks.tasklists.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasklists
         get:
           securedBy:
@@ -197,7 +197,7 @@ types:
               - https://www.googleapis.com/auth/tasks
               - https://www.googleapis.com/auth/tasks.readonly
           description: Returns the authenticated user's specified task list.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -205,7 +205,7 @@ types:
               body:
                 application/json: TaskList
           (commons.Id): tasks.tasklists.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasklists
         put:
           securedBy:
@@ -213,7 +213,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the authenticated user's specified task list.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -223,7 +223,7 @@ types:
               body:
                 application/json: TaskList
           (commons.Id): tasks.tasklists.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasklists
         delete:
           securedBy:
@@ -231,11 +231,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Deletes the authenticated user's specified task list.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): tasks.tasklists.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasklists
       post:
         securedBy:
@@ -243,7 +243,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Creates a new task list and adds it to the authenticated user's task lists.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -253,7 +253,7 @@ types:
             body:
               application/json: TaskList
         (commons.Id): tasks.tasklists.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Tasklists
       get:
         securedBy:
@@ -262,7 +262,7 @@ types:
             - https://www.googleapis.com/auth/tasks
             - https://www.googleapis.com/auth/tasks.readonly
         description: Returns all the authenticated user's task lists.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -278,7 +278,7 @@ types:
             body:
               application/json: TaskLists
         (commons.Id): tasks.tasklists.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Tasklists
 /lists:
   /{tasklist}:
@@ -299,7 +299,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/tasks
             description: Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks.
-            displayName: move
+            displayName: Move
             is:
             - hasParameters
             queryParameters:
@@ -314,7 +314,7 @@ types:
                 body:
                   application/json: Task
             (commons.Id): tasks.tasks.move
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Tasks
         patch:
           securedBy:
@@ -322,7 +322,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the specified task. This method supports patch semantics.
-          displayName: patch
+          displayName: Patch
           is:
           - hasParameters
           body:
@@ -332,7 +332,7 @@ types:
               body:
                 application/json: Task
           (commons.Id): tasks.tasks.patch
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasks
         get:
           securedBy:
@@ -341,7 +341,7 @@ types:
               - https://www.googleapis.com/auth/tasks
               - https://www.googleapis.com/auth/tasks.readonly
           description: Returns the specified task.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -349,7 +349,7 @@ types:
               body:
                 application/json: Task
           (commons.Id): tasks.tasks.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasks
         put:
           securedBy:
@@ -357,7 +357,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the specified task.
-          displayName: update
+          displayName: Update
           is:
           - hasParameters
           body:
@@ -367,7 +367,7 @@ types:
               body:
                 application/json: Task
           (commons.Id): tasks.tasks.update
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasks
         delete:
           securedBy:
@@ -375,11 +375,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Deletes the specified task from the task list.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): tasks.tasks.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Tasks
       post:
         securedBy:
@@ -387,7 +387,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Creates a new task on the specified task list.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         queryParameters:
@@ -404,7 +404,7 @@ types:
             body:
               application/json: Task
         (commons.Id): tasks.tasks.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Tasks
       get:
         securedBy:
@@ -413,7 +413,7 @@ types:
             - https://www.googleapis.com/auth/tasks
             - https://www.googleapis.com/auth/tasks.readonly
         description: Returns all tasks in the specified task list.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -453,7 +453,7 @@ types:
             body:
               application/json: Tasks
         (commons.Id): tasks.tasks.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Tasks
     /clear:
       post:
@@ -462,9 +462,9 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Clears all completed tasks from the specified task list. The affected tasks will be marked as 'hidden' and no longer be returned by default when retrieving all tasks for a task list.
-        displayName: clear
+        displayName: Clear
         is:
         - hasParameters
         (commons.Id): tasks.tasks.clear
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Tasks

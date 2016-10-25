@@ -111,7 +111,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Modify the list of owners for your website or domain. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -121,7 +121,7 @@ types:
           body:
             application/json: SiteVerificationWebResourceResource
       (commons.Id): siteVerification.webResource.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Web Resource
     get:
       securedBy:
@@ -129,7 +129,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Get the most current data for a website or domain.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -137,7 +137,7 @@ types:
           body:
             application/json: SiteVerificationWebResourceResource
       (commons.Id): siteVerification.webResource.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Web Resource
     put:
       securedBy:
@@ -145,7 +145,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Modify the list of owners for your website or domain.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -155,7 +155,7 @@ types:
           body:
             application/json: SiteVerificationWebResourceResource
       (commons.Id): siteVerification.webResource.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Web Resource
     delete:
       securedBy:
@@ -163,11 +163,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/siteverification
       description: Relinquish ownership of a website or domain.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): siteVerification.webResource.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Web Resource
   post:
     securedBy:
@@ -176,7 +176,7 @@ types:
         - https://www.googleapis.com/auth/siteverification
         - https://www.googleapis.com/auth/siteverification.verify_only
     description: Attempt verification of a website or domain.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     queryParameters:
@@ -190,7 +190,7 @@ types:
         body:
           application/json: SiteVerificationWebResourceResource
     (commons.Id): siteVerification.webResource.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Web Resource
   get:
     securedBy:
@@ -198,7 +198,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/siteverification
     description: Get the list of your verified websites and domains.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -206,7 +206,7 @@ types:
         body:
           application/json: SiteVerificationWebResourceListResponse
     (commons.Id): siteVerification.webResource.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Web Resource
 /token:
   post:
@@ -216,7 +216,7 @@ types:
         - https://www.googleapis.com/auth/siteverification
         - https://www.googleapis.com/auth/siteverification.verify_only
     description: Get a verification token for placing on a website or domain.
-    displayName: get Token
+    displayName: Get Token
     is:
     - hasParameters
     body:
@@ -226,5 +226,5 @@ types:
         body:
           application/json: SiteVerificationWebResourceGettokenResponse
     (commons.Id): siteVerification.webResource.getToken
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Web Resource

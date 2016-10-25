@@ -558,7 +558,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single setting by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -566,7 +566,7 @@ types:
           body:
             application/json: Setting
       (commons.Id): mirror.settings.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Settings
 /subscriptions:
   /{id}:
@@ -580,7 +580,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates an existing subscription in place.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -590,7 +590,7 @@ types:
           body:
             application/json: Subscription
       (commons.Id): mirror.subscriptions.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Subscriptions
     delete:
       securedBy:
@@ -598,11 +598,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Deletes a subscription.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): mirror.subscriptions.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Subscriptions
   post:
     securedBy:
@@ -610,7 +610,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Creates a new subscription.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -620,7 +620,7 @@ types:
         body:
           application/json: Subscription
     (commons.Id): mirror.subscriptions.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Subscriptions
   get:
     securedBy:
@@ -628,7 +628,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of subscriptions for the authenticated user and service.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -636,7 +636,7 @@ types:
         body:
           application/json: SubscriptionsListResponse
     (commons.Id): mirror.subscriptions.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Subscriptions
 /timeline:
   /{id}:
@@ -651,7 +651,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a timeline item in place. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -661,7 +661,7 @@ types:
           body:
             application/json: TimelineItem
       (commons.Id): mirror.timeline.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Timeline
     get:
       securedBy:
@@ -670,7 +670,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single timeline item by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -678,7 +678,7 @@ types:
           body:
             application/json: TimelineItem
       (commons.Id): mirror.timeline.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Timeline
     put:
       securedBy:
@@ -687,7 +687,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a timeline item in place.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -697,7 +697,7 @@ types:
           body:
             application/json: TimelineItem
       (commons.Id): mirror.timeline.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Timeline
     delete:
       securedBy:
@@ -706,11 +706,11 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Deletes a timeline item.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): mirror.timeline.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Timeline
   /{itemId}:
     uriParameters:
@@ -729,7 +729,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/glass.timeline
           description: Retrieves an attachment on a timeline item by item ID and attachment ID.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -737,7 +737,7 @@ types:
               body:
                 application/json: Attachment
           (commons.Id): mirror.timeline.attachments.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Timeline
           - Attachments
         delete:
@@ -746,11 +746,11 @@ types:
               scopes:
               - https://www.googleapis.com/auth/glass.timeline
           description: Deletes an attachment from a timeline item.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): mirror.timeline.attachments.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Timeline
           - Attachments
       post:
@@ -759,7 +759,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/glass.timeline
         description: Adds a new attachment to a timeline item.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         responses:
@@ -767,7 +767,7 @@ types:
             body:
               application/json: Attachment
         (commons.Id): mirror.timeline.attachments.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Timeline
         - Attachments
       get:
@@ -776,7 +776,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/glass.timeline
         description: Returns a list of attachments for a timeline item.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         responses:
@@ -784,7 +784,7 @@ types:
             body:
               application/json: AttachmentsListResponse
         (commons.Id): mirror.timeline.attachments.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Timeline
         - Attachments
   post:
@@ -794,7 +794,7 @@ types:
         - https://www.googleapis.com/auth/glass.location
         - https://www.googleapis.com/auth/glass.timeline
     description: Inserts a new item into the timeline.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -804,7 +804,7 @@ types:
         body:
           application/json: TimelineItem
     (commons.Id): mirror.timeline.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Timeline
   get:
     securedBy:
@@ -813,7 +813,7 @@ types:
         - https://www.googleapis.com/auth/glass.location
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of timeline items for the authenticated user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     queryParameters:
@@ -850,7 +850,7 @@ types:
         body:
           application/json: TimelineListResponse
     (commons.Id): mirror.timeline.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Timeline
 /locations:
   /{id}:
@@ -865,7 +865,7 @@ types:
           - https://www.googleapis.com/auth/glass.location
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single location by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -873,7 +873,7 @@ types:
           body:
             application/json: Location
       (commons.Id): mirror.locations.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Locations
   get:
     securedBy:
@@ -882,7 +882,7 @@ types:
         - https://www.googleapis.com/auth/glass.location
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of locations for the user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -890,7 +890,7 @@ types:
         body:
           application/json: LocationsListResponse
     (commons.Id): mirror.locations.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Locations
 /accounts:
   /{userToken}:
@@ -910,7 +910,7 @@ types:
             description: The name of the account to be passed to the Android Account Manager.
         post:
           description: Inserts a new account for a user
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -920,7 +920,7 @@ types:
               body:
                 application/json: Account
           (commons.Id): mirror.accounts.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Accounts
 /contacts:
   /{id}:
@@ -934,7 +934,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a contact in place. This method supports patch semantics.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -944,7 +944,7 @@ types:
           body:
             application/json: Contact
       (commons.Id): mirror.contacts.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Contacts
     get:
       securedBy:
@@ -952,7 +952,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Gets a single contact by ID.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -960,7 +960,7 @@ types:
           body:
             application/json: Contact
       (commons.Id): mirror.contacts.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Contacts
     put:
       securedBy:
@@ -968,7 +968,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Updates a contact in place.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -978,7 +978,7 @@ types:
           body:
             application/json: Contact
       (commons.Id): mirror.contacts.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Contacts
     delete:
       securedBy:
@@ -986,11 +986,11 @@ types:
           scopes:
           - https://www.googleapis.com/auth/glass.timeline
       description: Deletes a contact.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       (commons.Id): mirror.contacts.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Contacts
   post:
     securedBy:
@@ -998,7 +998,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Inserts a new contact.
-    displayName: insert
+    displayName: Insert
     is:
     - hasParameters
     body:
@@ -1008,7 +1008,7 @@ types:
         body:
           application/json: Contact
     (commons.Id): mirror.contacts.insert
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Contacts
   get:
     securedBy:
@@ -1016,7 +1016,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/glass.timeline
     description: Retrieves a list of contacts for the authenticated user.
-    displayName: list
+    displayName: List
     is:
     - hasParameters
     responses:
@@ -1024,5 +1024,5 @@ types:
         body:
           application/json: ContactsListResponse
     (commons.Id): mirror.contacts.list
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Contacts

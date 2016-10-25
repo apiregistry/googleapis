@@ -542,7 +542,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation.
-      displayName: cancel
+      displayName: Cancel
       is:
       - hasParameters
       body:
@@ -552,7 +552,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): genomics.operations.cancel
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations
   /{name}:
     uriParameters:
@@ -567,7 +567,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Lists operations that match the specified filter in the request.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       - hasParameters
@@ -591,7 +591,7 @@ types:
           body:
             application/json: ListOperationsResponse
       (commons.Id): genomics.operations.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations
   /pipelines:setOperationStatus:
     put:
@@ -601,7 +601,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Sets status of a given operation. Any new timestamps (as determined by description) are appended to TimestampEvents. Should only be called by VMs created by the Pipelines Service and not by end users.
-      displayName: set Operation Status
+      displayName: Set Operation Status
       is:
       - hasParameters
       body:
@@ -611,7 +611,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): genomics.pipelines.setOperationStatus
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pipelines
   /pipelines:getControllerConfig:
     get:
@@ -621,7 +621,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Gets controller configuration information. Should only be called by VMs created by the Pipelines Service and not by end users.
-      displayName: get Controller Config
+      displayName: Get Controller Config
       is:
       - hasParameters
       queryParameters:
@@ -636,7 +636,7 @@ types:
           body:
             application/json: ControllerConfig
       (commons.Id): genomics.pipelines.getControllerConfig
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pipelines
   /pipelines:
     /{pipelineId}:
@@ -651,7 +651,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Retrieves a pipeline based on ID. Caller must have READ permission to the project.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -659,7 +659,7 @@ types:
             body:
               application/json: Pipeline
         (commons.Id): genomics.pipelines.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pipelines
       delete:
         securedBy:
@@ -668,7 +668,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/genomics
         description: Deletes a pipeline based on ID. Caller must have WRITE permission to the project.
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         responses:
@@ -676,7 +676,7 @@ types:
             body:
               application/json: Empty
         (commons.Id): genomics.pipelines.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Pipelines
     post:
       securedBy:
@@ -685,7 +685,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Creates a pipeline that can be run later. Create takes a Pipeline that has all fields other than `pipelineId` populated, and then returns the same pipeline with `pipelineId` populated. This id can be used to run the pipeline. Caller must have WRITE permission to the project.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       body:
@@ -695,7 +695,7 @@ types:
           body:
             application/json: Pipeline
       (commons.Id): genomics.pipelines.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pipelines
     get:
       securedBy:
@@ -704,7 +704,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/genomics
       description: Lists pipelines. Caller must have READ permission to the project.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -726,7 +726,7 @@ types:
           body:
             application/json: ListPipelinesResponse
       (commons.Id): genomics.pipelines.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pipelines
   /pipelines:run:
     post:
@@ -737,7 +737,7 @@ types:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/genomics
       description: Runs a pipeline. If `pipelineId` is specified in the request, then run a saved pipeline. If `ephemeralPipeline` is specified, then run that pipeline once without saving a copy. The caller must have READ permission to the project where the pipeline is stored and WRITE permission to the project where the pipeline will be run, as VMs will be created and storage will be used.
-      displayName: run
+      displayName: Run
       is:
       - hasParameters
       body:
@@ -747,5 +747,5 @@ types:
           body:
             application/json: Operation
       (commons.Id): genomics.pipelines.run
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Pipelines

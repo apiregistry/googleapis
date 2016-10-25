@@ -579,7 +579,7 @@ types:
         description: The Open Civic Data division identifier of the division to look up.
     get:
       description: Looks up representative information for a single geographic division.
-      displayName: representative Info By Division
+      displayName: Representative Info By Division
       is:
       - hasParameters
       queryParameters:
@@ -643,11 +643,11 @@ types:
           body:
             application/json: RepresentativeInfoData
       (commons.Id): civicinfo.representatives.representativeInfoByDivision
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Representatives
   get:
     description: Looks up political geography and representative information for a single address.
-    displayName: representative Info By Address
+    displayName: Representative Info By Address
     is:
     - hasParameters
     queryParameters:
@@ -715,12 +715,12 @@ types:
         body:
           application/json: RepresentativeInfoResponse
     (commons.Id): civicinfo.representatives.representativeInfoByAddress
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Representatives
 /elections:
   get:
     description: List of available elections to query.
-    displayName: election Query
+    displayName: Election Query
     is:
     - hasParameters
     body:
@@ -730,12 +730,12 @@ types:
         body:
           application/json: ElectionsQueryResponse
     (commons.Id): civicinfo.elections.electionQuery
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Elections
 /voterinfo:
   get:
     description: Looks up information relevant to a voter based on the voter's registered address.
-    displayName: voter Info Query
+    displayName: Voter Info Query
     is:
     - hasParameters
     queryParameters:
@@ -762,12 +762,12 @@ types:
         body:
           application/json: VoterInfoResponse
     (commons.Id): civicinfo.elections.voterInfoQuery
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Elections
 /divisions:
   get:
     description: Searches for political divisions by their natural name or OCD ID.
-    displayName: search
+    displayName: Search
     is:
     - hasParameters
     queryParameters:
@@ -781,5 +781,5 @@ types:
         body:
           application/json: DivisionSearchResponse
     (commons.Id): civicinfo.divisions.search
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Divisions

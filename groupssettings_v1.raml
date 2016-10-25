@@ -170,7 +170,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/apps.groups.settings
     description: Updates an existing resource. This method supports patch semantics.
-    displayName: patch
+    displayName: Patch
     is:
     - hasParameters
     body:
@@ -180,7 +180,7 @@ types:
         body:
           application/json: Groups
     (commons.Id): groupsSettings.groups.patch
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Groups
   get:
     securedBy:
@@ -188,7 +188,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/apps.groups.settings
     description: Gets one resource by id.
-    displayName: get
+    displayName: Get
     is:
     - hasParameters
     responses:
@@ -196,7 +196,7 @@ types:
         body:
           application/json: Groups
     (commons.Id): groupsSettings.groups.get
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Groups
   put:
     securedBy:
@@ -204,7 +204,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/apps.groups.settings
     description: Updates an existing resource.
-    displayName: update
+    displayName: Update
     is:
     - hasParameters
     body:
@@ -214,5 +214,5 @@ types:
         body:
           application/json: Groups
     (commons.Id): groupsSettings.groups.update
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Groups

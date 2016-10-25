@@ -2774,7 +2774,7 @@ types:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -2782,7 +2782,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): servicemanagement.operations.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Operations
   /services:generateConfigReport:
     post:
@@ -2803,7 +2803,7 @@ types:
         If GenerateConfigReportRequest.old_value is not specified, this method
         will compare GenerateConfigReportRequest.new_value with the last pushed
         service configuration.
-      displayName: generate Config Report
+      displayName: Generate Config Report
       is:
       - hasParameters
       body:
@@ -2813,7 +2813,7 @@ types:
           body:
             application/json: GenerateConfigReportResponse
       (commons.Id): servicemanagement.services.generateConfigReport
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Services
   /{resource}:testIamPermissions:
     uriParameters:
@@ -2831,7 +2831,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/service.management
       description: Returns permissions that a caller has on the specified resource.
-      displayName: test Iam Permissions
+      displayName: Test Iam Permissions
       is:
       - hasParameters
       body:
@@ -2841,7 +2841,7 @@ types:
           body:
             application/json: TestIamPermissionsResponse
       (commons.Id): servicemanagement.services.testIamPermissions
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Services
   /services:
     /{serviceName}:disable:
@@ -2861,7 +2861,7 @@ types:
           Disable a managed service for a project.
 
           Operation<response: DisableServiceResponse>
-        displayName: disable
+        displayName: Disable
         is:
         - hasParameters
         body:
@@ -2871,7 +2871,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): servicemanagement.services.disable
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services
     /{serviceName}:enable:
       uriParameters:
@@ -2893,7 +2893,7 @@ types:
 
           google.rpc.Status errors may contain a
           google.rpc.PreconditionFailure error detail.
-        displayName: enable
+        displayName: Enable
         is:
         - hasParameters
         body:
@@ -2903,7 +2903,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): servicemanagement.services.enable
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services
     /{serviceName}:
       uriParameters:
@@ -2922,7 +2922,7 @@ types:
               - https://www.googleapis.com/auth/service.management
               - https://www.googleapis.com/auth/service.management.readonly
           description: Gets a service configuration (version) for a managed service.
-          displayName: get Config
+          displayName: Get Config
           is:
           - hasParameters
           queryParameters:
@@ -2933,7 +2933,7 @@ types:
               body:
                 application/json: Service
           (commons.Id): servicemanagement.services.getConfig
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Services
       /configs:submit:
         post:
@@ -2952,7 +2952,7 @@ types:
             please call CreateServiceRollout.
 
             Operation<response: SubmitConfigSourceResponse>
-          displayName: submit
+          displayName: Submit
           is:
           - hasParameters
           body:
@@ -2962,7 +2962,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): servicemanagement.services.configs.submit
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Services
           - Configs
       /configs:
@@ -2979,7 +2979,7 @@ types:
                 - https://www.googleapis.com/auth/service.management
                 - https://www.googleapis.com/auth/service.management.readonly
             description: Gets a service configuration (version) for a managed service.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -2987,7 +2987,7 @@ types:
                 body:
                   application/json: Service
             (commons.Id): servicemanagement.services.configs.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Services
             - Configs
         post:
@@ -3001,7 +3001,7 @@ types:
             This method only stores the service configuration. To roll out the service
             configuration to backend systems please call
             CreateServiceRollout.
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           body:
@@ -3011,7 +3011,7 @@ types:
               body:
                 application/json: Service
           (commons.Id): servicemanagement.services.configs.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Services
           - Configs
         get:
@@ -3025,7 +3025,7 @@ types:
           description: |-
             Lists the history of the service configuration for a managed service,
             from the newest to the oldest.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -3041,7 +3041,7 @@ types:
               body:
                 application/json: ListServiceConfigsResponse
           (commons.Id): servicemanagement.services.configs.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Services
           - Configs
       /rollouts:
@@ -3059,7 +3059,7 @@ types:
                 - https://www.googleapis.com/auth/service.management
                 - https://www.googleapis.com/auth/service.management.readonly
             description: Gets a service configuration rollout.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -3067,7 +3067,7 @@ types:
                 body:
                   application/json: Rollout
             (commons.Id): servicemanagement.services.rollouts.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Services
             - Rollouts
         post:
@@ -3087,7 +3087,7 @@ types:
             not be blocked by previous Rollouts.
 
             Operation<response: Rollout>
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           body:
@@ -3097,7 +3097,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): servicemanagement.services.rollouts.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Services
           - Rollouts
         get:
@@ -3111,7 +3111,7 @@ types:
           description: |-
             Lists the history of the service configuration rollouts for a managed
             service, from the newest to the oldest.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -3127,7 +3127,7 @@ types:
               body:
                 application/json: ListServiceRolloutsResponse
           (commons.Id): servicemanagement.services.rollouts.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Services
           - Rollouts
       get:
@@ -3139,7 +3139,7 @@ types:
             - https://www.googleapis.com/auth/service.management
             - https://www.googleapis.com/auth/service.management.readonly
         description: Gets a managed service.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -3147,7 +3147,7 @@ types:
             body:
               application/json: ManagedService
         (commons.Id): servicemanagement.services.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services
       delete:
         securedBy:
@@ -3162,7 +3162,7 @@ types:
           After 30 days, the service will be permanently deleted.
 
           Operation<response: google.protobuf.Empty>
-        displayName: delete
+        displayName: Delete
         is:
         - hasParameters
         responses:
@@ -3170,7 +3170,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): servicemanagement.services.delete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services
     /{serviceName}:undelete:
       uriParameters:
@@ -3192,7 +3192,7 @@ types:
           last 30 days.
 
           Operation<response: UndeleteServiceResponse>
-        displayName: undelete
+        displayName: Undelete
         is:
         - hasParameters
         responses:
@@ -3200,7 +3200,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): servicemanagement.services.undelete
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Services
     post:
       securedBy:
@@ -3213,7 +3213,7 @@ types:
         Please note one producer project can own no more than 20 services.
 
         Operation<response: ManagedService>
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       body:
@@ -3223,7 +3223,7 @@ types:
           body:
             application/json: Operation
       (commons.Id): servicemanagement.services.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Services
     get:
       securedBy:
@@ -3234,7 +3234,7 @@ types:
           - https://www.googleapis.com/auth/service.management
           - https://www.googleapis.com/auth/service.management.readonly
       description: Lists all managed services.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -3258,7 +3258,7 @@ types:
           body:
             application/json: ListServicesResponse
       (commons.Id): servicemanagement.services.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Services
   /{resource}:getIamPolicy:
     uriParameters:
@@ -3279,7 +3279,7 @@ types:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      displayName: get Iam Policy
+      displayName: Get Iam Policy
       is:
       - hasParameters
       body:
@@ -3289,7 +3289,7 @@ types:
           body:
             application/json: Policy
       (commons.Id): servicemanagement.services.getIamPolicy
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Services
   /{resource}:setIamPolicy:
     uriParameters:
@@ -3309,7 +3309,7 @@ types:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      displayName: set Iam Policy
+      displayName: Set Iam Policy
       is:
       - hasParameters
       body:
@@ -3319,5 +3319,5 @@ types:
           body:
             application/json: Policy
       (commons.Id): servicemanagement.services.setIamPolicy
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Services

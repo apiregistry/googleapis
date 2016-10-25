@@ -529,7 +529,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Resumes a transfer operation that is paused.
-      displayName: resume
+      displayName: Resume
       is:
       - hasParameters
       body:
@@ -539,7 +539,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): storagetransfer.transferOperations.resume
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Operations
   /{name}:cancel:
     uriParameters:
@@ -553,7 +553,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Cancels a transfer. Use the get method to check whether the cancellation succeeded or whether the operation completed despite cancellation.
-      displayName: cancel
+      displayName: Cancel
       is:
       - hasParameters
       responses:
@@ -561,7 +561,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): storagetransfer.transferOperations.cancel
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Operations
   /{name}:
     uriParameters:
@@ -578,7 +578,7 @@ types:
         If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE:
         the `name` binding below allows API services to override the binding to use
         different resource name schemes, such as `users/*/operations`.'
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       - hasParameters
@@ -598,7 +598,7 @@ types:
           body:
             application/json: ListOperationsResponse
       (commons.Id): storagetransfer.transferOperations.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Operations
     delete:
       securedBy:
@@ -606,7 +606,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      displayName: delete
+      displayName: Delete
       is:
       - hasParameters
       responses:
@@ -614,7 +614,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): storagetransfer.transferOperations.delete
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Operations
   /{name}:pause:
     uriParameters:
@@ -628,7 +628,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Pauses a transfer operation.
-      displayName: pause
+      displayName: Pause
       is:
       - hasParameters
       body:
@@ -638,7 +638,7 @@ types:
           body:
             application/json: Empty
       (commons.Id): storagetransfer.transferOperations.pause
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Operations
   /googleServiceAccounts:
     /{projectId}:
@@ -652,7 +652,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Returns the Google service account that is used by Storage Transfer Service to access buckets in the project where transfers run or in other projects. Each Google service account is associated with one Google Developers Console project. Users should add this service account to the Google Cloud Storage bucket ACLs to grant access to Storage Transfer Service. This service account is created and owned by Storage Transfer Service and can only be used by Storage Transfer Service.
-        displayName: get
+        displayName: Get
         is:
         - hasParameters
         responses:
@@ -660,7 +660,7 @@ types:
             body:
               application/json: GoogleServiceAccount
         (commons.Id): storagetransfer.googleServiceAccounts.get
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Google Service Accounts
   /{jobName}:
     uriParameters:
@@ -674,7 +674,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Updates a transfer job. Updating a job's transfer spec does not affect transfer operations that are running already. Updating the scheduling of a job is not allowed.
-      displayName: patch
+      displayName: Patch
       is:
       - hasParameters
       body:
@@ -684,7 +684,7 @@ types:
           body:
             application/json: TransferJob
       (commons.Id): storagetransfer.transferJobs.patch
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Jobs
     get:
       securedBy:
@@ -692,7 +692,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Gets a transfer job.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       queryParameters:
@@ -704,7 +704,7 @@ types:
           body:
             application/json: TransferJob
       (commons.Id): storagetransfer.transferJobs.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Jobs
   /transferJobs:
     post:
@@ -713,7 +713,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Creates a transfer job that runs periodically.
-      displayName: create
+      displayName: Create
       is:
       - hasParameters
       body:
@@ -723,7 +723,7 @@ types:
           body:
             application/json: TransferJob
       (commons.Id): storagetransfer.transferJobs.create
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Jobs
     get:
       securedBy:
@@ -731,7 +731,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Lists transfer jobs.
-      displayName: list
+      displayName: List
       is:
       - hasParameters
       queryParameters:
@@ -756,7 +756,7 @@ types:
           body:
             application/json: ListTransferJobsResponse
       (commons.Id): storagetransfer.transferJobs.list
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Transfer Jobs
 /v1:getGoogleServiceAccount:
   get:
@@ -765,7 +765,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/cloud-platform
     description: Returns the Google service account that is used by Storage Transfer Service to access buckets in the project where transfers run or in other projects. Each Google service account is associated with one Google Developers Console project. Users should add this service account to the Google Cloud Storage bucket ACLs to grant access to Storage Transfer Service. This service account is created and owned by Storage Transfer Service and can only be used by Storage Transfer Service.
-    displayName: get Google Service Account
+    displayName: Get Google Service Account
     is:
     - hasParameters
     queryParameters:
@@ -777,5 +777,5 @@ types:
         body:
           application/json: GoogleServiceAccount
     (commons.Id): storagetransfer.getGoogleServiceAccount
-    (commons.LogicalStucture):
+    (commons.LogicalStructure):
     - Get Google Service Account

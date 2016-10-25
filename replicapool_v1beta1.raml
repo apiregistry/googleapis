@@ -445,7 +445,7 @@ types:
                       - https://www.googleapis.com/auth/ndev.cloudman
                       - https://www.googleapis.com/auth/replicapool
                   description: Restarts a replica in a pool.
-                  displayName: restart
+                  displayName: Restart
                   is:
                   - hasParameters
                   responses:
@@ -453,7 +453,7 @@ types:
                       body:
                         application/json: Replica
                   (commons.Id): replicapool.replicas.restart
-                  (commons.LogicalStucture):
+                  (commons.LogicalStructure):
                   - Replicas
               get:
                 securedBy:
@@ -466,7 +466,7 @@ types:
                     - https://www.googleapis.com/auth/replicapool
                     - https://www.googleapis.com/auth/replicapool.readonly
                 description: Gets information about a specific replica.
-                displayName: get
+                displayName: Get
                 is:
                 - hasParameters
                 responses:
@@ -474,7 +474,7 @@ types:
                     body:
                       application/json: Replica
                 (commons.Id): replicapool.replicas.get
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Replicas
               post:
                 securedBy:
@@ -484,7 +484,7 @@ types:
                     - https://www.googleapis.com/auth/ndev.cloudman
                     - https://www.googleapis.com/auth/replicapool
                 description: Deletes a replica from the pool.
-                displayName: delete
+                displayName: Delete
                 is:
                 - hasParameters
                 body:
@@ -494,7 +494,7 @@ types:
                     body:
                       application/json: Replica
                 (commons.Id): replicapool.replicas.delete
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Replicas
             get:
               securedBy:
@@ -507,7 +507,7 @@ types:
                   - https://www.googleapis.com/auth/replicapool
                   - https://www.googleapis.com/auth/replicapool.readonly
               description: Lists all replicas in a pool.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -527,7 +527,7 @@ types:
                   body:
                     application/json: ReplicasListResponse
               (commons.Id): replicapool.replicas.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Replicas
           /resize:
             post:
@@ -538,7 +538,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/replicapool
               description: Resize a pool. This is an asynchronous operation, and multiple overlapping resize requests can be made. Replica Pools will use the information from the last resize request.
-              displayName: resize
+              displayName: Resize
               is:
               - hasParameters
               queryParameters:
@@ -551,7 +551,7 @@ types:
                   body:
                     application/json: Pool
               (commons.Id): replicapool.pools.resize
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Pools
           /updateTemplate:
             post:
@@ -562,13 +562,13 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/replicapool
               description: Update the template used by the pool.
-              displayName: updatetemplate
+              displayName: Updatetemplate
               is:
               - hasParameters
               body:
                 application/json: Template
               (commons.Id): replicapool.pools.updatetemplate
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Pools
           get:
             securedBy:
@@ -581,7 +581,7 @@ types:
                 - https://www.googleapis.com/auth/replicapool
                 - https://www.googleapis.com/auth/replicapool.readonly
             description: Gets information about a single replica pool.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -589,7 +589,7 @@ types:
                 body:
                   application/json: Pool
             (commons.Id): replicapool.pools.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Pools
           post:
             securedBy:
@@ -599,13 +599,13 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/replicapool
             description: Deletes a replica pool.
-            displayName: delete
+            displayName: Delete
             is:
             - hasParameters
             body:
               application/json: PoolsDeleteRequest
             (commons.Id): replicapool.pools.delete
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Pools
         post:
           securedBy:
@@ -615,7 +615,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/replicapool
           description: Inserts a new replica pool.
-          displayName: insert
+          displayName: Insert
           is:
           - hasParameters
           body:
@@ -625,7 +625,7 @@ types:
               body:
                 application/json: Pool
           (commons.Id): replicapool.pools.insert
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Pools
         get:
           securedBy:
@@ -638,7 +638,7 @@ types:
               - https://www.googleapis.com/auth/replicapool
               - https://www.googleapis.com/auth/replicapool.readonly
           description: List all replica pools.
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -658,5 +658,5 @@ types:
               body:
                 application/json: PoolsListResponse
           (commons.Id): replicapool.pools.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Pools

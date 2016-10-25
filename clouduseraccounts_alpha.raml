@@ -705,7 +705,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Returns a list of authorized public keys for a specific user account.
-            displayName: get Authorized Keys View
+            displayName: Get Authorized Keys View
             is:
             - hasParameters
             queryParameters:
@@ -720,7 +720,7 @@ types:
                 body:
                   application/json: LinuxGetAuthorizedKeysViewResponse
             (commons.Id): clouduseraccounts.linux.getAuthorizedKeysView
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Linux
       /linuxAccountViews:
         post:
@@ -732,7 +732,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Retrieves a list of user accounts for an instance within a specific project.
-          displayName: get Linux Account Views
+          displayName: Get Linux Account Views
           is:
           - hasParameters
           queryParameters:
@@ -774,7 +774,7 @@ types:
               body:
                 application/json: LinuxGetLinuxAccountViewsResponse
           (commons.Id): clouduseraccounts.linux.getLinuxAccountViews
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Linux
   /global:
     /groups:
@@ -792,7 +792,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Removes users from the specified group.
-            displayName: remove Member
+            displayName: Remove Member
             is:
             - hasParameters
             body:
@@ -802,7 +802,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): clouduseraccounts.groups.removeMember
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Groups
         /addMember:
           post:
@@ -812,7 +812,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Adds users to the specified group.
-            displayName: add Member
+            displayName: Add Member
             is:
             - hasParameters
             body:
@@ -822,7 +822,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): clouduseraccounts.groups.addMember
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Groups
         get:
           securedBy:
@@ -833,7 +833,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Returns the specified Group resource.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -841,7 +841,7 @@ types:
               body:
                 application/json: Group
           (commons.Id): clouduseraccounts.groups.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Groups
         delete:
           securedBy:
@@ -850,7 +850,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud.useraccounts
           description: Deletes the specified Group resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -858,7 +858,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): clouduseraccounts.groups.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Groups
       /{resource}:
         uriParameters:
@@ -876,7 +876,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Returns permissions that a caller has on the specified resource.
-            displayName: test Iam Permissions
+            displayName: Test Iam Permissions
             is:
             - hasParameters
             body:
@@ -886,7 +886,7 @@ types:
                 body:
                   application/json: TestPermissionsResponse
             (commons.Id): clouduseraccounts.groups.testIamPermissions
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Groups
         /getIamPolicy:
           get:
@@ -898,7 +898,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            displayName: get Iam Policy
+            displayName: Get Iam Policy
             is:
             - hasParameters
             responses:
@@ -906,7 +906,7 @@ types:
                 body:
                   application/json: Policy
             (commons.Id): clouduseraccounts.groups.getIamPolicy
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Groups
         /setIamPolicy:
           post:
@@ -918,7 +918,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Sets the access control policy on the specified resource. Replaces any existing policy.
-            displayName: set Iam Policy
+            displayName: Set Iam Policy
             is:
             - hasParameters
             body:
@@ -928,7 +928,7 @@ types:
                 body:
                   application/json: Policy
             (commons.Id): clouduseraccounts.groups.setIamPolicy
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Groups
       post:
         securedBy:
@@ -937,7 +937,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud.useraccounts
         description: Creates a Group resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -947,7 +947,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): clouduseraccounts.groups.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Groups
       get:
         securedBy:
@@ -958,7 +958,7 @@ types:
             - https://www.googleapis.com/auth/cloud.useraccounts
             - https://www.googleapis.com/auth/cloud.useraccounts.readonly
         description: Retrieves the list of groups contained within the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -997,7 +997,7 @@ types:
             body:
               application/json: GroupList
         (commons.Id): clouduseraccounts.groups.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Groups
     /operations:
       /{operation}:
@@ -1015,7 +1015,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Retrieves the specified operation resource.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1023,7 +1023,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): clouduseraccounts.globalAccountsOperations.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Accounts Operations
         delete:
           securedBy:
@@ -1032,11 +1032,11 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud.useraccounts
           description: Deletes the specified operation resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           (commons.Id): clouduseraccounts.globalAccountsOperations.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Global Accounts Operations
       get:
         securedBy:
@@ -1047,7 +1047,7 @@ types:
             - https://www.googleapis.com/auth/cloud.useraccounts
             - https://www.googleapis.com/auth/cloud.useraccounts.readonly
         description: Retrieves the list of operation resources contained within the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1086,7 +1086,7 @@ types:
             body:
               application/json: OperationList
         (commons.Id): clouduseraccounts.globalAccountsOperations.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Global Accounts Operations
     /users:
       /{user}:
@@ -1103,7 +1103,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Adds a public key to the specified User resource with the data included in the request.
-            displayName: add Public Key
+            displayName: Add Public Key
             is:
             - hasParameters
             body:
@@ -1113,7 +1113,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): clouduseraccounts.users.addPublicKey
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         /removePublicKey:
           post:
@@ -1123,7 +1123,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud.useraccounts
             description: Removes the specified public key from the user.
-            displayName: remove Public Key
+            displayName: Remove Public Key
             is:
             - hasParameters
             queryParameters:
@@ -1136,7 +1136,7 @@ types:
                 body:
                   application/json: Operation
             (commons.Id): clouduseraccounts.users.removePublicKey
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         get:
           securedBy:
@@ -1147,7 +1147,7 @@ types:
               - https://www.googleapis.com/auth/cloud.useraccounts
               - https://www.googleapis.com/auth/cloud.useraccounts.readonly
           description: Returns the specified User resource.
-          displayName: get
+          displayName: Get
           is:
           - hasParameters
           responses:
@@ -1155,7 +1155,7 @@ types:
               body:
                 application/json: User
           (commons.Id): clouduseraccounts.users.get
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Users
         delete:
           securedBy:
@@ -1164,7 +1164,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud.useraccounts
           description: Deletes the specified User resource.
-          displayName: delete
+          displayName: Delete
           is:
           - hasParameters
           responses:
@@ -1172,7 +1172,7 @@ types:
               body:
                 application/json: Operation
           (commons.Id): clouduseraccounts.users.delete
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Users
       /{resource}:
         uriParameters:
@@ -1190,7 +1190,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Returns permissions that a caller has on the specified resource.
-            displayName: test Iam Permissions
+            displayName: Test Iam Permissions
             is:
             - hasParameters
             body:
@@ -1200,7 +1200,7 @@ types:
                 body:
                   application/json: TestPermissionsResponse
             (commons.Id): clouduseraccounts.users.testIamPermissions
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         /getIamPolicy:
           get:
@@ -1212,7 +1212,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            displayName: get Iam Policy
+            displayName: Get Iam Policy
             is:
             - hasParameters
             responses:
@@ -1220,7 +1220,7 @@ types:
                 body:
                   application/json: Policy
             (commons.Id): clouduseraccounts.users.getIamPolicy
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
         /setIamPolicy:
           post:
@@ -1232,7 +1232,7 @@ types:
                 - https://www.googleapis.com/auth/cloud.useraccounts
                 - https://www.googleapis.com/auth/cloud.useraccounts.readonly
             description: Sets the access control policy on the specified resource. Replaces any existing policy.
-            displayName: set Iam Policy
+            displayName: Set Iam Policy
             is:
             - hasParameters
             body:
@@ -1242,7 +1242,7 @@ types:
                 body:
                   application/json: Policy
             (commons.Id): clouduseraccounts.users.setIamPolicy
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Users
       post:
         securedBy:
@@ -1251,7 +1251,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud.useraccounts
         description: Creates a User resource in the specified project using the data included in the request.
-        displayName: insert
+        displayName: Insert
         is:
         - hasParameters
         body:
@@ -1261,7 +1261,7 @@ types:
             body:
               application/json: Operation
         (commons.Id): clouduseraccounts.users.insert
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Users
       get:
         securedBy:
@@ -1272,7 +1272,7 @@ types:
             - https://www.googleapis.com/auth/cloud.useraccounts
             - https://www.googleapis.com/auth/cloud.useraccounts.readonly
         description: Retrieves a list of users contained within the specified project.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -1311,5 +1311,5 @@ types:
             body:
               application/json: UserList
         (commons.Id): clouduseraccounts.users.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Users

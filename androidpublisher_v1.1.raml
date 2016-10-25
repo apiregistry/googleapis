@@ -113,11 +113,11 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
-              displayName: cancel
+              displayName: Cancel
               is:
               - hasParameters
               (commons.Id): androidpublisher.purchases.cancel
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Purchases
           get:
             securedBy:
@@ -125,7 +125,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Checks whether a user's subscription purchase is valid and returns its expiry time.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -133,7 +133,7 @@ types:
                 body:
                   application/json: SubscriptionPurchase
             (commons.Id): androidpublisher.purchases.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Purchases
   /inapp:
     /{productId}:
@@ -153,7 +153,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Checks the purchase and consumption status of an inapp item.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             responses:
@@ -161,5 +161,5 @@ types:
                 body:
                   application/json: InappPurchase
             (commons.Id): androidpublisher.inapppurchases.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Inapppurchases

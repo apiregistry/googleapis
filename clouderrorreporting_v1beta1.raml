@@ -368,7 +368,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Deletes all error events of a given project.
-        displayName: delete Events
+        displayName: Delete Events
         is:
         - hasParameters
         responses:
@@ -376,7 +376,7 @@ types:
             body:
               application/json: DeleteEventsResponse
         (commons.Id): clouderrorreporting.projects.deleteEvents
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
       get:
         securedBy:
@@ -384,7 +384,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists the specified events.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -423,7 +423,7 @@ types:
             body:
               application/json: ListEventsResponse
         (commons.Id): clouderrorreporting.projects.events.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Events
     /groupStats:
@@ -433,7 +433,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists the specified groups.
-        displayName: list
+        displayName: List
         is:
         - hasParameters
         queryParameters:
@@ -508,7 +508,7 @@ types:
             body:
               application/json: ListGroupStatsResponse
         (commons.Id): clouderrorreporting.projects.groupStats.list
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Group Stats
     /events:report:
@@ -526,7 +526,7 @@ types:
           for authentication. To use an API key, append it to the URL as the value of
           a `key` parameter. For example:
           <pre>POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</pre>
-        displayName: report
+        displayName: Report
         is:
         - hasParameters
         body:
@@ -536,7 +536,7 @@ types:
             body:
               application/json: ReportErrorEventResponse
         (commons.Id): clouderrorreporting.projects.events.report
-        (commons.LogicalStucture):
+        (commons.LogicalStructure):
         - Projects
         - Events
   /{groupName}:
@@ -559,7 +559,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Get the specified group.
-      displayName: get
+      displayName: Get
       is:
       - hasParameters
       responses:
@@ -567,7 +567,7 @@ types:
           body:
             application/json: ErrorGroup
       (commons.Id): clouderrorreporting.projects.groups.get
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Groups
   /{name}:
@@ -586,7 +586,7 @@ types:
       description: |-
         Replace the data for the specified group.
         Fails if the group does not exist.
-      displayName: update
+      displayName: Update
       is:
       - hasParameters
       body:
@@ -596,6 +596,6 @@ types:
           body:
             application/json: ErrorGroup
       (commons.Id): clouderrorreporting.projects.groups.update
-      (commons.LogicalStucture):
+      (commons.LogicalStructure):
       - Projects
       - Groups

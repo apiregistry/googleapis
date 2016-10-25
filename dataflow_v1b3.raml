@@ -1765,7 +1765,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/userinfo.email
           description: Send a worker_message to the service.
-          displayName: worker Messages
+          displayName: Worker Messages
           is:
           - hasParameters
           body:
@@ -1775,7 +1775,7 @@ types:
               body:
                 application/json: SendWorkerMessagesResponse
           (commons.Id): dataflow.projects.workerMessages
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
       /jobs:
         /{jobId}:
@@ -1791,7 +1791,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/userinfo.email
               description: Request the job status.
-              displayName: get Metrics
+              displayName: Get Metrics
               is:
               - hasParameters
               queryParameters:
@@ -1803,7 +1803,7 @@ types:
                   body:
                     application/json: JobMetrics
               (commons.Id): dataflow.projects.jobs.getMetrics
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Jobs
           /debug:
@@ -1815,7 +1815,7 @@ types:
                     - https://www.googleapis.com/auth/cloud-platform
                     - https://www.googleapis.com/auth/userinfo.email
                 description: Send encoded debug capture data for component.
-                displayName: send Capture
+                displayName: Send Capture
                 is:
                 - hasParameters
                 body:
@@ -1825,7 +1825,7 @@ types:
                     body:
                       application/json: SendDebugCaptureResponse
                 (commons.Id): dataflow.projects.jobs.debug.sendCapture
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Jobs
                 - Debug
@@ -1837,7 +1837,7 @@ types:
                     - https://www.googleapis.com/auth/cloud-platform
                     - https://www.googleapis.com/auth/userinfo.email
                 description: Get encoded debug configuration for component. Not cacheable.
-                displayName: get Config
+                displayName: Get Config
                 is:
                 - hasParameters
                 body:
@@ -1847,7 +1847,7 @@ types:
                     body:
                       application/json: GetDebugConfigResponse
                 (commons.Id): dataflow.projects.jobs.debug.getConfig
-                (commons.LogicalStucture):
+                (commons.LogicalStructure):
                 - Projects
                 - Jobs
                 - Debug
@@ -1859,7 +1859,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/userinfo.email
               description: Reports the status of dataflow WorkItems leased by a worker.
-              displayName: report Status
+              displayName: Report Status
               is:
               - hasParameters
               body:
@@ -1869,7 +1869,7 @@ types:
                   body:
                     application/json: ReportWorkItemStatusResponse
               (commons.Id): dataflow.projects.jobs.workItems.reportStatus
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Jobs
               - Work Items
@@ -1881,7 +1881,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/userinfo.email
               description: Leases a dataflow WorkItem to run.
-              displayName: lease
+              displayName: Lease
               is:
               - hasParameters
               body:
@@ -1891,7 +1891,7 @@ types:
                   body:
                     application/json: LeaseWorkItemResponse
               (commons.Id): dataflow.projects.jobs.workItems.lease
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Jobs
               - Work Items
@@ -1903,7 +1903,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/userinfo.email
               description: Request the job status.
-              displayName: list
+              displayName: List
               is:
               - hasParameters
               queryParameters:
@@ -1935,7 +1935,7 @@ types:
                   body:
                     application/json: ListJobMessagesResponse
               (commons.Id): dataflow.projects.jobs.messages.list
-              (commons.LogicalStucture):
+              (commons.LogicalStructure):
               - Projects
               - Jobs
               - Messages
@@ -1946,7 +1946,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/userinfo.email
             description: Gets the state of the specified dataflow job.
-            displayName: get
+            displayName: Get
             is:
             - hasParameters
             queryParameters:
@@ -1962,7 +1962,7 @@ types:
                 body:
                   application/json: Job
             (commons.Id): dataflow.projects.jobs.get
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Jobs
           put:
@@ -1972,7 +1972,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/userinfo.email
             description: Updates the state of an existing dataflow job.
-            displayName: update
+            displayName: Update
             is:
             - hasParameters
             body:
@@ -1982,7 +1982,7 @@ types:
                 body:
                   application/json: Job
             (commons.Id): dataflow.projects.jobs.update
-            (commons.LogicalStucture):
+            (commons.LogicalStructure):
             - Projects
             - Jobs
         post:
@@ -1992,7 +1992,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/userinfo.email
           description: Creates a dataflow job.
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           queryParameters:
@@ -2013,7 +2013,7 @@ types:
               body:
                 application/json: Job
           (commons.Id): dataflow.projects.jobs.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Jobs
         get:
@@ -2023,7 +2023,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/userinfo.email
           description: List the jobs of a project
-          displayName: list
+          displayName: List
           is:
           - hasParameters
           queryParameters:
@@ -2054,7 +2054,7 @@ types:
               body:
                 application/json: ListJobsResponse
           (commons.Id): dataflow.projects.jobs.list
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Jobs
       /templates:
@@ -2065,7 +2065,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/userinfo.email
           description: Creates a dataflow job from a template.
-          displayName: create
+          displayName: Create
           is:
           - hasParameters
           body:
@@ -2075,6 +2075,6 @@ types:
               body:
                 application/json: Job
           (commons.Id): dataflow.projects.templates.create
-          (commons.LogicalStucture):
+          (commons.LogicalStructure):
           - Projects
           - Templates
