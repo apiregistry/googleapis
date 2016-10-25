@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -288,13 +291,18 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/adexchange.buyer
                 description: Retrieves an existing client user invitation.
-                displayName: Get Invitations Clients Accounts
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ClientUserInvitation
+                (commons.Id): adexchangebuyer2.accounts.clients.invitations.get
+                (commons.LogicalStucture):
+                - Accounts
+                - Clients
+                - Invitations
             post:
               securedBy:
                 oath2:
@@ -303,7 +311,7 @@ types:
               description: |-
                 Creates and sends out an email invitation to access
                 an Ad Exchange client buyer account.
-              displayName: Create Invitations Clients Accounts
+              displayName: create
               is:
               - hasParameters
               body:
@@ -312,6 +320,11 @@ types:
                 200:
                   body:
                     application/json: ClientUserInvitation
+              (commons.Id): adexchangebuyer2.accounts.clients.invitations.create
+              (commons.LogicalStucture):
+              - Accounts
+              - Clients
+              - Invitations
             get:
               securedBy:
                 oath2:
@@ -320,7 +333,7 @@ types:
               description: |-
                 Lists all the client users invitations for a client
                 with a given account ID.
-              displayName: List Invitations Clients Accounts
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -343,6 +356,11 @@ types:
                 200:
                   body:
                     application/json: ListClientUserInvitationsResponse
+              (commons.Id): adexchangebuyer2.accounts.clients.invitations.list
+              (commons.LogicalStucture):
+              - Accounts
+              - Clients
+              - Invitations
           /users:
             /{userId}:
               uriParameters:
@@ -356,13 +374,18 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/adexchange.buyer
                 description: Retrieves an existing client user.
-                displayName: Get Users Clients Accounts
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ClientUser
+                (commons.Id): adexchangebuyer2.accounts.clients.users.get
+                (commons.LogicalStucture):
+                - Accounts
+                - Clients
+                - Users
               put:
                 securedBy:
                   oath2:
@@ -371,7 +394,7 @@ types:
                 description: |-
                   Updates an existing client user.
                   Only the user status can be changed on update.
-                displayName: Update Users Clients Accounts
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -380,6 +403,11 @@ types:
                   200:
                     body:
                       application/json: ClientUser
+                (commons.Id): adexchangebuyer2.accounts.clients.users.update
+                (commons.LogicalStucture):
+                - Accounts
+                - Clients
+                - Users
             get:
               securedBy:
                 oath2:
@@ -388,7 +416,7 @@ types:
               description: |-
                 Lists all the known client users for a specified
                 sponsor buyer account ID.
-              displayName: List Users Clients Accounts
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -410,26 +438,35 @@ types:
                 200:
                   body:
                     application/json: ListClientUsersResponse
+              (commons.Id): adexchangebuyer2.accounts.clients.users.list
+              (commons.LogicalStucture):
+              - Accounts
+              - Clients
+              - Users
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/adexchange.buyer
             description: Gets a client buyer with a given client account ID.
-            displayName: Get Clients Accounts
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Client
+            (commons.Id): adexchangebuyer2.accounts.clients.get
+            (commons.LogicalStucture):
+            - Accounts
+            - Clients
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/adexchange.buyer
             description: Updates an existing client buyer.
-            displayName: Update Clients Accounts
+            displayName: update
             is:
             - hasParameters
             body:
@@ -438,13 +475,17 @@ types:
               200:
                 body:
                   application/json: Client
+            (commons.Id): adexchangebuyer2.accounts.clients.update
+            (commons.LogicalStucture):
+            - Accounts
+            - Clients
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Creates a new client buyer.
-          displayName: Create Clients Accounts
+          displayName: create
           is:
           - hasParameters
           body:
@@ -453,13 +494,17 @@ types:
             200:
               body:
                 application/json: Client
+          (commons.Id): adexchangebuyer2.accounts.clients.create
+          (commons.LogicalStucture):
+          - Accounts
+          - Clients
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/adexchange.buyer
           description: Lists all the clients for the current sponsor buyer.
-          displayName: List Clients Accounts
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -481,3 +526,7 @@ types:
             200:
               body:
                 application/json: ListClientsResponse
+          (commons.Id): adexchangebuyer2.accounts.clients.list
+          (commons.LogicalStucture):
+          - Accounts
+          - Clients

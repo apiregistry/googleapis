@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -904,7 +907,7 @@ types:
         <pre>
         {"error": "Divide by zero"}
         </pre>
-      displayName: Predict Projects
+      displayName: predict
       is:
       - hasParameters
       body:
@@ -913,6 +916,9 @@ types:
         200:
           body:
             application/json: GoogleApi__HttpBody
+      (commons.Id): ml.projects.predict
+      (commons.LogicalStucture):
+      - Projects
   /{name}:getConfig:
     uriParameters:
       name:
@@ -932,13 +938,16 @@ types:
         this information in order to grant the service account persmissions for
         the Google Cloud Storage location where you put your model training code
         for training the model with Google Cloud Machine Learning.
-      displayName: GetConfig Projects
+      displayName: get Config
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: GoogleCloudMlV1beta1__GetConfigResponse
+      (commons.Id): ml.projects.getConfig
+      (commons.LogicalStucture):
+      - Projects
   /{name}:
     uriParameters:
       name:
@@ -960,7 +969,7 @@ types:
 
           NOTE: the `name` binding below allows API services to override the binding
           to use different resource name schemes, such as `users/*/operations`.
-        displayName: List Operations Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -978,13 +987,17 @@ types:
           200:
             body:
               application/json: GoogleLongrunning__ListOperationsResponse
+        (commons.Id): ml.projects.operations.list
+        (commons.LogicalStucture):
+        - Projects
+        - Operations
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Describes a job.
-      displayName: Get Jobs Projects
+      displayName: get
       is:
       - hasParameters
       - hasParameters
@@ -994,6 +1007,10 @@ types:
         200:
           body:
             application/json: GoogleCloudMlV1beta1__Job
+      (commons.Id): ml.projects.jobs.get
+      (commons.LogicalStucture):
+      - Projects
+      - Jobs
     delete:
       securedBy:
         oath2:
@@ -1004,7 +1021,7 @@ types:
         no longer interested in the operation result. It does not cancel the
         operation. If the server doesn't support this method, it returns
         `google.rpc.Code.UNIMPLEMENTED`.
-      displayName: Delete Operations Projects
+      displayName: delete
       is:
       - hasParameters
       - hasParameters
@@ -1013,6 +1030,10 @@ types:
         200:
           body:
             application/json: GoogleProtobuf__Empty
+      (commons.Id): ml.projects.operations.delete
+      (commons.LogicalStucture):
+      - Projects
+      - Operations
   /{parent}:
     uriParameters:
       parent:
@@ -1034,7 +1055,7 @@ types:
           You must add at least one version before you can request predictions from
           the model. Add versions by calling
           [projects.models.versions.create](/ml/reference/rest/v1beta1/projects.models.versions/create).
-        displayName: Create Models Projects
+        displayName: create
         is:
         - hasParameters
         body:
@@ -1043,6 +1064,10 @@ types:
           200:
             body:
               application/json: GoogleCloudMlV1beta1__Model
+        (commons.Id): ml.projects.models.create
+        (commons.LogicalStucture):
+        - Projects
+        - Models
       get:
         securedBy:
           oath2:
@@ -1053,7 +1078,7 @@ types:
 
           Each project can contain multiple models, and each model can have multiple
           versions.
-        displayName: List Models Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1077,6 +1102,10 @@ types:
           200:
             body:
               application/json: GoogleCloudMlV1beta1__ListModelsResponse
+        (commons.Id): ml.projects.models.list
+        (commons.LogicalStucture):
+        - Projects
+        - Models
     /versions:
       post:
         securedBy:
@@ -1092,7 +1121,7 @@ types:
           versions, the default version does not automatically change. If you want a
           new version to be the default, you must call
           [projects.models.versions.setDefault](/ml/reference/rest/v1beta1/projects.models.versions/setDefault).
-        displayName: Create Versions Models Projects
+        displayName: create
         is:
         - hasParameters
         body:
@@ -1101,6 +1130,11 @@ types:
           200:
             body:
               application/json: GoogleLongrunning__Operation
+        (commons.Id): ml.projects.models.versions.create
+        (commons.LogicalStucture):
+        - Projects
+        - Models
+        - Versions
       get:
         securedBy:
           oath2:
@@ -1112,7 +1146,7 @@ types:
           If you expect that a model has a lot of versions, or if you need to handle
           only a limited number of results at a time, you can request that the list
           be retrieved in batches (called pages):
-        displayName: List Versions Models Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1136,6 +1170,11 @@ types:
           200:
             body:
               application/json: GoogleCloudMlV1beta1__ListVersionsResponse
+        (commons.Id): ml.projects.models.versions.list
+        (commons.LogicalStucture):
+        - Projects
+        - Models
+        - Versions
     /jobs:
       post:
         securedBy:
@@ -1143,7 +1182,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a training or a batch prediction job.
-        displayName: Create Jobs Projects
+        displayName: create
         is:
         - hasParameters
         body:
@@ -1152,13 +1191,17 @@ types:
           200:
             body:
               application/json: GoogleCloudMlV1beta1__Job
+        (commons.Id): ml.projects.jobs.create
+        (commons.LogicalStucture):
+        - Projects
+        - Jobs
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists the jobs in the project.
-        displayName: List Jobs Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1185,6 +1228,10 @@ types:
           200:
             body:
               application/json: GoogleCloudMlV1beta1__ListJobsResponse
+        (commons.Id): ml.projects.jobs.list
+        (commons.LogicalStucture):
+        - Projects
+        - Jobs
   /{name}:setDefault:
     uriParameters:
       name:
@@ -1210,7 +1257,7 @@ types:
         The first version to be created for a model is automatically set as the
         default. You must make any subsequent changes to the default version
         setting manually using this method.
-      displayName: SetDefault Versions Models Projects
+      displayName: set Default
       is:
       - hasParameters
       body:
@@ -1219,6 +1266,11 @@ types:
         200:
           body:
             application/json: GoogleCloudMlV1beta1__Version
+      (commons.Id): ml.projects.models.versions.setDefault
+      (commons.LogicalStucture):
+      - Projects
+      - Models
+      - Versions
   /{name}:cancel:
     uriParameters:
       name:
@@ -1231,7 +1283,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Cancels a running job.
-      displayName: Cancel Jobs Projects
+      displayName: cancel
       is:
       - hasParameters
       - hasParameters
@@ -1241,3 +1293,7 @@ types:
         200:
           body:
             application/json: GoogleProtobuf__Empty
+      (commons.Id): ml.projects.jobs.cancel
+      (commons.LogicalStucture):
+      - Projects
+      - Jobs

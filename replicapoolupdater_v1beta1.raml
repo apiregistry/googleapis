@@ -395,13 +395,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Cancels an update. The update must be PAUSED before it can be cancelled. This has no effect if the update is already CANCELLED.
-              displayName: Cancel RollingUpdates
+              displayName: cancel
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): replicapoolupdater.rollingUpdates.cancel
+              (commons.LogicalStucture):
+              - Rolling Updates
           /resume:
             post:
               securedBy:
@@ -410,13 +413,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Continues an update in PAUSED state. Has no effect if invoked when the state of the update is ROLLED_OUT.
-              displayName: Resume RollingUpdates
+              displayName: resume
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): replicapoolupdater.rollingUpdates.resume
+              (commons.LogicalStucture):
+              - Rolling Updates
           /rollback:
             post:
               securedBy:
@@ -425,13 +431,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no effect if invoked when the state of the update is ROLLED_BACK.
-              displayName: Rollback RollingUpdates
+              displayName: rollback
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): replicapoolupdater.rollingUpdates.rollback
+              (commons.LogicalStucture):
+              - Rolling Updates
           /instanceUpdates:
             get:
               securedBy:
@@ -442,7 +451,7 @@ types:
                   - https://www.googleapis.com/auth/replicapool
                   - https://www.googleapis.com/auth/replicapool.readonly
               description: Lists the current status for each instance within a given update.
-              displayName: ListInstanceUpdates RollingUpdates
+              displayName: list Instance Updates
               is:
               - hasParameters
               queryParameters:
@@ -463,6 +472,9 @@ types:
                 200:
                   body:
                     application/json: InstanceUpdateList
+              (commons.Id): replicapoolupdater.rollingUpdates.listInstanceUpdates
+              (commons.LogicalStucture):
+              - Rolling Updates
           /pause:
             post:
               securedBy:
@@ -471,13 +483,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/replicapool
               description: Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no effect if invoked when the state of the update is PAUSED.
-              displayName: Pause RollingUpdates
+              displayName: pause
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): replicapoolupdater.rollingUpdates.pause
+              (commons.LogicalStucture):
+              - Rolling Updates
           get:
             securedBy:
               oath2:
@@ -487,13 +502,16 @@ types:
                 - https://www.googleapis.com/auth/replicapool
                 - https://www.googleapis.com/auth/replicapool.readonly
             description: Returns information about an update.
-            displayName: Get RollingUpdates
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: RollingUpdate
+            (commons.Id): replicapoolupdater.rollingUpdates.get
+            (commons.LogicalStucture):
+            - Rolling Updates
         post:
           securedBy:
             oath2:
@@ -501,7 +519,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/replicapool
           description: Inserts and starts a new update.
-          displayName: Insert RollingUpdates
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -510,6 +528,9 @@ types:
             200:
               body:
                 application/json: Operation
+          (commons.Id): replicapoolupdater.rollingUpdates.insert
+          (commons.LogicalStucture):
+          - Rolling Updates
         get:
           securedBy:
             oath2:
@@ -519,7 +540,7 @@ types:
               - https://www.googleapis.com/auth/replicapool
               - https://www.googleapis.com/auth/replicapool.readonly
           description: Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.
-          displayName: List RollingUpdates
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -540,6 +561,9 @@ types:
             200:
               body:
                 application/json: RollingUpdateList
+          (commons.Id): replicapoolupdater.rollingUpdates.list
+          (commons.LogicalStucture):
+          - Rolling Updates
       /operations:
         /{operation}:
           uriParameters:
@@ -553,13 +577,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/replicapool
             description: Retrieves the specified zone-specific operation resource.
-            displayName: Get ZoneOperations
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): replicapoolupdater.zoneOperations.get
+            (commons.LogicalStucture):
+            - Zone Operations
         get:
           securedBy:
             oath2:
@@ -567,7 +594,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/replicapool
           description: Retrieves the list of Operation resources contained within the specified zone.
-          displayName: List ZoneOperations
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -588,3 +615,6 @@ types:
             200:
               body:
                 application/json: OperationList
+          (commons.Id): replicapoolupdater.zoneOperations.list
+          (commons.LogicalStucture):
+          - Zone Operations

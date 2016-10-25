@@ -116,7 +116,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Assign License. This method supports patch semantics.
-            displayName: Patch LicenseAssignments
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -125,26 +125,32 @@ types:
               200:
                 body:
                   application/json: LicenseAssignment
+            (commons.Id): licensing.licenseAssignments.patch
+            (commons.LogicalStucture):
+            - License Assignments
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Get license assignment of a particular product and sku for a user
-            displayName: Get LicenseAssignments
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: LicenseAssignment
+            (commons.Id): licensing.licenseAssignments.get
+            (commons.LogicalStucture):
+            - License Assignments
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Assign License.
-            displayName: Update LicenseAssignments
+            displayName: update
             is:
             - hasParameters
             body:
@@ -153,22 +159,28 @@ types:
               200:
                 body:
                   application/json: LicenseAssignment
+            (commons.Id): licensing.licenseAssignments.update
+            (commons.LogicalStucture):
+            - License Assignments
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/apps.licensing
             description: Revoke License.
-            displayName: Delete LicenseAssignments
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): licensing.licenseAssignments.delete
+            (commons.LogicalStucture):
+            - License Assignments
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/apps.licensing
           description: Assign License.
-          displayName: Insert LicenseAssignments
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -177,6 +189,9 @@ types:
             200:
               body:
                 application/json: LicenseAssignment
+          (commons.Id): licensing.licenseAssignments.insert
+          (commons.LogicalStucture):
+          - License Assignments
       /users:
         get:
           securedBy:
@@ -184,7 +199,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/apps.licensing
           description: List license assignments for given product and sku of the customer.
-          displayName: ListForProductAndSku LicenseAssignments
+          displayName: list For Product And Sku
           is:
           - hasParameters
           queryParameters:
@@ -206,6 +221,9 @@ types:
             200:
               body:
                 application/json: LicenseAssignmentList
+          (commons.Id): licensing.licenseAssignments.listForProductAndSku
+          (commons.LogicalStucture):
+          - License Assignments
   /users:
     get:
       securedBy:
@@ -213,7 +231,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/apps.licensing
       description: List license assignments for given product of the customer.
-      displayName: ListForProduct LicenseAssignments
+      displayName: list For Product
       is:
       - hasParameters
       queryParameters:
@@ -235,3 +253,6 @@ types:
         200:
           body:
             application/json: LicenseAssignmentList
+      (commons.Id): licensing.licenseAssignments.listForProduct
+      (commons.LogicalStucture):
+      - License Assignments

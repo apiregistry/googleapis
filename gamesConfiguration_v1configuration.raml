@@ -257,7 +257,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the achievement configuration with the given ID. This method supports patch semantics.
-      displayName: Patch AchievementConfigurations
+      displayName: patch
       is:
       - hasParameters
       body:
@@ -266,26 +266,32 @@ types:
         200:
           body:
             application/json: AchievementConfiguration
+      (commons.Id): gamesConfiguration.achievementConfigurations.patch
+      (commons.LogicalStucture):
+      - Achievement Configurations
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Retrieves the metadata of the achievement configuration with the given ID.
-      displayName: Get AchievementConfigurations
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: AchievementConfiguration
+      (commons.Id): gamesConfiguration.achievementConfigurations.get
+      (commons.LogicalStucture):
+      - Achievement Configurations
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the achievement configuration with the given ID.
-      displayName: Update AchievementConfigurations
+      displayName: update
       is:
       - hasParameters
       body:
@@ -294,15 +300,21 @@ types:
         200:
           body:
             application/json: AchievementConfiguration
+      (commons.Id): gamesConfiguration.achievementConfigurations.update
+      (commons.LogicalStucture):
+      - Achievement Configurations
     delete:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Delete the achievement configuration with the given ID.
-      displayName: Delete AchievementConfigurations
+      displayName: delete
       is:
       - hasParameters
+      (commons.Id): gamesConfiguration.achievementConfigurations.delete
+      (commons.LogicalStucture):
+      - Achievement Configurations
 /applications:
   /{applicationId}:
     uriParameters:
@@ -316,7 +328,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Insert a new achievement configuration in this application.
-        displayName: Insert AchievementConfigurations
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -325,13 +337,16 @@ types:
           200:
             body:
               application/json: AchievementConfiguration
+        (commons.Id): gamesConfiguration.achievementConfigurations.insert
+        (commons.LogicalStucture):
+        - Achievement Configurations
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns a list of the achievement configurations in this application.
-        displayName: List AchievementConfigurations
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -348,6 +363,9 @@ types:
           200:
             body:
               application/json: AchievementConfigurationListResponse
+        (commons.Id): gamesConfiguration.achievementConfigurations.list
+        (commons.LogicalStucture):
+        - Achievement Configurations
     /leaderboards:
       post:
         securedBy:
@@ -355,7 +373,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Insert a new leaderboard configuration in this application.
-        displayName: Insert LeaderboardConfigurations
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -364,13 +382,16 @@ types:
           200:
             body:
               application/json: LeaderboardConfiguration
+        (commons.Id): gamesConfiguration.leaderboardConfigurations.insert
+        (commons.LogicalStucture):
+        - Leaderboard Configurations
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns a list of the leaderboard configurations in this application.
-        displayName: List LeaderboardConfigurations
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -387,6 +408,9 @@ types:
           200:
             body:
               application/json: LeaderboardConfigurationListResponse
+        (commons.Id): gamesConfiguration.leaderboardConfigurations.list
+        (commons.LogicalStucture):
+        - Leaderboard Configurations
 /images:
   /{resourceId}:
     uriParameters:
@@ -399,6 +423,9 @@ types:
           imageType:
             type: string
             description: Selects which image in a resource for this method.
+            (commons.EnumDescriptions):
+            - The icon image for an achievement resource.
+            - The icon image for a leaderboard resource.
             enum:
             - ACHIEVEMENT_ICON
             - LEADERBOARD_ICON
@@ -408,13 +435,16 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Uploads an image for a resource with the given ID and image type.
-          displayName: Upload ImageConfigurations
+          displayName: upload
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ImageConfiguration
+          (commons.Id): gamesConfiguration.imageConfigurations.upload
+          (commons.LogicalStucture):
+          - Image Configurations
 /leaderboards:
   /{leaderboardId}:
     uriParameters:
@@ -427,7 +457,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the leaderboard configuration with the given ID. This method supports patch semantics.
-      displayName: Patch LeaderboardConfigurations
+      displayName: patch
       is:
       - hasParameters
       body:
@@ -436,26 +466,32 @@ types:
         200:
           body:
             application/json: LeaderboardConfiguration
+      (commons.Id): gamesConfiguration.leaderboardConfigurations.patch
+      (commons.LogicalStucture):
+      - Leaderboard Configurations
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Retrieves the metadata of the leaderboard configuration with the given ID.
-      displayName: Get LeaderboardConfigurations
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: LeaderboardConfiguration
+      (commons.Id): gamesConfiguration.leaderboardConfigurations.get
+      (commons.LogicalStucture):
+      - Leaderboard Configurations
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Update the metadata of the leaderboard configuration with the given ID.
-      displayName: Update LeaderboardConfigurations
+      displayName: update
       is:
       - hasParameters
       body:
@@ -464,12 +500,18 @@ types:
         200:
           body:
             application/json: LeaderboardConfiguration
+      (commons.Id): gamesConfiguration.leaderboardConfigurations.update
+      (commons.LogicalStucture):
+      - Leaderboard Configurations
     delete:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Delete the leaderboard configuration with the given ID.
-      displayName: Delete LeaderboardConfigurations
+      displayName: delete
       is:
       - hasParameters
+      (commons.Id): gamesConfiguration.leaderboardConfigurations.delete
+      (commons.LogicalStucture):
+      - Leaderboard Configurations

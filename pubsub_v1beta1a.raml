@@ -47,6 +47,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -292,7 +295,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Pulls a single message from the server. If return_immediately is true, and no messages are available in the subscription, this method returns FAILED_PRECONDITION. The system is free to return an UNAVAILABLE error if no messages are available in a reasonable amount of time (to reduce system load).
-        displayName: Pull Subscriptions
+        displayName: pull
         is:
         - hasParameters
         body:
@@ -301,6 +304,9 @@ types:
           200:
             body:
               application/json: PullResponse
+        (commons.Id): pubsub.subscriptions.pull
+        (commons.LogicalStucture):
+        - Subscriptions
     /pullBatch:
       post:
         securedBy:
@@ -309,7 +315,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Pulls messages from the server. Returns an empty list if there are no messages available in the backlog. The system is free to return UNAVAILABLE if there are too many pull requests outstanding for the given subscription.
-        displayName: PullBatch Subscriptions
+        displayName: pull Batch
         is:
         - hasParameters
         body:
@@ -318,6 +324,9 @@ types:
           200:
             body:
               application/json: PullBatchResponse
+        (commons.Id): pubsub.subscriptions.pullBatch
+        (commons.LogicalStucture):
+        - Subscriptions
     /acknowledge:
       post:
         securedBy:
@@ -330,7 +339,7 @@ types:
           whose Ack deadline has expired may succeed, but the message could have been
           already redelivered. Acknowledging a message more than once will not result
           in an error. This is only used for messages received via pull.'
-        displayName: Acknowledge Subscriptions
+        displayName: acknowledge
         is:
         - hasParameters
         body:
@@ -339,6 +348,9 @@ types:
           200:
             body:
               application/json: Empty
+        (commons.Id): pubsub.subscriptions.acknowledge
+        (commons.LogicalStucture):
+        - Subscriptions
     /{subscription}:
       uriParameters:
         subscription:
@@ -352,13 +364,16 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Gets the configuration details of a subscription.
-        displayName: Get Subscriptions
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Subscription
+        (commons.Id): pubsub.subscriptions.get
+        (commons.LogicalStucture):
+        - Subscriptions
       delete:
         securedBy:
           oath2:
@@ -366,13 +381,16 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Deletes an existing subscription. All pending messages in the subscription are immediately dropped. Calls to Pull after deletion will return NOT_FOUND.
-        displayName: Delete Subscriptions
+        displayName: delete
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Empty
+        (commons.Id): pubsub.subscriptions.delete
+        (commons.LogicalStucture):
+        - Subscriptions
     /modifyAckDeadline:
       post:
         securedBy:
@@ -381,7 +399,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Modifies the Ack deadline for a message received from a pull request.
-        displayName: ModifyAckDeadline Subscriptions
+        displayName: modify Ack Deadline
         is:
         - hasParameters
         body:
@@ -390,6 +408,9 @@ types:
           200:
             body:
               application/json: Empty
+        (commons.Id): pubsub.subscriptions.modifyAckDeadline
+        (commons.LogicalStucture):
+        - Subscriptions
     /modifyPushConfig:
       post:
         securedBy:
@@ -398,7 +419,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Modifies the PushConfig for a specified subscription. This method can be used to suspend the flow of messages to an endpoint by clearing the PushConfig field in the request. Messages will be accumulated for delivery even if no push configuration is defined or while the configuration is modified.
-        displayName: ModifyPushConfig Subscriptions
+        displayName: modify Push Config
         is:
         - hasParameters
         body:
@@ -407,6 +428,9 @@ types:
           200:
             body:
               application/json: Empty
+        (commons.Id): pubsub.subscriptions.modifyPushConfig
+        (commons.LogicalStucture):
+        - Subscriptions
     post:
       securedBy:
         oath2:
@@ -414,7 +438,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Creates a subscription on a given topic for a given subscriber. If the subscription already exists, returns ALREADY_EXISTS. If the corresponding topic doesn't exist, returns NOT_FOUND. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic.
-      displayName: Create Subscriptions
+      displayName: create
       is:
       - hasParameters
       body:
@@ -423,6 +447,9 @@ types:
         200:
           body:
             application/json: Subscription
+      (commons.Id): pubsub.subscriptions.create
+      (commons.LogicalStucture):
+      - Subscriptions
     get:
       securedBy:
         oath2:
@@ -430,7 +457,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Lists matching subscriptions.
-      displayName: List Subscriptions
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -448,6 +475,9 @@ types:
         200:
           body:
             application/json: ListSubscriptionsResponse
+      (commons.Id): pubsub.subscriptions.list
+      (commons.LogicalStucture):
+      - Subscriptions
   /topics:
     /publishBatch:
       post:
@@ -457,7 +487,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist.
-        displayName: PublishBatch Topics
+        displayName: publish Batch
         is:
         - hasParameters
         body:
@@ -466,6 +496,9 @@ types:
           200:
             body:
               application/json: PublishBatchResponse
+        (commons.Id): pubsub.topics.publishBatch
+        (commons.LogicalStucture):
+        - Topics
     /publish:
       post:
         securedBy:
@@ -474,7 +507,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Adds a message to the topic. Returns NOT_FOUND if the topic does not exist.
-        displayName: Publish Topics
+        displayName: publish
         is:
         - hasParameters
         body:
@@ -483,6 +516,9 @@ types:
           200:
             body:
               application/json: Empty
+        (commons.Id): pubsub.topics.publish
+        (commons.LogicalStucture):
+        - Topics
     /{topic}:
       uriParameters:
         topic:
@@ -496,13 +532,16 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Gets the configuration of a topic. Since the topic only has the name attribute, this method is only useful to check the existence of a topic. If other attributes are added in the future, they will be returned here.
-        displayName: Get Topics
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Topic
+        (commons.Id): pubsub.topics.get
+        (commons.LogicalStucture):
+        - Topics
       delete:
         securedBy:
           oath2:
@@ -510,13 +549,16 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/pubsub
         description: Deletes the topic with the given name. Returns NOT_FOUND if the topic does not exist. After a topic is deleted, a new topic may be created with the same name.
-        displayName: Delete Topics
+        displayName: delete
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Empty
+        (commons.Id): pubsub.topics.delete
+        (commons.LogicalStucture):
+        - Topics
     post:
       securedBy:
         oath2:
@@ -524,7 +566,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Creates the given topic with the given name.
-      displayName: Create Topics
+      displayName: create
       is:
       - hasParameters
       body:
@@ -533,6 +575,9 @@ types:
         200:
           body:
             application/json: Topic
+      (commons.Id): pubsub.topics.create
+      (commons.LogicalStucture):
+      - Topics
     get:
       securedBy:
         oath2:
@@ -540,7 +585,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/pubsub
       description: Lists matching topics.
-      displayName: List Topics
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -558,3 +603,6 @@ types:
         200:
           body:
             application/json: ListTopicsResponse
+      (commons.Id): pubsub.topics.list
+      (commons.LogicalStucture):
+      - Topics

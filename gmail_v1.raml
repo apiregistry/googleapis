@@ -682,9 +682,12 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Stop receiving push notifications for the given user mailbox.
-      displayName: Stop Users
+      displayName: stop
       is:
       - hasParameters
+      (commons.Id): gmail.users.stop
+      (commons.LogicalStucture):
+      - Users
   /watch:
     post:
       securedBy:
@@ -694,7 +697,7 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Set up or update a push notification watch on the given user mailbox.
-      displayName: Watch Users
+      displayName: watch
       is:
       - hasParameters
       body:
@@ -703,6 +706,9 @@ types:
         200:
           body:
             application/json: WatchResponse
+      (commons.Id): gmail.users.watch
+      (commons.LogicalStucture):
+      - Users
   /profile:
     get:
       securedBy:
@@ -713,13 +719,16 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Gets the current user's Gmail profile.
-      displayName: GetProfile Users
+      displayName: get Profile
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Profile
+      (commons.Id): gmail.users.getProfile
+      (commons.LogicalStucture):
+      - Users
   /settings:
     /autoForwarding:
       get:
@@ -731,20 +740,24 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Gets the auto-forwarding setting for the specified account.
-        displayName: GetAutoForwarding Settings Users
+        displayName: get Auto Forwarding
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: AutoForwarding
+        (commons.Id): gmail.users.settings.getAutoForwarding
+        (commons.LogicalStucture):
+        - Users
+        - Settings
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.sharing
         description: Updates the auto-forwarding setting for the specified account. A verified forwarding address must be specified when auto-forwarding is enabled.
-        displayName: UpdateAutoForwarding Settings Users
+        displayName: update Auto Forwarding
         is:
         - hasParameters
         body:
@@ -753,6 +766,10 @@ types:
           200:
             body:
               application/json: AutoForwarding
+        (commons.Id): gmail.users.settings.updateAutoForwarding
+        (commons.LogicalStucture):
+        - Users
+        - Settings
     /pop:
       get:
         securedBy:
@@ -763,20 +780,24 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Gets POP settings.
-        displayName: GetPop Settings Users
+        displayName: get Pop
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: PopSettings
+        (commons.Id): gmail.users.settings.getPop
+        (commons.LogicalStucture):
+        - Users
+        - Settings
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Updates POP settings.
-        displayName: UpdatePop Settings Users
+        displayName: update Pop
         is:
         - hasParameters
         body:
@@ -785,6 +806,10 @@ types:
           200:
             body:
               application/json: PopSettings
+        (commons.Id): gmail.users.settings.updatePop
+        (commons.LogicalStucture):
+        - Users
+        - Settings
     /vacation:
       put:
         securedBy:
@@ -792,7 +817,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Updates vacation responder settings.
-        displayName: UpdateVacation Settings Users
+        displayName: update Vacation
         is:
         - hasParameters
         body:
@@ -801,6 +826,10 @@ types:
           200:
             body:
               application/json: VacationSettings
+        (commons.Id): gmail.users.settings.updateVacation
+        (commons.LogicalStucture):
+        - Users
+        - Settings
       get:
         securedBy:
           oath2:
@@ -810,13 +839,17 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Gets vacation responder settings.
-        displayName: GetVacation Settings Users
+        displayName: get Vacation
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: VacationSettings
+        (commons.Id): gmail.users.settings.getVacation
+        (commons.LogicalStucture):
+        - Users
+        - Settings
     /imap:
       get:
         securedBy:
@@ -827,20 +860,24 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Gets IMAP settings.
-        displayName: GetImap Settings Users
+        displayName: get Imap
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ImapSettings
+        (commons.Id): gmail.users.settings.getImap
+        (commons.LogicalStucture):
+        - Users
+        - Settings
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Updates IMAP settings.
-        displayName: UpdateImap Settings Users
+        displayName: update Imap
         is:
         - hasParameters
         body:
@@ -849,6 +886,10 @@ types:
           200:
             body:
               application/json: ImapSettings
+        (commons.Id): gmail.users.settings.updateImap
+        (commons.LogicalStucture):
+        - Users
+        - Settings
     /forwardingAddresses:
       /{forwardingEmail}:
         uriParameters:
@@ -864,29 +905,39 @@ types:
               - https://www.googleapis.com/auth/gmail.readonly
               - https://www.googleapis.com/auth/gmail.settings.basic
           description: Gets the specified forwarding address.
-          displayName: Get ForwardingAddresses Settings Users
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ForwardingAddress
+          (commons.Id): gmail.users.settings.forwardingAddresses.get
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Forwarding Addresses
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/gmail.settings.sharing
           description: Deletes the specified forwarding address and revokes any verification that may have been required.
-          displayName: Delete ForwardingAddresses Settings Users
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): gmail.users.settings.forwardingAddresses.delete
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Forwarding Addresses
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.sharing
         description: Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource's verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted.
-        displayName: Create ForwardingAddresses Settings Users
+        displayName: create
         is:
         - hasParameters
         body:
@@ -895,6 +946,11 @@ types:
           200:
             body:
               application/json: ForwardingAddress
+        (commons.Id): gmail.users.settings.forwardingAddresses.create
+        (commons.LogicalStucture):
+        - Users
+        - Settings
+        - Forwarding Addresses
       get:
         securedBy:
           oath2:
@@ -904,13 +960,18 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Lists the forwarding addresses for the specified account.
-        displayName: List ForwardingAddresses Settings Users
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ListForwardingAddressesResponse
+        (commons.Id): gmail.users.settings.forwardingAddresses.list
+        (commons.LogicalStucture):
+        - Users
+        - Settings
+        - Forwarding Addresses
     /sendAs:
       /{sendAsEmail}:
         uriParameters:
@@ -924,9 +985,14 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/gmail.settings.sharing
             description: Sends a verification email to the specified send-as alias address. The verification status must be pending.
-            displayName: Verify SendAs Settings Users
+            displayName: verify
             is:
             - hasParameters
+            (commons.Id): gmail.users.settings.sendAs.verify
+            (commons.LogicalStucture):
+            - Users
+            - Settings
+            - Send As
         patch:
           securedBy:
             oath2:
@@ -934,7 +1000,7 @@ types:
               - https://www.googleapis.com/auth/gmail.settings.basic
               - https://www.googleapis.com/auth/gmail.settings.sharing
           description: Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. This method supports patch semantics.
-          displayName: Patch SendAs Settings Users
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -943,6 +1009,11 @@ types:
             200:
               body:
                 application/json: SendAs
+          (commons.Id): gmail.users.settings.sendAs.patch
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Send As
         get:
           securedBy:
             oath2:
@@ -952,13 +1023,18 @@ types:
               - https://www.googleapis.com/auth/gmail.readonly
               - https://www.googleapis.com/auth/gmail.settings.basic
           description: Gets the specified send-as alias. Fails with an HTTP 404 error if the specified address is not a member of the collection.
-          displayName: Get SendAs Settings Users
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: SendAs
+          (commons.Id): gmail.users.settings.sendAs.get
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Send As
         put:
           securedBy:
             oath2:
@@ -966,7 +1042,7 @@ types:
               - https://www.googleapis.com/auth/gmail.settings.basic
               - https://www.googleapis.com/auth/gmail.settings.sharing
           description: Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.
-          displayName: Update SendAs Settings Users
+          displayName: update
           is:
           - hasParameters
           body:
@@ -975,22 +1051,32 @@ types:
             200:
               body:
                 application/json: SendAs
+          (commons.Id): gmail.users.settings.sendAs.update
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Send As
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/gmail.settings.sharing
           description: Deletes the specified send-as alias. Revokes any verification that may have been required for using it.
-          displayName: Delete SendAs Settings Users
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): gmail.users.settings.sendAs.delete
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Send As
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.sharing
         description: Creates a custom "from" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource's verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.
-        displayName: Create SendAs Settings Users
+        displayName: create
         is:
         - hasParameters
         body:
@@ -999,6 +1085,11 @@ types:
           200:
             body:
               application/json: SendAs
+        (commons.Id): gmail.users.settings.sendAs.create
+        (commons.LogicalStucture):
+        - Users
+        - Settings
+        - Send As
       get:
         securedBy:
           oath2:
@@ -1008,13 +1099,18 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Lists the send-as aliases for the specified account. The result includes the primary send-as address associated with the account as well as any custom "from" aliases.
-        displayName: List SendAs Settings Users
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ListSendAsResponse
+        (commons.Id): gmail.users.settings.sendAs.list
+        (commons.LogicalStucture):
+        - Users
+        - Settings
+        - Send As
     /filters:
       /{id}:
         uriParameters:
@@ -1030,29 +1126,39 @@ types:
               - https://www.googleapis.com/auth/gmail.readonly
               - https://www.googleapis.com/auth/gmail.settings.basic
           description: Gets a filter.
-          displayName: Get Filters Settings Users
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Filter
+          (commons.Id): gmail.users.settings.filters.get
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Filters
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/gmail.settings.basic
           description: Deletes a filter.
-          displayName: Delete Filters Settings Users
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): gmail.users.settings.filters.delete
+          (commons.LogicalStucture):
+          - Users
+          - Settings
+          - Filters
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Creates a filter.
-        displayName: Create Filters Settings Users
+        displayName: create
         is:
         - hasParameters
         body:
@@ -1061,6 +1167,11 @@ types:
           200:
             body:
               application/json: Filter
+        (commons.Id): gmail.users.settings.filters.create
+        (commons.LogicalStucture):
+        - Users
+        - Settings
+        - Filters
       get:
         securedBy:
           oath2:
@@ -1070,13 +1181,18 @@ types:
             - https://www.googleapis.com/auth/gmail.readonly
             - https://www.googleapis.com/auth/gmail.settings.basic
         description: Lists the message filters of a Gmail user.
-        displayName: List Filters Settings Users
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ListFiltersResponse
+        (commons.Id): gmail.users.settings.filters.list
+        (commons.LogicalStucture):
+        - Users
+        - Settings
+        - Filters
   /messages:
     /{id}:
       uriParameters:
@@ -1091,7 +1207,7 @@ types:
               - https://mail.google.com/
               - https://www.googleapis.com/auth/gmail.modify
           description: Modifies the labels on the specified message.
-          displayName: Modify Messages Users
+          displayName: modify
           is:
           - hasParameters
           body:
@@ -1100,6 +1216,10 @@ types:
             200:
               body:
                 application/json: Message
+          (commons.Id): gmail.users.messages.modify
+          (commons.LogicalStucture):
+          - Users
+          - Messages
       /untrash:
         post:
           securedBy:
@@ -1108,13 +1228,17 @@ types:
               - https://mail.google.com/
               - https://www.googleapis.com/auth/gmail.modify
           description: Removes the specified message from the trash.
-          displayName: Untrash Messages Users
+          displayName: untrash
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Message
+          (commons.Id): gmail.users.messages.untrash
+          (commons.LogicalStucture):
+          - Users
+          - Messages
       /trash:
         post:
           securedBy:
@@ -1123,13 +1247,17 @@ types:
               - https://mail.google.com/
               - https://www.googleapis.com/auth/gmail.modify
           description: Moves the specified message to the trash.
-          displayName: Trash Messages Users
+          displayName: trash
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Message
+          (commons.Id): gmail.users.messages.trash
+          (commons.LogicalStucture):
+          - Users
+          - Messages
       get:
         securedBy:
           oath2:
@@ -1138,7 +1266,7 @@ types:
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified message.
-        displayName: Get Messages Users
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -1146,6 +1274,11 @@ types:
             type: string
             default: full
             description: The format to return the message in.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - full
             - metadata
@@ -1158,15 +1291,23 @@ types:
           200:
             body:
               application/json: Message
+        (commons.Id): gmail.users.messages.get
+        (commons.LogicalStucture):
+        - Users
+        - Messages
       delete:
         securedBy:
           oath2:
             scopes:
             - https://mail.google.com/
         description: Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer messages.trash instead.
-        displayName: Delete Messages Users
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): gmail.users.messages.delete
+        (commons.LogicalStucture):
+        - Users
+        - Messages
     /import:
       post:
         securedBy:
@@ -1176,7 +1317,7 @@ types:
             - https://www.googleapis.com/auth/gmail.insert
             - https://www.googleapis.com/auth/gmail.modify
         description: Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message.
-        displayName: Import Messages Users
+        displayName: import
         is:
         - hasParameters
         queryParameters:
@@ -1196,6 +1337,9 @@ types:
             type: string
             default: dateHeader
             description: Source for Gmail's internal date of the message.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - dateHeader
             - receivedTime
@@ -1205,6 +1349,10 @@ types:
           200:
             body:
               application/json: Message
+        (commons.Id): gmail.users.messages.import
+        (commons.LogicalStucture):
+        - Users
+        - Messages
     /send:
       post:
         securedBy:
@@ -1215,7 +1363,7 @@ types:
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.send
         description: Sends the specified message to the recipients in the To, Cc, and Bcc headers.
-        displayName: Send Messages Users
+        displayName: send
         is:
         - hasParameters
         body:
@@ -1224,6 +1372,10 @@ types:
           200:
             body:
               application/json: Message
+        (commons.Id): gmail.users.messages.send
+        (commons.LogicalStucture):
+        - Users
+        - Messages
     /batchDelete:
       post:
         securedBy:
@@ -1231,11 +1383,15 @@ types:
             scopes:
             - https://mail.google.com/
         description: Deletes many messages by message ID. Provides no guarantees that messages were not already deleted or even existed at all.
-        displayName: BatchDelete Messages Users
+        displayName: batch Delete
         is:
         - hasParameters
         body:
           application/json: BatchDeleteMessagesRequest
+        (commons.Id): gmail.users.messages.batchDelete
+        (commons.LogicalStucture):
+        - Users
+        - Messages
     /{messageId}:
       uriParameters:
         messageId:
@@ -1255,13 +1411,18 @@ types:
                 - https://www.googleapis.com/auth/gmail.modify
                 - https://www.googleapis.com/auth/gmail.readonly
             description: Gets the specified message attachment.
-            displayName: Get Attachments Messages Users
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: MessagePartBody
+            (commons.Id): gmail.users.messages.attachments.get
+            (commons.LogicalStucture):
+            - Users
+            - Messages
+            - Attachments
     post:
       securedBy:
         oath2:
@@ -1270,7 +1431,7 @@ types:
           - https://www.googleapis.com/auth/gmail.insert
           - https://www.googleapis.com/auth/gmail.modify
       description: Directly inserts a message into only this user's mailbox similar to IMAP APPEND, bypassing most scanning and classification. Does not send a message.
-      displayName: Insert Messages Users
+      displayName: insert
       is:
       - hasParameters
       queryParameters:
@@ -1282,6 +1443,9 @@ types:
           type: string
           default: receivedTime
           description: Source for Gmail's internal date of the message.
+          (commons.EnumDescriptions):
+          - ''
+          - ''
           enum:
           - dateHeader
           - receivedTime
@@ -1291,6 +1455,10 @@ types:
         200:
           body:
             application/json: Message
+      (commons.Id): gmail.users.messages.insert
+      (commons.LogicalStucture):
+      - Users
+      - Messages
     get:
       securedBy:
         oath2:
@@ -1299,7 +1467,7 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the messages in the user's mailbox.
-      displayName: List Messages Users
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1327,6 +1495,10 @@ types:
         200:
           body:
             application/json: ListMessagesResponse
+      (commons.Id): gmail.users.messages.list
+      (commons.LogicalStucture):
+      - Users
+      - Messages
   /threads:
     /{id}:
       uriParameters:
@@ -1341,7 +1513,7 @@ types:
               - https://mail.google.com/
               - https://www.googleapis.com/auth/gmail.modify
           description: Modifies the labels applied to the thread. This applies to all messages in the thread.
-          displayName: Modify Threads Users
+          displayName: modify
           is:
           - hasParameters
           body:
@@ -1350,6 +1522,10 @@ types:
             200:
               body:
                 application/json: Thread
+          (commons.Id): gmail.users.threads.modify
+          (commons.LogicalStucture):
+          - Users
+          - Threads
       /untrash:
         post:
           securedBy:
@@ -1358,13 +1534,17 @@ types:
               - https://mail.google.com/
               - https://www.googleapis.com/auth/gmail.modify
           description: Removes the specified thread from the trash.
-          displayName: Untrash Threads Users
+          displayName: untrash
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Thread
+          (commons.Id): gmail.users.threads.untrash
+          (commons.LogicalStucture):
+          - Users
+          - Threads
       /trash:
         post:
           securedBy:
@@ -1373,13 +1553,17 @@ types:
               - https://mail.google.com/
               - https://www.googleapis.com/auth/gmail.modify
           description: Moves the specified thread to the trash.
-          displayName: Trash Threads Users
+          displayName: trash
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Thread
+          (commons.Id): gmail.users.threads.trash
+          (commons.LogicalStucture):
+          - Users
+          - Threads
       get:
         securedBy:
           oath2:
@@ -1388,7 +1572,7 @@ types:
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified thread.
-        displayName: Get Threads Users
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -1396,6 +1580,10 @@ types:
             type: string
             default: full
             description: The format to return the messages in.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
             enum:
             - full
             - metadata
@@ -1407,15 +1595,23 @@ types:
           200:
             body:
               application/json: Thread
+        (commons.Id): gmail.users.threads.get
+        (commons.LogicalStucture):
+        - Users
+        - Threads
       delete:
         securedBy:
           oath2:
             scopes:
             - https://mail.google.com/
         description: Immediately and permanently deletes the specified thread. This operation cannot be undone. Prefer threads.trash instead.
-        displayName: Delete Threads Users
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): gmail.users.threads.delete
+        (commons.LogicalStucture):
+        - Users
+        - Threads
     get:
       securedBy:
         oath2:
@@ -1424,7 +1620,7 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the threads in the user's mailbox.
-      displayName: List Threads Users
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1452,6 +1648,10 @@ types:
         200:
           body:
             application/json: ListThreadsResponse
+      (commons.Id): gmail.users.threads.list
+      (commons.LogicalStucture):
+      - Users
+      - Threads
   /drafts:
     /{id}:
       uriParameters:
@@ -1467,7 +1667,7 @@ types:
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified draft.
-        displayName: Get Drafts Users
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -1475,6 +1675,11 @@ types:
             type: string
             default: full
             description: The format to return the draft in.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - full
             - metadata
@@ -1484,6 +1689,10 @@ types:
           200:
             body:
               application/json: Draft
+        (commons.Id): gmail.users.drafts.get
+        (commons.LogicalStucture):
+        - Users
+        - Drafts
       put:
         securedBy:
           oath2:
@@ -1492,7 +1701,7 @@ types:
             - https://www.googleapis.com/auth/gmail.compose
             - https://www.googleapis.com/auth/gmail.modify
         description: Replaces a draft's content.
-        displayName: Update Drafts Users
+        displayName: update
         is:
         - hasParameters
         body:
@@ -1501,6 +1710,10 @@ types:
           200:
             body:
               application/json: Draft
+        (commons.Id): gmail.users.drafts.update
+        (commons.LogicalStucture):
+        - Users
+        - Drafts
       delete:
         securedBy:
           oath2:
@@ -1509,9 +1722,13 @@ types:
             - https://www.googleapis.com/auth/gmail.compose
             - https://www.googleapis.com/auth/gmail.modify
         description: Immediately and permanently deletes the specified draft. Does not simply trash it.
-        displayName: Delete Drafts Users
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): gmail.users.drafts.delete
+        (commons.LogicalStucture):
+        - Users
+        - Drafts
     /send:
       post:
         securedBy:
@@ -1521,7 +1738,7 @@ types:
             - https://www.googleapis.com/auth/gmail.compose
             - https://www.googleapis.com/auth/gmail.modify
         description: Sends the specified, existing draft to the recipients in the To, Cc, and Bcc headers.
-        displayName: Send Drafts Users
+        displayName: send
         is:
         - hasParameters
         body:
@@ -1530,6 +1747,10 @@ types:
           200:
             body:
               application/json: Message
+        (commons.Id): gmail.users.drafts.send
+        (commons.LogicalStucture):
+        - Users
+        - Drafts
     post:
       securedBy:
         oath2:
@@ -1538,7 +1759,7 @@ types:
           - https://www.googleapis.com/auth/gmail.compose
           - https://www.googleapis.com/auth/gmail.modify
       description: Creates a new draft with the DRAFT label.
-      displayName: Create Drafts Users
+      displayName: create
       is:
       - hasParameters
       body:
@@ -1547,6 +1768,10 @@ types:
         200:
           body:
             application/json: Draft
+      (commons.Id): gmail.users.drafts.create
+      (commons.LogicalStucture):
+      - Users
+      - Drafts
     get:
       securedBy:
         oath2:
@@ -1556,7 +1781,7 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the drafts in the user's mailbox.
-      displayName: List Drafts Users
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1581,6 +1806,10 @@ types:
         200:
           body:
             application/json: ListDraftsResponse
+      (commons.Id): gmail.users.drafts.list
+      (commons.LogicalStucture):
+      - Users
+      - Drafts
   /history:
     get:
       securedBy:
@@ -1590,7 +1819,7 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing historyId).
-      displayName: List History Users
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1613,6 +1842,10 @@ types:
         200:
           body:
             application/json: ListHistoryResponse
+      (commons.Id): gmail.users.history.list
+      (commons.LogicalStucture):
+      - Users
+      - History
   /labels:
     /{id}:
       uriParameters:
@@ -1627,7 +1860,7 @@ types:
             - https://www.googleapis.com/auth/gmail.labels
             - https://www.googleapis.com/auth/gmail.modify
         description: Updates the specified label. This method supports patch semantics.
-        displayName: Patch Labels Users
+        displayName: patch
         is:
         - hasParameters
         body:
@@ -1636,6 +1869,10 @@ types:
           200:
             body:
               application/json: Label
+        (commons.Id): gmail.users.labels.patch
+        (commons.LogicalStucture):
+        - Users
+        - Labels
       get:
         securedBy:
           oath2:
@@ -1645,13 +1882,17 @@ types:
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified label.
-        displayName: Get Labels Users
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Label
+        (commons.Id): gmail.users.labels.get
+        (commons.LogicalStucture):
+        - Users
+        - Labels
       put:
         securedBy:
           oath2:
@@ -1660,7 +1901,7 @@ types:
             - https://www.googleapis.com/auth/gmail.labels
             - https://www.googleapis.com/auth/gmail.modify
         description: Updates the specified label.
-        displayName: Update Labels Users
+        displayName: update
         is:
         - hasParameters
         body:
@@ -1669,6 +1910,10 @@ types:
           200:
             body:
               application/json: Label
+        (commons.Id): gmail.users.labels.update
+        (commons.LogicalStucture):
+        - Users
+        - Labels
       delete:
         securedBy:
           oath2:
@@ -1677,9 +1922,13 @@ types:
             - https://www.googleapis.com/auth/gmail.labels
             - https://www.googleapis.com/auth/gmail.modify
         description: Immediately and permanently deletes the specified label and removes it from any messages and threads that it is applied to.
-        displayName: Delete Labels Users
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): gmail.users.labels.delete
+        (commons.LogicalStucture):
+        - Users
+        - Labels
     post:
       securedBy:
         oath2:
@@ -1688,7 +1937,7 @@ types:
           - https://www.googleapis.com/auth/gmail.labels
           - https://www.googleapis.com/auth/gmail.modify
       description: Creates a new label.
-      displayName: Create Labels Users
+      displayName: create
       is:
       - hasParameters
       body:
@@ -1697,6 +1946,10 @@ types:
         200:
           body:
             application/json: Label
+      (commons.Id): gmail.users.labels.create
+      (commons.LogicalStucture):
+      - Users
+      - Labels
     get:
       securedBy:
         oath2:
@@ -1706,10 +1959,14 @@ types:
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists all labels in the user's mailbox.
-      displayName: List Labels Users
+      displayName: list
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: ListLabelsResponse
+      (commons.Id): gmail.users.labels.list
+      (commons.LogicalStucture):
+      - Users
+      - Labels

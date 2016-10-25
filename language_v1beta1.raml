@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -503,7 +506,7 @@ types:
       description: |-
         Finds named entities (currently finds proper names) in the text,
         entity types, salience, mentions for each entity, and other properties.
-      displayName: AnalyzeEntities Documents
+      displayName: analyze Entities
       is:
       - hasParameters
       body:
@@ -512,6 +515,9 @@ types:
         200:
           body:
             application/json: AnalyzeEntitiesResponse
+      (commons.Id): language.documents.analyzeEntities
+      (commons.LogicalStucture):
+      - Documents
   /documents:annotateText:
     post:
       securedBy:
@@ -521,7 +527,7 @@ types:
       description: |-
         A convenience method that provides all the features that analyzeSentiment,
         analyzeEntities, and analyzeSyntax provide in one call.
-      displayName: AnnotateText Documents
+      displayName: annotate Text
       is:
       - hasParameters
       body:
@@ -530,6 +536,9 @@ types:
         200:
           body:
             application/json: AnnotateTextResponse
+      (commons.Id): language.documents.annotateText
+      (commons.LogicalStucture):
+      - Documents
   /documents:analyzeSentiment:
     post:
       securedBy:
@@ -537,7 +546,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Analyzes the sentiment of the provided text.
-      displayName: AnalyzeSentiment Documents
+      displayName: analyze Sentiment
       is:
       - hasParameters
       body:
@@ -546,3 +555,6 @@ types:
         200:
           body:
             application/json: AnalyzeSentimentResponse
+      (commons.Id): language.documents.analyzeSentiment
+      (commons.LogicalStucture):
+      - Documents

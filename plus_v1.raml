@@ -866,13 +866,16 @@ types:
           - https://www.googleapis.com/auth/plus.login
           - https://www.googleapis.com/auth/plus.me
       description: Get a comment.
-      displayName: Get Comments
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Comment
+      (commons.Id): plus.comments.get
+      (commons.LogicalStucture):
+      - Comments
 /activities:
   /{activityId}:
     uriParameters:
@@ -887,7 +890,7 @@ types:
             - https://www.googleapis.com/auth/plus.login
             - https://www.googleapis.com/auth/plus.me
         description: List all of the comments for an activity.
-        displayName: List Comments
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -902,6 +905,9 @@ types:
             type: string
             default: ascending
             description: The order in which to sort the list of comments.
+            (commons.EnumDescriptions):
+            - Sort oldest comments first.
+            - Sort newest comments first.
             enum:
             - ascending
             - descending
@@ -912,12 +918,18 @@ types:
           200:
             body:
               application/json: CommentFeed
+        (commons.Id): plus.comments.list
+        (commons.LogicalStucture):
+        - Comments
     /people:
       /{collection}:
         uriParameters:
           collection:
             type: string
             description: The collection of people to list.
+            (commons.EnumDescriptions):
+            - List all people who have +1'd this activity.
+            - List all people who have reshared this activity.
             enum:
             - plusoners
             - resharers
@@ -928,7 +940,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the people in the specified collection for a particular activity.
-          displayName: ListByActivity People
+          displayName: list ByActivity
           is:
           - hasParameters
           queryParameters:
@@ -946,6 +958,9 @@ types:
             200:
               body:
                 application/json: PeopleFeed
+          (commons.Id): plus.people.listByActivity
+          (commons.LogicalStucture):
+          - People
     get:
       securedBy:
         oath2:
@@ -953,13 +968,16 @@ types:
           - https://www.googleapis.com/auth/plus.login
           - https://www.googleapis.com/auth/plus.me
       description: Get an activity.
-      displayName: Get Activities
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Activity
+      (commons.Id): plus.activities.get
+      (commons.LogicalStucture):
+      - Activities
   get:
     securedBy:
       oath2:
@@ -967,7 +985,7 @@ types:
         - https://www.googleapis.com/auth/plus.login
         - https://www.googleapis.com/auth/plus.me
     description: Search public activities.
-    displayName: Search Activities
+    displayName: search
     is:
     - hasParameters
     queryParameters:
@@ -985,6 +1003,9 @@ types:
         type: string
         default: recent
         description: Specifies how to order search results.
+        (commons.EnumDescriptions):
+        - Sort activities by relevance to the user, most relevant first.
+        - Sort activities by published date, most recent first.
         enum:
         - best
         - recent
@@ -999,6 +1020,9 @@ types:
       200:
         body:
           application/json: ActivityFeed
+    (commons.Id): plus.activities.search
+    (commons.LogicalStucture):
+    - Activities
 /people:
   /{userId}:
     uriParameters:
@@ -1011,6 +1035,8 @@ types:
           collection:
             type: string
             description: The collection of activities to list.
+            (commons.EnumDescriptions):
+            - All public activities created by the specified user.
             enum:
             - public
         get:
@@ -1020,7 +1046,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the activities in the specified collection for a particular user.
-          displayName: List Activities
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1038,12 +1064,18 @@ types:
             200:
               body:
                 application/json: ActivityFeed
+          (commons.Id): plus.activities.list
+          (commons.LogicalStucture):
+          - Activities
     /people:
       /{collection}:
         uriParameters:
           collection:
             type: string
             description: The collection of people to list.
+            (commons.EnumDescriptions):
+            - The list of visible people in the authenticated user's circles who also use the requesting app. This list is limited to users who made their app activities visible to the authenticated user.
+            - The list of people who this user has added to one or more circles, limited to the circles visible to the requesting application.
             enum:
             - connected
             - visible
@@ -1054,7 +1086,7 @@ types:
               - https://www.googleapis.com/auth/plus.login
               - https://www.googleapis.com/auth/plus.me
           description: List all of the people in the specified collection.
-          displayName: List People
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1068,6 +1100,9 @@ types:
             orderBy?:
               type: string
               description: The order to return people in.
+              (commons.EnumDescriptions):
+              - Order the people by their display name.
+              - Order people based on the relevence to the viewer.
               enum:
               - alphabetical
               - best
@@ -1078,6 +1113,9 @@ types:
             200:
               body:
                 application/json: PeopleFeed
+          (commons.Id): plus.people.list
+          (commons.LogicalStucture):
+          - People
     get:
       securedBy:
         oath2:
@@ -1087,13 +1125,16 @@ types:
           - https://www.googleapis.com/auth/userinfo.email
           - https://www.googleapis.com/auth/userinfo.profile
       description: Get a person's profile. If your app uses scope https://www.googleapis.com/auth/plus.login, this method is guaranteed to return ageRange and language.
-      displayName: Get People
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Person
+      (commons.Id): plus.people.get
+      (commons.LogicalStucture):
+      - People
   get:
     securedBy:
       oath2:
@@ -1101,7 +1142,7 @@ types:
         - https://www.googleapis.com/auth/plus.login
         - https://www.googleapis.com/auth/plus.me
     description: Search all public profiles.
-    displayName: Search People
+    displayName: search
     is:
     - hasParameters
     queryParameters:
@@ -1126,3 +1167,6 @@ types:
       200:
         body:
           application/json: PeopleFeed
+    (commons.Id): plus.people.search
+    (commons.LogicalStucture):
+    - People

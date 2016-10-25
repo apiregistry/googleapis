@@ -46,6 +46,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -2535,7 +2538,7 @@ types:
             description: |-
               Copies a single sheet from a spreadsheet to another spreadsheet.
               Returns the properties of the newly created sheet.
-            displayName: CopyTo Sheets Spreadsheets
+            displayName: copy To
             is:
             - hasParameters
             body:
@@ -2544,6 +2547,10 @@ types:
               200:
                 body:
                   application/json: SheetProperties
+            (commons.Id): sheets.spreadsheets.sheets.copyTo
+            (commons.LogicalStucture):
+            - Spreadsheets
+            - Sheets
       /values:batchClear:
         post:
           securedBy:
@@ -2556,7 +2563,7 @@ types:
             The caller must specify the spreadsheet ID and one or more ranges.
             Only values are cleared -- all other properties of the cell (such as
             formatting, data validation, etc..) are kept.
-          displayName: BatchClear Values Spreadsheets
+          displayName: batch Clear
           is:
           - hasParameters
           body:
@@ -2565,6 +2572,10 @@ types:
             200:
               body:
                 application/json: BatchClearValuesResponse
+          (commons.Id): sheets.spreadsheets.values.batchClear
+          (commons.LogicalStucture):
+          - Spreadsheets
+          - Values
       /values:batchUpdate:
         post:
           securedBy:
@@ -2577,7 +2588,7 @@ types:
             The caller must specify the spreadsheet ID,
             a valueInputOption, and one or more
             ValueRanges.
-          displayName: BatchUpdate Values Spreadsheets
+          displayName: batch Update
           is:
           - hasParameters
           body:
@@ -2586,6 +2597,10 @@ types:
             200:
               body:
                 application/json: BatchUpdateValuesResponse
+          (commons.Id): sheets.spreadsheets.values.batchUpdate
+          (commons.LogicalStucture):
+          - Spreadsheets
+          - Values
       /values:
         /{range}:
           uriParameters:
@@ -2603,7 +2618,7 @@ types:
             description: |-
               Returns a range of values from a spreadsheet.
               The caller must specify the spreadsheet ID and a range.
-            displayName: Get Values Spreadsheets
+            displayName: get
             is:
             - hasParameters
             queryParameters:
@@ -2641,6 +2656,10 @@ types:
               200:
                 body:
                   application/json: ValueRange
+            (commons.Id): sheets.spreadsheets.values.get
+            (commons.LogicalStucture):
+            - Spreadsheets
+            - Values
           put:
             securedBy:
               oath2:
@@ -2651,7 +2670,7 @@ types:
               Sets values in a range of a spreadsheet.
               The caller must specify the spreadsheet ID, range, and
               a valueInputOption.
-            displayName: Update Values Spreadsheets
+            displayName: update
             is:
             - hasParameters
             queryParameters:
@@ -2668,6 +2687,10 @@ types:
               200:
                 body:
                   application/json: UpdateValuesResponse
+            (commons.Id): sheets.spreadsheets.values.update
+            (commons.LogicalStucture):
+            - Spreadsheets
+            - Values
         /{range}:clear:
           uriParameters:
             range:
@@ -2684,7 +2707,7 @@ types:
               The caller must specify the spreadsheet ID and range.
               Only values are cleared -- all other properties of the cell (such as
               formatting, data validation, etc..) are kept.
-            displayName: Clear Values Spreadsheets
+            displayName: clear
             is:
             - hasParameters
             body:
@@ -2693,6 +2716,10 @@ types:
               200:
                 body:
                   application/json: ClearValuesResponse
+            (commons.Id): sheets.spreadsheets.values.clear
+            (commons.LogicalStucture):
+            - Spreadsheets
+            - Values
         /{range}:append:
           uriParameters:
             range:
@@ -2721,7 +2748,7 @@ types:
               controls how the input data will be added to the sheet (column-wise or
               row-wise), it does not influence what cell the data starts being written
               to.
-            displayName: Append Values Spreadsheets
+            displayName: append
             is:
             - hasParameters
             queryParameters:
@@ -2744,6 +2771,10 @@ types:
               200:
                 body:
                   application/json: AppendValuesResponse
+            (commons.Id): sheets.spreadsheets.values.append
+            (commons.LogicalStucture):
+            - Spreadsheets
+            - Values
       /values:batchGet:
         get:
           securedBy:
@@ -2756,7 +2787,7 @@ types:
           description: |-
             Returns one or more ranges of values from a spreadsheet.
             The caller must specify the spreadsheet ID and one or more ranges.
-          displayName: BatchGet Values Spreadsheets
+          displayName: batch Get
           is:
           - hasParameters
           queryParameters:
@@ -2797,6 +2828,10 @@ types:
             200:
               body:
                 application/json: BatchGetValuesResponse
+          (commons.Id): sheets.spreadsheets.values.batchGet
+          (commons.LogicalStucture):
+          - Spreadsheets
+          - Values
       get:
         securedBy:
           oath2:
@@ -2827,7 +2862,7 @@ types:
           Multiple ranges can be specified.  Limiting the range will
           return only the portions of the spreadsheet that intersect the requested
           ranges. Ranges are specified using A1 notation.
-        displayName: Get Spreadsheets
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -2843,6 +2878,9 @@ types:
           200:
             body:
               application/json: Spreadsheet
+        (commons.Id): sheets.spreadsheets.get
+        (commons.LogicalStucture):
+        - Spreadsheets
     /{spreadsheetId}:batchUpdate:
       uriParameters:
         spreadsheetId:
@@ -2874,7 +2912,7 @@ types:
           applied together atomically. Your changes may be altered with respect to
           collaborator changes. If there are no collaborators, the spreadsheet
           should reflect your changes.
-        displayName: BatchUpdate Spreadsheets
+        displayName: batch Update
         is:
         - hasParameters
         body:
@@ -2883,6 +2921,9 @@ types:
           200:
             body:
               application/json: BatchUpdateSpreadsheetResponse
+        (commons.Id): sheets.spreadsheets.batchUpdate
+        (commons.LogicalStucture):
+        - Spreadsheets
     post:
       securedBy:
         oath2:
@@ -2890,7 +2931,7 @@ types:
           - https://www.googleapis.com/auth/drive
           - https://www.googleapis.com/auth/spreadsheets
       description: Creates a spreadsheet, returning the newly created spreadsheet.
-      displayName: Create Spreadsheets
+      displayName: create
       is:
       - hasParameters
       body:
@@ -2899,3 +2940,6 @@ types:
         200:
           body:
             application/json: Spreadsheet
+      (commons.Id): sheets.spreadsheets.create
+      (commons.LogicalStucture):
+      - Spreadsheets

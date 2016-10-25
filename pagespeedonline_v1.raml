@@ -156,7 +156,7 @@ types:
 /runPagespeed:
   get:
     description: Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.
-    displayName: Runpagespeed Pagespeedapi
+    displayName: runpagespeed
     is:
     - hasParameters
     queryParameters:
@@ -179,6 +179,9 @@ types:
       strategy?:
         type: string
         description: The analysis strategy to use
+        (commons.EnumDescriptions):
+        - Fetch and analyze the URL for desktop browsers
+        - Fetch and analyze the URL for mobile devices
         enum:
         - desktop
         - mobile
@@ -190,3 +193,6 @@ types:
       200:
         body:
           application/json: Result
+    (commons.Id): pagespeedonline.pagespeedapi.runpagespeed
+    (commons.LogicalStucture):
+    - Pagespeedapi

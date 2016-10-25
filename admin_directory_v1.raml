@@ -1564,13 +1564,16 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.rolemanagement
                 - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
             description: Retrieves a paginated list of all privileges for a customer.
-            displayName: List Privileges
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Privileges
+            (commons.Id): directory.privileges.list
+            (commons.LogicalStucture):
+            - Privileges
       /{roleId}:
         uriParameters:
           roleId:
@@ -1582,7 +1585,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Updates a role. This method supports patch semantics.
-          displayName: Patch Roles
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -1591,6 +1594,9 @@ types:
             200:
               body:
                 application/json: Role
+          (commons.Id): directory.roles.patch
+          (commons.LogicalStucture):
+          - Roles
         get:
           securedBy:
             oath2:
@@ -1598,20 +1604,23 @@ types:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
               - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
           description: Retrieves a role.
-          displayName: Get Roles
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Role
+          (commons.Id): directory.roles.get
+          (commons.LogicalStucture):
+          - Roles
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Updates a role.
-          displayName: Update Roles
+          displayName: update
           is:
           - hasParameters
           body:
@@ -1620,22 +1629,28 @@ types:
             200:
               body:
                 application/json: Role
+          (commons.Id): directory.roles.update
+          (commons.LogicalStucture):
+          - Roles
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Deletes a role.
-          displayName: Delete Roles
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.roles.delete
+          (commons.LogicalStucture):
+          - Roles
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
         description: Creates a role.
-        displayName: Insert Roles
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1644,6 +1659,9 @@ types:
           200:
             body:
               application/json: Role
+        (commons.Id): directory.roles.insert
+        (commons.LogicalStucture):
+        - Roles
       get:
         securedBy:
           oath2:
@@ -1651,7 +1669,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
             - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
         description: Retrieves a paginated list of all the roles in a domain.
-        displayName: List Roles
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1668,6 +1686,9 @@ types:
           200:
             body:
               application/json: Roles
+        (commons.Id): directory.roles.list
+        (commons.LogicalStucture):
+        - Roles
     /domains:
       /{domainName}:
         uriParameters:
@@ -1681,29 +1702,35 @@ types:
               - https://www.googleapis.com/auth/admin.directory.domain
               - https://www.googleapis.com/auth/admin.directory.domain.readonly
           description: Retrieves a domain of the customer.
-          displayName: Get Domains
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Domains
+          (commons.Id): directory.domains.get
+          (commons.LogicalStucture):
+          - Domains
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.domain
           description: Deletes a domain of the customer.
-          displayName: Delete Domains
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.domains.delete
+          (commons.LogicalStucture):
+          - Domains
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.domain
         description: Inserts a domain of the customer.
-        displayName: Insert Domains
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1712,6 +1739,9 @@ types:
           200:
             body:
               application/json: Domains
+        (commons.Id): directory.domains.insert
+        (commons.LogicalStucture):
+        - Domains
       get:
         securedBy:
           oath2:
@@ -1719,13 +1749,16 @@ types:
             - https://www.googleapis.com/auth/admin.directory.domain
             - https://www.googleapis.com/auth/admin.directory.domain.readonly
         description: Lists the domains of the customer.
-        displayName: List Domains
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Domains2
+        (commons.Id): directory.domains.list
+        (commons.LogicalStucture):
+        - Domains
     /resources:
       /calendars:
         /{calendarResourceId}:
@@ -1739,7 +1772,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
             description: Updates a calendar resource. This method supports patch semantics.
-            displayName: Patch Calendars Resources
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -1748,6 +1781,10 @@ types:
               200:
                 body:
                   application/json: CalendarResource
+            (commons.Id): directory.resources.calendars.patch
+            (commons.LogicalStucture):
+            - Resources
+            - Calendars
           get:
             securedBy:
               oath2:
@@ -1755,20 +1792,24 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
             description: Retrieves a calendar resource.
-            displayName: Get Calendars Resources
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: CalendarResource
+            (commons.Id): directory.resources.calendars.get
+            (commons.LogicalStucture):
+            - Resources
+            - Calendars
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
             description: Updates a calendar resource.
-            displayName: Update Calendars Resources
+            displayName: update
             is:
             - hasParameters
             body:
@@ -1777,22 +1818,30 @@ types:
               200:
                 body:
                   application/json: CalendarResource
+            (commons.Id): directory.resources.calendars.update
+            (commons.LogicalStucture):
+            - Resources
+            - Calendars
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.resource.calendar
             description: Deletes a calendar resource.
-            displayName: Delete Calendars Resources
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): directory.resources.calendars.delete
+            (commons.LogicalStucture):
+            - Resources
+            - Calendars
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.resource.calendar
           description: Inserts a calendar resource.
-          displayName: Insert Calendars Resources
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -1801,6 +1850,10 @@ types:
             200:
               body:
                 application/json: CalendarResource
+          (commons.Id): directory.resources.calendars.insert
+          (commons.LogicalStucture):
+          - Resources
+          - Calendars
         get:
           securedBy:
             oath2:
@@ -1808,7 +1861,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.resource.calendar
               - https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly
           description: Retrieves a list of calendar resources for an account.
-          displayName: List Calendars Resources
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1825,6 +1878,10 @@ types:
             200:
               body:
                 application/json: CalendarResources
+          (commons.Id): directory.resources.calendars.list
+          (commons.LogicalStucture):
+          - Resources
+          - Calendars
     /domainaliases:
       /{domainAliasName}:
         uriParameters:
@@ -1838,29 +1895,35 @@ types:
               - https://www.googleapis.com/auth/admin.directory.domain
               - https://www.googleapis.com/auth/admin.directory.domain.readonly
           description: Retrieves a domain alias of the customer.
-          displayName: Get DomainAliases
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: DomainAlias
+          (commons.Id): directory.domainAliases.get
+          (commons.LogicalStucture):
+          - Domain Aliases
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.domain
           description: Deletes a Domain Alias of the customer.
-          displayName: Delete DomainAliases
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.domainAliases.delete
+          (commons.LogicalStucture):
+          - Domain Aliases
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.domain
         description: Inserts a Domain alias of the customer.
-        displayName: Insert DomainAliases
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1869,6 +1932,9 @@ types:
           200:
             body:
               application/json: DomainAlias
+        (commons.Id): directory.domainAliases.insert
+        (commons.LogicalStucture):
+        - Domain Aliases
       get:
         securedBy:
           oath2:
@@ -1876,7 +1942,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.domain
             - https://www.googleapis.com/auth/admin.directory.domain.readonly
         description: Lists the domain aliases of the customer.
-        displayName: List DomainAliases
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1887,6 +1953,9 @@ types:
           200:
             body:
               application/json: DomainAliases
+        (commons.Id): directory.domainAliases.list
+        (commons.LogicalStucture):
+        - Domain Aliases
     /roleassignments:
       /{roleAssignmentId}:
         uriParameters:
@@ -1900,29 +1969,35 @@ types:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
               - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
           description: Retrieve a role assignment.
-          displayName: Get RoleAssignments
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: RoleAssignment
+          (commons.Id): directory.roleAssignments.get
+          (commons.LogicalStucture):
+          - Role Assignments
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.rolemanagement
           description: Deletes a role assignment.
-          displayName: Delete RoleAssignments
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.roleAssignments.delete
+          (commons.LogicalStucture):
+          - Role Assignments
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
         description: Creates a role assignment.
-        displayName: Insert RoleAssignments
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1931,6 +2006,9 @@ types:
           200:
             body:
               application/json: RoleAssignment
+        (commons.Id): directory.roleAssignments.insert
+        (commons.LogicalStucture):
+        - Role Assignments
       get:
         securedBy:
           oath2:
@@ -1938,7 +2016,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.rolemanagement
             - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
         description: Retrieves a paginated list of all roleAssignments.
-        displayName: List RoleAssignments
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1961,6 +2039,9 @@ types:
           200:
             body:
               application/json: RoleAssignments
+        (commons.Id): directory.roleAssignments.list
+        (commons.LogicalStucture):
+        - Role Assignments
     /notifications:
       /{notificationId}:
         uriParameters:
@@ -1973,7 +2054,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Updates a notification. This method supports patch semantics.
-          displayName: Patch Notifications
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -1982,26 +2063,32 @@ types:
             200:
               body:
                 application/json: Notification
+          (commons.Id): directory.notifications.patch
+          (commons.LogicalStucture):
+          - Notifications
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Retrieves a notification.
-          displayName: Get Notifications
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Notification
+          (commons.Id): directory.notifications.get
+          (commons.LogicalStucture):
+          - Notifications
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Updates a notification.
-          displayName: Update Notifications
+          displayName: update
           is:
           - hasParameters
           body:
@@ -2010,22 +2097,28 @@ types:
             200:
               body:
                 application/json: Notification
+          (commons.Id): directory.notifications.update
+          (commons.LogicalStucture):
+          - Notifications
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.notifications
           description: Deletes a notification
-          displayName: Delete Notifications
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.notifications.delete
+          (commons.LogicalStucture):
+          - Notifications
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.notifications
         description: Retrieves a list of notifications.
-        displayName: List Notifications
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -2043,6 +2136,9 @@ types:
           200:
             body:
               application/json: Notifications
+        (commons.Id): directory.notifications.list
+        (commons.LogicalStucture):
+        - Notifications
   /{customerId}:
     uriParameters:
       customerId:
@@ -2061,13 +2157,16 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos
             description: Update Chrome OS Device. This method supports patch semantics.
-            displayName: Patch Chromeosdevices
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
               projection?:
                 type: string
                 description: Restrict information returned to a set of selected fields.
+                (commons.EnumDescriptions):
+                - Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
+                - Includes all metadata fields
                 enum:
                 - BASIC
                 - FULL
@@ -2077,6 +2176,9 @@ types:
               200:
                 body:
                   application/json: ChromeOsDevice
+            (commons.Id): directory.chromeosdevices.patch
+            (commons.LogicalStucture):
+            - Chromeosdevices
           get:
             securedBy:
               oath2:
@@ -2084,13 +2186,16 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
             description: Retrieve Chrome OS Device
-            displayName: Get Chromeosdevices
+            displayName: get
             is:
             - hasParameters
             queryParameters:
               projection?:
                 type: string
                 description: Restrict information returned to a set of selected fields.
+                (commons.EnumDescriptions):
+                - Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
+                - Includes all metadata fields
                 enum:
                 - BASIC
                 - FULL
@@ -2098,19 +2203,25 @@ types:
               200:
                 body:
                   application/json: ChromeOsDevice
+            (commons.Id): directory.chromeosdevices.get
+            (commons.LogicalStucture):
+            - Chromeosdevices
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.device.chromeos
             description: Update Chrome OS Device
-            displayName: Update Chromeosdevices
+            displayName: update
             is:
             - hasParameters
             queryParameters:
               projection?:
                 type: string
                 description: Restrict information returned to a set of selected fields.
+                (commons.EnumDescriptions):
+                - Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
+                - Includes all metadata fields
                 enum:
                 - BASIC
                 - FULL
@@ -2120,6 +2231,9 @@ types:
               200:
                 body:
                   application/json: ChromeOsDevice
+            (commons.Id): directory.chromeosdevices.update
+            (commons.LogicalStucture):
+            - Chromeosdevices
         /{resourceId}:
           uriParameters:
             resourceId:
@@ -2132,11 +2246,14 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/admin.directory.device.chromeos
               description: Take action on Chrome OS Device
-              displayName: Action Chromeosdevices
+              displayName: action
               is:
               - hasParameters
               body:
                 application/json: ChromeOsDeviceAction
+              (commons.Id): directory.chromeosdevices.action
+              (commons.LogicalStucture):
+              - Chromeosdevices
         get:
           securedBy:
             oath2:
@@ -2144,7 +2261,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.device.chromeos
               - https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly
           description: Retrieve all Chrome OS Devices of a customer (paginated)
-          displayName: List Chromeosdevices
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -2159,12 +2276,23 @@ types:
             sortOrder?:
               type: string
               description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+              (commons.EnumDescriptions):
+              - Ascending order.
+              - Descending order.
               enum:
               - ASCENDING
               - DESCENDING
             orderBy?:
               type: string
               description: Column to use for sorting results
+              (commons.EnumDescriptions):
+              - Chromebook location as annotated by the administrator.
+              - Chromebook user as annotated by administrator.
+              - Chromebook last sync.
+              - Chromebook notes as annotated by the administrator.
+              - Chromebook Serial Number.
+              - Chromebook status.
+              - Chromebook support end date.
               enum:
               - annotatedLocation
               - annotatedUser
@@ -2179,6 +2307,9 @@ types:
             projection?:
               type: string
               description: Restrict information returned to a set of selected fields.
+              (commons.EnumDescriptions):
+              - Includes only the basic metadata fields (e.g., deviceId, serialNumber, status, and user)
+              - Includes all metadata fields
               enum:
               - BASIC
               - FULL
@@ -2186,6 +2317,9 @@ types:
             200:
               body:
                 application/json: ChromeOsDevices
+          (commons.Id): directory.chromeosdevices.list
+          (commons.LogicalStucture):
+          - Chromeosdevices
       /mobile:
         /{resourceId}:
           uriParameters:
@@ -2200,11 +2334,14 @@ types:
                   - https://www.googleapis.com/auth/admin.directory.device.mobile
                   - https://www.googleapis.com/auth/admin.directory.device.mobile.action
               description: Take action on Mobile Device
-              displayName: Action Mobiledevices
+              displayName: action
               is:
               - hasParameters
               body:
                 application/json: MobileDeviceAction
+              (commons.Id): directory.mobiledevices.action
+              (commons.LogicalStucture):
+              - Mobiledevices
           get:
             securedBy:
               oath2:
@@ -2213,13 +2350,16 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.device.mobile.action
                 - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
             description: Retrieve Mobile Device
-            displayName: Get Mobiledevices
+            displayName: get
             is:
             - hasParameters
             queryParameters:
               projection?:
                 type: string
                 description: Restrict information returned to a set of selected fields.
+                (commons.EnumDescriptions):
+                - Includes only the basic metadata fields (e.g., deviceId, model, status, type, and status)
+                - Includes all metadata fields
                 enum:
                 - BASIC
                 - FULL
@@ -2227,15 +2367,21 @@ types:
               200:
                 body:
                   application/json: MobileDevice
+            (commons.Id): directory.mobiledevices.get
+            (commons.LogicalStucture):
+            - Mobiledevices
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/admin.directory.device.mobile
             description: Delete Mobile Device
-            displayName: Delete Mobiledevices
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): directory.mobiledevices.delete
+            (commons.LogicalStucture):
+            - Mobiledevices
         get:
           securedBy:
             oath2:
@@ -2244,7 +2390,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.device.mobile.action
               - https://www.googleapis.com/auth/admin.directory.device.mobile.readonly
           description: Retrieve all Mobile Devices of a customer (paginated)
-          displayName: List Mobiledevices
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -2259,12 +2405,24 @@ types:
             sortOrder?:
               type: string
               description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+              (commons.EnumDescriptions):
+              - Ascending order.
+              - Descending order.
               enum:
               - ASCENDING
               - DESCENDING
             orderBy?:
               type: string
               description: Column to use for sorting results
+              (commons.EnumDescriptions):
+              - Mobile Device serial number.
+              - Owner user email.
+              - Last policy settings sync date time of the device.
+              - Mobile Device model.
+              - Owner user name.
+              - Mobile operating system.
+              - Status of the device.
+              - Type of the device.
               enum:
               - deviceId
               - email
@@ -2280,6 +2438,9 @@ types:
             projection?:
               type: string
               description: Restrict information returned to a set of selected fields.
+              (commons.EnumDescriptions):
+              - Includes only the basic metadata fields (e.g., deviceId, model, status, type, and status)
+              - Includes all metadata fields
               enum:
               - BASIC
               - FULL
@@ -2287,6 +2448,9 @@ types:
             200:
               body:
                 application/json: MobileDevices
+          (commons.Id): directory.mobiledevices.list
+          (commons.LogicalStucture):
+          - Mobiledevices
     /schemas:
       /{schemaKey}:
         uriParameters:
@@ -2299,7 +2463,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.userschema
           description: Update schema. This method supports patch semantics.
-          displayName: Patch Schemas
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -2308,6 +2472,9 @@ types:
             200:
               body:
                 application/json: Schema
+          (commons.Id): directory.schemas.patch
+          (commons.LogicalStucture):
+          - Schemas
         get:
           securedBy:
             oath2:
@@ -2315,20 +2482,23 @@ types:
               - https://www.googleapis.com/auth/admin.directory.userschema
               - https://www.googleapis.com/auth/admin.directory.userschema.readonly
           description: Retrieve schema
-          displayName: Get Schemas
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Schema
+          (commons.Id): directory.schemas.get
+          (commons.LogicalStucture):
+          - Schemas
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.userschema
           description: Update schema
-          displayName: Update Schemas
+          displayName: update
           is:
           - hasParameters
           body:
@@ -2337,22 +2507,28 @@ types:
             200:
               body:
                 application/json: Schema
+          (commons.Id): directory.schemas.update
+          (commons.LogicalStucture):
+          - Schemas
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.userschema
           description: Delete schema
-          displayName: Delete Schemas
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.schemas.delete
+          (commons.LogicalStucture):
+          - Schemas
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.userschema
         description: Create schema.
-        displayName: Insert Schemas
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -2361,6 +2537,9 @@ types:
           200:
             body:
               application/json: Schema
+        (commons.Id): directory.schemas.insert
+        (commons.LogicalStucture):
+        - Schemas
       get:
         securedBy:
           oath2:
@@ -2368,13 +2547,16 @@ types:
             - https://www.googleapis.com/auth/admin.directory.userschema
             - https://www.googleapis.com/auth/admin.directory.userschema.readonly
         description: Retrieve all schemas for a customer
-        displayName: List Schemas
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Schemas
+        (commons.Id): directory.schemas.list
+        (commons.LogicalStucture):
+        - Schemas
     /orgunits{orgUnitPath}:
       uriParameters:
         orgUnitPath:
@@ -2386,7 +2568,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Update Organization Unit. This method supports patch semantics.
-        displayName: Patch Orgunits
+        displayName: patch
         is:
         - hasParameters
         body:
@@ -2395,6 +2577,9 @@ types:
           200:
             body:
               application/json: OrgUnit
+        (commons.Id): directory.orgunits.patch
+        (commons.LogicalStucture):
+        - Orgunits
       get:
         securedBy:
           oath2:
@@ -2402,20 +2587,23 @@ types:
             - https://www.googleapis.com/auth/admin.directory.orgunit
             - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
         description: Retrieve Organization Unit
-        displayName: Get Orgunits
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: OrgUnit
+        (commons.Id): directory.orgunits.get
+        (commons.LogicalStucture):
+        - Orgunits
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Update Organization Unit
-        displayName: Update Orgunits
+        displayName: update
         is:
         - hasParameters
         body:
@@ -2424,15 +2612,21 @@ types:
           200:
             body:
               application/json: OrgUnit
+        (commons.Id): directory.orgunits.update
+        (commons.LogicalStucture):
+        - Orgunits
       delete:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Remove Organization Unit
-        displayName: Delete Orgunits
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): directory.orgunits.delete
+        (commons.LogicalStucture):
+        - Orgunits
     /orgunits:
       post:
         securedBy:
@@ -2440,7 +2634,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.orgunit
         description: Add Organization Unit
-        displayName: Insert Orgunits
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -2449,6 +2643,9 @@ types:
           200:
             body:
               application/json: OrgUnit
+        (commons.Id): directory.orgunits.insert
+        (commons.LogicalStucture):
+        - Orgunits
       get:
         securedBy:
           oath2:
@@ -2456,7 +2653,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.orgunit
             - https://www.googleapis.com/auth/admin.directory.orgunit.readonly
         description: Retrieve all Organization Units
-        displayName: List Orgunits
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -2467,6 +2664,9 @@ types:
           type?:
             type: string
             description: Whether to return all sub-organizations or just immediate children
+            (commons.EnumDescriptions):
+            - All sub-organization units.
+            - Immediate children only (default).
             enum:
             - all
             - children
@@ -2474,6 +2674,9 @@ types:
           200:
             body:
               application/json: OrgUnits
+        (commons.Id): directory.orgunits.list
+        (commons.LogicalStucture):
+        - Orgunits
 /groups:
   /{groupKey}:
     uriParameters:
@@ -2492,16 +2695,20 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.group
           description: Remove a alias for the group
-          displayName: Delete Aliases Groups
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.groups.aliases.delete
+          (commons.LogicalStucture):
+          - Groups
+          - Aliases
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.group
         description: Add a alias for the group
-        displayName: Insert Aliases Groups
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -2510,6 +2717,10 @@ types:
           200:
             body:
               application/json: Alias
+        (commons.Id): directory.groups.aliases.insert
+        (commons.LogicalStucture):
+        - Groups
+        - Aliases
       get:
         securedBy:
           oath2:
@@ -2517,13 +2728,17 @@ types:
             - https://www.googleapis.com/auth/admin.directory.group
             - https://www.googleapis.com/auth/admin.directory.group.readonly
         description: List all aliases for a group
-        displayName: List Aliases Groups
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Aliases
+        (commons.Id): directory.groups.aliases.list
+        (commons.LogicalStucture):
+        - Groups
+        - Aliases
     /members:
       /{memberKey}:
         uriParameters:
@@ -2537,7 +2752,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group
               - https://www.googleapis.com/auth/admin.directory.group.member
           description: Update membership of a user in the specified group. This method supports patch semantics.
-          displayName: Patch Members
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -2546,6 +2761,9 @@ types:
             200:
               body:
                 application/json: Member
+          (commons.Id): directory.members.patch
+          (commons.LogicalStucture):
+          - Members
         get:
           securedBy:
             oath2:
@@ -2555,13 +2773,16 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group.member.readonly
               - https://www.googleapis.com/auth/admin.directory.group.readonly
           description: Retrieve Group Member
-          displayName: Get Members
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Member
+          (commons.Id): directory.members.get
+          (commons.LogicalStucture):
+          - Members
         put:
           securedBy:
             oath2:
@@ -2569,7 +2790,7 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group
               - https://www.googleapis.com/auth/admin.directory.group.member
           description: Update membership of a user in the specified group.
-          displayName: Update Members
+          displayName: update
           is:
           - hasParameters
           body:
@@ -2578,6 +2799,9 @@ types:
             200:
               body:
                 application/json: Member
+          (commons.Id): directory.members.update
+          (commons.LogicalStucture):
+          - Members
         delete:
           securedBy:
             oath2:
@@ -2585,9 +2809,12 @@ types:
               - https://www.googleapis.com/auth/admin.directory.group
               - https://www.googleapis.com/auth/admin.directory.group.member
           description: Remove membership.
-          displayName: Delete Members
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.members.delete
+          (commons.LogicalStucture):
+          - Members
       post:
         securedBy:
           oath2:
@@ -2595,7 +2822,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.group
             - https://www.googleapis.com/auth/admin.directory.group.member
         description: Add user to the specified group.
-        displayName: Insert Members
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -2604,6 +2831,9 @@ types:
           200:
             body:
               application/json: Member
+        (commons.Id): directory.members.insert
+        (commons.LogicalStucture):
+        - Members
       get:
         securedBy:
           oath2:
@@ -2613,7 +2843,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.group.member.readonly
             - https://www.googleapis.com/auth/admin.directory.group.readonly
         description: Retrieve all members in a group (paginated)
-        displayName: List Members
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -2632,13 +2862,16 @@ types:
           200:
             body:
               application/json: Members
+        (commons.Id): directory.members.list
+        (commons.LogicalStucture):
+        - Members
     patch:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.group
       description: Update Group. This method supports patch semantics.
-      displayName: Patch Groups
+      displayName: patch
       is:
       - hasParameters
       body:
@@ -2647,6 +2880,9 @@ types:
         200:
           body:
             application/json: Group
+      (commons.Id): directory.groups.patch
+      (commons.LogicalStucture):
+      - Groups
     get:
       securedBy:
         oath2:
@@ -2654,20 +2890,23 @@ types:
           - https://www.googleapis.com/auth/admin.directory.group
           - https://www.googleapis.com/auth/admin.directory.group.readonly
       description: Retrieve Group
-      displayName: Get Groups
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Group
+      (commons.Id): directory.groups.get
+      (commons.LogicalStucture):
+      - Groups
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.group
       description: Update Group
-      displayName: Update Groups
+      displayName: update
       is:
       - hasParameters
       body:
@@ -2676,22 +2915,28 @@ types:
         200:
           body:
             application/json: Group
+      (commons.Id): directory.groups.update
+      (commons.LogicalStucture):
+      - Groups
     delete:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.group
       description: Delete Group
-      displayName: Delete Groups
+      displayName: delete
       is:
       - hasParameters
+      (commons.Id): directory.groups.delete
+      (commons.LogicalStucture):
+      - Groups
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/admin.directory.group
     description: Create Group
-    displayName: Insert Groups
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -2700,6 +2945,9 @@ types:
       200:
         body:
           application/json: Group
+    (commons.Id): directory.groups.insert
+    (commons.LogicalStucture):
+    - Groups
   get:
     securedBy:
       oath2:
@@ -2707,7 +2955,7 @@ types:
         - https://www.googleapis.com/auth/admin.directory.group
         - https://www.googleapis.com/auth/admin.directory.group.readonly
     description: Retrieve all groups in a domain (paginated)
-    displayName: List Groups
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -2732,6 +2980,9 @@ types:
       200:
         body:
           application/json: Groups
+    (commons.Id): directory.groups.list
+    (commons.LogicalStucture):
+    - Groups
 /users:
   /{userKey}:
     uriParameters:
@@ -2746,9 +2997,12 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Invalidate the current backup verification codes for the user.
-          displayName: Invalidate VerificationCodes
+          displayName: invalidate
           is:
           - hasParameters
+          (commons.Id): directory.verificationCodes.invalidate
+          (commons.LogicalStucture):
+          - Verification Codes
       /generate:
         post:
           securedBy:
@@ -2756,22 +3010,28 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Generate new backup verification codes for the user.
-          displayName: Generate VerificationCodes
+          displayName: generate
           is:
           - hasParameters
+          (commons.Id): directory.verificationCodes.generate
+          (commons.LogicalStucture):
+          - Verification Codes
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user.security
         description: Returns the current set of valid backup verification codes for the specified user.
-        displayName: List VerificationCodes
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: VerificationCodes
+        (commons.Id): directory.verificationCodes.list
+        (commons.LogicalStucture):
+        - Verification Codes
     /undelete:
       post:
         securedBy:
@@ -2779,11 +3039,14 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user
         description: Undelete a deleted user
-        displayName: Undelete Users
+        displayName: undelete
         is:
         - hasParameters
         body:
           application/json: UserUndelete
+        (commons.Id): directory.users.undelete
+        (commons.LogicalStucture):
+        - Users
     /makeAdmin:
       post:
         securedBy:
@@ -2791,11 +3054,14 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user
         description: change admin status of a user
-        displayName: MakeAdmin Users
+        displayName: make Admin
         is:
         - hasParameters
         body:
           application/json: UserMakeAdmin
+        (commons.Id): directory.users.makeAdmin
+        (commons.LogicalStucture):
+        - Users
     /aliases:
       /watch:
         post:
@@ -2807,13 +3073,16 @@ types:
               - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
               - https://www.googleapis.com/auth/admin.directory.user.readonly
           description: Watch for changes in user aliases list
-          displayName: Watch Aliases Users
+          displayName: watch
           is:
           - hasParameters
           queryParameters:
             event?:
               type: string
               description: Event on which subscription is intended (if subscribing)
+              (commons.EnumDescriptions):
+              - Alias Created Event
+              - Alias Deleted Event
               enum:
               - add
               - delete
@@ -2823,6 +3092,10 @@ types:
             200:
               body:
                 application/json: Channel
+          (commons.Id): directory.users.aliases.watch
+          (commons.LogicalStucture):
+          - Users
+          - Aliases
       /{alias}:
         uriParameters:
           alias:
@@ -2835,9 +3108,13 @@ types:
               - https://www.googleapis.com/auth/admin.directory.user
               - https://www.googleapis.com/auth/admin.directory.user.alias
           description: Remove a alias for the user
-          displayName: Delete Aliases Users
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.users.aliases.delete
+          (commons.LogicalStucture):
+          - Users
+          - Aliases
       post:
         securedBy:
           oath2:
@@ -2845,7 +3122,7 @@ types:
             - https://www.googleapis.com/auth/admin.directory.user
             - https://www.googleapis.com/auth/admin.directory.user.alias
         description: Add a alias for the user
-        displayName: Insert Aliases Users
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -2854,6 +3131,10 @@ types:
           200:
             body:
               application/json: Alias
+        (commons.Id): directory.users.aliases.insert
+        (commons.LogicalStucture):
+        - Users
+        - Aliases
       get:
         securedBy:
           oath2:
@@ -2863,13 +3144,16 @@ types:
             - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
             - https://www.googleapis.com/auth/admin.directory.user.readonly
         description: List all aliases for a user
-        displayName: List Aliases Users
+        displayName: list
         is:
         - hasParameters
         queryParameters:
           event?:
             type: string
             description: Event on which subscription is intended (if subscribing)
+            (commons.EnumDescriptions):
+            - Alias Created Event
+            - Alias Deleted Event
             enum:
             - add
             - delete
@@ -2877,6 +3161,10 @@ types:
           200:
             body:
               application/json: Aliases
+        (commons.Id): directory.users.aliases.list
+        (commons.LogicalStucture):
+        - Users
+        - Aliases
     /photos:
       /thumbnail:
         patch:
@@ -2885,7 +3173,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user
           description: Add a photo for the user. This method supports patch semantics.
-          displayName: Patch Photos Users
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -2894,6 +3182,10 @@ types:
             200:
               body:
                 application/json: UserPhoto
+          (commons.Id): directory.users.photos.patch
+          (commons.LogicalStucture):
+          - Users
+          - Photos
         get:
           securedBy:
             oath2:
@@ -2901,20 +3193,24 @@ types:
               - https://www.googleapis.com/auth/admin.directory.user
               - https://www.googleapis.com/auth/admin.directory.user.readonly
           description: Retrieve photo of a user
-          displayName: Get Photos Users
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: UserPhoto
+          (commons.Id): directory.users.photos.get
+          (commons.LogicalStucture):
+          - Users
+          - Photos
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user
           description: Add a photo for the user
-          displayName: Update Photos Users
+          displayName: update
           is:
           - hasParameters
           body:
@@ -2923,15 +3219,23 @@ types:
             200:
               body:
                 application/json: UserPhoto
+          (commons.Id): directory.users.photos.update
+          (commons.LogicalStucture):
+          - Users
+          - Photos
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user
           description: Remove photos for the user
-          displayName: Delete Photos Users
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.users.photos.delete
+          (commons.LogicalStucture):
+          - Users
+          - Photos
     /asps:
       /{codeId}:
         uriParameters:
@@ -2945,35 +3249,44 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Get information about an ASP issued by a user.
-          displayName: Get Asps
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Asp
+          (commons.Id): directory.asps.get
+          (commons.LogicalStucture):
+          - Asps
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Delete an ASP issued by a user.
-          displayName: Delete Asps
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.asps.delete
+          (commons.LogicalStucture):
+          - Asps
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user.security
         description: List the ASPs issued by a user.
-        displayName: List Asps
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Asps
+        (commons.Id): directory.asps.list
+        (commons.LogicalStucture):
+        - Asps
     /tokens:
       /{clientId}:
         uriParameters:
@@ -2986,42 +3299,51 @@ types:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Get information about an access token issued by a user.
-          displayName: Get Tokens
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Token
+          (commons.Id): directory.tokens.get
+          (commons.LogicalStucture):
+          - Tokens
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/admin.directory.user.security
           description: Delete all access tokens issued by a user for an application.
-          displayName: Delete Tokens
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): directory.tokens.delete
+          (commons.LogicalStucture):
+          - Tokens
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/admin.directory.user.security
         description: Returns the set of tokens specified user has issued to 3rd party applications.
-        displayName: List Tokens
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Tokens
+        (commons.Id): directory.tokens.list
+        (commons.LogicalStucture):
+        - Tokens
     patch:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.user
       description: update user. This method supports patch semantics.
-      displayName: Patch Users
+      displayName: patch
       is:
       - hasParameters
       body:
@@ -3030,6 +3352,9 @@ types:
         200:
           body:
             application/json: User
+      (commons.Id): directory.users.patch
+      (commons.LogicalStucture):
+      - Users
     get:
       securedBy:
         oath2:
@@ -3037,7 +3362,7 @@ types:
           - https://www.googleapis.com/auth/admin.directory.user
           - https://www.googleapis.com/auth/admin.directory.user.readonly
       description: retrieve user
-      displayName: Get Users
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -3045,6 +3370,9 @@ types:
           type: string
           default: admin_view
           description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          (commons.EnumDescriptions):
+          - Fetches the ADMIN_VIEW of the user.
+          - Fetches the DOMAIN_PUBLIC view of the user.
           enum:
           - admin_view
           - domain_public
@@ -3052,6 +3380,10 @@ types:
           type: string
           default: basic
           description: What subset of fields to fetch for this user.
+          (commons.EnumDescriptions):
+          - Do not include any custom fields for the user.
+          - Include custom fields from schemas mentioned in customFieldMask.
+          - Include all fields associated with this user.
           enum:
           - basic
           - custom
@@ -3063,13 +3395,16 @@ types:
         200:
           body:
             application/json: User
+      (commons.Id): directory.users.get
+      (commons.LogicalStucture):
+      - Users
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.user
       description: update user
-      displayName: Update Users
+      displayName: update
       is:
       - hasParameters
       body:
@@ -3078,15 +3413,21 @@ types:
         200:
           body:
             application/json: User
+      (commons.Id): directory.users.update
+      (commons.LogicalStucture):
+      - Users
     delete:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.user
       description: Delete user
-      displayName: Delete Users
+      displayName: delete
       is:
       - hasParameters
+      (commons.Id): directory.users.delete
+      (commons.LogicalStucture):
+      - Users
   /watch:
     post:
       securedBy:
@@ -3095,7 +3436,7 @@ types:
           - https://www.googleapis.com/auth/admin.directory.user
           - https://www.googleapis.com/auth/admin.directory.user.readonly
       description: Watch for changes in users list
-      displayName: Watch Users
+      displayName: watch
       is:
       - hasParameters
       queryParameters:
@@ -3117,6 +3458,9 @@ types:
         sortOrder?:
           type: string
           description: Whether to return results in ascending or descending order.
+          (commons.EnumDescriptions):
+          - Ascending order.
+          - Descending order.
           enum:
           - ASCENDING
           - DESCENDING
@@ -3124,12 +3468,19 @@ types:
           type: string
           default: admin_view
           description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          (commons.EnumDescriptions):
+          - Fetches the ADMIN_VIEW of the user.
+          - Fetches the DOMAIN_PUBLIC view of the user.
           enum:
           - admin_view
           - domain_public
         orderBy?:
           type: string
           description: Column to use for sorting results
+          (commons.EnumDescriptions):
+          - Primary email of the user.
+          - User's family name.
+          - User's given name.
           enum:
           - email
           - familyName
@@ -3141,6 +3492,10 @@ types:
           type: string
           default: basic
           description: What subset of fields to fetch for this user.
+          (commons.EnumDescriptions):
+          - Do not include any custom fields for the user.
+          - Include custom fields from schemas mentioned in customFieldMask.
+          - Include all fields associated with this user.
           enum:
           - basic
           - custom
@@ -3148,6 +3503,12 @@ types:
         event?:
           type: string
           description: Event on which subscription is intended (if subscribing)
+          (commons.EnumDescriptions):
+          - User Created Event
+          - User Deleted Event
+          - User Admin Status Change Event
+          - User Undeleted Event
+          - User Updated Event
           enum:
           - add
           - delete
@@ -3166,13 +3527,16 @@ types:
         200:
           body:
             application/json: Channel
+      (commons.Id): directory.users.watch
+      (commons.LogicalStucture):
+      - Users
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/admin.directory.user
     description: create user.
-    displayName: Insert Users
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -3181,6 +3545,9 @@ types:
       200:
         body:
           application/json: User
+    (commons.Id): directory.users.insert
+    (commons.LogicalStucture):
+    - Users
   get:
     securedBy:
       oath2:
@@ -3188,7 +3555,7 @@ types:
         - https://www.googleapis.com/auth/admin.directory.user
         - https://www.googleapis.com/auth/admin.directory.user.readonly
     description: Retrieve either deleted users or all users in a domain (paginated)
-    displayName: List Users
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -3210,6 +3577,9 @@ types:
       sortOrder?:
         type: string
         description: Whether to return results in ascending or descending order.
+        (commons.EnumDescriptions):
+        - Ascending order.
+        - Descending order.
         enum:
         - ASCENDING
         - DESCENDING
@@ -3217,12 +3587,19 @@ types:
         type: string
         default: admin_view
         description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+        (commons.EnumDescriptions):
+        - Fetches the ADMIN_VIEW of the user.
+        - Fetches the DOMAIN_PUBLIC view of the user.
         enum:
         - admin_view
         - domain_public
       orderBy?:
         type: string
         description: Column to use for sorting results
+        (commons.EnumDescriptions):
+        - Primary email of the user.
+        - User's family name.
+        - User's given name.
         enum:
         - email
         - familyName
@@ -3234,6 +3611,10 @@ types:
         type: string
         default: basic
         description: What subset of fields to fetch for this user.
+        (commons.EnumDescriptions):
+        - Do not include any custom fields for the user.
+        - Include custom fields from schemas mentioned in customFieldMask.
+        - Include all fields associated with this user.
         enum:
         - basic
         - custom
@@ -3241,6 +3622,12 @@ types:
       event?:
         type: string
         description: Event on which subscription is intended (if subscribing)
+        (commons.EnumDescriptions):
+        - User Created Event
+        - User Deleted Event
+        - User Admin Status Change Event
+        - User Undeleted Event
+        - User Updated Event
         enum:
         - add
         - delete
@@ -3257,6 +3644,9 @@ types:
       200:
         body:
           application/json: Users
+    (commons.Id): directory.users.list
+    (commons.LogicalStucture):
+    - Users
 /:
   /admin:
     /directory_v1:
@@ -3271,11 +3661,14 @@ types:
                 - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
                 - https://www.googleapis.com/auth/admin.directory.user.readonly
             description: Stop watching resources through this channel
-            displayName: Stop Channels
+            displayName: stop
             is:
             - hasParameters
             body:
               application/json: Channel
+            (commons.Id): admin.channels.stop
+            (commons.LogicalStucture):
+            - Channels
 /customers:
   /{customerKey}:
     uriParameters:
@@ -3288,7 +3681,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.customer
       description: Updates a customer. This method supports patch semantics.
-      displayName: Patch Customers
+      displayName: patch
       is:
       - hasParameters
       body:
@@ -3297,6 +3690,9 @@ types:
         200:
           body:
             application/json: Customer
+      (commons.Id): directory.customers.patch
+      (commons.LogicalStucture):
+      - Customers
     get:
       securedBy:
         oath2:
@@ -3304,20 +3700,23 @@ types:
           - https://www.googleapis.com/auth/admin.directory.customer
           - https://www.googleapis.com/auth/admin.directory.customer.readonly
       description: Retrieves a customer.
-      displayName: Get Customers
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Customer
+      (commons.Id): directory.customers.get
+      (commons.LogicalStucture):
+      - Customers
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/admin.directory.customer
       description: Updates a customer.
-      displayName: Update Customers
+      displayName: update
       is:
       - hasParameters
       body:
@@ -3326,3 +3725,6 @@ types:
         200:
           body:
             application/json: Customer
+      (commons.Id): directory.customers.update
+      (commons.LogicalStucture):
+      - Customers

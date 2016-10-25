@@ -1570,7 +1570,7 @@ types:
                     - https://www.googleapis.com/auth/cloud-platform
                     - https://www.googleapis.com/auth/cloud-platform.read-only
                 description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
-                displayName: List Tabledata
+                displayName: list
                 is:
                 - hasParameters
                 queryParameters:
@@ -1589,6 +1589,9 @@ types:
                   200:
                     body:
                       application/json: TableDataList
+                (commons.Id): bigquery.tabledata.list
+                (commons.LogicalStucture):
+                - Tabledata
             /insertAll:
               post:
                 securedBy:
@@ -1598,7 +1601,7 @@ types:
                     - https://www.googleapis.com/auth/bigquery.insertdata
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
-                displayName: InsertAll Tabledata
+                displayName: insert All
                 is:
                 - hasParameters
                 body:
@@ -1607,6 +1610,9 @@ types:
                   200:
                     body:
                       application/json: TableDataInsertAllResponse
+                (commons.Id): bigquery.tabledata.insertAll
+                (commons.LogicalStucture):
+                - Tabledata
             patch:
               securedBy:
                 oath2:
@@ -1614,7 +1620,7 @@ types:
                   - https://www.googleapis.com/auth/bigquery
                   - https://www.googleapis.com/auth/cloud-platform
               description: Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.
-              displayName: Patch Tables
+              displayName: patch
               is:
               - hasParameters
               body:
@@ -1623,6 +1629,9 @@ types:
                 200:
                   body:
                     application/json: Table
+              (commons.Id): bigquery.tables.patch
+              (commons.LogicalStucture):
+              - Tables
             get:
               securedBy:
                 oath2:
@@ -1631,13 +1640,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/cloud-platform.read-only
               description: Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.
-              displayName: Get Tables
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Table
+              (commons.Id): bigquery.tables.get
+              (commons.LogicalStucture):
+              - Tables
             put:
               securedBy:
                 oath2:
@@ -1645,7 +1657,7 @@ types:
                   - https://www.googleapis.com/auth/bigquery
                   - https://www.googleapis.com/auth/cloud-platform
               description: Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.
-              displayName: Update Tables
+              displayName: update
               is:
               - hasParameters
               body:
@@ -1654,6 +1666,9 @@ types:
                 200:
                   body:
                     application/json: Table
+              (commons.Id): bigquery.tables.update
+              (commons.LogicalStucture):
+              - Tables
             delete:
               securedBy:
                 oath2:
@@ -1661,9 +1676,12 @@ types:
                   - https://www.googleapis.com/auth/bigquery
                   - https://www.googleapis.com/auth/cloud-platform
               description: Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.
-              displayName: Delete Tables
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): bigquery.tables.delete
+              (commons.LogicalStucture):
+              - Tables
           post:
             securedBy:
               oath2:
@@ -1671,7 +1689,7 @@ types:
                 - https://www.googleapis.com/auth/bigquery
                 - https://www.googleapis.com/auth/cloud-platform
             description: Creates a new, empty table in the dataset.
-            displayName: Insert Tables
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -1680,6 +1698,9 @@ types:
               200:
                 body:
                   application/json: Table
+            (commons.Id): bigquery.tables.insert
+            (commons.LogicalStucture):
+            - Tables
           get:
             securedBy:
               oath2:
@@ -1688,7 +1709,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/cloud-platform.read-only
             description: Lists all tables in the specified dataset. Requires the READER dataset role.
-            displayName: List Tables
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -1703,6 +1724,9 @@ types:
               200:
                 body:
                   application/json: TableList
+            (commons.Id): bigquery.tables.list
+            (commons.LogicalStucture):
+            - Tables
         patch:
           securedBy:
             oath2:
@@ -1710,7 +1734,7 @@ types:
               - https://www.googleapis.com/auth/bigquery
               - https://www.googleapis.com/auth/cloud-platform
           description: Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.
-          displayName: Patch Datasets
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -1719,6 +1743,9 @@ types:
             200:
               body:
                 application/json: Dataset
+          (commons.Id): bigquery.datasets.patch
+          (commons.LogicalStucture):
+          - Datasets
         get:
           securedBy:
             oath2:
@@ -1727,13 +1754,16 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud-platform.read-only
           description: Returns the dataset specified by datasetID.
-          displayName: Get Datasets
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Dataset
+          (commons.Id): bigquery.datasets.get
+          (commons.LogicalStucture):
+          - Datasets
         put:
           securedBy:
             oath2:
@@ -1741,7 +1771,7 @@ types:
               - https://www.googleapis.com/auth/bigquery
               - https://www.googleapis.com/auth/cloud-platform
           description: Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.
-          displayName: Update Datasets
+          displayName: update
           is:
           - hasParameters
           body:
@@ -1750,6 +1780,9 @@ types:
             200:
               body:
                 application/json: Dataset
+          (commons.Id): bigquery.datasets.update
+          (commons.LogicalStucture):
+          - Datasets
         delete:
           securedBy:
             oath2:
@@ -1757,13 +1790,16 @@ types:
               - https://www.googleapis.com/auth/bigquery
               - https://www.googleapis.com/auth/cloud-platform
           description: Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
-          displayName: Delete Datasets
+          displayName: delete
           is:
           - hasParameters
           queryParameters:
             deleteContents?:
               type: boolean
               description: If True, delete all the tables in the dataset. If False and the dataset contains tables, the request will fail. Default is False
+          (commons.Id): bigquery.datasets.delete
+          (commons.LogicalStucture):
+          - Datasets
       post:
         securedBy:
           oath2:
@@ -1771,7 +1807,7 @@ types:
             - https://www.googleapis.com/auth/bigquery
             - https://www.googleapis.com/auth/cloud-platform
         description: Creates a new empty dataset.
-        displayName: Insert Datasets
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1780,6 +1816,9 @@ types:
           200:
             body:
               application/json: Dataset
+        (commons.Id): bigquery.datasets.insert
+        (commons.LogicalStucture):
+        - Datasets
       get:
         securedBy:
           oath2:
@@ -1788,7 +1827,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
-        displayName: List Datasets
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1812,6 +1851,9 @@ types:
           200:
             body:
               application/json: DatasetList
+        (commons.Id): bigquery.datasets.list
+        (commons.LogicalStucture):
+        - Datasets
     /jobs:
       /{jobId}:
         uriParameters:
@@ -1826,13 +1868,16 @@ types:
                 - https://www.googleapis.com/auth/bigquery
                 - https://www.googleapis.com/auth/cloud-platform
             description: Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
-            displayName: Cancel Jobs
+            displayName: cancel
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: JobCancelResponse
+            (commons.Id): bigquery.jobs.cancel
+            (commons.LogicalStucture):
+            - Jobs
         get:
           securedBy:
             oath2:
@@ -1841,13 +1886,16 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud-platform.read-only
           description: Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.
-          displayName: Get Jobs
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Job
+          (commons.Id): bigquery.jobs.get
+          (commons.LogicalStucture):
+          - Jobs
       post:
         securedBy:
           oath2:
@@ -1858,7 +1906,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Starts a new asynchronous job. Requires the Can View project role.
-        displayName: Insert Jobs
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1867,6 +1915,9 @@ types:
           200:
             body:
               application/json: Job
+        (commons.Id): bigquery.jobs.insert
+        (commons.LogicalStucture):
+        - Jobs
       get:
         securedBy:
           oath2:
@@ -1875,13 +1926,17 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
-        displayName: List Jobs
+        displayName: list
         is:
         - hasParameters
         queryParameters:
           stateFilter?:
             type: string
             description: Filter for job state
+            (commons.EnumDescriptions):
+            - Finished jobs
+            - Pending jobs
+            - Running jobs
             enum:
             - done
             - pending
@@ -1899,6 +1954,9 @@ types:
           projection?:
             type: string
             description: Restrict information returned to a set of selected fields
+            (commons.EnumDescriptions):
+            - Includes all job data
+            - Does not include the job configuration
             enum:
             - full
             - minimal
@@ -1906,6 +1964,9 @@ types:
           200:
             body:
               application/json: JobList
+        (commons.Id): bigquery.jobs.list
+        (commons.LogicalStucture):
+        - Jobs
     /queries:
       /{jobId}:
         uriParameters:
@@ -1920,7 +1981,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/cloud-platform.read-only
           description: Retrieves the results of a query job.
-          displayName: GetQueryResults Jobs
+          displayName: get Query Results
           is:
           - hasParameters
           queryParameters:
@@ -1943,6 +2004,9 @@ types:
             200:
               body:
                 application/json: GetQueryResultsResponse
+          (commons.Id): bigquery.jobs.getQueryResults
+          (commons.LogicalStucture):
+          - Jobs
       post:
         securedBy:
           oath2:
@@ -1951,7 +2015,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloud-platform.read-only
         description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
-        displayName: Query Jobs
+        displayName: query
         is:
         - hasParameters
         body:
@@ -1960,6 +2024,9 @@ types:
           200:
             body:
               application/json: QueryResponse
+        (commons.Id): bigquery.jobs.query
+        (commons.LogicalStucture):
+        - Jobs
   get:
     securedBy:
       oath2:
@@ -1968,7 +2035,7 @@ types:
         - https://www.googleapis.com/auth/cloud-platform
         - https://www.googleapis.com/auth/cloud-platform.read-only
     description: Lists all projects to which you have been granted any project role.
-    displayName: List Projects
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -1983,3 +2050,6 @@ types:
       200:
         body:
           application/json: ProjectList
+    (commons.Id): bigquery.projects.list
+    (commons.LogicalStucture):
+    - Projects

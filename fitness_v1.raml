@@ -500,7 +500,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/fitness.activity.write
         description: Updates or insert a given session.
-        displayName: Update Sessions Users
+        displayName: update
         is:
         - hasParameters
         queryParameters:
@@ -514,13 +514,17 @@ types:
           200:
             body:
               application/json: Session
+        (commons.Id): fitness.users.sessions.update
+        (commons.LogicalStucture):
+        - Users
+        - Sessions
       delete:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/fitness.activity.write
         description: Deletes a session specified by the given session ID.
-        displayName: Delete Sessions Users
+        displayName: delete
         is:
         - hasParameters
         queryParameters:
@@ -528,6 +532,10 @@ types:
             type: integer
             format: int64
             description: The client's current time in milliseconds since epoch.
+        (commons.Id): fitness.users.sessions.delete
+        (commons.LogicalStucture):
+        - Users
+        - Sessions
     get:
       securedBy:
         oath2:
@@ -541,7 +549,7 @@ types:
           - https://www.googleapis.com/auth/fitness.nutrition.read
           - https://www.googleapis.com/auth/fitness.nutrition.write
       description: Lists sessions previously created.
-      displayName: List Sessions Users
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -561,6 +569,10 @@ types:
         200:
           body:
             application/json: ListSessionsResponse
+      (commons.Id): fitness.users.sessions.list
+      (commons.LogicalStucture):
+      - Users
+      - Sessions
   /dataSources:
     /{dataSourceId}:
       uriParameters:
@@ -585,7 +597,7 @@ types:
                 - https://www.googleapis.com/auth/fitness.location.write
                 - https://www.googleapis.com/auth/fitness.nutrition.write
             description: Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics.
-            displayName: Patch Datasets DataSources Users
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
@@ -599,6 +611,11 @@ types:
               200:
                 body:
                   application/json: Dataset
+            (commons.Id): fitness.users.dataSources.datasets.patch
+            (commons.LogicalStucture):
+            - Users
+            - Data Sources
+            - Datasets
           get:
             securedBy:
               oath2:
@@ -612,7 +629,7 @@ types:
                 - https://www.googleapis.com/auth/fitness.nutrition.read
                 - https://www.googleapis.com/auth/fitness.nutrition.write
             description: Returns a dataset containing all data points whose start and end times overlap with the specified range of the dataset minimum start time and maximum end time. Specifically, any data point whose start time is less than or equal to the dataset end time and whose end time is greater than or equal to the dataset start time.
-            displayName: Get Datasets DataSources Users
+            displayName: get
             is:
             - hasParameters
             queryParameters:
@@ -627,6 +644,11 @@ types:
               200:
                 body:
                   application/json: Dataset
+            (commons.Id): fitness.users.dataSources.datasets.get
+            (commons.LogicalStucture):
+            - Users
+            - Data Sources
+            - Datasets
           delete:
             securedBy:
               oath2:
@@ -636,7 +658,7 @@ types:
                 - https://www.googleapis.com/auth/fitness.location.write
                 - https://www.googleapis.com/auth/fitness.nutrition.write
             description: Performs an inclusive delete of all data points whose start and end times have any overlap with the time range specified by the dataset ID. For most data types, the entire data point will be deleted. For data types where the time span represents a consistent value (such as com.google.activity.segment), and a data point straddles either end point of the dataset, only the overlapping portion of the data point will be deleted.
-            displayName: Delete Datasets DataSources Users
+            displayName: delete
             is:
             - hasParameters
             queryParameters:
@@ -648,6 +670,11 @@ types:
                 type: integer
                 format: int64
                 description: When the operation was performed on the client.
+            (commons.Id): fitness.users.dataSources.datasets.delete
+            (commons.LogicalStucture):
+            - Users
+            - Data Sources
+            - Datasets
       patch:
         securedBy:
           oath2:
@@ -660,7 +687,7 @@ types:
           Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified.
 
           Data sources are identified by their dataStreamId. This method supports patch semantics.
-        displayName: Patch DataSources Users
+        displayName: patch
         is:
         - hasParameters
         body:
@@ -669,6 +696,10 @@ types:
           200:
             body:
               application/json: DataSource
+        (commons.Id): fitness.users.dataSources.patch
+        (commons.LogicalStucture):
+        - Users
+        - Data Sources
       get:
         securedBy:
           oath2:
@@ -682,13 +713,17 @@ types:
             - https://www.googleapis.com/auth/fitness.nutrition.read
             - https://www.googleapis.com/auth/fitness.nutrition.write
         description: Returns the specified data source.
-        displayName: Get DataSources Users
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: DataSource
+        (commons.Id): fitness.users.dataSources.get
+        (commons.LogicalStucture):
+        - Users
+        - Data Sources
       put:
         securedBy:
           oath2:
@@ -701,7 +736,7 @@ types:
           Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified.
 
           Data sources are identified by their dataStreamId.
-        displayName: Update DataSources Users
+        displayName: update
         is:
         - hasParameters
         body:
@@ -710,6 +745,10 @@ types:
           200:
             body:
               application/json: DataSource
+        (commons.Id): fitness.users.dataSources.update
+        (commons.LogicalStucture):
+        - Users
+        - Data Sources
       delete:
         securedBy:
           oath2:
@@ -719,13 +758,17 @@ types:
             - https://www.googleapis.com/auth/fitness.location.write
             - https://www.googleapis.com/auth/fitness.nutrition.write
         description: Deletes the specified data source. The request will fail if the data source contains any data points.
-        displayName: Delete DataSources Users
+        displayName: delete
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: DataSource
+        (commons.Id): fitness.users.dataSources.delete
+        (commons.LogicalStucture):
+        - Users
+        - Data Sources
     post:
       securedBy:
         oath2:
@@ -735,7 +778,7 @@ types:
           - https://www.googleapis.com/auth/fitness.location.write
           - https://www.googleapis.com/auth/fitness.nutrition.write
       description: Creates a new data source that is unique across all data sources belonging to this user. The data stream ID field can be omitted and will be generated by the server with the correct format. The data stream ID is an ordered combination of some fields from the data source. In addition to the data source fields reflected into the data source ID, the developer project number that is authenticated when creating the data source is included. This developer project number is obfuscated when read by any other developer reading public data types.
-      displayName: Create DataSources Users
+      displayName: create
       is:
       - hasParameters
       body:
@@ -744,6 +787,10 @@ types:
         200:
           body:
             application/json: DataSource
+      (commons.Id): fitness.users.dataSources.create
+      (commons.LogicalStucture):
+      - Users
+      - Data Sources
     get:
       securedBy:
         oath2:
@@ -757,7 +804,7 @@ types:
           - https://www.googleapis.com/auth/fitness.nutrition.read
           - https://www.googleapis.com/auth/fitness.nutrition.write
       description: Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes.
-      displayName: List DataSources Users
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -768,6 +815,10 @@ types:
         200:
           body:
             application/json: ListDataSourcesResponse
+      (commons.Id): fitness.users.dataSources.list
+      (commons.LogicalStucture):
+      - Users
+      - Data Sources
   /dataset:aggregate:
     post:
       securedBy:
@@ -782,7 +833,7 @@ types:
           - https://www.googleapis.com/auth/fitness.nutrition.read
           - https://www.googleapis.com/auth/fitness.nutrition.write
       description: Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggreated into exactly one bucket type per request.
-      displayName: Aggregate Dataset Users
+      displayName: aggregate
       is:
       - hasParameters
       body:
@@ -791,3 +842,7 @@ types:
         200:
           body:
             application/json: AggregateResponse
+      (commons.Id): fitness.users.dataset.aggregate
+      (commons.LogicalStucture):
+      - Users
+      - Dataset

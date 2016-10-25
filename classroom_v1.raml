@@ -58,6 +58,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -744,7 +747,7 @@ types:
           if invalid fields are specified in the update mask or if no update mask
           is supplied. * `FAILED_PRECONDITION` for the following request errors: *
           CourseNotModifiable'
-        displayName: Patch Courses
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -761,6 +764,9 @@ types:
           200:
             body:
               application/json: Course
+        (commons.Id): classroom.courses.patch
+        (commons.LogicalStucture):
+        - Courses
       get:
         securedBy:
           oath2:
@@ -771,13 +777,16 @@ types:
           * `PERMISSION_DENIED` if the requesting user is not permitted to access
           the requested course or for access errors. * `NOT_FOUND` if no course exists
           with the requested ID.'
-        displayName: Get Courses
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Course
+        (commons.Id): classroom.courses.get
+        (commons.LogicalStucture):
+        - Courses
       put:
         securedBy:
           oath2:
@@ -788,7 +797,7 @@ types:
           the requested course or for access errors. * `NOT_FOUND` if no course exists
           with the requested ID. * `FAILED_PRECONDITION` for the following request
           errors: * CourseNotModifiable'
-        displayName: Update Courses
+        displayName: update
         is:
         - hasParameters
         body:
@@ -797,6 +806,9 @@ types:
           200:
             body:
               application/json: Course
+        (commons.Id): classroom.courses.update
+        (commons.LogicalStucture):
+        - Courses
       delete:
         securedBy:
           oath2:
@@ -806,13 +818,16 @@ types:
           * `PERMISSION_DENIED` if the requesting user is not permitted to delete
           the requested course or for access errors. * `NOT_FOUND` if no course exists
           with the requested ID.'
-        displayName: Delete Courses
+        displayName: delete
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Empty
+        (commons.Id): classroom.courses.delete
+        (commons.LogicalStucture):
+        - Courses
     /{courseId}:
       uriParameters:
         courseId:
@@ -833,13 +848,17 @@ types:
               error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
               to remove the alias or for access errors. * `NOT_FOUND` if the alias
               does not exist.'
-            displayName: Delete Aliases Courses
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Empty
+            (commons.Id): classroom.courses.aliases.delete
+            (commons.LogicalStucture):
+            - Courses
+            - Aliases
         post:
           securedBy:
             oath2:
@@ -849,7 +868,7 @@ types:
             error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
             to create the alias or for access errors. * `NOT_FOUND` if the course
             does not exist. * `ALREADY_EXISTS` if the alias already exists.'
-          displayName: Create Aliases Courses
+          displayName: create
           is:
           - hasParameters
           body:
@@ -858,6 +877,10 @@ types:
             200:
               body:
                 application/json: CourseAlias
+          (commons.Id): classroom.courses.aliases.create
+          (commons.LogicalStucture):
+          - Courses
+          - Aliases
         get:
           securedBy:
             oath2:
@@ -868,7 +891,7 @@ types:
             the following error codes: * `PERMISSION_DENIED` if the requesting user
             is not permitted to access the course or for access errors. * `NOT_FOUND`
             if the course does not exist.'
-          displayName: List Aliases Courses
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -883,6 +906,10 @@ types:
             200:
               body:
                 application/json: ListCourseAliasesResponse
+          (commons.Id): classroom.courses.aliases.list
+          (commons.LogicalStucture):
+          - Courses
+          - Aliases
       /courseWork:
         /{id}:
           uriParameters:
@@ -903,13 +930,17 @@ types:
               to access the requested course or course work, or for access errors.
               * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the
               requested course or course work does not exist.'
-            displayName: Get CourseWork Courses
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: CourseWork
+            (commons.Id): classroom.courses.courseWork.get
+            (commons.LogicalStucture):
+            - Courses
+            - Course Work
         /{courseWorkId}:
           uriParameters:
             courseWorkId:
@@ -938,7 +969,7 @@ types:
                   to the student submission, or for access errors. * `INVALID_ARGUMENT`
                   if the request is malformed. * `NOT_FOUND` if the requested course,
                   course work, or student submission does not exist.'
-                displayName: Patch StudentSubmissions CourseWork Courses
+                displayName: patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -954,6 +985,11 @@ types:
                   200:
                     body:
                       application/json: StudentSubmission
+                (commons.Id): classroom.courses.courseWork.studentSubmissions.patch
+                (commons.LogicalStucture):
+                - Courses
+                - Course Work
+                - Student Submissions
               get:
                 securedBy:
                   oath2:
@@ -965,13 +1001,18 @@ types:
                     - https://www.googleapis.com/auth/classroom.student-submissions.me.readonly
                     - https://www.googleapis.com/auth/classroom.student-submissions.students.readonly
                 description: Returns a student submission. * `PERMISSION_DENIED` if the requesting user is not permitted to access the requested course, course work, or student submission or for access errors. * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the requested course, course work, or student submission does not exist.
-                displayName: Get StudentSubmissions CourseWork Courses
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: StudentSubmission
+                (commons.Id): classroom.courses.courseWork.studentSubmissions.get
+                (commons.LogicalStucture):
+                - Courses
+                - Course Work
+                - Student Submissions
             /{id}:turnIn:
               uriParameters:
                 id:
@@ -995,7 +1036,7 @@ types:
                   * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND`
                   if the requested course, course work, or student submission does
                   not exist.'
-                displayName: TurnIn StudentSubmissions CourseWork Courses
+                displayName: turn In
                 is:
                 - hasParameters
                 body:
@@ -1004,6 +1045,11 @@ types:
                   200:
                     body:
                       application/json: Empty
+                (commons.Id): classroom.courses.courseWork.studentSubmissions.turnIn
+                (commons.LogicalStucture):
+                - Courses
+                - Course Work
+                - Student Submissions
             /{id}:reclaim:
               uriParameters:
                 id:
@@ -1029,7 +1075,7 @@ types:
                   in. * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND`
                   if the requested course, course work, or student submission does
                   not exist.'
-                displayName: Reclaim StudentSubmissions CourseWork Courses
+                displayName: reclaim
                 is:
                 - hasParameters
                 body:
@@ -1038,6 +1084,11 @@ types:
                   200:
                     body:
                       application/json: Empty
+                (commons.Id): classroom.courses.courseWork.studentSubmissions.reclaim
+                (commons.LogicalStucture):
+                - Courses
+                - Course Work
+                - Student Submissions
             /{id}:return:
               uriParameters:
                 id:
@@ -1062,7 +1113,7 @@ types:
                   the requested student submission, or for access errors. * `INVALID_ARGUMENT`
                   if the request is malformed. * `NOT_FOUND` if the requested course,
                   course work, or student submission does not exist.'
-                displayName: Return StudentSubmissions CourseWork Courses
+                displayName: return
                 is:
                 - hasParameters
                 body:
@@ -1071,6 +1122,11 @@ types:
                   200:
                     body:
                       application/json: Empty
+                (commons.Id): classroom.courses.courseWork.studentSubmissions.return
+                (commons.LogicalStucture):
+                - Courses
+                - Course Work
+                - Student Submissions
             /{id}:modifyAttachments:
               uriParameters:
                 id:
@@ -1093,7 +1149,7 @@ types:
                   student submission, or for access errors. * `INVALID_ARGUMENT` if
                   the request is malformed. * `NOT_FOUND` if the requested course,
                   course work, or student submission does not exist.'
-                displayName: ModifyAttachments StudentSubmissions CourseWork Courses
+                displayName: modify Attachments
                 is:
                 - hasParameters
                 body:
@@ -1102,6 +1158,11 @@ types:
                   200:
                     body:
                       application/json: StudentSubmission
+                (commons.Id): classroom.courses.courseWork.studentSubmissions.modifyAttachments
+                (commons.LogicalStucture):
+                - Courses
+                - Course Work
+                - Student Submissions
             get:
               securedBy:
                 oath2:
@@ -1122,7 +1183,7 @@ types:
                 or course work, or for access errors. * `INVALID_ARGUMENT` if the
                 request is malformed. * `NOT_FOUND` if the requested course does not
                 exist.'
-              displayName: List StudentSubmissions CourseWork Courses
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -1161,6 +1222,11 @@ types:
                 200:
                   body:
                     application/json: ListStudentSubmissionsResponse
+              (commons.Id): classroom.courses.courseWork.studentSubmissions.list
+              (commons.LogicalStucture):
+              - Courses
+              - Course Work
+              - Student Submissions
         post:
           securedBy:
             oath2:
@@ -1176,7 +1242,7 @@ types:
             to access the requested course, create course work in the requested course,
             or for access errors. * `INVALID_ARGUMENT` if the request is malformed.
             * `NOT_FOUND` if the requested course does not exist.'
-          displayName: Create CourseWork Courses
+          displayName: create
           is:
           - hasParameters
           body:
@@ -1185,6 +1251,10 @@ types:
             200:
               body:
                 application/json: CourseWork
+          (commons.Id): classroom.courses.courseWork.create
+          (commons.LogicalStucture):
+          - Courses
+          - Course Work
         get:
           securedBy:
             oath2:
@@ -1201,7 +1271,7 @@ types:
             user is not permitted to access the requested course or for access errors.
             * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the
             requested course does not exist.'
-          displayName: List CourseWork Courses
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1232,6 +1302,10 @@ types:
             200:
               body:
                 application/json: ListCourseWorkResponse
+          (commons.Id): classroom.courses.courseWork.list
+          (commons.LogicalStucture):
+          - Courses
+          - Course Work
       /teachers:
         /{userId}:
           uriParameters:
@@ -1254,13 +1328,17 @@ types:
               to view teachers of this course or for access errors. * `NOT_FOUND`
               if no teacher of this course has the requested ID or if the course does
               not exist.'
-            displayName: Get Teachers Courses
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Teacher
+            (commons.Id): classroom.courses.teachers.get
+            (commons.LogicalStucture):
+            - Courses
+            - Teachers
           delete:
             securedBy:
               oath2:
@@ -1272,13 +1350,17 @@ types:
               if no teacher of this course has the requested ID or if the course does
               not exist. * `FAILED_PRECONDITION` if the requested ID belongs to the
               primary teacher of this course.'
-            displayName: Delete Teachers Courses
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Empty
+            (commons.Id): classroom.courses.teachers.delete
+            (commons.LogicalStucture):
+            - Courses
+            - Teachers
         post:
           securedBy:
             oath2:
@@ -1294,7 +1376,7 @@ types:
             * CourseMemberLimitReached * CourseNotModifiable * CourseTeacherLimitReached
             * UserGroupsMembershipLimitReached * `ALREADY_EXISTS` if the user is already
             a teacher or student in the course.'
-          displayName: Create Teachers Courses
+          displayName: create
           is:
           - hasParameters
           body:
@@ -1303,6 +1385,10 @@ types:
             200:
               body:
                 application/json: Teacher
+          (commons.Id): classroom.courses.teachers.create
+          (commons.LogicalStucture):
+          - Courses
+          - Teachers
         get:
           securedBy:
             oath2:
@@ -1315,7 +1401,7 @@ types:
             is permitted to view. This method returns the following error codes: *
             `NOT_FOUND` if the course does not exist. * `PERMISSION_DENIED` for access
             errors.'
-          displayName: List Teachers Courses
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1330,6 +1416,10 @@ types:
             200:
               body:
                 application/json: ListTeachersResponse
+          (commons.Id): classroom.courses.teachers.list
+          (commons.LogicalStucture):
+          - Courses
+          - Teachers
       /students:
         /{userId}:
           uriParameters:
@@ -1352,13 +1442,17 @@ types:
               to view students of this course or for access errors. * `NOT_FOUND`
               if no student of this course has the requested ID or if the course does
               not exist.'
-            displayName: Get Students Courses
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Student
+            (commons.Id): classroom.courses.students.get
+            (commons.LogicalStucture):
+            - Courses
+            - Students
           delete:
             securedBy:
               oath2:
@@ -1369,13 +1463,17 @@ types:
               to delete students of this course or for access errors. * `NOT_FOUND`
               if no student of this course has the requested ID or if the course does
               not exist.'
-            displayName: Delete Students Courses
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Empty
+            (commons.Id): classroom.courses.students.delete
+            (commons.LogicalStucture):
+            - Courses
+            - Students
         post:
           securedBy:
             oath2:
@@ -1391,7 +1489,7 @@ types:
             errors: * CourseMemberLimitReached * CourseNotModifiable * UserGroupsMembershipLimitReached
             * `ALREADY_EXISTS` if the user is already a student or teacher in the
             course.'
-          displayName: Create Students Courses
+          displayName: create
           is:
           - hasParameters
           queryParameters:
@@ -1404,6 +1502,10 @@ types:
             200:
               body:
                 application/json: Student
+          (commons.Id): classroom.courses.students.create
+          (commons.LogicalStucture):
+          - Courses
+          - Students
         get:
           securedBy:
             oath2:
@@ -1416,7 +1518,7 @@ types:
             is permitted to view. This method returns the following error codes: *
             `NOT_FOUND` if the course does not exist. * `PERMISSION_DENIED` for access
             errors.'
-          displayName: List Students Courses
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1431,6 +1533,10 @@ types:
             200:
               body:
                 application/json: ListStudentsResponse
+          (commons.Id): classroom.courses.students.list
+          (commons.LogicalStucture):
+          - Courses
+          - Students
     post:
       securedBy:
         oath2:
@@ -1443,7 +1549,7 @@ types:
         is not a valid user. * `FAILED_PRECONDITION` if the course owner''s account
         is disabled or for the following request errors: * UserGroupsMembershipLimitReached
         * `ALREADY_EXISTS` if an alias was specified in the `id` and already exists.'
-      displayName: Create Courses
+      displayName: create
       is:
       - hasParameters
       body:
@@ -1452,6 +1558,9 @@ types:
         200:
           body:
             application/json: Course
+      (commons.Id): classroom.courses.create
+      (commons.LogicalStucture):
+      - Courses
     get:
       securedBy:
         oath2:
@@ -1463,7 +1572,7 @@ types:
         following error codes: * `PERMISSION_DENIED` for access errors. * `INVALID_ARGUMENT`
         if the query argument is malformed. * `NOT_FOUND` if any users specified in
         the query arguments do not exist.'
-      displayName: List Courses
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1499,6 +1608,9 @@ types:
         200:
           body:
             application/json: ListCoursesResponse
+      (commons.Id): classroom.courses.list
+      (commons.LogicalStucture):
+      - Courses
   /invitations:
     /{id}:
       uriParameters:
@@ -1515,13 +1627,16 @@ types:
           codes: * `PERMISSION_DENIED` if the requesting user is not permitted to
           view the requested invitation or for access errors. * `NOT_FOUND` if no
           invitation exists with the requested ID.'
-        displayName: Get Invitations
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Invitation
+        (commons.Id): classroom.invitations.get
+        (commons.LogicalStucture):
+        - Invitations
       delete:
         securedBy:
           oath2:
@@ -1531,13 +1646,16 @@ types:
           codes: * `PERMISSION_DENIED` if the requesting user is not permitted to
           delete the requested invitation or for access errors. * `NOT_FOUND` if no
           invitation exists with the requested ID.'
-        displayName: Delete Invitations
+        displayName: delete
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Empty
+        (commons.Id): classroom.invitations.delete
+        (commons.LogicalStucture):
+        - Invitations
     /{id}:accept:
       uriParameters:
         id:
@@ -1556,13 +1674,16 @@ types:
           for the following request errors: * CourseMemberLimitReached * CourseNotModifiable
           * CourseTeacherLimitReached * UserGroupsMembershipLimitReached * `NOT_FOUND`
           if no invitation exists with the requested ID.'
-        displayName: Accept Invitations
+        displayName: accept
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Empty
+        (commons.Id): classroom.invitations.accept
+        (commons.LogicalStucture):
+        - Invitations
     post:
       securedBy:
         oath2:
@@ -1576,7 +1697,7 @@ types:
         if the requested user''s account is disabled or if the user already has this
         role or a role with greater permissions. * `ALREADY_EXISTS` if an invitation
         for the specified user and course already exists.'
-      displayName: Create Invitations
+      displayName: create
       is:
       - hasParameters
       body:
@@ -1585,6 +1706,9 @@ types:
         200:
           body:
             application/json: Invitation
+      (commons.Id): classroom.invitations.create
+      (commons.LogicalStucture):
+      - Invitations
     get:
       securedBy:
         oath2:
@@ -1596,7 +1720,7 @@ types:
         one of `user_id` or `course_id` must be supplied. Both fields can be supplied.
         This method returns the following error codes: * `PERMISSION_DENIED` for access
         errors.'
-      displayName: List Invitations
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1620,6 +1744,9 @@ types:
         200:
           body:
             application/json: ListInvitationsResponse
+      (commons.Id): classroom.invitations.list
+      (commons.LogicalStucture):
+      - Invitations
   /userProfiles:
     /{userId}:
       uriParameters:
@@ -1641,13 +1768,16 @@ types:
           codes: * `PERMISSION_DENIED` if the requesting user is not permitted to
           access this user profile or if no profile exists with the requested ID or
           for access errors.'
-        displayName: Get UserProfiles
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: UserProfile
+        (commons.Id): classroom.userProfiles.get
+        (commons.LogicalStucture):
+        - User Profiles
     /{studentId}:
       uriParameters:
         studentId:
@@ -1674,7 +1804,7 @@ types:
               is a valid student ID, but Classroom has no record of that student,
               or if the `id` field does not refer to a guardian invitation known to
               Classroom.'
-            displayName: Patch GuardianInvitations UserProfiles
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
@@ -1691,6 +1821,10 @@ types:
               200:
                 body:
                   application/json: GuardianInvitation
+            (commons.Id): classroom.userProfiles.guardianInvitations.patch
+            (commons.LogicalStucture):
+            - User Profiles
+            - Guardian Invitations
           get:
             description: 'Returns a specific guardian invitation. This method returns
               the following error codes: * `PERMISSION_DENIED` if the requesting user
@@ -1702,13 +1836,17 @@ types:
               * `NOT_FOUND` if Classroom cannot find any record of the given student
               or `invitation_id`. May also be returned if the student exists, but
               the requesting user does not have access to see that student.'
-            displayName: Get GuardianInvitations UserProfiles
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: GuardianInvitation
+            (commons.Id): classroom.userProfiles.guardianInvitations.get
+            (commons.LogicalStucture):
+            - User Profiles
+            - Guardian Invitations
         post:
           description: 'Creates a guardian invitation, and sends an email to the guardian
             asking them to confirm that they are the student''s guardian. Once the
@@ -1732,7 +1870,7 @@ types:
             there is already a pending guardian invitation for the student and `invited_email_address`
             provided, or if the provided `invited_email_address` matches the Google
             account of an existing `Guardian` for this user.'
-          displayName: Create GuardianInvitations UserProfiles
+          displayName: create
           is:
           - hasParameters
           body:
@@ -1741,6 +1879,10 @@ types:
             200:
               body:
                 application/json: GuardianInvitation
+          (commons.Id): classroom.userProfiles.guardianInvitations.create
+          (commons.LogicalStucture):
+          - User Profiles
+          - Guardian Invitations
         get:
           description: 'Returns a list of guardian invitations that the requesting
             user is permitted to view, filtered by the parameters provided. This method
@@ -1754,7 +1896,7 @@ types:
             string `me`). May also be returned if an invalid `page_token` or `state`
             is provided. * `NOT_FOUND` if a `student_id` is specified, and its format
             can be recognized, but Classroom has no record of that student.'
-          displayName: List GuardianInvitations UserProfiles
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1779,6 +1921,10 @@ types:
             200:
               body:
                 application/json: ListGuardianInvitationsResponse
+          (commons.Id): classroom.userProfiles.guardianInvitations.list
+          (commons.LogicalStucture):
+          - User Profiles
+          - Guardian Invitations
       /guardians:
         /{guardianId}:
           uriParameters:
@@ -1795,13 +1941,17 @@ types:
               a `student_id` from the API, nor the literal string `me`). * `NOT_FOUND`
               if Classroom cannot find any record of the given student or `guardian_id`,
               or if the guardian has been disabled.'
-            displayName: Get Guardians UserProfiles
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Guardian
+            (commons.Id): classroom.userProfiles.guardians.get
+            (commons.LogicalStucture):
+            - User Profiles
+            - Guardians
           delete:
             description: 'Deletes a guardian. The guardian will no longer receive
               guardian notifications and the guardian will no longer be accessible
@@ -1813,13 +1963,17 @@ types:
               (it is not an email address, nor a `student_id` from the API). * `NOT_FOUND`
               if Classroom cannot find any record of the given `student_id` or `guardian_id`,
               or if the guardian has already been disabled.'
-            displayName: Delete Guardians UserProfiles
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Empty
+            (commons.Id): classroom.userProfiles.guardians.delete
+            (commons.LogicalStucture):
+            - User Profiles
+            - Guardians
         get:
           description: 'Returns a list of guardians that the requesting user is permitted
             to view, restricted to those that match the request. To list guardians
@@ -1836,7 +1990,7 @@ types:
             string `me`). May also be returned if an invalid `page_token` is provided.
             * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized,
             but Classroom has no record of that student.'
-          displayName: List Guardians UserProfiles
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1854,3 +2008,7 @@ types:
             200:
               body:
                 application/json: ListGuardiansResponse
+          (commons.Id): classroom.userProfiles.guardians.list
+          (commons.LogicalStucture):
+          - User Profiles
+          - Guardians

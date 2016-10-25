@@ -1020,7 +1020,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels all line items in an order.
-          displayName: Cancel Orders
+          displayName: cancel
           is:
           - hasParameters
           body:
@@ -1029,6 +1029,9 @@ types:
             200:
               body:
                 application/json: OrdersCancelResponse
+          (commons.Id): content.orders.cancel
+          (commons.LogicalStucture):
+          - Orders
       /shipLineItems:
         post:
           securedBy:
@@ -1036,7 +1039,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks line item(s) as shipped.
-          displayName: Shiplineitems Orders
+          displayName: shiplineitems
           is:
           - hasParameters
           body:
@@ -1045,6 +1048,9 @@ types:
             200:
               body:
                 application/json: OrdersShipLineItemsResponse
+          (commons.Id): content.orders.shiplineitems
+          (commons.LogicalStucture):
+          - Orders
       /cancelLineItem:
         post:
           securedBy:
@@ -1052,7 +1058,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Cancels a line item.
-          displayName: Cancellineitem Orders
+          displayName: cancellineitem
           is:
           - hasParameters
           body:
@@ -1061,6 +1067,9 @@ types:
             200:
               body:
                 application/json: OrdersCancelLineItemResponse
+          (commons.Id): content.orders.cancellineitem
+          (commons.LogicalStucture):
+          - Orders
       /returnLineItem:
         post:
           securedBy:
@@ -1068,7 +1077,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Returns a line item.
-          displayName: Returnlineitem Orders
+          displayName: returnlineitem
           is:
           - hasParameters
           body:
@@ -1077,6 +1086,9 @@ types:
             200:
               body:
                 application/json: OrdersReturnLineItemResponse
+          (commons.Id): content.orders.returnlineitem
+          (commons.LogicalStucture):
+          - Orders
       /acknowledge:
         post:
           securedBy:
@@ -1084,7 +1096,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Marks an order as acknowledged.
-          displayName: Acknowledge Orders
+          displayName: acknowledge
           is:
           - hasParameters
           body:
@@ -1093,6 +1105,9 @@ types:
             200:
               body:
                 application/json: OrdersAcknowledgeResponse
+          (commons.Id): content.orders.acknowledge
+          (commons.LogicalStucture):
+          - Orders
       /updateMerchantOrderId:
         post:
           securedBy:
@@ -1100,7 +1115,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates the merchant order ID for a given order.
-          displayName: Updatemerchantorderid Orders
+          displayName: updatemerchantorderid
           is:
           - hasParameters
           body:
@@ -1109,6 +1124,9 @@ types:
             200:
               body:
                 application/json: OrdersUpdateMerchantOrderIdResponse
+          (commons.Id): content.orders.updatemerchantorderid
+          (commons.LogicalStucture):
+          - Orders
       /refund:
         post:
           securedBy:
@@ -1116,7 +1134,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Refund a portion of the order, up to the full amount paid.
-          displayName: Refund Orders
+          displayName: refund
           is:
           - hasParameters
           body:
@@ -1125,6 +1143,9 @@ types:
             200:
               body:
                 application/json: OrdersRefundResponse
+          (commons.Id): content.orders.refund
+          (commons.LogicalStucture):
+          - Orders
       /updateShipment:
         post:
           securedBy:
@@ -1132,7 +1153,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Updates a shipment's status, carrier, and/or tracking ID.
-          displayName: Updateshipment Orders
+          displayName: updateshipment
           is:
           - hasParameters
           body:
@@ -1141,26 +1162,32 @@ types:
             200:
               body:
                 application/json: OrdersUpdateShipmentResponse
+          (commons.Id): content.orders.updateshipment
+          (commons.LogicalStucture):
+          - Orders
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order from your Merchant Center account.
-        displayName: Get Orders
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Order
+        (commons.Id): content.orders.get
+        (commons.LogicalStucture):
+        - Orders
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Lists the orders in your Merchant Center account.
-      displayName: List Orders
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1184,12 +1211,27 @@ types:
         orderBy?:
           type: string
           description: The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. "placedDate desc" stands for listing orders by placement date, from oldest to most recent. "placedDate asc" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria.
+          (commons.EnumDescriptions):
+          - ''
+          - ''
           enum:
           - placedDate asc
           - placedDate desc
         statuses?:
           type: string
           description: Obtains orders that match any of the specified statuses. Multiple values can be specified with comma separation. Additionally, please note that active is a shortcut for pendingShipment and partiallyShipped, and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.
+          (commons.EnumDescriptions):
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
           enum:
           - active
           - canceled
@@ -1209,6 +1251,9 @@ types:
         200:
           body:
             application/json: OrdersListResponse
+      (commons.Id): content.orders.list
+      (commons.LogicalStucture):
+      - Orders
   /testorders:
     /{orderId}:
       uriParameters:
@@ -1222,20 +1267,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/content
           description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
-          displayName: Advancetestorder Orders
+          displayName: advancetestorder
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: OrdersAdvanceTestOrderResponse
+          (commons.Id): content.orders.advancetestorder
+          (commons.LogicalStucture):
+          - Orders
     post:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Sandbox only. Creates a test order.
-      displayName: Createtestorder Orders
+      displayName: createtestorder
       is:
       - hasParameters
       body:
@@ -1244,6 +1292,9 @@ types:
         200:
           body:
             application/json: OrdersCreateTestOrderResponse
+      (commons.Id): content.orders.createtestorder
+      (commons.LogicalStucture):
+      - Orders
   /ordersbymerchantid:
     /{merchantOrderId}:
       uriParameters:
@@ -1256,19 +1307,27 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Retrieves an order using merchant order id.
-        displayName: Getbymerchantorderid Orders
+        displayName: getbymerchantorderid
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: OrdersGetByMerchantOrderIdResponse
+        (commons.Id): content.orders.getbymerchantorderid
+        (commons.LogicalStucture):
+        - Orders
   /testordertemplates:
     /{templateName}:
       uriParameters:
         templateName:
           type: string
           description: The name of the template to retrieve.
+          (commons.EnumDescriptions):
+          - ''
+          - ''
+          - ''
+          - ''
           enum:
           - template1
           - template1a
@@ -1280,13 +1339,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/content
         description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
-        displayName: Gettestordertemplate Orders
+        displayName: gettestordertemplate
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: OrdersGetTestOrderTemplateResponse
+        (commons.Id): content.orders.gettestordertemplate
+        (commons.LogicalStucture):
+        - Orders
 /orders:
   /batch:
     post:
@@ -1295,7 +1357,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/content
       description: Retrieves or modifies multiple orders in a single request.
-      displayName: Custombatch Orders
+      displayName: custombatch
       is:
       - hasParameters
       body:
@@ -1304,3 +1366,6 @@ types:
         200:
           body:
             application/json: OrdersCustomBatchResponse
+      (commons.Id): content.orders.custombatch
+      (commons.LogicalStucture):
+      - Orders

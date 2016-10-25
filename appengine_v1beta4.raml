@@ -46,6 +46,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -922,13 +925,17 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-            displayName: Get Operations Apps
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): appengine.apps.operations.get
+            (commons.LogicalStucture):
+            - Apps
+            - Operations
         get:
           securedBy:
             oath2:
@@ -938,7 +945,7 @@ types:
             If the server doesn''t support this method, it returns `UNIMPLEMENTED`.
             NOTE: the `name` binding below allows API services to override the binding
             to use different resource name schemes, such as `users/*/operations`.'
-          displayName: List Operations Apps
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -956,6 +963,10 @@ types:
             200:
               body:
                 application/json: ListOperationsResponse
+          (commons.Id): appengine.apps.operations.list
+          (commons.LogicalStucture):
+          - Apps
+          - Operations
       /locations:
         /{locationsId}:
           uriParameters:
@@ -968,20 +979,24 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Get information about a location.
-            displayName: Get Locations Apps
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Location
+            (commons.Id): appengine.apps.locations.get
+            (commons.LogicalStucture):
+            - Apps
+            - Locations
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Lists information about the supported locations for this service.
-          displayName: List Locations Apps
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -999,6 +1014,10 @@ types:
             200:
               body:
                 application/json: ListLocationsResponse
+          (commons.Id): appengine.apps.locations.list
+          (commons.LogicalStucture):
+          - Apps
+          - Locations
       /modules:
         /{modulesId}:
           uriParameters:
@@ -1023,7 +1042,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started. Only applicable for instances in App Engine flexible environment.
-                    displayName: Debug Instances Versions Modules Apps
+                    displayName: debug
                     is:
                     - hasParameters
                     body:
@@ -1032,6 +1051,12 @@ types:
                       200:
                         body:
                           application/json: Operation
+                    (commons.Id): appengine.apps.modules.versions.instances.debug
+                    (commons.LogicalStucture):
+                    - Apps
+                    - Modules
+                    - Versions
+                    - Instances
                 /{instancesId}:
                   uriParameters:
                     instancesId:
@@ -1043,33 +1068,45 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Gets instance information.
-                    displayName: Get Instances Versions Modules Apps
+                    displayName: get
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: Instance
+                    (commons.Id): appengine.apps.modules.versions.instances.get
+                    (commons.LogicalStucture):
+                    - Apps
+                    - Modules
+                    - Versions
+                    - Instances
                   delete:
                     securedBy:
                       oath2:
                         scopes:
                         - https://www.googleapis.com/auth/cloud-platform
                     description: Stops a running instance.
-                    displayName: Delete Instances Versions Modules Apps
+                    displayName: delete
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: Operation
+                    (commons.Id): appengine.apps.modules.versions.instances.delete
+                    (commons.LogicalStucture):
+                    - Apps
+                    - Modules
+                    - Versions
+                    - Instances
                 get:
                   securedBy:
                     oath2:
                       scopes:
                       - https://www.googleapis.com/auth/cloud-platform
                   description: Lists the instances of a version.
-                  displayName: List Instances Versions Modules Apps
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -1084,6 +1121,12 @@ types:
                     200:
                       body:
                         application/json: ListInstancesResponse
+                  (commons.Id): appengine.apps.modules.versions.instances.list
+                  (commons.LogicalStucture):
+                  - Apps
+                  - Modules
+                  - Versions
+                  - Instances
               patch:
                 securedBy:
                   oath2:
@@ -1100,7 +1143,7 @@ types:
                   App Engine standard environment. * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta4/apps.modules.versions#Version.FIELDS.automatic_scaling):
                   For Version resources that use automatic scaling and run in the
                   App Engine standard environment.'
-                displayName: Patch Versions Modules Apps
+                displayName: patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -1113,13 +1156,18 @@ types:
                   200:
                     body:
                       application/json: Operation
+                (commons.Id): appengine.apps.modules.versions.patch
+                (commons.LogicalStucture):
+                - Apps
+                - Modules
+                - Versions
               get:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Gets the specified Version resource. By default, only a `BASIC_VIEW` will be returned. Specify the `FULL_VIEW` parameter to get the full resource.
-                displayName: Get Versions Modules Apps
+                displayName: get
                 is:
                 - hasParameters
                 queryParameters:
@@ -1133,26 +1181,36 @@ types:
                   200:
                     body:
                       application/json: Version
+                (commons.Id): appengine.apps.modules.versions.get
+                (commons.LogicalStucture):
+                - Apps
+                - Modules
+                - Versions
               delete:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/cloud-platform
                 description: Deletes an existing version.
-                displayName: Delete Versions Modules Apps
+                displayName: delete
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: Operation
+                (commons.Id): appengine.apps.modules.versions.delete
+                (commons.LogicalStucture):
+                - Apps
+                - Modules
+                - Versions
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Deploys code and resource files to a new version.
-              displayName: Create Versions Modules Apps
+              displayName: create
               is:
               - hasParameters
               body:
@@ -1161,13 +1219,18 @@ types:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): appengine.apps.modules.versions.create
+              (commons.LogicalStucture):
+              - Apps
+              - Modules
+              - Versions
             get:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/cloud-platform
               description: Lists the versions of a module.
-              displayName: List Versions Modules Apps
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -1188,13 +1251,18 @@ types:
                 200:
                   body:
                     application/json: ListVersionsResponse
+              (commons.Id): appengine.apps.modules.versions.list
+              (commons.LogicalStucture):
+              - Apps
+              - Modules
+              - Versions
           patch:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Updates the configuration of the specified module.
-            displayName: Patch Modules Apps
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
@@ -1210,39 +1278,51 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): appengine.apps.modules.patch
+            (commons.LogicalStucture):
+            - Apps
+            - Modules
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Gets the current configuration of the specified module.
-            displayName: Get Modules Apps
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Module
+            (commons.Id): appengine.apps.modules.get
+            (commons.LogicalStucture):
+            - Apps
+            - Modules
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Deletes the specified module and all enclosed versions.
-            displayName: Delete Modules Apps
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): appengine.apps.modules.delete
+            (commons.LogicalStucture):
+            - Apps
+            - Modules
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/cloud-platform
           description: Lists all the modules in the application.
-          displayName: List Modules Apps
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1257,13 +1337,17 @@ types:
             200:
               body:
                 application/json: ListModulesResponse
+          (commons.Id): appengine.apps.modules.list
+          (commons.LogicalStucture):
+          - Apps
+          - Modules
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Updates application parameters.
-        displayName: Patch Apps
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -1276,13 +1360,16 @@ types:
           200:
             body:
               application/json: Operation
+        (commons.Id): appengine.apps.patch
+        (commons.LogicalStucture):
+        - Apps
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Gets information about an application.
-        displayName: Get Apps
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -1293,13 +1380,16 @@ types:
           200:
             body:
               application/json: Application
+        (commons.Id): appengine.apps.get
+        (commons.LogicalStucture):
+        - Apps
     post:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Creates an App Engine application for a Google Cloud Platform project. This requires a project that excludes an App Engine application. For details about creating a project without an application, see the [Google Cloud Resource Manager create project topic](https://cloud.google.com/resource-manager/docs/creating-project).
-      displayName: Create Apps
+      displayName: create
       is:
       - hasParameters
       body:
@@ -1308,3 +1398,6 @@ types:
         200:
           body:
             application/json: Operation
+      (commons.Id): appengine.apps.create
+      (commons.LogicalStucture):
+      - Apps

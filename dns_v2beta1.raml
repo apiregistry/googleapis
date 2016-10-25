@@ -476,64 +476,7 @@ types:
       uriParameters:
         managedZone:
           type: string
-          description: Identifies the managed zone addressed by this request.
-      /operations:
-        /{operation}:
-          uriParameters:
-            operation:
-              type: string
-              description: Identifies the operation addressed by this request.
-          get:
-            securedBy:
-              oath2:
-                scopes:
-                - https://www.googleapis.com/auth/cloud-platform
-                - https://www.googleapis.com/auth/cloud-platform.read-only
-                - https://www.googleapis.com/auth/ndev.clouddns.readonly
-                - https://www.googleapis.com/auth/ndev.clouddns.readwrite
-            description: Fetch the representation of an existing Operation.
-            displayName: Get ManagedZoneOperations
-            is:
-            - hasParameters
-            queryParameters:
-              clientOperationId?:
-                type: string
-                description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-            responses:
-              200:
-                body:
-                  application/json: Operation
-        get:
-          securedBy:
-            oath2:
-              scopes:
-              - https://www.googleapis.com/auth/cloud-platform
-              - https://www.googleapis.com/auth/cloud-platform.read-only
-              - https://www.googleapis.com/auth/ndev.clouddns.readonly
-              - https://www.googleapis.com/auth/ndev.clouddns.readwrite
-          description: Enumerate Operations for the given ManagedZone.
-          displayName: List ManagedZoneOperations
-          is:
-          - hasParameters
-          queryParameters:
-            maxResults?:
-              type: integer
-              format: int32
-              description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
-            sortBy?:
-              type: string
-              default: START_TIME
-              description: Sorting criterion. The only supported values are START_TIME and ID.
-              enum:
-              - ID
-              - START_TIME
-            pageToken?:
-              type: string
-              description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
-          responses:
-            200:
-              body:
-                application/json: ManagedZoneOperationsListResponse
+          description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
       /dnsKeys:
         /{dnsKeyId}:
           uriParameters:
@@ -549,7 +492,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.clouddns.readonly
                 - https://www.googleapis.com/auth/ndev.clouddns.readwrite
             description: Fetch the representation of an existing DnsKey.
-            displayName: Get Dnskeys
+            displayName: get
             is:
             - hasParameters
             queryParameters:
@@ -563,6 +506,9 @@ types:
               200:
                 body:
                   application/json: DnsKey
+            (commons.Id): dns.dnsKeys.get
+            (commons.LogicalStucture):
+            - Dns Keys
         get:
           securedBy:
             oath2:
@@ -572,7 +518,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate DnsKeys to a ResourceRecordSet collection.
-          displayName: List Dnskeys
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -590,6 +536,75 @@ types:
             200:
               body:
                 application/json: DnsKeysListResponse
+          (commons.Id): dns.dnsKeys.list
+          (commons.LogicalStucture):
+          - Dns Keys
+      /operations:
+        /{operation}:
+          uriParameters:
+            operation:
+              type: string
+              description: Identifies the operation addressed by this request.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/ndev.clouddns.readonly
+                - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+            description: Fetch the representation of an existing Operation.
+            displayName: get
+            is:
+            - hasParameters
+            queryParameters:
+              clientOperationId?:
+                type: string
+                description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+            responses:
+              200:
+                body:
+                  application/json: Operation
+            (commons.Id): dns.managedZoneOperations.get
+            (commons.LogicalStucture):
+            - Managed Zone Operations
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/ndev.clouddns.readonly
+              - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          description: Enumerate Operations for the given ManagedZone.
+          displayName: list
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+            sortBy?:
+              type: string
+              default: START_TIME
+              description: Sorting criterion. The only supported values are START_TIME and ID.
+              (commons.EnumDescriptions):
+              - ''
+              - ''
+              enum:
+              - ID
+              - START_TIME
+            pageToken?:
+              type: string
+              description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
+          responses:
+            200:
+              body:
+                application/json: ManagedZoneOperationsListResponse
+          (commons.Id): dns.managedZoneOperations.list
+          (commons.LogicalStucture):
+          - Managed Zone Operations
       /rrsets:
         get:
           securedBy:
@@ -600,7 +615,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate ResourceRecordSets that have been created but not yet deleted.
-          displayName: List ResourceRecordSets
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -621,6 +636,9 @@ types:
             200:
               body:
                 application/json: ResourceRecordSetsListResponse
+          (commons.Id): dns.resourceRecordSets.list
+          (commons.LogicalStucture):
+          - Resource Record Sets
       /changes:
         /{changeId}:
           uriParameters:
@@ -636,7 +654,7 @@ types:
                 - https://www.googleapis.com/auth/ndev.clouddns.readonly
                 - https://www.googleapis.com/auth/ndev.clouddns.readwrite
             description: Fetch the representation of an existing Change.
-            displayName: Get Changes
+            displayName: get
             is:
             - hasParameters
             queryParameters:
@@ -647,6 +665,9 @@ types:
               200:
                 body:
                   application/json: Change
+            (commons.Id): dns.changes.get
+            (commons.LogicalStucture):
+            - Changes
         post:
           securedBy:
             oath2:
@@ -654,7 +675,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Atomically update the ResourceRecordSet collection.
-          displayName: Create Changes
+          displayName: create
           is:
           - hasParameters
           queryParameters:
@@ -667,6 +688,9 @@ types:
             200:
               body:
                 application/json: Change
+          (commons.Id): dns.changes.create
+          (commons.LogicalStucture):
+          - Changes
         get:
           securedBy:
             oath2:
@@ -676,7 +700,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate Changes to a ResourceRecordSet collection.
-          displayName: List Changes
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -691,6 +715,8 @@ types:
               type: string
               default: CHANGE_SEQUENCE
               description: Sorting criterion. The only supported value is change sequence.
+              (commons.EnumDescriptions):
+              - ''
               enum:
               - CHANGE_SEQUENCE
             pageToken?:
@@ -700,6 +726,9 @@ types:
             200:
               body:
                 application/json: ChangesListResponse
+          (commons.Id): dns.changes.list
+          (commons.LogicalStucture):
+          - Changes
       patch:
         securedBy:
           oath2:
@@ -707,7 +736,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Update an existing ManagedZone. This method supports patch semantics.
-        displayName: Patch ManagedZones
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -720,6 +749,9 @@ types:
           200:
             body:
               application/json: Operation
+        (commons.Id): dns.managedZones.patch
+        (commons.LogicalStucture):
+        - Managed Zones
       get:
         securedBy:
           oath2:
@@ -729,7 +761,7 @@ types:
             - https://www.googleapis.com/auth/ndev.clouddns.readonly
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Fetch the representation of an existing ManagedZone.
-        displayName: Get ManagedZones
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -740,6 +772,9 @@ types:
           200:
             body:
               application/json: ManagedZone
+        (commons.Id): dns.managedZones.get
+        (commons.LogicalStucture):
+        - Managed Zones
       put:
         securedBy:
           oath2:
@@ -747,7 +782,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Update an existing ManagedZone.
-        displayName: Update ManagedZones
+        displayName: update
         is:
         - hasParameters
         queryParameters:
@@ -760,6 +795,9 @@ types:
           200:
             body:
               application/json: Operation
+        (commons.Id): dns.managedZones.update
+        (commons.LogicalStucture):
+        - Managed Zones
       delete:
         securedBy:
           oath2:
@@ -767,7 +805,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Delete a previously created ManagedZone.
-        displayName: Delete ManagedZones
+        displayName: delete
         is:
         - hasParameters
         queryParameters:
@@ -778,6 +816,9 @@ types:
           200:
             body:
               application/json: ManagedZonesDeleteResponse
+        (commons.Id): dns.managedZones.delete
+        (commons.LogicalStucture):
+        - Managed Zones
     post:
       securedBy:
         oath2:
@@ -785,7 +826,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       description: Create a new ManagedZone.
-      displayName: Create ManagedZones
+      displayName: create
       is:
       - hasParameters
       queryParameters:
@@ -798,6 +839,9 @@ types:
         200:
           body:
             application/json: ManagedZone
+      (commons.Id): dns.managedZones.create
+      (commons.LogicalStucture):
+      - Managed Zones
     get:
       securedBy:
         oath2:
@@ -807,7 +851,7 @@ types:
           - https://www.googleapis.com/auth/ndev.clouddns.readonly
           - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       description: Enumerate ManagedZones that have been created but not yet deleted.
-      displayName: List ManagedZones
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -825,6 +869,9 @@ types:
         200:
           body:
             application/json: ManagedZonesListResponse
+      (commons.Id): dns.managedZones.list
+      (commons.LogicalStucture):
+      - Managed Zones
   get:
     securedBy:
       oath2:
@@ -834,7 +881,7 @@ types:
         - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - https://www.googleapis.com/auth/ndev.clouddns.readwrite
     description: Fetch the representation of an existing Project.
-    displayName: Get Projects
+    displayName: get
     is:
     - hasParameters
     queryParameters:
@@ -845,3 +892,6 @@ types:
       200:
         body:
           application/json: Project
+    (commons.Id): dns.projects.get
+    (commons.LogicalStucture):
+    - Projects

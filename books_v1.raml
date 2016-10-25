@@ -1537,7 +1537,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns notification details for a given notification id.
-      displayName: Get Notification
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -1555,6 +1555,9 @@ types:
         200:
           body:
             application/json: Notification
+      (commons.Id): books.notification.get
+      (commons.LogicalStucture):
+      - Notification
 /dictionary:
   /listOfflineMetadata:
     get:
@@ -1563,7 +1566,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns a list of offline dictionary metadata available
-      displayName: ListOfflineMetadata Dictionary
+      displayName: list Offline Metadata
       is:
       - hasParameters
       queryParameters:
@@ -1574,6 +1577,9 @@ types:
         200:
           body:
             application/json: Metadata
+      (commons.Id): books.dictionary.listOfflineMetadata
+      (commons.LogicalStucture):
+      - Dictionary
 /cloudloading:
   /deleteBook:
     post:
@@ -1582,13 +1588,16 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Remove the book and its contents
-      displayName: DeleteBook Cloudloading
+      displayName: delete Book
       is:
       - hasParameters
       queryParameters:
         volumeId:
           type: string
           description: The id of the book to be removed.
+      (commons.Id): books.cloudloading.deleteBook
+      (commons.LogicalStucture):
+      - Cloudloading
   /updateBook:
     post:
       securedBy:
@@ -1596,7 +1605,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
-      displayName: UpdateBook Cloudloading
+      displayName: update Book
       is:
       - hasParameters
       body:
@@ -1605,6 +1614,9 @@ types:
         200:
           body:
             application/json: BooksCloudloadingResource
+      (commons.Id): books.cloudloading.updateBook
+      (commons.LogicalStucture):
+      - Cloudloading
   /addBook:
     post:
       securedBy:
@@ -1612,7 +1624,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
-      displayName: AddBook Cloudloading
+      displayName: add Book
       is:
       - hasParameters
       queryParameters:
@@ -1631,6 +1643,9 @@ types:
         200:
           body:
             application/json: BooksCloudloadingResource
+      (commons.Id): books.cloudloading.addBook
+      (commons.LogicalStucture):
+      - Cloudloading
 /mylibrary:
   /readingpositions:
     /{volumeId}:
@@ -1645,7 +1660,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Sets my reading position information for a volume.
-          displayName: SetPosition Readingpositions Mylibrary
+          displayName: set Position
           is:
           - hasParameters
           queryParameters:
@@ -1655,6 +1670,13 @@ types:
             action?:
               type: string
               description: Action that caused this reading position to be set.
+              (commons.EnumDescriptions):
+              - User chose bookmark within volume.
+              - User selected chapter from list.
+              - Next page event.
+              - Previous page event.
+              - User navigated to page.
+              - User chose search results within volume.
               enum:
               - bookmark
               - chapter
@@ -1674,13 +1696,17 @@ types:
             timestamp:
               type: string
               description: RFC 3339 UTC format timestamp associated with this reading position.
+          (commons.Id): books.mylibrary.readingpositions.setPosition
+          (commons.LogicalStucture):
+          - Mylibrary
+          - Readingpositions
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Retrieves my reading position information for a volume.
-        displayName: Get Readingpositions Mylibrary
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -1694,6 +1720,10 @@ types:
           200:
             body:
               application/json: ReadingPosition
+        (commons.Id): books.mylibrary.readingpositions.get
+        (commons.LogicalStucture):
+        - Mylibrary
+        - Readingpositions
   /annotations:
     /summary:
       post:
@@ -1702,7 +1732,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Gets the summary of specified layers.
-        displayName: Summary Annotations Mylibrary
+        displayName: summary
         is:
         - hasParameters
         queryParameters:
@@ -1716,6 +1746,10 @@ types:
           200:
             body:
               application/json: AnnotationsSummary
+        (commons.Id): books.mylibrary.annotations.summary
+        (commons.LogicalStucture):
+        - Mylibrary
+        - Annotations
     /{annotationId}:
       uriParameters:
         annotationId:
@@ -1727,7 +1761,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Updates an existing annotation.
-        displayName: Update Annotations Mylibrary
+        displayName: update
         is:
         - hasParameters
         queryParameters:
@@ -1740,26 +1774,34 @@ types:
           200:
             body:
               application/json: Annotation
+        (commons.Id): books.mylibrary.annotations.update
+        (commons.LogicalStucture):
+        - Mylibrary
+        - Annotations
       delete:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Deletes an annotation.
-        displayName: Delete Annotations Mylibrary
+        displayName: delete
         is:
         - hasParameters
         queryParameters:
           source?:
             type: string
             description: String to identify the originator of this request.
+        (commons.Id): books.mylibrary.annotations.delete
+        (commons.LogicalStucture):
+        - Mylibrary
+        - Annotations
     post:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Inserts a new annotation.
-      displayName: Insert Annotations Mylibrary
+      displayName: insert
       is:
       - hasParameters
       queryParameters:
@@ -1778,13 +1820,17 @@ types:
         200:
           body:
             application/json: Annotation
+      (commons.Id): books.mylibrary.annotations.insert
+      (commons.LogicalStucture):
+      - Mylibrary
+      - Annotations
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Retrieves a list of annotations, possibly filtered.
-      displayName: List Annotations Mylibrary
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1825,6 +1871,10 @@ types:
         200:
           body:
             application/json: Annotations
+      (commons.Id): books.mylibrary.annotations.list
+      (commons.LogicalStucture):
+      - Mylibrary
+      - Annotations
   /bookshelves:
     /{shelf}:
       uriParameters:
@@ -1838,13 +1888,17 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Adds a volume to a bookshelf.
-          displayName: AddVolume Bookshelves Mylibrary
+          displayName: add Volume
           is:
           - hasParameters
           queryParameters:
             reason?:
               type: string
               description: The reason for which the book is added to the library.
+              (commons.EnumDescriptions):
+              - Volumes added from the PREX flow on iOS.
+              - Volumes added from the Search flow on iOS.
+              - Volumes added from the Onboarding flow.
               enum:
               - IOS_PREX
               - IOS_SEARCH
@@ -1855,6 +1909,10 @@ types:
             source?:
               type: string
               description: String to identify the originator of this request.
+          (commons.Id): books.mylibrary.bookshelves.addVolume
+          (commons.LogicalStucture):
+          - Mylibrary
+          - Bookshelves
       /removeVolume:
         post:
           securedBy:
@@ -1862,13 +1920,15 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Removes a volume from a bookshelf.
-          displayName: RemoveVolume Bookshelves Mylibrary
+          displayName: remove Volume
           is:
           - hasParameters
           queryParameters:
             reason?:
               type: string
               description: The reason for which the book is removed from the library.
+              (commons.EnumDescriptions):
+              - Samples removed from the Onboarding flow.
               enum:
               - ONBOARDING
             volumeId:
@@ -1877,6 +1937,10 @@ types:
             source?:
               type: string
               description: String to identify the originator of this request.
+          (commons.Id): books.mylibrary.bookshelves.removeVolume
+          (commons.LogicalStucture):
+          - Mylibrary
+          - Bookshelves
       /clearVolumes:
         post:
           securedBy:
@@ -1884,13 +1948,17 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Clears all volumes from a bookshelf.
-          displayName: ClearVolumes Bookshelves Mylibrary
+          displayName: clear Volumes
           is:
           - hasParameters
           queryParameters:
             source?:
               type: string
               description: String to identify the originator of this request.
+          (commons.Id): books.mylibrary.bookshelves.clearVolumes
+          (commons.LogicalStucture):
+          - Mylibrary
+          - Bookshelves
       /moveVolume:
         post:
           securedBy:
@@ -1898,7 +1966,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Moves a volume within a bookshelf.
-          displayName: MoveVolume Bookshelves Mylibrary
+          displayName: move Volume
           is:
           - hasParameters
           queryParameters:
@@ -1912,6 +1980,10 @@ types:
             source?:
               type: string
               description: String to identify the originator of this request.
+          (commons.Id): books.mylibrary.bookshelves.moveVolume
+          (commons.LogicalStucture):
+          - Mylibrary
+          - Bookshelves
       /volumes:
         get:
           securedBy:
@@ -1919,7 +1991,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Gets volume information for volumes on a bookshelf.
-          displayName: List Volumes Bookshelves Mylibrary
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1945,6 +2017,9 @@ types:
             projection?:
               type: string
               description: Restrict information returned to a set of selected fields.
+              (commons.EnumDescriptions):
+              - Includes all volume data.
+              - Includes a subset of fields in volumeInfo and accessInfo.
               enum:
               - full
               - lite
@@ -1955,13 +2030,18 @@ types:
             200:
               body:
                 application/json: Volumes
+          (commons.Id): books.mylibrary.bookshelves.volumes.list
+          (commons.LogicalStucture):
+          - Mylibrary
+          - Bookshelves
+          - Volumes
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Retrieves metadata for a specific bookshelf belonging to the authenticated user.
-        displayName: Get Bookshelves Mylibrary
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -1972,13 +2052,17 @@ types:
           200:
             body:
               application/json: Bookshelf
+        (commons.Id): books.mylibrary.bookshelves.get
+        (commons.LogicalStucture):
+        - Mylibrary
+        - Bookshelves
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Retrieves a list of bookshelves belonging to the authenticated user.
-      displayName: List Bookshelves Mylibrary
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1989,6 +2073,10 @@ types:
         200:
           body:
             application/json: Bookshelves
+      (commons.Id): books.mylibrary.bookshelves.list
+      (commons.LogicalStucture):
+      - Mylibrary
+      - Bookshelves
 /personalizedstream:
   /get:
     get:
@@ -1997,13 +2085,16 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns a stream of personalized book clusters
-      displayName: Get Personalizedstream
+      displayName: get
       is:
       - hasParameters
       queryParameters:
         maxAllowedMaturityRating?:
           type: string
           description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+          (commons.EnumDescriptions):
+          - Show books which are rated mature or lower.
+          - Show books which are rated not mature.
           enum:
           - mature
           - not-mature
@@ -2018,6 +2109,9 @@ types:
         200:
           body:
             application/json: Discoveryclusters
+      (commons.Id): books.personalizedstream.get
+      (commons.LogicalStucture):
+      - Personalizedstream
 /series:
   /get:
     get:
@@ -2026,7 +2120,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns Series metadata for the given series ids.
-      displayName: Get Series
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -2037,6 +2131,9 @@ types:
         200:
           body:
             application/json: Series
+      (commons.Id): books.series.get
+      (commons.LogicalStucture):
+      - Series
   /membership:
     /get:
       get:
@@ -2045,7 +2142,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Returns Series membership data given the series id.
-        displayName: Get Membership Series
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -2063,6 +2160,10 @@ types:
           200:
             body:
               application/json: Seriesmembership
+        (commons.Id): books.series.membership.get
+        (commons.LogicalStucture):
+        - Series
+        - Membership
 /promooffer:
   /get:
     get:
@@ -2071,7 +2172,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Returns a list of promo offers available to the user
-      displayName: Get Promooffer
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -2097,6 +2198,9 @@ types:
         200:
           body:
             application/json: Offers
+      (commons.Id): books.promooffer.get
+      (commons.LogicalStucture):
+      - Promooffer
   /dismiss:
     post:
       securedBy:
@@ -2104,7 +2208,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
-      displayName: Dismiss Promooffer
+      displayName: dismiss
       is:
       - hasParameters
       queryParameters:
@@ -2129,6 +2233,9 @@ types:
         manufacturer?:
           type: string
           description: device manufacturer
+      (commons.Id): books.promooffer.dismiss
+      (commons.LogicalStucture):
+      - Promooffer
   /accept:
     post:
       securedBy:
@@ -2136,7 +2243,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: ''
-      displayName: Accept Promooffer
+      displayName: accept
       is:
       - hasParameters
       queryParameters:
@@ -2163,6 +2270,9 @@ types:
         manufacturer?:
           type: string
           description: device manufacturer
+      (commons.Id): books.promooffer.accept
+      (commons.LogicalStucture):
+      - Promooffer
 /volumes:
   /{volumeId}:
     uriParameters:
@@ -2181,7 +2291,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Gets the layer summary for a volume.
-          displayName: Get Layers
+          displayName: get
           is:
           - hasParameters
           queryParameters:
@@ -2195,13 +2305,16 @@ types:
             200:
               body:
                 application/json: Layersummary
+          (commons.Id): books.layers.get
+          (commons.LogicalStucture):
+          - Layers
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/books
         description: List the layer summaries for a volume.
-        displayName: List Layers
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -2224,6 +2337,9 @@ types:
           200:
             body:
               application/json: Layersummaries
+        (commons.Id): books.layers.list
+        (commons.LogicalStucture):
+        - Layers
     /layers:
       /{layerId}:
         uriParameters:
@@ -2242,7 +2358,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/books
               description: Gets the annotation data.
-              displayName: Get AnnotationData Layers
+              displayName: get
               is:
               - hasParameters
               queryParameters:
@@ -2276,13 +2392,17 @@ types:
                 200:
                   body:
                     application/json: Annotationdata
+              (commons.Id): books.layers.annotationData.get
+              (commons.LogicalStucture):
+              - Layers
+              - Annotation Data
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/books
             description: Gets the annotation data for a volume and layer.
-            displayName: List AnnotationData Layers
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -2331,6 +2451,10 @@ types:
               200:
                 body:
                   application/json: Annotationsdata
+            (commons.Id): books.layers.annotationData.list
+            (commons.LogicalStucture):
+            - Layers
+            - Annotation Data
         /annotations:
           /{annotationId}:
             uriParameters:
@@ -2343,7 +2467,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/books
               description: Gets the volume annotation.
-              displayName: Get VolumeAnnotations Layers
+              displayName: get
               is:
               - hasParameters
               queryParameters:
@@ -2358,13 +2482,17 @@ types:
                 200:
                   body:
                     application/json: Volumeannotation
+              (commons.Id): books.layers.volumeAnnotations.get
+              (commons.LogicalStucture):
+              - Layers
+              - Volume Annotations
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Gets the volume annotations for a volume and layer.
-          displayName: List VolumeAnnotations Layers
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -2415,6 +2543,10 @@ types:
             200:
               body:
                 application/json: Volumeannotations
+          (commons.Id): books.layers.volumeAnnotations.list
+          (commons.LogicalStucture):
+          - Layers
+          - Volume Annotations
     /associated:
       get:
         securedBy:
@@ -2422,19 +2554,26 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Return a list of associated books.
-        displayName: List Associated Volumes
+        displayName: list
         is:
         - hasParameters
         queryParameters:
           maxAllowedMaturityRating?:
             type: string
             description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+            (commons.EnumDescriptions):
+            - Show books which are rated mature or lower.
+            - Show books which are rated not mature.
             enum:
             - mature
             - not-mature
           association?:
             type: string
             description: Association type.
+            (commons.EnumDescriptions):
+            - Recommendations for display end-of-sample.
+            - Recommendations for display end-of-volume.
+            - Related volumes for Play Store.
             enum:
             - end-of-sample
             - end-of-volume
@@ -2450,13 +2589,17 @@ types:
           200:
             body:
               application/json: Volumes
+        (commons.Id): books.volumes.associated.list
+        (commons.LogicalStucture):
+        - Volumes
+        - Associated
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Gets volume information for a single volume.
-      displayName: Get Volumes
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -2472,6 +2615,9 @@ types:
         projection?:
           type: string
           description: Restrict information returned to a set of selected fields.
+          (commons.EnumDescriptions):
+          - Includes all volume data.
+          - Includes a subset of fields in volumeInfo and accessInfo.
           enum:
           - full
           - lite
@@ -2484,6 +2630,9 @@ types:
         200:
           body:
             application/json: Volume
+      (commons.Id): books.volumes.get
+      (commons.LogicalStucture):
+      - Volumes
   /useruploaded:
     get:
       securedBy:
@@ -2491,13 +2640,17 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Return a list of books uploaded by the current user.
-      displayName: List Useruploaded Volumes
+      displayName: list
       is:
       - hasParameters
       queryParameters:
         processingState?:
           type: string
           description: The processing state of the user uploaded volumes to be returned.
+          (commons.EnumDescriptions):
+          - The volume processing hase failed.
+          - The volume processing was completed.
+          - The volume processing is not completed.
           enum:
           - COMPLETED_FAILED
           - COMPLETED_SUCCESS
@@ -2527,6 +2680,10 @@ types:
         200:
           body:
             application/json: Volumes
+      (commons.Id): books.volumes.useruploaded.list
+      (commons.LogicalStucture):
+      - Volumes
+      - Useruploaded
   /mybooks:
     get:
       securedBy:
@@ -2534,7 +2691,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Return a list of books in My Library.
-      displayName: List Mybooks Volumes
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -2544,6 +2701,10 @@ types:
         processingState?:
           type: string
           description: The processing state of the user uploaded volumes to be returned. Applicable only if the UPLOADED is specified in the acquireMethod.
+          (commons.EnumDescriptions):
+          - The volume processing hase failed.
+          - The volume processing was completed.
+          - The volume processing is not completed.
           enum:
           - COMPLETED_FAILED
           - COMPLETED_SUCCESS
@@ -2556,6 +2717,15 @@ types:
         acquireMethod?:
           type: string
           description: How the book was acquired
+          (commons.EnumDescriptions):
+          - Books acquired via Family Sharing
+          - Preordered books (not yet available)
+          - User-rented books past their expiration time
+          - Public domain books
+          - Purchased books
+          - User-rented books
+          - Sample books
+          - User uploaded books
           enum:
           - FAMILY_SHARED
           - PREORDERED
@@ -2581,6 +2751,10 @@ types:
         200:
           body:
             application/json: Volumes
+      (commons.Id): books.volumes.mybooks.list
+      (commons.LogicalStucture):
+      - Volumes
+      - Mybooks
   /recommended:
     /rate:
       post:
@@ -2589,13 +2763,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Rate a recommended book for the current user.
-        displayName: Rate Recommended Volumes
+        displayName: rate
         is:
         - hasParameters
         queryParameters:
           rating:
             type: string
             description: Rating to be given to the volume.
+            (commons.EnumDescriptions):
+            - Rating indicating a dismissal due to ownership.
+            - Rating indicating a negative dismissal of a volume.
             enum:
             - HAVE_IT
             - NOT_INTERESTED
@@ -2613,19 +2790,26 @@ types:
           200:
             body:
               application/json: BooksVolumesRecommendedRateResponse
+        (commons.Id): books.volumes.recommended.rate
+        (commons.LogicalStucture):
+        - Volumes
+        - Recommended
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Return a list of recommended books for the current user.
-      displayName: List Recommended Volumes
+      displayName: list
       is:
       - hasParameters
       queryParameters:
         maxAllowedMaturityRating?:
           type: string
           description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+          (commons.EnumDescriptions):
+          - Show books which are rated mature or lower.
+          - Show books which are rated not mature.
           enum:
           - mature
           - not-mature
@@ -2640,19 +2824,27 @@ types:
         200:
           body:
             application/json: Volumes
+      (commons.Id): books.volumes.recommended.list
+      (commons.LogicalStucture):
+      - Volumes
+      - Recommended
   get:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/books
     description: Performs a book search.
-    displayName: List Volumes
+    displayName: list
     is:
     - hasParameters
     queryParameters:
       printType?:
         type: string
         description: Restrict to books or magazines.
+        (commons.EnumDescriptions):
+        - All volume content types.
+        - Just books.
+        - Just magazines.
         enum:
         - all
         - books
@@ -2660,12 +2852,18 @@ types:
       maxAllowedMaturityRating?:
         type: string
         description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+        (commons.EnumDescriptions):
+        - Show books which are rated mature or lower.
+        - Show books which are rated not mature.
         enum:
         - mature
         - not-mature
       orderBy?:
         type: string
         description: Sort search results.
+        (commons.EnumDescriptions):
+        - Most recently published.
+        - Relevance to search terms.
         enum:
         - newest
         - relevance
@@ -2675,6 +2873,12 @@ types:
       filter?:
         type: string
         description: Filter search results.
+        (commons.EnumDescriptions):
+        - All Google eBooks.
+        - Google eBook with full volume text viewability.
+        - Public can view entire volume text.
+        - Google eBook with a price.
+        - Public able to see parts of text.
         enum:
         - ebooks
         - free-ebooks
@@ -2690,6 +2894,8 @@ types:
       download?:
         type: string
         description: Restrict to volumes by download availability.
+        (commons.EnumDescriptions):
+        - All volumes with epub.
         enum:
         - epub
       startIndex?:
@@ -2712,12 +2918,18 @@ types:
       libraryRestrict?:
         type: string
         description: Restrict search to this user's library.
+        (commons.EnumDescriptions):
+        - Restrict to the user's library, any shelf.
+        - Do not restrict based on user's library.
         enum:
         - my-library
         - no-restrict
       projection?:
         type: string
         description: Restrict information returned to a set of selected fields.
+        (commons.EnumDescriptions):
+        - Includes all volume data.
+        - Includes a subset of fields in volumeInfo and accessInfo.
         enum:
         - full
         - lite
@@ -2725,6 +2937,9 @@ types:
       200:
         body:
           application/json: Volumes
+    (commons.Id): books.volumes.list
+    (commons.LogicalStucture):
+    - Volumes
 /onboarding:
   /listCategoryVolumes:
     get:
@@ -2733,13 +2948,16 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: List available volumes under categories for onboarding experience.
-      displayName: ListCategoryVolumes Onboarding
+      displayName: list Category Volumes
       is:
       - hasParameters
       queryParameters:
         maxAllowedMaturityRating?:
           type: string
           description: The maximum allowed maturity rating of returned volumes. Books with a higher maturity rating are filtered out.
+          (commons.EnumDescriptions):
+          - Show books which are rated mature or lower.
+          - Show books which are rated not mature.
           enum:
           - mature
           - not-mature
@@ -2760,6 +2978,9 @@ types:
         200:
           body:
             application/json: Volume2
+      (commons.Id): books.onboarding.listCategoryVolumes
+      (commons.LogicalStucture):
+      - Onboarding
   /listCategories:
     get:
       securedBy:
@@ -2767,7 +2988,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: List categories for onboarding experience.
-      displayName: ListCategories Onboarding
+      displayName: list Categories
       is:
       - hasParameters
       queryParameters:
@@ -2778,6 +2999,9 @@ types:
         200:
           body:
             application/json: Category
+      (commons.Id): books.onboarding.listCategories
+      (commons.LogicalStucture):
+      - Onboarding
 /users:
   /{userId}:
     uriParameters:
@@ -2797,7 +3021,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/books
             description: Retrieves volumes in a specific bookshelf for the specified user.
-            displayName: List Volumes Bookshelves
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -2821,13 +3045,17 @@ types:
               200:
                 body:
                   application/json: Volumes
+            (commons.Id): books.bookshelves.volumes.list
+            (commons.LogicalStucture):
+            - Bookshelves
+            - Volumes
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/books
           description: Retrieves metadata for a specific bookshelf for the specified user.
-          displayName: Get Bookshelves
+          displayName: get
           is:
           - hasParameters
           queryParameters:
@@ -2838,13 +3066,16 @@ types:
             200:
               body:
                 application/json: Bookshelf
+          (commons.Id): books.bookshelves.get
+          (commons.LogicalStucture):
+          - Bookshelves
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/books
         description: Retrieves a list of public bookshelves for the specified user.
-        displayName: List Bookshelves
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -2855,6 +3086,9 @@ types:
           200:
             body:
               application/json: Bookshelves
+        (commons.Id): books.bookshelves.list
+        (commons.LogicalStucture):
+        - Bookshelves
 /myconfig:
   /releaseDownloadAccess:
     post:
@@ -2863,7 +3097,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Release downloaded content access restriction.
-      displayName: ReleaseDownloadAccess Myconfig
+      displayName: release Download Access
       is:
       - hasParameters
       queryParameters:
@@ -2883,6 +3117,9 @@ types:
         200:
           body:
             application/json: DownloadAccesses
+      (commons.Id): books.myconfig.releaseDownloadAccess
+      (commons.LogicalStucture):
+      - Myconfig
   /updateUserSettings:
     post:
       securedBy:
@@ -2890,7 +3127,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Sets the settings for the user. If a sub-object is specified, it will overwrite the existing sub-object stored in the server. Unspecified sub-objects will retain the existing value.
-      displayName: UpdateUserSettings Myconfig
+      displayName: update User Settings
       is:
       - hasParameters
       body:
@@ -2899,6 +3136,9 @@ types:
         200:
           body:
             application/json: Usersettings
+      (commons.Id): books.myconfig.updateUserSettings
+      (commons.LogicalStucture):
+      - Myconfig
   /syncVolumeLicenses:
     post:
       securedBy:
@@ -2906,13 +3146,15 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Request downloaded content access for specified volumes on the My eBooks shelf.
-      displayName: SyncVolumeLicenses Myconfig
+      displayName: sync Volume Licenses
       is:
       - hasParameters
       queryParameters:
         features?:
           type: string
           description: List of features supported by the client, i.e., 'RENTALS'
+          (commons.EnumDescriptions):
+          - Client supports rentals.
           enum:
           - RENTALS
         includeNonComicsSeries?:
@@ -2940,6 +3182,9 @@ types:
         200:
           body:
             application/json: Volumes
+      (commons.Id): books.myconfig.syncVolumeLicenses
+      (commons.LogicalStucture):
+      - Myconfig
   /requestAccess:
     post:
       securedBy:
@@ -2947,7 +3192,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Request concurrent and download access restrictions.
-      displayName: RequestAccess Myconfig
+      displayName: request Access
       is:
       - hasParameters
       queryParameters:
@@ -2963,6 +3208,10 @@ types:
         licenseTypes?:
           type: string
           description: The type of access license to request. If not specified, the default is BOTH.
+          (commons.EnumDescriptions):
+          - Both concurrent and download licenses.
+          - Concurrent access license.
+          - Offline download access license.
           enum:
           - BOTH
           - CONCURRENT
@@ -2977,6 +3226,9 @@ types:
         200:
           body:
             application/json: RequestAccess
+      (commons.Id): books.myconfig.requestAccess
+      (commons.LogicalStucture):
+      - Myconfig
   /getUserSettings:
     get:
       securedBy:
@@ -2984,10 +3236,13 @@ types:
           scopes:
           - https://www.googleapis.com/auth/books
       description: Gets the current settings for the user.
-      displayName: GetUserSettings Myconfig
+      displayName: get User Settings
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Usersettings
+      (commons.Id): books.myconfig.getUserSettings
+      (commons.LogicalStucture):
+      - Myconfig

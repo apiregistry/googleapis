@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -586,7 +589,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Cancels a requested build in progress.
-            displayName: Cancel Builds Projects
+            displayName: cancel
             is:
             - hasParameters
             body:
@@ -595,6 +598,10 @@ types:
               200:
                 body:
                   application/json: Build
+            (commons.Id): cloudbuild.projects.builds.cancel
+            (commons.LogicalStucture):
+            - Projects
+            - Builds
         /{id}:
           uriParameters:
             id:
@@ -610,13 +617,17 @@ types:
 
               The Build that is returned includes its status (e.g., success or failure,
               or in-progress), and timing information.
-            displayName: Get Builds Projects
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Build
+            (commons.Id): cloudbuild.projects.builds.get
+            (commons.LogicalStucture):
+            - Projects
+            - Builds
         post:
           securedBy:
             oath2:
@@ -628,7 +639,7 @@ types:
             The long-running Operation returned by this method will include the ID of
             the build, which can be passed to GetBuild to determine its status (e.g.,
             success or failure).
-          displayName: Create Builds Projects
+          displayName: create
           is:
           - hasParameters
           body:
@@ -637,6 +648,10 @@ types:
             200:
               body:
                 application/json: Operation
+          (commons.Id): cloudbuild.projects.builds.create
+          (commons.LogicalStucture):
+          - Projects
+          - Builds
         get:
           securedBy:
             oath2:
@@ -647,7 +662,7 @@ types:
 
             Previously requested builds may still be in-progress, or may have finished
             successfully or unsuccessfully.
-          displayName: List Builds Projects
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -665,6 +680,10 @@ types:
             200:
               body:
                 application/json: ListBuildsResponse
+          (commons.Id): cloudbuild.projects.builds.list
+          (commons.LogicalStucture):
+          - Projects
+          - Builds
       /triggers:
         /{triggerId}:
           uriParameters:
@@ -680,7 +699,7 @@ types:
               Updates an BuildTrigger by its project ID and trigger ID.
 
               This API is experimental.
-            displayName: Patch Triggers Projects
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -689,6 +708,10 @@ types:
               200:
                 body:
                   application/json: BuildTrigger
+            (commons.Id): cloudbuild.projects.triggers.patch
+            (commons.LogicalStucture):
+            - Projects
+            - Triggers
           get:
             securedBy:
               oath2:
@@ -698,13 +721,17 @@ types:
               Gets information about a BuildTrigger.
 
               This API is experimental.
-            displayName: Get Triggers Projects
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: BuildTrigger
+            (commons.Id): cloudbuild.projects.triggers.get
+            (commons.LogicalStucture):
+            - Projects
+            - Triggers
           delete:
             securedBy:
               oath2:
@@ -714,13 +741,17 @@ types:
               Deletes an BuildTrigger by its project ID and trigger ID.
 
               This API is experimental.
-            displayName: Delete Triggers Projects
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Empty
+            (commons.Id): cloudbuild.projects.triggers.delete
+            (commons.LogicalStucture):
+            - Projects
+            - Triggers
         post:
           securedBy:
             oath2:
@@ -730,7 +761,7 @@ types:
             Creates a new BuildTrigger.
 
             This API is experimental.
-          displayName: Create Triggers Projects
+          displayName: create
           is:
           - hasParameters
           body:
@@ -739,6 +770,10 @@ types:
             200:
               body:
                 application/json: BuildTrigger
+          (commons.Id): cloudbuild.projects.triggers.create
+          (commons.LogicalStucture):
+          - Projects
+          - Triggers
         get:
           securedBy:
             oath2:
@@ -748,13 +783,17 @@ types:
             Lists existing BuildTrigger.
 
             This API is experimental.
-          displayName: List Triggers Projects
+          displayName: list
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ListBuildTriggersResponse
+          (commons.Id): cloudbuild.projects.triggers.list
+          (commons.LogicalStucture):
+          - Projects
+          - Triggers
   /{name}:
     uriParameters:
       name:
@@ -772,7 +811,7 @@ types:
 
         NOTE: the `name` binding below allows API services to override the binding
         to use different resource name schemes, such as `users/*/operations`.
-      displayName: List Operations
+      displayName: list
       is:
       - hasParameters
       - hasParameters
@@ -791,3 +830,6 @@ types:
         200:
           body:
             application/json: ListOperationsResponse
+      (commons.Id): cloudbuild.operations.list
+      (commons.LogicalStucture):
+      - Operations

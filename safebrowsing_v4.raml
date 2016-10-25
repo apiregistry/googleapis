@@ -34,6 +34,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -450,7 +453,7 @@ types:
   /threatMatches:find:
     post:
       description: Finds the threat entries that match the Safe Browsing lists.
-      displayName: Find ThreatMatches
+      displayName: find
       is:
       - hasParameters
       body:
@@ -459,10 +462,13 @@ types:
         200:
           body:
             application/json: FindThreatMatchesResponse
+      (commons.Id): safebrowsing.threatMatches.find
+      (commons.LogicalStucture):
+      - Threat Matches
   /fullHashes:find:
     post:
       description: Finds the full hashes that match the requested hash prefixes.
-      displayName: Find FullHashes
+      displayName: find
       is:
       - hasParameters
       body:
@@ -471,10 +477,13 @@ types:
         200:
           body:
             application/json: FindFullHashesResponse
+      (commons.Id): safebrowsing.fullHashes.find
+      (commons.LogicalStucture):
+      - Full Hashes
   /threatListUpdates:fetch:
     post:
       description: Fetches the most recent threat list updates. A client can request updates for multiple lists at once.
-      displayName: Fetch ThreatListUpdates
+      displayName: fetch
       is:
       - hasParameters
       body:
@@ -483,13 +492,19 @@ types:
         200:
           body:
             application/json: FetchThreatListUpdatesResponse
+      (commons.Id): safebrowsing.threatListUpdates.fetch
+      (commons.LogicalStucture):
+      - Threat List Updates
   /threatLists:
     get:
       description: Lists the Safe Browsing threat lists available for download.
-      displayName: List ThreatLists
+      displayName: list
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: ListThreatListsResponse
+      (commons.Id): safebrowsing.threatLists.list
+      (commons.LogicalStucture):
+      - Threat Lists

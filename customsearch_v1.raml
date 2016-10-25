@@ -271,7 +271,7 @@ types:
 /v1:
   get:
     description: Returns metadata about the search performed, metadata about the custom search engine used for the search, and the search results.
-    displayName: List Cse
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -290,6 +290,42 @@ types:
       lr?:
         type: string
         description: The language restriction for the search results
+        (commons.EnumDescriptions):
+        - Arabic
+        - Bulgarian
+        - Catalan
+        - Czech
+        - Danish
+        - German
+        - Greek
+        - English
+        - Spanish
+        - Estonian
+        - Finnish
+        - French
+        - Croatian
+        - Hungarian
+        - Indonesian
+        - Icelandic
+        - Italian
+        - Hebrew
+        - Japanese
+        - Korean
+        - Lithuanian
+        - Latvian
+        - Dutch
+        - Norwegian
+        - Polish
+        - Portuguese
+        - Romanian
+        - Russian
+        - Slovak
+        - Slovenian
+        - Serbian
+        - Swedish
+        - Turkish
+        - Chinese (Simplified)
+        - Chinese (Traditional)
         enum:
         - lang_ar
         - lang_bg
@@ -334,6 +370,9 @@ types:
       siteSearchFilter?:
         type: string
         description: Controls whether to include or exclude results from the site named in the as_sitesearch parameter
+        (commons.EnumDescriptions):
+        - exclude
+        - include
         enum:
         - e
         - i
@@ -367,6 +406,12 @@ types:
         type: string
         description: 'Returns images of a type, which can be one of: clipart, face,
           lineart, news, and photo.'
+        (commons.EnumDescriptions):
+        - clipart
+        - face
+        - lineart
+        - news
+        - photo
         enum:
         - clipart
         - face
@@ -383,6 +428,14 @@ types:
         type: string
         description: 'Returns images of a specified size, where size can be one of:
           icon, small, medium, large, xlarge, xxlarge, and huge.'
+        (commons.EnumDescriptions):
+        - huge
+        - icon
+        - large
+        - medium
+        - small
+        - xlarge
+        - xxlarge
         enum:
         - huge
         - icon
@@ -394,6 +447,8 @@ types:
       searchType?:
         type: string
         description: 'Specifies the search type: image.'
+        (commons.EnumDescriptions):
+        - custom image search
         enum:
         - image
       start?:
@@ -410,6 +465,17 @@ types:
         type: string
         description: 'Returns images of a specific dominant color: yellow, green,
           teal, blue, purple, pink, white, gray, black and brown.'
+        (commons.EnumDescriptions):
+        - black
+        - blue
+        - brown
+        - gray
+        - green
+        - pink
+        - purple
+        - teal
+        - white
+        - yellow
         enum:
         - black
         - blue
@@ -427,6 +493,9 @@ types:
       filter?:
         type: string
         description: Controls turning on or off the duplicate content filter.
+        (commons.EnumDescriptions):
+        - Turns off duplicate content filter.
+        - Turns on duplicate content filter.
         enum:
         - '0'
         - '1'
@@ -437,6 +506,10 @@ types:
         type: string
         description: 'Returns black and white, grayscale, or color images: mono, gray,
           and color.'
+        (commons.EnumDescriptions):
+        - color
+        - gray
+        - mono
         enum:
         - color
         - gray
@@ -448,6 +521,10 @@ types:
         type: string
         default: 'off'
         description: Search safety level
+        (commons.EnumDescriptions):
+        - Enables highest level of safe search filtering.
+        - Enables moderate safe search filtering.
+        - Disables safe search filtering.
         enum:
         - high
         - medium
@@ -463,3 +540,6 @@ types:
       200:
         body:
           application/json: Search
+    (commons.Id): search.cse.list
+    (commons.LogicalStucture):
+    - Cse

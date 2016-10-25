@@ -863,20 +863,24 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tagmanager.manage.users
           description: Gets a user's Account & Container Permissions.
-          displayName: Get Permissions Accounts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: UserAccess
+          (commons.Id): tagmanager.accounts.permissions.get
+          (commons.LogicalStucture):
+          - Accounts
+          - Permissions
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tagmanager.manage.users
           description: Updates a user's Account & Container Permissions.
-          displayName: Update Permissions Accounts
+          displayName: update
           is:
           - hasParameters
           body:
@@ -885,22 +889,30 @@ types:
             200:
               body:
                 application/json: UserAccess
+          (commons.Id): tagmanager.accounts.permissions.update
+          (commons.LogicalStucture):
+          - Accounts
+          - Permissions
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tagmanager.manage.users
           description: Removes a user from the account, revoking access to it and all of its containers.
-          displayName: Delete Permissions Accounts
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): tagmanager.accounts.permissions.delete
+          (commons.LogicalStucture):
+          - Accounts
+          - Permissions
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/tagmanager.manage.users
         description: Creates a user's Account & Container Permissions.
-        displayName: Create Permissions Accounts
+        displayName: create
         is:
         - hasParameters
         body:
@@ -909,19 +921,27 @@ types:
           200:
             body:
               application/json: UserAccess
+        (commons.Id): tagmanager.accounts.permissions.create
+        (commons.LogicalStucture):
+        - Accounts
+        - Permissions
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/tagmanager.manage.users
         description: List all users that have access to the account along with Account and Container Permissions granted to each of them.
-        displayName: List Permissions Accounts
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ListAccountUsersResponse
+        (commons.Id): tagmanager.accounts.permissions.list
+        (commons.LogicalStucture):
+        - Accounts
+        - Permissions
     /containers:
       /{containerId}:
         uriParameters:
@@ -941,20 +961,25 @@ types:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
                   - https://www.googleapis.com/auth/tagmanager.readonly
               description: Gets a GTM Variable.
-              displayName: Get Variables Containers Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Variable
+              (commons.Id): tagmanager.accounts.containers.variables.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Variables
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Updates a GTM Variable.
-              displayName: Update Variables Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -967,22 +992,32 @@ types:
                 200:
                   body:
                     application/json: Variable
+              (commons.Id): tagmanager.accounts.containers.variables.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Variables
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Deletes a GTM Variable.
-              displayName: Delete Variables Containers Accounts
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): tagmanager.accounts.containers.variables.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Variables
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
             description: Creates a GTM Variable.
-            displayName: Create Variables Containers Accounts
+            displayName: create
             is:
             - hasParameters
             body:
@@ -991,6 +1026,11 @@ types:
               200:
                 body:
                   application/json: Variable
+            (commons.Id): tagmanager.accounts.containers.variables.create
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Variables
           get:
             securedBy:
               oath2:
@@ -998,13 +1038,18 @@ types:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
                 - https://www.googleapis.com/auth/tagmanager.readonly
             description: Lists all GTM Variables of a Container.
-            displayName: List Variables Containers Accounts
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ListVariablesResponse
+            (commons.Id): tagmanager.accounts.containers.variables.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Variables
         /folders:
           /{folderId}:
             uriParameters:
@@ -1019,13 +1064,19 @@ types:
                     - https://www.googleapis.com/auth/tagmanager.edit.containers
                     - https://www.googleapis.com/auth/tagmanager.readonly
                 description: List all entities in a GTM Folder.
-                displayName: List Entities Folders Containers Accounts
+                displayName: list
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: FolderEntities
+                (commons.Id): tagmanager.accounts.containers.folders.entities.list
+                (commons.LogicalStucture):
+                - Accounts
+                - Containers
+                - Folders
+                - Entities
             get:
               securedBy:
                 oath2:
@@ -1033,20 +1084,25 @@ types:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
                   - https://www.googleapis.com/auth/tagmanager.readonly
               description: Gets a GTM Folder.
-              displayName: Get Folders Containers Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Folder
+              (commons.Id): tagmanager.accounts.containers.folders.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Folders
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Updates a GTM Folder.
-              displayName: Update Folders Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -1059,22 +1115,32 @@ types:
                 200:
                   body:
                     application/json: Folder
+              (commons.Id): tagmanager.accounts.containers.folders.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Folders
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Deletes a GTM Folder.
-              displayName: Delete Folders Containers Accounts
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): tagmanager.accounts.containers.folders.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Folders
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
             description: Creates a GTM Folder.
-            displayName: Create Folders Containers Accounts
+            displayName: create
             is:
             - hasParameters
             body:
@@ -1083,6 +1149,11 @@ types:
               200:
                 body:
                   application/json: Folder
+            (commons.Id): tagmanager.accounts.containers.folders.create
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Folders
           get:
             securedBy:
               oath2:
@@ -1090,13 +1161,18 @@ types:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
                 - https://www.googleapis.com/auth/tagmanager.readonly
             description: Lists all GTM Folders of a Container.
-            displayName: List Folders Containers Accounts
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ListFoldersResponse
+            (commons.Id): tagmanager.accounts.containers.folders.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Folders
         /environments:
           /{environmentId}:
             uriParameters:
@@ -1109,7 +1185,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Updates a GTM Environment. This method supports patch semantics.
-              displayName: Patch Environments Containers Accounts
+              displayName: patch
               is:
               - hasParameters
               queryParameters:
@@ -1122,6 +1198,11 @@ types:
                 200:
                   body:
                     application/json: Environment
+              (commons.Id): tagmanager.accounts.containers.environments.patch
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Environments
             get:
               securedBy:
                 oath2:
@@ -1129,20 +1210,25 @@ types:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
                   - https://www.googleapis.com/auth/tagmanager.readonly
               description: Gets a GTM Environment.
-              displayName: Get Environments Containers Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Environment
+              (commons.Id): tagmanager.accounts.containers.environments.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Environments
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Updates a GTM Environment.
-              displayName: Update Environments Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -1155,22 +1241,32 @@ types:
                 200:
                   body:
                     application/json: Environment
+              (commons.Id): tagmanager.accounts.containers.environments.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Environments
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Deletes a GTM Environment.
-              displayName: Delete Environments Containers Accounts
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): tagmanager.accounts.containers.environments.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Environments
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
             description: Creates a GTM Environment.
-            displayName: Create Environments Containers Accounts
+            displayName: create
             is:
             - hasParameters
             body:
@@ -1179,6 +1275,11 @@ types:
               200:
                 body:
                   application/json: Environment
+            (commons.Id): tagmanager.accounts.containers.environments.create
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Environments
           get:
             securedBy:
               oath2:
@@ -1186,13 +1287,18 @@ types:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
                 - https://www.googleapis.com/auth/tagmanager.readonly
             description: Lists all GTM Environments of a GTM Container.
-            displayName: List Environments Containers Accounts
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ListEnvironmentsResponse
+            (commons.Id): tagmanager.accounts.containers.environments.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Environments
         /versions:
           /{containerVersionId}:
             uriParameters:
@@ -1206,13 +1312,18 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/tagmanager.edit.containers
                 description: Restores a Container Version. This will overwrite the container's current configuration (including its variables, triggers and tags). The operation will not have any effect on the version that is being served (i.e. the published version).
-                displayName: Restore Versions Containers Accounts
+                displayName: restore
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ContainerVersion
+                (commons.Id): tagmanager.accounts.containers.versions.restore
+                (commons.LogicalStucture):
+                - Accounts
+                - Containers
+                - Versions
             /publish:
               post:
                 securedBy:
@@ -1220,7 +1331,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/tagmanager.publish
                 description: Publishes a Container Version.
-                displayName: Publish Versions Containers Accounts
+                displayName: publish
                 is:
                 - hasParameters
                 queryParameters:
@@ -1231,6 +1342,11 @@ types:
                   200:
                     body:
                       application/json: PublishContainerVersionResponse
+                (commons.Id): tagmanager.accounts.containers.versions.publish
+                (commons.LogicalStucture):
+                - Accounts
+                - Containers
+                - Versions
             /undelete:
               post:
                 securedBy:
@@ -1238,13 +1354,18 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/tagmanager.edit.containerversions
                 description: Undeletes a Container Version.
-                displayName: Undelete Versions Containers Accounts
+                displayName: undelete
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ContainerVersion
+                (commons.Id): tagmanager.accounts.containers.versions.undelete
+                (commons.LogicalStucture):
+                - Accounts
+                - Containers
+                - Versions
             get:
               securedBy:
                 oath2:
@@ -1253,20 +1374,25 @@ types:
                   - https://www.googleapis.com/auth/tagmanager.edit.containerversions
                   - https://www.googleapis.com/auth/tagmanager.readonly
               description: Gets a Container Version.
-              displayName: Get Versions Containers Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: ContainerVersion
+              (commons.Id): tagmanager.accounts.containers.versions.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Versions
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containerversions
               description: Updates a Container Version.
-              displayName: Update Versions Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -1279,22 +1405,32 @@ types:
                 200:
                   body:
                     application/json: ContainerVersion
+              (commons.Id): tagmanager.accounts.containers.versions.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Versions
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containerversions
               description: Deletes a Container Version.
-              displayName: Delete Versions Containers Accounts
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): tagmanager.accounts.containers.versions.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Versions
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/tagmanager.edit.containerversions
             description: Creates a Container Version.
-            displayName: Create Versions Containers Accounts
+            displayName: create
             is:
             - hasParameters
             body:
@@ -1303,6 +1439,11 @@ types:
               200:
                 body:
                   application/json: CreateContainerVersionResponse
+            (commons.Id): tagmanager.accounts.containers.versions.create
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Versions
           get:
             securedBy:
               oath2:
@@ -1311,7 +1452,7 @@ types:
                 - https://www.googleapis.com/auth/tagmanager.edit.containerversions
                 - https://www.googleapis.com/auth/tagmanager.readonly
             description: Lists all Container Versions of a GTM Container.
-            displayName: List Versions Containers Accounts
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -1327,6 +1468,11 @@ types:
               200:
                 body:
                   application/json: ListContainerVersionsResponse
+            (commons.Id): tagmanager.accounts.containers.versions.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Versions
         /reauthorize_environments:
           /{environmentId}:
             uriParameters:
@@ -1339,7 +1485,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.publish
               description: Re-generates the authorization code for a GTM Environment.
-              displayName: Update Reauthorize_environments Containers Accounts
+              displayName: update
               is:
               - hasParameters
               body:
@@ -1348,6 +1494,11 @@ types:
                 200:
                   body:
                     application/json: Environment
+              (commons.Id): tagmanager.accounts.containers.reauthorize_environments.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Reauthorize_environments
         /move_folders:
           /{folderId}:
             uriParameters:
@@ -1360,7 +1511,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Moves entities to a GTM Folder.
-              displayName: Update Move_folders Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -1375,6 +1526,11 @@ types:
                   description: The variables to be moved to the folder.
               body:
                 application/json: Folder
+              (commons.Id): tagmanager.accounts.containers.move_folders.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Move_folders
         /triggers:
           /{triggerId}:
             uriParameters:
@@ -1388,20 +1544,25 @@ types:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
                   - https://www.googleapis.com/auth/tagmanager.readonly
               description: Gets a GTM Trigger.
-              displayName: Get Triggers Containers Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Trigger
+              (commons.Id): tagmanager.accounts.containers.triggers.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Triggers
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Updates a GTM Trigger.
-              displayName: Update Triggers Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -1414,22 +1575,32 @@ types:
                 200:
                   body:
                     application/json: Trigger
+              (commons.Id): tagmanager.accounts.containers.triggers.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Triggers
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Deletes a GTM Trigger.
-              displayName: Delete Triggers Containers Accounts
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): tagmanager.accounts.containers.triggers.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Triggers
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
             description: Creates a GTM Trigger.
-            displayName: Create Triggers Containers Accounts
+            displayName: create
             is:
             - hasParameters
             body:
@@ -1438,6 +1609,11 @@ types:
               200:
                 body:
                   application/json: Trigger
+            (commons.Id): tagmanager.accounts.containers.triggers.create
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Triggers
           get:
             securedBy:
               oath2:
@@ -1445,13 +1621,18 @@ types:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
                 - https://www.googleapis.com/auth/tagmanager.readonly
             description: Lists all GTM Triggers of a Container.
-            displayName: List Triggers Containers Accounts
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ListTriggersResponse
+            (commons.Id): tagmanager.accounts.containers.triggers.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Triggers
         /tags:
           /{tagId}:
             uriParameters:
@@ -1465,20 +1646,25 @@ types:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
                   - https://www.googleapis.com/auth/tagmanager.readonly
               description: Gets a GTM Tag.
-              displayName: Get Tags Containers Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Tag
+              (commons.Id): tagmanager.accounts.containers.tags.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Tags
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Updates a GTM Tag.
-              displayName: Update Tags Containers Accounts
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -1491,22 +1677,32 @@ types:
                 200:
                   body:
                     application/json: Tag
+              (commons.Id): tagmanager.accounts.containers.tags.update
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Tags
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/tagmanager.edit.containers
               description: Deletes a GTM Tag.
-              displayName: Delete Tags Containers Accounts
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): tagmanager.accounts.containers.tags.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Containers
+              - Tags
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
             description: Creates a GTM Tag.
-            displayName: Create Tags Containers Accounts
+            displayName: create
             is:
             - hasParameters
             body:
@@ -1515,6 +1711,11 @@ types:
               200:
                 body:
                   application/json: Tag
+            (commons.Id): tagmanager.accounts.containers.tags.create
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Tags
           get:
             securedBy:
               oath2:
@@ -1522,13 +1723,18 @@ types:
                 - https://www.googleapis.com/auth/tagmanager.edit.containers
                 - https://www.googleapis.com/auth/tagmanager.readonly
             description: Lists all GTM Tags of a Container.
-            displayName: List Tags Containers Accounts
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ListTagsResponse
+            (commons.Id): tagmanager.accounts.containers.tags.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Containers
+            - Tags
         get:
           securedBy:
             oath2:
@@ -1536,20 +1742,24 @@ types:
               - https://www.googleapis.com/auth/tagmanager.edit.containers
               - https://www.googleapis.com/auth/tagmanager.readonly
           description: Gets a Container.
-          displayName: Get Containers Accounts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Container
+          (commons.Id): tagmanager.accounts.containers.get
+          (commons.LogicalStucture):
+          - Accounts
+          - Containers
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tagmanager.edit.containers
           description: Updates a Container.
-          displayName: Update Containers Accounts
+          displayName: update
           is:
           - hasParameters
           queryParameters:
@@ -1562,22 +1772,30 @@ types:
             200:
               body:
                 application/json: Container
+          (commons.Id): tagmanager.accounts.containers.update
+          (commons.LogicalStucture):
+          - Accounts
+          - Containers
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tagmanager.delete.containers
           description: Deletes a Container.
-          displayName: Delete Containers Accounts
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): tagmanager.accounts.containers.delete
+          (commons.LogicalStucture):
+          - Accounts
+          - Containers
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
         description: Creates a Container.
-        displayName: Create Containers Accounts
+        displayName: create
         is:
         - hasParameters
         body:
@@ -1586,6 +1804,10 @@ types:
           200:
             body:
               application/json: Container
+        (commons.Id): tagmanager.accounts.containers.create
+        (commons.LogicalStucture):
+        - Accounts
+        - Containers
       get:
         securedBy:
           oath2:
@@ -1593,13 +1815,17 @@ types:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
             - https://www.googleapis.com/auth/tagmanager.readonly
         description: Lists all Containers that belongs to a GTM Account.
-        displayName: List Containers Accounts
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ListContainersResponse
+        (commons.Id): tagmanager.accounts.containers.list
+        (commons.LogicalStucture):
+        - Accounts
+        - Containers
     get:
       securedBy:
         oath2:
@@ -1608,20 +1834,23 @@ types:
           - https://www.googleapis.com/auth/tagmanager.manage.accounts
           - https://www.googleapis.com/auth/tagmanager.readonly
       description: Gets a GTM Account.
-      displayName: Get Accounts
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Account
+      (commons.Id): tagmanager.accounts.get
+      (commons.LogicalStucture):
+      - Accounts
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/tagmanager.manage.accounts
       description: Updates a GTM Account.
-      displayName: Update Accounts
+      displayName: update
       is:
       - hasParameters
       queryParameters:
@@ -1634,6 +1863,9 @@ types:
         200:
           body:
             application/json: Account
+      (commons.Id): tagmanager.accounts.update
+      (commons.LogicalStucture):
+      - Accounts
   get:
     securedBy:
       oath2:
@@ -1642,10 +1874,13 @@ types:
         - https://www.googleapis.com/auth/tagmanager.manage.accounts
         - https://www.googleapis.com/auth/tagmanager.readonly
     description: Lists all GTM Accounts that a user has access to.
-    displayName: List Accounts
+    displayName: list
     is:
     - hasParameters
     responses:
       200:
         body:
           application/json: ListAccountsResponse
+    (commons.Id): tagmanager.accounts.list
+    (commons.LogicalStucture):
+    - Accounts

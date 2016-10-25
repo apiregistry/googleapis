@@ -2475,13 +2475,17 @@ types:
             - https://www.googleapis.com/auth/analytics.edit
             - https://www.googleapis.com/auth/analytics.readonly
         description: Lists all columns for a report type
-        displayName: List Columns Metadata
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Columns
+        (commons.Id): analytics.metadata.columns.list
+        (commons.LogicalStucture):
+        - Metadata
+        - Columns
 /data:
   /mcf:
     get:
@@ -2491,7 +2495,7 @@ types:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Returns Analytics Multi-Channel Funnels data for a view (profile).
-      displayName: Get Mcf Data
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -2527,6 +2531,10 @@ types:
         samplingLevel?:
           type: string
           description: The desired sampling level.
+          (commons.EnumDescriptions):
+          - Returns response with a sample size that balances speed and accuracy.
+          - Returns a fast response with a smaller sample size.
+          - Returns a more accurate response using a large sample size, but this may result in the response being slower.
           enum:
           - DEFAULT
           - FASTER
@@ -2543,6 +2551,10 @@ types:
         200:
           body:
             application/json: McfData
+      (commons.Id): analytics.data.mcf.get
+      (commons.LogicalStucture):
+      - Data
+      - Mcf
   /realtime:
     get:
       securedBy:
@@ -2551,7 +2563,7 @@ types:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Returns real time data for a view (profile).
-      displayName: Get Realtime Data
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -2583,6 +2595,10 @@ types:
         200:
           body:
             application/json: RealtimeData
+      (commons.Id): analytics.data.realtime.get
+      (commons.LogicalStucture):
+      - Data
+      - Realtime
   /ga:
     get:
       securedBy:
@@ -2591,7 +2607,7 @@ types:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Returns Analytics data for a view (profile).
-      displayName: Get Ga Data
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -2618,6 +2634,10 @@ types:
         samplingLevel?:
           type: string
           description: The desired sampling level.
+          (commons.EnumDescriptions):
+          - Returns response with a sample size that balances speed and accuracy.
+          - Returns a fast response with a smaller sample size.
+          - Returns a more accurate response using a large sample size, but this may result in the response being slower.
           enum:
           - DEFAULT
           - FASTER
@@ -2629,6 +2649,9 @@ types:
         output?:
           type: string
           description: The selected format for the response. Default format is JSON.
+          (commons.EnumDescriptions):
+          - Returns the response in Google Charts Data Table format. This is useful in creating visualization using Google Charts.
+          - Returns the response in standard JSON format.
           enum:
           - dataTable
           - json
@@ -2655,6 +2678,10 @@ types:
         200:
           body:
             application/json: GaData
+      (commons.Id): analytics.data.ga.get
+      (commons.LogicalStucture):
+      - Data
+      - Ga
 /management:
   /accounts:
     /{accountId}:
@@ -2680,7 +2707,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing webProperty-AdWords link. This method supports patch semantics.
-                displayName: Patch WebPropertyAdWordsLinks Management
+                displayName: patch
                 is:
                 - hasParameters
                 body:
@@ -2689,6 +2716,10 @@ types:
                   200:
                     body:
                       application/json: EntityAdWordsLink
+                (commons.Id): analytics.management.webPropertyAdWordsLinks.patch
+                (commons.LogicalStucture):
+                - Management
+                - Web Property Ad Words Links
               get:
                 securedBy:
                   oath2:
@@ -2696,20 +2727,24 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Returns a web property-AdWords link to which the user has access.
-                displayName: Get WebPropertyAdWordsLinks Management
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: EntityAdWordsLink
+                (commons.Id): analytics.management.webPropertyAdWordsLinks.get
+                (commons.LogicalStucture):
+                - Management
+                - Web Property Ad Words Links
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing webProperty-AdWords link.
-                displayName: Update WebPropertyAdWordsLinks Management
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -2718,22 +2753,30 @@ types:
                   200:
                     body:
                       application/json: EntityAdWordsLink
+                (commons.Id): analytics.management.webPropertyAdWordsLinks.update
+                (commons.LogicalStucture):
+                - Management
+                - Web Property Ad Words Links
               delete:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Deletes a web property-AdWords link.
-                displayName: Delete WebPropertyAdWordsLinks Management
+                displayName: delete
                 is:
                 - hasParameters
+                (commons.Id): analytics.management.webPropertyAdWordsLinks.delete
+                (commons.LogicalStucture):
+                - Management
+                - Web Property Ad Words Links
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Creates a webProperty-AdWords link.
-              displayName: Insert WebPropertyAdWordsLinks Management
+              displayName: insert
               is:
               - hasParameters
               body:
@@ -2742,6 +2785,10 @@ types:
                 200:
                   body:
                     application/json: EntityAdWordsLink
+              (commons.Id): analytics.management.webPropertyAdWordsLinks.insert
+              (commons.LogicalStucture):
+              - Management
+              - Web Property Ad Words Links
             get:
               securedBy:
                 oath2:
@@ -2749,7 +2796,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists webProperty-AdWords links for a given web property.
-              displayName: List WebPropertyAdWordsLinks Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -2766,6 +2813,10 @@ types:
                 200:
                   body:
                     application/json: EntityAdWordsLinks
+              (commons.Id): analytics.management.webPropertyAdWordsLinks.list
+              (commons.LogicalStucture):
+              - Management
+              - Web Property Ad Words Links
           /customDimensions:
             /{customDimensionId}:
               uriParameters:
@@ -2778,7 +2829,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom dimension. This method supports patch semantics.
-                displayName: Patch CustomDimensions Management
+                displayName: patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -2792,6 +2843,10 @@ types:
                   200:
                     body:
                       application/json: CustomDimension
+                (commons.Id): analytics.management.customDimensions.patch
+                (commons.LogicalStucture):
+                - Management
+                - Custom Dimensions
               get:
                 securedBy:
                   oath2:
@@ -2799,20 +2854,24 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Get a custom dimension to which the user has access.
-                displayName: Get CustomDimensions Management
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: CustomDimension
+                (commons.Id): analytics.management.customDimensions.get
+                (commons.LogicalStucture):
+                - Management
+                - Custom Dimensions
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom dimension.
-                displayName: Update CustomDimensions Management
+                displayName: update
                 is:
                 - hasParameters
                 queryParameters:
@@ -2826,13 +2885,17 @@ types:
                   200:
                     body:
                       application/json: CustomDimension
+                (commons.Id): analytics.management.customDimensions.update
+                (commons.LogicalStucture):
+                - Management
+                - Custom Dimensions
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Create a new custom dimension.
-              displayName: Insert CustomDimensions Management
+              displayName: insert
               is:
               - hasParameters
               body:
@@ -2841,6 +2904,10 @@ types:
                 200:
                   body:
                     application/json: CustomDimension
+              (commons.Id): analytics.management.customDimensions.insert
+              (commons.LogicalStucture):
+              - Management
+              - Custom Dimensions
             get:
               securedBy:
                 oath2:
@@ -2848,7 +2915,7 @@ types:
                   - https://www.googleapis.com/auth/analytics
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists custom dimensions to which the user has access.
-              displayName: List CustomDimensions Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -2865,6 +2932,10 @@ types:
                 200:
                   body:
                     application/json: CustomDimensions
+              (commons.Id): analytics.management.customDimensions.list
+              (commons.LogicalStucture):
+              - Management
+              - Custom Dimensions
           /customDataSources:
             /{customDataSourceId}:
               uriParameters:
@@ -2886,13 +2957,17 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: List uploads to which the user has access.
-                    displayName: Get Uploads Management
+                    displayName: get
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: Upload
+                    (commons.Id): analytics.management.uploads.get
+                    (commons.LogicalStucture):
+                    - Management
+                    - Uploads
                 post:
                   securedBy:
                     oath2:
@@ -2900,13 +2975,17 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Upload data for a custom data source.
-                  displayName: UploadData Uploads Management
+                  displayName: upload Data
                   is:
                   - hasParameters
                   responses:
                     200:
                       body:
                         application/json: Upload
+                  (commons.Id): analytics.management.uploads.uploadData
+                  (commons.LogicalStucture):
+                  - Management
+                  - Uploads
                 get:
                   securedBy:
                     oath2:
@@ -2915,7 +2994,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: List uploads to which the user has access.
-                  displayName: List Uploads Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -2933,6 +3012,10 @@ types:
                     200:
                       body:
                         application/json: Uploads
+                  (commons.Id): analytics.management.uploads.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Uploads
               /deleteUploadData:
                 post:
                   securedBy:
@@ -2941,11 +3024,15 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Delete data associated with a previous upload.
-                  displayName: DeleteUploadData Uploads Management
+                  displayName: delete Upload Data
                   is:
                   - hasParameters
                   body:
                     application/json: AnalyticsDataimportDeleteUploadDataRequest
+                  (commons.Id): analytics.management.uploads.deleteUploadData
+                  (commons.LogicalStucture):
+                  - Management
+                  - Uploads
             get:
               securedBy:
                 oath2:
@@ -2954,7 +3041,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: List custom data sources to which the user has access.
-              displayName: List CustomDataSources Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -2972,6 +3059,10 @@ types:
                 200:
                   body:
                     application/json: CustomDataSources
+              (commons.Id): analytics.management.customDataSources.list
+              (commons.LogicalStucture):
+              - Management
+              - Custom Data Sources
           /profiles:
             /{profileId}:
               uriParameters:
@@ -2991,7 +3082,7 @@ types:
                         - https://www.googleapis.com/auth/analytics
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing experiment. This method supports patch semantics.
-                    displayName: Patch Experiments Management
+                    displayName: patch
                     is:
                     - hasParameters
                     body:
@@ -3000,6 +3091,10 @@ types:
                       200:
                         body:
                           application/json: Experiment
+                    (commons.Id): analytics.management.experiments.patch
+                    (commons.LogicalStucture):
+                    - Management
+                    - Experiments
                   get:
                     securedBy:
                       oath2:
@@ -3008,13 +3103,17 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Returns an experiment to which the user has access.
-                    displayName: Get Experiments Management
+                    displayName: get
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: Experiment
+                    (commons.Id): analytics.management.experiments.get
+                    (commons.LogicalStucture):
+                    - Management
+                    - Experiments
                   put:
                     securedBy:
                       oath2:
@@ -3022,7 +3121,7 @@ types:
                         - https://www.googleapis.com/auth/analytics
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing experiment.
-                    displayName: Update Experiments Management
+                    displayName: update
                     is:
                     - hasParameters
                     body:
@@ -3031,6 +3130,10 @@ types:
                       200:
                         body:
                           application/json: Experiment
+                    (commons.Id): analytics.management.experiments.update
+                    (commons.LogicalStucture):
+                    - Management
+                    - Experiments
                   delete:
                     securedBy:
                       oath2:
@@ -3038,9 +3141,13 @@ types:
                         - https://www.googleapis.com/auth/analytics
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Delete an experiment.
-                    displayName: Delete Experiments Management
+                    displayName: delete
                     is:
                     - hasParameters
+                    (commons.Id): analytics.management.experiments.delete
+                    (commons.LogicalStucture):
+                    - Management
+                    - Experiments
                 post:
                   securedBy:
                     oath2:
@@ -3048,7 +3155,7 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new experiment.
-                  displayName: Insert Experiments Management
+                  displayName: insert
                   is:
                   - hasParameters
                   body:
@@ -3057,6 +3164,10 @@ types:
                     200:
                       body:
                         application/json: Experiment
+                  (commons.Id): analytics.management.experiments.insert
+                  (commons.LogicalStucture):
+                  - Management
+                  - Experiments
                 get:
                   securedBy:
                     oath2:
@@ -3065,7 +3176,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists experiments to which the user has access.
-                  displayName: List Experiments Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -3082,6 +3193,10 @@ types:
                     200:
                       body:
                         application/json: Experiments
+                  (commons.Id): analytics.management.experiments.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Experiments
               /unsampledReports:
                 /{unsampledReportId}:
                   uriParameters:
@@ -3096,22 +3211,30 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Returns a single unsampled report.
-                    displayName: Get UnsampledReports Management
+                    displayName: get
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: UnsampledReport
+                    (commons.Id): analytics.management.unsampledReports.get
+                    (commons.LogicalStucture):
+                    - Management
+                    - Unsampled Reports
                   delete:
                     securedBy:
                       oath2:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Deletes an unsampled report.
-                    displayName: Delete UnsampledReports Management
+                    displayName: delete
                     is:
                     - hasParameters
+                    (commons.Id): analytics.management.unsampledReports.delete
+                    (commons.LogicalStucture):
+                    - Management
+                    - Unsampled Reports
                 post:
                   securedBy:
                     oath2:
@@ -3119,7 +3242,7 @@ types:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new unsampled report.
-                  displayName: Insert UnsampledReports Management
+                  displayName: insert
                   is:
                   - hasParameters
                   body:
@@ -3128,6 +3251,10 @@ types:
                     200:
                       body:
                         application/json: UnsampledReport
+                  (commons.Id): analytics.management.unsampledReports.insert
+                  (commons.LogicalStucture):
+                  - Management
+                  - Unsampled Reports
                 get:
                   securedBy:
                     oath2:
@@ -3136,7 +3263,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists unsampled reports to which the user has access.
-                  displayName: List UnsampledReports Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -3153,6 +3280,10 @@ types:
                     200:
                       body:
                         application/json: UnsampledReports
+                  (commons.Id): analytics.management.unsampledReports.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Unsampled Reports
               /entityUserLinks:
                 /{linkId}:
                   uriParameters:
@@ -3165,7 +3296,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.manage.users
                     description: Updates permissions for an existing user on the given view (profile).
-                    displayName: Update ProfileUserLinks Management
+                    displayName: update
                     is:
                     - hasParameters
                     body:
@@ -3174,22 +3305,30 @@ types:
                       200:
                         body:
                           application/json: EntityUserLink
+                    (commons.Id): analytics.management.profileUserLinks.update
+                    (commons.LogicalStucture):
+                    - Management
+                    - Profile User Links
                   delete:
                     securedBy:
                       oath2:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.manage.users
                     description: Removes a user from the given view (profile).
-                    displayName: Delete ProfileUserLinks Management
+                    displayName: delete
                     is:
                     - hasParameters
+                    (commons.Id): analytics.management.profileUserLinks.delete
+                    (commons.LogicalStucture):
+                    - Management
+                    - Profile User Links
                 post:
                   securedBy:
                     oath2:
                       scopes:
                       - https://www.googleapis.com/auth/analytics.manage.users
                   description: Adds a new user to the given view (profile).
-                  displayName: Insert ProfileUserLinks Management
+                  displayName: insert
                   is:
                   - hasParameters
                   body:
@@ -3198,6 +3337,10 @@ types:
                     200:
                       body:
                         application/json: EntityUserLink
+                  (commons.Id): analytics.management.profileUserLinks.insert
+                  (commons.LogicalStucture):
+                  - Management
+                  - Profile User Links
                 get:
                   securedBy:
                     oath2:
@@ -3205,7 +3348,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.manage.users
                       - https://www.googleapis.com/auth/analytics.manage.users.readonly
                   description: Lists profile-user links for a given view (profile).
-                  displayName: List ProfileUserLinks Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -3222,6 +3365,10 @@ types:
                     200:
                       body:
                         application/json: EntityUserLinks
+                  (commons.Id): analytics.management.profileUserLinks.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Profile User Links
               /profileFilterLinks:
                 /{linkId}:
                   uriParameters:
@@ -3235,7 +3382,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing profile filter link. This method supports patch semantics.
-                    displayName: Patch ProfileFilterLinks Management
+                    displayName: patch
                     is:
                     - hasParameters
                     body:
@@ -3244,6 +3391,10 @@ types:
                       200:
                         body:
                           application/json: ProfileFilterLink
+                    (commons.Id): analytics.management.profileFilterLinks.patch
+                    (commons.LogicalStucture):
+                    - Management
+                    - Profile Filter Links
                   get:
                     securedBy:
                       oath2:
@@ -3251,20 +3402,24 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Returns a single profile filter link.
-                    displayName: Get ProfileFilterLinks Management
+                    displayName: get
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: ProfileFilterLink
+                    (commons.Id): analytics.management.profileFilterLinks.get
+                    (commons.LogicalStucture):
+                    - Management
+                    - Profile Filter Links
                   put:
                     securedBy:
                       oath2:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Update an existing profile filter link.
-                    displayName: Update ProfileFilterLinks Management
+                    displayName: update
                     is:
                     - hasParameters
                     body:
@@ -3273,22 +3428,30 @@ types:
                       200:
                         body:
                           application/json: ProfileFilterLink
+                    (commons.Id): analytics.management.profileFilterLinks.update
+                    (commons.LogicalStucture):
+                    - Management
+                    - Profile Filter Links
                   delete:
                     securedBy:
                       oath2:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Delete a profile filter link.
-                    displayName: Delete ProfileFilterLinks Management
+                    displayName: delete
                     is:
                     - hasParameters
+                    (commons.Id): analytics.management.profileFilterLinks.delete
+                    (commons.LogicalStucture):
+                    - Management
+                    - Profile Filter Links
                 post:
                   securedBy:
                     oath2:
                       scopes:
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new profile filter link.
-                  displayName: Insert ProfileFilterLinks Management
+                  displayName: insert
                   is:
                   - hasParameters
                   body:
@@ -3297,6 +3460,10 @@ types:
                     200:
                       body:
                         application/json: ProfileFilterLink
+                  (commons.Id): analytics.management.profileFilterLinks.insert
+                  (commons.LogicalStucture):
+                  - Management
+                  - Profile Filter Links
                 get:
                   securedBy:
                     oath2:
@@ -3304,7 +3471,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists all profile filter links for a profile.
-                  displayName: List ProfileFilterLinks Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -3321,6 +3488,10 @@ types:
                     200:
                       body:
                         application/json: ProfileFilterLinks
+                  (commons.Id): analytics.management.profileFilterLinks.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Profile Filter Links
               /goals:
                 /{goalId}:
                   uriParameters:
@@ -3333,7 +3504,7 @@ types:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Updates an existing goal. This method supports patch semantics.
-                    displayName: Patch Goals Management
+                    displayName: patch
                     is:
                     - hasParameters
                     body:
@@ -3342,6 +3513,10 @@ types:
                       200:
                         body:
                           application/json: Goal
+                    (commons.Id): analytics.management.goals.patch
+                    (commons.LogicalStucture):
+                    - Management
+                    - Goals
                   get:
                     securedBy:
                       oath2:
@@ -3349,20 +3524,24 @@ types:
                         - https://www.googleapis.com/auth/analytics.edit
                         - https://www.googleapis.com/auth/analytics.readonly
                     description: Gets a goal to which the user has access.
-                    displayName: Get Goals Management
+                    displayName: get
                     is:
                     - hasParameters
                     responses:
                       200:
                         body:
                           application/json: Goal
+                    (commons.Id): analytics.management.goals.get
+                    (commons.LogicalStucture):
+                    - Management
+                    - Goals
                   put:
                     securedBy:
                       oath2:
                         scopes:
                         - https://www.googleapis.com/auth/analytics.edit
                     description: Updates an existing goal.
-                    displayName: Update Goals Management
+                    displayName: update
                     is:
                     - hasParameters
                     body:
@@ -3371,13 +3550,17 @@ types:
                       200:
                         body:
                           application/json: Goal
+                    (commons.Id): analytics.management.goals.update
+                    (commons.LogicalStucture):
+                    - Management
+                    - Goals
                 post:
                   securedBy:
                     oath2:
                       scopes:
                       - https://www.googleapis.com/auth/analytics.edit
                   description: Create a new goal.
-                  displayName: Insert Goals Management
+                  displayName: insert
                   is:
                   - hasParameters
                   body:
@@ -3386,6 +3569,10 @@ types:
                     200:
                       body:
                         application/json: Goal
+                  (commons.Id): analytics.management.goals.insert
+                  (commons.LogicalStucture):
+                  - Management
+                  - Goals
                 get:
                   securedBy:
                     oath2:
@@ -3394,7 +3581,7 @@ types:
                       - https://www.googleapis.com/auth/analytics.edit
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists goals to which the user has access.
-                  displayName: List Goals Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -3411,13 +3598,17 @@ types:
                     200:
                       body:
                         application/json: Goals
+                  (commons.Id): analytics.management.goals.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Goals
               patch:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing view (profile). This method supports patch semantics.
-                displayName: Patch Profiles Management
+                displayName: patch
                 is:
                 - hasParameters
                 body:
@@ -3426,6 +3617,10 @@ types:
                   200:
                     body:
                       application/json: Profile
+                (commons.Id): analytics.management.profiles.patch
+                (commons.LogicalStucture):
+                - Management
+                - Profiles
               get:
                 securedBy:
                   oath2:
@@ -3433,20 +3628,24 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Gets a view (profile) to which the user has access.
-                displayName: Get Profiles Management
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: Profile
+                (commons.Id): analytics.management.profiles.get
+                (commons.LogicalStucture):
+                - Management
+                - Profiles
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing view (profile).
-                displayName: Update Profiles Management
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -3455,22 +3654,30 @@ types:
                   200:
                     body:
                       application/json: Profile
+                (commons.Id): analytics.management.profiles.update
+                (commons.LogicalStucture):
+                - Management
+                - Profiles
               delete:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Deletes a view (profile).
-                displayName: Delete Profiles Management
+                displayName: delete
                 is:
                 - hasParameters
+                (commons.Id): analytics.management.profiles.delete
+                (commons.LogicalStucture):
+                - Management
+                - Profiles
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Create a new view (profile).
-              displayName: Insert Profiles Management
+              displayName: insert
               is:
               - hasParameters
               body:
@@ -3479,6 +3686,10 @@ types:
                 200:
                   body:
                     application/json: Profile
+              (commons.Id): analytics.management.profiles.insert
+              (commons.LogicalStucture):
+              - Management
+              - Profiles
             get:
               securedBy:
                 oath2:
@@ -3487,7 +3698,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists views (profiles) to which the user has access.
-              displayName: List Profiles Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -3504,6 +3715,10 @@ types:
                 200:
                   body:
                     application/json: Profiles
+              (commons.Id): analytics.management.profiles.list
+              (commons.LogicalStucture):
+              - Management
+              - Profiles
           /customMetrics:
             /{customMetricId}:
               uriParameters:
@@ -3516,7 +3731,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom metric. This method supports patch semantics.
-                displayName: Patch CustomMetrics Management
+                displayName: patch
                 is:
                 - hasParameters
                 queryParameters:
@@ -3530,6 +3745,10 @@ types:
                   200:
                     body:
                       application/json: CustomMetric
+                (commons.Id): analytics.management.customMetrics.patch
+                (commons.LogicalStucture):
+                - Management
+                - Custom Metrics
               get:
                 securedBy:
                   oath2:
@@ -3537,20 +3756,24 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Get a custom metric to which the user has access.
-                displayName: Get CustomMetrics Management
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: CustomMetric
+                (commons.Id): analytics.management.customMetrics.get
+                (commons.LogicalStucture):
+                - Management
+                - Custom Metrics
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing custom metric.
-                displayName: Update CustomMetrics Management
+                displayName: update
                 is:
                 - hasParameters
                 queryParameters:
@@ -3564,13 +3787,17 @@ types:
                   200:
                     body:
                       application/json: CustomMetric
+                (commons.Id): analytics.management.customMetrics.update
+                (commons.LogicalStucture):
+                - Management
+                - Custom Metrics
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Create a new custom metric.
-              displayName: Insert CustomMetrics Management
+              displayName: insert
               is:
               - hasParameters
               body:
@@ -3579,6 +3806,10 @@ types:
                 200:
                   body:
                     application/json: CustomMetric
+              (commons.Id): analytics.management.customMetrics.insert
+              (commons.LogicalStucture):
+              - Management
+              - Custom Metrics
             get:
               securedBy:
                 oath2:
@@ -3586,7 +3817,7 @@ types:
                   - https://www.googleapis.com/auth/analytics
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists custom metrics to which the user has access.
-              displayName: List CustomMetrics Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -3603,6 +3834,10 @@ types:
                 200:
                   body:
                     application/json: CustomMetrics
+              (commons.Id): analytics.management.customMetrics.list
+              (commons.LogicalStucture):
+              - Management
+              - Custom Metrics
           /remarketingAudiences:
             /{remarketingAudienceId}:
               uriParameters:
@@ -3615,7 +3850,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing remarketing audience. This method supports patch semantics.
-                displayName: Patch RemarketingAudience Management
+                displayName: patch
                 is:
                 - hasParameters
                 body:
@@ -3624,6 +3859,10 @@ types:
                   200:
                     body:
                       application/json: RemarketingAudience
+                (commons.Id): analytics.management.remarketingAudience.patch
+                (commons.LogicalStucture):
+                - Management
+                - Remarketing Audience
               get:
                 securedBy:
                   oath2:
@@ -3631,20 +3870,24 @@ types:
                     - https://www.googleapis.com/auth/analytics.edit
                     - https://www.googleapis.com/auth/analytics.readonly
                 description: Gets a remarketing audience to which the user has access.
-                displayName: Get RemarketingAudience Management
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: RemarketingAudience
+                (commons.Id): analytics.management.remarketingAudience.get
+                (commons.LogicalStucture):
+                - Management
+                - Remarketing Audience
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.edit
                 description: Updates an existing remarketing audience.
-                displayName: Update RemarketingAudience Management
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -3653,13 +3896,17 @@ types:
                   200:
                     body:
                       application/json: RemarketingAudience
+                (commons.Id): analytics.management.remarketingAudience.update
+                (commons.LogicalStucture):
+                - Management
+                - Remarketing Audience
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.edit
               description: Creates a new remarketing audience.
-              displayName: Insert RemarketingAudience Management
+              displayName: insert
               is:
               - hasParameters
               body:
@@ -3668,6 +3915,10 @@ types:
                 200:
                   body:
                     application/json: RemarketingAudience
+              (commons.Id): analytics.management.remarketingAudience.insert
+              (commons.LogicalStucture):
+              - Management
+              - Remarketing Audience
             get:
               securedBy:
                 oath2:
@@ -3675,7 +3926,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.edit
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists remarketing audiences to which the user has access.
-              displayName: List RemarketingAudience Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -3695,6 +3946,10 @@ types:
                 200:
                   body:
                     application/json: RemarketingAudiences
+              (commons.Id): analytics.management.remarketingAudience.list
+              (commons.LogicalStucture):
+              - Management
+              - Remarketing Audience
           /entityUserLinks:
             /{linkId}:
               uriParameters:
@@ -3707,7 +3962,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.manage.users
                 description: Updates permissions for an existing user on the given web property.
-                displayName: Update WebpropertyUserLinks Management
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -3716,22 +3971,30 @@ types:
                   200:
                     body:
                       application/json: EntityUserLink
+                (commons.Id): analytics.management.webpropertyUserLinks.update
+                (commons.LogicalStucture):
+                - Management
+                - Webproperty User Links
               delete:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/analytics.manage.users
                 description: Removes a user from the given web property.
-                displayName: Delete WebpropertyUserLinks Management
+                displayName: delete
                 is:
                 - hasParameters
+                (commons.Id): analytics.management.webpropertyUserLinks.delete
+                (commons.LogicalStucture):
+                - Management
+                - Webproperty User Links
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/analytics.manage.users
               description: Adds a new user to the given web property.
-              displayName: Insert WebpropertyUserLinks Management
+              displayName: insert
               is:
               - hasParameters
               body:
@@ -3740,6 +4003,10 @@ types:
                 200:
                   body:
                     application/json: EntityUserLink
+              (commons.Id): analytics.management.webpropertyUserLinks.insert
+              (commons.LogicalStucture):
+              - Management
+              - Webproperty User Links
             get:
               securedBy:
                 oath2:
@@ -3747,7 +4014,7 @@ types:
                   - https://www.googleapis.com/auth/analytics.manage.users
                   - https://www.googleapis.com/auth/analytics.manage.users.readonly
               description: Lists webProperty-user links for a given web property.
-              displayName: List WebpropertyUserLinks Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -3764,13 +4031,17 @@ types:
                 200:
                   body:
                     application/json: EntityUserLinks
+              (commons.Id): analytics.management.webpropertyUserLinks.list
+              (commons.LogicalStucture):
+              - Management
+              - Webproperty User Links
           patch:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing web property. This method supports patch semantics.
-            displayName: Patch Webproperties Management
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -3779,6 +4050,10 @@ types:
               200:
                 body:
                   application/json: Webproperty
+            (commons.Id): analytics.management.webproperties.patch
+            (commons.LogicalStucture):
+            - Management
+            - Webproperties
           get:
             securedBy:
               oath2:
@@ -3786,20 +4061,24 @@ types:
                 - https://www.googleapis.com/auth/analytics.edit
                 - https://www.googleapis.com/auth/analytics.readonly
             description: Gets a web property to which the user has access.
-            displayName: Get Webproperties Management
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Webproperty
+            (commons.Id): analytics.management.webproperties.get
+            (commons.LogicalStucture):
+            - Management
+            - Webproperties
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing web property.
-            displayName: Update Webproperties Management
+            displayName: update
             is:
             - hasParameters
             body:
@@ -3808,13 +4087,17 @@ types:
               200:
                 body:
                   application/json: Webproperty
+            (commons.Id): analytics.management.webproperties.update
+            (commons.LogicalStucture):
+            - Management
+            - Webproperties
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/analytics.edit
           description: Create a new property if the account has fewer than 20 properties. Web properties are visible in the Google Analytics interface only if they have at least one profile.
-          displayName: Insert Webproperties Management
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -3823,6 +4106,10 @@ types:
             200:
               body:
                 application/json: Webproperty
+          (commons.Id): analytics.management.webproperties.insert
+          (commons.LogicalStucture):
+          - Management
+          - Webproperties
         get:
           securedBy:
             oath2:
@@ -3831,7 +4118,7 @@ types:
               - https://www.googleapis.com/auth/analytics.edit
               - https://www.googleapis.com/auth/analytics.readonly
           description: Lists web properties to which the user has access.
-          displayName: List Webproperties Management
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -3848,6 +4135,10 @@ types:
             200:
               body:
                 application/json: Webproperties
+          (commons.Id): analytics.management.webproperties.list
+          (commons.LogicalStucture):
+          - Management
+          - Webproperties
       /filters:
         /{filterId}:
           uriParameters:
@@ -3860,7 +4151,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing filter. This method supports patch semantics.
-            displayName: Patch Filters Management
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -3869,6 +4160,10 @@ types:
               200:
                 body:
                   application/json: Filter
+            (commons.Id): analytics.management.filters.patch
+            (commons.LogicalStucture):
+            - Management
+            - Filters
           get:
             securedBy:
               oath2:
@@ -3876,20 +4171,24 @@ types:
                 - https://www.googleapis.com/auth/analytics.edit
                 - https://www.googleapis.com/auth/analytics.readonly
             description: Returns a filters to which the user has access.
-            displayName: Get Filters Management
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Filter
+            (commons.Id): analytics.management.filters.get
+            (commons.LogicalStucture):
+            - Management
+            - Filters
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Updates an existing filter.
-            displayName: Update Filters Management
+            displayName: update
             is:
             - hasParameters
             body:
@@ -3898,26 +4197,34 @@ types:
               200:
                 body:
                   application/json: Filter
+            (commons.Id): analytics.management.filters.update
+            (commons.LogicalStucture):
+            - Management
+            - Filters
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.edit
             description: Delete a filter.
-            displayName: Delete Filters Management
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Filter
+            (commons.Id): analytics.management.filters.delete
+            (commons.LogicalStucture):
+            - Management
+            - Filters
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/analytics.edit
           description: Create a new filter.
-          displayName: Insert Filters Management
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -3926,6 +4233,10 @@ types:
             200:
               body:
                 application/json: Filter
+          (commons.Id): analytics.management.filters.insert
+          (commons.LogicalStucture):
+          - Management
+          - Filters
         get:
           securedBy:
             oath2:
@@ -3933,7 +4244,7 @@ types:
               - https://www.googleapis.com/auth/analytics.edit
               - https://www.googleapis.com/auth/analytics.readonly
           description: Lists all filters for an account
-          displayName: List Filters Management
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -3950,6 +4261,10 @@ types:
             200:
               body:
                 application/json: Filters
+          (commons.Id): analytics.management.filters.list
+          (commons.LogicalStucture):
+          - Management
+          - Filters
       /entityUserLinks:
         /{linkId}:
           uriParameters:
@@ -3962,7 +4277,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.manage.users
             description: Updates permissions for an existing user on the given account.
-            displayName: Update AccountUserLinks Management
+            displayName: update
             is:
             - hasParameters
             body:
@@ -3971,22 +4286,30 @@ types:
               200:
                 body:
                   application/json: EntityUserLink
+            (commons.Id): analytics.management.accountUserLinks.update
+            (commons.LogicalStucture):
+            - Management
+            - Account User Links
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/analytics.manage.users
             description: Removes a user from the given account.
-            displayName: Delete AccountUserLinks Management
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): analytics.management.accountUserLinks.delete
+            (commons.LogicalStucture):
+            - Management
+            - Account User Links
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/analytics.manage.users
           description: Adds a new user to the given account.
-          displayName: Insert AccountUserLinks Management
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -3995,6 +4318,10 @@ types:
             200:
               body:
                 application/json: EntityUserLink
+          (commons.Id): analytics.management.accountUserLinks.insert
+          (commons.LogicalStucture):
+          - Management
+          - Account User Links
         get:
           securedBy:
             oath2:
@@ -4002,7 +4329,7 @@ types:
               - https://www.googleapis.com/auth/analytics.manage.users
               - https://www.googleapis.com/auth/analytics.manage.users.readonly
           description: Lists account-user links for a given account.
-          displayName: List AccountUserLinks Management
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -4019,6 +4346,10 @@ types:
             200:
               body:
                 application/json: EntityUserLinks
+          (commons.Id): analytics.management.accountUserLinks.list
+          (commons.LogicalStucture):
+          - Management
+          - Account User Links
     get:
       securedBy:
         oath2:
@@ -4027,7 +4358,7 @@ types:
           - https://www.googleapis.com/auth/analytics.edit
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists all accounts to which the user has access.
-      displayName: List Accounts Management
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -4044,6 +4375,10 @@ types:
         200:
           body:
             application/json: Accounts
+      (commons.Id): analytics.management.accounts.list
+      (commons.LogicalStucture):
+      - Management
+      - Accounts
   /accountSummaries:
     get:
       securedBy:
@@ -4052,7 +4387,7 @@ types:
           - https://www.googleapis.com/auth/analytics.edit
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists account summaries (lightweight tree comprised of accounts/properties/profiles) to which the user has access.
-      displayName: List AccountSummaries Management
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -4069,6 +4404,10 @@ types:
         200:
           body:
             application/json: AccountSummaries
+      (commons.Id): analytics.management.accountSummaries.list
+      (commons.LogicalStucture):
+      - Management
+      - Account Summaries
   /segments:
     get:
       securedBy:
@@ -4078,7 +4417,7 @@ types:
           - https://www.googleapis.com/auth/analytics.edit
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists segments to which the user has access.
-      displayName: List Segments Management
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -4095,6 +4434,10 @@ types:
         200:
           body:
             application/json: Segments
+      (commons.Id): analytics.management.segments.list
+      (commons.LogicalStucture):
+      - Management
+      - Segments
 /provisioning:
   /createAccountTicket:
     post:
@@ -4103,7 +4446,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/analytics.provision
       description: Creates an account ticket.
-      displayName: CreateAccountTicket Provisioning
+      displayName: create Account Ticket
       is:
       - hasParameters
       body:
@@ -4112,3 +4455,6 @@ types:
         200:
           body:
             application/json: AccountTicket
+      (commons.Id): analytics.provisioning.createAccountTicket
+      (commons.LogicalStucture):
+      - Provisioning

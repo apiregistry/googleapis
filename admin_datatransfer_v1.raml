@@ -175,20 +175,23 @@ types:
           - https://www.googleapis.com/auth/admin.datatransfer
           - https://www.googleapis.com/auth/admin.datatransfer.readonly
       description: Retrieves a data transfer request by its resource ID.
-      displayName: Get Transfers
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: DataTransfer
+      (commons.Id): datatransfer.transfers.get
+      (commons.LogicalStucture):
+      - Transfers
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/admin.datatransfer
     description: Inserts a data transfer request.
-    displayName: Insert Transfers
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -197,6 +200,9 @@ types:
       200:
         body:
           application/json: DataTransfer
+    (commons.Id): datatransfer.transfers.insert
+    (commons.LogicalStucture):
+    - Transfers
   get:
     securedBy:
       oath2:
@@ -204,7 +210,7 @@ types:
         - https://www.googleapis.com/auth/admin.datatransfer
         - https://www.googleapis.com/auth/admin.datatransfer.readonly
     description: Lists the transfers for a customer by source user, destination user, or status.
-    displayName: List Transfers
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -233,6 +239,9 @@ types:
       200:
         body:
           application/json: DataTransfersListResponse
+    (commons.Id): datatransfer.transfers.list
+    (commons.LogicalStucture):
+    - Transfers
 /applications:
   /{applicationId}:
     uriParameters:
@@ -247,13 +256,16 @@ types:
           - https://www.googleapis.com/auth/admin.datatransfer
           - https://www.googleapis.com/auth/admin.datatransfer.readonly
       description: Retrieves information about an application for the given application ID.
-      displayName: Get Applications
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Application
+      (commons.Id): datatransfer.applications.get
+      (commons.LogicalStucture):
+      - Applications
   get:
     securedBy:
       oath2:
@@ -261,7 +273,7 @@ types:
         - https://www.googleapis.com/auth/admin.datatransfer
         - https://www.googleapis.com/auth/admin.datatransfer.readonly
     description: Lists the applications available for data transfer for a customer.
-    displayName: List Applications
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -281,3 +293,6 @@ types:
       200:
         body:
           application/json: ApplicationsListResponse
+    (commons.Id): datatransfer.applications.list
+    (commons.LogicalStucture):
+    - Applications

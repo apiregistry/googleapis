@@ -518,7 +518,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Updates an ACL entry on the specified object. This method supports patch semantics.
-              displayName: Patch ObjectAccessControls
+              displayName: patch
               is:
               - hasParameters
               queryParameters:
@@ -532,13 +532,16 @@ types:
                 200:
                   body:
                     application/json: ObjectAccessControl
+              (commons.Id): storage.objectAccessControls.patch
+              (commons.LogicalStucture):
+              - Object Access Controls
             get:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Returns the ACL entry for the specified entity on the specified object.
-              displayName: Get ObjectAccessControls
+              displayName: get
               is:
               - hasParameters
               queryParameters:
@@ -550,13 +553,16 @@ types:
                 200:
                   body:
                     application/json: ObjectAccessControl
+              (commons.Id): storage.objectAccessControls.get
+              (commons.LogicalStucture):
+              - Object Access Controls
             put:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Updates an ACL entry on the specified object.
-              displayName: Update ObjectAccessControls
+              displayName: update
               is:
               - hasParameters
               queryParameters:
@@ -570,13 +576,16 @@ types:
                 200:
                   body:
                     application/json: ObjectAccessControl
+              (commons.Id): storage.objectAccessControls.update
+              (commons.LogicalStucture):
+              - Object Access Controls
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/devstorage.full_control
               description: Permanently deletes the ACL entry for the specified entity on the specified object.
-              displayName: Delete ObjectAccessControls
+              displayName: delete
               is:
               - hasParameters
               queryParameters:
@@ -584,13 +593,16 @@ types:
                   type: integer
                   format: int64
                   description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
+              (commons.Id): storage.objectAccessControls.delete
+              (commons.LogicalStucture):
+              - Object Access Controls
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/devstorage.full_control
             description: Creates a new ACL entry on the specified object.
-            displayName: Insert ObjectAccessControls
+            displayName: insert
             is:
             - hasParameters
             queryParameters:
@@ -604,13 +616,16 @@ types:
               200:
                 body:
                   application/json: ObjectAccessControl
+            (commons.Id): storage.objectAccessControls.insert
+            (commons.LogicalStucture):
+            - Object Access Controls
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/devstorage.full_control
             description: Retrieves ACL entries on the specified object.
-            displayName: List ObjectAccessControls
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -622,6 +637,9 @@ types:
               200:
                 body:
                   application/json: ObjectAccessControls
+            (commons.Id): storage.objectAccessControls.list
+            (commons.LogicalStucture):
+            - Object Access Controls
         patch:
           securedBy:
             oath2:
@@ -629,7 +647,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Updates a data blob's associated metadata. This method supports patch semantics.
-          displayName: Patch Objects
+          displayName: patch
           is:
           - hasParameters
           queryParameters:
@@ -652,6 +670,9 @@ types:
             projection?:
               type: string
               description: Set of properties to return. Defaults to full.
+              (commons.EnumDescriptions):
+              - Include all properties.
+              - Omit the acl property.
               enum:
               - full
               - noAcl
@@ -665,6 +686,9 @@ types:
             200:
               body:
                 application/json: Object
+          (commons.Id): storage.objects.patch
+          (commons.LogicalStucture):
+          - Objects
         get:
           securedBy:
             oath2:
@@ -673,7 +697,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.read_only
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Retrieves objects or their associated metadata.
-          displayName: Get Objects
+          displayName: get
           is:
           - hasParameters
           queryParameters:
@@ -696,6 +720,9 @@ types:
             projection?:
               type: string
               description: Set of properties to return. Defaults to noAcl.
+              (commons.EnumDescriptions):
+              - Include all properties.
+              - Omit the acl property.
               enum:
               - full
               - noAcl
@@ -707,6 +734,9 @@ types:
             200:
               body:
                 application/json: Object
+          (commons.Id): storage.objects.get
+          (commons.LogicalStucture):
+          - Objects
         put:
           securedBy:
             oath2:
@@ -714,7 +744,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Updates a data blob's associated metadata.
-          displayName: Update Objects
+          displayName: update
           is:
           - hasParameters
           queryParameters:
@@ -737,6 +767,9 @@ types:
             projection?:
               type: string
               description: Set of properties to return. Defaults to full.
+              (commons.EnumDescriptions):
+              - Include all properties.
+              - Omit the acl property.
               enum:
               - full
               - noAcl
@@ -750,6 +783,9 @@ types:
             200:
               body:
                 application/json: Object
+          (commons.Id): storage.objects.update
+          (commons.LogicalStucture):
+          - Objects
         delete:
           securedBy:
             oath2:
@@ -757,7 +793,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.full_control
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Deletes data blobs and associated metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
-          displayName: Delete Objects
+          displayName: delete
           is:
           - hasParameters
           queryParameters:
@@ -781,6 +817,9 @@ types:
               type: integer
               format: int64
               description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
+          (commons.Id): storage.objects.delete
+          (commons.LogicalStucture):
+          - Objects
       /watch:
         post:
           securedBy:
@@ -790,7 +829,7 @@ types:
               - https://www.googleapis.com/auth/devstorage.read_only
               - https://www.googleapis.com/auth/devstorage.read_write
           description: Watch for changes on all objects in a bucket.
-          displayName: WatchAll Objects
+          displayName: watch All
           is:
           - hasParameters
           queryParameters:
@@ -814,6 +853,9 @@ types:
             projection?:
               type: string
               description: Set of properties to return. Defaults to noAcl.
+              (commons.EnumDescriptions):
+              - Include all properties.
+              - Omit the acl property.
               enum:
               - full
               - noAcl
@@ -823,6 +865,9 @@ types:
             200:
               body:
                 application/json: Channel
+          (commons.Id): storage.objects.watchAll
+          (commons.LogicalStucture):
+          - Objects
       post:
         securedBy:
           oath2:
@@ -830,7 +875,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.full_control
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Stores new data blobs and associated metadata.
-        displayName: Insert Objects
+        displayName: insert
         is:
         - hasParameters
         queryParameters:
@@ -852,6 +897,9 @@ types:
           projection?:
             type: string
             description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
+            (commons.EnumDescriptions):
+            - Include all properties.
+            - Omit the acl property.
             enum:
             - full
             - noAcl
@@ -865,6 +913,9 @@ types:
           200:
             body:
               application/json: Object
+        (commons.Id): storage.objects.insert
+        (commons.LogicalStucture):
+        - Objects
       get:
         securedBy:
           oath2:
@@ -873,7 +924,7 @@ types:
             - https://www.googleapis.com/auth/devstorage.read_only
             - https://www.googleapis.com/auth/devstorage.read_write
         description: Retrieves a list of objects matching the criteria.
-        displayName: List Objects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -897,6 +948,9 @@ types:
           projection?:
             type: string
             description: Set of properties to return. Defaults to noAcl.
+            (commons.EnumDescriptions):
+            - Include all properties.
+            - Omit the acl property.
             enum:
             - full
             - noAcl
@@ -904,6 +958,9 @@ types:
           200:
             body:
               application/json: Objects
+        (commons.Id): storage.objects.list
+        (commons.LogicalStucture):
+        - Objects
     /defaultObjectAcl:
       /{entity}:
         uriParameters:
@@ -916,7 +973,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates a default object ACL entry on the specified bucket. This method supports patch semantics.
-          displayName: Patch DefaultObjectAccessControls
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -925,26 +982,32 @@ types:
             200:
               body:
                 application/json: ObjectAccessControl
+          (commons.Id): storage.defaultObjectAccessControls.patch
+          (commons.LogicalStucture):
+          - Default Object Access Controls
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Returns the default object ACL entry for the specified entity on the specified bucket.
-          displayName: Get DefaultObjectAccessControls
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ObjectAccessControl
+          (commons.Id): storage.defaultObjectAccessControls.get
+          (commons.LogicalStucture):
+          - Default Object Access Controls
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates a default object ACL entry on the specified bucket.
-          displayName: Update DefaultObjectAccessControls
+          displayName: update
           is:
           - hasParameters
           body:
@@ -953,22 +1016,28 @@ types:
             200:
               body:
                 application/json: ObjectAccessControl
+          (commons.Id): storage.defaultObjectAccessControls.update
+          (commons.LogicalStucture):
+          - Default Object Access Controls
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Permanently deletes the default object ACL entry for the specified entity on the specified bucket.
-          displayName: Delete DefaultObjectAccessControls
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): storage.defaultObjectAccessControls.delete
+          (commons.LogicalStucture):
+          - Default Object Access Controls
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Creates a new default object ACL entry on the specified bucket.
-        displayName: Insert DefaultObjectAccessControls
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -977,13 +1046,16 @@ types:
           200:
             body:
               application/json: ObjectAccessControl
+        (commons.Id): storage.defaultObjectAccessControls.insert
+        (commons.LogicalStucture):
+        - Default Object Access Controls
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Retrieves default object ACL entries on the specified bucket.
-        displayName: List DefaultObjectAccessControls
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -999,6 +1071,9 @@ types:
           200:
             body:
               application/json: ObjectAccessControls
+        (commons.Id): storage.defaultObjectAccessControls.list
+        (commons.LogicalStucture):
+        - Default Object Access Controls
     /acl:
       /{entity}:
         uriParameters:
@@ -1011,7 +1086,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
-          displayName: Patch BucketAccessControls
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -1020,26 +1095,32 @@ types:
             200:
               body:
                 application/json: BucketAccessControl
+          (commons.Id): storage.bucketAccessControls.patch
+          (commons.LogicalStucture):
+          - Bucket Access Controls
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Returns the ACL entry for the specified entity on the specified bucket.
-          displayName: Get BucketAccessControls
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: BucketAccessControl
+          (commons.Id): storage.bucketAccessControls.get
+          (commons.LogicalStucture):
+          - Bucket Access Controls
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Updates an ACL entry on the specified bucket.
-          displayName: Update BucketAccessControls
+          displayName: update
           is:
           - hasParameters
           body:
@@ -1048,22 +1129,28 @@ types:
             200:
               body:
                 application/json: BucketAccessControl
+          (commons.Id): storage.bucketAccessControls.update
+          (commons.LogicalStucture):
+          - Bucket Access Controls
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/devstorage.full_control
           description: Permanently deletes the ACL entry for the specified entity on the specified bucket.
-          displayName: Delete BucketAccessControls
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): storage.bucketAccessControls.delete
+          (commons.LogicalStucture):
+          - Bucket Access Controls
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Creates a new ACL entry on the specified bucket.
-        displayName: Insert BucketAccessControls
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1072,19 +1159,25 @@ types:
           200:
             body:
               application/json: BucketAccessControl
+        (commons.Id): storage.bucketAccessControls.insert
+        (commons.LogicalStucture):
+        - Bucket Access Controls
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/devstorage.full_control
         description: Retrieves ACL entries on the specified bucket.
-        displayName: List BucketAccessControls
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: BucketAccessControls
+        (commons.Id): storage.bucketAccessControls.list
+        (commons.LogicalStucture):
+        - Bucket Access Controls
     patch:
       securedBy:
         oath2:
@@ -1092,7 +1185,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Updates a bucket. This method supports patch semantics.
-      displayName: Patch Buckets
+      displayName: patch
       is:
       - hasParameters
       queryParameters:
@@ -1103,6 +1196,9 @@ types:
         projection?:
           type: string
           description: Set of properties to return. Defaults to full.
+          (commons.EnumDescriptions):
+          - Include all properties.
+          - Omit acl and defaultObjectAcl properties.
           enum:
           - full
           - noAcl
@@ -1116,6 +1212,9 @@ types:
         200:
           body:
             application/json: Bucket
+      (commons.Id): storage.buckets.patch
+      (commons.LogicalStucture):
+      - Buckets
     get:
       securedBy:
         oath2:
@@ -1124,7 +1223,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Returns metadata for the specified bucket.
-      displayName: Get Buckets
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -1135,6 +1234,9 @@ types:
         projection?:
           type: string
           description: Set of properties to return. Defaults to noAcl.
+          (commons.EnumDescriptions):
+          - Include all properties.
+          - Omit acl and defaultObjectAcl properties.
           enum:
           - full
           - noAcl
@@ -1146,6 +1248,9 @@ types:
         200:
           body:
             application/json: Bucket
+      (commons.Id): storage.buckets.get
+      (commons.LogicalStucture):
+      - Buckets
     put:
       securedBy:
         oath2:
@@ -1153,7 +1258,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Updates a bucket.
-      displayName: Update Buckets
+      displayName: update
       is:
       - hasParameters
       queryParameters:
@@ -1164,6 +1269,9 @@ types:
         projection?:
           type: string
           description: Set of properties to return. Defaults to full.
+          (commons.EnumDescriptions):
+          - Include all properties.
+          - Omit acl and defaultObjectAcl properties.
           enum:
           - full
           - noAcl
@@ -1177,6 +1285,9 @@ types:
         200:
           body:
             application/json: Bucket
+      (commons.Id): storage.buckets.update
+      (commons.LogicalStucture):
+      - Buckets
     delete:
       securedBy:
         oath2:
@@ -1184,7 +1295,7 @@ types:
           - https://www.googleapis.com/auth/devstorage.full_control
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Permanently deletes an empty bucket.
-      displayName: Delete Buckets
+      displayName: delete
       is:
       - hasParameters
       queryParameters:
@@ -1196,6 +1307,9 @@ types:
           type: integer
           format: int64
           description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
+      (commons.Id): storage.buckets.delete
+      (commons.LogicalStucture):
+      - Buckets
   /{destinationBucket}:
     uriParameters:
       destinationBucket:
@@ -1215,7 +1329,7 @@ types:
                 - https://www.googleapis.com/auth/devstorage.full_control
                 - https://www.googleapis.com/auth/devstorage.read_write
             description: Concatenates a list of existing objects into a new object in the same bucket.
-            displayName: Compose Objects
+            displayName: compose
             is:
             - hasParameters
             queryParameters:
@@ -1233,6 +1347,9 @@ types:
               200:
                 body:
                   application/json: Object
+            (commons.Id): storage.objects.compose
+            (commons.LogicalStucture):
+            - Objects
   /{sourceBucket}:
     uriParameters:
       sourceBucket:
@@ -1264,7 +1381,7 @@ types:
                         - https://www.googleapis.com/auth/devstorage.full_control
                         - https://www.googleapis.com/auth/devstorage.read_write
                     description: Copies an object to a destination in the same location. Optionally overrides metadata.
-                    displayName: Copy Objects
+                    displayName: copy
                     is:
                     - hasParameters
                     queryParameters:
@@ -1303,6 +1420,9 @@ types:
                       projection?:
                         type: string
                         description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
+                        (commons.EnumDescriptions):
+                        - Include all properties.
+                        - Omit the acl property.
                         enum:
                         - full
                         - noAcl
@@ -1316,6 +1436,9 @@ types:
                       200:
                         body:
                           application/json: Object
+                    (commons.Id): storage.objects.copy
+                    (commons.LogicalStucture):
+                    - Objects
   post:
     securedBy:
       oath2:
@@ -1323,7 +1446,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.full_control
         - https://www.googleapis.com/auth/devstorage.read_write
     description: Creates a new bucket.
-    displayName: Insert Buckets
+    displayName: insert
     is:
     - hasParameters
     queryParameters:
@@ -1333,6 +1456,9 @@ types:
       projection?:
         type: string
         description: Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.
+        (commons.EnumDescriptions):
+        - Include all properties.
+        - Omit acl and defaultObjectAcl properties.
         enum:
         - full
         - noAcl
@@ -1342,6 +1468,9 @@ types:
       200:
         body:
           application/json: Bucket
+    (commons.Id): storage.buckets.insert
+    (commons.LogicalStucture):
+    - Buckets
   get:
     securedBy:
       oath2:
@@ -1350,7 +1479,7 @@ types:
         - https://www.googleapis.com/auth/devstorage.read_only
         - https://www.googleapis.com/auth/devstorage.read_write
     description: Retrieves a list of buckets for a given project.
-    displayName: List Buckets
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -1368,6 +1497,9 @@ types:
       projection?:
         type: string
         description: Set of properties to return. Defaults to noAcl.
+        (commons.EnumDescriptions):
+        - Include all properties.
+        - Omit acl and defaultObjectAcl properties.
         enum:
         - full
         - noAcl
@@ -1375,6 +1507,9 @@ types:
       200:
         body:
           application/json: Buckets
+    (commons.Id): storage.buckets.list
+    (commons.LogicalStucture):
+    - Buckets
 /channels:
   /stop:
     post:
@@ -1385,8 +1520,11 @@ types:
           - https://www.googleapis.com/auth/devstorage.read_only
           - https://www.googleapis.com/auth/devstorage.read_write
       description: Stop watching resources through this channel
-      displayName: Stop Channels
+      displayName: stop
       is:
       - hasParameters
       body:
         application/json: Channel
+      (commons.Id): storage.channels.stop
+      (commons.LogicalStucture):
+      - Channels

@@ -68,10 +68,13 @@ types:
           scopes:
           - https://www.googleapis.com/auth/apps.groups.migration
       description: Inserts a new mail into the archive of the Google group.
-      displayName: Insert Archive
+      displayName: insert
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Groups
+      (commons.Id): groupsmigration.archive.insert
+      (commons.LogicalStucture):
+      - Archive

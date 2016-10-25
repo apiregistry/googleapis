@@ -34,6 +34,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -696,7 +699,7 @@ types:
       /leads:
         post:
           description: Creates an advertiser lead for the given company ID.
-          displayName: Create Leads Companies
+          displayName: create
           is:
           - hasParameters
           body:
@@ -705,9 +708,13 @@ types:
             200:
               body:
                 application/json: CreateLeadResponse
+          (commons.Id): partners.companies.leads.create
+          (commons.LogicalStucture):
+          - Companies
+          - Leads
       get:
         description: Gets a company.
-        displayName: Get Companies
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -751,9 +758,12 @@ types:
           200:
             body:
               application/json: GetCompanyResponse
+        (commons.Id): partners.companies.get
+        (commons.LogicalStucture):
+        - Companies
     get:
       description: Lists companies.
-      displayName: List Companies
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -865,10 +875,13 @@ types:
         200:
           body:
             application/json: ListCompaniesResponse
+      (commons.Id): partners.companies.list
+      (commons.LogicalStucture):
+      - Companies
   /userStates:
     get:
       description: Lists states for current user.
-      displayName: List UserStates
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -897,10 +910,13 @@ types:
         200:
           body:
             application/json: ListUserStatesResponse
+      (commons.Id): partners.userStates.list
+      (commons.LogicalStucture):
+      - User States
   /clientMessages:log:
     post:
       description: Logs a generic message from the client, such as `Failed to render component`, `Profile page is running slow`, `More than 500 users have accessed this result.`, etc.
-      displayName: Log ClientMessages
+      displayName: log
       is:
       - hasParameters
       body:
@@ -909,10 +925,13 @@ types:
         200:
           body:
             application/json: LogMessageResponse
+      (commons.Id): partners.clientMessages.log
+      (commons.LogicalStucture):
+      - Client Messages
   /userEvents:log:
     post:
       description: Logs a user event.
-      displayName: Log UserEvents
+      displayName: log
       is:
       - hasParameters
       body:
@@ -921,3 +940,6 @@ types:
         200:
           body:
             application/json: LogUserEventResponse
+      (commons.Id): partners.userEvents.log
+      (commons.LogicalStucture):
+      - User Events

@@ -433,20 +433,23 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/blogger
               description: Gets one comment by id.
-              displayName: Get Comments
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Comment
+              (commons.Id): blogger.comments.get
+              (commons.LogicalStucture):
+              - Comments
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Retrieves the comments for a blog, possibly filtered.
-            displayName: List Comments
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -467,26 +470,32 @@ types:
               200:
                 body:
                   application/json: CommentList
+            (commons.Id): blogger.comments.list
+            (commons.LogicalStucture):
+            - Comments
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Get a post by id.
-          displayName: Get Posts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Post
+          (commons.Id): blogger.posts.get
+          (commons.LogicalStucture):
+          - Posts
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieves a list of posts, possibly filtered.
-        displayName: List Posts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -507,6 +516,9 @@ types:
           200:
             body:
               application/json: PostList
+        (commons.Id): blogger.posts.list
+        (commons.LogicalStucture):
+        - Posts
     /pages:
       /{pageId}:
         uriParameters:
@@ -519,20 +531,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Gets one blog page by id.
-          displayName: Get Pages
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Page
+          (commons.Id): blogger.pages.get
+          (commons.LogicalStucture):
+          - Pages
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieves pages for a blog, possibly filtered.
-        displayName: List Pages
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -543,19 +558,25 @@ types:
           200:
             body:
               application/json: PageList
+        (commons.Id): blogger.pages.list
+        (commons.LogicalStucture):
+        - Pages
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/blogger
       description: Gets one blog by id.
-      displayName: Get Blogs
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Blog
+      (commons.Id): blogger.blogs.get
+      (commons.LogicalStucture):
+      - Blogs
 /users:
   /{userId}:
     uriParameters:
@@ -569,23 +590,30 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieves a list of blogs, possibly filtered.
-        displayName: List Blogs Users
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: BlogList
+        (commons.Id): blogger.users.blogs.list
+        (commons.LogicalStucture):
+        - Users
+        - Blogs
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/blogger
       description: Gets one user by id.
-      displayName: Get Users
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: User
+      (commons.Id): blogger.users.get
+      (commons.LogicalStucture):
+      - Users

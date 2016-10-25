@@ -521,7 +521,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing template. This method supports patch semantics.
-          displayName: Patch Template
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -530,6 +530,9 @@ types:
             200:
               body:
                 application/json: Template
+          (commons.Id): fusiontables.template.patch
+          (commons.LogicalStucture):
+          - Template
         get:
           securedBy:
             oath2:
@@ -537,20 +540,23 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Retrieves a specific template by its id
-          displayName: Get Template
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Template
+          (commons.Id): fusiontables.template.get
+          (commons.LogicalStucture):
+          - Template
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing template
-          displayName: Update Template
+          displayName: update
           is:
           - hasParameters
           body:
@@ -559,22 +565,28 @@ types:
             200:
               body:
                 application/json: Template
+          (commons.Id): fusiontables.template.update
+          (commons.LogicalStucture):
+          - Template
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes a template
-          displayName: Delete Template
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): fusiontables.template.delete
+          (commons.LogicalStucture):
+          - Template
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Creates a new template for the table.
-        displayName: Insert Template
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -583,6 +595,9 @@ types:
           200:
             body:
               application/json: Template
+        (commons.Id): fusiontables.template.insert
+        (commons.LogicalStucture):
+        - Template
       get:
         securedBy:
           oath2:
@@ -590,7 +605,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of templates.
-        displayName: List Template
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -606,6 +621,9 @@ types:
           200:
             body:
               application/json: TemplateList
+        (commons.Id): fusiontables.template.list
+        (commons.LogicalStucture):
+        - Template
     /tasks:
       /{taskId}:
         uriParameters:
@@ -618,22 +636,28 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Retrieves a specific task by its id.
-          displayName: Get Task
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Task
+          (commons.Id): fusiontables.task.get
+          (commons.LogicalStucture):
+          - Task
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes the task, unless already started.
-          displayName: Delete Task
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): fusiontables.task.delete
+          (commons.LogicalStucture):
+          - Task
       get:
         securedBy:
           oath2:
@@ -641,7 +665,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of tasks.
-        displayName: List Task
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -659,6 +683,9 @@ types:
           200:
             body:
               application/json: TaskList
+        (commons.Id): fusiontables.task.list
+        (commons.LogicalStucture):
+        - Task
     /columns:
       /{columnId}:
         uriParameters:
@@ -671,7 +698,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates the name or type of an existing column. This method supports patch semantics.
-          displayName: Patch Column
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -680,6 +707,9 @@ types:
             200:
               body:
                 application/json: Column
+          (commons.Id): fusiontables.column.patch
+          (commons.LogicalStucture):
+          - Column
         get:
           securedBy:
             oath2:
@@ -687,20 +717,23 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Retrieves a specific column by its id.
-          displayName: Get Column
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Column
+          (commons.Id): fusiontables.column.get
+          (commons.LogicalStucture):
+          - Column
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates the name or type of an existing column.
-          displayName: Update Column
+          displayName: update
           is:
           - hasParameters
           body:
@@ -709,22 +742,28 @@ types:
             200:
               body:
                 application/json: Column
+          (commons.Id): fusiontables.column.update
+          (commons.LogicalStucture):
+          - Column
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes the column.
-          displayName: Delete Column
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): fusiontables.column.delete
+          (commons.LogicalStucture):
+          - Column
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Adds a new column to the table.
-        displayName: Insert Column
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -733,6 +772,9 @@ types:
           200:
             body:
               application/json: Column
+        (commons.Id): fusiontables.column.insert
+        (commons.LogicalStucture):
+        - Column
       get:
         securedBy:
           oath2:
@@ -740,7 +782,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of columns.
-        displayName: List Column
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -756,6 +798,9 @@ types:
           200:
             body:
               application/json: ColumnList
+        (commons.Id): fusiontables.column.list
+        (commons.LogicalStucture):
+        - Column
     /styles:
       /{styleId}:
         uriParameters:
@@ -769,7 +814,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing style. This method supports patch semantics.
-          displayName: Patch Style
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -778,6 +823,9 @@ types:
             200:
               body:
                 application/json: StyleSetting
+          (commons.Id): fusiontables.style.patch
+          (commons.LogicalStucture):
+          - Style
         get:
           securedBy:
             oath2:
@@ -785,20 +833,23 @@ types:
               - https://www.googleapis.com/auth/fusiontables
               - https://www.googleapis.com/auth/fusiontables.readonly
           description: Gets a specific style.
-          displayName: Get Style
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: StyleSetting
+          (commons.Id): fusiontables.style.get
+          (commons.LogicalStucture):
+          - Style
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Updates an existing style.
-          displayName: Update Style
+          displayName: update
           is:
           - hasParameters
           body:
@@ -807,22 +858,28 @@ types:
             200:
               body:
                 application/json: StyleSetting
+          (commons.Id): fusiontables.style.update
+          (commons.LogicalStucture):
+          - Style
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/fusiontables
           description: Deletes a style.
-          displayName: Delete Style
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): fusiontables.style.delete
+          (commons.LogicalStucture):
+          - Style
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Adds a new style for the table.
-        displayName: Insert Style
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -831,6 +888,9 @@ types:
           200:
             body:
               application/json: StyleSetting
+        (commons.Id): fusiontables.style.insert
+        (commons.LogicalStucture):
+        - Style
       get:
         securedBy:
           oath2:
@@ -838,7 +898,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Retrieves a list of styles.
-        displayName: List Style
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -854,6 +914,9 @@ types:
           200:
             body:
               application/json: StyleSettingList
+        (commons.Id): fusiontables.style.list
+        (commons.LogicalStucture):
+        - Style
     /import:
       post:
         securedBy:
@@ -861,7 +924,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/fusiontables
         description: Import more rows into a table.
-        displayName: ImportRows Table
+        displayName: import Rows
         is:
         - hasParameters
         queryParameters:
@@ -886,6 +949,9 @@ types:
           200:
             body:
               application/json: Import
+        (commons.Id): fusiontables.table.importRows
+        (commons.LogicalStucture):
+        - Table
     /copy:
       post:
         securedBy:
@@ -894,7 +960,7 @@ types:
             - https://www.googleapis.com/auth/fusiontables
             - https://www.googleapis.com/auth/fusiontables.readonly
         description: Copies a table.
-        displayName: Copy Table
+        displayName: copy
         is:
         - hasParameters
         queryParameters:
@@ -905,13 +971,16 @@ types:
           200:
             body:
               application/json: Table
+        (commons.Id): fusiontables.table.copy
+        (commons.LogicalStucture):
+        - Table
     patch:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated. This method supports patch semantics.
-      displayName: Patch Table
+      displayName: patch
       is:
       - hasParameters
       queryParameters:
@@ -924,6 +993,9 @@ types:
         200:
           body:
             application/json: Table
+      (commons.Id): fusiontables.table.patch
+      (commons.LogicalStucture):
+      - Table
     get:
       securedBy:
         oath2:
@@ -931,20 +1003,23 @@ types:
           - https://www.googleapis.com/auth/fusiontables
           - https://www.googleapis.com/auth/fusiontables.readonly
       description: Retrieves a specific table by its id.
-      displayName: Get Table
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Table
+      (commons.Id): fusiontables.table.get
+      (commons.LogicalStucture):
+      - Table
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated.
-      displayName: Update Table
+      displayName: update
       is:
       - hasParameters
       queryParameters:
@@ -957,15 +1032,21 @@ types:
         200:
           body:
             application/json: Table
+      (commons.Id): fusiontables.table.update
+      (commons.LogicalStucture):
+      - Table
     delete:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Deletes a table.
-      displayName: Delete Table
+      displayName: delete
       is:
       - hasParameters
+      (commons.Id): fusiontables.table.delete
+      (commons.LogicalStucture):
+      - Table
   /import:
     post:
       securedBy:
@@ -973,7 +1054,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/fusiontables
       description: Import a new table.
-      displayName: ImportTable Table
+      displayName: import Table
       is:
       - hasParameters
       queryParameters:
@@ -990,13 +1071,16 @@ types:
         200:
           body:
             application/json: Table
+      (commons.Id): fusiontables.table.importTable
+      (commons.LogicalStucture):
+      - Table
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/fusiontables
     description: Creates a new table.
-    displayName: Insert Table
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -1005,6 +1089,9 @@ types:
       200:
         body:
           application/json: Table
+    (commons.Id): fusiontables.table.insert
+    (commons.LogicalStucture):
+    - Table
   get:
     securedBy:
       oath2:
@@ -1012,7 +1099,7 @@ types:
         - https://www.googleapis.com/auth/fusiontables
         - https://www.googleapis.com/auth/fusiontables.readonly
     description: Retrieves a list of tables a user owns.
-    displayName: List Table
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -1028,6 +1115,9 @@ types:
       200:
         body:
           application/json: TableList
+    (commons.Id): fusiontables.table.list
+    (commons.LogicalStucture):
+    - Table
 /query:
   post:
     securedBy:
@@ -1036,7 +1126,7 @@ types:
         - https://www.googleapis.com/auth/fusiontables
         - https://www.googleapis.com/auth/fusiontables.readonly
     description: Executes an SQL SELECT/INSERT/UPDATE/DELETE/SHOW/DESCRIBE/CREATE statement.
-    displayName: Sql Query
+    displayName: sql
     is:
     - hasParameters
     queryParameters:
@@ -1053,6 +1143,9 @@ types:
       200:
         body:
           application/json: Sqlresponse
+    (commons.Id): fusiontables.query.sql
+    (commons.LogicalStucture):
+    - Query
   get:
     securedBy:
       oath2:
@@ -1060,7 +1153,7 @@ types:
         - https://www.googleapis.com/auth/fusiontables
         - https://www.googleapis.com/auth/fusiontables.readonly
     description: Executes an SQL SELECT/SHOW/DESCRIBE statement.
-    displayName: SqlGet Query
+    displayName: sql Get
     is:
     - hasParameters
     queryParameters:
@@ -1077,3 +1170,6 @@ types:
       200:
         body:
           application/json: Sqlresponse
+    (commons.Id): fusiontables.query.sqlGet
+    (commons.LogicalStucture):
+    - Query

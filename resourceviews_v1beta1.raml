@@ -222,7 +222,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: List the resources in the view.
-              displayName: Listresources RegionViews
+              displayName: listresources
               is:
               - hasParameters
               queryParameters:
@@ -241,6 +241,9 @@ types:
                 200:
                   body:
                     application/json: RegionViewsListResourcesResponse
+              (commons.Id): resourceviews.regionViews.listresources
+              (commons.LogicalStucture):
+              - Region Views
           /addResources:
             post:
               securedBy:
@@ -250,11 +253,14 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Add resources to the view.
-              displayName: Addresources RegionViews
+              displayName: addresources
               is:
               - hasParameters
               body:
                 application/json: RegionViewsAddResourcesRequest
+              (commons.Id): resourceviews.regionViews.addresources
+              (commons.LogicalStucture):
+              - Region Views
           /removeResources:
             post:
               securedBy:
@@ -264,11 +270,14 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Remove resources from the view.
-              displayName: Removeresources RegionViews
+              displayName: removeresources
               is:
               - hasParameters
               body:
                 application/json: RegionViewsRemoveResourcesRequest
+              (commons.Id): resourceviews.regionViews.removeresources
+              (commons.LogicalStucture):
+              - Region Views
           get:
             securedBy:
               oath2:
@@ -280,13 +289,16 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Get the information of a resource view.
-            displayName: Get RegionViews
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ResourceView
+            (commons.Id): resourceviews.regionViews.get
+            (commons.LogicalStucture):
+            - Region Views
           delete:
             securedBy:
               oath2:
@@ -295,9 +307,12 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Delete a resource view.
-            displayName: Delete RegionViews
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): resourceviews.regionViews.delete
+            (commons.LogicalStucture):
+            - Region Views
         post:
           securedBy:
             oath2:
@@ -306,7 +321,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Create a resource view.
-          displayName: Insert RegionViews
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -315,6 +330,9 @@ types:
             200:
               body:
                 application/json: RegionViewsInsertResponse
+          (commons.Id): resourceviews.regionViews.insert
+          (commons.LogicalStucture):
+          - Region Views
         get:
           securedBy:
             oath2:
@@ -326,7 +344,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: List resource views.
-          displayName: List RegionViews
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -345,6 +363,9 @@ types:
             200:
               body:
                 application/json: RegionViewsListResponse
+          (commons.Id): resourceviews.regionViews.list
+          (commons.LogicalStucture):
+          - Region Views
   /zones:
     /{zone}:
       uriParameters:
@@ -369,7 +390,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: List the resources of the resource view.
-              displayName: Listresources ZoneViews
+              displayName: listresources
               is:
               - hasParameters
               queryParameters:
@@ -388,6 +409,9 @@ types:
                 200:
                   body:
                     application/json: ZoneViewsListResourcesResponse
+              (commons.Id): resourceviews.zoneViews.listresources
+              (commons.LogicalStucture):
+              - Zone Views
           /addResources:
             post:
               securedBy:
@@ -397,11 +421,14 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Add resources to the view.
-              displayName: Addresources ZoneViews
+              displayName: addresources
               is:
               - hasParameters
               body:
                 application/json: ZoneViewsAddResourcesRequest
+              (commons.Id): resourceviews.zoneViews.addresources
+              (commons.LogicalStucture):
+              - Zone Views
           /removeResources:
             post:
               securedBy:
@@ -411,11 +438,14 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Remove resources from the view.
-              displayName: Removeresources ZoneViews
+              displayName: removeresources
               is:
               - hasParameters
               body:
                 application/json: ZoneViewsRemoveResourcesRequest
+              (commons.Id): resourceviews.zoneViews.removeresources
+              (commons.LogicalStucture):
+              - Zone Views
           get:
             securedBy:
               oath2:
@@ -427,13 +457,16 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Get the information of a zonal resource view.
-            displayName: Get ZoneViews
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ResourceView
+            (commons.Id): resourceviews.zoneViews.get
+            (commons.LogicalStucture):
+            - Zone Views
           delete:
             securedBy:
               oath2:
@@ -442,9 +475,12 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Delete a resource view.
-            displayName: Delete ZoneViews
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): resourceviews.zoneViews.delete
+            (commons.LogicalStucture):
+            - Zone Views
         post:
           securedBy:
             oath2:
@@ -453,7 +489,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Create a resource view.
-          displayName: Insert ZoneViews
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -462,6 +498,9 @@ types:
             200:
               body:
                 application/json: ZoneViewsInsertResponse
+          (commons.Id): resourceviews.zoneViews.insert
+          (commons.LogicalStucture):
+          - Zone Views
         get:
           securedBy:
             oath2:
@@ -473,7 +512,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: List resource views.
-          displayName: List ZoneViews
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -492,3 +531,6 @@ types:
             200:
               body:
                 application/json: ZoneViewsListResponse
+          (commons.Id): resourceviews.zoneViews.list
+          (commons.LogicalStucture):
+          - Zone Views

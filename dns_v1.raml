@@ -257,7 +257,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate ResourceRecordSets that have been created but not yet deleted.
-          displayName: List ResourceRecordSets
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -278,6 +278,9 @@ types:
             200:
               body:
                 application/json: ResourceRecordSetsListResponse
+          (commons.Id): dns.resourceRecordSets.list
+          (commons.LogicalStucture):
+          - Resource Record Sets
       /changes:
         /{changeId}:
           uriParameters:
@@ -293,13 +296,16 @@ types:
                 - https://www.googleapis.com/auth/ndev.clouddns.readonly
                 - https://www.googleapis.com/auth/ndev.clouddns.readwrite
             description: Fetch the representation of an existing Change.
-            displayName: Get Changes
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Change
+            (commons.Id): dns.changes.get
+            (commons.LogicalStucture):
+            - Changes
         post:
           securedBy:
             oath2:
@@ -307,7 +313,7 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Atomically update the ResourceRecordSet collection.
-          displayName: Create Changes
+          displayName: create
           is:
           - hasParameters
           body:
@@ -316,6 +322,9 @@ types:
             200:
               body:
                 application/json: Change
+          (commons.Id): dns.changes.create
+          (commons.LogicalStucture):
+          - Changes
         get:
           securedBy:
             oath2:
@@ -325,7 +334,7 @@ types:
               - https://www.googleapis.com/auth/ndev.clouddns.readonly
               - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           description: Enumerate Changes to a ResourceRecordSet collection.
-          displayName: List Changes
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -340,6 +349,8 @@ types:
               type: string
               default: changeSequence
               description: Sorting criterion. The only supported value is change sequence.
+              (commons.EnumDescriptions):
+              - ''
               enum:
               - changeSequence
             pageToken?:
@@ -349,6 +360,9 @@ types:
             200:
               body:
                 application/json: ChangesListResponse
+          (commons.Id): dns.changes.list
+          (commons.LogicalStucture):
+          - Changes
       get:
         securedBy:
           oath2:
@@ -358,13 +372,16 @@ types:
             - https://www.googleapis.com/auth/ndev.clouddns.readonly
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Fetch the representation of an existing ManagedZone.
-        displayName: Get ManagedZones
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ManagedZone
+        (commons.Id): dns.managedZones.get
+        (commons.LogicalStucture):
+        - Managed Zones
       delete:
         securedBy:
           oath2:
@@ -372,9 +389,12 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
         description: Delete a previously created ManagedZone.
-        displayName: Delete ManagedZones
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): dns.managedZones.delete
+        (commons.LogicalStucture):
+        - Managed Zones
     post:
       securedBy:
         oath2:
@@ -382,7 +402,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       description: Create a new ManagedZone.
-      displayName: Create ManagedZones
+      displayName: create
       is:
       - hasParameters
       body:
@@ -391,6 +411,9 @@ types:
         200:
           body:
             application/json: ManagedZone
+      (commons.Id): dns.managedZones.create
+      (commons.LogicalStucture):
+      - Managed Zones
     get:
       securedBy:
         oath2:
@@ -400,7 +423,7 @@ types:
           - https://www.googleapis.com/auth/ndev.clouddns.readonly
           - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       description: Enumerate ManagedZones that have been created but not yet deleted.
-      displayName: List ManagedZones
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -418,6 +441,9 @@ types:
         200:
           body:
             application/json: ManagedZonesListResponse
+      (commons.Id): dns.managedZones.list
+      (commons.LogicalStucture):
+      - Managed Zones
   get:
     securedBy:
       oath2:
@@ -427,10 +453,13 @@ types:
         - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - https://www.googleapis.com/auth/ndev.clouddns.readwrite
     description: Fetch the representation of an existing Project.
-    displayName: Get Projects
+    displayName: get
     is:
     - hasParameters
     responses:
       200:
         body:
           application/json: Project
+    (commons.Id): dns.projects.get
+    (commons.LogicalStucture):
+    - Projects

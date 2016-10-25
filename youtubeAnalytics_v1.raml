@@ -249,7 +249,7 @@ types:
         - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
         - https://www.googleapis.com/auth/yt-analytics.readonly
     description: Retrieve your YouTube Analytics reports.
-    displayName: Query Reports
+    displayName: query
     is:
     - hasParameters
     queryParameters:
@@ -301,6 +301,9 @@ types:
       200:
         body:
           application/json: ResultTable
+    (commons.Id): youtubeAnalytics.reports.query
+    (commons.LogicalStucture):
+    - Reports
 /batchReportDefinitions:
   get:
     securedBy:
@@ -309,7 +312,7 @@ types:
         - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
         - https://www.googleapis.com/auth/yt-analytics.readonly
     description: Retrieves a list of available batch report definitions.
-    displayName: List BatchReportDefinitions
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -320,6 +323,9 @@ types:
       200:
         body:
           application/json: BatchReportDefinitionList
+    (commons.Id): youtubeAnalytics.batchReportDefinitions.list
+    (commons.LogicalStucture):
+    - Batch Report Definitions
 /groups:
   post:
     securedBy:
@@ -328,7 +334,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtubepartner
     description: Creates a group.
-    displayName: Insert Groups
+    displayName: insert
     is:
     - hasParameters
     queryParameters:
@@ -344,6 +350,9 @@ types:
       200:
         body:
           application/json: Group
+    (commons.Id): youtubeAnalytics.groups.insert
+    (commons.LogicalStucture):
+    - Groups
   put:
     securedBy:
       oath2:
@@ -351,7 +360,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtubepartner
     description: Modifies a group. For example, you could change a group's title.
-    displayName: Update Groups
+    displayName: update
     is:
     - hasParameters
     queryParameters:
@@ -367,6 +376,9 @@ types:
       200:
         body:
           application/json: Group
+    (commons.Id): youtubeAnalytics.groups.update
+    (commons.LogicalStucture):
+    - Groups
   get:
     securedBy:
       oath2:
@@ -376,7 +388,7 @@ types:
         - https://www.googleapis.com/auth/youtubepartner
         - https://www.googleapis.com/auth/yt-analytics.readonly
     description: Returns a collection of groups that match the API request parameters. For example, you can retrieve all groups that the authenticated user owns, or you can retrieve one or more groups by their unique IDs.
-    displayName: List Groups
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -399,6 +411,9 @@ types:
       200:
         body:
           application/json: GroupListResponse
+    (commons.Id): youtubeAnalytics.groups.list
+    (commons.LogicalStucture):
+    - Groups
   delete:
     securedBy:
       oath2:
@@ -406,7 +421,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtubepartner
     description: Deletes a group.
-    displayName: Delete Groups
+    displayName: delete
     is:
     - hasParameters
     queryParameters:
@@ -419,6 +434,9 @@ types:
       id:
         type: string
         description: The id parameter specifies the YouTube group ID for the group that is being deleted.
+    (commons.Id): youtubeAnalytics.groups.delete
+    (commons.LogicalStucture):
+    - Groups
 /groupItems:
   post:
     securedBy:
@@ -427,7 +445,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtubepartner
     description: Creates a group item.
-    displayName: Insert GroupItems
+    displayName: insert
     is:
     - hasParameters
     queryParameters:
@@ -443,6 +461,9 @@ types:
       200:
         body:
           application/json: GroupItem
+    (commons.Id): youtubeAnalytics.groupItems.insert
+    (commons.LogicalStucture):
+    - Group Items
   get:
     securedBy:
       oath2:
@@ -452,7 +473,7 @@ types:
         - https://www.googleapis.com/auth/youtubepartner
         - https://www.googleapis.com/auth/yt-analytics.readonly
     description: Returns a collection of group items that match the API request parameters.
-    displayName: List GroupItems
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -469,6 +490,9 @@ types:
       200:
         body:
           application/json: GroupItemListResponse
+    (commons.Id): youtubeAnalytics.groupItems.list
+    (commons.LogicalStucture):
+    - Group Items
   delete:
     securedBy:
       oath2:
@@ -476,7 +500,7 @@ types:
         - https://www.googleapis.com/auth/youtube
         - https://www.googleapis.com/auth/youtubepartner
     description: Removes an item from a group.
-    displayName: Delete GroupItems
+    displayName: delete
     is:
     - hasParameters
     queryParameters:
@@ -489,6 +513,9 @@ types:
       id:
         type: string
         description: The id parameter specifies the YouTube group item ID for the group that is being deleted.
+    (commons.Id): youtubeAnalytics.groupItems.delete
+    (commons.LogicalStucture):
+    - Group Items
 /batchReports:
   get:
     securedBy:
@@ -497,7 +524,7 @@ types:
         - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
         - https://www.googleapis.com/auth/yt-analytics.readonly
     description: Retrieves a list of processed batch reports.
-    displayName: List BatchReports
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -511,3 +538,6 @@ types:
       200:
         body:
           application/json: BatchReportList
+    (commons.Id): youtubeAnalytics.batchReports.list
+    (commons.LogicalStucture):
+    - Batch Reports

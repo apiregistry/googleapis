@@ -280,20 +280,23 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adexchange.buyer
         description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
-        displayName: Get Creatives
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Creative
+        (commons.Id): adexchangebuyer.creatives.get
+        (commons.LogicalStucture):
+        - Creatives
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Submit a new creative.
-    displayName: Insert Creatives
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -302,19 +305,26 @@ types:
       200:
         body:
           application/json: Creative
+    (commons.Id): adexchangebuyer.creatives.insert
+    (commons.LogicalStucture):
+    - Creatives
   get:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
-    displayName: List Creatives
+    displayName: list
     is:
     - hasParameters
     queryParameters:
       statusFilter?:
         type: string
         description: When specified, only creatives having the given status are returned.
+        (commons.EnumDescriptions):
+        - Creatives which have been approved.
+        - Creatives which have been disapproved.
+        - Creatives whose status is not yet checked.
         enum:
         - approved
         - disapproved
@@ -332,6 +342,9 @@ types:
       200:
         body:
           application/json: CreativesList
+    (commons.Id): adexchangebuyer.creatives.list
+    (commons.LogicalStucture):
+    - Creatives
 /accounts:
   /{id}:
     uriParameters:
@@ -345,7 +358,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account. This method supports patch semantics.
-      displayName: Patch Accounts
+      displayName: patch
       is:
       - hasParameters
       body:
@@ -354,26 +367,32 @@ types:
         200:
           body:
             application/json: Account
+      (commons.Id): adexchangebuyer.accounts.patch
+      (commons.LogicalStucture):
+      - Accounts
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Gets one account by ID.
-      displayName: Get Accounts
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Account
+      (commons.Id): adexchangebuyer.accounts.get
+      (commons.LogicalStucture):
+      - Accounts
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/adexchange.buyer
       description: Updates an existing account.
-      displayName: Update Accounts
+      displayName: update
       is:
       - hasParameters
       body:
@@ -382,16 +401,22 @@ types:
         200:
           body:
             application/json: Account
+      (commons.Id): adexchangebuyer.accounts.update
+      (commons.LogicalStucture):
+      - Accounts
   get:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/adexchange.buyer
     description: Retrieves the authenticated user's list of accounts.
-    displayName: List Accounts
+    displayName: list
     is:
     - hasParameters
     responses:
       200:
         body:
           application/json: AccountsList
+    (commons.Id): adexchangebuyer.accounts.list
+    (commons.LogicalStucture):
+    - Accounts

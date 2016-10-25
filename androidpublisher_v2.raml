@@ -660,7 +660,7 @@ types:
   /entitlements:
     get:
       description: Lists the user's current inapp item or subscription entitlements
-      displayName: List Entitlements
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -679,6 +679,9 @@ types:
         200:
           body:
             application/json: EntitlementsListResponse
+      (commons.Id): androidpublisher.entitlements.list
+      (commons.LogicalStucture):
+      - Entitlements
   /reviews:
     /{reviewId}:
       uriParameters:
@@ -690,13 +693,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns a single review.
-        displayName: Get Reviews
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Review
+        (commons.Id): androidpublisher.reviews.get
+        (commons.LogicalStucture):
+        - Reviews
     /{reviewId}:reply:
       uriParameters:
         reviewId:
@@ -707,7 +713,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Reply to a single review, or update an existing reply.
-        displayName: Reply Reviews
+        displayName: reply
         is:
         - hasParameters
         body:
@@ -716,13 +722,16 @@ types:
           200:
             body:
               application/json: ReviewsReplyResponse
+        (commons.Id): androidpublisher.reviews.reply
+        (commons.LogicalStucture):
+        - Reviews
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Returns a list of reviews.
-      displayName: List Reviews
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -738,6 +747,9 @@ types:
         200:
           body:
             application/json: ReviewsListResponse
+      (commons.Id): androidpublisher.reviews.list
+      (commons.LogicalStucture):
+      - Reviews
   /purchases:
     /subscriptions:
       /{subscriptionId}:
@@ -757,9 +769,13 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
-              displayName: Cancel Subscriptions Purchases
+              displayName: cancel
               is:
               - hasParameters
+              (commons.Id): androidpublisher.purchases.subscriptions.cancel
+              (commons.LogicalStucture):
+              - Purchases
+              - Subscriptions
           /{token}:defer:
             uriParameters:
               token:
@@ -771,7 +787,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Defers a user's subscription purchase until a specified future expiration time.
-              displayName: Defer Subscriptions Purchases
+              displayName: defer
               is:
               - hasParameters
               body:
@@ -780,6 +796,10 @@ types:
                 200:
                   body:
                     application/json: SubscriptionPurchasesDeferResponse
+              (commons.Id): androidpublisher.purchases.subscriptions.defer
+              (commons.LogicalStucture):
+              - Purchases
+              - Subscriptions
           /{token}:
             uriParameters:
               token:
@@ -791,13 +811,17 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Checks whether a user's subscription purchase is valid and returns its expiry time.
-              displayName: Get Subscriptions Purchases
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: SubscriptionPurchase
+              (commons.Id): androidpublisher.purchases.subscriptions.get
+              (commons.LogicalStucture):
+              - Purchases
+              - Subscriptions
           /{token}:revoke:
             uriParameters:
               token:
@@ -809,9 +833,13 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.
-              displayName: Revoke Subscriptions Purchases
+              displayName: revoke
               is:
               - hasParameters
+              (commons.Id): androidpublisher.purchases.subscriptions.revoke
+              (commons.LogicalStucture):
+              - Purchases
+              - Subscriptions
           /{token}:refund:
             uriParameters:
               token:
@@ -823,9 +851,13 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.
-              displayName: Refund Subscriptions Purchases
+              displayName: refund
               is:
               - hasParameters
+              (commons.Id): androidpublisher.purchases.subscriptions.refund
+              (commons.LogicalStucture):
+              - Purchases
+              - Subscriptions
     /products:
       /{productId}:
         uriParameters:
@@ -844,13 +876,17 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Checks the purchase and consumption status of an inapp item.
-              displayName: Get Products Purchases
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: ProductPurchase
+              (commons.Id): androidpublisher.purchases.products.get
+              (commons.LogicalStucture):
+              - Purchases
+              - Products
   /edits:
     /{editId}:
       uriParameters:
@@ -867,6 +903,16 @@ types:
             uriParameters:
               imageType:
                 type: string
+                (commons.EnumDescriptions):
+                - ''
+                - ''
+                - ''
+                - ''
+                - ''
+                - ''
+                - ''
+                - ''
+                - ''
                 enum:
                 - featureGraphic
                 - icon
@@ -888,55 +934,71 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Deletes the image (specified by id) from the edit.
-                displayName: Delete Images Edits
+                displayName: delete
                 is:
                 - hasParameters
+                (commons.Id): androidpublisher.edits.images.delete
+                (commons.LogicalStucture):
+                - Edits
+                - Images
             post:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Uploads a new image and adds it to the list of images for the specified language and image type.
-              displayName: Upload Images Edits
+              displayName: upload
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: ImagesUploadResponse
+              (commons.Id): androidpublisher.edits.images.upload
+              (commons.LogicalStucture):
+              - Edits
+              - Images
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Deletes all images for the specified language and image type.
-              displayName: Deleteall Images Edits
+              displayName: deleteall
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: ImagesDeleteAllResponse
+              (commons.Id): androidpublisher.edits.images.deleteall
+              (commons.LogicalStucture):
+              - Edits
+              - Images
             get:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Lists all images for the specified language and image type.
-              displayName: List Images Edits
+              displayName: list
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: ImagesListResponse
+              (commons.Id): androidpublisher.edits.images.list
+              (commons.LogicalStucture):
+              - Edits
+              - Images
           patch:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Creates or updates a localized store listing. This method supports patch semantics.
-            displayName: Patch Listings Edits
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -945,26 +1007,34 @@ types:
               200:
                 body:
                   application/json: Listing
+            (commons.Id): androidpublisher.edits.listings.patch
+            (commons.LogicalStucture):
+            - Edits
+            - Listings
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Fetches information about a localized store listing.
-            displayName: Get Listings Edits
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Listing
+            (commons.Id): androidpublisher.edits.listings.get
+            (commons.LogicalStucture):
+            - Edits
+            - Listings
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Creates or updates a localized store listing.
-            displayName: Update Listings Edits
+            displayName: update
             is:
             - hasParameters
             body:
@@ -973,37 +1043,53 @@ types:
               200:
                 body:
                   application/json: Listing
+            (commons.Id): androidpublisher.edits.listings.update
+            (commons.LogicalStucture):
+            - Edits
+            - Listings
           delete:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Deletes the specified localized store listing from an edit.
-            displayName: Delete Listings Edits
+            displayName: delete
             is:
             - hasParameters
+            (commons.Id): androidpublisher.edits.listings.delete
+            (commons.LogicalStucture):
+            - Edits
+            - Listings
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Deletes all localized listings from an edit.
-          displayName: Deleteall Listings Edits
+          displayName: deleteall
           is:
           - hasParameters
+          (commons.Id): androidpublisher.edits.listings.deleteall
+          (commons.LogicalStucture):
+          - Edits
+          - Listings
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Returns all of the localized store listings attached to this edit.
-          displayName: List Listings Edits
+          displayName: list
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ListingsListResponse
+          (commons.Id): androidpublisher.edits.listings.list
+          (commons.LogicalStucture):
+          - Edits
+          - Listings
       /apks:
         /{apkVersionCode}:
           uriParameters:
@@ -1016,6 +1102,8 @@ types:
               uriParameters:
                 deobfuscationFileType:
                   type: string
+                  (commons.EnumDescriptions):
+                  - ''
                   enum:
                   - proguard
               post:
@@ -1024,18 +1112,25 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Uploads the deobfuscation file of the specified APK. If a deobfuscation file already exists, it will be replaced.
-                displayName: Upload Deobfuscationfiles Edits
+                displayName: upload
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: DeobfuscationFilesUploadResponse
+                (commons.Id): androidpublisher.edits.deobfuscationfiles.upload
+                (commons.LogicalStucture):
+                - Edits
+                - Deobfuscationfiles
           /expansionFiles:
             /{expansionFileType}:
               uriParameters:
                 expansionFileType:
                   type: string
+                  (commons.EnumDescriptions):
+                  - ''
+                  - ''
                   enum:
                   - main
                   - patch
@@ -1045,7 +1140,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method. This method supports patch semantics.
-                displayName: Patch Expansionfiles Edits
+                displayName: patch
                 is:
                 - hasParameters
                 body:
@@ -1054,39 +1149,51 @@ types:
                   200:
                     body:
                       application/json: ExpansionFile
+                (commons.Id): androidpublisher.edits.expansionfiles.patch
+                (commons.LogicalStucture):
+                - Edits
+                - Expansionfiles
               post:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Uploads and attaches a new Expansion File to the APK specified.
-                displayName: Upload Expansionfiles Edits
+                displayName: upload
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ExpansionFilesUploadResponse
+                (commons.Id): androidpublisher.edits.expansionfiles.upload
+                (commons.LogicalStucture):
+                - Edits
+                - Expansionfiles
               get:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Fetches the Expansion File configuration for the APK specified.
-                displayName: Get Expansionfiles Edits
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ExpansionFile
+                (commons.Id): androidpublisher.edits.expansionfiles.get
+                (commons.LogicalStucture):
+                - Edits
+                - Expansionfiles
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method.
-                displayName: Update Expansionfiles Edits
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -1095,6 +1202,10 @@ types:
                   200:
                     body:
                       application/json: ExpansionFile
+                (commons.Id): androidpublisher.edits.expansionfiles.update
+                (commons.LogicalStucture):
+                - Edits
+                - Expansionfiles
           /listings:
             /{language}:
               uriParameters:
@@ -1107,7 +1218,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Updates or creates the APK-specific localized listing for a specified APK and language code. This method supports patch semantics.
-                displayName: Patch Apklistings Edits
+                displayName: patch
                 is:
                 - hasParameters
                 body:
@@ -1116,26 +1227,34 @@ types:
                   200:
                     body:
                       application/json: ApkListing
+                (commons.Id): androidpublisher.edits.apklistings.patch
+                (commons.LogicalStucture):
+                - Edits
+                - Apklistings
               get:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Fetches the APK-specific localized listing for a specified APK and language code.
-                displayName: Get Apklistings Edits
+                displayName: get
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: ApkListing
+                (commons.Id): androidpublisher.edits.apklistings.get
+                (commons.LogicalStucture):
+                - Edits
+                - Apklistings
               put:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Updates or creates the APK-specific localized listing for a specified APK and language code.
-                displayName: Update Apklistings Edits
+                displayName: update
                 is:
                 - hasParameters
                 body:
@@ -1144,37 +1263,53 @@ types:
                   200:
                     body:
                       application/json: ApkListing
+                (commons.Id): androidpublisher.edits.apklistings.update
+                (commons.LogicalStucture):
+                - Edits
+                - Apklistings
               delete:
                 securedBy:
                   oath2:
                     scopes:
                     - https://www.googleapis.com/auth/androidpublisher
                 description: Deletes the APK-specific localized listing for a specified APK and language code.
-                displayName: Delete Apklistings Edits
+                displayName: delete
                 is:
                 - hasParameters
+                (commons.Id): androidpublisher.edits.apklistings.delete
+                (commons.LogicalStucture):
+                - Edits
+                - Apklistings
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Deletes all the APK-specific localized listings for a specified APK.
-              displayName: Deleteall Apklistings Edits
+              displayName: deleteall
               is:
               - hasParameters
+              (commons.Id): androidpublisher.edits.apklistings.deleteall
+              (commons.LogicalStucture):
+              - Edits
+              - Apklistings
             get:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/androidpublisher
               description: Lists all the APK-specific localized listings for a specified APK.
-              displayName: List Apklistings Edits
+              displayName: list
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: ApkListingsListResponse
+              (commons.Id): androidpublisher.edits.apklistings.list
+              (commons.LogicalStucture):
+              - Edits
+              - Apklistings
         /externallyHosted:
           post:
             securedBy:
@@ -1182,7 +1317,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Google Play for Work whose application is configured to restrict distribution to the enterprise domain.
-            displayName: Addexternallyhosted Apks Edits
+            displayName: addexternallyhosted
             is:
             - hasParameters
             body:
@@ -1191,35 +1326,52 @@ types:
               200:
                 body:
                   application/json: ApksAddExternallyHostedResponse
+            (commons.Id): androidpublisher.edits.apks.addexternallyhosted
+            (commons.LogicalStucture):
+            - Edits
+            - Apks
         post:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
-          displayName: Upload Apks Edits
+          displayName: upload
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Apk
+          (commons.Id): androidpublisher.edits.apks.upload
+          (commons.LogicalStucture):
+          - Edits
+          - Apks
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
-          displayName: List Apks Edits
+          displayName: list
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ApksListResponse
+          (commons.Id): androidpublisher.edits.apks.list
+          (commons.LogicalStucture):
+          - Edits
+          - Apks
       /testers:
         /{track}:
           uriParameters:
             track:
               type: string
+              (commons.EnumDescriptions):
+              - ''
+              - ''
+              - ''
+              - ''
               enum:
               - alpha
               - beta
@@ -1230,7 +1382,7 @@ types:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
-            displayName: Patch Testers Edits
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -1239,24 +1391,32 @@ types:
               200:
                 body:
                   application/json: Testers
+            (commons.Id): androidpublisher.edits.testers.patch
+            (commons.LogicalStucture):
+            - Edits
+            - Testers
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
-            displayName: Get Testers Edits
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Testers
+            (commons.Id): androidpublisher.edits.testers.get
+            (commons.LogicalStucture):
+            - Edits
+            - Testers
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
-            displayName: Update Testers Edits
+            displayName: update
             is:
             - hasParameters
             body:
@@ -1265,6 +1425,10 @@ types:
               200:
                 body:
                   application/json: Testers
+            (commons.Id): androidpublisher.edits.testers.update
+            (commons.LogicalStucture):
+            - Edits
+            - Testers
       /details:
         patch:
           securedBy:
@@ -1272,7 +1436,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Updates app details for this edit. This method supports patch semantics.
-          displayName: Patch Details Edits
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -1281,26 +1445,34 @@ types:
             200:
               body:
                 application/json: AppDetails
+          (commons.Id): androidpublisher.edits.details.patch
+          (commons.LogicalStucture):
+          - Edits
+          - Details
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Fetches app details for this edit. This includes the default language and developer support contact information.
-          displayName: Get Details Edits
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AppDetails
+          (commons.Id): androidpublisher.edits.details.get
+          (commons.LogicalStucture):
+          - Edits
+          - Details
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Updates app details for this edit.
-          displayName: Update Details Edits
+          displayName: update
           is:
           - hasParameters
           body:
@@ -1309,12 +1481,21 @@ types:
             200:
               body:
                 application/json: AppDetails
+          (commons.Id): androidpublisher.edits.details.update
+          (commons.LogicalStucture):
+          - Edits
+          - Details
       /tracks:
         /{track}:
           uriParameters:
             track:
               type: string
               description: The track type to read or modify.
+              (commons.EnumDescriptions):
+              - ''
+              - ''
+              - ''
+              - ''
               enum:
               - alpha
               - beta
@@ -1326,7 +1507,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume. This method supports patch semantics.
-            displayName: Patch Tracks Edits
+            displayName: patch
             is:
             - hasParameters
             body:
@@ -1335,26 +1516,34 @@ types:
               200:
                 body:
                   application/json: Track
+            (commons.Id): androidpublisher.edits.tracks.patch
+            (commons.LogicalStucture):
+            - Edits
+            - Tracks
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Fetches the track configuration for the specified track type. Includes the APK version codes that are in this track.
-            displayName: Get Tracks Edits
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Track
+            (commons.Id): androidpublisher.edits.tracks.get
+            (commons.LogicalStucture):
+            - Edits
+            - Tracks
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/androidpublisher
             description: Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume.
-            displayName: Update Tracks Edits
+            displayName: update
             is:
             - hasParameters
             body:
@@ -1363,41 +1552,55 @@ types:
               200:
                 body:
                   application/json: Track
+            (commons.Id): androidpublisher.edits.tracks.update
+            (commons.LogicalStucture):
+            - Edits
+            - Tracks
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/androidpublisher
           description: Lists all the track configurations for this edit.
-          displayName: List Tracks Edits
+          displayName: list
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: TracksListResponse
+          (commons.Id): androidpublisher.edits.tracks.list
+          (commons.LogicalStucture):
+          - Edits
+          - Tracks
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns information about the edit specified. Calls will fail if the edit is no long active (e.g. has been deleted, superseded or expired).
-        displayName: Get Edits
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: AppEdit
+        (commons.Id): androidpublisher.edits.get
+        (commons.LogicalStucture):
+        - Edits
       delete:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Deletes an edit for an app. Creating a new edit will automatically delete any of your previous edits so this method need only be called if you want to preemptively abandon an edit.
-        displayName: Delete Edits
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): androidpublisher.edits.delete
+        (commons.LogicalStucture):
+        - Edits
     /{editId}:commit:
       uriParameters:
         editId:
@@ -1409,13 +1612,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Commits/applies the changes made in this edit back to the app.
-        displayName: Commit Edits
+        displayName: commit
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: AppEdit
+        (commons.Id): androidpublisher.edits.commit
+        (commons.LogicalStucture):
+        - Edits
     /{editId}:validate:
       uriParameters:
         editId:
@@ -1427,20 +1633,23 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.
-        displayName: Validate Edits
+        displayName: validate
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: AppEdit
+        (commons.Id): androidpublisher.edits.validate
+        (commons.LogicalStucture):
+        - Edits
     post:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Creates a new edit for an app, populated with the app's current state.
-      displayName: Insert Edits
+      displayName: insert
       is:
       - hasParameters
       body:
@@ -1449,6 +1658,9 @@ types:
         200:
           body:
             application/json: AppEdit
+      (commons.Id): androidpublisher.edits.insert
+      (commons.LogicalStucture):
+      - Edits
   /inappproducts:
     /{sku}:
       uriParameters:
@@ -1461,7 +1673,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Updates the details of an in-app product. This method supports patch semantics.
-        displayName: Patch Inappproducts
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -1474,26 +1686,32 @@ types:
           200:
             body:
               application/json: InAppProduct
+        (commons.Id): androidpublisher.inappproducts.patch
+        (commons.LogicalStucture):
+        - Inappproducts
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Returns information about the in-app product specified.
-        displayName: Get Inappproducts
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: InAppProduct
+        (commons.Id): androidpublisher.inappproducts.get
+        (commons.LogicalStucture):
+        - Inappproducts
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Updates the details of an in-app product.
-        displayName: Update Inappproducts
+        displayName: update
         is:
         - hasParameters
         queryParameters:
@@ -1506,22 +1724,28 @@ types:
           200:
             body:
               application/json: InAppProduct
+        (commons.Id): androidpublisher.inappproducts.update
+        (commons.LogicalStucture):
+        - Inappproducts
       delete:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/androidpublisher
         description: Delete an in-app product for an app.
-        displayName: Delete Inappproducts
+        displayName: delete
         is:
         - hasParameters
+        (commons.Id): androidpublisher.inappproducts.delete
+        (commons.LogicalStucture):
+        - Inappproducts
     post:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: Creates a new in-app product for an app.
-      displayName: Insert Inappproducts
+      displayName: insert
       is:
       - hasParameters
       queryParameters:
@@ -1534,13 +1758,16 @@ types:
         200:
           body:
             application/json: InAppProduct
+      (commons.Id): androidpublisher.inappproducts.insert
+      (commons.LogicalStucture):
+      - Inappproducts
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
       description: List all the in-app products for an Android app, both subscriptions and managed in-app products..
-      displayName: List Inappproducts
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1556,6 +1783,9 @@ types:
         200:
           body:
             application/json: InappproductsListResponse
+      (commons.Id): androidpublisher.inappproducts.list
+      (commons.LogicalStucture):
+      - Inappproducts
 /inappproducts:
   /batch:
     post:
@@ -1563,7 +1793,7 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/androidpublisher
-      displayName: Batch Inappproducts
+      displayName: batch
       is:
       - hasParameters
       body:
@@ -1572,3 +1802,6 @@ types:
         200:
           body:
             application/json: InappproductsBatchResponse
+      (commons.Id): androidpublisher.inappproducts.batch
+      (commons.LogicalStucture):
+      - Inappproducts

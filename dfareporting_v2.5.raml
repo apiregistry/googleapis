@@ -6488,7 +6488,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Runs a report.
-            displayName: Run Reports
+            displayName: run
             is:
             - hasParameters
             queryParameters:
@@ -6499,6 +6499,9 @@ types:
               200:
                 body:
                   application/json: File
+            (commons.Id): dfareporting.reports.run
+            (commons.LogicalStucture):
+            - Reports
         /files:
           /{fileId}:
             uriParameters:
@@ -6512,20 +6515,24 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfareporting
               description: Retrieves a report file.
-              displayName: Get Files Reports
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: File
+              (commons.Id): dfareporting.reports.files.get
+              (commons.LogicalStucture):
+              - Reports
+              - Files
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Lists files for a report.
-            displayName: List Files Reports
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -6539,6 +6546,9 @@ types:
                 type: string
                 default: DESCENDING
                 description: Order of sorted results, default is 'DESCENDING'.
+                (commons.EnumDescriptions):
+                - Ascending order.
+                - Descending order.
                 enum:
                 - ASCENDING
                 - DESCENDING
@@ -6546,6 +6556,9 @@ types:
                 type: string
                 default: LAST_MODIFIED_TIME
                 description: The field by which to sort the list.
+                (commons.EnumDescriptions):
+                - Sort by file ID.
+                - Sort by 'lastmodifiedAt' field.
                 enum:
                 - ID
                 - LAST_MODIFIED_TIME
@@ -6556,13 +6569,17 @@ types:
               200:
                 body:
                   application/json: FileList
+            (commons.Id): dfareporting.reports.files.list
+            (commons.LogicalStucture):
+            - Reports
+            - Files
         patch:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Updates a report. This method supports patch semantics.
-          displayName: Patch Reports
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -6571,26 +6588,32 @@ types:
             200:
               body:
                 application/json: Report
+          (commons.Id): dfareporting.reports.patch
+          (commons.LogicalStucture):
+          - Reports
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves a report by its ID.
-          displayName: Get Reports
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Report
+          (commons.Id): dfareporting.reports.get
+          (commons.LogicalStucture):
+          - Reports
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Updates a report.
-          displayName: Update Reports
+          displayName: update
           is:
           - hasParameters
           body:
@@ -6599,15 +6622,21 @@ types:
             200:
               body:
                 application/json: Report
+          (commons.Id): dfareporting.reports.update
+          (commons.LogicalStucture):
+          - Reports
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Deletes a report by its ID.
-          displayName: Delete Reports
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.reports.delete
+          (commons.LogicalStucture):
+          - Reports
       /compatiblefields:
         /query:
           post:
@@ -6616,7 +6645,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfareporting
             description: Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.
-            displayName: Query CompatibleFields Reports
+            displayName: query
             is:
             - hasParameters
             body:
@@ -6625,13 +6654,17 @@ types:
               200:
                 body:
                   application/json: CompatibleFields
+            (commons.Id): dfareporting.reports.compatibleFields.query
+            (commons.LogicalStucture):
+            - Reports
+            - Compatible Fields
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Creates a report.
-        displayName: Insert Reports
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -6640,13 +6673,16 @@ types:
           200:
             body:
               application/json: Report
+        (commons.Id): dfareporting.reports.insert
+        (commons.LogicalStucture):
+        - Reports
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Retrieves list of reports.
-        displayName: List Reports
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -6660,6 +6696,9 @@ types:
             type: string
             default: MINE
             description: The scope that defines which results are returned, default is 'MINE'.
+            (commons.EnumDescriptions):
+            - All reports in account.
+            - My reports.
             enum:
             - ALL
             - MINE
@@ -6667,6 +6706,9 @@ types:
             type: string
             default: DESCENDING
             description: Order of sorted results, default is 'DESCENDING'.
+            (commons.EnumDescriptions):
+            - Ascending order.
+            - Descending order.
             enum:
             - ASCENDING
             - DESCENDING
@@ -6674,6 +6716,10 @@ types:
             type: string
             default: LAST_MODIFIED_TIME
             description: The field by which to sort the list.
+            (commons.EnumDescriptions):
+            - Sort by report ID.
+            - Sort by 'lastModifiedTime' field.
+            - Sort by name of reports.
             enum:
             - ID
             - LAST_MODIFIED_TIME
@@ -6685,6 +6731,9 @@ types:
           200:
             body:
               application/json: ReportList
+        (commons.Id): dfareporting.reports.list
+        (commons.LogicalStucture):
+        - Reports
     /contentCategories:
       /{id}:
         uriParameters:
@@ -6698,29 +6747,35 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one content category by ID.
-          displayName: Get ContentCategories
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ContentCategory
+          (commons.Id): dfareporting.contentCategories.get
+          (commons.LogicalStucture):
+          - Content Categories
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing content category.
-          displayName: Delete ContentCategories
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.contentCategories.delete
+          (commons.LogicalStucture):
+          - Content Categories
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing content category. This method supports patch semantics.
-        displayName: Patch ContentCategories
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -6734,13 +6789,16 @@ types:
           200:
             body:
               application/json: ContentCategory
+        (commons.Id): dfareporting.contentCategories.patch
+        (commons.LogicalStucture):
+        - Content Categories
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new content category.
-        displayName: Insert ContentCategories
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -6749,13 +6807,16 @@ types:
           200:
             body:
               application/json: ContentCategory
+        (commons.Id): dfareporting.contentCategories.insert
+        (commons.LogicalStucture):
+        - Content Categories
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing content category.
-        displayName: Update ContentCategories
+        displayName: update
         is:
         - hasParameters
         body:
@@ -6764,13 +6825,16 @@ types:
           200:
             body:
               application/json: ContentCategory
+        (commons.Id): dfareporting.contentCategories.update
+        (commons.LogicalStucture):
+        - Content Categories
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of content categories, possibly filtered.
-        displayName: List ContentCategories
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -6784,12 +6848,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -6804,6 +6874,9 @@ types:
           200:
             body:
               application/json: ContentCategoriesListResponse
+        (commons.Id): dfareporting.contentCategories.list
+        (commons.LogicalStucture):
+        - Content Categories
     /postalCodes:
       /{code}:
         uriParameters:
@@ -6816,26 +6889,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one postal code by ID.
-          displayName: Get PostalCodes
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: PostalCode
+          (commons.Id): dfareporting.postalCodes.get
+          (commons.LogicalStucture):
+          - Postal Codes
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of postal codes.
-        displayName: List PostalCodes
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: PostalCodesListResponse
+        (commons.Id): dfareporting.postalCodes.list
+        (commons.LogicalStucture):
+        - Postal Codes
     /projects:
       /{id}:
         uriParameters:
@@ -6849,13 +6928,16 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one project by ID.
-          displayName: Get Projects
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Project
+          (commons.Id): dfareporting.projects.get
+          (commons.LogicalStucture):
+          - Projects
       /{projectId}:
         uriParameters:
           projectId:
@@ -6875,20 +6957,23 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one order document by ID.
-              displayName: Get OrderDocuments
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: OrderDocument
+              (commons.Id): dfareporting.orderDocuments.get
+              (commons.LogicalStucture):
+              - Order Documents
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of order documents, possibly filtered.
-            displayName: List OrderDocuments
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -6909,12 +6994,18 @@ types:
               sortOrder?:
                 type: string
                 description: Order of sorted results, default is ASCENDING.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ASCENDING
                 - DESCENDING
               sortField?:
                 type: string
                 description: Field by which to sort the list.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ID
                 - NAME
@@ -6933,6 +7024,9 @@ types:
               200:
                 body:
                   application/json: OrderDocumentsListResponse
+            (commons.Id): dfareporting.orderDocuments.list
+            (commons.LogicalStucture):
+            - Order Documents
         /inventoryItems:
           /{id}:
             uriParameters:
@@ -6946,20 +7040,23 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one inventory item by ID.
-              displayName: Get InventoryItems
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: InventoryItem
+              (commons.Id): dfareporting.inventoryItems.get
+              (commons.LogicalStucture):
+              - Inventory Items
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of inventory items, possibly filtered.
-            displayName: List InventoryItems
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -6974,12 +7071,18 @@ types:
               sortOrder?:
                 type: string
                 description: Order of sorted results, default is ASCENDING.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ASCENDING
                 - DESCENDING
               sortField?:
                 type: string
                 description: Field by which to sort the list.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ID
                 - NAME
@@ -6997,6 +7100,9 @@ types:
               type?:
                 type: string
                 description: Select only inventory items with this type.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - PLANNING_PLACEMENT_TYPE_CREDIT
                 - PLANNING_PLACEMENT_TYPE_REGULAR
@@ -7007,6 +7113,9 @@ types:
               200:
                 body:
                   application/json: InventoryItemsListResponse
+            (commons.Id): dfareporting.inventoryItems.list
+            (commons.LogicalStucture):
+            - Inventory Items
         /orders:
           /{id}:
             uriParameters:
@@ -7020,20 +7129,23 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one order by ID.
-              displayName: Get Orders
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Order
+              (commons.Id): dfareporting.orders.get
+              (commons.LogicalStucture):
+              - Orders
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of orders, possibly filtered.
-            displayName: List Orders
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -7047,12 +7159,18 @@ types:
               sortOrder?:
                 type: string
                 description: Order of sorted results, default is ASCENDING.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ASCENDING
                 - DESCENDING
               sortField?:
                 type: string
                 description: Field by which to sort the list.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ID
                 - NAME
@@ -7071,13 +7189,16 @@ types:
               200:
                 body:
                   application/json: OrdersListResponse
+            (commons.Id): dfareporting.orders.list
+            (commons.LogicalStucture):
+            - Orders
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of projects, possibly filtered.
-        displayName: List Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -7095,12 +7216,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -7115,6 +7242,9 @@ types:
           200:
             body:
               application/json: ProjectsListResponse
+        (commons.Id): dfareporting.projects.list
+        (commons.LogicalStucture):
+        - Projects
     /accountUserProfiles:
       /{id}:
         uriParameters:
@@ -7128,20 +7258,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account user profile by ID.
-          displayName: Get AccountUserProfiles
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AccountUserProfile
+          (commons.Id): dfareporting.accountUserProfiles.get
+          (commons.LogicalStucture):
+          - Account User Profiles
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account user profile. This method supports patch semantics.
-        displayName: Patch AccountUserProfiles
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7155,13 +7288,16 @@ types:
           200:
             body:
               application/json: AccountUserProfile
+        (commons.Id): dfareporting.accountUserProfiles.patch
+        (commons.LogicalStucture):
+        - Account User Profiles
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new account user profile.
-        displayName: Insert AccountUserProfiles
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -7170,13 +7306,16 @@ types:
           200:
             body:
               application/json: AccountUserProfile
+        (commons.Id): dfareporting.accountUserProfiles.insert
+        (commons.LogicalStucture):
+        - Account User Profiles
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account user profile.
-        displayName: Update AccountUserProfiles
+        displayName: update
         is:
         - hasParameters
         body:
@@ -7185,13 +7324,16 @@ types:
           200:
             body:
               application/json: AccountUserProfile
+        (commons.Id): dfareporting.accountUserProfiles.update
+        (commons.LogicalStucture):
+        - Account User Profiles
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of account user profiles, possibly filtered.
-        displayName: List AccountUserProfiles
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -7209,12 +7351,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -7236,6 +7384,9 @@ types:
           200:
             body:
               application/json: AccountUserProfilesListResponse
+        (commons.Id): dfareporting.accountUserProfiles.list
+        (commons.LogicalStucture):
+        - Account User Profiles
     /advertisers:
       /{id}:
         uriParameters:
@@ -7249,20 +7400,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one advertiser by ID.
-          displayName: Get Advertisers
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Advertiser
+          (commons.Id): dfareporting.advertisers.get
+          (commons.LogicalStucture):
+          - Advertisers
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser. This method supports patch semantics.
-        displayName: Patch Advertisers
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7276,13 +7430,16 @@ types:
           200:
             body:
               application/json: Advertiser
+        (commons.Id): dfareporting.advertisers.patch
+        (commons.LogicalStucture):
+        - Advertisers
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new advertiser.
-        displayName: Insert Advertisers
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -7291,13 +7448,16 @@ types:
           200:
             body:
               application/json: Advertiser
+        (commons.Id): dfareporting.advertisers.insert
+        (commons.LogicalStucture):
+        - Advertisers
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser.
-        displayName: Update Advertisers
+        displayName: update
         is:
         - hasParameters
         body:
@@ -7306,13 +7466,16 @@ types:
           200:
             body:
               application/json: Advertiser
+        (commons.Id): dfareporting.advertisers.update
+        (commons.LogicalStucture):
+        - Advertisers
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of advertisers, possibly filtered.
-        displayName: List Advertisers
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -7344,12 +7507,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -7363,6 +7532,9 @@ types:
           status?:
             type: string
             description: Select only advertisers with the specified status.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - APPROVED
             - ON_HOLD
@@ -7370,6 +7542,9 @@ types:
           200:
             body:
               application/json: AdvertisersListResponse
+        (commons.Id): dfareporting.advertisers.list
+        (commons.LogicalStucture):
+        - Advertisers
     /placementGroups:
       /{id}:
         uriParameters:
@@ -7383,20 +7558,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement group by ID.
-          displayName: Get PlacementGroups
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: PlacementGroup
+          (commons.Id): dfareporting.placementGroups.get
+          (commons.LogicalStucture):
+          - Placement Groups
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement group. This method supports patch semantics.
-        displayName: Patch PlacementGroups
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7410,13 +7588,16 @@ types:
           200:
             body:
               application/json: PlacementGroup
+        (commons.Id): dfareporting.placementGroups.patch
+        (commons.LogicalStucture):
+        - Placement Groups
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement group.
-        displayName: Insert PlacementGroups
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -7425,13 +7606,16 @@ types:
           200:
             body:
               application/json: PlacementGroup
+        (commons.Id): dfareporting.placementGroups.insert
+        (commons.LogicalStucture):
+        - Placement Groups
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement group.
-        displayName: Update PlacementGroups
+        displayName: update
         is:
         - hasParameters
         body:
@@ -7440,13 +7624,16 @@ types:
           200:
             body:
               application/json: PlacementGroup
+        (commons.Id): dfareporting.placementGroups.update
+        (commons.LogicalStucture):
+        - Placement Groups
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placement groups, possibly filtered.
-        displayName: List PlacementGroups
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -7463,6 +7650,9 @@ types:
           placementGroupType?:
             type: string
             description: Select only placement groups belonging with this group type. A package is a simple group of placements that acts as a single pricing point for a group of tags. A roadblock is a group of placements that not only acts as a single pricing point but also assumes that all the tags in it will be served at the same time. A roadblock requires one of its assigned placements to be marked as primary for reporting.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - PLACEMENT_PACKAGE
             - PLACEMENT_ROADBLOCK
@@ -7497,12 +7687,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -7513,6 +7709,13 @@ types:
           pricingTypes?:
             type: string
             description: Select only placement groups with these pricing types.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - PRICING_TYPE_CPA
             - PRICING_TYPE_CPC
@@ -7535,6 +7738,9 @@ types:
           200:
             body:
               application/json: PlacementGroupsListResponse
+        (commons.Id): dfareporting.placementGroups.list
+        (commons.LogicalStucture):
+        - Placement Groups
     /creatives:
       /{id}:
         uriParameters:
@@ -7548,20 +7754,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative by ID.
-          displayName: Get Creatives
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Creative
+          (commons.Id): dfareporting.creatives.get
+          (commons.LogicalStucture):
+          - Creatives
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative. This method supports patch semantics.
-        displayName: Patch Creatives
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7575,13 +7784,16 @@ types:
           200:
             body:
               application/json: Creative
+        (commons.Id): dfareporting.creatives.patch
+        (commons.LogicalStucture):
+        - Creatives
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative.
-        displayName: Insert Creatives
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -7590,13 +7802,16 @@ types:
           200:
             body:
               application/json: Creative
+        (commons.Id): dfareporting.creatives.insert
+        (commons.LogicalStucture):
+        - Creatives
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative.
-        displayName: Update Creatives
+        displayName: update
         is:
         - hasParameters
         body:
@@ -7605,13 +7820,16 @@ types:
           200:
             body:
               application/json: Creative
+        (commons.Id): dfareporting.creatives.update
+        (commons.LogicalStucture):
+        - Creatives
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creatives, possibly filtered.
-        displayName: List Creatives
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -7622,6 +7840,31 @@ types:
           types?:
             type: string
             description: Select only creatives with these creative types.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
             - CUSTOM_DISPLAY
@@ -7683,12 +7926,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -7707,6 +7956,9 @@ types:
           200:
             body:
               application/json: CreativesListResponse
+        (commons.Id): dfareporting.creatives.list
+        (commons.LogicalStucture):
+        - Creatives
     /mobileCarriers:
       /{id}:
         uriParameters:
@@ -7720,26 +7972,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one mobile carrier by ID.
-          displayName: Get MobileCarriers
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: MobileCarrier
+          (commons.Id): dfareporting.mobileCarriers.get
+          (commons.LogicalStucture):
+          - Mobile Carriers
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of mobile carriers.
-        displayName: List MobileCarriers
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: MobileCarriersListResponse
+        (commons.Id): dfareporting.mobileCarriers.list
+        (commons.LogicalStucture):
+        - Mobile Carriers
     /remarketingListShares:
       /{remarketingListId}:
         uriParameters:
@@ -7753,20 +8011,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list share by remarketing list ID.
-          displayName: Get RemarketingListShares
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: RemarketingListShare
+          (commons.Id): dfareporting.remarketingListShares.get
+          (commons.LogicalStucture):
+          - Remarketing List Shares
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list share. This method supports patch semantics.
-        displayName: Patch RemarketingListShares
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7780,13 +8041,16 @@ types:
           200:
             body:
               application/json: RemarketingListShare
+        (commons.Id): dfareporting.remarketingListShares.patch
+        (commons.LogicalStucture):
+        - Remarketing List Shares
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list share.
-        displayName: Update RemarketingListShares
+        displayName: update
         is:
         - hasParameters
         body:
@@ -7795,6 +8059,9 @@ types:
           200:
             body:
               application/json: RemarketingListShare
+        (commons.Id): dfareporting.remarketingListShares.update
+        (commons.LogicalStucture):
+        - Remarketing List Shares
     /sites:
       /{id}:
         uriParameters:
@@ -7808,20 +8075,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one site by ID.
-          displayName: Get Sites
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Site
+          (commons.Id): dfareporting.sites.get
+          (commons.LogicalStucture):
+          - Sites
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing site. This method supports patch semantics.
-        displayName: Patch Sites
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7835,13 +8105,16 @@ types:
           200:
             body:
               application/json: Site
+        (commons.Id): dfareporting.sites.patch
+        (commons.LogicalStucture):
+        - Sites
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new site.
-        displayName: Insert Sites
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -7850,13 +8123,16 @@ types:
           200:
             body:
               application/json: Site
+        (commons.Id): dfareporting.sites.insert
+        (commons.LogicalStucture):
+        - Sites
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing site.
-        displayName: Update Sites
+        displayName: update
         is:
         - hasParameters
         body:
@@ -7865,13 +8141,16 @@ types:
           200:
             body:
               application/json: Site
+        (commons.Id): dfareporting.sites.update
+        (commons.LogicalStucture):
+        - Sites
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of sites, possibly filtered.
-        displayName: List Sites
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -7908,12 +8187,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -7935,6 +8220,9 @@ types:
           200:
             body:
               application/json: SitesListResponse
+        (commons.Id): dfareporting.sites.list
+        (commons.LogicalStucture):
+        - Sites
     /eventTags:
       /{id}:
         uriParameters:
@@ -7948,29 +8236,35 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one event tag by ID.
-          displayName: Get EventTags
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: EventTag
+          (commons.Id): dfareporting.eventTags.get
+          (commons.LogicalStucture):
+          - Event Tags
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing event tag.
-          displayName: Delete EventTags
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.eventTags.delete
+          (commons.LogicalStucture):
+          - Event Tags
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing event tag. This method supports patch semantics.
-        displayName: Patch EventTags
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -7984,13 +8278,16 @@ types:
           200:
             body:
               application/json: EventTag
+        (commons.Id): dfareporting.eventTags.patch
+        (commons.LogicalStucture):
+        - Event Tags
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new event tag.
-        displayName: Insert EventTags
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -7999,13 +8296,16 @@ types:
           200:
             body:
               application/json: EventTag
+        (commons.Id): dfareporting.eventTags.insert
+        (commons.LogicalStucture):
+        - Event Tags
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing event tag.
-        displayName: Update EventTags
+        displayName: update
         is:
         - hasParameters
         body:
@@ -8014,13 +8314,16 @@ types:
           200:
             body:
               application/json: EventTag
+        (commons.Id): dfareporting.eventTags.update
+        (commons.LogicalStucture):
+        - Event Tags
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of event tags, possibly filtered.
-        displayName: List EventTags
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8030,6 +8333,10 @@ types:
           eventTagTypes?:
             type: string
             description: Select only event tags with the specified event tag types. Event tag types can be used to specify whether to use a third-party pixel, a third-party JavaScript URL, or a third-party click-through URL for either impression or click tracking.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
             enum:
             - CLICK_THROUGH_EVENT_TAG
             - IMPRESSION_IMAGE_EVENT_TAG
@@ -8048,12 +8355,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -8072,6 +8385,9 @@ types:
           200:
             body:
               application/json: EventTagsListResponse
+        (commons.Id): dfareporting.eventTags.list
+        (commons.LogicalStucture):
+        - Event Tags
     /dynamicTargetingKeys:
       /{objectId}:
         uriParameters:
@@ -8085,7 +8401,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing dynamic targeting key.
-          displayName: Delete DynamicTargetingKeys
+          displayName: delete
           is:
           - hasParameters
           queryParameters:
@@ -8095,18 +8411,26 @@ types:
             objectType:
               type: string
               description: Type of the object of this dynamic targeting key. This is a required field.
+              (commons.EnumDescriptions):
+              - ''
+              - ''
+              - ''
+              - ''
               enum:
               - OBJECT_AD
               - OBJECT_ADVERTISER
               - OBJECT_CREATIVE
               - OBJECT_PLACEMENT
+          (commons.Id): dfareporting.dynamicTargetingKeys.delete
+          (commons.LogicalStucture):
+          - Dynamic Targeting Keys
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser's ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.
-        displayName: Insert DynamicTargetingKeys
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -8115,13 +8439,16 @@ types:
           200:
             body:
               application/json: DynamicTargetingKey
+        (commons.Id): dfareporting.dynamicTargetingKeys.insert
+        (commons.LogicalStucture):
+        - Dynamic Targeting Keys
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of dynamic targeting keys.
-        displayName: List DynamicTargetingKeys
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8139,6 +8466,11 @@ types:
           objectType?:
             type: string
             description: Select only dynamic targeting keys with this object type.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - OBJECT_AD
             - OBJECT_ADVERTISER
@@ -8148,6 +8480,9 @@ types:
           200:
             body:
               application/json: DynamicTargetingKeysListResponse
+        (commons.Id): dfareporting.dynamicTargetingKeys.list
+        (commons.LogicalStucture):
+        - Dynamic Targeting Keys
     /dimensionvalues:
       /query:
         post:
@@ -8156,7 +8491,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves list of report dimension values for a list of filters.
-          displayName: Query DimensionValues
+          displayName: query
           is:
           - hasParameters
           queryParameters:
@@ -8175,6 +8510,9 @@ types:
             200:
               body:
                 application/json: DimensionValueList
+          (commons.Id): dfareporting.dimensionValues.query
+          (commons.LogicalStucture):
+          - Dimension Values
     /campaigns:
       /{id}:
         uriParameters:
@@ -8188,13 +8526,16 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one campaign by ID.
-          displayName: Get Campaigns
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Campaign
+          (commons.Id): dfareporting.campaigns.get
+          (commons.LogicalStucture):
+          - Campaigns
       /{campaignId}:
         uriParameters:
           campaignId:
@@ -8208,7 +8549,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
-            displayName: Insert CampaignCreativeAssociations
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -8217,13 +8558,16 @@ types:
               200:
                 body:
                   application/json: CampaignCreativeAssociation
+            (commons.Id): dfareporting.campaignCreativeAssociations.insert
+            (commons.LogicalStucture):
+            - Campaign Creative Associations
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves the list of creative IDs associated with the specified campaign.
-            displayName: List CampaignCreativeAssociations
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -8234,6 +8578,9 @@ types:
               sortOrder?:
                 type: string
                 description: Order of sorted results, default is ASCENDING.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ASCENDING
                 - DESCENDING
@@ -8244,6 +8591,9 @@ types:
               200:
                 body:
                   application/json: CampaignCreativeAssociationsListResponse
+            (commons.Id): dfareporting.campaignCreativeAssociations.list
+            (commons.LogicalStucture):
+            - Campaign Creative Associations
         /landingPages:
           /{id}:
             uriParameters:
@@ -8257,29 +8607,35 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one campaign landing page by ID.
-              displayName: Get LandingPages
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: LandingPage
+              (commons.Id): dfareporting.landingPages.get
+              (commons.LogicalStucture):
+              - Landing Pages
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Deletes an existing campaign landing page.
-              displayName: Delete LandingPages
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): dfareporting.landingPages.delete
+              (commons.LogicalStucture):
+              - Landing Pages
           patch:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing campaign landing page. This method supports patch semantics.
-            displayName: Patch LandingPages
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
@@ -8293,13 +8649,16 @@ types:
               200:
                 body:
                   application/json: LandingPage
+            (commons.Id): dfareporting.landingPages.patch
+            (commons.LogicalStucture):
+            - Landing Pages
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new landing page for the specified campaign.
-            displayName: Insert LandingPages
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -8308,13 +8667,16 @@ types:
               200:
                 body:
                   application/json: LandingPage
+            (commons.Id): dfareporting.landingPages.insert
+            (commons.LogicalStucture):
+            - Landing Pages
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing campaign landing page.
-            displayName: Update LandingPages
+            displayName: update
             is:
             - hasParameters
             body:
@@ -8323,26 +8685,32 @@ types:
               200:
                 body:
                   application/json: LandingPage
+            (commons.Id): dfareporting.landingPages.update
+            (commons.LogicalStucture):
+            - Landing Pages
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves the list of landing pages for the specified campaign.
-            displayName: List LandingPages
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: LandingPagesListResponse
+            (commons.Id): dfareporting.landingPages.list
+            (commons.LogicalStucture):
+            - Landing Pages
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing campaign. This method supports patch semantics.
-        displayName: Patch Campaigns
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -8356,13 +8724,16 @@ types:
           200:
             body:
               application/json: Campaign
+        (commons.Id): dfareporting.campaigns.patch
+        (commons.LogicalStucture):
+        - Campaigns
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new campaign.
-        displayName: Insert Campaigns
+        displayName: insert
         is:
         - hasParameters
         queryParameters:
@@ -8378,13 +8749,16 @@ types:
           200:
             body:
               application/json: Campaign
+        (commons.Id): dfareporting.campaigns.insert
+        (commons.LogicalStucture):
+        - Campaigns
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing campaign.
-        displayName: Update Campaigns
+        displayName: update
         is:
         - hasParameters
         body:
@@ -8393,13 +8767,16 @@ types:
           200:
             body:
               application/json: Campaign
+        (commons.Id): dfareporting.campaigns.update
+        (commons.LogicalStucture):
+        - Campaigns
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of campaigns, possibly filtered.
-        displayName: List Campaigns
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8439,12 +8816,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -8459,6 +8842,9 @@ types:
           200:
             body:
               application/json: CampaignsListResponse
+        (commons.Id): dfareporting.campaigns.list
+        (commons.LogicalStucture):
+        - Campaigns
     /creativeGroups:
       /{id}:
         uriParameters:
@@ -8472,20 +8858,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative group by ID.
-          displayName: Get CreativeGroups
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: CreativeGroup
+          (commons.Id): dfareporting.creativeGroups.get
+          (commons.LogicalStucture):
+          - Creative Groups
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative group. This method supports patch semantics.
-        displayName: Patch CreativeGroups
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -8499,13 +8888,16 @@ types:
           200:
             body:
               application/json: CreativeGroup
+        (commons.Id): dfareporting.creativeGroups.patch
+        (commons.LogicalStucture):
+        - Creative Groups
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative group.
-        displayName: Insert CreativeGroups
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -8514,13 +8906,16 @@ types:
           200:
             body:
               application/json: CreativeGroup
+        (commons.Id): dfareporting.creativeGroups.insert
+        (commons.LogicalStucture):
+        - Creative Groups
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative group.
-        displayName: Update CreativeGroups
+        displayName: update
         is:
         - hasParameters
         body:
@@ -8529,13 +8924,16 @@ types:
           200:
             body:
               application/json: CreativeGroup
+        (commons.Id): dfareporting.creativeGroups.update
+        (commons.LogicalStucture):
+        - Creative Groups
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creative groups, possibly filtered.
-        displayName: List CreativeGroups
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8553,12 +8951,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -8577,6 +8981,9 @@ types:
           200:
             body:
               application/json: CreativeGroupsListResponse
+        (commons.Id): dfareporting.creativeGroups.list
+        (commons.LogicalStucture):
+        - Creative Groups
     /sizes:
       /{id}:
         uriParameters:
@@ -8590,20 +8997,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one size by ID.
-          displayName: Get Sizes
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Size
+          (commons.Id): dfareporting.sizes.get
+          (commons.LogicalStucture):
+          - Sizes
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new size.
-        displayName: Insert Sizes
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -8612,13 +9022,16 @@ types:
           200:
             body:
               application/json: Size
+        (commons.Id): dfareporting.sizes.insert
+        (commons.LogicalStucture):
+        - Sizes
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of sizes, possibly filtered.
-        displayName: List Sizes
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8641,6 +9054,9 @@ types:
           200:
             body:
               application/json: SizesListResponse
+        (commons.Id): dfareporting.sizes.list
+        (commons.LogicalStucture):
+        - Sizes
     /changeLogs:
       /{id}:
         uriParameters:
@@ -8654,20 +9070,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one change log by ID.
-          displayName: Get ChangeLogs
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ChangeLog
+          (commons.Id): dfareporting.changeLogs.get
+          (commons.LogicalStucture):
+          - Change Logs
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of change logs.
-        displayName: List ChangeLogs
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8688,6 +9107,24 @@ types:
           action?:
             type: string
             description: Select only change logs with the specified action.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - ACTION_ADD
             - ACTION_ASSIGN
@@ -8723,6 +9160,45 @@ types:
           objectType?:
             type: string
             description: Select only change logs with the specified object type.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - OBJECT_ACCOUNT
             - OBJECT_ACCOUNT_BILLING_FEATURE
@@ -8766,6 +9242,9 @@ types:
           200:
             body:
               application/json: ChangeLogsListResponse
+        (commons.Id): dfareporting.changeLogs.list
+        (commons.LogicalStucture):
+        - Change Logs
     /directorySites:
       /{id}:
         uriParameters:
@@ -8779,20 +9258,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one directory site by ID.
-          displayName: Get DirectorySites
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: DirectorySite
+          (commons.Id): dfareporting.directorySites.get
+          (commons.LogicalStucture):
+          - Directory Sites
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new directory site.
-        displayName: Insert DirectorySites
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -8801,13 +9283,16 @@ types:
           200:
             body:
               application/json: DirectorySite
+        (commons.Id): dfareporting.directorySites.insert
+        (commons.LogicalStucture):
+        - Directory Sites
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of directory sites, possibly filtered.
-        displayName: List DirectorySites
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8844,12 +9329,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -8864,6 +9355,9 @@ types:
           200:
             body:
               application/json: DirectorySitesListResponse
+        (commons.Id): dfareporting.directorySites.list
+        (commons.LogicalStucture):
+        - Directory Sites
     /targetableRemarketingLists:
       /{id}:
         uriParameters:
@@ -8877,20 +9371,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list by ID.
-          displayName: Get TargetableRemarketingLists
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: TargetableRemarketingList
+          (commons.Id): dfareporting.targetableRemarketingLists.get
+          (commons.LogicalStucture):
+          - Targetable Remarketing Lists
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of targetable remarketing lists, possibly filtered.
-        displayName: List TargetableRemarketingLists
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -8901,6 +9398,9 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
@@ -8910,6 +9410,9 @@ types:
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -8927,6 +9430,9 @@ types:
           200:
             body:
               application/json: TargetableRemarketingListsListResponse
+        (commons.Id): dfareporting.targetableRemarketingLists.list
+        (commons.LogicalStucture):
+        - Targetable Remarketing Lists
     /placementStrategies:
       /{id}:
         uriParameters:
@@ -8940,29 +9446,35 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement strategy by ID.
-          displayName: Get PlacementStrategies
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: PlacementStrategy
+          (commons.Id): dfareporting.placementStrategies.get
+          (commons.LogicalStucture):
+          - Placement Strategies
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing placement strategy.
-          displayName: Delete PlacementStrategies
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.placementStrategies.delete
+          (commons.LogicalStucture):
+          - Placement Strategies
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement strategy. This method supports patch semantics.
-        displayName: Patch PlacementStrategies
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -8976,13 +9488,16 @@ types:
           200:
             body:
               application/json: PlacementStrategy
+        (commons.Id): dfareporting.placementStrategies.patch
+        (commons.LogicalStucture):
+        - Placement Strategies
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement strategy.
-        displayName: Insert PlacementStrategies
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -8991,13 +9506,16 @@ types:
           200:
             body:
               application/json: PlacementStrategy
+        (commons.Id): dfareporting.placementStrategies.insert
+        (commons.LogicalStucture):
+        - Placement Strategies
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement strategy.
-        displayName: Update PlacementStrategies
+        displayName: update
         is:
         - hasParameters
         body:
@@ -9006,13 +9524,16 @@ types:
           200:
             body:
               application/json: PlacementStrategy
+        (commons.Id): dfareporting.placementStrategies.update
+        (commons.LogicalStucture):
+        - Placement Strategies
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placement strategies, possibly filtered.
-        displayName: List PlacementStrategies
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9026,12 +9547,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -9046,6 +9573,9 @@ types:
           200:
             body:
               application/json: PlacementStrategiesListResponse
+        (commons.Id): dfareporting.placementStrategies.list
+        (commons.LogicalStucture):
+        - Placement Strategies
     /accountActiveAdSummaries:
       /{summaryAccountId}:
         uriParameters:
@@ -9059,13 +9589,16 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets the account's active ad summary by account ID.
-          displayName: Get AccountActiveAdSummaries
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AccountActiveAdSummary
+          (commons.Id): dfareporting.accountActiveAdSummaries.get
+          (commons.LogicalStucture):
+          - Account Active Ad Summaries
     /cities:
       get:
         securedBy:
@@ -9073,7 +9606,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of cities, possibly filtered.
-        displayName: List Cities
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9096,6 +9629,9 @@ types:
           200:
             body:
               application/json: CitiesListResponse
+        (commons.Id): dfareporting.cities.list
+        (commons.LogicalStucture):
+        - Cities
     /directorySiteContacts:
       /{id}:
         uriParameters:
@@ -9109,20 +9645,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one directory site contact by ID.
-          displayName: Get DirectorySiteContacts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: DirectorySiteContact
+          (commons.Id): dfareporting.directorySiteContacts.get
+          (commons.LogicalStucture):
+          - Directory Site Contacts
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of directory site contacts, possibly filtered.
-        displayName: List DirectorySiteContacts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9140,12 +9679,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -9160,6 +9705,9 @@ types:
           200:
             body:
               application/json: DirectorySiteContactsListResponse
+        (commons.Id): dfareporting.directorySiteContacts.list
+        (commons.LogicalStucture):
+        - Directory Site Contacts
     /operatingSystemVersions:
       /{id}:
         uriParameters:
@@ -9173,26 +9721,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one operating system version by ID.
-          displayName: Get OperatingSystemVersions
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: OperatingSystemVersion
+          (commons.Id): dfareporting.operatingSystemVersions.get
+          (commons.LogicalStucture):
+          - Operating System Versions
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of operating system versions.
-        displayName: List OperatingSystemVersions
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: OperatingSystemVersionsListResponse
+        (commons.Id): dfareporting.operatingSystemVersions.list
+        (commons.LogicalStucture):
+        - Operating System Versions
     /countries:
       /{dartId}:
         uriParameters:
@@ -9206,26 +9760,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one country by ID.
-          displayName: Get Countries
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Country
+          (commons.Id): dfareporting.countries.get
+          (commons.LogicalStucture):
+          - Countries
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of countries.
-        displayName: List Countries
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: CountriesListResponse
+        (commons.Id): dfareporting.countries.list
+        (commons.LogicalStucture):
+        - Countries
     /browsers:
       get:
         securedBy:
@@ -9233,13 +9793,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of browsers.
-        displayName: List Browsers
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: BrowsersListResponse
+        (commons.Id): dfareporting.browsers.list
+        (commons.LogicalStucture):
+        - Browsers
     /userRolePermissionGroups:
       /{id}:
         uriParameters:
@@ -9253,26 +9816,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role permission group by ID.
-          displayName: Get UserRolePermissionGroups
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: UserRolePermissionGroup
+          (commons.Id): dfareporting.userRolePermissionGroups.get
+          (commons.LogicalStucture):
+          - User Role Permission Groups
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of all supported user role permission groups.
-        displayName: List UserRolePermissionGroups
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: UserRolePermissionGroupsListResponse
+        (commons.Id): dfareporting.userRolePermissionGroups.list
+        (commons.LogicalStucture):
+        - User Role Permission Groups
     /ads:
       /{id}:
         uriParameters:
@@ -9286,20 +9855,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one ad by ID.
-          displayName: Get Ads
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Ad
+          (commons.Id): dfareporting.ads.get
+          (commons.LogicalStucture):
+          - Ads
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing ad. This method supports patch semantics.
-        displayName: Patch Ads
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -9313,13 +9885,16 @@ types:
           200:
             body:
               application/json: Ad
+        (commons.Id): dfareporting.ads.patch
+        (commons.LogicalStucture):
+        - Ads
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new ad.
-        displayName: Insert Ads
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -9328,13 +9903,16 @@ types:
           200:
             body:
               application/json: Ad
+        (commons.Id): dfareporting.ads.insert
+        (commons.LogicalStucture):
+        - Ads
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing ad.
-        displayName: Update Ads
+        displayName: update
         is:
         - hasParameters
         body:
@@ -9343,13 +9921,16 @@ types:
           200:
             body:
               application/json: Ad
+        (commons.Id): dfareporting.ads.update
+        (commons.LogicalStucture):
+        - Ads
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of ads, possibly filtered.
-        displayName: List Ads
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9372,6 +9953,11 @@ types:
           type?:
             type: string
             description: Select only ads with these types.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - AD_SERVING_CLICK_TRACKER
             - AD_SERVING_DEFAULT_AD
@@ -9398,6 +9984,9 @@ types:
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -9425,6 +10014,31 @@ types:
           creativeType?:
             type: string
             description: Select only ads with the specified creativeType.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
             - CUSTOM_DISPLAY
@@ -9456,6 +10070,9 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
@@ -9473,6 +10090,12 @@ types:
           compatibility?:
             type: string
             description: Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - APP
             - APP_INTERSTITIAL
@@ -9483,6 +10106,9 @@ types:
           200:
             body:
               application/json: AdsListResponse
+        (commons.Id): dfareporting.ads.list
+        (commons.LogicalStucture):
+        - Ads
     /userRoles:
       /{id}:
         uriParameters:
@@ -9496,29 +10122,35 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role by ID.
-          displayName: Get UserRoles
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: UserRole
+          (commons.Id): dfareporting.userRoles.get
+          (commons.LogicalStucture):
+          - User Roles
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing user role.
-          displayName: Delete UserRoles
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.userRoles.delete
+          (commons.LogicalStucture):
+          - User Roles
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing user role. This method supports patch semantics.
-        displayName: Patch UserRoles
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -9532,13 +10164,16 @@ types:
           200:
             body:
               application/json: UserRole
+        (commons.Id): dfareporting.userRoles.patch
+        (commons.LogicalStucture):
+        - User Roles
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new user role.
-        displayName: Insert UserRoles
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -9547,13 +10182,16 @@ types:
           200:
             body:
               application/json: UserRole
+        (commons.Id): dfareporting.userRoles.insert
+        (commons.LogicalStucture):
+        - User Roles
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing user role.
-        displayName: Update UserRoles
+        displayName: update
         is:
         - hasParameters
         body:
@@ -9562,13 +10200,16 @@ types:
           200:
             body:
               application/json: UserRole
+        (commons.Id): dfareporting.userRoles.update
+        (commons.LogicalStucture):
+        - User Roles
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of user roles, possibly filtered.
-        displayName: List UserRoles
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9589,12 +10230,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -9609,6 +10256,9 @@ types:
           200:
             body:
               application/json: UserRolesListResponse
+        (commons.Id): dfareporting.userRoles.list
+        (commons.LogicalStucture):
+        - User Roles
     /remarketingLists:
       /{id}:
         uriParameters:
@@ -9622,20 +10272,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one remarketing list by ID.
-          displayName: Get RemarketingLists
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: RemarketingList
+          (commons.Id): dfareporting.remarketingLists.get
+          (commons.LogicalStucture):
+          - Remarketing Lists
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list. This method supports patch semantics.
-        displayName: Patch RemarketingLists
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -9649,13 +10302,16 @@ types:
           200:
             body:
               application/json: RemarketingList
+        (commons.Id): dfareporting.remarketingLists.patch
+        (commons.LogicalStucture):
+        - Remarketing Lists
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new remarketing list.
-        displayName: Insert RemarketingLists
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -9664,13 +10320,16 @@ types:
           200:
             body:
               application/json: RemarketingList
+        (commons.Id): dfareporting.remarketingLists.insert
+        (commons.LogicalStucture):
+        - Remarketing Lists
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing remarketing list.
-        displayName: Update RemarketingLists
+        displayName: update
         is:
         - hasParameters
         body:
@@ -9679,13 +10338,16 @@ types:
           200:
             body:
               application/json: RemarketingList
+        (commons.Id): dfareporting.remarketingLists.update
+        (commons.LogicalStucture):
+        - Remarketing Lists
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of remarketing lists, possibly filtered.
-        displayName: List RemarketingLists
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9696,6 +10358,9 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
@@ -9705,6 +10370,9 @@ types:
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -9726,6 +10394,9 @@ types:
           200:
             body:
               application/json: RemarketingListsListResponse
+        (commons.Id): dfareporting.remarketingLists.list
+        (commons.LogicalStucture):
+        - Remarketing Lists
     /files:
       get:
         securedBy:
@@ -9733,7 +10404,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfareporting
         description: Lists files for a user profile.
-        displayName: List Files
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9747,6 +10418,10 @@ types:
             type: string
             default: MINE
             description: The scope that defines which results are returned, default is 'MINE'.
+            (commons.EnumDescriptions):
+            - All files in account.
+            - My files.
+            - Files shared with me.
             enum:
             - ALL
             - MINE
@@ -9755,6 +10430,9 @@ types:
             type: string
             default: DESCENDING
             description: Order of sorted results, default is 'DESCENDING'.
+            (commons.EnumDescriptions):
+            - Ascending order.
+            - Descending order.
             enum:
             - ASCENDING
             - DESCENDING
@@ -9762,6 +10440,9 @@ types:
             type: string
             default: LAST_MODIFIED_TIME
             description: The field by which to sort the list.
+            (commons.EnumDescriptions):
+            - Sort by file ID.
+            - Sort by 'lastmodifiedAt' field.
             enum:
             - ID
             - LAST_MODIFIED_TIME
@@ -9772,6 +10453,9 @@ types:
           200:
             body:
               application/json: FileList
+        (commons.Id): dfareporting.files.list
+        (commons.LogicalStucture):
+        - Files
     /accountPermissionGroups:
       /{id}:
         uriParameters:
@@ -9785,26 +10469,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account permission group by ID.
-          displayName: Get AccountPermissionGroups
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AccountPermissionGroup
+          (commons.Id): dfareporting.accountPermissionGroups.get
+          (commons.LogicalStucture):
+          - Account Permission Groups
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of account permission groups.
-        displayName: List AccountPermissionGroups
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: AccountPermissionGroupsListResponse
+        (commons.Id): dfareporting.accountPermissionGroups.list
+        (commons.LogicalStucture):
+        - Account Permission Groups
     /floodlightActivityGroups:
       /{id}:
         uriParameters:
@@ -9818,20 +10508,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight activity group by ID.
-          displayName: Get FloodlightActivityGroups
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: FloodlightActivityGroup
+          (commons.Id): dfareporting.floodlightActivityGroups.get
+          (commons.LogicalStucture):
+          - Floodlight Activity Groups
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity group. This method supports patch semantics.
-        displayName: Patch FloodlightActivityGroups
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -9845,13 +10538,16 @@ types:
           200:
             body:
               application/json: FloodlightActivityGroup
+        (commons.Id): dfareporting.floodlightActivityGroups.patch
+        (commons.LogicalStucture):
+        - Floodlight Activity Groups
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new floodlight activity group.
-        displayName: Insert FloodlightActivityGroups
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -9860,13 +10556,16 @@ types:
           200:
             body:
               application/json: FloodlightActivityGroup
+        (commons.Id): dfareporting.floodlightActivityGroups.insert
+        (commons.LogicalStucture):
+        - Floodlight Activity Groups
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity group.
-        displayName: Update FloodlightActivityGroups
+        displayName: update
         is:
         - hasParameters
         body:
@@ -9875,13 +10574,16 @@ types:
           200:
             body:
               application/json: FloodlightActivityGroup
+        (commons.Id): dfareporting.floodlightActivityGroups.update
+        (commons.LogicalStucture):
+        - Floodlight Activity Groups
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight activity groups, possibly filtered.
-        displayName: List FloodlightActivityGroups
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -9895,12 +10597,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -9914,6 +10622,9 @@ types:
           type?:
             type: string
             description: Select only floodlight activity groups with the specified floodlight activity group type.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - COUNTER
             - SALE
@@ -9929,6 +10640,9 @@ types:
           200:
             body:
               application/json: FloodlightActivityGroupsListResponse
+        (commons.Id): dfareporting.floodlightActivityGroups.list
+        (commons.LogicalStucture):
+        - Floodlight Activity Groups
     /subaccounts:
       /{id}:
         uriParameters:
@@ -9942,20 +10656,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one subaccount by ID.
-          displayName: Get Subaccounts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Subaccount
+          (commons.Id): dfareporting.subaccounts.get
+          (commons.LogicalStucture):
+          - Subaccounts
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing subaccount. This method supports patch semantics.
-        displayName: Patch Subaccounts
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -9969,13 +10686,16 @@ types:
           200:
             body:
               application/json: Subaccount
+        (commons.Id): dfareporting.subaccounts.patch
+        (commons.LogicalStucture):
+        - Subaccounts
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new subaccount.
-        displayName: Insert Subaccounts
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -9984,13 +10704,16 @@ types:
           200:
             body:
               application/json: Subaccount
+        (commons.Id): dfareporting.subaccounts.insert
+        (commons.LogicalStucture):
+        - Subaccounts
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing subaccount.
-        displayName: Update Subaccounts
+        displayName: update
         is:
         - hasParameters
         body:
@@ -9999,13 +10722,16 @@ types:
           200:
             body:
               application/json: Subaccount
+        (commons.Id): dfareporting.subaccounts.update
+        (commons.LogicalStucture):
+        - Subaccounts
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of subaccounts, possibly filtered.
-        displayName: List Subaccounts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -10019,12 +10745,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -10039,6 +10771,9 @@ types:
           200:
             body:
               application/json: SubaccountsListResponse
+        (commons.Id): dfareporting.subaccounts.list
+        (commons.LogicalStucture):
+        - Subaccounts
     /connectionTypes:
       /{id}:
         uriParameters:
@@ -10052,26 +10787,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one connection type by ID.
-          displayName: Get ConnectionTypes
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: ConnectionType
+          (commons.Id): dfareporting.connectionTypes.get
+          (commons.LogicalStucture):
+          - Connection Types
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of connection types.
-        displayName: List ConnectionTypes
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ConnectionTypesListResponse
+        (commons.Id): dfareporting.connectionTypes.list
+        (commons.LogicalStucture):
+        - Connection Types
     /accountPermissions:
       /{id}:
         uriParameters:
@@ -10085,26 +10826,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account permission by ID.
-          displayName: Get AccountPermissions
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AccountPermission
+          (commons.Id): dfareporting.accountPermissions.get
+          (commons.LogicalStucture):
+          - Account Permissions
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of account permissions.
-        displayName: List AccountPermissions
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: AccountPermissionsListResponse
+        (commons.Id): dfareporting.accountPermissions.list
+        (commons.LogicalStucture):
+        - Account Permissions
     /metros:
       get:
         securedBy:
@@ -10112,13 +10859,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of metros.
-        displayName: List Metros
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: MetrosListResponse
+        (commons.Id): dfareporting.metros.list
+        (commons.LogicalStucture):
+        - Metros
     /platformTypes:
       /{id}:
         uriParameters:
@@ -10132,26 +10882,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one platform type by ID.
-          displayName: Get PlatformTypes
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: PlatformType
+          (commons.Id): dfareporting.platformTypes.get
+          (commons.LogicalStucture):
+          - Platform Types
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of platform types.
-        displayName: List PlatformTypes
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: PlatformTypesListResponse
+        (commons.Id): dfareporting.platformTypes.list
+        (commons.LogicalStucture):
+        - Platform Types
     /conversions:
       /batchinsert:
         post:
@@ -10160,7 +10916,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/ddmconversions
           description: Inserts conversions.
-          displayName: Batchinsert Conversions
+          displayName: batchinsert
           is:
           - hasParameters
           body:
@@ -10169,6 +10925,9 @@ types:
             200:
               body:
                 application/json: ConversionsBatchInsertResponse
+          (commons.Id): dfareporting.conversions.batchinsert
+          (commons.LogicalStucture):
+          - Conversions
     /regions:
       get:
         securedBy:
@@ -10176,13 +10935,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of regions.
-        displayName: List Regions
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: RegionsListResponse
+        (commons.Id): dfareporting.regions.list
+        (commons.LogicalStucture):
+        - Regions
     /placements:
       /generatetags:
         post:
@@ -10191,7 +10953,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Generates tags for a placement.
-          displayName: Generatetags Placements
+          displayName: generatetags
           is:
           - hasParameters
           queryParameters:
@@ -10202,6 +10964,25 @@ types:
             tagFormats?:
               type: string
               description: Tag formats to generate for these placements.
+              (commons.EnumDescriptions):
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
+              - ''
               enum:
               - PLACEMENT_TAG_CLICK_COMMANDS
               - PLACEMENT_TAG_IFRAME_ILAYER
@@ -10229,6 +11010,9 @@ types:
             200:
               body:
                 application/json: PlacementsGenerateTagsResponse
+          (commons.Id): dfareporting.placements.generatetags
+          (commons.LogicalStucture):
+          - Placements
       /{id}:
         uriParameters:
           id:
@@ -10241,20 +11025,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one placement by ID.
-          displayName: Get Placements
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Placement
+          (commons.Id): dfareporting.placements.get
+          (commons.LogicalStucture):
+          - Placements
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement. This method supports patch semantics.
-        displayName: Patch Placements
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -10268,13 +11055,16 @@ types:
           200:
             body:
               application/json: Placement
+        (commons.Id): dfareporting.placements.patch
+        (commons.LogicalStucture):
+        - Placements
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new placement.
-        displayName: Insert Placements
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -10283,13 +11073,16 @@ types:
           200:
             body:
               application/json: Placement
+        (commons.Id): dfareporting.placements.insert
+        (commons.LogicalStucture):
+        - Placements
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing placement.
-        displayName: Update Placements
+        displayName: update
         is:
         - hasParameters
         body:
@@ -10298,13 +11091,16 @@ types:
           200:
             body:
               application/json: Placement
+        (commons.Id): dfareporting.placements.update
+        (commons.LogicalStucture):
+        - Placements
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of placements, possibly filtered.
-        displayName: List Placements
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -10325,6 +11121,9 @@ types:
           paymentSource?:
             type: string
             description: Select only placements with this payment source.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - PLACEMENT_AGENCY_PAID
             - PLACEMENT_PUBLISHER_PAID
@@ -10363,12 +11162,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -10379,6 +11184,13 @@ types:
           pricingTypes?:
             type: string
             description: Select only placements with these pricing types.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - PRICING_TYPE_CPA
             - PRICING_TYPE_CPC
@@ -10400,6 +11212,12 @@ types:
           compatibilities?:
             type: string
             description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
             enum:
             - APP
             - APP_INTERSTITIAL
@@ -10410,6 +11228,9 @@ types:
           200:
             body:
               application/json: PlacementsListResponse
+        (commons.Id): dfareporting.placements.list
+        (commons.LogicalStucture):
+        - Placements
     /userRolePermissions:
       /{id}:
         uriParameters:
@@ -10423,20 +11244,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one user role permission by ID.
-          displayName: Get UserRolePermissions
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: UserRolePermission
+          (commons.Id): dfareporting.userRolePermissions.get
+          (commons.LogicalStucture):
+          - User Role Permissions
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Gets a list of user role permissions, possibly filtered.
-        displayName: List UserRolePermissions
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -10448,6 +11272,9 @@ types:
           200:
             body:
               application/json: UserRolePermissionsListResponse
+        (commons.Id): dfareporting.userRolePermissions.list
+        (commons.LogicalStucture):
+        - User Role Permissions
     /creativeAssets:
       /{advertiserId}:
         uriParameters:
@@ -10462,7 +11289,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new creative asset.
-            displayName: Insert CreativeAssets
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -10471,6 +11298,9 @@ types:
               200:
                 body:
                   application/json: CreativeAssetMetadata
+            (commons.Id): dfareporting.creativeAssets.insert
+            (commons.LogicalStucture):
+            - Creative Assets
     /floodlightActivities:
       /{id}:
         uriParameters:
@@ -10484,22 +11314,28 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight activity by ID.
-          displayName: Get FloodlightActivities
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: FloodlightActivity
+          (commons.Id): dfareporting.floodlightActivities.get
+          (commons.LogicalStucture):
+          - Floodlight Activities
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing floodlight activity.
-          displayName: Delete FloodlightActivities
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.floodlightActivities.delete
+          (commons.LogicalStucture):
+          - Floodlight Activities
       /generatetag:
         post:
           securedBy:
@@ -10507,7 +11343,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Generates a tag for a floodlight activity.
-          displayName: Generatetag FloodlightActivities
+          displayName: generatetag
           is:
           - hasParameters
           queryParameters:
@@ -10519,13 +11355,16 @@ types:
             200:
               body:
                 application/json: FloodlightActivitiesGenerateTagResponse
+          (commons.Id): dfareporting.floodlightActivities.generatetag
+          (commons.LogicalStucture):
+          - Floodlight Activities
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity. This method supports patch semantics.
-        displayName: Patch FloodlightActivities
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -10539,13 +11378,16 @@ types:
           200:
             body:
               application/json: FloodlightActivity
+        (commons.Id): dfareporting.floodlightActivities.patch
+        (commons.LogicalStucture):
+        - Floodlight Activities
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new floodlight activity.
-        displayName: Insert FloodlightActivities
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -10554,13 +11396,16 @@ types:
           200:
             body:
               application/json: FloodlightActivity
+        (commons.Id): dfareporting.floodlightActivities.insert
+        (commons.LogicalStucture):
+        - Floodlight Activities
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight activity.
-        displayName: Update FloodlightActivities
+        displayName: update
         is:
         - hasParameters
         body:
@@ -10569,13 +11414,16 @@ types:
           200:
             body:
               application/json: FloodlightActivity
+        (commons.Id): dfareporting.floodlightActivities.update
+        (commons.LogicalStucture):
+        - Floodlight Activities
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight activities, possibly filtered.
-        displayName: List FloodlightActivities
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -10604,18 +11452,27 @@ types:
           floodlightActivityGroupType?:
             type: string
             description: Select only floodlight activities with the specified floodlight activity group type.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - COUNTER
             - SALE
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -10636,6 +11493,9 @@ types:
           200:
             body:
               application/json: FloodlightActivitiesListResponse
+        (commons.Id): dfareporting.floodlightActivities.list
+        (commons.LogicalStucture):
+        - Floodlight Activities
     /advertiserGroups:
       /{id}:
         uriParameters:
@@ -10649,29 +11509,35 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one advertiser group by ID.
-          displayName: Get AdvertiserGroups
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AdvertiserGroup
+          (commons.Id): dfareporting.advertiserGroups.get
+          (commons.LogicalStucture):
+          - Advertiser Groups
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing advertiser group.
-          displayName: Delete AdvertiserGroups
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.advertiserGroups.delete
+          (commons.LogicalStucture):
+          - Advertiser Groups
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser group. This method supports patch semantics.
-        displayName: Patch AdvertiserGroups
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -10685,13 +11551,16 @@ types:
           200:
             body:
               application/json: AdvertiserGroup
+        (commons.Id): dfareporting.advertiserGroups.patch
+        (commons.LogicalStucture):
+        - Advertiser Groups
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new advertiser group.
-        displayName: Insert AdvertiserGroups
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -10700,13 +11569,16 @@ types:
           200:
             body:
               application/json: AdvertiserGroup
+        (commons.Id): dfareporting.advertiserGroups.insert
+        (commons.LogicalStucture):
+        - Advertiser Groups
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing advertiser group.
-        displayName: Update AdvertiserGroups
+        displayName: update
         is:
         - hasParameters
         body:
@@ -10715,13 +11587,16 @@ types:
           200:
             body:
               application/json: AdvertiserGroup
+        (commons.Id): dfareporting.advertiserGroups.update
+        (commons.LogicalStucture):
+        - Advertiser Groups
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of advertiser groups, possibly filtered.
-        displayName: List AdvertiserGroups
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -10735,12 +11610,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -10755,6 +11636,9 @@ types:
           200:
             body:
               application/json: AdvertiserGroupsListResponse
+        (commons.Id): dfareporting.advertiserGroups.list
+        (commons.LogicalStucture):
+        - Advertiser Groups
     /floodlightConfigurations:
       /{id}:
         uriParameters:
@@ -10768,20 +11652,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one floodlight configuration by ID.
-          displayName: Get FloodlightConfigurations
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: FloodlightConfiguration
+          (commons.Id): dfareporting.floodlightConfigurations.get
+          (commons.LogicalStucture):
+          - Floodlight Configurations
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight configuration. This method supports patch semantics.
-        displayName: Patch FloodlightConfigurations
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -10795,13 +11682,16 @@ types:
           200:
             body:
               application/json: FloodlightConfiguration
+        (commons.Id): dfareporting.floodlightConfigurations.patch
+        (commons.LogicalStucture):
+        - Floodlight Configurations
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing floodlight configuration.
-        displayName: Update FloodlightConfigurations
+        displayName: update
         is:
         - hasParameters
         body:
@@ -10810,13 +11700,16 @@ types:
           200:
             body:
               application/json: FloodlightConfiguration
+        (commons.Id): dfareporting.floodlightConfigurations.update
+        (commons.LogicalStucture):
+        - Floodlight Configurations
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of floodlight configurations, possibly filtered.
-        displayName: List FloodlightConfigurations
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -10828,6 +11721,9 @@ types:
           200:
             body:
               application/json: FloodlightConfigurationsListResponse
+        (commons.Id): dfareporting.floodlightConfigurations.list
+        (commons.LogicalStucture):
+        - Floodlight Configurations
     /creativeFields:
       /{creativeFieldId}:
         uriParameters:
@@ -10848,29 +11744,35 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Gets one creative field value by ID.
-              displayName: Get CreativeFieldValues
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: CreativeFieldValue
+              (commons.Id): dfareporting.creativeFieldValues.get
+              (commons.LogicalStucture):
+              - Creative Field Values
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/dfatrafficking
               description: Deletes an existing creative field value.
-              displayName: Delete CreativeFieldValues
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): dfareporting.creativeFieldValues.delete
+              (commons.LogicalStucture):
+              - Creative Field Values
           patch:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing creative field value. This method supports patch semantics.
-            displayName: Patch CreativeFieldValues
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
@@ -10884,13 +11786,16 @@ types:
               200:
                 body:
                   application/json: CreativeFieldValue
+            (commons.Id): dfareporting.creativeFieldValues.patch
+            (commons.LogicalStucture):
+            - Creative Field Values
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Inserts a new creative field value.
-            displayName: Insert CreativeFieldValues
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -10899,13 +11804,16 @@ types:
               200:
                 body:
                   application/json: CreativeFieldValue
+            (commons.Id): dfareporting.creativeFieldValues.insert
+            (commons.LogicalStucture):
+            - Creative Field Values
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Updates an existing creative field value.
-            displayName: Update CreativeFieldValues
+            displayName: update
             is:
             - hasParameters
             body:
@@ -10914,13 +11822,16 @@ types:
               200:
                 body:
                   application/json: CreativeFieldValue
+            (commons.Id): dfareporting.creativeFieldValues.update
+            (commons.LogicalStucture):
+            - Creative Field Values
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
             description: Retrieves a list of creative field values, possibly filtered.
-            displayName: List CreativeFieldValues
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -10934,12 +11845,18 @@ types:
               sortOrder?:
                 type: string
                 description: Order of sorted results, default is ASCENDING.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ASCENDING
                 - DESCENDING
               sortField?:
                 type: string
                 description: Field by which to sort the list.
+                (commons.EnumDescriptions):
+                - ''
+                - ''
                 enum:
                 - ID
                 - VALUE
@@ -10954,6 +11871,9 @@ types:
               200:
                 body:
                   application/json: CreativeFieldValuesListResponse
+            (commons.Id): dfareporting.creativeFieldValues.list
+            (commons.LogicalStucture):
+            - Creative Field Values
       /{id}:
         uriParameters:
           id:
@@ -10966,29 +11886,35 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one creative field by ID.
-          displayName: Get CreativeFields
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: CreativeField
+          (commons.Id): dfareporting.creativeFields.get
+          (commons.LogicalStucture):
+          - Creative Fields
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Deletes an existing creative field.
-          displayName: Delete CreativeFields
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): dfareporting.creativeFields.delete
+          (commons.LogicalStucture):
+          - Creative Fields
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative field. This method supports patch semantics.
-        displayName: Patch CreativeFields
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -11002,13 +11928,16 @@ types:
           200:
             body:
               application/json: CreativeField
+        (commons.Id): dfareporting.creativeFields.patch
+        (commons.LogicalStucture):
+        - Creative Fields
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Inserts a new creative field.
-        displayName: Insert CreativeFields
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -11017,13 +11946,16 @@ types:
           200:
             body:
               application/json: CreativeField
+        (commons.Id): dfareporting.creativeFields.insert
+        (commons.LogicalStucture):
+        - Creative Fields
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing creative field.
-        displayName: Update CreativeFields
+        displayName: update
         is:
         - hasParameters
         body:
@@ -11032,13 +11964,16 @@ types:
           200:
             body:
               application/json: CreativeField
+        (commons.Id): dfareporting.creativeFields.update
+        (commons.LogicalStucture):
+        - Creative Fields
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of creative fields, possibly filtered.
-        displayName: List CreativeFields
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -11056,12 +11991,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -11076,6 +12017,9 @@ types:
           200:
             body:
               application/json: CreativeFieldsListResponse
+        (commons.Id): dfareporting.creativeFields.list
+        (commons.LogicalStucture):
+        - Creative Fields
     /operatingSystems:
       /{dartId}:
         uriParameters:
@@ -11089,26 +12033,32 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one operating system by DART ID.
-          displayName: Get OperatingSystems
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: OperatingSystem
+          (commons.Id): dfareporting.operatingSystems.get
+          (commons.LogicalStucture):
+          - Operating Systems
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves a list of operating systems.
-        displayName: List OperatingSystems
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: OperatingSystemsListResponse
+        (commons.Id): dfareporting.operatingSystems.list
+        (commons.LogicalStucture):
+        - Operating Systems
     /accounts:
       /{id}:
         uriParameters:
@@ -11122,20 +12072,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfatrafficking
           description: Gets one account by ID.
-          displayName: Get Accounts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Account
+          (commons.Id): dfareporting.accounts.get
+          (commons.LogicalStucture):
+          - Accounts
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account. This method supports patch semantics.
-        displayName: Patch Accounts
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -11149,13 +12102,16 @@ types:
           200:
             body:
               application/json: Account
+        (commons.Id): dfareporting.accounts.patch
+        (commons.LogicalStucture):
+        - Accounts
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Updates an existing account.
-        displayName: Update Accounts
+        displayName: update
         is:
         - hasParameters
         body:
@@ -11164,13 +12120,16 @@ types:
           200:
             body:
               application/json: Account
+        (commons.Id): dfareporting.accounts.update
+        (commons.LogicalStucture):
+        - Accounts
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
         description: Retrieves the list of accounts, possibly filtered.
-        displayName: List Accounts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -11184,12 +12143,18 @@ types:
           sortOrder?:
             type: string
             description: Order of sorted results, default is ASCENDING.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ASCENDING
             - DESCENDING
           sortField?:
             type: string
             description: Field by which to sort the list.
+            (commons.EnumDescriptions):
+            - ''
+            - ''
             enum:
             - ID
             - NAME
@@ -11207,6 +12172,9 @@ types:
           200:
             body:
               application/json: AccountsListResponse
+        (commons.Id): dfareporting.accounts.list
+        (commons.LogicalStucture):
+        - Accounts
     get:
       securedBy:
         oath2:
@@ -11214,13 +12182,16 @@ types:
           - https://www.googleapis.com/auth/dfareporting
           - https://www.googleapis.com/auth/dfatrafficking
       description: Gets one user profile by ID.
-      displayName: Get UserProfiles
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: UserProfile
+      (commons.Id): dfareporting.userProfiles.get
+      (commons.LogicalStucture):
+      - User Profiles
   get:
     securedBy:
       oath2:
@@ -11228,13 +12199,16 @@ types:
         - https://www.googleapis.com/auth/dfareporting
         - https://www.googleapis.com/auth/dfatrafficking
     description: Retrieves list of user profiles for a user.
-    displayName: List UserProfiles
+    displayName: list
     is:
     - hasParameters
     responses:
       200:
         body:
           application/json: UserProfileList
+    (commons.Id): dfareporting.userProfiles.list
+    (commons.LogicalStucture):
+    - User Profiles
 /reports:
   /{reportId}:
     uriParameters:
@@ -11255,10 +12229,13 @@ types:
               scopes:
               - https://www.googleapis.com/auth/dfareporting
           description: Retrieves a report file by its report ID and file ID.
-          displayName: Get Files
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: File
+          (commons.Id): dfareporting.files.get
+          (commons.LogicalStucture):
+          - Files

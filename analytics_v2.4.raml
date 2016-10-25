@@ -53,7 +53,7 @@ securedBy:
         - https://www.googleapis.com/auth/analytics
         - https://www.googleapis.com/auth/analytics.readonly
     description: Returns Analytics report data for a view (profile).
-    displayName: Get Data
+    displayName: get
     is:
     - hasParameters
     queryParameters:
@@ -97,6 +97,9 @@ securedBy:
         type: string
         pattern: (ga:.+)?
         description: A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.
+    (commons.Id): analytics.data.get
+    (commons.LogicalStucture):
+    - Data
 /management:
   /accounts:
     /{accountId}:
@@ -124,7 +127,7 @@ securedBy:
                       - https://www.googleapis.com/auth/analytics
                       - https://www.googleapis.com/auth/analytics.readonly
                   description: Lists goals to which the user has access.
-                  displayName: List Goals Management
+                  displayName: list
                   is:
                   - hasParameters
                   queryParameters:
@@ -137,6 +140,10 @@ securedBy:
                       format: int32
                       description: An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
                       minimum: 1
+                  (commons.Id): analytics.management.goals.list
+                  (commons.LogicalStucture):
+                  - Management
+                  - Goals
             get:
               securedBy:
                 oath2:
@@ -144,7 +151,7 @@ securedBy:
                   - https://www.googleapis.com/auth/analytics
                   - https://www.googleapis.com/auth/analytics.readonly
               description: Lists views (profiles) to which the user has access.
-              displayName: List Profiles Management
+              displayName: list
               is:
               - hasParameters
               queryParameters:
@@ -157,6 +164,10 @@ securedBy:
                   format: int32
                   description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
                   minimum: 1
+              (commons.Id): analytics.management.profiles.list
+              (commons.LogicalStucture):
+              - Management
+              - Profiles
         get:
           securedBy:
             oath2:
@@ -164,7 +175,7 @@ securedBy:
               - https://www.googleapis.com/auth/analytics
               - https://www.googleapis.com/auth/analytics.readonly
           description: Lists web properties to which the user has access.
-          displayName: List Webproperties Management
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -177,6 +188,10 @@ securedBy:
               format: int32
               description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
               minimum: 1
+          (commons.Id): analytics.management.webproperties.list
+          (commons.LogicalStucture):
+          - Management
+          - Webproperties
     get:
       securedBy:
         oath2:
@@ -184,7 +199,7 @@ securedBy:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists all accounts to which the user has access.
-      displayName: List Accounts Management
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -197,6 +212,10 @@ securedBy:
           format: int32
           description: An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           minimum: 1
+      (commons.Id): analytics.management.accounts.list
+      (commons.LogicalStucture):
+      - Management
+      - Accounts
   /segments:
     get:
       securedBy:
@@ -205,7 +224,7 @@ securedBy:
           - https://www.googleapis.com/auth/analytics
           - https://www.googleapis.com/auth/analytics.readonly
       description: Lists advanced segments to which the user has access.
-      displayName: List Segments Management
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -218,3 +237,7 @@ securedBy:
           format: int32
           description: An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           minimum: 1
+      (commons.Id): analytics.management.segments.list
+      (commons.LogicalStucture):
+      - Management
+      - Segments

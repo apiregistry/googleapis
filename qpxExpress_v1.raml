@@ -623,7 +623,7 @@ types:
 /search:
   post:
     description: Returns a list of flights.
-    displayName: Search Trips
+    displayName: search
     is:
     - hasParameters
     body:
@@ -632,3 +632,6 @@ types:
       200:
         body:
           application/json: TripsSearchResponse
+    (commons.Id): qpxExpress.trips.search
+    (commons.LogicalStucture):
+    - Trips

@@ -90,7 +90,7 @@ types:
   /languages:
     get:
       description: List the source/target languages supported by the API
-      displayName: List Languages
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -101,10 +101,13 @@ types:
         200:
           body:
             application/json: LanguagesListResponse
+      (commons.Id): language.languages.list
+      (commons.LogicalStucture):
+      - Languages
   /detect:
     get:
       description: Detect the language of text.
-      displayName: List Detections
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -115,9 +118,12 @@ types:
         200:
           body:
             application/json: DetectionsListResponse
+      (commons.Id): language.detections.list
+      (commons.LogicalStucture):
+      - Detections
   get:
     description: Returns text translations from one language to another.
-    displayName: List Translations
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -127,6 +133,9 @@ types:
       format?:
         type: string
         description: The format of the text
+        (commons.EnumDescriptions):
+        - Specifies the input is in HTML
+        - Specifies the input is in plain textual format
         enum:
         - html
         - text
@@ -143,3 +152,6 @@ types:
       200:
         body:
           application/json: TranslationsListResponse
+    (commons.Id): language.translations.list
+    (commons.LogicalStucture):
+    - Translations

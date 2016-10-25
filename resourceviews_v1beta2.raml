@@ -383,7 +383,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Add resources to the view.
-              displayName: AddResources ZoneViews
+              displayName: add Resources
               is:
               - hasParameters
               body:
@@ -392,6 +392,9 @@ types:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): resourceviews.zoneViews.addResources
+              (commons.LogicalStucture):
+              - Zone Views
           /setService:
             post:
               securedBy:
@@ -401,7 +404,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Update the service information of a resource view or a resource.
-              displayName: SetService ZoneViews
+              displayName: set Service
               is:
               - hasParameters
               body:
@@ -410,6 +413,9 @@ types:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): resourceviews.zoneViews.setService
+              (commons.LogicalStucture):
+              - Zone Views
           /resources:
             get:
               securedBy:
@@ -422,7 +428,7 @@ types:
                   - https://www.googleapis.com/auth/ndev.cloudman
                   - https://www.googleapis.com/auth/ndev.cloudman.readonly
               description: List the resources of the resource view.
-              displayName: ListResources ZoneViews
+              displayName: list Resources
               is:
               - hasParameters
               queryParameters:
@@ -430,6 +436,9 @@ types:
                   type: string
                   default: ALL
                   description: The state of the instance to list. By default, it lists all instances.
+                  (commons.EnumDescriptions):
+                  - ''
+                  - ''
                   enum:
                   - ALL
                   - RUNNING
@@ -444,6 +453,10 @@ types:
                 format?:
                   type: string
                   description: The requested format of the return value. It can be URL or URL_PORT. A JSON object will be included in the response based on the format. The default format is NONE, which results in no JSON in the response.
+                  (commons.EnumDescriptions):
+                  - ''
+                  - ''
+                  - ''
                   enum:
                   - NONE
                   - URL
@@ -458,6 +471,9 @@ types:
                 200:
                   body:
                     application/json: ZoneViewsListResourcesResponse
+              (commons.Id): resourceviews.zoneViews.listResources
+              (commons.LogicalStucture):
+              - Zone Views
           /removeResources:
             post:
               securedBy:
@@ -467,7 +483,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Remove resources from the view.
-              displayName: RemoveResources ZoneViews
+              displayName: remove Resources
               is:
               - hasParameters
               body:
@@ -476,6 +492,9 @@ types:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): resourceviews.zoneViews.removeResources
+              (commons.LogicalStucture):
+              - Zone Views
           /getService:
             post:
               securedBy:
@@ -485,7 +504,7 @@ types:
                   - https://www.googleapis.com/auth/compute
                   - https://www.googleapis.com/auth/ndev.cloudman
               description: Get the service information of a resource view or a resource.
-              displayName: GetService ZoneViews
+              displayName: get Service
               is:
               - hasParameters
               queryParameters:
@@ -496,6 +515,9 @@ types:
                 200:
                   body:
                     application/json: ZoneViewsGetServiceResponse
+              (commons.Id): resourceviews.zoneViews.getService
+              (commons.LogicalStucture):
+              - Zone Views
           get:
             securedBy:
               oath2:
@@ -507,13 +529,16 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Get the information of a zonal resource view.
-            displayName: Get ZoneViews
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: ResourceView
+            (commons.Id): resourceviews.zoneViews.get
+            (commons.LogicalStucture):
+            - Zone Views
           delete:
             securedBy:
               oath2:
@@ -522,13 +547,16 @@ types:
                 - https://www.googleapis.com/auth/compute
                 - https://www.googleapis.com/auth/ndev.cloudman
             description: Delete a resource view.
-            displayName: Delete ZoneViews
+            displayName: delete
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): resourceviews.zoneViews.delete
+            (commons.LogicalStucture):
+            - Zone Views
         post:
           securedBy:
             oath2:
@@ -537,7 +565,7 @@ types:
               - https://www.googleapis.com/auth/compute
               - https://www.googleapis.com/auth/ndev.cloudman
           description: Create a resource view.
-          displayName: Insert ZoneViews
+          displayName: insert
           is:
           - hasParameters
           body:
@@ -546,6 +574,9 @@ types:
             200:
               body:
                 application/json: Operation
+          (commons.Id): resourceviews.zoneViews.insert
+          (commons.LogicalStucture):
+          - Zone Views
         get:
           securedBy:
             oath2:
@@ -557,7 +588,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: List resource views.
-          displayName: List ZoneViews
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -576,6 +607,9 @@ types:
             200:
               body:
                 application/json: ZoneViewsList
+          (commons.Id): resourceviews.zoneViews.list
+          (commons.LogicalStucture):
+          - Zone Views
       /operations:
         /{operation}:
           uriParameters:
@@ -594,13 +628,16 @@ types:
                 - https://www.googleapis.com/auth/ndev.cloudman
                 - https://www.googleapis.com/auth/ndev.cloudman.readonly
             description: Retrieves the specified zone-specific operation resource.
-            displayName: Get ZoneOperations
+            displayName: get
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): resourceviews.zoneOperations.get
+            (commons.LogicalStucture):
+            - Zone Operations
         get:
           securedBy:
             oath2:
@@ -612,7 +649,7 @@ types:
               - https://www.googleapis.com/auth/ndev.cloudman
               - https://www.googleapis.com/auth/ndev.cloudman.readonly
           description: Retrieves the list of operation resources contained within the specified zone.
-          displayName: List ZoneOperations
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -633,3 +670,6 @@ types:
             200:
               body:
                 application/json: OperationList
+          (commons.Id): resourceviews.zoneOperations.list
+          (commons.LogicalStucture):
+          - Zone Operations

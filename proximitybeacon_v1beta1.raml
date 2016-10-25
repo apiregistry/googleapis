@@ -46,6 +46,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -394,7 +397,7 @@ types:
   /beaconinfo:getforobserved:
     post:
       description: Given one or more beacon observations, returns any beacon information and attachments accessible to your application. Authorize by using the [API key](https://developers.google.com/beacons/proximity/how-tos/authorizing#APIKey) for the application.
-      displayName: Getforobserved Beaconinfo
+      displayName: getforobserved
       is:
       - hasParameters
       body:
@@ -403,6 +406,9 @@ types:
         200:
           body:
             application/json: GetInfoForObservedBeaconsResponse
+      (commons.Id): proximitybeacon.beaconinfo.getforobserved
+      (commons.LogicalStucture):
+      - Beaconinfo
   /eidparams:
     get:
       securedBy:
@@ -410,13 +416,16 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Gets the Proximity Beacon API's current public key and associated parameters used to initiate the Diffie-Hellman key exchange required to register a beacon that broadcasts the Eddystone-EID format. This key changes periodically; clients may cache it and re-use the same public key to provision and register multiple beacons. However, clients should be prepared to refresh this key when they encounter an error registering an Eddystone-EID beacon.
-      displayName: GetEidparams
+      displayName: get Eidparams
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: EphemeralIdRegistrationParams
+      (commons.Id): proximitybeacon.getEidparams
+      (commons.LogicalStucture):
+      - Get Eidparams
   /{beaconName}:
     uriParameters:
       beaconName:
@@ -430,7 +439,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
         description: List the diagnostics for a single beacon. You can also list diagnostics for all the beacons owned by your Google Developers Console project by using the beacon name `beacons/-`. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.
-        displayName: List Diagnostics Beacons
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -455,6 +464,10 @@ types:
           200:
             body:
               application/json: ListDiagnosticsResponse
+        (commons.Id): proximitybeacon.beacons.diagnostics.list
+        (commons.LogicalStucture):
+        - Beacons
+        - Diagnostics
     /attachments:
       post:
         securedBy:
@@ -471,7 +484,7 @@ types:
           \ token](https://developers.google.com/identity/protocols/OAuth2) from a\
           \ signed-in user with **Is owner** or **Can edit** permissions in the Google\
           \ Developers Console project."
-        displayName: Create Attachments Beacons
+        displayName: create
         is:
         - hasParameters
         queryParameters:
@@ -484,13 +497,17 @@ types:
           200:
             body:
               application/json: BeaconAttachment
+        (commons.Id): proximitybeacon.beacons.attachments.create
+        (commons.LogicalStucture):
+        - Beacons
+        - Attachments
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
         description: Returns the attachments for the specified beacon that match the specified namespaced-type pattern. To control which namespaced types are returned, you add the `namespacedType` query parameter to the request. You must either use `*/*`, to return all attachments, or the namespace must be one of the ones returned from the `namespaces` endpoint. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.
-        displayName: List Attachments Beacons
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -504,6 +521,10 @@ types:
           200:
             body:
               application/json: ListBeaconAttachmentsResponse
+        (commons.Id): proximitybeacon.beacons.attachments.list
+        (commons.LogicalStucture):
+        - Beacons
+        - Attachments
     /attachments:batchDelete:
       post:
         securedBy:
@@ -511,7 +532,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
         description: Deletes multiple attachments on a given beacon. This operation is permanent and cannot be undone. You can optionally specify `namespacedType` to choose which attachments should be deleted. If you do not specify `namespacedType`, all your attachments on the given beacon will be deleted. You also may explicitly specify `*/*` to delete all. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-        displayName: BatchDelete Attachments Beacons
+        displayName: batch Delete
         is:
         - hasParameters
         queryParameters:
@@ -525,6 +546,10 @@ types:
           200:
             body:
               application/json: DeleteAttachmentsResponse
+        (commons.Id): proximitybeacon.beacons.attachments.batchDelete
+        (commons.LogicalStucture):
+        - Beacons
+        - Attachments
     get:
       securedBy:
         oath2:
@@ -538,7 +563,7 @@ types:
         base16 ephemeral ID broadcast by the beacon. The returned `Beacon` object
         will contain the beacon''s stable Eddystone-UID. Clients not authorized to
         resolve the beacon''s ephemeral Eddystone-EID broadcast will receive an error.'
-      displayName: Get Beacons
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -549,13 +574,16 @@ types:
         200:
           body:
             application/json: Beacon
+      (commons.Id): proximitybeacon.beacons.get
+      (commons.LogicalStucture):
+      - Beacons
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Updates the information about the specified beacon. **Any field that you do not populate in the submitted beacon will be permanently erased**, so you should follow the "read, modify, write" pattern to avoid inadvertently destroying data. Changes to the beacon status via this method will be silently ignored. To update beacon status, use the separate methods on this API for activation, deactivation, and decommissioning. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: Update Beacons
+      displayName: update
       is:
       - hasParameters
       queryParameters:
@@ -568,6 +596,9 @@ types:
         200:
           body:
             application/json: Beacon
+      (commons.Id): proximitybeacon.beacons.update
+      (commons.LogicalStucture):
+      - Beacons
   /{beaconName}:activate:
     uriParameters:
       beaconName:
@@ -580,7 +611,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Activates a beacon. A beacon that is active will return information and attachment data when queried via `beaconinfo.getforobserved`. Calling this method on an already active beacon will do nothing (but will return a successful response code). Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: Activate Beacons
+      displayName: activate
       is:
       - hasParameters
       queryParameters:
@@ -591,6 +622,9 @@ types:
         200:
           body:
             application/json: Empty
+      (commons.Id): proximitybeacon.beacons.activate
+      (commons.LogicalStucture):
+      - Beacons
   /{beaconName}:decommission:
     uriParameters:
       beaconName:
@@ -603,7 +637,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Decommissions the specified beacon in the service. This beacon will no longer be returned from `beaconinfo.getforobserved`. This operation is permanent -- you will not be able to re-register a beacon with this ID again. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: Decommission Beacons
+      displayName: decommission
       is:
       - hasParameters
       queryParameters:
@@ -614,6 +648,9 @@ types:
         200:
           body:
             application/json: Empty
+      (commons.Id): proximitybeacon.beacons.decommission
+      (commons.LogicalStucture):
+      - Beacons
   /beacons:
     get:
       securedBy:
@@ -621,7 +658,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Searches the beacon registry for beacons that match the given search criteria. Only those beacons that the client has permission to list will be returned. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: List Beacons
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -682,6 +719,9 @@ types:
         200:
           body:
             application/json: ListBeaconsResponse
+      (commons.Id): proximitybeacon.beacons.list
+      (commons.LogicalStucture):
+      - Beacons
   /beacons:register:
     post:
       securedBy:
@@ -689,7 +729,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Registers a previously unregistered beacon given its `advertisedId`. These IDs are unique within the system. An ID can be registered only once. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: Register Beacons
+      displayName: register
       is:
       - hasParameters
       queryParameters:
@@ -702,6 +742,9 @@ types:
         200:
           body:
             application/json: Beacon
+      (commons.Id): proximitybeacon.beacons.register
+      (commons.LogicalStucture):
+      - Beacons
   /{beaconName}:deactivate:
     uriParameters:
       beaconName:
@@ -714,7 +757,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Deactivates a beacon. Once deactivated, the API will not return information nor attachment data for the beacon when queried via `beaconinfo.getforobserved`. Calling this method on an already inactive beacon will do nothing (but will return a successful response code). Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: Deactivate Beacons
+      displayName: deactivate
       is:
       - hasParameters
       queryParameters:
@@ -725,6 +768,9 @@ types:
         200:
           body:
             application/json: Empty
+      (commons.Id): proximitybeacon.beacons.deactivate
+      (commons.LogicalStucture):
+      - Beacons
   /{attachmentName}:
     uriParameters:
       attachmentName:
@@ -740,7 +786,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Deletes the specified attachment for the given beacon. Each attachment has a unique attachment name (`attachmentName`) which is returned when you fetch the attachment data via this API. You specify this with the delete request to control which attachment is removed. This operation cannot be undone. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: Delete Attachments Beacons
+      displayName: delete
       is:
       - hasParameters
       queryParameters:
@@ -751,6 +797,10 @@ types:
         200:
           body:
             application/json: Empty
+      (commons.Id): proximitybeacon.beacons.attachments.delete
+      (commons.LogicalStucture):
+      - Beacons
+      - Attachments
   /{namespaceName}:
     uriParameters:
       namespaceName:
@@ -764,7 +814,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Updates the information about the specified namespace. Only the namespace visibility can be updated.
-      displayName: Update Namespaces
+      displayName: update
       is:
       - hasParameters
       queryParameters:
@@ -777,6 +827,9 @@ types:
         200:
           body:
             application/json: Namespace
+      (commons.Id): proximitybeacon.namespaces.update
+      (commons.LogicalStucture):
+      - Namespaces
   /namespaces:
     get:
       securedBy:
@@ -784,7 +837,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/userlocation.beacon.registry
       description: Lists all attachment namespaces owned by your Google Developers Console project. Attachment data associated with a beacon must include a namespaced type, and the namespace must be owned by your project. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.
-      displayName: List Namespaces
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -795,3 +848,6 @@ types:
         200:
           body:
             application/json: ListNamespacesResponse
+      (commons.Id): proximitybeacon.namespaces.list
+      (commons.LogicalStucture):
+      - Namespaces

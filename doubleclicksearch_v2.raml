@@ -507,22 +507,28 @@ types:
               scopes:
               - https://www.googleapis.com/auth/doubleclicksearch
           description: Downloads a report file encoded in UTF-8.
-          displayName: GetFile Reports
+          displayName: get File
           is:
           - hasParameters
+          (commons.Id): doubleclicksearch.reports.getFile
+          (commons.LogicalStucture):
+          - Reports
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/doubleclicksearch
       description: Polls for the status of a report request.
-      displayName: Get Reports
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Report
+      (commons.Id): doubleclicksearch.reports.get
+      (commons.LogicalStucture):
+      - Reports
   /generate:
     post:
       securedBy:
@@ -530,7 +536,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/doubleclicksearch
       description: Generates and returns a report immediately.
-      displayName: Generate Reports
+      displayName: generate
       is:
       - hasParameters
       body:
@@ -539,13 +545,16 @@ types:
         200:
           body:
             application/json: Report
+      (commons.Id): doubleclicksearch.reports.generate
+      (commons.LogicalStucture):
+      - Reports
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Inserts a report request into the reporting system.
-    displayName: Request Reports
+    displayName: request
     is:
     - hasParameters
     body:
@@ -554,6 +563,9 @@ types:
       200:
         body:
           application/json: Report
+    (commons.Id): doubleclicksearch.reports.request
+    (commons.LogicalStucture):
+    - Reports
 /agency:
   /{agencyId}:
     uriParameters:
@@ -575,13 +587,16 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/doubleclicksearch
             description: Retrieve the list of saved columns for a specified advertiser.
-            displayName: List SavedColumns
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: SavedColumnList
+            (commons.Id): doubleclicksearch.savedColumns.list
+            (commons.LogicalStucture):
+            - Saved Columns
         /engine:
           /{engineAccountId}:
             uriParameters:
@@ -596,7 +611,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/doubleclicksearch
                 description: Retrieves a list of conversions from a DoubleClick Search engine account.
-                displayName: Get Conversion
+                displayName: get
                 is:
                 - hasParameters
                 queryParameters:
@@ -642,6 +657,9 @@ types:
                   200:
                     body:
                       application/json: ConversionList
+                (commons.Id): doubleclicksearch.conversion.get
+                (commons.LogicalStucture):
+                - Conversion
 /conversion:
   /updateAvailability:
     post:
@@ -650,7 +668,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/doubleclicksearch
       description: Updates the availabilities of a batch of floodlight activities in DoubleClick Search.
-      displayName: UpdateAvailability Conversion
+      displayName: update Availability
       is:
       - hasParameters
       body:
@@ -659,13 +677,16 @@ types:
         200:
           body:
             application/json: UpdateAvailabilityResponse
+      (commons.Id): doubleclicksearch.conversion.updateAvailability
+      (commons.LogicalStucture):
+      - Conversion
   patch:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Updates a batch of conversions in DoubleClick Search. This method supports patch semantics.
-    displayName: Patch Conversion
+    displayName: patch
     is:
     - hasParameters
     queryParameters:
@@ -709,13 +730,16 @@ types:
       200:
         body:
           application/json: ConversionList
+    (commons.Id): doubleclicksearch.conversion.patch
+    (commons.LogicalStucture):
+    - Conversion
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Inserts a batch of new conversions into DoubleClick Search.
-    displayName: Insert Conversion
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -724,13 +748,16 @@ types:
       200:
         body:
           application/json: ConversionList
+    (commons.Id): doubleclicksearch.conversion.insert
+    (commons.LogicalStucture):
+    - Conversion
   put:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/doubleclicksearch
     description: Updates a batch of conversions in DoubleClick Search.
-    displayName: Update Conversion
+    displayName: update
     is:
     - hasParameters
     body:
@@ -739,3 +766,6 @@ types:
       200:
         body:
           application/json: ConversionList
+    (commons.Id): doubleclicksearch.conversion.update
+    (commons.LogicalStucture):
+    - Conversion

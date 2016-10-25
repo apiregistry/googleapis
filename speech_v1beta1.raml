@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -369,7 +372,7 @@ types:
           the operation is not deleted; instead, it becomes an operation with
           an Operation.error value with a google.rpc.Status.code of 1,
           corresponding to `Code.CANCELLED`.
-        displayName: Cancel Operations
+        displayName: cancel
         is:
         - hasParameters
         body:
@@ -378,6 +381,9 @@ types:
           200:
             body:
               application/json: Empty
+        (commons.Id): speech.operations.cancel
+        (commons.LogicalStucture):
+        - Operations
     /{name}:
       uriParameters:
         name:
@@ -393,13 +399,16 @@ types:
           Gets the latest state of a long-running operation.  Clients can use this
           method to poll the operation result at intervals as recommended by the API
           service.
-        displayName: Get Operations
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Operation
+        (commons.Id): speech.operations.get
+        (commons.LogicalStucture):
+        - Operations
       delete:
         securedBy:
           oath2:
@@ -410,13 +419,16 @@ types:
           no longer interested in the operation result. It does not cancel the
           operation. If the server doesn't support this method, it returns
           `google.rpc.Code.UNIMPLEMENTED`.
-        displayName: Delete Operations
+        displayName: delete
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Empty
+        (commons.Id): speech.operations.delete
+        (commons.LogicalStucture):
+        - Operations
     get:
       securedBy:
         oath2:
@@ -428,7 +440,7 @@ types:
 
         NOTE: the `name` binding below allows API services to override the binding
         to use different resource name schemes, such as `users/*/operations`.
-      displayName: List Operations
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -449,6 +461,9 @@ types:
         200:
           body:
             application/json: ListOperationsResponse
+      (commons.Id): speech.operations.list
+      (commons.LogicalStucture):
+      - Operations
   /speech:syncrecognize:
     post:
       securedBy:
@@ -458,7 +473,7 @@ types:
       description: |-
         Perform synchronous speech-recognition: receive results after all audio
         has been sent and processed.
-      displayName: Syncrecognize Speech
+      displayName: syncrecognize
       is:
       - hasParameters
       body:
@@ -467,6 +482,9 @@ types:
         200:
           body:
             application/json: SyncRecognizeResponse
+      (commons.Id): speech.speech.syncrecognize
+      (commons.LogicalStucture):
+      - Speech
   /speech:asyncrecognize:
     post:
       securedBy:
@@ -478,7 +496,7 @@ types:
         google.longrunning.Operations interface. Returns either an
         `Operation.error` or an `Operation.response` which contains
         an `AsyncRecognizeResponse` message.
-      displayName: Asyncrecognize Speech
+      displayName: asyncrecognize
       is:
       - hasParameters
       body:
@@ -487,3 +505,6 @@ types:
         200:
           body:
             application/json: Operation
+      (commons.Id): speech.speech.asyncrecognize
+      (commons.LogicalStucture):
+      - Speech

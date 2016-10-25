@@ -172,26 +172,32 @@ types:
   /v1:
     /raw_public_keys:
       get:
-        displayName: GetCertForOpenIdConnectRaw
+        displayName: get Cert ForOpen Id Connect Raw
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Raw
+        (commons.Id): oauth2.getCertForOpenIdConnectRaw
+        (commons.LogicalStucture):
+        - Get Cert ForOpen Id Connect Raw
     /certs:
       get:
-        displayName: GetCertForOpenIdConnect
+        displayName: get Cert ForOpen Id Connect
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: X509
+        (commons.Id): oauth2.getCertForOpenIdConnect
+        (commons.LogicalStucture):
+        - Get Cert ForOpen Id Connect
     /tokeninfo:
       post:
         description: Get token info
-        displayName: Tokeninfo
+        displayName: tokeninfo
         is:
         - hasParameters
         queryParameters:
@@ -205,6 +211,9 @@ types:
           200:
             body:
               application/json: Tokeninfo
+        (commons.Id): oauth2.tokeninfo
+        (commons.LogicalStucture):
+        - Tokeninfo
     /userinfo:
       get:
         securedBy:
@@ -215,13 +224,16 @@ types:
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
         description: Get user info
-        displayName: Get Userinfo
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Userinfoplus
+        (commons.Id): oauth2.userinfo.get
+        (commons.LogicalStucture):
+        - Userinfo
 /service_accounts:
   /v1:
     /metadata:
@@ -232,13 +244,16 @@ types:
               type: string
               description: The email of robot account.
           get:
-            displayName: GetRobotMetadataRaw
+            displayName: get Robot Metadata Raw
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Raw
+            (commons.Id): oauth2.getRobotMetadataRaw
+            (commons.LogicalStucture):
+            - Get Robot Metadata Raw
       /x509:
         /{robotEmail}:
           uriParameters:
@@ -246,13 +261,16 @@ types:
               type: string
               description: The email of robot account.
           get:
-            displayName: GetRobotMetadataX509
+            displayName: get Robot Metadata X509
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: X509
+            (commons.Id): oauth2.getRobotMetadataX509
+            (commons.LogicalStucture):
+            - Get Robot Metadata X509
     /jwk:
       /{robotEmail}:
         uriParameters:
@@ -260,13 +278,16 @@ types:
             type: string
             description: The email of robot account.
         get:
-          displayName: GetRobotJwk
+          displayName: get Robot Jwk
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Jwk
+          (commons.Id): oauth2.getRobotJwk
+          (commons.LogicalStucture):
+          - Get Robot Jwk
 /userinfo:
   /v2:
     /me:
@@ -279,10 +300,15 @@ types:
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
         description: Get user info
-        displayName: Get Me V2 Userinfo
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Userinfoplus
+        (commons.Id): oauth2.userinfo.v2.me.get
+        (commons.LogicalStucture):
+        - Userinfo
+        - V2
+        - Me

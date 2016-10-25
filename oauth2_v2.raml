@@ -143,16 +143,19 @@ types:
   /v2:
     /certs:
       get:
-        displayName: GetCertForOpenIdConnect
+        displayName: get Cert ForOpen Id Connect
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Jwk
+        (commons.Id): oauth2.getCertForOpenIdConnect
+        (commons.LogicalStucture):
+        - Get Cert ForOpen Id Connect
     /tokeninfo:
       post:
-        displayName: Tokeninfo
+        displayName: tokeninfo
         is:
         - hasParameters
         queryParameters:
@@ -166,6 +169,9 @@ types:
           200:
             body:
               application/json: Tokeninfo
+        (commons.Id): oauth2.tokeninfo
+        (commons.LogicalStucture):
+        - Tokeninfo
     /userinfo:
       get:
         securedBy:
@@ -175,13 +181,16 @@ types:
             - https://www.googleapis.com/auth/plus.me
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
-        displayName: Get Userinfo
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Userinfoplus
+        (commons.Id): oauth2.userinfo.get
+        (commons.LogicalStucture):
+        - Userinfo
 /userinfo:
   /v2:
     /me:
@@ -193,10 +202,15 @@ types:
             - https://www.googleapis.com/auth/plus.me
             - https://www.googleapis.com/auth/userinfo.email
             - https://www.googleapis.com/auth/userinfo.profile
-        displayName: Get Me V2 Userinfo
+        displayName: get
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: Userinfoplus
+        (commons.Id): oauth2.userinfo.v2.me.get
+        (commons.LogicalStucture):
+        - Userinfo
+        - V2
+        - Me

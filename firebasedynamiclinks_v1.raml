@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -304,7 +307,7 @@ types:
 
         The Dynamic Link domain in the request must be owned by requester's
         Firebase project.
-      displayName: Create ShortLinks
+      displayName: create
       is:
       - hasParameters
       body:
@@ -313,3 +316,6 @@ types:
         200:
           body:
             application/json: CreateShortDynamicLinkResponse
+      (commons.Id): firebasedynamiclinks.shortLinks.create
+      (commons.LogicalStucture):
+      - Short Links

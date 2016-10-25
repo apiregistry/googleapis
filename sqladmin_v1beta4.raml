@@ -939,7 +939,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Updates a resource containing information about a database inside a Cloud SQL instance. This method supports patch semantics.
-              displayName: Patch Databases
+              displayName: patch
               is:
               - hasParameters
               body:
@@ -948,6 +948,9 @@ types:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): sql.databases.patch
+              (commons.LogicalStucture):
+              - Databases
             get:
               securedBy:
                 oath2:
@@ -955,13 +958,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Retrieves a resource containing information about a database inside a Cloud SQL instance.
-              displayName: Get Databases
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Database
+              (commons.Id): sql.databases.get
+              (commons.LogicalStucture):
+              - Databases
             put:
               securedBy:
                 oath2:
@@ -969,7 +975,7 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Updates a resource containing information about a database inside a Cloud SQL instance.
-              displayName: Update Databases
+              displayName: update
               is:
               - hasParameters
               body:
@@ -978,6 +984,9 @@ types:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): sql.databases.update
+              (commons.LogicalStucture):
+              - Databases
             delete:
               securedBy:
                 oath2:
@@ -985,13 +994,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Deletes a database from a Cloud SQL instance.
-              displayName: Delete Databases
+              displayName: delete
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): sql.databases.delete
+              (commons.LogicalStucture):
+              - Databases
           post:
             securedBy:
               oath2:
@@ -999,7 +1011,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Inserts a resource containing information about a database inside a Cloud SQL instance.
-            displayName: Insert Databases
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -1008,6 +1020,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.databases.insert
+            (commons.LogicalStucture):
+            - Databases
           get:
             securedBy:
               oath2:
@@ -1015,13 +1030,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Lists databases in the specified Cloud SQL instance.
-            displayName: List Databases
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: DatabasesListResponse
+            (commons.Id): sql.databases.list
+            (commons.LogicalStucture):
+            - Databases
         /import:
           post:
             securedBy:
@@ -1029,7 +1047,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Imports data into a Cloud SQL instance from a MySQL dump file in Google Cloud Storage.
-            displayName: Import Instances
+            displayName: import
             is:
             - hasParameters
             body:
@@ -1038,6 +1056,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.import
+            (commons.LogicalStucture):
+            - Instances
         /restart:
           post:
             securedBy:
@@ -1046,13 +1067,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Restarts a Cloud SQL instance.
-            displayName: Restart Instances
+            displayName: restart
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.restart
+            (commons.LogicalStucture):
+            - Instances
         /restoreBackup:
           post:
             securedBy:
@@ -1061,7 +1085,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Restores a backup of a Cloud SQL instance.
-            displayName: RestoreBackup Instances
+            displayName: restore Backup
             is:
             - hasParameters
             body:
@@ -1070,6 +1094,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.restoreBackup
+            (commons.LogicalStucture):
+            - Instances
         /startReplica:
           post:
             securedBy:
@@ -1078,13 +1105,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Starts the replication in the read replica instance.
-            displayName: StartReplica Instances
+            displayName: start Replica
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.startReplica
+            (commons.LogicalStucture):
+            - Instances
         /failover:
           post:
             securedBy:
@@ -1093,7 +1123,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Failover the instance to its failover replica instance.
-            displayName: Failover Instances
+            displayName: failover
             is:
             - hasParameters
             body:
@@ -1102,6 +1132,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.failover
+            (commons.LogicalStucture):
+            - Instances
         /promoteReplica:
           post:
             securedBy:
@@ -1110,13 +1143,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Promotes the read replica instance to be a stand-alone Cloud SQL instance.
-            displayName: PromoteReplica Instances
+            displayName: promote Replica
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.promoteReplica
+            (commons.LogicalStucture):
+            - Instances
         /clone:
           post:
             securedBy:
@@ -1125,7 +1161,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Creates a Cloud SQL instance as a clone of the source instance. The API is not ready for Second Generation instances yet.
-            displayName: Clone Instances
+            displayName: clone
             is:
             - hasParameters
             body:
@@ -1134,6 +1170,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.clone
+            (commons.LogicalStucture):
+            - Instances
         /export:
           post:
             securedBy:
@@ -1141,7 +1180,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/cloud-platform
             description: Exports data from a Cloud SQL instance to a Google Cloud Storage bucket as a MySQL dump file.
-            displayName: Export Instances
+            displayName: export
             is:
             - hasParameters
             body:
@@ -1150,6 +1189,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.export
+            (commons.LogicalStucture):
+            - Instances
         /stopReplica:
           post:
             securedBy:
@@ -1158,13 +1200,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Stops the replication in the read replica instance.
-            displayName: StopReplica Instances
+            displayName: stop Replica
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.stopReplica
+            (commons.LogicalStucture):
+            - Instances
         /resetSslConfig:
           post:
             securedBy:
@@ -1173,13 +1218,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Deletes all client certificates and generates a new server SSL certificate for the instance. The changes will not take effect until the instance is restarted. Existing instances without a server certificate will need to call this once to set a server certificate.
-            displayName: ResetSslConfig Instances
+            displayName: reset Ssl Config
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.instances.resetSslConfig
+            (commons.LogicalStucture):
+            - Instances
         /backupRuns:
           /{id}:
             uriParameters:
@@ -1194,13 +1242,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Retrieves a resource containing information about a backup run.
-              displayName: Get BackupRuns
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: BackupRun
+              (commons.Id): sql.backupRuns.get
+              (commons.LogicalStucture):
+              - Backup Runs
             delete:
               securedBy:
                 oath2:
@@ -1208,13 +1259,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Deletes the backup taken by a backup run.
-              displayName: Delete BackupRuns
+              displayName: delete
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): sql.backupRuns.delete
+              (commons.LogicalStucture):
+              - Backup Runs
           post:
             securedBy:
               oath2:
@@ -1222,7 +1276,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Creates a new backup run on demand. This method is applicable only to Second Generation instances.
-            displayName: Insert BackupRuns
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -1231,6 +1285,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.backupRuns.insert
+            (commons.LogicalStucture):
+            - Backup Runs
           get:
             securedBy:
               oath2:
@@ -1238,7 +1295,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the enqueued time.
-            displayName: List BackupRuns
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -1253,6 +1310,9 @@ types:
               200:
                 body:
                   application/json: BackupRunsListResponse
+            (commons.Id): sql.backupRuns.list
+            (commons.LogicalStucture):
+            - Backup Runs
         /createEphemeral:
           post:
             securedBy:
@@ -1261,7 +1321,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.
-            displayName: CreateEphemeral SslCerts
+            displayName: create Ephemeral
             is:
             - hasParameters
             body:
@@ -1270,6 +1330,9 @@ types:
               200:
                 body:
                   application/json: SslCert
+            (commons.Id): sql.sslCerts.createEphemeral
+            (commons.LogicalStucture):
+            - Ssl Certs
         /sslCerts:
           /{sha1Fingerprint}:
             uriParameters:
@@ -1283,13 +1346,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Retrieves a particular SSL certificate. Does not include the private key (required for usage). The private key must be saved from the response to initial creation.
-              displayName: Get SslCerts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: SslCert
+              (commons.Id): sql.sslCerts.get
+              (commons.LogicalStucture):
+              - Ssl Certs
             delete:
               securedBy:
                 oath2:
@@ -1297,13 +1363,16 @@ types:
                   - https://www.googleapis.com/auth/cloud-platform
                   - https://www.googleapis.com/auth/sqlservice.admin
               description: Deletes the SSL certificate. The change will not take effect until the instance is restarted.
-              displayName: Delete SslCerts
+              displayName: delete
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: Operation
+              (commons.Id): sql.sslCerts.delete
+              (commons.LogicalStucture):
+              - Ssl Certs
           post:
             securedBy:
               oath2:
@@ -1311,7 +1380,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Creates an SSL certificate and returns it along with the private key and server certificate authority. The new certificate will not be usable until the instance is restarted.
-            displayName: Insert SslCerts
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -1320,6 +1389,9 @@ types:
               200:
                 body:
                   application/json: SslCertsInsertResponse
+            (commons.Id): sql.sslCerts.insert
+            (commons.LogicalStucture):
+            - Ssl Certs
           get:
             securedBy:
               oath2:
@@ -1327,13 +1399,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Lists all of the current SSL certificates for the instance.
-            displayName: List SslCerts
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: SslCertsListResponse
+            (commons.Id): sql.sslCerts.list
+            (commons.LogicalStucture):
+            - Ssl Certs
         /users:
           post:
             securedBy:
@@ -1342,7 +1417,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Creates a new user in a Cloud SQL instance.
-            displayName: Insert Users
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -1351,6 +1426,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.users.insert
+            (commons.LogicalStucture):
+            - Users
           put:
             securedBy:
               oath2:
@@ -1358,7 +1436,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Updates an existing user in a Cloud SQL instance.
-            displayName: Update Users
+            displayName: update
             is:
             - hasParameters
             queryParameters:
@@ -1374,6 +1452,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.users.update
+            (commons.LogicalStucture):
+            - Users
           get:
             securedBy:
               oath2:
@@ -1381,13 +1462,16 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Lists users in the specified Cloud SQL instance.
-            displayName: List Users
+            displayName: list
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: UsersListResponse
+            (commons.Id): sql.users.list
+            (commons.LogicalStucture):
+            - Users
           delete:
             securedBy:
               oath2:
@@ -1395,7 +1479,7 @@ types:
                 - https://www.googleapis.com/auth/cloud-platform
                 - https://www.googleapis.com/auth/sqlservice.admin
             description: Deletes a user from a Cloud SQL instance.
-            displayName: Delete Users
+            displayName: delete
             is:
             - hasParameters
             queryParameters:
@@ -1409,6 +1493,9 @@ types:
               200:
                 body:
                   application/json: Operation
+            (commons.Id): sql.users.delete
+            (commons.LogicalStucture):
+            - Users
         put:
           securedBy:
             oath2:
@@ -1418,7 +1505,7 @@ types:
           description: 'Updates settings of a Cloud SQL instance. Caution: This is
             not a partial update, so you must include values for all the settings
             that you want to retain. For partial updates, use patch.'
-          displayName: Update Instances
+          displayName: update
           is:
           - hasParameters
           body:
@@ -1427,6 +1514,9 @@ types:
             200:
               body:
                 application/json: Operation
+          (commons.Id): sql.instances.update
+          (commons.LogicalStucture):
+          - Instances
         delete:
           securedBy:
             oath2:
@@ -1434,13 +1524,16 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/sqlservice.admin
           description: Deletes a Cloud SQL instance.
-          displayName: Delete Instances
+          displayName: delete
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Operation
+          (commons.Id): sql.instances.delete
+          (commons.LogicalStucture):
+          - Instances
         patch:
           securedBy:
             oath2:
@@ -1451,7 +1544,7 @@ types:
             not a partial update, so you must include values for all the settings
             that you want to retain. For partial updates, use patch.. This method
             supports patch semantics.'
-          displayName: Patch Instances
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -1460,6 +1553,9 @@ types:
             200:
               body:
                 application/json: Operation
+          (commons.Id): sql.instances.patch
+          (commons.LogicalStucture):
+          - Instances
         get:
           securedBy:
             oath2:
@@ -1467,13 +1563,16 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/sqlservice.admin
           description: Retrieves a resource containing information about a Cloud SQL instance.
-          displayName: Get Instances
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: DatabaseInstance
+          (commons.Id): sql.instances.get
+          (commons.LogicalStucture):
+          - Instances
       post:
         securedBy:
           oath2:
@@ -1481,7 +1580,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/sqlservice.admin
         description: Creates a new Cloud SQL instance.
-        displayName: Insert Instances
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -1490,6 +1589,9 @@ types:
           200:
             body:
               application/json: Operation
+        (commons.Id): sql.instances.insert
+        (commons.LogicalStucture):
+        - Instances
       get:
         securedBy:
           oath2:
@@ -1497,7 +1599,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/sqlservice.admin
         description: Lists instances under a given project in the alphabetical order of the instance name.
-        displayName: List Instances
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1512,6 +1614,9 @@ types:
           200:
             body:
               application/json: InstancesListResponse
+        (commons.Id): sql.instances.list
+        (commons.LogicalStucture):
+        - Instances
     /tiers:
       get:
         securedBy:
@@ -1520,13 +1625,16 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/sqlservice.admin
         description: Lists all available service tiers for Google Cloud SQL, for example D1, D2. For related information, see Pricing.
-        displayName: List Tiers
+        displayName: list
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: TiersListResponse
+        (commons.Id): sql.tiers.list
+        (commons.LogicalStucture):
+        - Tiers
     /operations:
       /{operation}:
         uriParameters:
@@ -1540,13 +1648,16 @@ types:
               - https://www.googleapis.com/auth/cloud-platform
               - https://www.googleapis.com/auth/sqlservice.admin
           description: Retrieves an instance operation that has been performed on an instance.
-          displayName: Get Operations
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Operation
+          (commons.Id): sql.operations.get
+          (commons.LogicalStucture):
+          - Operations
       get:
         securedBy:
           oath2:
@@ -1554,7 +1665,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/sqlservice.admin
         description: Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.
-        displayName: List Operations
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1572,6 +1683,9 @@ types:
           200:
             body:
               application/json: OperationsListResponse
+        (commons.Id): sql.operations.list
+        (commons.LogicalStucture):
+        - Operations
 /flags:
   get:
     securedBy:
@@ -1580,10 +1694,13 @@ types:
         - https://www.googleapis.com/auth/cloud-platform
         - https://www.googleapis.com/auth/sqlservice.admin
     description: List all available database flags for Google Cloud SQL instances.
-    displayName: List Flags
+    displayName: list
     is:
     - hasParameters
     responses:
       200:
         body:
           application/json: FlagsListResponse
+    (commons.Id): sql.flags.list
+    (commons.LogicalStucture):
+    - Flags

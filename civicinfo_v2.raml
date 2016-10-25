@@ -579,13 +579,25 @@ types:
         description: The Open Civic Data division identifier of the division to look up.
     get:
       description: Looks up representative information for a single geographic division.
-      displayName: RepresentativeInfoByDivision Representatives
+      displayName: representative Info By Division
       is:
       - hasParameters
       queryParameters:
         roles?:
           type: string
           description: A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned.
+          (commons.EnumDescriptions):
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
           enum:
           - deputyHeadOfGovernment
           - executiveCouncil
@@ -601,6 +613,16 @@ types:
         levels?:
           type: string
           description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
+          (commons.EnumDescriptions):
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
+          - ''
           enum:
           - administrativeArea1
           - administrativeArea2
@@ -620,9 +642,12 @@ types:
         200:
           body:
             application/json: RepresentativeInfoData
+      (commons.Id): civicinfo.representatives.representativeInfoByDivision
+      (commons.LogicalStucture):
+      - Representatives
   get:
     description: Looks up political geography and representative information for a single address.
-    displayName: RepresentativeInfoByAddress Representatives
+    displayName: representative Info By Address
     is:
     - hasParameters
     queryParameters:
@@ -636,6 +661,18 @@ types:
       roles?:
         type: string
         description: A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned.
+        (commons.EnumDescriptions):
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
         enum:
         - deputyHeadOfGovernment
         - executiveCouncil
@@ -651,6 +688,16 @@ types:
       levels?:
         type: string
         description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
+        (commons.EnumDescriptions):
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
         enum:
         - administrativeArea1
         - administrativeArea2
@@ -667,10 +714,13 @@ types:
       200:
         body:
           application/json: RepresentativeInfoResponse
+    (commons.Id): civicinfo.representatives.representativeInfoByAddress
+    (commons.LogicalStucture):
+    - Representatives
 /elections:
   get:
     description: List of available elections to query.
-    displayName: ElectionQuery Elections
+    displayName: election Query
     is:
     - hasParameters
     body:
@@ -679,10 +729,13 @@ types:
       200:
         body:
           application/json: ElectionsQueryResponse
+    (commons.Id): civicinfo.elections.electionQuery
+    (commons.LogicalStucture):
+    - Elections
 /voterinfo:
   get:
     description: Looks up information relevant to a voter based on the voter's registered address.
-    displayName: VoterInfoQuery Elections
+    displayName: voter Info Query
     is:
     - hasParameters
     queryParameters:
@@ -708,10 +761,13 @@ types:
       200:
         body:
           application/json: VoterInfoResponse
+    (commons.Id): civicinfo.elections.voterInfoQuery
+    (commons.LogicalStucture):
+    - Elections
 /divisions:
   get:
     description: Searches for political divisions by their natural name or OCD ID.
-    displayName: Search Divisions
+    displayName: search
     is:
     - hasParameters
     queryParameters:
@@ -724,3 +780,6 @@ types:
       200:
         body:
           application/json: DivisionSearchResponse
+    (commons.Id): civicinfo.divisions.search
+    (commons.LogicalStucture):
+    - Divisions

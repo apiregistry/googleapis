@@ -642,7 +642,7 @@ types:
 /init:
   post:
     description: Initializes the connection between a white space device and the database.
-    displayName: Init Paws
+    displayName: init
     is:
     - hasParameters
     body:
@@ -651,10 +651,13 @@ types:
       200:
         body:
           application/json: PawsInitResponse
+    (commons.Id): spectrum.paws.init
+    (commons.LogicalStucture):
+    - Paws
 /verifyDevice:
   post:
     description: Validates a device for white space use in accordance with regulatory rules. The Google Spectrum Database does not support master/slave configurations, so this always yields an UNIMPLEMENTED error.
-    displayName: VerifyDevice Paws
+    displayName: verify Device
     is:
     - hasParameters
     body:
@@ -663,10 +666,13 @@ types:
       200:
         body:
           application/json: PawsVerifyDeviceResponse
+    (commons.Id): spectrum.paws.verifyDevice
+    (commons.LogicalStucture):
+    - Paws
 /getSpectrumBatch:
   post:
     description: The Google Spectrum Database does not support batch requests, so this method always yields an UNIMPLEMENTED error.
-    displayName: GetSpectrumBatch Paws
+    displayName: get Spectrum Batch
     is:
     - hasParameters
     body:
@@ -675,10 +681,13 @@ types:
       200:
         body:
           application/json: PawsGetSpectrumBatchResponse
+    (commons.Id): spectrum.paws.getSpectrumBatch
+    (commons.LogicalStucture):
+    - Paws
 /getSpectrum:
   post:
     description: Requests information about the available spectrum for a device at a location. Requests from a fixed-mode device must include owner information so the device can be registered with the database.
-    displayName: GetSpectrum Paws
+    displayName: get Spectrum
     is:
     - hasParameters
     body:
@@ -687,10 +696,13 @@ types:
       200:
         body:
           application/json: PawsGetSpectrumResponse
+    (commons.Id): spectrum.paws.getSpectrum
+    (commons.LogicalStucture):
+    - Paws
 /notifySpectrumUse:
   post:
     description: Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.
-    displayName: NotifySpectrumUse Paws
+    displayName: notify Spectrum Use
     is:
     - hasParameters
     body:
@@ -699,10 +711,13 @@ types:
       200:
         body:
           application/json: PawsNotifySpectrumUseResponse
+    (commons.Id): spectrum.paws.notifySpectrumUse
+    (commons.LogicalStucture):
+    - Paws
 /register:
   post:
     description: The Google Spectrum Database implements registration in the getSpectrum method. As such this always returns an UNIMPLEMENTED error.
-    displayName: Register Paws
+    displayName: register
     is:
     - hasParameters
     body:
@@ -711,3 +726,6 @@ types:
       200:
         body:
           application/json: PawsRegisterResponse
+    (commons.Id): spectrum.paws.register
+    (commons.LogicalStucture):
+    - Paws

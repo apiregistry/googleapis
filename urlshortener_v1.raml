@@ -142,7 +142,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/urlshortener
       description: Retrieves a list of URLs shortened by a user.
-      displayName: List Url
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -152,6 +152,9 @@ types:
         projection?:
           type: string
           description: Additional information to return.
+          (commons.EnumDescriptions):
+          - Returns short URL click counts.
+          - Returns short URL click counts.
           enum:
           - ANALYTICS_CLICKS
           - FULL
@@ -159,13 +162,16 @@ types:
         200:
           body:
             application/json: UrlHistory
+      (commons.Id): urlshortener.url.list
+      (commons.LogicalStucture):
+      - Url
   get:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/urlshortener
     description: Expands a short URL or gets creation time and analytics.
-    displayName: Get Url
+    displayName: get
     is:
     - hasParameters
     queryParameters:
@@ -175,6 +181,10 @@ types:
       projection?:
         type: string
         description: Additional information to return.
+        (commons.EnumDescriptions):
+        - Returns only click counts.
+        - Returns only top string counts.
+        - Returns the creation timestamp and all available analytics.
         enum:
         - ANALYTICS_CLICKS
         - ANALYTICS_TOP_STRINGS
@@ -183,13 +193,16 @@ types:
       200:
         body:
           application/json: Url
+    (commons.Id): urlshortener.url.get
+    (commons.LogicalStucture):
+    - Url
   post:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/urlshortener
     description: Creates a new short URL.
-    displayName: Insert Url
+    displayName: insert
     is:
     - hasParameters
     body:
@@ -198,3 +211,6 @@ types:
       200:
         body:
           application/json: Url
+    (commons.Id): urlshortener.url.insert
+    (commons.LogicalStucture):
+    - Url

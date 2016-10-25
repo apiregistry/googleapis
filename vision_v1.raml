@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -812,7 +815,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Run image detection and annotation for a batch of images.
-      displayName: Annotate Images
+      displayName: annotate
       is:
       - hasParameters
       body:
@@ -821,3 +824,6 @@ types:
         200:
           body:
             application/json: BatchAnnotateImagesResponse
+      (commons.Id): vision.images.annotate
+      (commons.LogicalStucture):
+      - Images

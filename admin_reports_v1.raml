@@ -306,7 +306,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/admin.reports.usage.readonly
         description: Retrieves a report which is a collection of properties / statistics for a specific customer.
-        displayName: Get CustomerUsageReports
+        displayName: get
         is:
         - hasParameters
         queryParameters:
@@ -325,6 +325,9 @@ types:
           200:
             body:
               application/json: UsageReports
+        (commons.Id): reports.customerUsageReports.get
+        (commons.LogicalStucture):
+        - Customer Usage Reports
   /users:
     /{userKey}:
       uriParameters:
@@ -344,7 +347,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.reports.usage.readonly
             description: Retrieves a report which is a collection of properties / statistics for a set of users.
-            displayName: Get UserUsageReport
+            displayName: get
             is:
             - hasParameters
             queryParameters:
@@ -372,6 +375,9 @@ types:
               200:
                 body:
                   application/json: UsageReports
+            (commons.Id): reports.userUsageReport.get
+            (commons.LogicalStucture):
+            - User Usage Report
 /:
   /admin:
     /reports_v1:
@@ -383,11 +389,14 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/admin.reports.audit.readonly
             description: Stop watching resources through this channel
-            displayName: Stop Channels
+            displayName: stop
             is:
             - hasParameters
             body:
               application/json: Channel
+            (commons.Id): admin.channels.stop
+            (commons.LogicalStucture):
+            - Channels
 /activity:
   /users:
     /{userKey}:
@@ -409,7 +418,7 @@ types:
                   scopes:
                   - https://www.googleapis.com/auth/admin.reports.audit.readonly
               description: Push changes to activities
-              displayName: Watch Activities
+              displayName: watch
               is:
               - hasParameters
               queryParameters:
@@ -450,13 +459,16 @@ types:
                 200:
                   body:
                     application/json: Channel
+              (commons.Id): reports.activities.watch
+              (commons.LogicalStucture):
+              - Activities
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/admin.reports.audit.readonly
             description: Retrieves a list of activities for a specific customer and application.
-            displayName: List Activities
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -495,3 +507,6 @@ types:
               200:
                 body:
                   application/json: Activities
+            (commons.Id): reports.activities.list
+            (commons.LogicalStucture):
+            - Activities

@@ -178,7 +178,7 @@ types:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the authenticated user's specified task list. This method supports patch semantics.
-          displayName: Patch Tasklists
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -187,6 +187,9 @@ types:
             200:
               body:
                 application/json: TaskList
+          (commons.Id): tasks.tasklists.patch
+          (commons.LogicalStucture):
+          - Tasklists
         get:
           securedBy:
             oath2:
@@ -194,20 +197,23 @@ types:
               - https://www.googleapis.com/auth/tasks
               - https://www.googleapis.com/auth/tasks.readonly
           description: Returns the authenticated user's specified task list.
-          displayName: Get Tasklists
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: TaskList
+          (commons.Id): tasks.tasklists.get
+          (commons.LogicalStucture):
+          - Tasklists
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the authenticated user's specified task list.
-          displayName: Update Tasklists
+          displayName: update
           is:
           - hasParameters
           body:
@@ -216,22 +222,28 @@ types:
             200:
               body:
                 application/json: TaskList
+          (commons.Id): tasks.tasklists.update
+          (commons.LogicalStucture):
+          - Tasklists
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Deletes the authenticated user's specified task list.
-          displayName: Delete Tasklists
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): tasks.tasklists.delete
+          (commons.LogicalStucture):
+          - Tasklists
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Creates a new task list and adds it to the authenticated user's task lists.
-        displayName: Insert Tasklists
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -240,6 +252,9 @@ types:
           200:
             body:
               application/json: TaskList
+        (commons.Id): tasks.tasklists.insert
+        (commons.LogicalStucture):
+        - Tasklists
       get:
         securedBy:
           oath2:
@@ -247,7 +262,7 @@ types:
             - https://www.googleapis.com/auth/tasks
             - https://www.googleapis.com/auth/tasks.readonly
         description: Returns all the authenticated user's task lists.
-        displayName: List Tasklists
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -262,6 +277,9 @@ types:
           200:
             body:
               application/json: TaskLists
+        (commons.Id): tasks.tasklists.list
+        (commons.LogicalStucture):
+        - Tasklists
 /lists:
   /{tasklist}:
     uriParameters:
@@ -281,7 +299,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/tasks
             description: Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks.
-            displayName: Move Tasks
+            displayName: move
             is:
             - hasParameters
             queryParameters:
@@ -295,13 +313,16 @@ types:
               200:
                 body:
                   application/json: Task
+            (commons.Id): tasks.tasks.move
+            (commons.LogicalStucture):
+            - Tasks
         patch:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the specified task. This method supports patch semantics.
-          displayName: Patch Tasks
+          displayName: patch
           is:
           - hasParameters
           body:
@@ -310,6 +331,9 @@ types:
             200:
               body:
                 application/json: Task
+          (commons.Id): tasks.tasks.patch
+          (commons.LogicalStucture):
+          - Tasks
         get:
           securedBy:
             oath2:
@@ -317,20 +341,23 @@ types:
               - https://www.googleapis.com/auth/tasks
               - https://www.googleapis.com/auth/tasks.readonly
           description: Returns the specified task.
-          displayName: Get Tasks
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: Task
+          (commons.Id): tasks.tasks.get
+          (commons.LogicalStucture):
+          - Tasks
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Updates the specified task.
-          displayName: Update Tasks
+          displayName: update
           is:
           - hasParameters
           body:
@@ -339,22 +366,28 @@ types:
             200:
               body:
                 application/json: Task
+          (commons.Id): tasks.tasks.update
+          (commons.LogicalStucture):
+          - Tasks
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/tasks
           description: Deletes the specified task from the task list.
-          displayName: Delete Tasks
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): tasks.tasks.delete
+          (commons.LogicalStucture):
+          - Tasks
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Creates a new task on the specified task list.
-        displayName: Insert Tasks
+        displayName: insert
         is:
         - hasParameters
         queryParameters:
@@ -370,6 +403,9 @@ types:
           200:
             body:
               application/json: Task
+        (commons.Id): tasks.tasks.insert
+        (commons.LogicalStucture):
+        - Tasks
       get:
         securedBy:
           oath2:
@@ -377,7 +413,7 @@ types:
             - https://www.googleapis.com/auth/tasks
             - https://www.googleapis.com/auth/tasks.readonly
         description: Returns all tasks in the specified task list.
-        displayName: List Tasks
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -416,6 +452,9 @@ types:
           200:
             body:
               application/json: Tasks
+        (commons.Id): tasks.tasks.list
+        (commons.LogicalStucture):
+        - Tasks
     /clear:
       post:
         securedBy:
@@ -423,6 +462,9 @@ types:
             scopes:
             - https://www.googleapis.com/auth/tasks
         description: Clears all completed tasks from the specified task list. The affected tasks will be marked as 'hidden' and no longer be returned by default when retrieving all tasks for a task list.
-        displayName: Clear Tasks
+        displayName: clear
         is:
         - hasParameters
+        (commons.Id): tasks.tasks.clear
+        (commons.LogicalStucture):
+        - Tasks

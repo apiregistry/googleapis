@@ -34,6 +34,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
       uploadType?:
         type: string
         description: Legacy upload protocol for media (e.g. "media", "multipart").
@@ -63,7 +66,7 @@ types:
   /entities:search:
     get:
       description: Searches Knowledge Graph for entities that match the constraints. A list of matched entities will be returned in response, which will be in JSON-LD format and compatible with http://schema.org
-      displayName: Search Entities
+      displayName: search
       is:
       - hasParameters
       queryParameters:
@@ -93,3 +96,6 @@ types:
         200:
           body:
             application/json: SearchResponse
+      (commons.Id): kgsearch.entities.search
+      (commons.LogicalStucture):
+      - Entities

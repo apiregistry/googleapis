@@ -400,7 +400,7 @@ types:
         scopes:
         - https://www.googleapis.com/auth/adsensehost
     description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
-    displayName: Generate Reports
+    displayName: generate
     is:
     - hasParameters
     queryParameters:
@@ -448,6 +448,9 @@ types:
       200:
         body:
           application/json: Report
+    (commons.Id): adsensehost.reports.generate
+    (commons.LogicalStucture):
+    - Reports
 /adclients:
   /{adClientId}:
     uriParameters:
@@ -466,20 +469,23 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Delete a URL channel from the host AdSense account.
-          displayName: Delete Urlchannels
+          displayName: delete
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: UrlChannel
+          (commons.Id): adsensehost.urlchannels.delete
+          (commons.LogicalStucture):
+          - Urlchannels
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Add a new URL channel to the host AdSense account.
-        displayName: Insert Urlchannels
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -488,13 +494,16 @@ types:
           200:
             body:
               application/json: UrlChannel
+        (commons.Id): adsensehost.urlchannels.insert
+        (commons.LogicalStucture):
+        - Urlchannels
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: List all host URL channels in the host AdSense account.
-        displayName: List Urlchannels
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -511,6 +520,9 @@ types:
           200:
             body:
               application/json: UrlChannels
+        (commons.Id): adsensehost.urlchannels.list
+        (commons.LogicalStucture):
+        - Urlchannels
     /customchannels:
       /{customChannelId}:
         uriParameters:
@@ -523,33 +535,39 @@ types:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Get a specific custom channel from the host AdSense account.
-          displayName: Get Customchannels
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: CustomChannel
+          (commons.Id): adsensehost.customchannels.get
+          (commons.LogicalStucture):
+          - Customchannels
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Delete a specific custom channel from the host AdSense account.
-          displayName: Delete Customchannels
+          displayName: delete
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: CustomChannel
+          (commons.Id): adsensehost.customchannels.delete
+          (commons.LogicalStucture):
+          - Customchannels
       patch:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Update a custom channel in the host AdSense account. This method supports patch semantics.
-        displayName: Patch Customchannels
+        displayName: patch
         is:
         - hasParameters
         queryParameters:
@@ -562,13 +580,16 @@ types:
           200:
             body:
               application/json: CustomChannel
+        (commons.Id): adsensehost.customchannels.patch
+        (commons.LogicalStucture):
+        - Customchannels
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Add a new custom channel to the host AdSense account.
-        displayName: Insert Customchannels
+        displayName: insert
         is:
         - hasParameters
         body:
@@ -577,13 +598,16 @@ types:
           200:
             body:
               application/json: CustomChannel
+        (commons.Id): adsensehost.customchannels.insert
+        (commons.LogicalStucture):
+        - Customchannels
       put:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Update a custom channel in the host AdSense account.
-        displayName: Update Customchannels
+        displayName: update
         is:
         - hasParameters
         body:
@@ -592,13 +616,16 @@ types:
           200:
             body:
               application/json: CustomChannel
+        (commons.Id): adsensehost.customchannels.update
+        (commons.LogicalStucture):
+        - Customchannels
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: List all host custom channels in this AdSense account.
-        displayName: List Customchannels
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -615,26 +642,32 @@ types:
           200:
             body:
               application/json: CustomChannels
+        (commons.Id): adsensehost.customchannels.list
+        (commons.LogicalStucture):
+        - Customchannels
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Get information about one of the ad clients in the Host AdSense account.
-      displayName: Get Adclients
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: AdClient
+      (commons.Id): adsensehost.adclients.get
+      (commons.LogicalStucture):
+      - Adclients
   get:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/adsensehost
     description: List all host ad clients in this AdSense account.
-    displayName: List Adclients
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -651,6 +684,9 @@ types:
       200:
         body:
           application/json: AdClients
+    (commons.Id): adsensehost.adclients.list
+    (commons.LogicalStucture):
+    - Adclients
 /associationsessions:
   /start:
     get:
@@ -659,13 +695,19 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Create an association session for initiating an association with an AdSense user.
-      displayName: Start Associationsessions
+      displayName: start
       is:
       - hasParameters
       queryParameters:
         productCode:
           type: string
           description: Products to associate with the user.
+          (commons.EnumDescriptions):
+          - AdSense For Content
+          - AdSense For Games
+          - AdSense For Mobile Content - deprecated
+          - AdSense For Search - deprecated
+          - AdSense For Video
           enum:
           - AFC
           - AFG
@@ -685,6 +727,9 @@ types:
         200:
           body:
             application/json: AssociationSession
+      (commons.Id): adsensehost.associationsessions.start
+      (commons.LogicalStucture):
+      - Associationsessions
   /verify:
     get:
       securedBy:
@@ -692,7 +737,7 @@ types:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Verify an association session after the association callback returns from AdSense signup.
-      displayName: Verify Associationsessions
+      displayName: verify
       is:
       - hasParameters
       queryParameters:
@@ -703,6 +748,9 @@ types:
         200:
           body:
             application/json: AssociationSession
+      (commons.Id): adsensehost.associationsessions.verify
+      (commons.LogicalStucture):
+      - Associationsessions
 /accounts:
   /{accountId}:
     uriParameters:
@@ -716,7 +764,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
-        displayName: Generate Reports Accounts
+        displayName: generate
         is:
         - hasParameters
         queryParameters:
@@ -764,6 +812,10 @@ types:
           200:
             body:
               application/json: Report
+        (commons.Id): adsensehost.accounts.reports.generate
+        (commons.LogicalStucture):
+        - Accounts
+        - Reports
     /adclients:
       /{adClientId}:
         uriParameters:
@@ -783,7 +835,7 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/adsensehost
                 description: Get ad code for the specified ad unit, attaching the specified host custom channels.
-                displayName: GetAdCode Adunits Accounts
+                displayName: get AdCode
                 is:
                 - hasParameters
                 queryParameters:
@@ -794,39 +846,51 @@ types:
                   200:
                     body:
                       application/json: AdCode
+                (commons.Id): adsensehost.accounts.adunits.getAdCode
+                (commons.LogicalStucture):
+                - Accounts
+                - Adunits
             get:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/adsensehost
               description: Get the specified host ad unit in this AdSense account.
-              displayName: Get Adunits Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: AdUnit
+              (commons.Id): adsensehost.accounts.adunits.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Adunits
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/adsensehost
               description: Delete the specified ad unit from the specified publisher AdSense account.
-              displayName: Delete Adunits Accounts
+              displayName: delete
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: AdUnit
+              (commons.Id): adsensehost.accounts.adunits.delete
+              (commons.LogicalStucture):
+              - Accounts
+              - Adunits
           patch:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/adsensehost
             description: Update the supplied ad unit in the specified publisher AdSense account. This method supports patch semantics.
-            displayName: Patch Adunits Accounts
+            displayName: patch
             is:
             - hasParameters
             queryParameters:
@@ -839,13 +903,17 @@ types:
               200:
                 body:
                   application/json: AdUnit
+            (commons.Id): adsensehost.accounts.adunits.patch
+            (commons.LogicalStucture):
+            - Accounts
+            - Adunits
           post:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/adsensehost
             description: Insert the supplied ad unit into the specified publisher AdSense account.
-            displayName: Insert Adunits Accounts
+            displayName: insert
             is:
             - hasParameters
             body:
@@ -854,13 +922,17 @@ types:
               200:
                 body:
                   application/json: AdUnit
+            (commons.Id): adsensehost.accounts.adunits.insert
+            (commons.LogicalStucture):
+            - Accounts
+            - Adunits
           put:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/adsensehost
             description: Update the supplied ad unit in the specified publisher AdSense account.
-            displayName: Update Adunits Accounts
+            displayName: update
             is:
             - hasParameters
             body:
@@ -869,13 +941,17 @@ types:
               200:
                 body:
                   application/json: AdUnit
+            (commons.Id): adsensehost.accounts.adunits.update
+            (commons.LogicalStucture):
+            - Accounts
+            - Adunits
           get:
             securedBy:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/adsensehost
             description: List all ad units in the specified publisher's AdSense account.
-            displayName: List Adunits Accounts
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -895,26 +971,34 @@ types:
               200:
                 body:
                   application/json: AdUnits
+            (commons.Id): adsensehost.accounts.adunits.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Adunits
         get:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/adsensehost
           description: Get information about one of the ad clients in the specified publisher's AdSense account.
-          displayName: Get Adclients Accounts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AdClient
+          (commons.Id): adsensehost.accounts.adclients.get
+          (commons.LogicalStucture):
+          - Accounts
+          - Adclients
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/adsensehost
         description: List all hosted ad clients in the specified hosted account.
-        displayName: List Adclients Accounts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -931,26 +1015,33 @@ types:
           200:
             body:
               application/json: AdClients
+        (commons.Id): adsensehost.accounts.adclients.list
+        (commons.LogicalStucture):
+        - Accounts
+        - Adclients
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/adsensehost
       description: Get information about the selected associated AdSense account.
-      displayName: Get Accounts
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Account
+      (commons.Id): adsensehost.accounts.get
+      (commons.LogicalStucture):
+      - Accounts
   get:
     securedBy:
       oath2:
         scopes:
         - https://www.googleapis.com/auth/adsensehost
     description: List hosted accounts associated with this AdSense account by ad client id.
-    displayName: List Accounts
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -961,3 +1052,6 @@ types:
       200:
         body:
           application/json: Accounts
+    (commons.Id): adsensehost.accounts.list
+    (commons.LogicalStucture):
+    - Accounts

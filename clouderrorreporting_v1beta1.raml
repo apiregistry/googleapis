@@ -43,6 +43,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -365,20 +368,23 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Deletes all error events of a given project.
-        displayName: DeleteEvents Projects
+        displayName: delete Events
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: DeleteEventsResponse
+        (commons.Id): clouderrorreporting.projects.deleteEvents
+        (commons.LogicalStucture):
+        - Projects
       get:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists the specified events.
-        displayName: List Events Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -416,6 +422,10 @@ types:
           200:
             body:
               application/json: ListEventsResponse
+        (commons.Id): clouderrorreporting.projects.events.list
+        (commons.LogicalStucture):
+        - Projects
+        - Events
     /groupStats:
       get:
         securedBy:
@@ -423,7 +433,7 @@ types:
             scopes:
             - https://www.googleapis.com/auth/cloud-platform
         description: Lists the specified groups.
-        displayName: List GroupStats Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -497,6 +507,10 @@ types:
           200:
             body:
               application/json: ListGroupStatsResponse
+        (commons.Id): clouderrorreporting.projects.groupStats.list
+        (commons.LogicalStucture):
+        - Projects
+        - Group Stats
     /events:report:
       post:
         securedBy:
@@ -512,7 +526,7 @@ types:
           for authentication. To use an API key, append it to the URL as the value of
           a `key` parameter. For example:
           <pre>POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</pre>
-        displayName: Report Events Projects
+        displayName: report
         is:
         - hasParameters
         body:
@@ -521,6 +535,10 @@ types:
           200:
             body:
               application/json: ReportErrorEventResponse
+        (commons.Id): clouderrorreporting.projects.events.report
+        (commons.LogicalStucture):
+        - Projects
+        - Events
   /{groupName}:
     uriParameters:
       groupName:
@@ -541,13 +559,17 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
       description: Get the specified group.
-      displayName: Get Groups Projects
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: ErrorGroup
+      (commons.Id): clouderrorreporting.projects.groups.get
+      (commons.LogicalStucture):
+      - Projects
+      - Groups
   /{name}:
     uriParameters:
       name:
@@ -564,7 +586,7 @@ types:
       description: |-
         Replace the data for the specified group.
         Fails if the group does not exist.
-      displayName: Update Groups Projects
+      displayName: update
       is:
       - hasParameters
       body:
@@ -573,3 +595,7 @@ types:
         200:
           body:
             application/json: ErrorGroup
+      (commons.Id): clouderrorreporting.projects.groups.update
+      (commons.LogicalStucture):
+      - Projects
+      - Groups

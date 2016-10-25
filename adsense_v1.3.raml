@@ -548,7 +548,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List the alerts for this AdSense account.
-    displayName: List Alerts
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -559,6 +559,9 @@ types:
       200:
         body:
           application/json: Alerts
+    (commons.Id): adsense.alerts.list
+    (commons.LogicalStucture):
+    - Alerts
 /reports:
   /saved:
     get:
@@ -568,7 +571,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: List all saved reports in this AdSense account.
-      displayName: List Saved Reports
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -585,6 +588,10 @@ types:
         200:
           body:
             application/json: SavedReports
+      (commons.Id): adsense.reports.saved.list
+      (commons.LogicalStucture):
+      - Reports
+      - Saved
   /{savedReportId}:
     uriParameters:
       savedReportId:
@@ -597,7 +604,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: Generate an AdSense report based on the saved report ID sent in the query parameters.
-      displayName: Generate Saved Reports
+      displayName: generate
       is:
       - hasParameters
       queryParameters:
@@ -621,6 +628,10 @@ types:
         200:
           body:
             application/json: AdsenseReportsGenerateResponse
+      (commons.Id): adsense.reports.saved.generate
+      (commons.LogicalStucture):
+      - Reports
+      - Saved
   get:
     securedBy:
       oath2:
@@ -628,7 +639,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
-    displayName: Generate Reports
+    displayName: generate
     is:
     - hasParameters
     queryParameters:
@@ -686,6 +697,9 @@ types:
       200:
         body:
           application/json: AdsenseReportsGenerateResponse
+    (commons.Id): adsense.reports.generate
+    (commons.LogicalStucture):
+    - Reports
 /metadata:
   /metrics:
     get:
@@ -695,13 +709,17 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: List the metadata for the metrics available to this AdSense account.
-      displayName: List Metrics Metadata
+      displayName: list
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Metadata
+      (commons.Id): adsense.metadata.metrics.list
+      (commons.LogicalStucture):
+      - Metadata
+      - Metrics
   /dimensions:
     get:
       securedBy:
@@ -710,13 +728,17 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: List the metadata for the dimensions available to this AdSense account.
-      displayName: List Dimensions Metadata
+      displayName: list
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Metadata
+      (commons.Id): adsense.metadata.dimensions.list
+      (commons.LogicalStucture):
+      - Metadata
+      - Dimensions
 /adclients:
   /{adClientId}:
     uriParameters:
@@ -731,7 +753,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all URL channels in the specified ad client for this AdSense account.
-        displayName: List Urlchannels
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -748,6 +770,9 @@ types:
           200:
             body:
               application/json: UrlChannels
+        (commons.Id): adsense.urlchannels.list
+        (commons.LogicalStucture):
+        - Urlchannels
     /customchannels:
       /{customChannelId}:
         uriParameters:
@@ -762,7 +787,7 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: List all ad units in the specified custom channel.
-            displayName: List Adunits Customchannels
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -782,6 +807,10 @@ types:
               200:
                 body:
                   application/json: AdUnits
+            (commons.Id): adsense.customchannels.adunits.list
+            (commons.LogicalStucture):
+            - Customchannels
+            - Adunits
         get:
           securedBy:
             oath2:
@@ -789,13 +818,16 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: Get the specified custom channel from the specified ad client.
-          displayName: Get Customchannels
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: CustomChannel
+          (commons.Id): adsense.customchannels.get
+          (commons.LogicalStucture):
+          - Customchannels
       get:
         securedBy:
           oath2:
@@ -803,7 +835,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all custom channels in the specified ad client for this AdSense account.
-        displayName: List Customchannels
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -820,6 +852,9 @@ types:
           200:
             body:
               application/json: CustomChannels
+        (commons.Id): adsense.customchannels.list
+        (commons.LogicalStucture):
+        - Customchannels
     /adunits:
       /{adUnitId}:
         uriParameters:
@@ -834,13 +869,16 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: Get ad code for the specified ad unit.
-            displayName: GetAdCode Adunits
+            displayName: get AdCode
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: AdCode
+            (commons.Id): adsense.adunits.getAdCode
+            (commons.LogicalStucture):
+            - Adunits
         /customchannels:
           get:
             securedBy:
@@ -849,7 +887,7 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: List all custom channels which the specified ad unit belongs to.
-            displayName: List Customchannels Adunits
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -866,6 +904,10 @@ types:
               200:
                 body:
                   application/json: CustomChannels
+            (commons.Id): adsense.adunits.customchannels.list
+            (commons.LogicalStucture):
+            - Adunits
+            - Customchannels
         get:
           securedBy:
             oath2:
@@ -873,13 +915,16 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: Gets the specified ad unit in the specified ad client.
-          displayName: Get Adunits
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: AdUnit
+          (commons.Id): adsense.adunits.get
+          (commons.LogicalStucture):
+          - Adunits
       get:
         securedBy:
           oath2:
@@ -887,7 +932,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all ad units in the specified ad client for this AdSense account.
-        displayName: List Adunits
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -907,6 +952,9 @@ types:
           200:
             body:
               application/json: AdUnits
+        (commons.Id): adsense.adunits.list
+        (commons.LogicalStucture):
+        - Adunits
   get:
     securedBy:
       oath2:
@@ -914,7 +962,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List all ad clients in this AdSense account.
-    displayName: List Adclients
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -931,6 +979,9 @@ types:
       200:
         body:
           application/json: AdClients
+    (commons.Id): adsense.adclients.list
+    (commons.LogicalStucture):
+    - Adclients
 /savedadstyles:
   /{savedAdStyleId}:
     uriParameters:
@@ -944,13 +995,16 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: Get a specific saved ad style from the user's account.
-      displayName: Get Savedadstyles
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: SavedAdStyle
+      (commons.Id): adsense.savedadstyles.get
+      (commons.LogicalStucture):
+      - Savedadstyles
   get:
     securedBy:
       oath2:
@@ -958,7 +1012,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List all saved ad styles in the user's account.
-    displayName: List Savedadstyles
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -975,6 +1029,9 @@ types:
       200:
         body:
           application/json: SavedAdStyles
+    (commons.Id): adsense.savedadstyles.list
+    (commons.LogicalStucture):
+    - Savedadstyles
 /accounts:
   /{accountId}:
     uriParameters:
@@ -989,7 +1046,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List the alerts for the specified AdSense account.
-        displayName: List Alerts Accounts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1000,6 +1057,10 @@ types:
           200:
             body:
               application/json: Alerts
+        (commons.Id): adsense.accounts.alerts.list
+        (commons.LogicalStucture):
+        - Accounts
+        - Alerts
     /reports:
       /saved:
         get:
@@ -1009,7 +1070,7 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: List all saved reports in the specified AdSense account.
-          displayName: List Saved Reports Accounts
+          displayName: list
           is:
           - hasParameters
           queryParameters:
@@ -1026,6 +1087,11 @@ types:
             200:
               body:
                 application/json: SavedReports
+          (commons.Id): adsense.accounts.reports.saved.list
+          (commons.LogicalStucture):
+          - Accounts
+          - Reports
+          - Saved
       /{savedReportId}:
         uriParameters:
           savedReportId:
@@ -1038,7 +1104,7 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: Generate an AdSense report based on the saved report ID sent in the query parameters.
-          displayName: Generate Saved Reports Accounts
+          displayName: generate
           is:
           - hasParameters
           queryParameters:
@@ -1062,6 +1128,11 @@ types:
             200:
               body:
                 application/json: AdsenseReportsGenerateResponse
+          (commons.Id): adsense.accounts.reports.saved.generate
+          (commons.LogicalStucture):
+          - Accounts
+          - Reports
+          - Saved
       get:
         securedBy:
           oath2:
@@ -1069,7 +1140,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
-        displayName: Generate Reports Accounts
+        displayName: generate
         is:
         - hasParameters
         queryParameters:
@@ -1124,6 +1195,10 @@ types:
           200:
             body:
               application/json: AdsenseReportsGenerateResponse
+        (commons.Id): adsense.accounts.reports.generate
+        (commons.LogicalStucture):
+        - Accounts
+        - Reports
     /adclients:
       /{adClientId}:
         uriParameters:
@@ -1138,7 +1213,7 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: List all URL channels in the specified ad client for the specified account.
-            displayName: List Urlchannels Accounts
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -1155,6 +1230,10 @@ types:
               200:
                 body:
                   application/json: UrlChannels
+            (commons.Id): adsense.accounts.urlchannels.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Urlchannels
         /customchannels:
           /{customChannelId}:
             uriParameters:
@@ -1169,7 +1248,7 @@ types:
                     - https://www.googleapis.com/auth/adsense
                     - https://www.googleapis.com/auth/adsense.readonly
                 description: List all ad units in the specified custom channel.
-                displayName: List Adunits Customchannels Accounts
+                displayName: list
                 is:
                 - hasParameters
                 queryParameters:
@@ -1189,6 +1268,11 @@ types:
                   200:
                     body:
                       application/json: AdUnits
+                (commons.Id): adsense.accounts.customchannels.adunits.list
+                (commons.LogicalStucture):
+                - Accounts
+                - Customchannels
+                - Adunits
             get:
               securedBy:
                 oath2:
@@ -1196,13 +1280,17 @@ types:
                   - https://www.googleapis.com/auth/adsense
                   - https://www.googleapis.com/auth/adsense.readonly
               description: Get the specified custom channel from the specified ad client for the specified account.
-              displayName: Get Customchannels Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: CustomChannel
+              (commons.Id): adsense.accounts.customchannels.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Customchannels
           get:
             securedBy:
               oath2:
@@ -1210,7 +1298,7 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: List all custom channels in the specified ad client for the specified account.
-            displayName: List Customchannels Accounts
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -1227,6 +1315,10 @@ types:
               200:
                 body:
                   application/json: CustomChannels
+            (commons.Id): adsense.accounts.customchannels.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Customchannels
         /adunits:
           /{adUnitId}:
             uriParameters:
@@ -1241,13 +1333,17 @@ types:
                     - https://www.googleapis.com/auth/adsense
                     - https://www.googleapis.com/auth/adsense.readonly
                 description: Get ad code for the specified ad unit.
-                displayName: GetAdCode Adunits Accounts
+                displayName: get AdCode
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: AdCode
+                (commons.Id): adsense.accounts.adunits.getAdCode
+                (commons.LogicalStucture):
+                - Accounts
+                - Adunits
             /customchannels:
               get:
                 securedBy:
@@ -1256,7 +1352,7 @@ types:
                     - https://www.googleapis.com/auth/adsense
                     - https://www.googleapis.com/auth/adsense.readonly
                 description: List all custom channels which the specified ad unit belongs to.
-                displayName: List Customchannels Adunits Accounts
+                displayName: list
                 is:
                 - hasParameters
                 queryParameters:
@@ -1273,6 +1369,11 @@ types:
                   200:
                     body:
                       application/json: CustomChannels
+                (commons.Id): adsense.accounts.adunits.customchannels.list
+                (commons.LogicalStucture):
+                - Accounts
+                - Adunits
+                - Customchannels
             get:
               securedBy:
                 oath2:
@@ -1280,13 +1381,17 @@ types:
                   - https://www.googleapis.com/auth/adsense
                   - https://www.googleapis.com/auth/adsense.readonly
               description: Gets the specified ad unit in the specified ad client for the specified account.
-              displayName: Get Adunits Accounts
+              displayName: get
               is:
               - hasParameters
               responses:
                 200:
                   body:
                     application/json: AdUnit
+              (commons.Id): adsense.accounts.adunits.get
+              (commons.LogicalStucture):
+              - Accounts
+              - Adunits
           get:
             securedBy:
               oath2:
@@ -1294,7 +1399,7 @@ types:
                 - https://www.googleapis.com/auth/adsense
                 - https://www.googleapis.com/auth/adsense.readonly
             description: List all ad units in the specified ad client for the specified account.
-            displayName: List Adunits Accounts
+            displayName: list
             is:
             - hasParameters
             queryParameters:
@@ -1314,6 +1419,10 @@ types:
               200:
                 body:
                   application/json: AdUnits
+            (commons.Id): adsense.accounts.adunits.list
+            (commons.LogicalStucture):
+            - Accounts
+            - Adunits
       get:
         securedBy:
           oath2:
@@ -1321,7 +1430,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all ad clients in the specified account.
-        displayName: List Adclients Accounts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1338,6 +1447,10 @@ types:
           200:
             body:
               application/json: AdClients
+        (commons.Id): adsense.accounts.adclients.list
+        (commons.LogicalStucture):
+        - Accounts
+        - Adclients
     /savedadstyles:
       /{savedAdStyleId}:
         uriParameters:
@@ -1351,13 +1464,17 @@ types:
               - https://www.googleapis.com/auth/adsense
               - https://www.googleapis.com/auth/adsense.readonly
           description: List a specific saved ad style for the specified account.
-          displayName: Get Savedadstyles Accounts
+          displayName: get
           is:
           - hasParameters
           responses:
             200:
               body:
                 application/json: SavedAdStyle
+          (commons.Id): adsense.accounts.savedadstyles.get
+          (commons.LogicalStucture):
+          - Accounts
+          - Savedadstyles
       get:
         securedBy:
           oath2:
@@ -1365,7 +1482,7 @@ types:
             - https://www.googleapis.com/auth/adsense
             - https://www.googleapis.com/auth/adsense.readonly
         description: List all saved ad styles in the specified account.
-        displayName: List Savedadstyles Accounts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -1382,6 +1499,10 @@ types:
           200:
             body:
               application/json: SavedAdStyles
+        (commons.Id): adsense.accounts.savedadstyles.list
+        (commons.LogicalStucture):
+        - Accounts
+        - Savedadstyles
     get:
       securedBy:
         oath2:
@@ -1389,7 +1510,7 @@ types:
           - https://www.googleapis.com/auth/adsense
           - https://www.googleapis.com/auth/adsense.readonly
       description: Get information about the selected AdSense account.
-      displayName: Get Accounts
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -1400,6 +1521,9 @@ types:
         200:
           body:
             application/json: Account
+      (commons.Id): adsense.accounts.get
+      (commons.LogicalStucture):
+      - Accounts
   get:
     securedBy:
       oath2:
@@ -1407,7 +1531,7 @@ types:
         - https://www.googleapis.com/auth/adsense
         - https://www.googleapis.com/auth/adsense.readonly
     description: List all accounts available to this AdSense account.
-    displayName: List Accounts
+    displayName: list
     is:
     - hasParameters
     queryParameters:
@@ -1424,3 +1548,6 @@ types:
       200:
         body:
           application/json: Accounts
+    (commons.Id): adsense.accounts.list
+    (commons.LogicalStucture):
+    - Accounts

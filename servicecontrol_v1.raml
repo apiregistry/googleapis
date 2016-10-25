@@ -44,6 +44,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -587,7 +590,7 @@ types:
           This method requires the `servicemanagement.services.report` permission
           on the specified service. For more information, see
           [Google Cloud IAM](https://cloud.google.com/iam).
-        displayName: Report Services
+        displayName: report
         is:
         - hasParameters
         body:
@@ -596,6 +599,9 @@ types:
           200:
             body:
               application/json: ReportResponse
+        (commons.Id): servicecontrol.services.report
+        (commons.LogicalStucture):
+        - Services
     /{serviceName}:check:
       uriParameters:
         serviceName:
@@ -619,7 +625,7 @@ types:
           This method requires the `servicemanagement.services.check` permission
           on the specified service. For more information, see
           [Google Cloud IAM](https://cloud.google.com/iam).
-        displayName: Check Services
+        displayName: check
         is:
         - hasParameters
         body:
@@ -628,3 +634,6 @@ types:
           200:
             body:
               application/json: CheckResponse
+        (commons.Id): servicecontrol.services.check
+        (commons.LogicalStucture):
+        - Services

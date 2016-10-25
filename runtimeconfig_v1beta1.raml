@@ -44,6 +44,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -438,7 +441,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Gets information about a single waiter.
-      displayName: Get Waiters Configs Projects
+      displayName: get
       is:
       - hasParameters
       - hasParameters
@@ -448,6 +451,11 @@ types:
         200:
           body:
             application/json: Waiter
+      (commons.Id): runtimeconfig.projects.configs.waiters.get
+      (commons.LogicalStucture):
+      - Projects
+      - Configs
+      - Waiters
     put:
       securedBy:
         oath2:
@@ -455,7 +463,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Updates an existing variable with a new value.
-      displayName: Update Variables Configs Projects
+      displayName: update
       is:
       - hasParameters
       - hasParameters
@@ -465,6 +473,11 @@ types:
         200:
           body:
             application/json: Variable
+      (commons.Id): runtimeconfig.projects.configs.variables.update
+      (commons.LogicalStucture):
+      - Projects
+      - Configs
+      - Variables
     delete:
       securedBy:
         oath2:
@@ -472,7 +485,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
       description: Deletes the waiter with the specified name.
-      displayName: Delete Waiters Configs Projects
+      displayName: delete
       is:
       - hasParameters
       - hasParameters
@@ -487,6 +500,11 @@ types:
         200:
           body:
             application/json: Empty
+      (commons.Id): runtimeconfig.projects.configs.waiters.delete
+      (commons.LogicalStucture):
+      - Projects
+      - Configs
+      - Waiters
   /{parent}:
     uriParameters:
       parent:
@@ -505,7 +523,7 @@ types:
         description: |-
           Creates a new RuntimeConfig resource. The configuration name must be
           unique within project.
-        displayName: Create Configs Projects
+        displayName: create
         is:
         - hasParameters
         queryParameters:
@@ -525,6 +543,10 @@ types:
           200:
             body:
               application/json: RuntimeConfig
+        (commons.Id): runtimeconfig.projects.configs.create
+        (commons.LogicalStucture):
+        - Projects
+        - Configs
       get:
         securedBy:
           oath2:
@@ -532,7 +554,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloudruntimeconfig
         description: Lists all the RuntimeConfig resources within project.
-        displayName: List Configs Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -551,6 +573,10 @@ types:
           200:
             body:
               application/json: ListConfigsResponse
+        (commons.Id): runtimeconfig.projects.configs.list
+        (commons.LogicalStucture):
+        - Projects
+        - Configs
     /variables:
       post:
         securedBy:
@@ -566,7 +592,7 @@ types:
           To learn more about creating a variable, read the
           [Setting and Getting Data](/deployment-manager/runtime-configurator/set-and-get-variables)
           documentation.
-        displayName: Create Variables Configs Projects
+        displayName: create
         is:
         - hasParameters
         queryParameters:
@@ -586,6 +612,11 @@ types:
           200:
             body:
               application/json: Variable
+        (commons.Id): runtimeconfig.projects.configs.variables.create
+        (commons.LogicalStucture):
+        - Projects
+        - Configs
+        - Variables
       get:
         securedBy:
           oath2:
@@ -595,7 +626,7 @@ types:
         description: |-
           Lists variables within given a configuration, matching any provided filters.
           This only lists variable names, not the values.
-        displayName: List Variables Configs Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -620,6 +651,11 @@ types:
           200:
             body:
               application/json: ListVariablesResponse
+        (commons.Id): runtimeconfig.projects.configs.variables.list
+        (commons.LogicalStucture):
+        - Projects
+        - Configs
+        - Variables
     /waiters:
       post:
         securedBy:
@@ -633,7 +669,7 @@ types:
           given name will exist (and can be retrieved) prior to the operation
           completing. If the operation fails, the failed Waiter resource will
           still exist and must be deleted prior to subsequent creation attempts.
-        displayName: Create Waiters Configs Projects
+        displayName: create
         is:
         - hasParameters
         queryParameters:
@@ -653,6 +689,11 @@ types:
           200:
             body:
               application/json: Operation
+        (commons.Id): runtimeconfig.projects.configs.waiters.create
+        (commons.LogicalStucture):
+        - Projects
+        - Configs
+        - Waiters
       get:
         securedBy:
           oath2:
@@ -660,7 +701,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/cloudruntimeconfig
         description: List waiters within the given configuration.
-        displayName: List Waiters Configs Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -679,6 +720,11 @@ types:
           200:
             body:
               application/json: ListWaitersResponse
+        (commons.Id): runtimeconfig.projects.configs.waiters.list
+        (commons.LogicalStucture):
+        - Projects
+        - Configs
+        - Waiters
   /{name}:watch:
     uriParameters:
       name:
@@ -708,7 +754,7 @@ types:
         To learn more about creating a watcher, read the
         [Watching a Variable for Changes](/deployment-manager/runtime-configurator/watching-a-variable)
         documentation.
-      displayName: Watch Variables Configs Projects
+      displayName: watch
       is:
       - hasParameters
       body:
@@ -717,3 +763,8 @@ types:
         200:
           body:
             application/json: Variable
+      (commons.Id): runtimeconfig.projects.configs.variables.watch
+      (commons.LogicalStucture):
+      - Projects
+      - Configs
+      - Variables

@@ -47,6 +47,9 @@ traits:
       $.xgafv?:
         type: string
         description: V1 error format.
+        (commons.EnumDescriptions):
+        - v1 error format
+        - v2 error format
         enum:
         - '1'
         - '2'
@@ -803,7 +806,7 @@ types:
         Lists log entries.  Use this method to retrieve log entries from Cloud
         Logging.  For ways to export log entries, see
         [Exporting Logs](/logging/docs/export).
-      displayName: List Entries
+      displayName: list
       is:
       - hasParameters
       body:
@@ -812,6 +815,9 @@ types:
         200:
           body:
             application/json: ListLogEntriesResponse
+      (commons.Id): logging.entries.list
+      (commons.LogicalStucture):
+      - Entries
   /entries:write:
     post:
       securedBy:
@@ -823,7 +829,7 @@ types:
       description: |-
         Writes log entries to Stackdriver Logging.  All log entries are
         written by this method.
-      displayName: Write Entries
+      displayName: write
       is:
       - hasParameters
       body:
@@ -832,6 +838,9 @@ types:
         200:
           body:
             application/json: WriteLogEntriesResponse
+      (commons.Id): logging.entries.write
+      (commons.LogicalStucture):
+      - Entries
   /{sinkName}:
     uriParameters:
       sinkName:
@@ -849,13 +858,17 @@ types:
           - https://www.googleapis.com/auth/logging.admin
           - https://www.googleapis.com/auth/logging.read
       description: Gets a sink.
-      displayName: Get Sinks Projects
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: LogSink
+      (commons.Id): logging.projects.sinks.get
+      (commons.LogicalStucture):
+      - Projects
+      - Sinks
     put:
       securedBy:
         oath2:
@@ -863,7 +876,7 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/logging.admin
       description: Updates or creates a sink.
-      displayName: Update Sinks Projects
+      displayName: update
       is:
       - hasParameters
       body:
@@ -872,6 +885,10 @@ types:
         200:
           body:
             application/json: LogSink
+      (commons.Id): logging.projects.sinks.update
+      (commons.LogicalStucture):
+      - Projects
+      - Sinks
     delete:
       securedBy:
         oath2:
@@ -879,13 +896,17 @@ types:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/logging.admin
       description: Deletes a sink.
-      displayName: Delete Sinks Projects
+      displayName: delete
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Empty
+      (commons.Id): logging.projects.sinks.delete
+      (commons.LogicalStucture):
+      - Projects
+      - Sinks
   /{parent}:
     uriParameters:
       parent:
@@ -903,7 +924,7 @@ types:
             - https://www.googleapis.com/auth/cloud-platform
             - https://www.googleapis.com/auth/logging.admin
         description: Creates a sink.
-        displayName: Create Sinks Projects
+        displayName: create
         is:
         - hasParameters
         body:
@@ -912,6 +933,10 @@ types:
           200:
             body:
               application/json: LogSink
+        (commons.Id): logging.projects.sinks.create
+        (commons.LogicalStucture):
+        - Projects
+        - Sinks
       get:
         securedBy:
           oath2:
@@ -921,7 +946,7 @@ types:
             - https://www.googleapis.com/auth/logging.admin
             - https://www.googleapis.com/auth/logging.read
         description: Lists sinks.
-        displayName: List Sinks Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -943,6 +968,10 @@ types:
           200:
             body:
               application/json: ListSinksResponse
+        (commons.Id): logging.projects.sinks.list
+        (commons.LogicalStucture):
+        - Projects
+        - Sinks
     /metrics:
       post:
         securedBy:
@@ -952,7 +981,7 @@ types:
             - https://www.googleapis.com/auth/logging.admin
             - https://www.googleapis.com/auth/logging.write
         description: Creates a logs-based metric.
-        displayName: Create Metrics Projects
+        displayName: create
         is:
         - hasParameters
         body:
@@ -961,6 +990,10 @@ types:
           200:
             body:
               application/json: LogMetric
+        (commons.Id): logging.projects.metrics.create
+        (commons.LogicalStucture):
+        - Projects
+        - Metrics
       get:
         securedBy:
           oath2:
@@ -970,7 +1003,7 @@ types:
             - https://www.googleapis.com/auth/logging.admin
             - https://www.googleapis.com/auth/logging.read
         description: Lists logs-based metrics.
-        displayName: List Metrics Projects
+        displayName: list
         is:
         - hasParameters
         queryParameters:
@@ -992,6 +1025,10 @@ types:
           200:
             body:
               application/json: ListLogMetricsResponse
+        (commons.Id): logging.projects.metrics.list
+        (commons.LogicalStucture):
+        - Projects
+        - Metrics
   /{metricName}:
     uriParameters:
       metricName:
@@ -1009,13 +1046,17 @@ types:
           - https://www.googleapis.com/auth/logging.admin
           - https://www.googleapis.com/auth/logging.read
       description: Gets a logs-based metric.
-      displayName: Get Metrics Projects
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: LogMetric
+      (commons.Id): logging.projects.metrics.get
+      (commons.LogicalStucture):
+      - Projects
+      - Metrics
     put:
       securedBy:
         oath2:
@@ -1024,7 +1065,7 @@ types:
           - https://www.googleapis.com/auth/logging.admin
           - https://www.googleapis.com/auth/logging.write
       description: Creates or updates a logs-based metric.
-      displayName: Update Metrics Projects
+      displayName: update
       is:
       - hasParameters
       body:
@@ -1033,6 +1074,10 @@ types:
         200:
           body:
             application/json: LogMetric
+      (commons.Id): logging.projects.metrics.update
+      (commons.LogicalStucture):
+      - Projects
+      - Metrics
     delete:
       securedBy:
         oath2:
@@ -1041,13 +1086,17 @@ types:
           - https://www.googleapis.com/auth/logging.admin
           - https://www.googleapis.com/auth/logging.write
       description: Deletes a logs-based metric.
-      displayName: Delete Metrics Projects
+      displayName: delete
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Empty
+      (commons.Id): logging.projects.metrics.delete
+      (commons.LogicalStucture):
+      - Projects
+      - Metrics
   /{logName}:
     uriParameters:
       logName:
@@ -1065,7 +1114,7 @@ types:
       description: |-
         Deletes a log and all its log entries.
         The log will reappear if it receives new entries.
-      displayName: Delete Logs BillingAccounts
+      displayName: delete
       is:
       - hasParameters
       - hasParameters
@@ -1074,6 +1123,10 @@ types:
         200:
           body:
             application/json: Empty
+      (commons.Id): logging.billingAccounts.logs.delete
+      (commons.LogicalStucture):
+      - Billing Accounts
+      - Logs
   /monitoredResourceDescriptors:
     get:
       securedBy:
@@ -1084,7 +1137,7 @@ types:
           - https://www.googleapis.com/auth/logging.admin
           - https://www.googleapis.com/auth/logging.read
       description: Lists the monitored resource descriptors used by Stackdriver Logging.
-      displayName: List MonitoredResourceDescriptors
+      displayName: list
       is:
       - hasParameters
       queryParameters:
@@ -1106,3 +1159,6 @@ types:
         200:
           body:
             application/json: ListMonitoredResourceDescriptorsResponse
+      (commons.Id): logging.monitoredResourceDescriptors.list
+      (commons.LogicalStucture):
+      - Monitored Resource Descriptors

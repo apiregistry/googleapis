@@ -599,13 +599,16 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/blogger
                 description: Marks a comment as spam.
-                displayName: MarkAsSpam Comments
+                displayName: mark AsSpam
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: Comment
+                (commons.Id): blogger.comments.markAsSpam
+                (commons.LogicalStucture):
+                - Comments
             /approve:
               post:
                 securedBy:
@@ -613,13 +616,16 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/blogger
                 description: Marks a comment as not spam.
-                displayName: Approve Comments
+                displayName: approve
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: Comment
+                (commons.Id): blogger.comments.approve
+                (commons.LogicalStucture):
+                - Comments
             /removecontent:
               post:
                 securedBy:
@@ -627,13 +633,16 @@ types:
                     scopes:
                     - https://www.googleapis.com/auth/blogger
                 description: Removes the content of a comment.
-                displayName: RemoveContent Comments
+                displayName: remove Content
                 is:
                 - hasParameters
                 responses:
                   200:
                     body:
                       application/json: Comment
+                (commons.Id): blogger.comments.removeContent
+                (commons.LogicalStucture):
+                - Comments
             get:
               securedBy:
                 oath2:
@@ -641,7 +650,7 @@ types:
                   - https://www.googleapis.com/auth/blogger
                   - https://www.googleapis.com/auth/blogger.readonly
               description: Gets one comment by ID.
-              displayName: Get Comments
+              displayName: get
               is:
               - hasParameters
               queryParameters:
@@ -651,6 +660,10 @@ types:
                     Note that some comments will require elevated permissions, for
                     example comments where the parent posts which is in a draft state,
                     or comments that are pending moderation.'
+                  (commons.EnumDescriptions):
+                  - Admin level detail
+                  - Author level detail
+                  - Admin level detail
                   enum:
                   - ADMIN
                   - AUTHOR
@@ -659,15 +672,21 @@ types:
                 200:
                   body:
                     application/json: Comment
+              (commons.Id): blogger.comments.get
+              (commons.LogicalStucture):
+              - Comments
             delete:
               securedBy:
                 oath2:
                   scopes:
                   - https://www.googleapis.com/auth/blogger
               description: Delete a comment by ID.
-              displayName: Delete Comments
+              displayName: delete
               is:
               - hasParameters
+              (commons.Id): blogger.comments.delete
+              (commons.LogicalStucture):
+              - Comments
           get:
             securedBy:
               oath2:
@@ -675,13 +694,17 @@ types:
                 - https://www.googleapis.com/auth/blogger
                 - https://www.googleapis.com/auth/blogger.readonly
             description: Retrieves the comments for a post, possibly filtered.
-            displayName: List Comments
+            displayName: list
             is:
             - hasParameters
             queryParameters:
               view?:
                 type: string
                 description: Access level with which to view the returned result. Note that some fields require elevated access.
+                (commons.EnumDescriptions):
+                - Admin level detail
+                - Author level detail
+                - Reader level detail
                 enum:
                 - ADMIN
                 - AUTHOR
@@ -704,6 +727,11 @@ types:
                 description: Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
               status?:
                 type: string
+                (commons.EnumDescriptions):
+                - Comments that have had their content removed
+                - Comments that are publicly visible
+                - Comments that are awaiting administrator approval
+                - Comments marked as spam by the administrator
                 enum:
                 - emptied
                 - live
@@ -713,6 +741,9 @@ types:
               200:
                 body:
                   application/json: CommentList
+            (commons.Id): blogger.comments.list
+            (commons.LogicalStucture):
+            - Comments
         /publish:
           post:
             securedBy:
@@ -720,7 +751,7 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Publishes a draft post, optionally at the specific time of the given publishDate parameter.
-            displayName: Publish Posts
+            displayName: publish
             is:
             - hasParameters
             queryParameters:
@@ -731,6 +762,9 @@ types:
               200:
                 body:
                   application/json: Post
+            (commons.Id): blogger.posts.publish
+            (commons.LogicalStucture):
+            - Posts
         /revert:
           post:
             securedBy:
@@ -738,20 +772,23 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Revert a published or scheduled post to draft state.
-            displayName: Revert Posts
+            displayName: revert
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Post
+            (commons.Id): blogger.posts.revert
+            (commons.LogicalStucture):
+            - Posts
         patch:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a post. This method supports patch semantics.
-          displayName: Patch Posts
+          displayName: patch
           is:
           - hasParameters
           queryParameters:
@@ -782,6 +819,9 @@ types:
             200:
               body:
                 application/json: Post
+          (commons.Id): blogger.posts.patch
+          (commons.LogicalStucture):
+          - Posts
         get:
           securedBy:
             oath2:
@@ -789,7 +829,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Get a post by ID.
-          displayName: Get Posts
+          displayName: get
           is:
           - hasParameters
           queryParameters:
@@ -800,6 +840,10 @@ types:
             view?:
               type: string
               description: Access level with which to view the returned result. Note that some fields require elevated access.
+              (commons.EnumDescriptions):
+              - Admin level detail
+              - Author level detail
+              - Reader level detail
               enum:
               - ADMIN
               - AUTHOR
@@ -818,13 +862,16 @@ types:
             200:
               body:
                 application/json: Post
+          (commons.Id): blogger.posts.get
+          (commons.LogicalStucture):
+          - Posts
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a post.
-          displayName: Update Posts
+          displayName: update
           is:
           - hasParameters
           queryParameters:
@@ -855,15 +902,21 @@ types:
             200:
               body:
                 application/json: Post
+          (commons.Id): blogger.posts.update
+          (commons.LogicalStucture):
+          - Posts
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Delete a post by ID.
-          displayName: Delete Posts
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): blogger.posts.delete
+          (commons.LogicalStucture):
+          - Posts
       /search:
         get:
           securedBy:
@@ -872,7 +925,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Search for a post.
-          displayName: Search Posts
+          displayName: search
           is:
           - hasParameters
           queryParameters:
@@ -889,6 +942,9 @@ types:
               type: string
               default: PUBLISHED
               description: Sort search results
+              (commons.EnumDescriptions):
+              - Order by the date the post was published
+              - Order by the date the post was last updated
               enum:
               - published
               - updated
@@ -896,6 +952,9 @@ types:
             200:
               body:
                 application/json: PostList
+          (commons.Id): blogger.posts.search
+          (commons.LogicalStucture):
+          - Posts
       /bypath:
         get:
           securedBy:
@@ -904,7 +963,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Retrieve a Post by Path.
-          displayName: GetByPath Posts
+          displayName: get ByPath
           is:
           - hasParameters
           queryParameters:
@@ -918,6 +977,10 @@ types:
             view?:
               type: string
               description: Access level with which to view the returned result. Note that some fields require elevated access.
+              (commons.EnumDescriptions):
+              - Admin level detail
+              - Author level detail
+              - Reader level detail
               enum:
               - ADMIN
               - AUTHOR
@@ -926,13 +989,16 @@ types:
             200:
               body:
                 application/json: Post
+          (commons.Id): blogger.posts.getByPath
+          (commons.LogicalStucture):
+          - Posts
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Add a post.
-        displayName: Insert Posts
+        displayName: insert
         is:
         - hasParameters
         queryParameters:
@@ -954,6 +1020,9 @@ types:
           200:
             body:
               application/json: Post
+        (commons.Id): blogger.posts.insert
+        (commons.LogicalStucture):
+        - Posts
       get:
         securedBy:
           oath2:
@@ -961,13 +1030,17 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves a list of posts, possibly filtered.
-        displayName: List Posts
+        displayName: list
         is:
         - hasParameters
         queryParameters:
           view?:
             type: string
             description: Access level with which to view the returned result. Note that some fields require escalated access.
+            (commons.EnumDescriptions):
+            - Admin level detail
+            - Author level detail
+            - Reader level detail
             enum:
             - ADMIN
             - AUTHOR
@@ -992,6 +1065,9 @@ types:
             type: string
             default: PUBLISHED
             description: Sort search results
+            (commons.EnumDescriptions):
+            - Order by the date the post was published
+            - Order by the date the post was last updated
             enum:
             - published
             - updated
@@ -1007,6 +1083,10 @@ types:
           status?:
             type: string
             description: Statuses to include in the results.
+            (commons.EnumDescriptions):
+            - Draft (non-published) posts.
+            - Published posts
+            - Posts that are scheduled to publish in the future.
             enum:
             - draft
             - live
@@ -1015,6 +1095,9 @@ types:
           200:
             body:
               application/json: PostList
+        (commons.Id): blogger.posts.list
+        (commons.LogicalStucture):
+        - Posts
     /comments:
       get:
         securedBy:
@@ -1023,7 +1106,7 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves the comments for a blog, across all posts, possibly filtered.
-        displayName: ListByBlog Comments
+        displayName: list ByBlog
         is:
         - hasParameters
         queryParameters:
@@ -1045,6 +1128,11 @@ types:
             description: Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
           status?:
             type: string
+            (commons.EnumDescriptions):
+            - Comments that have had their content removed
+            - Comments that are publicly visible
+            - Comments that are awaiting administrator approval
+            - Comments marked as spam by the administrator
             enum:
             - emptied
             - live
@@ -1054,6 +1142,9 @@ types:
           200:
             body:
               application/json: CommentList
+        (commons.Id): blogger.comments.listByBlog
+        (commons.LogicalStucture):
+        - Comments
     /pages:
       /{pageId}:
         uriParameters:
@@ -1067,13 +1158,16 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Publishes a draft page.
-            displayName: Publish Pages
+            displayName: publish
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Page
+            (commons.Id): blogger.pages.publish
+            (commons.LogicalStucture):
+            - Pages
         /revert:
           post:
             securedBy:
@@ -1081,20 +1175,23 @@ types:
                 scopes:
                 - https://www.googleapis.com/auth/blogger
             description: Revert a published or scheduled page to draft state.
-            displayName: Revert Pages
+            displayName: revert
             is:
             - hasParameters
             responses:
               200:
                 body:
                   application/json: Page
+            (commons.Id): blogger.pages.revert
+            (commons.LogicalStucture):
+            - Pages
         patch:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a page. This method supports patch semantics.
-          displayName: Patch Pages
+          displayName: patch
           is:
           - hasParameters
           queryParameters:
@@ -1112,6 +1209,9 @@ types:
             200:
               body:
                 application/json: Page
+          (commons.Id): blogger.pages.patch
+          (commons.LogicalStucture):
+          - Pages
         get:
           securedBy:
             oath2:
@@ -1119,12 +1219,16 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Gets one blog page by ID.
-          displayName: Get Pages
+          displayName: get
           is:
           - hasParameters
           queryParameters:
             view?:
               type: string
+              (commons.EnumDescriptions):
+              - Admin level detail
+              - Author level detail
+              - Reader level detail
               enum:
               - ADMIN
               - AUTHOR
@@ -1133,13 +1237,16 @@ types:
             200:
               body:
                 application/json: Page
+          (commons.Id): blogger.pages.get
+          (commons.LogicalStucture):
+          - Pages
         put:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Update a page.
-          displayName: Update Pages
+          displayName: update
           is:
           - hasParameters
           queryParameters:
@@ -1157,22 +1264,28 @@ types:
             200:
               body:
                 application/json: Page
+          (commons.Id): blogger.pages.update
+          (commons.LogicalStucture):
+          - Pages
         delete:
           securedBy:
             oath2:
               scopes:
               - https://www.googleapis.com/auth/blogger
           description: Delete a page by ID.
-          displayName: Delete Pages
+          displayName: delete
           is:
           - hasParameters
+          (commons.Id): blogger.pages.delete
+          (commons.LogicalStucture):
+          - Pages
       post:
         securedBy:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Add a page.
-        displayName: Insert Pages
+        displayName: insert
         is:
         - hasParameters
         queryParameters:
@@ -1185,6 +1298,9 @@ types:
           200:
             body:
               application/json: Page
+        (commons.Id): blogger.pages.insert
+        (commons.LogicalStucture):
+        - Pages
       get:
         securedBy:
           oath2:
@@ -1192,13 +1308,17 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves the pages for a blog, optionally including non-LIVE statuses.
-        displayName: List Pages
+        displayName: list
         is:
         - hasParameters
         queryParameters:
           view?:
             type: string
             description: Access level with which to view the returned result. Note that some fields require elevated access.
+            (commons.EnumDescriptions):
+            - Admin level detail
+            - Author level detail
+            - Reader level detail
             enum:
             - ADMIN
             - AUTHOR
@@ -1215,6 +1335,9 @@ types:
             description: Continuation token if the request is paged.
           status?:
             type: string
+            (commons.EnumDescriptions):
+            - Draft (unpublished) Pages
+            - Pages that are publicly visible
             enum:
             - draft
             - live
@@ -1222,6 +1345,9 @@ types:
           200:
             body:
               application/json: PageList
+        (commons.Id): blogger.pages.list
+        (commons.LogicalStucture):
+        - Pages
     /pageviews:
       get:
         securedBy:
@@ -1229,12 +1355,16 @@ types:
             scopes:
             - https://www.googleapis.com/auth/blogger
         description: Retrieve pageview stats for a Blog.
-        displayName: Get PageViews
+        displayName: get
         is:
         - hasParameters
         queryParameters:
           range?:
             type: string
+            (commons.EnumDescriptions):
+            - Page view counts from the last thirty days.
+            - Page view counts from the last seven days.
+            - Total page view counts from all time.
             enum:
             - 30DAYS
             - 7DAYS
@@ -1243,6 +1373,9 @@ types:
           200:
             body:
               application/json: Pageviews
+        (commons.Id): blogger.pageViews.get
+        (commons.LogicalStucture):
+        - Page Views
     get:
       securedBy:
         oath2:
@@ -1250,7 +1383,7 @@ types:
           - https://www.googleapis.com/auth/blogger
           - https://www.googleapis.com/auth/blogger.readonly
       description: Gets one blog by ID.
-      displayName: Get Blogs
+      displayName: get
       is:
       - hasParameters
       queryParameters:
@@ -1261,6 +1394,10 @@ types:
         view?:
           type: string
           description: Access level with which to view the blog. Note that some fields require elevated access.
+          (commons.EnumDescriptions):
+          - Admin level detail.
+          - Author level detail.
+          - Reader level detail.
           enum:
           - ADMIN
           - AUTHOR
@@ -1269,6 +1406,9 @@ types:
         200:
           body:
             application/json: Blog
+      (commons.Id): blogger.blogs.get
+      (commons.LogicalStucture):
+      - Blogs
   /byurl:
     get:
       securedBy:
@@ -1277,13 +1417,17 @@ types:
           - https://www.googleapis.com/auth/blogger
           - https://www.googleapis.com/auth/blogger.readonly
       description: Retrieve a Blog by URL.
-      displayName: GetByUrl Blogs
+      displayName: get ByUrl
       is:
       - hasParameters
       queryParameters:
         view?:
           type: string
           description: Access level with which to view the blog. Note that some fields require elevated access.
+          (commons.EnumDescriptions):
+          - Admin level detail.
+          - Author level detail.
+          - Reader level detail.
           enum:
           - ADMIN
           - AUTHOR
@@ -1295,6 +1439,9 @@ types:
         200:
           body:
             application/json: Blog
+      (commons.Id): blogger.blogs.getByUrl
+      (commons.LogicalStucture):
+      - Blogs
 /users:
   /{userId}:
     uriParameters:
@@ -1320,7 +1467,7 @@ types:
                   - https://www.googleapis.com/auth/blogger
                   - https://www.googleapis.com/auth/blogger.readonly
               description: Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.
-              displayName: Get PostUserInfos
+              displayName: get
               is:
               - hasParameters
               queryParameters:
@@ -1332,6 +1479,9 @@ types:
                 200:
                   body:
                     application/json: PostUserInfo
+              (commons.Id): blogger.postUserInfos.get
+              (commons.LogicalStucture):
+              - Post User Infos
           get:
             securedBy:
               oath2:
@@ -1339,13 +1489,17 @@ types:
                 - https://www.googleapis.com/auth/blogger
                 - https://www.googleapis.com/auth/blogger.readonly
             description: Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.
-            displayName: List PostUserInfos
+            displayName: list
             is:
             - hasParameters
             queryParameters:
               view?:
                 type: string
                 description: Access level with which to view the returned result. Note that some fields require elevated access.
+                (commons.EnumDescriptions):
+                - Admin level detail
+                - Author level detail
+                - Reader level detail
                 enum:
                 - ADMIN
                 - AUTHOR
@@ -1365,6 +1519,9 @@ types:
                 type: string
                 default: PUBLISHED
                 description: Sort order applied to search results. Default is published.
+                (commons.EnumDescriptions):
+                - Order by the date the post was published
+                - Order by the date the post was last updated
                 enum:
                 - published
                 - updated
@@ -1379,6 +1536,10 @@ types:
                 description: Comma-separated list of labels to search for.
               status?:
                 type: string
+                (commons.EnumDescriptions):
+                - Draft posts
+                - Published posts
+                - Posts that are scheduled to publish in future.
                 enum:
                 - draft
                 - live
@@ -1387,6 +1548,9 @@ types:
               200:
                 body:
                   application/json: PostUserInfosList
+            (commons.Id): blogger.postUserInfos.list
+            (commons.LogicalStucture):
+            - Post User Infos
         get:
           securedBy:
             oath2:
@@ -1394,7 +1558,7 @@ types:
               - https://www.googleapis.com/auth/blogger
               - https://www.googleapis.com/auth/blogger.readonly
           description: Gets one blog and user info pair by blogId and userId.
-          displayName: Get BlogUserInfos
+          displayName: get
           is:
           - hasParameters
           queryParameters:
@@ -1406,6 +1570,9 @@ types:
             200:
               body:
                 application/json: BlogUserInfo
+          (commons.Id): blogger.blogUserInfos.get
+          (commons.LogicalStucture):
+          - Blog User Infos
       get:
         securedBy:
           oath2:
@@ -1413,7 +1580,7 @@ types:
             - https://www.googleapis.com/auth/blogger
             - https://www.googleapis.com/auth/blogger.readonly
         description: Retrieves a list of blogs, possibly filtered.
-        displayName: ListByUser Blogs
+        displayName: list ByUser
         is:
         - hasParameters
         queryParameters:
@@ -1423,6 +1590,10 @@ types:
           view?:
             type: string
             description: Access level with which to view the blogs. Note that some fields require elevated access.
+            (commons.EnumDescriptions):
+            - Admin level detail.
+            - Author level detail.
+            - Reader level detail.
             enum:
             - ADMIN
             - AUTHOR
@@ -1430,6 +1601,10 @@ types:
           role?:
             type: string
             description: User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.
+            (commons.EnumDescriptions):
+            - Admin role - Blogs where the user has Admin level access.
+            - Author role - Blogs where the user has Author level access.
+            - Reader role - Blogs where the user has Reader level access (to a private blog).
             enum:
             - ADMIN
             - AUTHOR
@@ -1439,6 +1614,9 @@ types:
             default: LIVE
             description: 'Blog statuses to include in the result (default: Live blogs
               only). Note that ADMIN access is required to view deleted blogs.'
+            (commons.EnumDescriptions):
+            - Blog has been deleted by an administrator.
+            - Blog is currently live.
             enum:
             - DELETED
             - LIVE
@@ -1446,6 +1624,9 @@ types:
           200:
             body:
               application/json: BlogList
+        (commons.Id): blogger.blogs.listByUser
+        (commons.LogicalStucture):
+        - Blogs
     get:
       securedBy:
         oath2:
@@ -1453,10 +1634,13 @@ types:
           - https://www.googleapis.com/auth/blogger
           - https://www.googleapis.com/auth/blogger.readonly
       description: Gets one user by ID.
-      displayName: Get Users
+      displayName: get
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: User
+      (commons.Id): blogger.users.get
+      (commons.LogicalStucture):
+      - Users

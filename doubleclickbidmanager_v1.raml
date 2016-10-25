@@ -1038,27 +1038,33 @@ types:
     /reports:
       get:
         description: Retrieves stored reports.
-        displayName: Listreports Reports
+        displayName: listreports
         is:
         - hasParameters
         responses:
           200:
             body:
               application/json: ListReportsResponse
+        (commons.Id): doubleclickbidmanager.reports.listreports
+        (commons.LogicalStucture):
+        - Reports
   get:
     description: Retrieves stored queries.
-    displayName: Listqueries Queries
+    displayName: listqueries
     is:
     - hasParameters
     responses:
       200:
         body:
           application/json: ListQueriesResponse
+    (commons.Id): doubleclickbidmanager.queries.listqueries
+    (commons.LogicalStucture):
+    - Queries
 /lineitems:
   /downloadlineitems:
     post:
       description: Retrieves line items in CSV format.
-      displayName: Downloadlineitems Lineitems
+      displayName: downloadlineitems
       is:
       - hasParameters
       body:
@@ -1067,10 +1073,13 @@ types:
         200:
           body:
             application/json: DownloadLineItemsResponse
+      (commons.Id): doubleclickbidmanager.lineitems.downloadlineitems
+      (commons.LogicalStucture):
+      - Lineitems
   /uploadlineitems:
     post:
       description: Uploads line items in CSV format.
-      displayName: Uploadlineitems Lineitems
+      displayName: uploadlineitems
       is:
       - hasParameters
       body:
@@ -1079,11 +1088,14 @@ types:
         200:
           body:
             application/json: UploadLineItemsResponse
+      (commons.Id): doubleclickbidmanager.lineitems.uploadlineitems
+      (commons.LogicalStucture):
+      - Lineitems
 /sdf:
   /download:
     post:
       description: Retrieves entities in SDF format.
-      displayName: Download Sdf
+      displayName: download
       is:
       - hasParameters
       body:
@@ -1092,6 +1104,9 @@ types:
         200:
           body:
             application/json: DownloadResponse
+      (commons.Id): doubleclickbidmanager.sdf.download
+      (commons.LogicalStucture):
+      - Sdf
 /query:
   /{queryId}:
     uriParameters:
@@ -1101,28 +1116,37 @@ types:
         description: Query ID to delete.
     delete:
       description: Deletes a stored query as well as the associated stored reports.
-      displayName: Deletequery Queries
+      displayName: deletequery
       is:
       - hasParameters
+      (commons.Id): doubleclickbidmanager.queries.deletequery
+      (commons.LogicalStucture):
+      - Queries
     get:
       description: Retrieves a stored query.
-      displayName: Getquery Queries
+      displayName: getquery
       is:
       - hasParameters
       responses:
         200:
           body:
             application/json: Query
+      (commons.Id): doubleclickbidmanager.queries.getquery
+      (commons.LogicalStucture):
+      - Queries
     post:
       description: Runs a stored query to generate a report.
-      displayName: Runquery Queries
+      displayName: runquery
       is:
       - hasParameters
       body:
         application/json: RunQueryRequest
+      (commons.Id): doubleclickbidmanager.queries.runquery
+      (commons.LogicalStucture):
+      - Queries
   post:
     description: Creates a query.
-    displayName: Createquery Queries
+    displayName: createquery
     is:
     - hasParameters
     body:
@@ -1131,3 +1155,6 @@ types:
       200:
         body:
           application/json: Query
+    (commons.Id): doubleclickbidmanager.queries.createquery
+    (commons.LogicalStucture):
+    - Queries
