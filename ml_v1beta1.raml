@@ -939,3 +939,305 @@ types:
         200:
           body:
             application/json: GoogleCloudMlV1beta1__GetConfigResponse
+  /{name}:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]+/models/[^/]+$
+        description: |-
+          Required. The name of the model.
+
+          Authorization: requires `Viewer` role on the parent project.
+    /operations:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: |-
+          Lists operations that match the specified filter in the request. If the
+          server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+          NOTE: the `name` binding below allows API services to override the binding
+          to use different resource name schemes, such as `users/*/operations`.
+        displayName: List Operations Projects
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: The standard list filter.
+          pageSize?:
+            type: integer
+            format: int32
+            description: The standard list page size.
+          pageToken?:
+            type: string
+            description: The standard list page token.
+        responses:
+          200:
+            body:
+              application/json: GoogleLongrunning__ListOperationsResponse
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: Describes a job.
+      displayName: Get Jobs Projects
+      is:
+      - hasParameters
+      - hasParameters
+      - hasParameters
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: GoogleCloudMlV1beta1__Job
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      displayName: Delete Operations Projects
+      is:
+      - hasParameters
+      - hasParameters
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: GoogleProtobuf__Empty
+  /{parent}:
+    uriParameters:
+      parent:
+        type: string
+        pattern: ^projects/[^/]+$
+        description: |-
+          Required. The project name.
+
+          Authorization: requires `Editor` role on the specified project.
+    /models:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: |-
+          Creates a model which will later contain one or more versions.
+
+          You must add at least one version before you can request predictions from
+          the model. Add versions by calling
+          [projects.models.versions.create](/ml/reference/rest/v1beta1/projects.models.versions/create).
+        displayName: Create Models Projects
+        is:
+        - hasParameters
+        body:
+          application/json: GoogleCloudMlV1beta1__Model
+        responses:
+          200:
+            body:
+              application/json: GoogleCloudMlV1beta1__Model
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: |-
+          Lists the models in a project.
+
+          Each project can contain multiple models, and each model can have multiple
+          versions.
+        displayName: List Models Projects
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Optional. The number of models to retrieve per "page" of results. If there
+              are more remaining results than this number, the response message will
+              contain a valid value in the `next_page_token` field.
+
+              The default value is 20, and the maximum page size is 100.
+          pageToken?:
+            type: string
+            description: |-
+              Optional. A page token to request the next page of results.
+
+              You get the token from the `next_page_token` field of the response from
+              the previous call.
+        responses:
+          200:
+            body:
+              application/json: GoogleCloudMlV1beta1__ListModelsResponse
+    /versions:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: |-
+          Creates a new version of a model from a trained TensorFlow model.
+
+          If the version created in the cloud by this call is the first deployed
+          version of the specified model, it will be made the default version of the
+          model. When you add a version to a model that already has one or more
+          versions, the default version does not automatically change. If you want a
+          new version to be the default, you must call
+          [projects.models.versions.setDefault](/ml/reference/rest/v1beta1/projects.models.versions/setDefault).
+        displayName: Create Versions Models Projects
+        is:
+        - hasParameters
+        body:
+          application/json: GoogleCloudMlV1beta1__Version
+        responses:
+          200:
+            body:
+              application/json: GoogleLongrunning__Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: |-
+          Gets basic information about all the versions of a model.
+
+          If you expect that a model has a lot of versions, or if you need to handle
+          only a limited number of results at a time, you can request that the list
+          be retrieved in batches (called pages):
+        displayName: List Versions Models Projects
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Optional. The number of versions to retrieve per "page" of results. If
+              there are more remaining results than this number, the response message
+              will contain a valid value in the `next_page_token` field.
+
+              The default value is 20, and the maximum page size is 100.
+          pageToken?:
+            type: string
+            description: |-
+              Optional. A page token to request the next page of results.
+
+              You get the token from the `next_page_token` field of the response from
+              the previous call.
+        responses:
+          200:
+            body:
+              application/json: GoogleCloudMlV1beta1__ListVersionsResponse
+    /jobs:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Creates a training or a batch prediction job.
+        displayName: Create Jobs Projects
+        is:
+        - hasParameters
+        body:
+          application/json: GoogleCloudMlV1beta1__Job
+        responses:
+          200:
+            body:
+              application/json: GoogleCloudMlV1beta1__Job
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Lists the jobs in the project.
+        displayName: List Jobs Projects
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: Optional. Specifies the subset of jobs to retrieve.
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Optional. The number of jobs to retrieve per "page" of results. If there
+              are more remaining results than this number, the response message will
+              contain a valid value in the `next_page_token` field.
+
+              The default value is 20, and the maximum page size is 100.
+          pageToken?:
+            type: string
+            description: |-
+              Optional. A page token to request the next page of results.
+
+              You get the token from the `next_page_token` field of the response from
+              the previous call.
+        responses:
+          200:
+            body:
+              application/json: GoogleCloudMlV1beta1__ListJobsResponse
+  /{name}:setDefault:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]+/models/[^/]+/versions/[^/]+$
+        description: |-
+          Required. The name of the version to make the default for the model. You
+          can get the names of all the versions of a model by calling
+          [projects.models.versions.list](/ml/reference/rest/v1beta1/projects.models.versions/list).
+
+          Authorization: requires `Editor` role on the parent project.
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: |-
+        Designates a version to be the default for the model.
+
+        The default version is used for prediction requests made against the model
+        that don't specify a version.
+
+        The first version to be created for a model is automatically set as the
+        default. You must make any subsequent changes to the default version
+        setting manually using this method.
+      displayName: SetDefault Versions Models Projects
+      is:
+      - hasParameters
+      body:
+        application/json: GoogleCloudMlV1beta1__SetDefaultVersionRequest
+      responses:
+        200:
+          body:
+            application/json: GoogleCloudMlV1beta1__Version
+  /{name}:cancel:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]+/operations/[^/]+$
+        description: The name of the operation resource to be cancelled.
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: Cancels a running job.
+      displayName: Cancel Jobs Projects
+      is:
+      - hasParameters
+      - hasParameters
+      body:
+        application/json: GoogleCloudMlV1beta1__CancelJobRequest
+      responses:
+        200:
+          body:
+            application/json: GoogleProtobuf__Empty

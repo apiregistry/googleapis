@@ -205,6 +205,64 @@ types:
         jobId:
           type: string
           description: The ID of the job to retrieve.
+      /reports:
+        /{reportId}:
+          uriParameters:
+            reportId:
+              type: string
+              description: The ID of the report to retrieve.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
+                - https://www.googleapis.com/auth/yt-analytics.readonly
+            description: Gets the metadata of a specific report.
+            displayName: Get Reports Jobs
+            is:
+            - hasParameters
+            queryParameters:
+              onBehalfOfContentOwner?:
+                type: string
+                description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
+            responses:
+              200:
+                body:
+                  application/json: Report
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/yt-analytics-monetary.readonly
+              - https://www.googleapis.com/auth/yt-analytics.readonly
+          description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
+          displayName: List Reports Jobs
+          is:
+          - hasParameters
+          queryParameters:
+            onBehalfOfContentOwner?:
+              type: string
+              description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
+            startTimeAtOrAfter?:
+              type: string
+              description: If set, only reports whose start time is greater than or equal the specified date/time are returned.
+            pageSize?:
+              type: integer
+              format: int32
+              description: Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.
+            pageToken?:
+              type: string
+              description: A token identifying a page of results the server should return. Typically, this is the value of ListReportsResponse.next_page_token returned in response to the previous call to the `ListReports` method.
+            createdAfter?:
+              type: string
+              description: If set, only reports created after the specified date/time are returned.
+            startTimeBefore?:
+              type: string
+              description: If set, only reports whose start time is smaller than the specified date/time are returned.
+          responses:
+            200:
+              body:
+                application/json: ListReportsResponse
       get:
         securedBy:
           oath2:

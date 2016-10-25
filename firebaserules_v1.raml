@@ -286,3 +286,216 @@ types:
         200:
           body:
             application/json: TestRulesetResponse
+  /{name}:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]*/rulesets/[^/]*$
+        description: |-
+          Resource name for the ruleset to get.
+
+          Format: `projects/{project_id}/rulesets/{ruleset_id}`
+    /rulesets:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/firebase
+        description: |-
+          Create a `Ruleset` from `Source`.
+
+          The `Ruleset` is given a unique generated name which is returned to the
+          caller. `Source` containing syntactic or semantics errors will result in an
+          error response indicating the first error encountered. For a detailed view
+          of `Source` issues, use TestRuleset.
+        displayName: Create Rulesets Projects
+        is:
+        - hasParameters
+        body:
+          application/json: Ruleset
+        responses:
+          200:
+            body:
+              application/json: Ruleset
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/firebase
+            - https://www.googleapis.com/auth/firebase.readonly
+        description: |-
+          List `Ruleset` metadata only and optionally filter the results by Ruleset
+          name.
+
+          The full `Source` contents of a `Ruleset` may be retrieved with
+          GetRuleset.
+        displayName: List Rulesets Projects
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Page size to load. Maximum of 100. Defaults to 10.
+              Note: `page_size` is just a hint and the service may choose to load less
+              than `page_size` due to the size of the output. To traverse all of the
+              releases, caller should iterate until the `page_token` is empty.
+          pageToken?:
+            type: string
+            description: Next page token for loading the next batch of `Ruleset` instances.
+        responses:
+          200:
+            body:
+              application/json: ListRulesetsResponse
+    /releases:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/firebase
+        description: |-
+          Create a `Release`.
+
+          Release names should reflect the developer's deployment practices. For
+          example, the release name may include the environment name, application
+          name, application version, or any other name meaningful to the developer.
+          Once a `Release` refers to a `Ruleset`, the rules can be enforced by
+          Firebase Rules-enabled services.
+
+          More than one `Release` may be 'live' concurrently. Consider the following
+          three `Release` names for `projects/foo` and the `Ruleset` to which they
+          refer.
+
+          Release Name                    | Ruleset Name
+          --------------------------------|-------------
+          projects/foo/releases/prod      | projects/foo/rulesets/uuid123
+          projects/foo/releases/prod/beta | projects/foo/rulesets/uuid123
+          projects/foo/releases/prod/v23  | projects/foo/rulesets/uuid456
+
+          The table reflects the `Ruleset` rollout in progress. The `prod` and
+          `prod/beta` releases refer to the same `Ruleset`. However, `prod/v23`
+          refers to a new `Ruleset`. The `Ruleset` reference for a `Release` may be
+          updated using the UpdateRelease method, and the custom `Release` name
+          may be referenced by specifying the `X-Firebase-Rules-Release-Name` header.
+        displayName: Create Releases Projects
+        is:
+        - hasParameters
+        body:
+          application/json: Release
+        responses:
+          200:
+            body:
+              application/json: Release
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/firebase
+            - https://www.googleapis.com/auth/firebase.readonly
+        description: |-
+          List the `Release` values for a project. This list may optionally be
+          filtered by `Release` name or `Ruleset` id or both.
+        displayName: List Releases Projects
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              `Release` filter. The list method supports filters with restrictions on the
+              `Release` `name` and also on the `Ruleset` `ruleset_name`.
+
+              Example 1) A filter of 'name=prod*' might return `Release`s with names
+              within 'projects/foo' prefixed with 'prod':
+
+              Name                          | Ruleset Name
+              ------------------------------|-------------
+              projects/foo/releases/prod    | projects/foo/rulesets/uuid1234
+              projects/foo/releases/prod/v1 | projects/foo/rulesets/uuid1234
+              projects/foo/releases/prod/v2 | projects/foo/rulesets/uuid8888
+
+              Example 2) A filter of `name=prod* ruleset_name=uuid1234` would return only
+              `Release` instances for 'projects/foo' with names prefixed with 'prod'
+              referring to the same `Ruleset` name of 'uuid1234':
+
+              Name                          | Ruleset Name
+              ------------------------------|-------------
+              projects/foo/releases/prod    | projects/foo/rulesets/1234
+              projects/foo/releases/prod/v1 | projects/foo/rulesets/1234
+
+              In the examples, the filter parameters refer to the search filters for
+              release and ruleset names are relative to the project releases and rulesets
+              collections. Fully qualified prefixed may also be used. e.g.
+              `name=projects/foo/releases/prod* ruleset_name=projects/foo/rulesets/uuid1`
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Page size to load. Maximum of 100. Defaults to 10.
+              Note: `page_size` is just a hint and the service may choose to load less
+              than `page_size` due to the size of the output. To traverse all of the
+              releases, caller should iterate until the `page_token` is empty.
+          pageToken?:
+            type: string
+            description: Next page token for the next batch of `Release` instances.
+        responses:
+          200:
+            body:
+              application/json: ListReleasesResponse
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/firebase
+          - https://www.googleapis.com/auth/firebase.readonly
+      description: Get a `Release` by name.
+      displayName: Get Releases Projects
+      is:
+      - hasParameters
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Release
+    delete:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/firebase
+      description: Delete a `Release` by resource name.
+      displayName: Delete Releases Projects
+      is:
+      - hasParameters
+      - hasParameters
+      responses:
+        200:
+          body:
+            application/json: Empty
+    put:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/firebase
+      description: |-
+        Update a `Release`.
+
+        Only updates to the `ruleset_name` field will be honored. `Release` rename
+        is not supported. To create a `Release` use the CreateRelease method
+        instead.
+      displayName: Update Releases Projects
+      is:
+      - hasParameters
+      body:
+        application/json: Release
+      responses:
+        200:
+          body:
+            application/json: Release

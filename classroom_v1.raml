@@ -813,6 +813,624 @@ types:
           200:
             body:
               application/json: Empty
+    /{courseId}:
+      uriParameters:
+        courseId:
+          type: string
+          description: Identifier of the course to alias. This identifier can be either the Classroom-assigned identifier or an alias.
+      /aliases:
+        /{alias}:
+          uriParameters:
+            alias:
+              type: string
+              description: Alias to delete. This may not be the Classroom-assigned identifier.
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/classroom.courses
+            description: 'Deletes an alias of a course. This method returns the following
+              error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to remove the alias or for access errors. * `NOT_FOUND` if the alias
+              does not exist.'
+            displayName: Delete Aliases Courses
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Empty
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.courses
+          description: 'Creates an alias for a course. This method returns the following
+            error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+            to create the alias or for access errors. * `NOT_FOUND` if the course
+            does not exist. * `ALREADY_EXISTS` if the alias already exists.'
+          displayName: Create Aliases Courses
+          is:
+          - hasParameters
+          body:
+            application/json: CourseAlias
+          responses:
+            200:
+              body:
+                application/json: CourseAlias
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.courses
+              - https://www.googleapis.com/auth/classroom.courses.readonly
+          description: 'Returns a list of aliases for a course. This method returns
+            the following error codes: * `PERMISSION_DENIED` if the requesting user
+            is not permitted to access the course or for access errors. * `NOT_FOUND`
+            if the course does not exist.'
+          displayName: List Aliases Courses
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+            pageToken?:
+              type: string
+              description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+          responses:
+            200:
+              body:
+                application/json: ListCourseAliasesResponse
+      /courseWork:
+        /{id}:
+          uriParameters:
+            id:
+              type: string
+              description: Identifier of the course work.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/classroom.course-work.readonly
+                - https://www.googleapis.com/auth/classroom.coursework.me
+                - https://www.googleapis.com/auth/classroom.coursework.me.readonly
+                - https://www.googleapis.com/auth/classroom.coursework.students
+                - https://www.googleapis.com/auth/classroom.coursework.students.readonly
+            description: 'Returns course work. This method returns the following error
+              codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to access the requested course or course work, or for access errors.
+              * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the
+              requested course or course work does not exist.'
+            displayName: Get CourseWork Courses
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: CourseWork
+        /{courseWorkId}:
+          uriParameters:
+            courseWorkId:
+              type: string
+              description: Identifier of the course work.
+          /studentSubmissions:
+            /{id}:
+              uriParameters:
+                id:
+                  type: string
+                  description: Identifier of the student submission.
+              patch:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/classroom.coursework.me
+                    - https://www.googleapis.com/auth/classroom.coursework.students
+                description: 'Updates one or more fields of a student submission.
+                  See google.classroom.v1.StudentSubmission for details of which fields
+                  may be updated and who may change them. This request must be made
+                  by the Developer Console project of the [OAuth client ID](https://support.google.com/cloud/answer/6158849)
+                  used to create the corresponding course work item. This method returns
+                  the following error codes: * `PERMISSION_DENIED` if the requesting
+                  developer project did not create the corresponding course work,
+                  if the user is not permitted to make the requested modification
+                  to the student submission, or for access errors. * `INVALID_ARGUMENT`
+                  if the request is malformed. * `NOT_FOUND` if the requested course,
+                  course work, or student submission does not exist.'
+                displayName: Patch StudentSubmissions CourseWork Courses
+                is:
+                - hasParameters
+                queryParameters:
+                  updateMask?:
+                    type: string
+                    description: 'Mask that identifies which fields on the student
+                      submission to update. This field is required to do an update.
+                      The update fails if invalid fields are specified. The following
+                      fields may be specified by teachers: * `draft_grade` * `assigned_grade`'
+                body:
+                  application/json: StudentSubmission
+                responses:
+                  200:
+                    body:
+                      application/json: StudentSubmission
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/classroom.coursework.me
+                    - https://www.googleapis.com/auth/classroom.coursework.me.readonly
+                    - https://www.googleapis.com/auth/classroom.coursework.students
+                    - https://www.googleapis.com/auth/classroom.coursework.students.readonly
+                    - https://www.googleapis.com/auth/classroom.student-submissions.me.readonly
+                    - https://www.googleapis.com/auth/classroom.student-submissions.students.readonly
+                description: Returns a student submission. * `PERMISSION_DENIED` if the requesting user is not permitted to access the requested course, course work, or student submission or for access errors. * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the requested course, course work, or student submission does not exist.
+                displayName: Get StudentSubmissions CourseWork Courses
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: StudentSubmission
+            /{id}:turnIn:
+              uriParameters:
+                id:
+                  type: string
+                  description: Identifier of the student submission.
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/classroom.coursework.me
+                description: 'Turns in a student submission. Turning in a student
+                  submission transfers ownership of attached Drive files to the teacher
+                  and may also update the submission state. This may only be called
+                  by the student that owns the specified student submission. This
+                  request must be made by the Developer Console project of the [OAuth
+                  client ID](https://support.google.com/cloud/answer/6158849) used
+                  to create the corresponding course work item. This method returns
+                  the following error codes: * `PERMISSION_DENIED` if the requesting
+                  user is not permitted to access the requested course or course work,
+                  turn in the requested student submission, or for access errors.
+                  * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND`
+                  if the requested course, course work, or student submission does
+                  not exist.'
+                displayName: TurnIn StudentSubmissions CourseWork Courses
+                is:
+                - hasParameters
+                body:
+                  application/json: TurnInStudentSubmissionRequest
+                responses:
+                  200:
+                    body:
+                      application/json: Empty
+            /{id}:reclaim:
+              uriParameters:
+                id:
+                  type: string
+                  description: Identifier of the student submission.
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/classroom.coursework.me
+                description: 'Reclaims a student submission on behalf of the student
+                  that owns it. Reclaiming a student submission transfers ownership
+                  of attached Drive files to the student and update the submission
+                  state. Only the student that ownes the requested student submission
+                  may call this method, and only for a student submission that has
+                  been turned in. This request must be made by the Developer Console
+                  project of the [OAuth client ID](https://support.google.com/cloud/answer/6158849)
+                  used to create the corresponding course work item. This method returns
+                  the following error codes: * `PERMISSION_DENIED` if the requesting
+                  user is not permitted to access the requested course or course work,
+                  unsubmit the requested student submission, or for access errors.
+                  * `FAILED_PRECONDITION` if the student submission has not been turned
+                  in. * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND`
+                  if the requested course, course work, or student submission does
+                  not exist.'
+                displayName: Reclaim StudentSubmissions CourseWork Courses
+                is:
+                - hasParameters
+                body:
+                  application/json: ReclaimStudentSubmissionRequest
+                responses:
+                  200:
+                    body:
+                      application/json: Empty
+            /{id}:return:
+              uriParameters:
+                id:
+                  type: string
+                  description: Identifier of the student submission.
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/classroom.coursework.students
+                description: 'Returns a student submission. Returning a student submission
+                  transfers ownership of attached Drive files to the student and may
+                  also update the submission state. Unlike the Classroom application,
+                  returning a student submission does not set assignedGrade to the
+                  draftGrade value. Only a teacher of the course that contains the
+                  requested student submission may call this method. This request
+                  must be made by the Developer Console project of the [OAuth client
+                  ID](https://support.google.com/cloud/answer/6158849) used to create
+                  the corresponding course work item. This method returns the following
+                  error codes: * `PERMISSION_DENIED` if the requesting user is not
+                  permitted to access the requested course or course work, return
+                  the requested student submission, or for access errors. * `INVALID_ARGUMENT`
+                  if the request is malformed. * `NOT_FOUND` if the requested course,
+                  course work, or student submission does not exist.'
+                displayName: Return StudentSubmissions CourseWork Courses
+                is:
+                - hasParameters
+                body:
+                  application/json: ReturnStudentSubmissionRequest
+                responses:
+                  200:
+                    body:
+                      application/json: Empty
+            /{id}:modifyAttachments:
+              uriParameters:
+                id:
+                  type: string
+                  description: Identifier of the student submission.
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/classroom.coursework.me
+                    - https://www.googleapis.com/auth/classroom.coursework.students
+                description: 'Modifies attachments of student submission. Attachments
+                  may only be added to student submissions whose type is `ASSIGNMENT`.
+                  This request must be made by the Developer Console project of the
+                  [OAuth client ID](https://support.google.com/cloud/answer/6158849)
+                  used to create the corresponding course work item. This method returns
+                  the following error codes: * `PERMISSION_DENIED` if the requesting
+                  user is not permitted to access the requested course or course work,
+                  if the user is not permitted to modify attachments on the requested
+                  student submission, or for access errors. * `INVALID_ARGUMENT` if
+                  the request is malformed. * `NOT_FOUND` if the requested course,
+                  course work, or student submission does not exist.'
+                displayName: ModifyAttachments StudentSubmissions CourseWork Courses
+                is:
+                - hasParameters
+                body:
+                  application/json: ModifyAttachmentsRequest
+                responses:
+                  200:
+                    body:
+                      application/json: StudentSubmission
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/classroom.coursework.me
+                  - https://www.googleapis.com/auth/classroom.coursework.me.readonly
+                  - https://www.googleapis.com/auth/classroom.coursework.students
+                  - https://www.googleapis.com/auth/classroom.coursework.students.readonly
+                  - https://www.googleapis.com/auth/classroom.student-submissions.me.readonly
+                  - https://www.googleapis.com/auth/classroom.student-submissions.students.readonly
+              description: 'Returns a list of student submissions that the requester
+                is permitted to view, factoring in the OAuth scopes of the request.
+                `-` may be specified as the `course_work_id` to include student submissions
+                for multiple course work items. Course students may only view their
+                own work. Course teachers and domain administrators may view all student
+                submissions. This method returns the following error codes: * `PERMISSION_DENIED`
+                if the requesting user is not permitted to access the requested course
+                or course work, or for access errors. * `INVALID_ARGUMENT` if the
+                request is malformed. * `NOT_FOUND` if the requested course does not
+                exist.'
+              displayName: List StudentSubmissions CourseWork Courses
+              is:
+              - hasParameters
+              queryParameters:
+                late?:
+                  type: string
+                  description: Requested lateness value. If specified, returned student submissions are restricted by the requested value. If unspecified, submissions are returned regardless of `late` value.
+                  enum:
+                  - LATE_VALUES_UNSPECIFIED
+                  - LATE_ONLY
+                  - NOT_LATE_ONLY
+                pageSize?:
+                  type: integer
+                  format: int32
+                  description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+                pageToken?:
+                  type: string
+                  description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+                userId?:
+                  type: string
+                  description: 'Optional argument to restrict returned student work
+                    to those owned by the student with the specified identifier. The
+                    identifier can be one of the following: * the numeric identifier
+                    for the user * the email address of the user * the string literal
+                    `"me"`, indicating the requesting user'
+                states?:
+                  type: string
+                  description: Requested submission states. If specified, returned student submissions match one of the specified submission states.
+                  enum:
+                  - SUBMISSION_STATE_UNSPECIFIED
+                  - NEW
+                  - CREATED
+                  - TURNED_IN
+                  - RETURNED
+                  - RECLAIMED_BY_STUDENT
+              responses:
+                200:
+                  body:
+                    application/json: ListStudentSubmissionsResponse
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.coursework.students
+          description: 'Creates course work. The resulting course work (and corresponding
+            student submissions) are associated with the Developer Console project
+            of the [OAuth client ID](https://support.google.com/cloud/answer/6158849)
+            used to make the request. Classroom API requests to modify course work
+            and student submissions must be made with an OAuth client ID from the
+            associated Developer Console project. This method returns the following
+            error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+            to access the requested course, create course work in the requested course,
+            or for access errors. * `INVALID_ARGUMENT` if the request is malformed.
+            * `NOT_FOUND` if the requested course does not exist.'
+          displayName: Create CourseWork Courses
+          is:
+          - hasParameters
+          body:
+            application/json: CourseWork
+          responses:
+            200:
+              body:
+                application/json: CourseWork
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.course-work.readonly
+              - https://www.googleapis.com/auth/classroom.coursework.me
+              - https://www.googleapis.com/auth/classroom.coursework.me.readonly
+              - https://www.googleapis.com/auth/classroom.coursework.students
+              - https://www.googleapis.com/auth/classroom.coursework.students.readonly
+          description: 'Returns a list of course work that the requester is permitted
+            to view. Course students may only view `PUBLISHED` course work. Course
+            teachers and domain administrators may view all course work. This method
+            returns the following error codes: * `PERMISSION_DENIED` if the requesting
+            user is not permitted to access the requested course or for access errors.
+            * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the
+            requested course does not exist.'
+          displayName: List CourseWork Courses
+          is:
+          - hasParameters
+          queryParameters:
+            courseWorkStates?:
+              type: string
+              description: Restriction on the work status to return. Only courseWork that matches is returned. If unspecified, items with a work status of `PUBLISHED` is returned.
+              enum:
+              - COURSE_WORK_STATE_UNSPECIFIED
+              - PUBLISHED
+              - DRAFT
+              - DELETED
+            orderBy?:
+              type: string
+              description: 'Optional sort ordering for results. A comma-separated
+                list of fields with an optional sort direction keyword. Supported
+                fields are `updateTime` and `dueDate`. Supported direction keywords
+                are `asc` and `desc`. If not specified, `updateTime desc` is the default
+                behavior. Examples: `dueDate asc,updateTime desc`, `updateTime,dueDate
+                desc`'
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+            pageToken?:
+              type: string
+              description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+          responses:
+            200:
+              body:
+                application/json: ListCourseWorkResponse
+      /teachers:
+        /{userId}:
+          uriParameters:
+            userId:
+              type: string
+              description: 'Identifier of the teacher to return. The identifier can
+                be one of the following: * the numeric identifier for the user * the
+                email address of the user * the string literal `"me"`, indicating
+                the requesting user'
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/classroom.profile.emails
+                - https://www.googleapis.com/auth/classroom.profile.photos
+                - https://www.googleapis.com/auth/classroom.rosters
+                - https://www.googleapis.com/auth/classroom.rosters.readonly
+            description: 'Returns a teacher of a course. This method returns the following
+              error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to view teachers of this course or for access errors. * `NOT_FOUND`
+              if no teacher of this course has the requested ID or if the course does
+              not exist.'
+            displayName: Get Teachers Courses
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Teacher
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/classroom.rosters
+            description: 'Deletes a teacher of a course. This method returns the following
+              error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to delete teachers of this course or for access errors. * `NOT_FOUND`
+              if no teacher of this course has the requested ID or if the course does
+              not exist. * `FAILED_PRECONDITION` if the requested ID belongs to the
+              primary teacher of this course.'
+            displayName: Delete Teachers Courses
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Empty
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.profile.emails
+              - https://www.googleapis.com/auth/classroom.profile.photos
+              - https://www.googleapis.com/auth/classroom.rosters
+          description: 'Creates a teacher of a course. This method returns the following
+            error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+            to create teachers in this course or for access errors. * `NOT_FOUND`
+            if the requested course ID does not exist. * `FAILED_PRECONDITION` if
+            the requested user''s account is disabled, for the following request errors:
+            * CourseMemberLimitReached * CourseNotModifiable * CourseTeacherLimitReached
+            * UserGroupsMembershipLimitReached * `ALREADY_EXISTS` if the user is already
+            a teacher or student in the course.'
+          displayName: Create Teachers Courses
+          is:
+          - hasParameters
+          body:
+            application/json: Teacher
+          responses:
+            200:
+              body:
+                application/json: Teacher
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.profile.emails
+              - https://www.googleapis.com/auth/classroom.profile.photos
+              - https://www.googleapis.com/auth/classroom.rosters
+              - https://www.googleapis.com/auth/classroom.rosters.readonly
+          description: 'Returns a list of teachers of this course that the requester
+            is permitted to view. This method returns the following error codes: *
+            `NOT_FOUND` if the course does not exist. * `PERMISSION_DENIED` for access
+            errors.'
+          displayName: List Teachers Courses
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of items to return. Zero means no maximum. The server may return fewer than the specified number of results.
+            pageToken?:
+              type: string
+              description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+          responses:
+            200:
+              body:
+                application/json: ListTeachersResponse
+      /students:
+        /{userId}:
+          uriParameters:
+            userId:
+              type: string
+              description: 'Identifier of the student to return. The identifier can
+                be one of the following: * the numeric identifier for the user * the
+                email address of the user * the string literal `"me"`, indicating
+                the requesting user'
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/classroom.profile.emails
+                - https://www.googleapis.com/auth/classroom.profile.photos
+                - https://www.googleapis.com/auth/classroom.rosters
+                - https://www.googleapis.com/auth/classroom.rosters.readonly
+            description: 'Returns a student of a course. This method returns the following
+              error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to view students of this course or for access errors. * `NOT_FOUND`
+              if no student of this course has the requested ID or if the course does
+              not exist.'
+            displayName: Get Students Courses
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Student
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/classroom.rosters
+            description: 'Deletes a student of a course. This method returns the following
+              error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to delete students of this course or for access errors. * `NOT_FOUND`
+              if no student of this course has the requested ID or if the course does
+              not exist.'
+            displayName: Delete Students Courses
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Empty
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.profile.emails
+              - https://www.googleapis.com/auth/classroom.profile.photos
+              - https://www.googleapis.com/auth/classroom.rosters
+          description: 'Adds a user as a student of a course. This method returns
+            the following error codes: * `PERMISSION_DENIED` if the requesting user
+            is not permitted to create students in this course or for access errors.
+            * `NOT_FOUND` if the requested course ID does not exist. * `FAILED_PRECONDITION`
+            if the requested user''s account is disabled, for the following request
+            errors: * CourseMemberLimitReached * CourseNotModifiable * UserGroupsMembershipLimitReached
+            * `ALREADY_EXISTS` if the user is already a student or teacher in the
+            course.'
+          displayName: Create Students Courses
+          is:
+          - hasParameters
+          queryParameters:
+            enrollmentCode?:
+              type: string
+              description: Enrollment code of the course to create the student in. This code is required if userId corresponds to the requesting user; it may be omitted if the requesting user has administrative permissions to create students for any user.
+          body:
+            application/json: Student
+          responses:
+            200:
+              body:
+                application/json: Student
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/classroom.profile.emails
+              - https://www.googleapis.com/auth/classroom.profile.photos
+              - https://www.googleapis.com/auth/classroom.rosters
+              - https://www.googleapis.com/auth/classroom.rosters.readonly
+          description: 'Returns a list of students of this course that the requester
+            is permitted to view. This method returns the following error codes: *
+            `NOT_FOUND` if the course does not exist. * `PERMISSION_DENIED` for access
+            errors.'
+          displayName: List Students Courses
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of items to return. Zero means no maximum. The server may return fewer than the specified number of results.
+            pageToken?:
+              type: string
+              description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+          responses:
+            200:
+              body:
+                application/json: ListStudentsResponse
     post:
       securedBy:
         oath2:
@@ -1030,3 +1648,209 @@ types:
           200:
             body:
               application/json: UserProfile
+    /{studentId}:
+      uriParameters:
+        studentId:
+          type: string
+          description: The ID of the student whose guardian invitation is to be modified.
+      /guardianInvitations:
+        /{invitationId}:
+          uriParameters:
+            invitationId:
+              type: string
+              description: The `id` field of the `GuardianInvitation` to be modified.
+          patch:
+            description: 'Modifies a guardian invitation. Currently, the only valid
+              modification is to change the `state` from `PENDING` to `COMPLETE`.
+              This has the effect of withdrawing the invitation. This method returns
+              the following error codes: * `PERMISSION_DENIED` if the current user
+              does not have permission to manage guardians, if guardians are not enabled
+              for the domain in question or for other access errors. * `FAILED_PRECONDITION`
+              if the guardian link is not in the `PENDING` state. * `INVALID_ARGUMENT`
+              if the format of the student ID provided cannot be recognized (it is
+              not an email address, nor a `user_id` from this API), or if the passed
+              `GuardianInvitation` has a `state` other than `COMPLETE`, or if it modifies
+              fields other than `state`. * `NOT_FOUND` if the student ID provided
+              is a valid student ID, but Classroom has no record of that student,
+              or if the `id` field does not refer to a guardian invitation known to
+              Classroom.'
+            displayName: Patch GuardianInvitations UserProfiles
+            is:
+            - hasParameters
+            queryParameters:
+              updateMask?:
+                type: string
+                description: 'Mask that identifies which fields on the course to update.
+                  This field is required to do an update. The update will fail if
+                  invalid fields are specified. The following fields are valid: *
+                  `state` When set in a query parameter, this field should be specified
+                  as `updateMask=,,...`'
+            body:
+              application/json: GuardianInvitation
+            responses:
+              200:
+                body:
+                  application/json: GuardianInvitation
+          get:
+            description: 'Returns a specific guardian invitation. This method returns
+              the following error codes: * `PERMISSION_DENIED` if the requesting user
+              is not permitted to view guardian invitations for the student identified
+              by the `student_id`, if guardians are not enabled for the domain in
+              question, or for other access errors. * `INVALID_ARGUMENT` if a `student_id`
+              is specified, but its format cannot be recognized (it is not an email
+              address, nor a `student_id` from the API, nor the literal string `me`).
+              * `NOT_FOUND` if Classroom cannot find any record of the given student
+              or `invitation_id`. May also be returned if the student exists, but
+              the requesting user does not have access to see that student.'
+            displayName: Get GuardianInvitations UserProfiles
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: GuardianInvitation
+        post:
+          description: 'Creates a guardian invitation, and sends an email to the guardian
+            asking them to confirm that they are the student''s guardian. Once the
+            guardian accepts the invitation, their `state` will change to `COMPLETED`
+            and they will start receiving guardian notifications. A `Guardian` resource
+            will also be created to represent the active guardian. The request object
+            must have the `student_id` and `invited_email_address` fields set. Failing
+            to set these fields, or setting any other fields in the request, will
+            result in an error. This method returns the following error codes: * `PERMISSION_DENIED`
+            if the current user does not have permission to manage guardians, if the
+            guardian in question has already rejected too many requests for that student,
+            if guardians are not enabled for the domain in question, or for other
+            access errors. * `RESOURCE_EXHAUSTED` if the student or guardian has exceeded
+            the guardian link limit. * `INVALID_ARGUMENT` if the guardian email address
+            is not valid (for example, if it is too long), or if the format of the
+            student ID provided cannot be recognized (it is not an email address,
+            nor a `user_id` from this API). This error will also be returned if read-only
+            fields are set, or if the `state` field is set to to a value other than
+            `PENDING`. * `NOT_FOUND` if the student ID provided is a valid student
+            ID, but Classroom has no record of that student. * `ALREADY_EXISTS` if
+            there is already a pending guardian invitation for the student and `invited_email_address`
+            provided, or if the provided `invited_email_address` matches the Google
+            account of an existing `Guardian` for this user.'
+          displayName: Create GuardianInvitations UserProfiles
+          is:
+          - hasParameters
+          body:
+            application/json: GuardianInvitation
+          responses:
+            200:
+              body:
+                application/json: GuardianInvitation
+        get:
+          description: 'Returns a list of guardian invitations that the requesting
+            user is permitted to view, filtered by the parameters provided. This method
+            returns the following error codes: * `PERMISSION_DENIED` if a `student_id`
+            is specified, and the requesting user is not permitted to view guardian
+            invitations for that student, if `"-"` is specified as the `student_id`
+            and the user is not a domain administrator, if guardians are not enabled
+            for the domain in question, or for other access errors. * `INVALID_ARGUMENT`
+            if a `student_id` is specified, but its format cannot be recognized (it
+            is not an email address, nor a `student_id` from the API, nor the literal
+            string `me`). May also be returned if an invalid `page_token` or `state`
+            is provided. * `NOT_FOUND` if a `student_id` is specified, and its format
+            can be recognized, but Classroom has no record of that student.'
+          displayName: List GuardianInvitations UserProfiles
+          is:
+          - hasParameters
+          queryParameters:
+            invitedEmailAddress?:
+              type: string
+              description: If specified, only results with the specified `invited_email_address` will be returned.
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+            pageToken?:
+              type: string
+              description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+            states?:
+              type: string
+              description: If specified, only results with the specified `state` values will be returned. Otherwise, results with a `state` of `PENDING` will be returned.
+              enum:
+              - GUARDIAN_INVITATION_STATE_UNSPECIFIED
+              - PENDING
+              - COMPLETE
+          responses:
+            200:
+              body:
+                application/json: ListGuardianInvitationsResponse
+      /guardians:
+        /{guardianId}:
+          uriParameters:
+            guardianId:
+              type: string
+              description: The `id` field from a `Guardian`.
+          get:
+            description: 'Returns a specific guardian. This method returns the following
+              error codes: * `PERMISSION_DENIED` if the requesting user is not permitted
+              to view guardian information for the student identified by the `student_id`,
+              if guardians are not enabled for the domain in question, or for other
+              access errors. * `INVALID_ARGUMENT` if a `student_id` is specified,
+              but its format cannot be recognized (it is not an email address, nor
+              a `student_id` from the API, nor the literal string `me`). * `NOT_FOUND`
+              if Classroom cannot find any record of the given student or `guardian_id`,
+              or if the guardian has been disabled.'
+            displayName: Get Guardians UserProfiles
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Guardian
+          delete:
+            description: 'Deletes a guardian. The guardian will no longer receive
+              guardian notifications and the guardian will no longer be accessible
+              via the API. This method returns the following error codes: * `PERMISSION_DENIED`
+              if the requesting user is not permitted to manage guardians for the
+              student identified by the `student_id`, if guardians are not enabled
+              for the domain in question, or for other access errors. * `INVALID_ARGUMENT`
+              if a `student_id` is specified, but its format cannot be recognized
+              (it is not an email address, nor a `student_id` from the API). * `NOT_FOUND`
+              if Classroom cannot find any record of the given `student_id` or `guardian_id`,
+              or if the guardian has already been disabled.'
+            displayName: Delete Guardians UserProfiles
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Empty
+        get:
+          description: 'Returns a list of guardians that the requesting user is permitted
+            to view, restricted to those that match the request. To list guardians
+            for any student that the requesting user may view guardians for, use the
+            literal character `-` for the student ID. This method returns the following
+            error codes: * `PERMISSION_DENIED` if a `student_id` is specified, and
+            the requesting user is not permitted to view guardian information for
+            that student, if `"-"` is specified as the `student_id` and the user is
+            not a domain administrator, if guardians are not enabled for the domain
+            in question, if the `invited_email_address` filter is set by a user who
+            is not a domain administrator, or for other access errors. * `INVALID_ARGUMENT`
+            if a `student_id` is specified, but its format cannot be recognized (it
+            is not an email address, nor a `student_id` from the API, nor the literal
+            string `me`). May also be returned if an invalid `page_token` is provided.
+            * `NOT_FOUND` if a `student_id` is specified, and its format can be recognized,
+            but Classroom has no record of that student.'
+          displayName: List Guardians UserProfiles
+          is:
+          - hasParameters
+          queryParameters:
+            invitedEmailAddress?:
+              type: string
+              description: Filter results by the email address that the original invitation was sent to, resulting in this guardian link. This filter can only be used by domain administrators.
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+            pageToken?:
+              type: string
+              description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+          responses:
+            200:
+              body:
+                application/json: ListGuardiansResponse

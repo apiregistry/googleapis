@@ -403,19 +403,65 @@ types:
           200:
             body:
               application/json: ListServiceAccountsResponse
+    /keys:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Creates a ServiceAccountKey and returns it.
+        displayName: Create Keys ServiceAccounts Projects
+        is:
+        - hasParameters
+        body:
+          application/json: CreateServiceAccountKeyRequest
+        responses:
+          200:
+            body:
+              application/json: ServiceAccountKey
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Lists ServiceAccountKeys.
+        displayName: List Keys ServiceAccounts Projects
+        is:
+        - hasParameters
+        queryParameters:
+          keyTypes?:
+            type: string
+            description: Filters the types of keys the user wants to include in the list response. Duplicate key types are not allowed. If no key type is provided, all keys are returned.
+            enum:
+            - KEY_TYPE_UNSPECIFIED
+            - USER_MANAGED
+            - SYSTEM_MANAGED
+        responses:
+          200:
+            body:
+              application/json: ListServiceAccountKeysResponse
     get:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
-      description: Gets a ServiceAccount.
-      displayName: Get ServiceAccounts Projects
+      description: Gets the ServiceAccountKey by key id.
+      displayName: Get Keys ServiceAccounts Projects
       is:
       - hasParameters
+      - hasParameters
+      queryParameters:
+        publicKeyType?:
+          type: string
+          description: The output format of the public key requested. X509_PEM is the default output format.
+          enum:
+          - TYPE_NONE
+          - TYPE_X509_PEM_FILE
+          - TYPE_RAW_PUBLIC_KEY
       responses:
         200:
           body:
-            application/json: ServiceAccount
+            application/json: ServiceAccountKey
     put:
       securedBy:
         oath2:
@@ -437,9 +483,10 @@ types:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
-      description: Deletes a ServiceAccount.
-      displayName: Delete ServiceAccounts Projects
+      description: Deletes a ServiceAccountKey.
+      displayName: Delete Keys ServiceAccounts Projects
       is:
+      - hasParameters
       - hasParameters
       responses:
         200:

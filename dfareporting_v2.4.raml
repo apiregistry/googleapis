@@ -6200,6 +6200,63 @@ types:
               200:
                 body:
                   application/json: File
+        /files:
+          /{fileId}:
+            uriParameters:
+              fileId:
+                type: integer
+                format: int64
+                description: The ID of the report file.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/dfareporting
+              description: Retrieves a report file.
+              displayName: Get Files Reports
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: File
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/dfareporting
+            description: Lists files for a report.
+            displayName: List Files Reports
+            is:
+            - hasParameters
+            queryParameters:
+              maxResults?:
+                type: integer
+                format: int32
+                description: Maximum number of results to return.
+                maximum: 10
+                minimum: 0
+              sortOrder?:
+                type: string
+                default: DESCENDING
+                description: Order of sorted results, default is 'DESCENDING'.
+                enum:
+                - ASCENDING
+                - DESCENDING
+              sortField?:
+                type: string
+                default: LAST_MODIFIED_TIME
+                description: The field by which to sort the list.
+                enum:
+                - ID
+                - LAST_MODIFIED_TIME
+              pageToken?:
+                type: string
+                description: The value of the nextToken from the previous result page.
+            responses:
+              200:
+                body:
+                  application/json: FileList
         patch:
           securedBy:
             oath2:
@@ -6252,6 +6309,23 @@ types:
           displayName: Delete Reports
           is:
           - hasParameters
+      /compatiblefields:
+        /query:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/dfareporting
+            description: Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.
+            displayName: Query CompatibleFields Reports
+            is:
+            - hasParameters
+            body:
+              application/json: Report
+            responses:
+              200:
+                body:
+                  application/json: CompatibleFields
       post:
         securedBy:
           oath2:

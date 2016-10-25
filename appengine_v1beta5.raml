@@ -891,6 +891,353 @@ types:
           type: string
           description: 'Part of `name`. Name of the application to update. Example:
             `apps/myapp`.'
+      /operations:
+        /{operationsId}:
+          uriParameters:
+            operationsId:
+              type: string
+              description: Part of `name`. See documentation of `appsId`.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+            displayName: Get Operations Apps
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+          description: 'Lists operations that match the specified filter in the request.
+            If the server doesn''t support this method, it returns `UNIMPLEMENTED`.
+            NOTE: the `name` binding below allows API services to override the binding
+            to use different resource name schemes, such as `users/*/operations`.'
+          displayName: List Operations Apps
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: The standard list filter.
+            pageSize?:
+              type: integer
+              format: int32
+              description: The standard list page size.
+            pageToken?:
+              type: string
+              description: The standard list page token.
+          responses:
+            200:
+              body:
+                application/json: ListOperationsResponse
+      /locations:
+        /{locationsId}:
+          uriParameters:
+            locationsId:
+              type: string
+              description: Part of `name`. See documentation of `appsId`.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Get information about a location.
+            displayName: Get Locations Apps
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Location
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+          description: Lists information about the supported locations for this service.
+          displayName: List Locations Apps
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: The standard list filter.
+            pageSize?:
+              type: integer
+              format: int32
+              description: The standard list page size.
+            pageToken?:
+              type: string
+              description: The standard list page token.
+          responses:
+            200:
+              body:
+                application/json: ListLocationsResponse
+      /services:
+        /{servicesId}:
+          uriParameters:
+            servicesId:
+              type: string
+              description: Part of `name`. See documentation of `appsId`.
+          /versions:
+            /{versionsId}:
+              uriParameters:
+                versionsId:
+                  type: string
+                  description: Part of `name`. See documentation of `appsId`.
+              /instances:
+                /{instancesId}:debug:
+                  uriParameters:
+                    instancesId:
+                      type: string
+                      description: Part of `name`. See documentation of `appsId`.
+                  post:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                    description: Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started. Only applicable for instances in App Engine flexible environment.
+                    displayName: Debug Instances Versions Services Apps
+                    is:
+                    - hasParameters
+                    body:
+                      application/json: DebugInstanceRequest
+                    responses:
+                      200:
+                        body:
+                          application/json: Operation
+                /{instancesId}:
+                  uriParameters:
+                    instancesId:
+                      type: string
+                      description: Part of `name`. See documentation of `appsId`.
+                  get:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                    description: Gets instance information.
+                    displayName: Get Instances Versions Services Apps
+                    is:
+                    - hasParameters
+                    responses:
+                      200:
+                        body:
+                          application/json: Instance
+                  delete:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                    description: Stops a running instance.
+                    displayName: Delete Instances Versions Services Apps
+                    is:
+                    - hasParameters
+                    responses:
+                      200:
+                        body:
+                          application/json: Operation
+                get:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                  description: Lists the instances of a version.
+                  displayName: List Instances Versions Services Apps
+                  is:
+                  - hasParameters
+                  queryParameters:
+                    pageSize?:
+                      type: integer
+                      format: int32
+                      description: Maximum results to return per page.
+                    pageToken?:
+                      type: string
+                      description: Continuation token for fetching the next page of results.
+                  responses:
+                    200:
+                      body:
+                        application/json: ListInstancesResponse
+              patch:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: 'Updates the specified Version resource. You can specify
+                  the following fields depending on the App Engine environment and
+                  type of scaling that the version resource uses: * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.serving_status):
+                  For Version resources that use basic scaling, manual scaling, or
+                  run in the App Engine flexible environment. * [`instance_class`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.instance_class):
+                  For Version resources that run in the App Engine standard environment.
+                  * [`automatic_scaling.min_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.automatic_scaling):
+                  For Version resources that use automatic scaling and run in the
+                  App Engine standard environment. * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.automatic_scaling):
+                  For Version resources that use automatic scaling and run in the
+                  App Engine standard environment.'
+                displayName: Patch Versions Services Apps
+                is:
+                - hasParameters
+                queryParameters:
+                  mask?:
+                    type: string
+                    description: Standard field mask for the set of fields to be updated.
+                body:
+                  application/json: Version
+                responses:
+                  200:
+                    body:
+                      application/json: Operation
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: Gets the specified Version resource. By default, only a `BASIC_VIEW` will be returned. Specify the `FULL_VIEW` parameter to get the full resource.
+                displayName: Get Versions Services Apps
+                is:
+                - hasParameters
+                queryParameters:
+                  view?:
+                    type: string
+                    description: Controls the set of fields returned in the `Get` response.
+                    enum:
+                    - BASIC
+                    - FULL
+                responses:
+                  200:
+                    body:
+                      application/json: Version
+              delete:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: Deletes an existing version.
+                displayName: Delete Versions Services Apps
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Operation
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: Deploys new code and resource files to a new version.
+              displayName: Create Versions Services Apps
+              is:
+              - hasParameters
+              body:
+                application/json: Version
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: Lists the versions of a service.
+              displayName: List Versions Services Apps
+              is:
+              - hasParameters
+              queryParameters:
+                view?:
+                  type: string
+                  description: Controls the set of fields returned in the `List` response.
+                  enum:
+                  - BASIC
+                  - FULL
+                pageSize?:
+                  type: integer
+                  format: int32
+                  description: Maximum results to return per page.
+                pageToken?:
+                  type: string
+                  description: Continuation token for fetching the next page of results.
+              responses:
+                200:
+                  body:
+                    application/json: ListVersionsResponse
+          patch:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Updates the configuration of the specified service.
+            displayName: Patch Services Apps
+            is:
+            - hasParameters
+            queryParameters:
+              migrateTraffic?:
+                type: boolean
+                description: Set to `true` to gradually shift traffic from one version to another single version. By default, traffic is shifted immediately. For gradual traffic migration, the target version must be located within instances that are configured for both [warmup requests](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#inboundservicetype) and [automatic scaling](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#automaticscaling). You must specify the [`shardBy`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta5/apps.services#shardby) field in the Service resource. Gradual traffic migration is not supported in the App Engine flexible environment. For examples, see [Migrating and Splitting Traffic](https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
+              mask?:
+                type: string
+                description: Standard field mask for the set of fields to be updated.
+            body:
+              application/json: Service
+            responses:
+              200:
+                body:
+                  application/json: Operation
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Gets the current configuration of the specified service.
+            displayName: Get Services Apps
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Service
+          delete:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: Deletes the specified service and all enclosed versions.
+            displayName: Delete Services Apps
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+          description: Lists all the services in the application.
+          displayName: List Services Apps
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum results to return per page.
+            pageToken?:
+              type: string
+              description: Continuation token for fetching the next page of results.
+          responses:
+            200:
+              body:
+                application/json: ListServicesResponse
       patch:
         securedBy:
           oath2:

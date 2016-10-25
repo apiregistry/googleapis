@@ -685,6 +685,65 @@ types:
       displayName: Delete Timeline
       is:
       - hasParameters
+  /{itemId}:
+    uriParameters:
+      itemId:
+        type: string
+        description: The ID of the timeline item the attachment belongs to.
+    /attachments:
+      /{attachmentId}:
+        uriParameters:
+          attachmentId:
+            type: string
+            description: The ID of the attachment.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/glass.timeline
+          description: Retrieves an attachment on a timeline item by item ID and attachment ID.
+          displayName: Get Attachments Timeline
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Attachment
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/glass.timeline
+          description: Deletes an attachment from a timeline item.
+          displayName: Delete Attachments Timeline
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/glass.timeline
+        description: Adds a new attachment to a timeline item.
+        displayName: Insert Attachments Timeline
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Attachment
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/glass.timeline
+        description: Returns a list of attachments for a timeline item.
+        displayName: List Attachments Timeline
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: AttachmentsListResponse
   post:
     securedBy:
       oath2:

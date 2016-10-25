@@ -449,3 +449,170 @@ types:
                 200:
                   body:
                     application/json: ServerConfig
+          /operations:
+            /{operationId}:
+              uriParameters:
+                operationId:
+                  type: string
+                  description: The server-assigned `name` of the operation.
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: Gets the specified operation.
+                displayName: Get Operations Zones Projects
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Operation
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: Lists all operations in a project in a specific zone or all zones.
+              displayName: List Operations Zones Projects
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: ListOperationsResponse
+          /clusters:
+            /{clusterId}:
+              uriParameters:
+                clusterId:
+                  type: string
+                  description: The name of the cluster to retrieve.
+              /nodePools:
+                /{nodePoolId}:
+                  uriParameters:
+                    nodePoolId:
+                      type: string
+                      description: The name of the node pool.
+                  get:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                    description: Retrieves the node pool requested.
+                    displayName: Get NodePools Clusters Zones Projects
+                    is:
+                    - hasParameters
+                    responses:
+                      200:
+                        body:
+                          application/json: NodePool
+                  delete:
+                    securedBy:
+                      oath2:
+                        scopes:
+                        - https://www.googleapis.com/auth/cloud-platform
+                    description: Deletes a node pool from a cluster.
+                    displayName: Delete NodePools Clusters Zones Projects
+                    is:
+                    - hasParameters
+                    responses:
+                      200:
+                        body:
+                          application/json: Operation
+                post:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                  description: Creates a node pool for a cluster.
+                  displayName: Create NodePools Clusters Zones Projects
+                  is:
+                  - hasParameters
+                  body:
+                    application/json: CreateNodePoolRequest
+                  responses:
+                    200:
+                      body:
+                        application/json: Operation
+                get:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                  description: Lists the node pools for a cluster.
+                  displayName: List NodePools Clusters Zones Projects
+                  is:
+                  - hasParameters
+                  responses:
+                    200:
+                      body:
+                        application/json: ListNodePoolsResponse
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: Gets the details of a specific cluster.
+                displayName: Get Clusters Zones Projects
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Cluster
+              put:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: Updates the settings of a specific cluster.
+                displayName: Update Clusters Zones Projects
+                is:
+                - hasParameters
+                body:
+                  application/json: UpdateClusterRequest
+                responses:
+                  200:
+                    body:
+                      application/json: Operation
+              delete:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster (e.g. load balancer resources) will not be deleted if they weren't present at the initial create time.
+                displayName: Delete Clusters Zones Projects
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Operation
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the cluster creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range is being used by the cluster.
+              displayName: Create Clusters Zones Projects
+              is:
+              - hasParameters
+              body:
+                application/json: CreateClusterRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: Lists all clusters owned by a project in either the specified zone or all zones.
+              displayName: List Clusters Zones Projects
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: ListClustersResponse

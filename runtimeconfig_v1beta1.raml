@@ -437,40 +437,52 @@ types:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
-      description: Gets information about a RuntimeConfig resource.
-      displayName: Get Configs Projects
+      description: Gets information about a single waiter.
+      displayName: Get Waiters Configs Projects
       is:
+      - hasParameters
+      - hasParameters
+      - hasParameters
       - hasParameters
       responses:
         200:
           body:
-            application/json: RuntimeConfig
+            application/json: Waiter
     put:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
-      description: Updates a RuntimeConfig resource. The configuration must exist beforehand.
-      displayName: Update Configs Projects
+      description: Updates an existing variable with a new value.
+      displayName: Update Variables Configs Projects
       is:
       - hasParameters
+      - hasParameters
       body:
-        application/json: RuntimeConfig
+        application/json: Variable
       responses:
         200:
           body:
-            application/json: RuntimeConfig
+            application/json: Variable
     delete:
       securedBy:
         oath2:
           scopes:
           - https://www.googleapis.com/auth/cloud-platform
           - https://www.googleapis.com/auth/cloudruntimeconfig
-      description: Deletes a RuntimeConfig resource.
-      displayName: Delete Configs Projects
+      description: Deletes the waiter with the specified name.
+      displayName: Delete Waiters Configs Projects
       is:
       - hasParameters
+      - hasParameters
+      - hasParameters
+      queryParameters:
+        recursive?:
+          type: boolean
+          description: |-
+            Set to `true` to recursively delete multiple variables with the same
+            prefix.
       responses:
         200:
           body:
@@ -539,3 +551,169 @@ types:
           200:
             body:
               application/json: ListConfigsResponse
+    /variables:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloudruntimeconfig
+        description: |-
+          Creates a variable within the given configuration. You cannot create
+          a variable with a name that is a prefix of an existing variable name, or a
+          name that has an existing variable name as a prefix.
+
+          To learn more about creating a variable, read the
+          [Setting and Getting Data](/deployment-manager/runtime-configurator/set-and-get-variables)
+          documentation.
+        displayName: Create Variables Configs Projects
+        is:
+        - hasParameters
+        queryParameters:
+          requestId?:
+            type: string
+            description: |-
+              An optional unique request_id. If server receives two Create requests with
+              the same request_id then second request will be ignored and the resource
+              stored in the backend will be returned. Empty request_id fields are
+              ignored.
+              It is responsibility of the client to ensure uniqueness of the request_id
+              strings.
+              The strings are limited to 64 characters.
+        body:
+          application/json: Variable
+        responses:
+          200:
+            body:
+              application/json: Variable
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloudruntimeconfig
+        description: |-
+          Lists variables within given a configuration, matching any provided filters.
+          This only lists variable names, not the values.
+        displayName: List Variables Configs Projects
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Filters variables by matching the specified filter. For example:
+
+              `projects/example-project/config/[CONFIG_NAME]/variables/example-variable`.
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Specifies the number of results to return per page. If there are fewer
+              elements than the specified number, returns all elements.
+          pageToken?:
+            type: string
+            description: |-
+              Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+              returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: ListVariablesResponse
+    /waiters:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloudruntimeconfig
+        description: |-
+          Creates a Waiter resource. This operation returns a long-running Operation
+          resource which can be polled for completion. However, a waiter with the
+          given name will exist (and can be retrieved) prior to the operation
+          completing. If the operation fails, the failed Waiter resource will
+          still exist and must be deleted prior to subsequent creation attempts.
+        displayName: Create Waiters Configs Projects
+        is:
+        - hasParameters
+        queryParameters:
+          requestId?:
+            type: string
+            description: |-
+              An optional unique request_id. If server receives two Create requests with
+              the same request_id then second request will be ignored and information
+              stored in the backend will be returned. Empty request_id fields are
+              ignored.
+              It is responsibility of the client to ensure uniqueness of the request_id
+              strings.
+              The strings are limited to 64 characters.
+        body:
+          application/json: Waiter
+        responses:
+          200:
+            body:
+              application/json: Operation
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/cloudruntimeconfig
+        description: List waiters within the given configuration.
+        displayName: List Waiters Configs Projects
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Specifies the number of results to return per page. If there are fewer
+              elements than the specified number, returns all elements.
+          pageToken?:
+            type: string
+            description: |-
+              Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+              returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: ListWaitersResponse
+  /{name}:watch:
+    uriParameters:
+      name:
+        type: string
+        pattern: ^projects/[^/]+/configs/[^/]+/variables/.+$
+        description: |-
+          The name of the variable to watch, in the format:
+
+          `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+          - https://www.googleapis.com/auth/cloudruntimeconfig
+      description: |-
+        Watches a specific variable and waits for a change in the variable's value.
+        When there is a change, this method returns the new value or times out.
+
+        If a variable is deleted while being watched, the `variableState` state is
+        set to `DELETED` and the method returns the last known variable `value`.
+
+        If you set the deadline for watching to a larger value than internal timeout
+        (60 seconds), the current variable value is returned and the `variableState`
+        will be `VARIABLE_STATE_UNSPECIFIED`.
+
+        To learn more about creating a watcher, read the
+        [Watching a Variable for Changes](/deployment-manager/runtime-configurator/watching-a-variable)
+        documentation.
+      displayName: Watch Variables Configs Projects
+      is:
+      - hasParameters
+      body:
+        application/json: WatchVariableRequest
+      responses:
+        200:
+          body:
+            application/json: Variable

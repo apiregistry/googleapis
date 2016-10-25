@@ -759,6 +759,38 @@ types:
           type: string
           description: REQUIRED. See _General rules_ for more information about this field.
       /components:
+        /{componentId}:
+          uriParameters:
+            componentId:
+              type: string
+              description: REQUIRED. Component ID.
+          /type:
+            /{type}:
+              uriParameters:
+                type:
+                  type: string
+                  description: REQUIRED. Component Type.
+                  enum:
+                  - COMPONENT_TYPE_UNSPECIFIED
+                  - VIDEO
+                  - AUDIO_20
+                  - AUDIO_51
+                  - SUBTITLE
+                  - ARTWORK
+                  - METADATA
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/playmovies_partner.readonly
+                description: Get a Component given its id.
+                displayName: Get Type Components Accounts
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Component
         get:
           securedBy:
             oath2:
@@ -1022,6 +1054,30 @@ types:
               body:
                 application/json: ListExperienceLocalesResponse
       /storeInfos:
+        /{videoId}:
+          uriParameters:
+            videoId:
+              type: string
+              description: REQUIRED. Video ID.
+          /country:
+            /{country}:
+              uriParameters:
+                country:
+                  type: string
+                  description: REQUIRED. Edit country.
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/playmovies_partner.readonly
+                description: Get a StoreInfo given its video id and country. See _Authentication and Authorization rules_ and _Get methods rules_ for more information about this method.
+                displayName: Get Country StoreInfos Accounts
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: StoreInfo
         get:
           securedBy:
             oath2:

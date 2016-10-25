@@ -487,9 +487,6 @@ types:
   ChannelContentDetails:
     type: object
     properties:
-      googlePlusUserId?:
-        type: string
-        description: The googlePlusUserId object identifies the Google+ profile ID associated with this channel.
       relatedPlaylists?:
         type: object
         properties:
@@ -935,9 +932,6 @@ types:
       parentId?:
         type: string
         description: The unique id of the parent comment, only set for replies.
-      authorGoogleplusProfileUrl?:
-        type: string
-        description: Link to the author's Google+ profile, if any.
       canRate?:
         type: boolean
         description: Whether the current viewer can rate this comment.
@@ -3645,6 +3639,9 @@ types:
         enum:
         - hd
         - sd
+      hasCustomThumbnail?:
+        type: boolean
+        description: Indicates whether the video uploader has provided a custom thumbnail image for the video. This property is only visible to the video uploader.
       projection?:
         type: string
         description: Specifies the projection format of the video.
@@ -3685,7 +3682,6 @@ types:
           \ The value is specified in ISO 8601 format. Currently, the following ISO\
           \ 8601 formats are supported:  \n- Date only: YYYY-MM-DD \n- Naive time:\
           \ YYYY-MM-DDTHH:MM:SS \n- Time with timezone: YYYY-MM-DDTHH:MM:SS+HH:MM"
-      recordingLocation?: GeoPoint
       fileSize?:
         type: integer
         format: int64
@@ -3866,6 +3862,13 @@ types:
   VideoPlayer:
     type: object
     properties:
+      embedHeight?:
+        type: integer
+        format: int64
+      embedWidth?:
+        type: integer
+        format: int64
+        description: The embed width
       embedHtml?:
         type: string
         description: An <iframe> tag that embeds a player that will play the video.
@@ -4539,9 +4542,6 @@ types:
     is:
     - hasParameters
     queryParameters:
-      regionCode?:
-        type: string
-        description: The regionCode parameter instructs the API to select a video chart available in the specified region. This parameter can only be used in conjunction with the chart parameter. The parameter value is an ISO 3166-1 alpha-2 country code.
       hl?:
         type: string
         description: |-
@@ -4560,6 +4560,24 @@ types:
           Note: This parameter is intended exclusively for YouTube content partners.
 
           The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
+      part:
+        type: string
+        description: |-
+          The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include.
+
+          If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.
+      locale?:
+        type: string
+        description: DEPRECATED
+      regionCode?:
+        type: string
+        description: The regionCode parameter instructs the API to select a video chart available in the specified region. This parameter can only be used in conjunction with the chart parameter. The parameter value is an ISO 3166-1 alpha-2 country code.
+      maxHeight?:
+        type: integer
+        format: int32
+        description: The maxHeight parameter specifies a maximum height of the embedded player. If maxWidth is provided, maxHeight may not be reached in order to not violate the width request.
+        maximum: 8192
+        minimum: 72
       maxResults?:
         type: integer
         default: 5
@@ -4574,12 +4592,6 @@ types:
         type: string
         default: '0'
         description: The videoCategoryId parameter identifies the video category for which the chart should be retrieved. This parameter can only be used in conjunction with the chart parameter. By default, charts are not restricted to a particular category.
-      part:
-        type: string
-        description: |-
-          The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include.
-
-          If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.
       id?:
         type: string
         description: The id parameter specifies a comma-separated list of the YouTube video ID(s) for the resource(s) that are being retrieved. In a video resource, the id property specifies the video's ID.
@@ -4589,14 +4601,17 @@ types:
           The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
 
           Note: This parameter is supported for use in conjunction with the myRating parameter, but it is not supported for use in conjunction with the id parameter.
-      locale?:
-        type: string
-        description: DEPRECATED
       chart?:
         type: string
         description: The chart parameter identifies the chart that you want to retrieve.
         enum:
         - mostPopular
+      maxWidth?:
+        type: integer
+        format: int32
+        description: The maxWidth parameter specifies a maximum width of the embedded player. If maxHeight is provided, maxWidth may not be reached in order to not violate the height request.
+        maximum: 8192
+        minimum: 72
     responses:
       200:
         body:
@@ -6556,6 +6571,12 @@ types:
     is:
     - hasParameters
     queryParameters:
+      onBehalfOfContentOwner?:
+        type: string
+        description: |-
+          Note: This parameter is intended exclusively for YouTube content partners.
+
+          The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
       part:
         type: string
         description: |-
@@ -6628,6 +6649,12 @@ types:
     is:
     - hasParameters
     queryParameters:
+      onBehalfOfContentOwner?:
+        type: string
+        description: |-
+          Note: This parameter is intended exclusively for YouTube content partners.
+
+          The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
       id:
         type: string
         description: The id parameter specifies the YouTube playlist item ID for the playlist item that is being deleted. In a playlistItem resource, the id property specifies the playlist item's ID.

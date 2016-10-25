@@ -610,6 +610,29 @@ types:
         type: string
         pattern: ^projects/[^/]*/topics/[^/]*$
         description: The name of the topic to get.
+    /subscriptions:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/pubsub
+        description: Lists the name of the subscriptions for this topic.
+        displayName: List Subscriptions Topics Projects
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: Maximum number of subscription names to return.
+          pageToken?:
+            type: string
+            description: The value returned by the last `ListTopicSubscriptionsResponse`; indicates that this is a continuation of a prior `ListTopicSubscriptions` call, and that the system should return the next page of data.
+        responses:
+          200:
+            body:
+              application/json: ListTopicSubscriptionsResponse
     get:
       securedBy:
         oath2:

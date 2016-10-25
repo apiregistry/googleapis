@@ -809,6 +809,400 @@ types:
         200:
           body:
             application/json: ProjectSettings
+  /histories:
+    /{historyId}:
+      uriParameters:
+        historyId:
+          type: string
+          description: |-
+            A History id.
+
+            Required.
+      /executions:
+        /{executionId}:
+          uriParameters:
+            executionId:
+              type: string
+              description: Required.
+          /steps:
+            /{stepId}:
+              uriParameters:
+                stepId:
+                  type: string
+                  description: |-
+                    A Step id.
+
+                    Required.
+              /thumbnails:
+                get:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                  description: |-
+                    Lists thumbnails of images attached to a step.
+
+                    May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read from the project, or from any of the images - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the step does not exist, or if any of the images do not exist
+                  displayName: List Thumbnails Steps Executions Histories Projects
+                  is:
+                  - hasParameters
+                  queryParameters:
+                    pageSize?:
+                      type: integer
+                      format: int32
+                      description: |-
+                        The maximum number of thumbnails to fetch.
+
+                        Default value: 50. The server will use this default if the field is not set or has a value of 0.
+
+                        Optional.
+                    pageToken?:
+                      type: string
+                      description: |-
+                        A continuation token to resume the query at the next item.
+
+                        Optional.
+                  responses:
+                    200:
+                      body:
+                        application/json: ListStepThumbnailsResponse
+              patch:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: |-
+                  Updates an existing Step with the supplied partial entity.
+
+                  May return any of the following canonical error codes:
+
+                  - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
+                displayName: Patch Steps Executions Histories Projects
+                is:
+                - hasParameters
+                queryParameters:
+                  requestId?:
+                    type: string
+                    description: |-
+                      A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+                      Optional, but strongly recommended.
+                body:
+                  application/json: Step
+                responses:
+                  200:
+                    body:
+                      application/json: Step
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: |-
+                  Gets a Step.
+
+                  May return any of the following canonical error codes:
+
+                  - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Step does not exist
+                displayName: Get Steps Executions Histories Projects
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: Step
+            /{stepId}:publishXunitXmlFiles:
+              uriParameters:
+                stepId:
+                  type: string
+                  description: |-
+                    A Step id. Note: This step must include a TestExecutionStep.
+
+                    Required.
+              post:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                description: |-
+                  Publish xml files to an existing Step.
+
+                  May return any of the following canonical error codes:
+
+                  - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal, e.g try to upload a duplicate xml file or a file too large. - NOT_FOUND - if the containing Execution does not exist
+                displayName: PublishXunitXmlFiles Steps Executions Histories Projects
+                is:
+                - hasParameters
+                body:
+                  application/json: PublishXunitXmlFilesRequest
+                responses:
+                  200:
+                    body:
+                      application/json: Step
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: |-
+                Creates a Step.
+
+                The returned Step will have the id set.
+
+                May return any of the following canonical error codes:
+
+                - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
+              displayName: Create Steps Executions Histories Projects
+              is:
+              - hasParameters
+              queryParameters:
+                requestId?:
+                  type: string
+                  description: |-
+                    A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+                    Optional, but strongly recommended.
+              body:
+                application/json: Step
+              responses:
+                200:
+                  body:
+                    application/json: Step
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+              description: |-
+                Lists Steps for a given Execution.
+
+                The steps are sorted by creation_time in descending order. The step_id key will be used to order the steps with the same creation_time.
+
+                May return any of the following canonical error codes:
+
+                - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if an argument in the request happens to be invalid; e.g. if an attempt is made to list the children of a nonexistent Step - NOT_FOUND - if the containing Execution does not exist
+              displayName: List Steps Executions Histories Projects
+              is:
+              - hasParameters
+              queryParameters:
+                pageSize?:
+                  type: integer
+                  format: int32
+                  description: |-
+                    The maximum number of Steps to fetch.
+
+                    Default value: 25. The server will use this default if the field is not set or has a value of 0.
+
+                    Optional.
+                pageToken?:
+                  type: string
+                  description: |-
+                    A continuation token to resume the query at the next item.
+
+                    Optional.
+              responses:
+                200:
+                  body:
+                    application/json: ListStepsResponse
+          patch:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: |-
+              Updates an existing Execution with the supplied partial entity.
+
+              May return any of the following canonical error codes:
+
+              - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal - NOT_FOUND - if the containing History does not exist
+            displayName: Patch Executions Histories Projects
+            is:
+            - hasParameters
+            queryParameters:
+              requestId?:
+                type: string
+                description: |-
+                  A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+                  Optional, but strongly recommended.
+            body:
+              application/json: Execution
+            responses:
+              200:
+                body:
+                  application/json: Execution
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+            description: |-
+              Gets an Execution.
+
+              May return any of the following canonical error codes:
+
+              - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Execution does not exist
+            displayName: Get Executions Histories Projects
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Execution
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+          description: |-
+            Creates an Execution.
+
+            The returned Execution will have the id set.
+
+            May return any of the following canonical error codes:
+
+            - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
+          displayName: Create Executions Histories Projects
+          is:
+          - hasParameters
+          queryParameters:
+            requestId?:
+              type: string
+              description: |-
+                A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+                Optional, but strongly recommended.
+          body:
+            application/json: Execution
+          responses:
+            200:
+              body:
+                application/json: Execution
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+          description: |-
+            Lists Histories for a given Project.
+
+            The executions are sorted by creation_time in descending order. The execution_id key will be used to order the executions with the same creation_time.
+
+            May return any of the following canonical error codes:
+
+            - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
+          displayName: List Executions Histories Projects
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: |-
+                The maximum number of Executions to fetch.
+
+                Default value: 25. The server will use this default if the field is not set or has a value of 0.
+
+                Optional.
+            pageToken?:
+              type: string
+              description: |-
+                A continuation token to resume the query at the next item.
+
+                Optional.
+          responses:
+            200:
+              body:
+                application/json: ListExecutionsResponse
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: |-
+          Gets a History.
+
+          May return any of the following canonical error codes:
+
+          - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist
+        displayName: Get Histories Projects
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: History
+    post:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: |-
+        Creates a History.
+
+        The returned History will have the id set.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing project does not exist
+      displayName: Create Histories Projects
+      is:
+      - hasParameters
+      queryParameters:
+        requestId?:
+          type: string
+          description: |-
+            A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+            Optional, but strongly recommended.
+      body:
+        application/json: History
+      responses:
+        200:
+          body:
+            application/json: History
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+      description: |-
+        Lists Histories for a given Project.
+
+        The histories are sorted by modification time in descending order. The history_id key will be used to order the history with the same modification time.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist
+      displayName: List Histories Projects
+      is:
+      - hasParameters
+      queryParameters:
+        filterByName?:
+          type: string
+          description: |-
+            If set, only return histories with the given name.
+
+            Optional.
+        pageSize?:
+          type: integer
+          format: int32
+          description: |-
+            The maximum number of Histories to fetch.
+
+            Default value: 20. The server will use this default if the field is not set or has a value of 0. Any value greater than 100 will be treated as 100.
+
+            Optional.
+        pageToken?:
+          type: string
+          description: |-
+            A continuation token to resume the query at the next item.
+
+            Optional.
+      responses:
+        200:
+          body:
+            application/json: ListHistoriesResponse
 /{projectId}:initializeSettings:
   uriParameters:
     projectId:

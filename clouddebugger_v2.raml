@@ -442,8 +442,166 @@ types:
             200:
               body:
                 application/json: RegisterDebuggeeResponse
+      /{debuggeeId}:
+        uriParameters:
+          debuggeeId:
+            type: string
+            description: Identifies the debuggee being debugged.
+        /breakpoints:
+          /{id}:
+            uriParameters:
+              id:
+                type: string
+                description: Breakpoint identifier, unique in the scope of the debuggee.
+            put:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud_debugger
+              description: Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the `location`, `condition` and `expression` fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.
+              displayName: Update Breakpoints Debuggees Controller
+              is:
+              - hasParameters
+              body:
+                application/json: UpdateActiveBreakpointRequest
+              responses:
+                200:
+                  body:
+                    application/json: UpdateActiveBreakpointResponse
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud_debugger
+            description: Returns the list of all active breakpoints for the debuggee. The breakpoint specification (location, condition, and expression fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn't change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.
+            displayName: List Breakpoints Debuggees Controller
+            is:
+            - hasParameters
+            queryParameters:
+              waitToken?:
+                type: string
+                description: A wait token that, if specified, blocks the method call until the list of active breakpoints has changed, or a server selected timeout has expired. The value should be set from the last returned response.
+              successOnTimeout?:
+                type: boolean
+                description: If set to `true`, returns `google.rpc.Code.OK` status and sets the `wait_expired` response field to `true` when the server-selected timeout has expired (recommended). If set to `false`, returns `google.rpc.Code.ABORTED` status when the server-selected timeout has expired (deprecated).
+            responses:
+              200:
+                body:
+                  application/json: ListActiveBreakpointsResponse
   /debugger:
     /debuggees:
+      /{debuggeeId}:
+        uriParameters:
+          debuggeeId:
+            type: string
+            description: ID of the debuggee where the breakpoint is to be set.
+        /breakpoints:
+          /set:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud_debugger
+              description: Sets the breakpoint to the debuggee.
+              displayName: Set Breakpoints Debuggees Debugger
+              is:
+              - hasParameters
+              queryParameters:
+                clientVersion?:
+                  type: string
+                  description: 'The client version making the call. Following: `domain/type/version`
+                    (e.g., `google.com/intellij/v1`).'
+              body:
+                application/json: Breakpoint
+              responses:
+                200:
+                  body:
+                    application/json: SetBreakpointResponse
+          /{breakpointId}:
+            uriParameters:
+              breakpointId:
+                type: string
+                description: ID of the breakpoint to get.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud_debugger
+              description: Gets breakpoint information.
+              displayName: Get Breakpoints Debuggees Debugger
+              is:
+              - hasParameters
+              queryParameters:
+                clientVersion?:
+                  type: string
+                  description: 'The client version making the call. Following: `domain/type/version`
+                    (e.g., `google.com/intellij/v1`).'
+              responses:
+                200:
+                  body:
+                    application/json: GetBreakpointResponse
+            delete:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/cloud_debugger
+              description: Deletes the breakpoint from the debuggee.
+              displayName: Delete Breakpoints Debuggees Debugger
+              is:
+              - hasParameters
+              queryParameters:
+                clientVersion?:
+                  type: string
+                  description: 'The client version making the call. Following: `domain/type/version`
+                    (e.g., `google.com/intellij/v1`).'
+              responses:
+                200:
+                  body:
+                    application/json: Empty
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud_debugger
+            description: Lists all breakpoints for the debuggee.
+            displayName: List Breakpoints Debuggees Debugger
+            is:
+            - hasParameters
+            queryParameters:
+              waitToken?:
+                type: string
+                description: A wait token that, if specified, blocks the call until the breakpoints list has changed, or a server selected timeout has expired. The value should be set from the last response. The error code `google.rpc.Code.ABORTED` (RPC) is returned on wait timeout, which should be called again with the same `wait_token`.
+              includeInactive?:
+                type: boolean
+                description: When set to `true`, the response includes active and inactive breakpoints. Otherwise, it includes only active breakpoints.
+              includeAllUsers?:
+                type: boolean
+                description: When set to `true`, the response includes the list of breakpoints set by any user. Otherwise, it includes only breakpoints set by the caller.
+              stripResults?:
+                type: boolean
+                description: 'When set to `true`, the response breakpoints are stripped
+                  of the results fields: `stack_frames`, `evaluated_expressions` and
+                  `variable_table`.'
+              clientVersion?:
+                type: string
+                description: 'The client version making the call. Following: `domain/type/version`
+                  (e.g., `google.com/intellij/v1`).'
+              action.value?:
+                type: string
+                description: Only breakpoints with the specified action will pass the filter.
+                enum:
+                - CAPTURE
+                - LOG
+            responses:
+              200:
+                body:
+                  application/json: ListBreakpointsResponse
       get:
         securedBy:
           oath2:

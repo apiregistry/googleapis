@@ -139,6 +139,25 @@ types:
           type: string
           description: ID of the Cloud project where the trace data is stored.
       /traces:
+        /{traceId}:
+          uriParameters:
+            traceId:
+              type: string
+              description: ID of the trace to return.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/trace.readonly
+            description: Gets a single trace by its ID.
+            displayName: Get Traces Projects
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Trace
         patch:
           securedBy:
             oath2:
@@ -155,3 +174,51 @@ types:
             200:
               body:
                 application/json: Empty
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/trace.readonly
+          description: Returns of a list of traces that match the specified filter conditions.
+          displayName: List Traces Projects
+          is:
+          - hasParameters
+          queryParameters:
+            filter?:
+              type: string
+              description: An optional filter for the request.
+            view?:
+              type: string
+              description: Type of data returned for traces in the list. Optional. Default is `MINIMAL`.
+              enum:
+              - VIEW_TYPE_UNSPECIFIED
+              - MINIMAL
+              - ROOTSPAN
+              - COMPLETE
+            pageSize?:
+              type: integer
+              format: int32
+              description: Maximum number of traces to return. If not specified or <= 0, the implementation selects a reasonable value. The implementation may return fewer traces than the requested page size. Optional.
+            orderBy?:
+              type: string
+              description: 'Field used to sort the returned traces. Optional. Can
+                be one of the following: * `trace_id` * `name` (`name` field of root
+                span in the trace) * `duration` (difference between `end_time` and
+                `start_time` fields of the root span) * `start` (`start_time` field
+                of the root span) Descending order can be specified by appending `desc`
+                to the sort field (for example, `name desc`). Only one sort field
+                is permitted.'
+            startTime?:
+              type: string
+              description: End of the time interval (inclusive) during which the trace data was collected from the application.
+            pageToken?:
+              type: string
+              description: Token identifying the page of results to return. If provided, use the value of the `next_page_token` field from a previous request. Optional.
+            endTime?:
+              type: string
+              description: Start of the time interval (inclusive) during which the trace data was collected from the application.
+          responses:
+            200:
+              body:
+                application/json: ListTracesResponse

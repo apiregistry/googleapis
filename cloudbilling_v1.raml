@@ -167,6 +167,28 @@ types:
           200:
             body:
               application/json: ProjectBillingInfo
+    /projects:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+        description: Lists the projects associated with a billing account. The current authenticated user must be an [owner of the billing account](https://support.google.com/cloud/answer/4430947).
+        displayName: List Projects BillingAccounts
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: Requested page size. The maximum page size is 100; this is also the default.
+          pageToken?:
+            type: string
+            description: A token identifying a page of results to be returned. This should be a `next_page_token` value returned from a previous `ListProjectBillingInfo` call. If unspecified, the first page of results is returned.
+        responses:
+          200:
+            body:
+              application/json: ListProjectBillingInfoResponse
     get:
       securedBy:
         oath2:

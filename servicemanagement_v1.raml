@@ -2914,6 +2914,173 @@ types:
             200:
               body:
                 application/json: Service
+      /configs:submit:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/service.management
+          description: |-
+            Creates a new service configuration (version) for a managed service based
+            on
+            user-supplied configuration source files (for example: OpenAPI
+            Specification). This method stores the source configurations as well as the
+            generated service configuration. To rollout the service configuration to
+            other services,
+            please call CreateServiceRollout.
+
+            Operation<response: SubmitConfigSourceResponse>
+          displayName: Submit Configs Services
+          is:
+          - hasParameters
+          body:
+            application/json: SubmitConfigSourceRequest
+          responses:
+            200:
+              body:
+                application/json: Operation
+      /configs:
+        /{configId}:
+          uriParameters:
+            configId:
+              type: string
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/service.management
+                - https://www.googleapis.com/auth/service.management.readonly
+            description: Gets a service configuration (version) for a managed service.
+            displayName: Get Configs Services
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Service
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/service.management
+          description: |-
+            Creates a new service configuration (version) for a managed service.
+            This method only stores the service configuration. To roll out the service
+            configuration to backend systems please call
+            CreateServiceRollout.
+          displayName: Create Configs Services
+          is:
+          - hasParameters
+          body:
+            application/json: Service
+          responses:
+            200:
+              body:
+                application/json: Service
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/service.management
+              - https://www.googleapis.com/auth/service.management.readonly
+          description: |-
+            Lists the history of the service configuration for a managed service,
+            from the newest to the oldest.
+          displayName: List Configs Services
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: The max number of items to include in the response list.
+            pageToken?:
+              type: string
+              description: The token of the page to retrieve.
+          responses:
+            200:
+              body:
+                application/json: ListServiceConfigsResponse
+      /rollouts:
+        /{rolloutId}:
+          uriParameters:
+            rolloutId:
+              type: string
+              description: The id of the rollout resource.
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/cloud-platform.read-only
+                - https://www.googleapis.com/auth/service.management
+                - https://www.googleapis.com/auth/service.management.readonly
+            description: Gets a service configuration rollout.
+            displayName: Get Rollouts Services
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Rollout
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/service.management
+          description: |-
+            Creates a new service configuration rollout. Based on rollout, the
+            Google Service Management will roll out the service configurations to
+            different backend services. For example, the logging configuration will be
+            pushed to Google Cloud Logging.
+
+            Please note that any previous pending and running Rollouts and associated
+            Operations will be automatically cancelled so that the latest Rollout will
+            not be blocked by previous Rollouts.
+
+            Operation<response: Rollout>
+          displayName: Create Rollouts Services
+          is:
+          - hasParameters
+          body:
+            application/json: Rollout
+          responses:
+            200:
+              body:
+                application/json: Operation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/cloud-platform.read-only
+              - https://www.googleapis.com/auth/service.management
+              - https://www.googleapis.com/auth/service.management.readonly
+          description: |-
+            Lists the history of the service configuration rollouts for a managed
+            service, from the newest to the oldest.
+          displayName: List Rollouts Services
+          is:
+          - hasParameters
+          queryParameters:
+            pageSize?:
+              type: integer
+              format: int32
+              description: The max number of items to include in the response list.
+            pageToken?:
+              type: string
+              description: The token of the page to retrieve.
+          responses:
+            200:
+              body:
+                application/json: ListServiceRolloutsResponse
       get:
         securedBy:
           oath2:

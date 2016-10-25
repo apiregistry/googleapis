@@ -267,3 +267,22 @@ types:
             200:
               body:
                 application/json: Jwk
+/userinfo:
+  /v2:
+    /me:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/plus.login
+            - https://www.googleapis.com/auth/plus.me
+            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/userinfo.profile
+        description: Get user info
+        displayName: Get Me V2 Userinfo
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Userinfoplus

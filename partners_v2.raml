@@ -693,6 +693,18 @@ types:
         companyId:
           type: string
           description: The ID of the company to retrieve.
+      /leads:
+        post:
+          description: Creates an advertiser lead for the given company ID.
+          displayName: Create Leads Companies
+          is:
+          - hasParameters
+          body:
+            application/json: CreateLeadRequest
+          responses:
+            200:
+              body:
+                application/json: CreateLeadResponse
       get:
         description: Gets a company.
         displayName: Get Companies

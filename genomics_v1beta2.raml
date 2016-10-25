@@ -1595,6 +1595,41 @@ types:
       referenceId:
         type: string
         description: The ID of the reference.
+    /bases:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/genomics
+            - https://www.googleapis.com/auth/genomics.readonly
+        description: |-
+          Lists the bases in a reference, optionally restricted to a range.
+
+          Implements GlobalAllianceApi.getReferenceBases.
+        displayName: List Bases References
+        is:
+        - hasParameters
+        queryParameters:
+          start?:
+            type: integer
+            format: int64
+            description: The start position (0-based) of this query. Defaults to 0.
+          pageSize?:
+            type: integer
+            format: int32
+            description: The maximum number of bases to return in a single page. If unspecified, defaults to 200Kbp (kilo base pairs). The maximum value is 10Mbp (mega base pairs).
+          end?:
+            type: integer
+            format: int64
+            description: The end position (0-based, exclusive) of this query. Defaults to the length of this reference.
+          pageToken?:
+            type: string
+            description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+        responses:
+          200:
+            body:
+              application/json: ListBasesResponse
     get:
       securedBy:
         oath2:
@@ -1889,6 +1924,48 @@ types:
       readGroupSetId:
         type: string
         description: The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.
+    /coveragebuckets:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/genomics
+            - https://www.googleapis.com/auth/genomics.readonly
+        description: |-
+          Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range.
+
+          Coverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage 'zoom levels'. The caller must have READ permissions for the target read group set.
+        displayName: List Coveragebuckets Readgroupsets
+        is:
+        - hasParameters
+        queryParameters:
+          targetBucketWidth?:
+            type: integer
+            format: int64
+            description: The desired width of each reported coverage bucket in base pairs. This will be rounded down to the nearest precomputed bucket width; the value of which is returned as bucketWidth in the response. Defaults to infinity (each bucket spans an entire reference sequence) or the length of the target range, if specified. The smallest precomputed bucketWidth is currently 2048 base pairs; this is subject to change.
+          pageSize?:
+            type: integer
+            format: int32
+            description: The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 2048.
+          range.start?:
+            type: integer
+            format: int64
+            description: The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.
+          pageToken?:
+            type: string
+            description: The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.
+          range.end?:
+            type: integer
+            format: int64
+            description: The end position of the range on the reference, 0-based exclusive. If specified, referenceName must also be specified.
+          range.referenceName?:
+            type: string
+            description: The reference sequence name, for example chr1, 1, or chrX.
+        responses:
+          200:
+            body:
+              application/json: ListCoverageBucketsResponse
     patch:
       securedBy:
         oath2:
