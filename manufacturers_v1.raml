@@ -1,0 +1,276 @@
+#%RAML 1.0
+title: Manufacturer Center API
+version: v1
+baseUri: https://manufacturers.googleapis.com/
+uses:
+  commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+(commons.Links):
+- title: Developer Documentation
+  url: https://developers.google.com/manufacturers/
+  role: documentation
+(commons.Icons):
+- url: http://www.google.com/images/icons/product/search-32.gif
+  name: x32
+- url: http://www.google.com/images/icons/product/search-16.gif
+  name: x16
+(commons.Id): manufacturers:v1
+securitySchemes:
+  oath2:
+    type: OAuth 2.0
+    description: Google Oath2.0 authorization. Detailed documentation can be found at https://developers.google.com/identity/protocols/OAuth2
+    settings:
+      authorizationGrants:
+      - authorization_code
+      - implicit
+      authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      accessTokenUri: https://accounts.google.com/o/oauth2/v2/auth
+      scopes:
+      - https://www.googleapis.com/auth/manufacturercenter
+traits:
+  hasParameters:
+    queryParameters:
+      quotaUser?:
+        type: string
+        description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      pp?:
+        type: boolean
+        default: true
+        description: Pretty-print response.
+      prettyPrint?:
+        type: boolean
+        default: true
+        description: Returns response with indentations and line breaks.
+      $.xgafv?:
+        type: string
+        description: V1 error format.
+        enum:
+        - '1'
+        - '2'
+      upload_protocol?:
+        type: string
+        description: Upload protocol for media (e.g. "raw", "multipart").
+      uploadType?:
+        type: string
+        description: Legacy upload protocol for media (e.g. "media", "multipart").
+      callback?:
+        type: string
+        description: JSONP
+      fields?:
+        type: string
+        description: Selector specifying which fields to include in a partial response.
+securedBy:
+  oath2: 
+types:
+  Attributes:
+    type: object
+    properties:
+      productLine?:
+        type: string
+        description: |-
+          The name of the group of products related to the product. For more
+          information, see
+          https://support.google.com/manufacturers/answer/6124116#productline.
+      productPageUrl?:
+        type: string
+        description: |-
+          The URL of the manufacturer's detail page of the product. For more
+          information, see
+          https://support.google.com/manufacturers/answer/6124116#productpage.
+      gtin?:
+        type: array
+        description: |-
+          The Global Trade Item Number (GTIN) of the product. For more information,
+          see https://support.google.com/manufacturers/answer/6124116#gtin.
+        items:
+          type: string
+      mpn?:
+        type: string
+        description: |-
+          The Manufacturer Part Number (MPN) of the product. For more information,
+          see https://support.google.com/manufacturers/answer/6124116#mpn.
+      title?:
+        type: string
+        description: |-
+          The title of the product. For more information, see
+          https://support.google.com/manufacturers/answer/6124116#title.
+      brand?:
+        type: string
+        description: |-
+          The brand name of the product. For more information, see
+          https://support.google.com/manufacturers/answer/6124116#brand.
+      productName?:
+        type: string
+        description: |-
+          The canonical name of the product. For more information, see
+          https://support.google.com/manufacturers/answer/6124116#productname.
+      productType?:
+        type: array
+        description: |-
+          The manufacturer's category of the product. For more information, see
+          https://support.google.com/manufacturers/answer/6124116#producttype.
+        items:
+          type: string
+    description: |-
+      Attributes of the product. For more information, see
+      https://support.google.com/manufacturers/answer/6124116.
+  Issue:
+    type: object
+    properties:
+      severity?:
+        type: string
+        description: The severity of the issue.
+        enum:
+        - SEVERITY_UNSPECIFIED
+        - ERROR
+        - WARNING
+        - INFO
+      description?:
+        type: string
+        description: Description of the issue.
+      attribute?:
+        type: string
+        description: |-
+          If present, the attribute that triggered the issue. For more information
+          about attributes, see
+          https://support.google.com/manufacturers/answer/6124116.
+      type?:
+        type: string
+        description: |-
+          The server-generated type of the issue, for example,
+          “INCORRECT_TEXT_FORMATTING”, “IMAGE_NOT_SERVEABLE”, etc.
+    description: Product issue.
+  ListProductsResponse:
+    type: object
+    properties:
+      nextPageToken?:
+        type: string
+        description: The token for the retrieval of the next page of product statuses.
+      products?:
+        type: array
+        description: List of the products.
+        items: Product
+  Product:
+    type: object
+    properties:
+      manuallyProvidedAttributes?: Attributes
+      parent?:
+        type: string
+        description: |-
+          Parent ID in the format `accounts/{account_id}`.
+
+          `account_id` - The ID of the Manufacturer Center account.
+          @OutputOnly
+      manuallyDeletedAttributes?:
+        type: array
+        description: |-
+          Names of the attributes of the product deleted manually via the
+          Manufacturer Center UI.
+          @OutputOnly
+        items:
+          type: string
+      productId?:
+        type: string
+        description: |-
+          The ID of the product. For more information, see
+          https://support.google.com/manufacturers/answer/6124116#id.
+          @OutputOnly
+      finalAttributes?: Attributes
+      name?:
+        type: string
+        description: |-
+          Name in the format `{target_country}:{content_language}:{product_id}`.
+
+          `target_country`   - The target country of the product as a CLDR territory
+                               code (for example, US).
+
+          `content_language` - The content language of the product as a two-letter
+                               ISO 639-1 language code (for example, en).
+
+          `product_id`     -   The ID of the product. For more information, see
+                               https://support.google.com/manufacturers/answer/6124116#id.
+          @OutputOnly
+      contentLanguage?:
+        type: string
+        description: |-
+          The content language of the product as a two-letter ISO 639-1 language code
+          (for example, en).
+          @OutputOnly
+      uploadedAttributes?: Attributes
+      issues?:
+        type: array
+        description: |-
+          A server-generated list of issues associated with the product.
+          @OutputOnly
+        items: Issue
+      targetCountry?:
+        type: string
+        description: |-
+          The target country of the product as a CLDR territory code (for example,
+          US).
+          @OutputOnly
+    description: Product data.
+/v1:
+  /{parent}:
+    uriParameters:
+      parent:
+        type: string
+        pattern: ^accounts/[^/]+$
+        description: |-
+          Parent ID in the format `accounts/{account_id}`.
+
+          `account_id` - The ID of the Manufacturer Center account.
+    /products:
+      /{name}:
+        uriParameters:
+          name:
+            type: string
+            pattern: ^[^/]+$
+            description: |-
+              Name in the format `{target_country}:{content_language}:{product_id}`.
+
+              `target_country`   - The target country of the product as a CLDR territory
+                                   code (for example, US).
+
+              `content_language` - The content language of the product as a two-letter
+                                   ISO 639-1 language code (for example, en).
+
+              `product_id`     -   The ID of the product. For more information, see
+                                   https://support.google.com/manufacturers/answer/6124116#id.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/manufacturercenter
+          description: |-
+            Gets the product from a Manufacturer Center account, including product
+            issues.
+          displayName: Get Products Accounts
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Product
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/manufacturercenter
+        description: Lists all the products in a Manufacturer Center account.
+        displayName: List Products Accounts
+        is:
+        - hasParameters
+        queryParameters:
+          pageSize?:
+            type: integer
+            format: int32
+            description: |-
+              Maximum number of product statuses to return in the response, used for
+              paging.
+          pageToken?:
+            type: string
+            description: The token returned by the previous request.
+        responses:
+          200:
+            body:
+              application/json: ListProductsResponse
