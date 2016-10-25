@@ -71,8 +71,8 @@ types:
               description: "The protocol that the bidder endpoint is using. By default,\
                 \ OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF\
                 \ uses protobuf encoding over the latest OpenRTB protocol version,\
-                \ which is 2.3 right now. Allowed values:  \n- PROTOCOL_ADX \n- PROTOCOL_OPENRTB_2_2\
-                \ \n- PROTOCOL_OPENRTB_2_3 \n- PROTOCOL_OPENRTB_PROTOBUF"
+                \ which is 2.4 right now. Allowed values:  \n- PROTOCOL_ADX \n- PROTOCOL_OPENRTB_2_2\
+                \ \n- PROTOCOL_OPENRTB_2_3 \n- PROTOCOL_OPENRTB_2_4 \n- PROTOCOL_OPENRTB_PROTOBUF"
             region?:
               type: string
               description: "The geographical region the Ad Exchange should send requests\
@@ -314,7 +314,7 @@ types:
         description: A buyer-specific id identifying the creative in this ad.
       videoURL?:
         type: string
-        description: The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set. Note, this is diffrent from resource.native_ad.video_url above.
+        description: The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set. Note, this is different from resource.native_ad.video_url above.
       detectedDomains?:
         type: array
         description: Detected domains for this creative. Read-only. This field should not be set in requests.
@@ -458,6 +458,9 @@ types:
                 type: integer
                 format: int32
             description: A large image.
+          clickLinkUrl?:
+            type: string
+            description: The URL that the browser/SDK will load when the user clicks the ad.
           impressionTrackingUrl?:
             type: array
             description: The URLs are called when the impression is rendered.
@@ -489,6 +492,7 @@ types:
             description: The URL to use for click tracking.
           videoURL?:
             type: string
+            description: The URL of the XML VAST for a native ad. Note this is a separate field from resource.video_url.
           price?:
             type: string
             description: The price of the promoted app including the currency info.
@@ -1045,34 +1049,10 @@ types:
   PretargetingConfig:
     type: object
     properties:
-      configName?:
-        type: string
-        description: The name of the config. Must be unique. Required for all requests.
       billingId?:
         type: integer
         format: int64
         description: The id for billing purposes, provided for reference. Leave this field blank for insert requests; the id will be generated automatically.
-      languages?:
-        type: array
-        description: Request containing any of these language codes will match.
-        items:
-          type: string
-      vendorTypes?:
-        type: array
-        description: Requests that allow any of these vendor ids will match. Values are from vendors.txt in the downloadable files section.
-        items:
-          type: integer
-          format: int64
-      kind?:
-        type: string
-        default: adexchangebuyer#pretargetingConfig
-        description: The kind of the resource, i.e. "adexchangebuyer#pretargetingConfig".
-      userLists?:
-        type: array
-        description: Requests containing any of these user list ids will match.
-        items:
-          type: integer
-          format: int64
       mobileCarriers?:
         type: array
         description: Requests containing any of these mobile carrier ids will match. Values are from mobile-carriers.csv in the downloadable files section.
@@ -1106,12 +1086,6 @@ types:
             token?:
               type: string
               description: The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.
-      verticals?:
-        type: array
-        description: Requests containing any of these vertical ids will match.
-        items:
-          type: integer
-          format: int64
       platforms?:
         type: array
         description: Requests matching any of these platforms will match. Possible values are PRETARGETING_PLATFORM_MOBILE, PRETARGETING_PLATFORM_DESKTOP, and PRETARGETING_PLATFORM_TABLET.
@@ -1120,6 +1094,52 @@ types:
       excludedVerticals?:
         type: array
         description: Requests containing any of these vertical ids will not match. Values are from the publisher-verticals.txt file in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      configId?:
+        type: integer
+        format: int64
+        description: The config id; generated automatically. Leave this field blank for insert requests.
+      supportedCreativeAttributes?:
+        type: array
+        description: Creative attributes should be declared here if all creatives corresponding to this pretargeting configuration have that creative attribute. Values are from pretargetable-creative-attributes.txt in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      excludedGeoCriteriaIds?:
+        type: array
+        description: Requests containing any of these geo criteria ids will not match.
+        items:
+          type: integer
+          format: int64
+      configName?:
+        type: string
+        description: The name of the config. Must be unique. Required for all requests.
+      languages?:
+        type: array
+        description: Request containing any of these language codes will match.
+        items:
+          type: string
+      vendorTypes?:
+        type: array
+        description: Requests that allow any of these vendor ids will match. Values are from vendors.txt in the downloadable files section.
+        items:
+          type: integer
+          format: int64
+      kind?:
+        type: string
+        default: adexchangebuyer#pretargetingConfig
+        description: The kind of the resource, i.e. "adexchangebuyer#pretargetingConfig".
+      userLists?:
+        type: array
+        description: Requests containing any of these user list ids will match.
+        items:
+          type: integer
+          format: int64
+      verticals?:
+        type: array
+        description: Requests containing any of these vertical ids will match.
         items:
           type: integer
           format: int64
@@ -1151,10 +1171,6 @@ types:
         description: List must contain exactly one of PRETARGETING_CREATIVE_TYPE_HTML or PRETARGETING_CREATIVE_TYPE_VIDEO.
         items:
           type: string
-      configId?:
-        type: integer
-        format: int64
-        description: The config id; generated automatically. Leave this field blank for insert requests.
       mobileOperatingSystemVersions?:
         type: array
         description: Requests containing any of these mobile operating system version ids will match. Values are from mobile-os.csv in the downloadable files section.
@@ -1173,18 +1189,11 @@ types:
         items:
           type: integer
           format: int64
-      supportedCreativeAttributes?:
+      userIdentifierDataRequired?:
         type: array
-        description: Creative attributes should be declared here if all creatives corresponding to this pretargeting configuration have that creative attribute. Values are from pretargetable-creative-attributes.txt in the downloadable files section.
+        description: Requests containing the specified type of user data will match. Possible values are HOSTED_MATCH_DATA, which means the request is cookie-targetable and has a match in the buyer's hosted match table, and COOKIE_OR_IDFA, which means the request has either a targetable cookie or an iOS IDFA.
         items:
-          type: integer
-          format: int64
-      excludedGeoCriteriaIds?:
-        type: array
-        description: Requests containing any of these geo criteria ids will not match.
-        items:
-          type: integer
-          format: int64
+          type: string
       dimensions?:
         type: array
         description: Requests which allow one of these (width, height) pairs will match. All pairs must be supported ad dimensions.

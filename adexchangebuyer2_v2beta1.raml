@@ -275,6 +275,141 @@ types:
               type: integer
               format: int64
               description: Numerical account ID of the client buyer to retrieve. (required)
+          /invitations:
+            /{invitationId}:
+              uriParameters:
+                invitationId:
+                  type: integer
+                  format: int64
+                  description: Numerical identifier of the user invitation to retrieve. (required)
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/adexchange.buyer
+                description: Retrieves an existing client user invitation.
+                displayName: Get Invitations Clients Accounts
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: ClientUserInvitation
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/adexchange.buyer
+              description: |-
+                Creates and sends out an email invitation to access
+                an Ad Exchange client buyer account.
+              displayName: Create Invitations Clients Accounts
+              is:
+              - hasParameters
+              body:
+                application/json: ClientUserInvitation
+              responses:
+                200:
+                  body:
+                    application/json: ClientUserInvitation
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/adexchange.buyer
+              description: |-
+                Lists all the client users invitations for a client
+                with a given account ID.
+              displayName: List Invitations Clients Accounts
+              is:
+              - hasParameters
+              queryParameters:
+                pageSize?:
+                  type: integer
+                  format: int32
+                  description: |-
+                    Requested page size. Server may return fewer clients than requested.
+                    If unspecified, server will pick an appropriate default.
+                pageToken?:
+                  type: string
+                  description: |-
+                    A token identifying a page of results the server should return.
+                    Typically, this is the value of
+                    ListClientUserInvitationsResponse.nextPageToken
+                    returned from the previous call to the
+                    clients.invitations.list
+                    method.
+              responses:
+                200:
+                  body:
+                    application/json: ListClientUserInvitationsResponse
+          /users:
+            /{userId}:
+              uriParameters:
+                userId:
+                  type: integer
+                  format: int64
+                  description: Numerical identifier of the user to retrieve. (required)
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/adexchange.buyer
+                description: Retrieves an existing client user.
+                displayName: Get Users Clients Accounts
+                is:
+                - hasParameters
+                responses:
+                  200:
+                    body:
+                      application/json: ClientUser
+              put:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/adexchange.buyer
+                description: |-
+                  Updates an existing client user.
+                  Only the user status can be changed on update.
+                displayName: Update Users Clients Accounts
+                is:
+                - hasParameters
+                body:
+                  application/json: ClientUser
+                responses:
+                  200:
+                    body:
+                      application/json: ClientUser
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/adexchange.buyer
+              description: |-
+                Lists all the known client users for a specified
+                sponsor buyer account ID.
+              displayName: List Users Clients Accounts
+              is:
+              - hasParameters
+              queryParameters:
+                pageSize?:
+                  type: integer
+                  format: int32
+                  description: |-
+                    Requested page size. The server may return fewer clients than requested.
+                    If unspecified, the server will pick an appropriate default.
+                pageToken?:
+                  type: string
+                  description: |-
+                    A token identifying a page of results the server should return.
+                    Typically, this is the value of
+                    ListClientUsersResponse.nextPageToken
+                    returned from the previous call to the
+                    accounts.clients.users.list method.
+              responses:
+                200:
+                  body:
+                    application/json: ListClientUsersResponse
           get:
             securedBy:
               oath2:

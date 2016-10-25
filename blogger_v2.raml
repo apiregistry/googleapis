@@ -562,6 +562,20 @@ types:
       userId:
         type: string
         description: The ID of the user to get.
+    /blogs:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/blogger
+        description: Retrieves a list of blogs, possibly filtered.
+        displayName: List Blogs Users
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: BlogList
     get:
       securedBy:
         oath2:

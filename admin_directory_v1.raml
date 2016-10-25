@@ -2480,6 +2480,50 @@ types:
       groupKey:
         type: string
         description: Email or immutable Id of the group. If Id, it should match with id of group object
+    /aliases:
+      /{alias}:
+        uriParameters:
+          alias:
+            type: string
+            description: The alias to be removed
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.group
+          description: Remove a alias for the group
+          displayName: Delete Aliases Groups
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.group
+        description: Add a alias for the group
+        displayName: Insert Aliases Groups
+        is:
+        - hasParameters
+        body:
+          application/json: Alias
+        responses:
+          200:
+            body:
+              application/json: Alias
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.group
+            - https://www.googleapis.com/auth/admin.directory.group.readonly
+        description: List all aliases for a group
+        displayName: List Aliases Groups
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: Aliases
     /members:
       /{memberKey}:
         uriParameters:
@@ -2752,6 +2796,142 @@ types:
         - hasParameters
         body:
           application/json: UserMakeAdmin
+    /aliases:
+      /watch:
+        post:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user
+              - https://www.googleapis.com/auth/admin.directory.user.alias
+              - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
+              - https://www.googleapis.com/auth/admin.directory.user.readonly
+          description: Watch for changes in user aliases list
+          displayName: Watch Aliases Users
+          is:
+          - hasParameters
+          queryParameters:
+            event?:
+              type: string
+              description: Event on which subscription is intended (if subscribing)
+              enum:
+              - add
+              - delete
+          body:
+            application/json: Channel
+          responses:
+            200:
+              body:
+                application/json: Channel
+      /{alias}:
+        uriParameters:
+          alias:
+            type: string
+            description: The alias to be removed
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user
+              - https://www.googleapis.com/auth/admin.directory.user.alias
+          description: Remove a alias for the user
+          displayName: Delete Aliases Users
+          is:
+          - hasParameters
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user
+            - https://www.googleapis.com/auth/admin.directory.user.alias
+        description: Add a alias for the user
+        displayName: Insert Aliases Users
+        is:
+        - hasParameters
+        body:
+          application/json: Alias
+        responses:
+          200:
+            body:
+              application/json: Alias
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/admin.directory.user
+            - https://www.googleapis.com/auth/admin.directory.user.alias
+            - https://www.googleapis.com/auth/admin.directory.user.alias.readonly
+            - https://www.googleapis.com/auth/admin.directory.user.readonly
+        description: List all aliases for a user
+        displayName: List Aliases Users
+        is:
+        - hasParameters
+        queryParameters:
+          event?:
+            type: string
+            description: Event on which subscription is intended (if subscribing)
+            enum:
+            - add
+            - delete
+        responses:
+          200:
+            body:
+              application/json: Aliases
+    /photos:
+      /thumbnail:
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user
+          description: Add a photo for the user. This method supports patch semantics.
+          displayName: Patch Photos Users
+          is:
+          - hasParameters
+          body:
+            application/json: UserPhoto
+          responses:
+            200:
+              body:
+                application/json: UserPhoto
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user
+              - https://www.googleapis.com/auth/admin.directory.user.readonly
+          description: Retrieve photo of a user
+          displayName: Get Photos Users
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: UserPhoto
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user
+          description: Add a photo for the user
+          displayName: Update Photos Users
+          is:
+          - hasParameters
+          body:
+            application/json: UserPhoto
+          responses:
+            200:
+              body:
+                application/json: UserPhoto
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/admin.directory.user
+          description: Remove photos for the user
+          displayName: Delete Photos Users
+          is:
+          - hasParameters
     /asps:
       /{codeId}:
         uriParameters:

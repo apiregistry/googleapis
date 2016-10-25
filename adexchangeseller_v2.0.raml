@@ -399,6 +399,306 @@ types:
         type: string
         description: 'Account to get information about. Tip: ''myaccount'' is a valid
           ID.'
+    /alerts:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.seller
+            - https://www.googleapis.com/auth/adexchange.seller.readonly
+        description: List the alerts for this Ad Exchange account.
+        displayName: List Alerts Accounts
+        is:
+        - hasParameters
+        queryParameters:
+          locale?:
+            type: string
+            description: The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.
+        responses:
+          200:
+            body:
+              application/json: Alerts
+    /reports:
+      /saved:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.seller
+              - https://www.googleapis.com/auth/adexchange.seller.readonly
+          description: List all saved reports in this Ad Exchange account.
+          displayName: List Saved Reports Accounts
+          is:
+          - hasParameters
+          queryParameters:
+            maxResults?:
+              type: integer
+              format: int32
+              description: The maximum number of saved reports to include in the response, used for paging.
+              maximum: 100
+              minimum: 0
+            pageToken?:
+              type: string
+              description: A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+          responses:
+            200:
+              body:
+                application/json: SavedReports
+      /{savedReportId}:
+        uriParameters:
+          savedReportId:
+            type: string
+            description: The saved report to retrieve.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.seller
+              - https://www.googleapis.com/auth/adexchange.seller.readonly
+          description: Generate an Ad Exchange report based on the saved report ID sent in the query parameters.
+          displayName: Generate Saved Reports Accounts
+          is:
+          - hasParameters
+          queryParameters:
+            startIndex?:
+              type: integer
+              format: int32
+              description: Index of the first row of report data to return.
+              maximum: 5000
+              minimum: 0
+            maxResults?:
+              type: integer
+              format: int32
+              description: The maximum number of rows of report data to return.
+              maximum: 50000
+              minimum: 0
+            locale?:
+              type: string
+              pattern: '[a-zA-Z_]+'
+              description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
+          responses:
+            200:
+              body:
+                application/json: Report
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.seller
+            - https://www.googleapis.com/auth/adexchange.seller.readonly
+        description: Generate an Ad Exchange report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
+        displayName: Generate Reports Accounts
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            pattern: '[a-zA-Z_]+(==|=@).+'
+            description: Filters to be run on the report.
+          startIndex?:
+            type: integer
+            format: int32
+            description: Index of the first row of report data to return.
+            maximum: 5000
+            minimum: 0
+          endDate:
+            type: string
+            pattern: \d{4}-\d{2}-\d{2}|(today|startOfMonth|startOfYear)(([\-\+]\d+[dwmy]){0,3}?)
+            description: End of the date range to report on in "YYYY-MM-DD" format, inclusive.
+          metric?:
+            type: string
+            pattern: '[a-zA-Z_]+'
+            description: Numeric columns to include in the report.
+          maxResults?:
+            type: integer
+            format: int32
+            description: The maximum number of rows of report data to return.
+            maximum: 50000
+            minimum: 0
+          sort?:
+            type: string
+            pattern: (\+|-)?[a-zA-Z_]+
+            description: The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
+          locale?:
+            type: string
+            pattern: '[a-zA-Z_]+'
+            description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
+          dimension?:
+            type: string
+            pattern: '[a-zA-Z_]+'
+            description: Dimensions to base the report on.
+          startDate:
+            type: string
+            pattern: \d{4}-\d{2}-\d{2}|(today|startOfMonth|startOfYear)(([\-\+]\d+[dwmy]){0,3}?)
+            description: Start of the date range to report on in "YYYY-MM-DD" format, inclusive.
+        responses:
+          200:
+            body:
+              application/json: Report
+    /metadata:
+      /metrics:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.seller
+              - https://www.googleapis.com/auth/adexchange.seller.readonly
+          description: List the metadata for the metrics available to this AdExchange account.
+          displayName: List Metrics Metadata Accounts
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Metadata
+      /dimensions:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.seller
+              - https://www.googleapis.com/auth/adexchange.seller.readonly
+          description: List the metadata for the dimensions available to this AdExchange account.
+          displayName: List Dimensions Metadata Accounts
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Metadata
+    /adclients:
+      /{adClientId}:
+        uriParameters:
+          adClientId:
+            type: string
+            description: Ad client for which to list URL channels.
+        /urlchannels:
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/adexchange.seller
+                - https://www.googleapis.com/auth/adexchange.seller.readonly
+            description: List all URL channels in the specified ad client for this Ad Exchange account.
+            displayName: List Urlchannels Accounts
+            is:
+            - hasParameters
+            queryParameters:
+              maxResults?:
+                type: integer
+                format: int32
+                description: The maximum number of URL channels to include in the response, used for paging.
+                maximum: 10000
+                minimum: 0
+              pageToken?:
+                type: string
+                description: A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+            responses:
+              200:
+                body:
+                  application/json: UrlChannels
+        /customchannels:
+          /{customChannelId}:
+            uriParameters:
+              customChannelId:
+                type: string
+                description: Custom channel to retrieve.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/adexchange.seller
+                  - https://www.googleapis.com/auth/adexchange.seller.readonly
+              description: Get the specified custom channel from the specified ad client.
+              displayName: Get Customchannels Accounts
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: CustomChannel
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/adexchange.seller
+                - https://www.googleapis.com/auth/adexchange.seller.readonly
+            description: List all custom channels in the specified ad client for this Ad Exchange account.
+            displayName: List Customchannels Accounts
+            is:
+            - hasParameters
+            queryParameters:
+              maxResults?:
+                type: integer
+                format: int32
+                description: The maximum number of custom channels to include in the response, used for paging.
+                maximum: 10000
+                minimum: 0
+              pageToken?:
+                type: string
+                description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+            responses:
+              200:
+                body:
+                  application/json: CustomChannels
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.seller
+            - https://www.googleapis.com/auth/adexchange.seller.readonly
+        description: List all ad clients in this Ad Exchange account.
+        displayName: List Adclients Accounts
+        is:
+        - hasParameters
+        queryParameters:
+          maxResults?:
+            type: integer
+            format: int32
+            description: The maximum number of ad clients to include in the response, used for paging.
+            maximum: 10000
+            minimum: 0
+          pageToken?:
+            type: string
+            description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+        responses:
+          200:
+            body:
+              application/json: AdClients
+    /preferreddeals:
+      /{dealId}:
+        uriParameters:
+          dealId:
+            type: string
+            description: Preferred deal to get information about.
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/adexchange.seller
+              - https://www.googleapis.com/auth/adexchange.seller.readonly
+          description: Get information about the selected Ad Exchange Preferred Deal.
+          displayName: Get Preferreddeals Accounts
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: PreferredDeal
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/adexchange.seller
+            - https://www.googleapis.com/auth/adexchange.seller.readonly
+        description: List the preferred deals for this Ad Exchange account.
+        displayName: List Preferreddeals Accounts
+        is:
+        - hasParameters
+        responses:
+          200:
+            body:
+              application/json: PreferredDeals
     get:
       securedBy:
         oath2:

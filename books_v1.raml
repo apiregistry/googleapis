@@ -1912,6 +1912,49 @@ types:
             source?:
               type: string
               description: String to identify the originator of this request.
+      /volumes:
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/books
+          description: Gets volume information for volumes on a bookshelf.
+          displayName: List Volumes Bookshelves Mylibrary
+          is:
+          - hasParameters
+          queryParameters:
+            country?:
+              type: string
+              description: ISO-3166-1 code to override the IP-based location.
+            q?:
+              type: string
+              description: Full-text search query string in this bookshelf.
+            startIndex?:
+              type: integer
+              format: int32
+              description: Index of the first element to return (starts at 0)
+              minimum: 0
+            maxResults?:
+              type: integer
+              format: int32
+              description: Maximum number of results to return
+              minimum: 0
+            showPreorders?:
+              type: boolean
+              description: Set to true to show pre-ordered books. Defaults to false.
+            projection?:
+              type: string
+              description: Restrict information returned to a set of selected fields.
+              enum:
+              - full
+              - lite
+            source?:
+              type: string
+              description: String to identify the originator of this request.
+          responses:
+            200:
+              body:
+                application/json: Volumes
       get:
         securedBy:
           oath2:
@@ -1994,6 +2037,32 @@ types:
         200:
           body:
             application/json: Series
+  /membership:
+    /get:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/books
+        description: Returns Series membership data given the series id.
+        displayName: Get Membership Series
+        is:
+        - hasParameters
+        queryParameters:
+          page_token?:
+            type: string
+            description: The value of the nextToken from the previous page.
+          page_size?:
+            type: integer
+            format: int32
+            description: Number of maximum results per page to be included in the response.
+          series_id:
+            type: string
+            description: String that identifies the series
+        responses:
+          200:
+            body:
+              application/json: Seriesmembership
 /promooffer:
   /get:
     get:
@@ -2155,6 +2224,232 @@ types:
           200:
             body:
               application/json: Layersummaries
+    /layers:
+      /{layerId}:
+        uriParameters:
+          layerId:
+            type: string
+            description: The ID for the layer to get the annotations.
+        /data:
+          /{annotationDataId}:
+            uriParameters:
+              annotationDataId:
+                type: string
+                description: The ID of the annotation data to retrieve.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/books
+              description: Gets the annotation data.
+              displayName: Get AnnotationData Layers
+              is:
+              - hasParameters
+              queryParameters:
+                w?:
+                  type: integer
+                  format: int32
+                  description: The requested pixel width for any images. If width is provided height must also be provided.
+                h?:
+                  type: integer
+                  format: int32
+                  description: The requested pixel height for any images. If height is provided width must also be provided.
+                scale?:
+                  type: integer
+                  format: int32
+                  description: The requested scale for the image.
+                  minimum: 0
+                source?:
+                  type: string
+                  description: String to identify the originator of this request.
+                locale?:
+                  type: string
+                  description: 'The locale information for the data. ISO-639-1 language
+                    and ISO-3166-1 country code. Ex: ''en_US''.'
+                contentVersion:
+                  type: string
+                  description: The content version for the volume you are trying to retrieve.
+                allowWebDefinitions?:
+                  type: boolean
+                  description: For the dictionary layer. Whether or not to allow web definitions.
+              responses:
+                200:
+                  body:
+                    application/json: Annotationdata
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/books
+            description: Gets the annotation data for a volume and layer.
+            displayName: List AnnotationData Layers
+            is:
+            - hasParameters
+            queryParameters:
+              h?:
+                type: integer
+                format: int32
+                description: The requested pixel height for any images. If height is provided width must also be provided.
+              scale?:
+                type: integer
+                format: int32
+                description: The requested scale for the image.
+                minimum: 0
+              updatedMax?:
+                type: string
+                description: RFC 3339 timestamp to restrict to items updated prior to this timestamp (exclusive).
+              source?:
+                type: string
+                description: String to identify the originator of this request.
+              locale?:
+                type: string
+                description: 'The locale information for the data. ISO-639-1 language
+                  and ISO-3166-1 country code. Ex: ''en_US''.'
+              updatedMin?:
+                type: string
+                description: RFC 3339 timestamp to restrict to items updated since this timestamp (inclusive).
+              maxResults?:
+                type: integer
+                format: int32
+                description: Maximum number of results to return
+                maximum: 200
+                minimum: 0
+              w?:
+                type: integer
+                format: int32
+                description: The requested pixel width for any images. If width is provided height must also be provided.
+              annotationDataId?:
+                type: string
+                description: The list of Annotation Data Ids to retrieve. Pagination is ignored if this is set.
+              pageToken?:
+                type: string
+                description: The value of the nextToken from the previous page.
+              contentVersion:
+                type: string
+                description: The content version for the requested volume.
+            responses:
+              200:
+                body:
+                  application/json: Annotationsdata
+        /annotations:
+          /{annotationId}:
+            uriParameters:
+              annotationId:
+                type: string
+                description: The ID of the volume annotation to retrieve.
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/books
+              description: Gets the volume annotation.
+              displayName: Get VolumeAnnotations Layers
+              is:
+              - hasParameters
+              queryParameters:
+                source?:
+                  type: string
+                  description: String to identify the originator of this request.
+                locale?:
+                  type: string
+                  description: 'The locale information for the data. ISO-639-1 language
+                    and ISO-3166-1 country code. Ex: ''en_US''.'
+              responses:
+                200:
+                  body:
+                    application/json: Volumeannotation
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/books
+          description: Gets the volume annotations for a volume and layer.
+          displayName: List VolumeAnnotations Layers
+          is:
+          - hasParameters
+          queryParameters:
+            endOffset?:
+              type: string
+              description: The end offset to end retrieving data from.
+            volumeAnnotationsVersion?:
+              type: string
+              description: The version of the volume annotations that you are requesting.
+            updatedMax?:
+              type: string
+              description: RFC 3339 timestamp to restrict to items updated prior to this timestamp (exclusive).
+            source?:
+              type: string
+              description: String to identify the originator of this request.
+            locale?:
+              type: string
+              description: 'The locale information for the data. ISO-639-1 language
+                and ISO-3166-1 country code. Ex: ''en_US''.'
+            startPosition?:
+              type: string
+              description: The start position to start retrieving data from.
+            showDeleted?:
+              type: boolean
+              description: Set to true to return deleted annotations. updatedMin must be in the request to use this. Defaults to false.
+            startOffset?:
+              type: string
+              description: The start offset to start retrieving data from.
+            updatedMin?:
+              type: string
+              description: RFC 3339 timestamp to restrict to items updated since this timestamp (inclusive).
+            endPosition?:
+              type: string
+              description: The end position to end retrieving data from.
+            maxResults?:
+              type: integer
+              format: int32
+              description: Maximum number of results to return
+              maximum: 200
+              minimum: 0
+            pageToken?:
+              type: string
+              description: The value of the nextToken from the previous page.
+            contentVersion:
+              type: string
+              description: The content version for the requested volume.
+          responses:
+            200:
+              body:
+                application/json: Volumeannotations
+    /associated:
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/books
+        description: Return a list of associated books.
+        displayName: List Associated Volumes
+        is:
+        - hasParameters
+        queryParameters:
+          maxAllowedMaturityRating?:
+            type: string
+            description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+            enum:
+            - mature
+            - not-mature
+          association?:
+            type: string
+            description: Association type.
+            enum:
+            - end-of-sample
+            - end-of-volume
+            - related-for-play
+          source?:
+            type: string
+            description: String to identify the originator of this request.
+          locale?:
+            type: string
+            description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.
+              Used for generating recommendations.'
+        responses:
+          200:
+            body:
+              application/json: Volumes
     get:
       securedBy:
         oath2:
@@ -2189,6 +2484,162 @@ types:
         200:
           body:
             application/json: Volume
+  /useruploaded:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/books
+      description: Return a list of books uploaded by the current user.
+      displayName: List Useruploaded Volumes
+      is:
+      - hasParameters
+      queryParameters:
+        processingState?:
+          type: string
+          description: The processing state of the user uploaded volumes to be returned.
+          enum:
+          - COMPLETED_FAILED
+          - COMPLETED_SUCCESS
+          - RUNNING
+        startIndex?:
+          type: integer
+          format: int32
+          description: Index of the first result to return (starts at 0)
+          minimum: 0
+        maxResults?:
+          type: integer
+          format: int32
+          description: Maximum number of results to return.
+          maximum: 40
+          minimum: 0
+        volumeId?:
+          type: string
+          description: The ids of the volumes to be returned. If not specified all that match the processingState are returned.
+        source?:
+          type: string
+          description: String to identify the originator of this request.
+        locale?:
+          type: string
+          description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.
+            Used for generating recommendations.'
+      responses:
+        200:
+          body:
+            application/json: Volumes
+  /mybooks:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/books
+      description: Return a list of books in My Library.
+      displayName: List Mybooks Volumes
+      is:
+      - hasParameters
+      queryParameters:
+        country?:
+          type: string
+          description: ISO-3166-1 code to override the IP-based location.
+        processingState?:
+          type: string
+          description: The processing state of the user uploaded volumes to be returned. Applicable only if the UPLOADED is specified in the acquireMethod.
+          enum:
+          - COMPLETED_FAILED
+          - COMPLETED_SUCCESS
+          - RUNNING
+        startIndex?:
+          type: integer
+          format: int32
+          description: Index of the first result to return (starts at 0)
+          minimum: 0
+        acquireMethod?:
+          type: string
+          description: How the book was acquired
+          enum:
+          - FAMILY_SHARED
+          - PREORDERED
+          - PREVIOUSLY_RENTED
+          - PUBLIC_DOMAIN
+          - PURCHASED
+          - RENTED
+          - SAMPLE
+          - UPLOADED
+        maxResults?:
+          type: integer
+          format: int32
+          description: Maximum number of results to return.
+          maximum: 100
+          minimum: 0
+        source?:
+          type: string
+          description: String to identify the originator of this request.
+        locale?:
+          type: string
+          description: ISO-639-1 language and ISO-3166-1 country code. Ex:'en_US'. Used for generating recommendations.
+      responses:
+        200:
+          body:
+            application/json: Volumes
+  /recommended:
+    /rate:
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/books
+        description: Rate a recommended book for the current user.
+        displayName: Rate Recommended Volumes
+        is:
+        - hasParameters
+        queryParameters:
+          rating:
+            type: string
+            description: Rating to be given to the volume.
+            enum:
+            - HAVE_IT
+            - NOT_INTERESTED
+          volumeId:
+            type: string
+            description: ID of the source volume.
+          source?:
+            type: string
+            description: String to identify the originator of this request.
+          locale?:
+            type: string
+            description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.
+              Used for generating recommendations.'
+        responses:
+          200:
+            body:
+              application/json: BooksVolumesRecommendedRateResponse
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/books
+      description: Return a list of recommended books for the current user.
+      displayName: List Recommended Volumes
+      is:
+      - hasParameters
+      queryParameters:
+        maxAllowedMaturityRating?:
+          type: string
+          description: The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.
+          enum:
+          - mature
+          - not-mature
+        source?:
+          type: string
+          description: String to identify the originator of this request.
+        locale?:
+          type: string
+          description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.
+            Used for generating recommendations.'
+      responses:
+        200:
+          body:
+            application/json: Volumes
   get:
     securedBy:
       oath2:
@@ -2339,6 +2790,37 @@ types:
           shelf:
             type: string
             description: ID of bookshelf to retrieve.
+        /volumes:
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/books
+            description: Retrieves volumes in a specific bookshelf for the specified user.
+            displayName: List Volumes Bookshelves
+            is:
+            - hasParameters
+            queryParameters:
+              startIndex?:
+                type: integer
+                format: int32
+                description: Index of the first element to return (starts at 0)
+                minimum: 0
+              maxResults?:
+                type: integer
+                format: int32
+                description: Maximum number of results to return
+                minimum: 0
+              showPreorders?:
+                type: boolean
+                description: Set to true to show pre-ordered books. Defaults to false.
+              source?:
+                type: string
+                description: String to identify the originator of this request.
+            responses:
+              200:
+                body:
+                  application/json: Volumes
         get:
           securedBy:
             oath2:

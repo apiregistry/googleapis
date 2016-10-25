@@ -437,6 +437,67 @@ types:
         body:
           application/json: Alerts
 /reports:
+  /saved:
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.seller
+          - https://www.googleapis.com/auth/adexchange.seller.readonly
+      description: List all saved reports in this Ad Exchange account.
+      displayName: List Saved Reports
+      is:
+      - hasParameters
+      queryParameters:
+        maxResults?:
+          type: integer
+          format: int32
+          description: The maximum number of saved reports to include in the response, used for paging.
+          maximum: 100
+          minimum: 0
+        pageToken?:
+          type: string
+          description: A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+      responses:
+        200:
+          body:
+            application/json: SavedReports
+  /{savedReportId}:
+    uriParameters:
+      savedReportId:
+        type: string
+        description: The saved report to retrieve.
+    get:
+      securedBy:
+        oath2:
+          scopes:
+          - https://www.googleapis.com/auth/adexchange.seller
+          - https://www.googleapis.com/auth/adexchange.seller.readonly
+      description: Generate an Ad Exchange report based on the saved report ID sent in the query parameters.
+      displayName: Generate Saved Reports
+      is:
+      - hasParameters
+      queryParameters:
+        startIndex?:
+          type: integer
+          format: int32
+          description: Index of the first row of report data to return.
+          maximum: 5000
+          minimum: 0
+        maxResults?:
+          type: integer
+          format: int32
+          description: The maximum number of rows of report data to return.
+          maximum: 50000
+          minimum: 0
+        locale?:
+          type: string
+          pattern: '[a-zA-Z_]+'
+          description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
+      responses:
+        200:
+          body:
+            application/json: Report
   get:
     securedBy:
       oath2:
@@ -560,6 +621,34 @@ types:
           customChannelId:
             type: string
             description: Custom channel to retrieve.
+        /adunits:
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/adexchange.seller
+                - https://www.googleapis.com/auth/adexchange.seller.readonly
+            description: List all ad units in the specified custom channel.
+            displayName: List Adunits Customchannels
+            is:
+            - hasParameters
+            queryParameters:
+              includeInactive?:
+                type: boolean
+                description: 'Whether to include inactive ad units. Default: true.'
+              maxResults?:
+                type: integer
+                format: int32
+                description: The maximum number of ad units to include in the response, used for paging.
+                maximum: 10000
+                minimum: 0
+              pageToken?:
+                type: string
+                description: A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+            responses:
+              200:
+                body:
+                  application/json: AdUnits
         get:
           securedBy:
             oath2:
@@ -604,6 +693,31 @@ types:
           adUnitId:
             type: string
             description: Ad unit to retrieve.
+        /customchannels:
+          get:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/adexchange.seller
+                - https://www.googleapis.com/auth/adexchange.seller.readonly
+            description: List all custom channels which the specified ad unit belongs to.
+            displayName: List Customchannels Adunits
+            is:
+            - hasParameters
+            queryParameters:
+              maxResults?:
+                type: integer
+                format: int32
+                description: The maximum number of custom channels to include in the response, used for paging.
+                maximum: 10000
+                minimum: 0
+              pageToken?:
+                type: string
+                description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
+            responses:
+              200:
+                body:
+                  application/json: CustomChannels
         get:
           securedBy:
             oath2:

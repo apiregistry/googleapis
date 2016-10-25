@@ -1082,6 +1082,7 @@ types:
       salePriceEffectiveDate?:
         type: string
         description: A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as 'null' if undecided.
+      pickup?: InventoryPickup
       availability?:
         type: string
         description: The availability of the product.
@@ -1138,6 +1139,15 @@ types:
         description: The ID of the request entry this entry responds to.
       errors?: Errors
     description: A batch entry encoding a single non-batch inventory response.
+  InventoryPickup:
+    type: object
+    properties:
+      pickupMethod?:
+        type: string
+        description: Whether store pickup is available for this offer and whether the pickup option should be shown as buy, reserve, or not supported. Only supported for local inventory. Unless the value is "not supported", must be submitted together with pickupSla.
+      pickupSla?:
+        type: string
+        description: The expected date that an order will be ready for pickup, relative to when the order is placed. Only supported for local inventory. Must be submitted together with pickupMethod.
   InventorySetRequest:
     type: object
     properties:
@@ -1155,6 +1165,7 @@ types:
       salePriceEffectiveDate?:
         type: string
         description: A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as 'null' if undecided.
+      pickup?: InventoryPickup
       availability?:
         type: string
         description: The availability of the product.
