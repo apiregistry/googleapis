@@ -4,6 +4,7 @@ version: v3
 baseUri: https://www.googleapis.com/calendar/v3/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/google-apps/calendar/firstapp
@@ -80,6 +81,8 @@ types:
           \ access, and event details will be visible. \n- \"owner\" - Provides ownership\
           \ of the calendar. This role has all of the permissions of the writer role\
           \ with the additional ability to see and manipulate ACLs."
+        (extras.RequiredIn):
+        - calendar.acl.insert
       kind?:
         type: string
         default: calendar#aclRule
@@ -95,10 +98,14 @@ types:
               \ group. \n- \"domain\" - Limits the scope to a domain.  Note: The permissions\
               \ granted to the \"default\", or public, scope apply to any user, authenticated\
               \ or not."
+            (extras.RequiredIn):
+            - calendar.acl.insert
           value?:
             type: string
             description: The email address of a user or group, or the name of a domain, depending on the scope type. Omitted for type "default".
         description: The scope of the rule.
+        (extras.RequiredIn):
+        - calendar.acl.insert
       etag?:
         type: string
         description: ETag of the resource.
@@ -111,6 +118,8 @@ types:
       summary?:
         type: string
         description: Title of the calendar.
+        (extras.RequiredIn):
+        - calendar.calendars.insert
       kind?:
         type: string
         default: calendar#calendar
@@ -218,6 +227,8 @@ types:
       id?:
         type: string
         description: Identifier of the calendar.
+        (extras.RequiredIn):
+        - calendar.calendarList.insert
       selected?:
         type: boolean
         default: false
@@ -236,6 +247,9 @@ types:
           \ are sent via SMS. This value is read-only and is ignored on inserts and\
           \ updates. SMS reminders are only available for Google Apps for Work, Education,\
           \ and Government customers."
+        (extras.RequiredIn):
+        - calendar.calendarList.insert
+        - calendar.calendarList.update
       type?:
         type: string
         description: "The type of notification. Possible values are:  \n- \"eventCreation\"\
@@ -244,6 +258,9 @@ types:
           \ - Notification sent when an event is cancelled. \n- \"eventResponse\"\
           \ - Notification sent when an event is changed. \n- \"agenda\" - An agenda\
           \ with the events of the day (sent out in the morning)."
+        (extras.RequiredIn):
+        - calendar.calendarList.insert
+        - calendar.calendarList.update
   Channel:
     type: object
     properties:
@@ -501,6 +518,8 @@ types:
         description: |-
           Event unique identifier as defined in RFC5545. It is used to uniquely identify events accross calendaring systems and must be supplied when importing events via the import method.
           Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
+        (extras.RequiredIn):
+        - calendar.events.import
       start?: EventDateTime
       originalStartTime?: EventDateTime
       recurrence?:
@@ -566,6 +585,10 @@ types:
         description: |-
           URL link to the attachment.
           For adding Google Drive file attachments use the same format as in alternateLink property of the Files resource in the Drive API.
+        (extras.RequiredIn):
+        - calendar.events.import
+        - calendar.events.insert
+        - calendar.events.update
       mimeType?:
         type: string
         description: Internet media type (MIME type) of the attachment.
@@ -619,6 +642,10 @@ types:
       email?:
         type: string
         description: The attendee's email address, if available. This field must be present when adding an attendee. It must be a valid email address as per RFC5322.
+        (extras.RequiredIn):
+        - calendar.events.import
+        - calendar.events.insert
+        - calendar.events.update
   EventDateTime:
     type: object
     properties:
@@ -641,10 +668,22 @@ types:
           \ sent via SMS. These are only available for Google Apps for Work, Education,\
           \ and Government customers. Requests to set SMS reminders for other account\
           \ types are ignored. \n- \"popup\" - Reminders are sent via a UI popup."
+        (extras.RequiredIn):
+        - calendar.calendarList.insert
+        - calendar.calendarList.update
+        - calendar.events.import
+        - calendar.events.insert
+        - calendar.events.update
       minutes?:
         type: integer
         format: int32
         description: Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
+        (extras.RequiredIn):
+        - calendar.calendarList.insert
+        - calendar.calendarList.update
+        - calendar.events.import
+        - calendar.events.insert
+        - calendar.events.update
   Events:
     type: object
     properties:

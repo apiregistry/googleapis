@@ -4,6 +4,7 @@ version: v2
 baseUri: https://www.googleapis.com/bigquery/v2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/bigquery/
@@ -338,9 +339,13 @@ types:
         description: '[Required] A unique ID for this dataset, without the project
           name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores
           (_). The maximum length is 1,024 characters.'
+        (extras.RequiredIn):
+        - bigquery.datasets.update
       projectId?:
         type: string
         description: '[Optional] The ID of the project containing this dataset.'
+        (extras.RequiredIn):
+        - bigquery.datasets.update
   ErrorProto:
     type: object
     properties:
@@ -850,9 +855,9 @@ types:
           append actions occur as one atomic update upon job completion.'
       useLegacySql?:
         type: boolean
-        description: '[Experimental] Specifies whether to use BigQuery''s legacy SQL
-          dialect for this query. The default value is true. If set to false, the
-          query will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/
+        description: 'Specifies whether to use BigQuery''s legacy SQL dialect for
+          this query. The default value is true. If set to false, the query will use
+          BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/
           When useLegacySql is set to false, the values of allowLargeResults and flattenResults
           are ignored; query will be run as if allowLargeResults is true and flattenResults
           is false.'
@@ -930,9 +935,13 @@ types:
         description: '[Required] The ID of the job. The ID must contain only letters
           (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length
           is 1,024 characters.'
+        (extras.RequiredIn):
+        - bigquery.jobs.getQueryResults
       projectId?:
         type: string
         description: '[Required] The ID of the project containing this job.'
+        (extras.RequiredIn):
+        - bigquery.jobs.getQueryResults
   JobStatistics:
     type: object
     properties:
@@ -1189,13 +1198,15 @@ types:
         type: string
         description: '[Required] A query string, following the BigQuery query syntax,
           of the query to execute. Example: "SELECT count(f1) FROM [myProjectId:myDatasetId.myTableId]".'
+        (extras.RequiredIn):
+        - bigquery.jobs.query
       defaultDataset?: DatasetReference
       useLegacySql?:
         type: boolean
         default: true
-        description: '[Experimental] Specifies whether to use BigQuery''s legacy SQL
-          dialect for this query. The default value is true. If set to false, the
-          query will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/
+        description: 'Specifies whether to use BigQuery''s legacy SQL dialect for
+          this query. The default value is true. If set to false, the query will use
+          BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/
           When useLegacySql is set to false, the values of allowLargeResults and flattenResults
           are ignored; query will be run as if allowLargeResults is true and flattenResults
           is false.'
@@ -1480,14 +1491,20 @@ types:
       datasetId?:
         type: string
         description: '[Required] The ID of the dataset containing this table.'
+        (extras.RequiredIn):
+        - bigquery.tables.update
       tableId?:
         type: string
         description: '[Required] The ID of the table. The ID must contain only letters
           (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024
           characters.'
+        (extras.RequiredIn):
+        - bigquery.tables.update
       projectId?:
         type: string
         description: '[Required] The ID of the project containing this table.'
+        (extras.RequiredIn):
+        - bigquery.tables.update
   TableRow:
     type: object
     properties:
@@ -1539,10 +1556,10 @@ types:
         description: '[Required] A query that BigQuery executes when the view is referenced.'
       useLegacySql?:
         type: boolean
-        description: '[Experimental] Specifies whether to use BigQuery''s legacy SQL
-          for this view. The default value is true. If set to false, the view will
-          use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/
-          Queries and views that reference this view must use the same flag value.'
+        description: 'Specifies whether to use BigQuery''s legacy SQL for this view.
+          The default value is true. If set to false, the view will use BigQuery''s
+          standard SQL: https://cloud.google.com/bigquery/sql-reference/ Queries and
+          views that reference this view must use the same flag value.'
 /projects:
   /{projectId}:
     uriParameters:

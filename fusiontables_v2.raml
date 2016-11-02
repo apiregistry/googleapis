@@ -4,6 +4,7 @@ version: v2
 baseUri: https://www.googleapis.com/fusiontables/v2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/fusiontables
@@ -97,6 +98,8 @@ types:
       name?:
         type: string
         description: Name of the column.
+        (extras.RequiredIn):
+        - fusiontables.column.insert
       description?:
         type: string
         description: Column description.
@@ -121,6 +124,8 @@ types:
       type?:
         type: string
         description: Type of the column.
+        (extras.RequiredIn):
+        - fusiontables.column.insert
       validValues?:
         type: array
         description: List of valid values used to validate data and supply a drop-down list of values in the web application.
@@ -340,6 +345,8 @@ types:
       columnName?:
         type: string
         description: Name of the column whose value is used in the style.
+        (extras.RequiredIn):
+        - fusiontables.style.insert
     description: Represents a StyleFunction within a StyleSetting
   StyleSetting:
     type: object
@@ -387,6 +394,9 @@ types:
       columns?:
         type: array
         description: Columns in the table.
+        (extras.RequiredIn):
+        - fusiontables.table.insert
+        - fusiontables.table.update
         items: Column
       kind?:
         type: string
@@ -404,6 +414,9 @@ types:
       isExportable?:
         type: boolean
         description: Variable for whether table is exportable.
+        (extras.RequiredIn):
+        - fusiontables.table.insert
+        - fusiontables.table.update
       tablePropertiesJsonSchema?:
         type: string
         description: JSON schema for validating the JSON table properties.
@@ -416,6 +429,9 @@ types:
       name?:
         type: string
         description: Name assigned to a table.
+        (extras.RequiredIn):
+        - fusiontables.table.insert
+        - fusiontables.table.update
       tableId?:
         type: string
         description: Encrypted unique alphanumeric identifier for the table.

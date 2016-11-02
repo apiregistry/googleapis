@@ -4,6 +4,7 @@ version: v2
 baseUri: https://www.googleapis.com/doubleclicksearch/v2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/doubleclick-search/
@@ -52,13 +53,19 @@ types:
         type: integer
         format: int64
         description: The time by which all conversions have been uploaded, in epoch millis UTC.
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.updateAvailability
       segmentationType?:
         type: string
         description: The segmentation type that this availability is for (its default value is FLOODLIGHT).
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.updateAvailability
       agencyId?:
         type: integer
         format: int64
         description: DS agency ID.
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.updateAvailability
       segmentationName?:
         type: string
         description: The friendly segmentation identifier (for example, DoubleClick Search Floodlight activity name).
@@ -70,6 +77,8 @@ types:
         type: integer
         format: int64
         description: DS advertiser ID.
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.updateAvailability
     description: A message containing availability data relevant to DoubleClick Search.
   Conversion:
     type: object
@@ -133,6 +142,8 @@ types:
       conversionId?:
         type: string
         description: For offline conversions, this is an ID that advertisers are required to provide. Advertisers can specify any ID that is meaningful to them. For online conversions, DS copies the dsConversionId or floodlightOrderId into this property depending on the advertiser's Floodlight instructions.
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.insert
       segmentationId?:
         type: integer
         format: int64
@@ -175,6 +186,8 @@ types:
       segmentationType?:
         type: string
         description: The segmentation type of this conversion (for example, FLOODLIGHT).
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.insert
       engineAccountId?:
         type: integer
         format: int64
@@ -193,6 +206,8 @@ types:
         type: integer
         format: int64
         description: The time at which the conversion took place, in epoch millis UTC.
+        (extras.RequiredIn):
+        - doubleclicksearch.conversion.insert
     description: A conversion containing data relevant to DoubleClick Search.
   ConversionList:
     type: object
@@ -320,6 +335,8 @@ types:
         format: int32
         description: Asynchronous report only. The maximum number of rows per report file. A large report is split into many files based on this field. Acceptable values are 1000000 to 100000000, inclusive.
         maximum: 100000000
+        (extras.RequiredIn):
+        - doubleclicksearch.reports.request
         minimum: 1000000
       startRow?:
         type: integer
@@ -327,6 +344,8 @@ types:
         format: int32
         description: Synchronous report only. Zero-based index of the first row to return. Acceptable values are 0 to 50000, inclusive. Defaults to 0.
         maximum: 50000
+        (extras.RequiredIn):
+        - doubleclicksearch.reports.generate
         minimum: 0
       columns?:
         type: array
@@ -335,6 +354,8 @@ types:
       downloadFormat?:
         type: string
         description: Format that the report should be returned in. Currently csv or tsv is supported.
+        (extras.RequiredIn):
+        - doubleclicksearch.reports.request
       orderBy?:
         type: array
         description: Synchronous report only. A list of columns and directions defining sorting to be performed on the report rows.
@@ -351,6 +372,9 @@ types:
           values are: usd, agency (valid if the report is scoped to agency or lower),
           advertiser (valid if the report is scoped to * advertiser or lower), or
           account (valid if the report is scoped to engine account or lower).'
+        (extras.RequiredIn):
+        - doubleclicksearch.reports.generate
+        - doubleclicksearch.reports.request
       filters?:
         type: array
         description: A list of filters to be applied to the report.
@@ -372,6 +396,9 @@ types:
           For example, if you specify reportType: keyword, each row in the report
           will contain data about a keyword. See the Types of Reports reference for
           the columns that are available for each type.'
+        (extras.RequiredIn):
+        - doubleclicksearch.reports.generate
+        - doubleclicksearch.reports.request
       verifySingleTimeZone?:
         type: boolean
         default: false
@@ -386,6 +413,8 @@ types:
         format: int32
         description: Synchronous report only. The maxinum number of rows to return; additional rows are dropped. Acceptable values are 0 to 10000, inclusive. Defaults to 10000.
         maximum: 10000
+        (extras.RequiredIn):
+        - doubleclicksearch.reports.generate
         minimum: 0
       includeRemovedEntities?:
         type: boolean

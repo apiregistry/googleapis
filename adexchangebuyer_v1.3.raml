@@ -4,6 +4,7 @@ version: v1.3
 baseUri: https://www.googleapis.com/adexchangebuyer/v1.3/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/ad-exchange/buyer-rest
@@ -218,6 +219,8 @@ types:
       clickThroughUrl?:
         type: array
         description: The set of destination urls for the snippet.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
         items:
           type: string
       impressionTrackingUrl?:
@@ -236,6 +239,8 @@ types:
       advertiserName?:
         type: string
         description: The name of the company being advertised in the creative.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       advertiserId?:
         type: array
         description: Detected advertiser id, if any. Read-only. This field should not be set in requests.
@@ -245,6 +250,8 @@ types:
       buyerCreativeId?:
         type: string
         description: A buyer-specific id identifying the creative in this ad.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       restrictedCategories?:
         type: array
         description: All restricted categories for the ads that may be shown from this snippet.
@@ -255,6 +262,8 @@ types:
         type: integer
         format: int32
         description: Account id.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       productCategories?:
         type: array
         description: Detected product categories, if any. Read-only. This field should not be set in requests.
@@ -354,6 +363,8 @@ types:
         type: integer
         format: int32
         description: Ad width.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       attribute?:
         type: array
         description: All attributes for the ads that may be shown from this snippet.
@@ -364,6 +375,8 @@ types:
         type: integer
         format: int32
         description: Ad height.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       sensitiveCategories?:
         type: array
         description: Detected sensitive categories, if any. Read-only. This field should not be set in requests.

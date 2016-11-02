@@ -4,6 +4,7 @@ version: v1.4
 baseUri: https://www.googleapis.com/adexchangebuyer/v1.4/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/ad-exchange/buyer-rest
@@ -309,9 +310,13 @@ types:
       advertiserName?:
         type: string
         description: The name of the company being advertised in the creative.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       buyerCreativeId?:
         type: string
         description: A buyer-specific id identifying the creative in this ad.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       videoURL?:
         type: string
         description: The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set. Note, this is different from resource.native_ad.video_url above.
@@ -330,6 +335,8 @@ types:
         type: integer
         format: int32
         description: Ad height.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       sensitiveCategories?:
         type: array
         description: Detected sensitive categories, if any. Read-only. This field should not be set in requests.
@@ -369,6 +376,8 @@ types:
       clickThroughUrl?:
         type: array
         description: The set of destination urls for the snippet.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
         items:
           type: string
       impressionTrackingUrl?:
@@ -396,6 +405,8 @@ types:
         type: integer
         format: int32
         description: Account id.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       productCategories?:
         type: array
         description: Detected product categories, if any. Read-only. This field should not be set in requests.
@@ -526,6 +537,8 @@ types:
         type: integer
         format: int32
         description: Ad width.
+        (extras.RequiredIn):
+        - adexchangebuyer.creatives.insert
       openAuctionStatus?:
         type: string
         description: Top-level open auction status. Read-only. This field should not be set in requests. If disapproved, an entry for auctionType=OPEN_AUCTION (or ALL) in servingRestrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case it may be preferable to read from ServingRestrictions directly.

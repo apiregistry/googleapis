@@ -4,6 +4,7 @@ version: v2
 baseUri: https://www.googleapis.com/consumersurveys/v2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Icons):
 - url: http://www.google.com/images/icons/product/search-32.gif
   name: x32
@@ -119,6 +120,8 @@ types:
       questions?:
         type: array
         description: List of questions defining the survey.
+        (extras.RequiredIn):
+        - consumersurveys.surveys.insert
         items: SurveyQuestion
       wantedResponseCount?:
         type: integer
@@ -133,6 +136,8 @@ types:
       owners?:
         type: array
         description: List of email addresses for survey owners. Must contain at least the address of the user making the API call.
+        (extras.RequiredIn):
+        - consumersurveys.surveys.insert
         items:
           type: string
       state?:
@@ -149,12 +154,16 @@ types:
       country?:
         type: string
         description: Required country code that surveys should be targeted to. Accepts standard ISO 3166-1 2 character language codes. For instance, 'US' for the United States, and 'GB' for the United Kingdom.
+        (extras.RequiredIn):
+        - consumersurveys.surveys.insert
       gender?:
         type: string
         description: Optional gender to target.
       languages?:
         type: array
         description: Language code that surveys should be targeted to. For instance, 'en-US'. Surveys may target bilingual users by specifying a list of language codes (for example, 'de' and 'en-US'). In that case, all languages will be used for targeting users but the survey content (which is displayed) must match the first language listed. Accepts standard BCP47 language codes. See specification.
+        (extras.RequiredIn):
+        - consumersurveys.surveys.insert
         items:
           type: string
       ages?:
@@ -221,6 +230,8 @@ types:
       type?:
         type: string
         description: Required field defining the question type. For details about configuring different type of questions, consult the question configuration guide.
+        (extras.RequiredIn):
+        - consumersurveys.surveys.insert
       mustPickSuggestion?:
         type: boolean
         description: Option to force the user to pick one of the open text suggestions. This requires that suggestions are provided for this question.

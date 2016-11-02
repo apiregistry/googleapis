@@ -4,6 +4,7 @@ version: v1b3
 baseUri: https://dataflow.googleapis.com/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/dataflow
@@ -359,6 +360,13 @@ types:
         type: string
         description: The type of cluster manager API to use. If unknown or unspecified, the service will attempt to choose a reasonable default. This should be in the form of the API service name, e.g. "compute.googleapis.com".
     description: Describes the environment in which a Dataflow Job runs.
+  FailedLocation:
+    type: object
+    properties:
+      name?:
+        type: string
+        description: The name of the failed location.
+    description: FailedLocation indicates which location failed to respond to a request for data.
   FlattenInstruction:
     type: object
     properties:
@@ -517,6 +525,9 @@ types:
       name?:
         type: string
         description: The user-specified Dataflow job name. Only one Job with a given name may exist in a project at any given time. If a caller attempts to create a Job with the same name as an already-existing Job, the attempt will return the existing Job. The name must match the regular expression [a-z]([-a-z0-9]{0,38}[a-z0-9])?
+      location?:
+        type: string
+        description: The location which contains this job.
       id?:
         type: string
         description: The unique ID of this job. This field is set by the Dataflow service when the Job is created, and is immutable for the life of the Job.
@@ -633,6 +644,9 @@ types:
         description: Filter for WorkItem type.
         items:
           type: string
+      location?:
+        type: string
+        description: The location which contains the WorkItem's job.
       requestedLeaseDuration?:
         type: string
         description: The initial lease period.
@@ -671,6 +685,10 @@ types:
         type: array
         description: A subset of the requested job information.
         items: Job
+      failedLocation?:
+        type: array
+        description: Zero or more messages describing locations that failed to respond.
+        items: FailedLocation
     description: Response to a request to list Dataflow jobs. This may be a partial response, depending on the page size in the ListJobsRequest.
   MapTask:
     type: object
@@ -915,6 +933,9 @@ types:
         type: array
         description: The order is unimportant, except that the order of the WorkItemServiceState messages in the ReportWorkItemStatusResponse corresponds to the order of WorkItemStatus messages here.
         items: WorkItemStatus
+      location?:
+        type: string
+        description: The location which contains the WorkItem's job.
     description: Request to report the status of WorkItems.
   ReportWorkItemStatusResponse:
     type: object
@@ -1798,6 +1819,9 @@ types:
                 startTime?:
                   type: string
                   description: Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.
+                location?:
+                  type: string
+                  description: The location which contains the job specified by job_id.
               responses:
                 200:
                   body:
@@ -1924,6 +1948,9 @@ types:
                 startTime?:
                   type: string
                   description: If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).
+                location?:
+                  type: string
+                  description: The location which contains the job specified by job_id.
                 pageToken?:
                   type: string
                   description: If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.
@@ -1957,6 +1984,9 @@ types:
                 - JOB_VIEW_UNKNOWN
                 - JOB_VIEW_SUMMARY
                 - JOB_VIEW_ALL
+              location?:
+                type: string
+                description: The location which contains this job.
             responses:
               200:
                 body:
@@ -1975,6 +2005,10 @@ types:
             displayName: Update
             is:
             - hasParameters
+            queryParameters:
+              location?:
+                type: string
+                description: The location which contains this job.
             body:
               application/json: Job
             responses:
@@ -2006,6 +2040,9 @@ types:
             replaceJobId?:
               type: string
               description: DEPRECATED. This field is now on the Job message.
+            location?:
+              type: string
+              description: The location which contains this job.
           body:
             application/json: Job
           responses:
@@ -2046,6 +2083,9 @@ types:
               type: integer
               format: int32
               description: If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
+            location?:
+              type: string
+              description: The location which contains this job.
             pageToken?:
               type: string
               description: Set this to the 'next_page_token' field of a previous response to request additional results in a long list.
@@ -2078,3 +2118,252 @@ types:
           (commons.LogicalStructure):
           - Projects
           - Templates
+      /locations:
+        /{location}:
+          uriParameters:
+            location:
+              type: string
+              description: The location which contains this job.
+          /jobs:
+            /{jobId}:
+              uriParameters:
+                jobId:
+                  type: string
+                  description: Identifies a single job.
+              /metrics:
+                get:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                      - https://www.googleapis.com/auth/userinfo.email
+                  description: Request the job status.
+                  displayName: Get Metrics
+                  is:
+                  - hasParameters
+                  queryParameters:
+                    startTime?:
+                      type: string
+                      description: Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.
+                  responses:
+                    200:
+                      body:
+                        application/json: JobMetrics
+                  (commons.Id): dataflow.projects.locations.jobs.getMetrics
+                  (commons.LogicalStructure):
+                  - Projects
+                  - Locations
+                  - Jobs
+              /workItems:reportStatus:
+                post:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                      - https://www.googleapis.com/auth/userinfo.email
+                  description: Reports the status of dataflow WorkItems leased by a worker.
+                  displayName: Report Status
+                  is:
+                  - hasParameters
+                  body:
+                    application/json: ReportWorkItemStatusRequest
+                  responses:
+                    200:
+                      body:
+                        application/json: ReportWorkItemStatusResponse
+                  (commons.Id): dataflow.projects.locations.jobs.workItems.reportStatus
+                  (commons.LogicalStructure):
+                  - Projects
+                  - Locations
+                  - Jobs
+                  - Work Items
+              /workItems:lease:
+                post:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                      - https://www.googleapis.com/auth/userinfo.email
+                  description: Leases a dataflow WorkItem to run.
+                  displayName: Lease
+                  is:
+                  - hasParameters
+                  body:
+                    application/json: LeaseWorkItemRequest
+                  responses:
+                    200:
+                      body:
+                        application/json: LeaseWorkItemResponse
+                  (commons.Id): dataflow.projects.locations.jobs.workItems.lease
+                  (commons.LogicalStructure):
+                  - Projects
+                  - Locations
+                  - Jobs
+                  - Work Items
+              /messages:
+                get:
+                  securedBy:
+                    oath2:
+                      scopes:
+                      - https://www.googleapis.com/auth/cloud-platform
+                      - https://www.googleapis.com/auth/userinfo.email
+                  description: Request the job status.
+                  displayName: List
+                  is:
+                  - hasParameters
+                  queryParameters:
+                    minimumImportance?:
+                      type: string
+                      description: Filter to only get messages with importance >= level
+                      enum:
+                      - JOB_MESSAGE_IMPORTANCE_UNKNOWN
+                      - JOB_MESSAGE_DEBUG
+                      - JOB_MESSAGE_DETAILED
+                      - JOB_MESSAGE_BASIC
+                      - JOB_MESSAGE_WARNING
+                      - JOB_MESSAGE_ERROR
+                    pageSize?:
+                      type: integer
+                      format: int32
+                      description: If specified, determines the maximum number of messages to return. If unspecified, the service may choose an appropriate default, or may return an arbitrarily large number of results.
+                    startTime?:
+                      type: string
+                      description: If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).
+                    pageToken?:
+                      type: string
+                      description: If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.
+                    endTime?:
+                      type: string
+                      description: Return only messages with timestamps < end_time. The default is now (i.e. return up to the latest messages available).
+                  responses:
+                    200:
+                      body:
+                        application/json: ListJobMessagesResponse
+                  (commons.Id): dataflow.projects.locations.jobs.messages.list
+                  (commons.LogicalStructure):
+                  - Projects
+                  - Locations
+                  - Jobs
+                  - Messages
+              get:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                    - https://www.googleapis.com/auth/userinfo.email
+                description: Gets the state of the specified dataflow job.
+                displayName: Get
+                is:
+                - hasParameters
+                queryParameters:
+                  view?:
+                    type: string
+                    description: Level of information requested in response.
+                    enum:
+                    - JOB_VIEW_UNKNOWN
+                    - JOB_VIEW_SUMMARY
+                    - JOB_VIEW_ALL
+                responses:
+                  200:
+                    body:
+                      application/json: Job
+                (commons.Id): dataflow.projects.locations.jobs.get
+                (commons.LogicalStructure):
+                - Projects
+                - Locations
+                - Jobs
+              put:
+                securedBy:
+                  oath2:
+                    scopes:
+                    - https://www.googleapis.com/auth/cloud-platform
+                    - https://www.googleapis.com/auth/userinfo.email
+                description: Updates the state of an existing dataflow job.
+                displayName: Update
+                is:
+                - hasParameters
+                body:
+                  application/json: Job
+                responses:
+                  200:
+                    body:
+                      application/json: Job
+                (commons.Id): dataflow.projects.locations.jobs.update
+                (commons.LogicalStructure):
+                - Projects
+                - Locations
+                - Jobs
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/userinfo.email
+              description: Creates a dataflow job.
+              displayName: Create
+              is:
+              - hasParameters
+              queryParameters:
+                view?:
+                  type: string
+                  description: Level of information requested in response.
+                  enum:
+                  - JOB_VIEW_UNKNOWN
+                  - JOB_VIEW_SUMMARY
+                  - JOB_VIEW_ALL
+                replaceJobId?:
+                  type: string
+                  description: DEPRECATED. This field is now on the Job message.
+              body:
+                application/json: Job
+              responses:
+                200:
+                  body:
+                    application/json: Job
+              (commons.Id): dataflow.projects.locations.jobs.create
+              (commons.LogicalStructure):
+              - Projects
+              - Locations
+              - Jobs
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/userinfo.email
+              description: List the jobs of a project
+              displayName: List
+              is:
+              - hasParameters
+              queryParameters:
+                filter?:
+                  type: string
+                  description: The kind of filter to use.
+                  enum:
+                  - UNKNOWN
+                  - ALL
+                  - TERMINATED
+                  - ACTIVE
+                view?:
+                  type: string
+                  description: Level of information requested in response. Default is SUMMARY.
+                  enum:
+                  - JOB_VIEW_UNKNOWN
+                  - JOB_VIEW_SUMMARY
+                  - JOB_VIEW_ALL
+                pageSize?:
+                  type: integer
+                  format: int32
+                  description: If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
+                pageToken?:
+                  type: string
+                  description: Set this to the 'next_page_token' field of a previous response to request additional results in a long list.
+              responses:
+                200:
+                  body:
+                    application/json: ListJobsResponse
+              (commons.Id): dataflow.projects.locations.jobs.list
+              (commons.LogicalStructure):
+              - Projects
+              - Locations
+              - Jobs

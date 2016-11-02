@@ -4,6 +4,7 @@ version: v2
 baseUri: https://www.googleapis.com/civicinfo/v2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/civic-information
@@ -451,6 +452,73 @@ types:
         type: string
         description: A description of when this location is open.
     description: A location where a voter can vote. This may be an early vote site, an election day voting location, or a drop off location for a completed ballot.
+  PostalAddress:
+    type: object
+    properties:
+      dependentThoroughfaresIndicator?:
+        type: string
+      thoroughfareLeadingType?:
+        type: string
+      thoroughfareTrailingType?:
+        type: string
+      dependentThoroughfareLeadingType?:
+        type: string
+      dependentThoroughfarePreDirection?:
+        type: string
+      dependentThoroughfaresType?:
+        type: string
+      dependentThoroughfareName?:
+        type: string
+      isDisputed?:
+        type: boolean
+      localityName?:
+        type: string
+      sortingCode?:
+        type: string
+      dependentThoroughfarePostDirection?:
+        type: string
+      recipientName?:
+        type: string
+      thoroughfarePreDirection?:
+        type: string
+      addressLines?:
+        type: array
+        items:
+          type: string
+      administrativeAreaName?:
+        type: string
+      thoroughfareName?:
+        type: string
+      dependentLocalityName?:
+        type: string
+      languageCode?:
+        type: string
+      postalCodeNumber?:
+        type: string
+      subPremiseName?:
+        type: string
+      subAdministrativeAreaName?:
+        type: string
+      dependentThoroughfaresConnector?:
+        type: string
+      postalCodeNumberExtension?:
+        type: string
+      thoroughfarePostDirection?:
+        type: string
+      dependentThoroughfareTrailingType?:
+        type: string
+      postBoxNumber?:
+        type: string
+      firmName?:
+        type: string
+      countryName?:
+        type: string
+      thoroughfareNumber?:
+        type: string
+      premiseName?:
+        type: string
+      countryNameCode?:
+        type: string
   RepresentativeInfoData:
     type: object
     properties:
@@ -530,6 +598,7 @@ types:
     type: object
     properties:
       contextParams?: ContextParams
+      voterInfoSegmentResult?: VoterInfoSegmentResult
     description: A request for information about a voter.
   VoterInfoResponse:
     type: object
@@ -571,6 +640,15 @@ types:
         description: Locations where the voter is eligible to vote early, prior to election day.
         items: PollingLocation
     description: The result of a voter info lookup query.
+  VoterInfoSegmentResult:
+    type: object
+    properties:
+      request?: VoterInfoRequest
+      postalAddress?: PostalAddress
+      response?: VoterInfoResponse
+      generatedMillis?:
+        type: integer
+        format: int64
 /representatives:
   /{ocdId}:
     uriParameters:

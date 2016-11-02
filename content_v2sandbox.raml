@@ -4,6 +4,7 @@ version: v2sandbox
 baseUri: https://www.googleapis.com/content/v2sandbox/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/shopping-content
@@ -309,13 +310,19 @@ types:
       isReturnable?:
         type: boolean
         description: Whether the item is returnable.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       policyUrl?:
         type: string
         description: URL of the item return policy.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       daysToReturn?:
         type: integer
         format: int32
         description: How many days later the item can be returned.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   OrderLineItemShippingDetails:
     type: object
     properties:
@@ -323,9 +330,13 @@ types:
       shipByDate?:
         type: string
         description: The ship by date, in ISO 8601 format.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       deliverByDate?:
         type: string
         description: The delivery by date, in ISO 8601 format.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   OrderLineItemShippingDetailsMethod:
     type: object
     properties:
@@ -336,13 +347,19 @@ types:
         type: integer
         format: int32
         description: Minimum transit time.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       methodName?:
         type: string
         description: The name of the shipping method.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       maxDaysInTransit?:
         type: integer
         format: int32
         description: Maximum transit time.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   OrderPaymentMethod:
     type: object
     properties:
@@ -897,6 +914,8 @@ types:
       lineItems?:
         type: array
         description: Line items that are ordered. At least one line item must be provided.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
         items: TestOrderLineItem
       promotions?:
         type: array
@@ -906,6 +925,8 @@ types:
       predefinedDeliveryAddress?:
         type: string
         description: Identifier of one of the predefined delivery addresses for the delivery.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       shippingCostTax?: Price
       kind?:
         type: string
@@ -917,6 +938,8 @@ types:
       shippingOption?:
         type: string
         description: The requested shipping option.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   TestOrderCustomer:
     type: object
     properties:
@@ -929,6 +952,8 @@ types:
       email?:
         type: string
         description: Email address of the customer.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   TestOrderLineItem:
     type: object
     properties:
@@ -939,6 +964,8 @@ types:
         type: integer
         format: int32
         description: Number of items ordered.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       unitTax?: Price
   TestOrderLineItemProduct:
     type: object
@@ -953,34 +980,50 @@ types:
       channel?:
         type: string
         description: The item's channel.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       mpn?:
         type: string
         description: Manufacturer Part Number (MPN) of the item. Optional.
       title?:
         type: string
         description: The title of the product.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       itemGroupId?:
         type: string
         description: Shared identifier for all variants of the same product. Optional.
       targetCountry?:
         type: string
         description: The CLDR territory code of the target country of the product.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       imageLink?:
         type: string
         description: URL of an image of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       condition?:
         type: string
         description: Condition or state of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       price?: Price
       contentLanguage?:
         type: string
         description: The two-letter ISO 639-1 language code for the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       offerId?:
         type: string
         description: An identifier of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       brand?:
         type: string
         description: Brand of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   TestOrderPaymentMethod:
     type: object
     properties:

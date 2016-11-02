@@ -4,6 +4,7 @@ version: reports_v1
 baseUri: https://www.googleapis.com/admin/reports/v1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Id): admin:reports_v1
 (commons.Links):
 - title: Developer Documentation
@@ -199,6 +200,7 @@ types:
       date?:
         type: string
         description: The date to which the record belongs.
+        (extras.Readonly): true
       kind?:
         type: string
         default: admin#reports#usageReport
@@ -209,46 +211,57 @@ types:
       parameters?:
         type: array
         description: Parameter value pairs for various applications.
+        (extras.Readonly): true
         items:
           type: object
           properties:
             stringValue?:
               type: string
               description: String value of the parameter.
+              (extras.Readonly): true
             datetimeValue?:
               type: string
               description: RFC 3339 formatted value of the parameter.
+              (extras.Readonly): true
             intValue?:
               type: integer
               format: int64
               description: Integral value of the parameter.
+              (extras.Readonly): true
             name?:
               type: string
               description: The name of the parameter.
             msgValue?:
               type: array
               description: Nested message value of the parameter.
+              (extras.Readonly): true
               items:
                 type: object
             boolValue?:
               type: boolean
               description: Boolean value of the parameter.
+              (extras.Readonly): true
       entity?:
         type: object
         properties:
           profileId?:
             type: string
             description: Obfuscated user id for the record.
+            (extras.Readonly): true
           customerId?:
             type: string
             description: Obfuscated customer id for the record.
+            (extras.Readonly): true
           userEmail?:
             type: string
             description: user's email.
+            (extras.Readonly): true
           type?:
             type: string
             description: The type of item, can be a customer or user.
+            (extras.Readonly): true
         description: Information about the type of the item.
+        (extras.Readonly): true
     description: JSON template for a usage report.
   UsageReports:
     type: object

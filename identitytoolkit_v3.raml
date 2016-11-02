@@ -4,6 +4,7 @@ version: v3
 baseUri: https://www.googleapis.com/identitytoolkit/v3/relyingparty/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/identity-toolkit/v3/
@@ -278,6 +279,8 @@ types:
       enableAnonymousUser?:
         type: boolean
         description: Whether anonymous user is enabled.
+      dynamicLinksDomain?:
+        type: string
       allowPasswordUser?:
         type: boolean
         description: Whether to allow password user sign in or sign up.
@@ -451,6 +454,12 @@ types:
       captchaResponse?:
         type: string
         description: Response to the captcha.
+      emailVerified?:
+        type: boolean
+        description: Mark the email as verified or not. Only can be used by service account.
+      photoUrl?:
+        type: string
+        description: The photo url of the user.
       password?:
         type: string
         description: The new password of the user.
@@ -466,6 +475,9 @@ types:
       idToken?:
         type: string
         description: The GITKit token of the authenticated user.
+      disabled?:
+        type: boolean
+        description: Whether to disable the user. Only can be used by service account.
       email?:
         type: string
         description: The email of the user.
@@ -490,6 +502,9 @@ types:
         type: integer
         format: int64
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+      allowOverwrite?:
+        type: boolean
+        description: Whether allow overwrite existing account when user local_id exists.
       sanityCheck?:
         type: boolean
         description: If true, backend will do sanity check(including duplicate email and federated id) when uploading account.
@@ -799,9 +814,6 @@ types:
             email?:
               type: string
               description: User's email at IDP.
-            rawUserInfo?:
-              type: string
-              description: Raw IDP-returned user info.
       displayName?:
         type: string
         description: The name of the user.
@@ -842,6 +854,9 @@ types:
       disabled?:
         type: boolean
         description: Whether the user is disabled.
+      rawPassword?:
+        type: string
+        description: The user's plain text password.
       email?:
         type: string
         description: The email of the user.

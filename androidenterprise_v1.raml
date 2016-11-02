@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/androidenterprise/v1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/android/work/play/emm-api
@@ -205,6 +206,9 @@ types:
       productId?:
         type: array
         description: The IDs of the products in the collection, in the order in which they should be displayed.
+        (extras.RequiredIn):
+        - androidenterprise.collections.insert
+        - androidenterprise.collections.update
         items:
           type: string
       visibility?:
@@ -221,6 +225,9 @@ types:
       name?:
         type: string
         description: A user-friendly name for the collection (should be unique), e.g. "Accounting apps".
+        (extras.RequiredIn):
+        - androidenterprise.collections.insert
+        - androidenterprise.collections.update
       collectionId?:
         type: string
         description: Arbitrary unique ID, allocated by the API on creation.
@@ -325,6 +332,8 @@ types:
       primaryDomain?:
         type: string
         description: The enterprise's primary domain, such as "example.com".
+        (extras.RequiredIn):
+        - androidenterprise.enterprises.insert
       id?:
         type: string
         description: The unique ID for the enterprise.
@@ -792,6 +801,8 @@ types:
       permission?:
         type: array
         description: The permissions required by the app.
+        (extras.RequiredIn):
+        - androidenterprise.products.updatePermissions
         items: ProductPermission
     description: Information about the permissions required by a specific app and whether they have been accepted by the enterprise.
   ProductSet:
@@ -866,6 +877,8 @@ types:
       type?:
         type: string
         description: The file format of the generated key data.
+        (extras.RequiredIn):
+        - androidenterprise.serviceaccountkeys.insert
     description: Credentials that can be used to authenticate as a service account.
   ServiceAccountKeysListResponse:
     type: object
@@ -1007,9 +1020,13 @@ types:
       accountType?:
         type: string
         description: The type of account that this user represents. A userAccount can be installed on multiple devices, but a deviceAccount is specific to a single device. An EMM-managed user (emmManaged) can be either type (userAccount, deviceAccount), but a Google-managed user (googleManaged) is always a userAccount.
+        (extras.RequiredIn):
+        - androidenterprise.users.insert
       accountIdentifier?:
         type: string
         description: A unique identifier you create for this user, such as "user342" or "asset#44418". Do not use personally identifiable information (PII) for this property. Must always be set for EMM-managed users. Not set for Google-managed users.
+        (extras.RequiredIn):
+        - androidenterprise.users.insert
       id?:
         type: string
         description: The unique ID for the user.
@@ -2312,8 +2329,7 @@ types:
             description: The BCP47 tag for the user's preferred language (e.g. "en-US", "de"). Results are returned in the language best matching the preferred language.
           token?:
             type: string
-            description: !!binary |-
-              QSBwYWdpbmF0aW9uIHRva2VuIGlzIGNvbnRhaW5lZCBpbiBhIHJlcXVlc3TCknMgcmVzcG9uc2Ugd2hlbiB0aGVyZSBhcmUgbW9yZSBwcm9kdWN0cy4gVGhlIHRva2VuIGNhbiBiZSB1c2VkIGluIGEgc3Vic2VxdWVudCByZXF1ZXN0IHRvIG9idGFpbiBtb3JlIHByb2R1Y3RzLCBhbmQgc28gZm9ydGguIFRoaXMgcGFyYW1ldGVyIGNhbm5vdCBiZSB1c2VkIGluIHRoZSBpbml0aWFsIHJlcXVlc3Qu
+            description: A pagination token is contained in a requests response when there are more products. The token can be used in a subsequent request to obtain more products, and so forth. This parameter cannot be used in the initial request.
         responses:
           200:
             body:

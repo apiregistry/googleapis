@@ -4,6 +4,7 @@ version: v1alpha2
 baseUri: https://genomics.googleapis.com/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/genomics/
@@ -250,7 +251,7 @@ types:
         description: The original request that started the operation. Note that this will be in current version of the API. If the operation was started with v1beta2 API and a GetOperation is performed on v1 API, a v1 request will be returned.
       clientId?:
         type: string
-        description: Optionally provided by the caller when submitting the request that creates the operation.
+        description: This field is deprecated. Use `labels` instead. Optionally provided by the caller when submitting the request that creates the operation.
       createTime?:
         type: string
         description: The time at which the job was submitted to the Genomics service.
@@ -270,6 +271,9 @@ types:
       runtimeMetadata?:
         type: object
         description: Runtime metadata on this Operation.
+      labels?:
+        type: object
+        description: Optionally provided by the caller when submitting the request that creates the operation.
     description: Metadata describing an Operation.
   Pipeline:
     type: object
@@ -397,7 +401,7 @@ types:
         description: Pipeline output arguments; keys are defined in the pipeline documentation. All output parameters of without default values must be specified. If parameters with defaults are specified here, the defaults will be overridden.
       clientId?:
         type: string
-        description: Client-specified pipeline operation identifier.
+        description: This field is deprecated. Use `labels` instead. Client-specified pipeline operation identifier.
       keepVmAliveOnFailureDuration?:
         type: string
         description: How long to keep the VM up after a failure (for example docker command failed, copying input or output files failed, etc). While the VM is up, one can ssh into the VM to debug. Default is 0; maximum allowed value is 1 day.
@@ -410,6 +414,9 @@ types:
       projectId?:
         type: string
         description: Required. The project in which to run the pipeline. The caller must have WRITER access to all Google Cloud services and resources (e.g. Google Compute Engine) will be used.
+      labels?:
+        type: object
+        description: Labels to apply to this pipeline run. Labels will also be applied to compute resources (VM, disks) created by this pipeline run. When listing operations, operations can filtered by labels. Label keys may not be empty; label values may be empty. Non-empty labels must be 1-63 characters long, and comply with [RFC1035] (https://www.ietf.org/rfc/rfc1035.txt). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
     description: The pipeline run arguments.
   RunPipelineRequest:
     type: object
@@ -578,7 +585,9 @@ types:
             are supported: * projectId: Required. Corresponds to OperationMetadata.projectId.
             * createTime: The time this job was created, in seconds from the [epoch](http://en.wikipedia.org/wiki/Unix_time).
             Can use `>=` and/or `= 1432140000` * `projectId = my-project AND createTime
-            >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING`'
+            >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING` * `projectId
+            = my-project AND labels.color = *` * `projectId = my-project AND labels.color
+            = red`'
         pageSize?:
           type: integer
           format: int32

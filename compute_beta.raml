@@ -4,6 +4,7 @@ version: beta
 baseUri: https://www.googleapis.com/compute/beta/projects/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/compute/docs/reference/latest/
@@ -89,6 +90,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.addresses.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -261,7 +264,12 @@ types:
         description: Assigns a zero-based index to this disk, where 0 is reserved for the boot disk. For example, if you have many disks attached to an instance, each disk would have a unique index number. If not specified, the server will choose an appropriate value.
       source?:
         type: string
-        description: Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. Note that for InstanceTemplate, it is just disk name, not URL for the disk.
+        description: |-
+          Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance, one of initializeParams.sourceImage or disks.source is required.
+
+          If desired, you can also attach existing non-root persistent disks using this property. This field is only applicable for persistent disks.
+
+          Note that for InstanceTemplate, specify the disk name, not the URL for the disk.
       boot?:
         type: boolean
         description: Indicates that this is a boot disk. The virtual machine will use the first partition of the disk for its root filesystem.
@@ -274,6 +282,8 @@ types:
       type?:
         type: string
         description: Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
+        (extras.RequiredIn):
+        - compute.instances.insert
         enum:
         - PERSISTENT
         - SCRATCH
@@ -311,17 +321,19 @@ types:
           \ URL."
       sourceImage?:
         type: string
-        description: "The source image used to create this disk. If the source image\
-          \ is deleted, this field will not be set.\n\nTo create a disk with one of\
-          \ the public operating system images, specify the image by its family name.\
-          \ For example, specify family/debian-8 to use the latest Debian 8 image:\n\
-          \nprojects/debian-cloud/global/images/family/debian-8 \n\nAlternatively,\
-          \ use a specific version of a public operating system image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD\
+        description: "The source image to create this disk. When creating a new instance,\
+          \ one of initializeParams.sourceImage or disks.source is required.\n\nTo\
+          \ create a disk with one of the public operating system images, specify\
+          \ the image by its family name. For example, specify family/debian-8 to\
+          \ use the latest Debian 8 image:\n\nprojects/debian-cloud/global/images/family/debian-8\
+          \ \n\nAlternatively, use a specific version of a public operating system\
+          \ image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD\
           \ \n\nTo create a disk with a private image that you created, specify the\
           \ image name in the following format:\n\nglobal/images/my-private-image\
           \ \n\nYou can also specify a private image by its image family, which returns\
           \ the latest version of the image in that family. Replace the image name\
-          \ with family/family-name:\n\nglobal/images/family/my-private-family"
+          \ with family/family-name:\n\nglobal/images/family/my-private-family \n\n\
+          If the source image is deleted later, this field will not be set."
       diskSizeGb?:
         type: integer
         format: int64
@@ -330,6 +342,18 @@ types:
       [Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance.
 
       This property is mutually exclusive with the source property; you can only define one or the other, but not both.
+  AuditConfig:
+    type: object
+    properties:
+      exemptedMembers?:
+        type: array
+        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
+        items:
+          type: string
+      service?:
+        type: string
+        description: Specifies a service that will be enabled for "data access" audit logging. For example, `resourcemanager`, `storage`, `compute`. `allServices` is a special value that covers all services.
+    description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
   Autoscaler:
     type: object
     properties:
@@ -349,6 +373,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.instanceGroups.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -655,6 +681,60 @@ types:
 
           This cannot be used for internal load balancing.
     description: Message containing information of one individual backend.
+  BackendBucket:
+    type: object
+    properties:
+      bucketName?:
+        type: string
+        description: Cloud Storage bucket name.
+      enableCdn?:
+        type: boolean
+        description: If true, enable Cloud CDN for this BackendBucket.
+      kind?:
+        type: string
+        default: compute#backendBucket
+        description: Type of the resource.
+      creationTimestamp?:
+        type: string
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+      name?:
+        type: string
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+      description?:
+        type: string
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+      id?:
+        type: integer
+        format: int64
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined URL for the resource.'
+    description: A BackendBucket resource. This resource defines a Cloud Storage bucket.
+  BackendBucketList:
+    type: object
+    properties:
+      kind?:
+        type: string
+        default: compute#backendBucketList
+        description: Type of resource.
+      nextPageToken?:
+        type: string
+        description: '[Output Only] A token used to continue a truncated list request.'
+      id?:
+        type: string
+        description: '[Output Only] Unique identifier for the resource; defined by
+          the server.'
+      items?:
+        type: array
+        description: A list of BackendBucket resources.
+        items: BackendBucket
+      selfLink?:
+        type: string
+        description: '[Output Only] Server-defined URL for this resource.'
+    description: Contains a list of BackendBucket resources.
   BackendService:
     type: object
     properties:
@@ -880,11 +960,83 @@ types:
             description: '[Output Only] A human-readable description of the warning
               code.'
         description: Informational warning which replaces the list of backend services when the list is empty.
+  Binding:
+    type: object
+    properties:
+      role?:
+        type: string
+        description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+      members?:
+        type: array
+        description: |-
+          Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
+
+
+
+          * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
+        items:
+          type: string
+    description: Associates `members` with a `role`.
   CacheInvalidationRule:
     type: object
     properties:
       path?:
         type: string
+      host?:
+        type: string
+        description: If set, this invalidation rule will only apply to requests with a Host header matching host.
+  Condition:
+    type: object
+    properties:
+      op?:
+        type: string
+        description: An operator to apply the subject with.
+        enum:
+        - DISCHARGED
+        - EQUALS
+        - IN
+        - NOT_EQUALS
+        - NOT_IN
+        - NO_OP
+      svc?:
+        type: string
+        description: Trusted attributes discharged by the service.
+      iam?:
+        type: string
+        description: Trusted attributes supplied by the IAM system.
+        enum:
+        - ATTRIBUTION
+        - AUTHORITY
+        - NO_ATTR
+        - SECURITY_REALM
+      values?:
+        type: array
+        description: The objects of the condition. This is mutually exclusive with 'value'.
+        items:
+          type: string
+      sys?:
+        type: string
+        description: Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.
+        enum:
+        - IP
+        - NAME
+        - NO_ATTR
+        - REGION
+        - SERVICE
+      value?:
+        type: string
+        description: DEPRECATED. Use 'values' instead.
+    description: A condition to be met.
   ConnectionDraining:
     type: object
     properties:
@@ -925,13 +1077,13 @@ types:
     properties:
       deleted?:
         type: string
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to DELETED.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to DELETED. This is only informational and the status will not change unless the client explicitly changes it.
       deprecated?:
         type: string
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to DEPRECATED.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to DEPRECATED. This is only informational and the status will not change unless the client explicitly changes it.
       obsolete?:
         type: string
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to OBSOLETE.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to OBSOLETE. This is only informational and the status will not change unless the client explicitly changes it.
       state?:
         type: string
         description: The deprecation state of this resource. This can be DEPRECATED, OBSOLETE, or DELETED. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.
@@ -1034,6 +1186,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.disks.insert
       storageType?:
         type: string
         description: '[Deprecated] Storage type of the persistent disk.'
@@ -1387,6 +1541,9 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.firewalls.insert
+        - compute.firewalls.patch
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -2085,6 +2242,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.images.insert
       sourceDiskEncryptionKey?: CustomerEncryptionKey
       archiveSizeBytes?:
         type: integer
@@ -2113,6 +2272,8 @@ types:
           source?:
             type: string
             description: The full Google Cloud Storage URL where the disk image is stored. You must provide either this property or the sourceDisk property but not both.
+            (extras.RequiredIn):
+            - compute.images.insert
         description: The parameters of the raw disk image.
       diskSizeGb?:
         type: integer
@@ -2230,6 +2391,8 @@ types:
           \ memory is 5120 MB):\n\nzones/zone/machineTypes/custom-CPUS-MEMORY \n\n\
           For example: zones/us-central1-f/machineTypes/custom-4-5120 \n\nFor a full\
           \ list of restrictions, read the Specifications for custom machine types."
+        (extras.RequiredIn):
+        - compute.instances.insert
       status?:
         type: string
         description: '[Output Only] The status of the instance. One of the following
@@ -2321,6 +2484,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: The name of the instance group. The name must be 1-63 characters long, and comply with RFC1035.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       id?:
         type: integer
         format: int64
@@ -2409,6 +2574,8 @@ types:
         type: string
         pattern: '[a-z][-a-z0-9]{0,57}'
         description: The base instance name to use for instances in this group. The value must be 1-58 characters long. Instances are named by appending a hyphen and a random four-character string to the base instance name. The base instance name must comply with RFC1035.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       instanceGroup?:
         type: string
         description: '[Output Only] The URL of the Instance Group resource.'
@@ -2425,6 +2592,8 @@ types:
         type: integer
         format: int32
         description: The target number of running instances for this managed instance group. Deleting or abandoning instances reduces this number. Resizing the group changes this number.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       zone?:
         type: string
         description: '[Output Only] The URL of the zone where the managed instance
@@ -2448,6 +2617,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: The name of the managed instance group. The name must be 1-63 characters long, and comply with RFC1035.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       id?:
         type: integer
         format: int64
@@ -2894,6 +3065,8 @@ types:
       machineType?:
         type: string
         description: The machine type to use for instances that are created from this template.
+        (extras.RequiredIn):
+        - compute.instanceTemplates.insert
       labels?:
         type: object
         description: Labels to apply to instances that are created from this template. Each label key/value pair must comply with RFC1035. Label values may be empty.
@@ -2921,6 +3094,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.instanceTemplates.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -3092,10 +3267,27 @@ types:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: '[Output Only] Name of the resource. The name is 1-63 characters
           long and complies with RFC1035.'
+        (extras.RequiredIn):
+        - compute.images.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined URL for the resource.'
     description: A license resource.
+  LogConfig:
+    type: object
+    properties:
+      counter?: LogConfigCounterOptions
+    description: Specifies what kind of log the caller must write
+  LogConfigCounterOptions:
+    type: object
+    properties:
+      field?:
+        type: string
+        description: The field value to attribute.
+      metric?:
+        type: string
+        description: The metric to update.
+    description: Options for counters
   MachineType:
     type: object
     properties:
@@ -3362,6 +3554,9 @@ types:
             value?:
               type: string
               description: Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 32768 bytes.
+              (extras.RequiredIn):
+              - compute.instances.insert
+              - compute.projects.setCommonInstanceMetadata
             key?:
               type: string
               pattern: '[a-zA-Z0-9-_]{1,128}'
@@ -3370,6 +3565,9 @@ types:
                 is reflected as part of a URL in the metadata server. Additionally,
                 to avoid ambiguity, keys must not conflict with any other metadata
                 keys for the project.'
+              (extras.RequiredIn):
+              - compute.instances.insert
+              - compute.projects.setCommonInstanceMetadata
     description: A metadata key/value entry.
   NamedPort:
     type: object
@@ -3409,6 +3607,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.networks.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -3463,6 +3663,8 @@ types:
           \ the network as a full or partial URL. For example, the following are all\
           \ valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project/global/networks/network\
           \ \n- projects/project/global/networks/network \n- global/networks/default"
+        (extras.RequiredIn):
+        - compute.instances.insert
     description: A network interface resource attached to an instance.
   NetworkList:
     type: object
@@ -3613,8 +3815,8 @@ types:
       targetLink?:
         type: string
         description: '[Output Only] The URL of the resource that the operation modifies.
-          If creating a persistent disk snapshot, this points to the persistent disk
-          that the snapshot was created from.'
+          For operations related to creating a snapshot, this points to the persistent
+          disk that the snapshot was created from.'
       creationTimestamp?:
         type: string
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -3815,6 +4017,55 @@ types:
         type: string
         description: The URL of the BackendService resource if this rule is matched.
     description: A path-matching rule for a URL. If matched, will use the specified BackendService to handle the traffic arriving at this URL.
+  Policy:
+    type: object
+    properties:
+      bindings?:
+        type: array
+        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
+        items: Binding
+      iamOwned?:
+        type: boolean
+        description: ''
+      etag?:
+        type: string
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
+      rules?:
+        type: array
+        description: 'If more than one rule is specified, the rules are applied in
+          the following manner: - All matching LOG rules are always applied. - If
+          any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will
+          be applied if one or more matching rule requires logging. - Otherwise, if
+          any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will
+          be applied if one or more matching rule requires logging. - Otherwise, if
+          no rule applies, permission is denied.'
+        items: Rule
+      version?:
+        type: integer
+        format: int32
+        description: Version of the `Policy`. The default version is 0.
+      auditConfigs?:
+        type: array
+        description: |-
+          Specifies audit logging configs for "data access". "data access": generally refers to data reads/writes and admin reads. "admin activity": generally refers to admin writes.
+
+          Note: `AuditConfig` doesn't apply to "admin activity", which always enables audit logging.
+        items: AuditConfig
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.
+
+
+
+      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
+
+      **Example**
+
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
+
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
   Project:
     type: object
     properties:
@@ -3873,6 +4124,7 @@ types:
         description: '[Output Only] Name of the quota metric.'
         enum:
         - AUTOSCALERS
+        - BACKEND_BUCKETS
         - BACKEND_SERVICES
         - CPUS
         - DISKS_TOTAL_GB
@@ -4238,18 +4490,24 @@ types:
         type: integer
         format: int32
         description: The priority of this route. Priority is used to break ties in cases where there is more than one matching route of equal prefix length. In the case of two routes with equal prefix length, the one with the lowest-numbered priority value wins. Default value is 1000. Valid range is 0 through 65535.
+        (extras.RequiredIn):
+        - compute.routes.insert
       nextHopNetwork?:
         type: string
         description: The URL of the local network if it should handle matching packets.
       network?:
         type: string
         description: Fully-qualified URL of the network that this route applies to.
+        (extras.RequiredIn):
+        - compute.routes.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
       tags?:
         type: array
         description: A list of instance tags to which this route applies.
+        (extras.RequiredIn):
+        - compute.routes.insert
         items:
           type: string
       nextHopInstance?:
@@ -4264,9 +4522,13 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.routes.insert
       destRange?:
         type: string
         description: The destination range of outgoing packets that this route applies to.
+        (extras.RequiredIn):
+        - compute.routes.insert
       nextHopVpnTunnel?:
         type: string
         description: The URL to a VpnTunnel that should handle matching packets.
@@ -4328,6 +4590,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.routers.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -4347,6 +4611,8 @@ types:
       network?:
         type: string
         description: URI of the network to which this router belongs.
+        (extras.RequiredIn):
+        - compute.routers.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined URL for the resource.'
@@ -4571,6 +4837,46 @@ types:
         type: array
         description: List of routers contained in this scope.
         items: Router
+  Rule:
+    type: object
+    properties:
+      permissions?:
+        type: array
+        description: A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
+        items:
+          type: string
+      logConfigs?:
+        type: array
+        description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
+        items: LogConfig
+      action?:
+        type: string
+        description: Required
+        enum:
+        - ALLOW
+        - ALLOW_WITH_LOG
+        - DENY
+        - DENY_WITH_LOG
+        - LOG
+        - NO_ACTION
+      description?:
+        type: string
+        description: Human-readable description of the rule.
+      conditions?:
+        type: array
+        description: Additional restrictions that must be met
+        items: Condition
+      notIns?:
+        type: array
+        description: If one or more 'not_in' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
+        items:
+          type: string
+      ins?:
+        type: array
+        description: If one or more 'in' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
+        items:
+          type: string
+    description: A rule to be applied in a Policy.
   SSLHealthCheck:
     type: object
     properties:
@@ -5629,6 +5935,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.targetVpnGateways.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -5651,6 +5959,8 @@ types:
       network?:
         type: string
         description: URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created.
+        (extras.RequiredIn):
+        - compute.targetVpnGateways.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined URL for the resource.'
@@ -5972,6 +6282,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.vpnTunnels.insert
       remoteTrafficSelector?:
         type: array
         description: 'Remote traffic selectors to use when establishing the VPN tunnel
@@ -5993,6 +6305,8 @@ types:
       targetVpnGateway?:
         type: string
         description: URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
+        (extras.RequiredIn):
+        - compute.vpnTunnels.insert
       status?:
         type: string
         description: '[Output Only] The status of the VPN tunnel.'
@@ -6199,6 +6513,154 @@ types:
       pattern: (?:(?:[-a-z0-9]{1,63}\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))
       description: Project ID for this request.
   /global:
+    /backendBuckets:
+      /{backendBucket}:
+        uriParameters:
+          backendBucket:
+            type: string
+            pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+            description: Name of the BackendBucket resource to update.
+        patch:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+          description: Updates the specified BackendBucket resource with the data included in the request. This method supports patch semantics.
+          displayName: Patch
+          is:
+          - hasParameters
+          body:
+            application/json: BackendBucket
+          responses:
+            200:
+              body:
+                application/json: Operation
+          (commons.Id): compute.backendBuckets.patch
+          (commons.LogicalStructure):
+          - Backend Buckets
+        get:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+              - https://www.googleapis.com/auth/compute.readonly
+          description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
+          displayName: Get
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: BackendBucket
+          (commons.Id): compute.backendBuckets.get
+          (commons.LogicalStructure):
+          - Backend Buckets
+        put:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+          description: Updates the specified BackendBucket resource with the data included in the request.
+          displayName: Update
+          is:
+          - hasParameters
+          body:
+            application/json: BackendBucket
+          responses:
+            200:
+              body:
+                application/json: Operation
+          (commons.Id): compute.backendBuckets.update
+          (commons.LogicalStructure):
+          - Backend Buckets
+        delete:
+          securedBy:
+            oath2:
+              scopes:
+              - https://www.googleapis.com/auth/cloud-platform
+              - https://www.googleapis.com/auth/compute
+          description: Deletes the specified BackendBucket resource.
+          displayName: Delete
+          is:
+          - hasParameters
+          responses:
+            200:
+              body:
+                application/json: Operation
+          (commons.Id): compute.backendBuckets.delete
+          (commons.LogicalStructure):
+          - Backend Buckets
+      post:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/compute
+        description: Creates a BackendBucket resource in the specified project using the data included in the request.
+        displayName: Insert
+        is:
+        - hasParameters
+        body:
+          application/json: BackendBucket
+        responses:
+          200:
+            body:
+              application/json: Operation
+        (commons.Id): compute.backendBuckets.insert
+        (commons.LogicalStructure):
+        - Backend Buckets
+      get:
+        securedBy:
+          oath2:
+            scopes:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/compute
+            - https://www.googleapis.com/auth/compute.readonly
+        description: Retrieves the list of BackendBucket resources available to the specified project.
+        displayName: List
+        is:
+        - hasParameters
+        queryParameters:
+          filter?:
+            type: string
+            description: |-
+              Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+              The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+              For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+              You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+              To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          maxResults?:
+            type: integer
+            default: 500
+            format: int32
+            description: The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.
+            maximum: 500
+            minimum: 0
+          orderBy?:
+            type: string
+            description: |-
+              Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+              You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+              Currently, only sorting by name or creationTimestamp desc is supported.
+          pageToken?:
+            type: string
+            description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+        responses:
+          200:
+            body:
+              application/json: BackendBucketList
+        (commons.Id): compute.backendBuckets.list
+        (commons.LogicalStructure):
+        - Backend Buckets
     /healthChecks:
       /{healthCheck}:
         uriParameters:
@@ -9274,6 +9736,46 @@ types:
               (commons.Id): compute.subnetworks.testIamPermissions
               (commons.LogicalStructure):
               - Subnetworks
+          /getIamPolicy:
+            get:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/compute.readonly
+              description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+              displayName: Get Iam Policy
+              is:
+              - hasParameters
+              responses:
+                200:
+                  body:
+                    application/json: Policy
+              (commons.Id): compute.subnetworks.getIamPolicy
+              (commons.LogicalStructure):
+              - Subnetworks
+          /setIamPolicy:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+                  - https://www.googleapis.com/auth/compute.readonly
+              description: Sets the access control policy on the specified resource. Replaces any existing policy.
+              displayName: Set Iam Policy
+              is:
+              - hasParameters
+              body:
+                application/json: Policy
+              responses:
+                200:
+                  body:
+                    application/json: Policy
+              (commons.Id): compute.subnetworks.setIamPolicy
+              (commons.LogicalStructure):
+              - Subnetworks
         /{subnetwork}:
           uriParameters:
             subnetwork:
@@ -11010,6 +11512,19 @@ types:
               displayName: List Managed Instances
               is:
               - hasParameters
+              queryParameters:
+                filter?:
+                  type: string
+                maxResults?:
+                  type: integer
+                  default: 500
+                  format: int32
+                  maximum: 500
+                  minimum: 0
+                order_by?:
+                  type: string
+                pageToken?:
+                  type: string
               responses:
                 200:
                   body:
@@ -13115,6 +13630,19 @@ types:
               displayName: List Managed Instances
               is:
               - hasParameters
+              queryParameters:
+                filter?:
+                  type: string
+                maxResults?:
+                  type: integer
+                  default: 500
+                  format: int32
+                  maximum: 500
+                  minimum: 0
+                order_by?:
+                  type: string
+                pageToken?:
+                  type: string
               responses:
                 200:
                   body:

@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/compute/v1/projects/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/compute/docs/reference/latest/
@@ -89,6 +90,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.addresses.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -261,7 +264,12 @@ types:
         description: Assigns a zero-based index to this disk, where 0 is reserved for the boot disk. For example, if you have many disks attached to an instance, each disk would have a unique index number. If not specified, the server will choose an appropriate value.
       source?:
         type: string
-        description: Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. Note that for InstanceTemplate, it is just disk name, not URL for the disk.
+        description: |-
+          Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance, one of initializeParams.sourceImage or disks.source is required.
+
+          If desired, you can also attach existing non-root persistent disks using this property. This field is only applicable for persistent disks.
+
+          Note that for InstanceTemplate, specify the disk name, not the URL for the disk.
       boot?:
         type: boolean
         description: Indicates that this is a boot disk. The virtual machine will use the first partition of the disk for its root filesystem.
@@ -274,6 +282,8 @@ types:
       type?:
         type: string
         description: Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
+        (extras.RequiredIn):
+        - compute.instances.insert
         enum:
         - PERSISTENT
         - SCRATCH
@@ -305,17 +315,19 @@ types:
           \ URL."
       sourceImage?:
         type: string
-        description: "The source image used to create this disk. If the source image\
-          \ is deleted, this field will not be set.\n\nTo create a disk with one of\
-          \ the public operating system images, specify the image by its family name.\
-          \ For example, specify family/debian-8 to use the latest Debian 8 image:\n\
-          \nprojects/debian-cloud/global/images/family/debian-8 \n\nAlternatively,\
-          \ use a specific version of a public operating system image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD\
+        description: "The source image to create this disk. When creating a new instance,\
+          \ one of initializeParams.sourceImage or disks.source is required.\n\nTo\
+          \ create a disk with one of the public operating system images, specify\
+          \ the image by its family name. For example, specify family/debian-8 to\
+          \ use the latest Debian 8 image:\n\nprojects/debian-cloud/global/images/family/debian-8\
+          \ \n\nAlternatively, use a specific version of a public operating system\
+          \ image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD\
           \ \n\nTo create a disk with a private image that you created, specify the\
           \ image name in the following format:\n\nglobal/images/my-private-image\
           \ \n\nYou can also specify a private image by its image family, which returns\
           \ the latest version of the image in that family. Replace the image name\
-          \ with family/family-name:\n\nglobal/images/family/my-private-family"
+          \ with family/family-name:\n\nglobal/images/family/my-private-family \n\n\
+          If the source image is deleted later, this field will not be set."
       diskSizeGb?:
         type: integer
         format: int64
@@ -343,6 +355,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.instanceGroups.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -785,13 +799,13 @@ types:
     properties:
       deleted?:
         type: string
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to DELETED.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to DELETED. This is only informational and the status will not change unless the client explicitly changes it.
       deprecated?:
         type: string
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to DEPRECATED.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to DEPRECATED. This is only informational and the status will not change unless the client explicitly changes it.
       obsolete?:
         type: string
-        description: An optional RFC3339 timestamp on or after which the deprecation state of this resource will be changed to OBSOLETE.
+        description: An optional RFC3339 timestamp on or after which the state of this resource is intended to change to OBSOLETE. This is only informational and the status will not change unless the client explicitly changes it.
       state?:
         type: string
         description: The deprecation state of this resource. This can be DEPRECATED, OBSOLETE, or DELETED. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.
@@ -877,6 +891,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.disks.insert
       options?:
         type: string
         description: Internal use only.
@@ -1232,6 +1248,9 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.firewalls.insert
+        - compute.firewalls.patch
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -1849,6 +1868,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.images.insert
       sourceDiskEncryptionKey?: CustomerEncryptionKey
       archiveSizeBytes?:
         type: integer
@@ -1877,6 +1898,8 @@ types:
           source?:
             type: string
             description: The full Google Cloud Storage URL where the disk image is stored. You must provide either this property or the sourceDisk property but not both.
+            (extras.RequiredIn):
+            - compute.images.insert
         description: The parameters of the raw disk image.
       diskSizeGb?:
         type: integer
@@ -1985,6 +2008,8 @@ types:
           \ memory is 5120 MB):\n\nzones/zone/machineTypes/custom-CPUS-MEMORY \n\n\
           For example: zones/us-central1-f/machineTypes/custom-4-5120 \n\nFor a full\
           \ list of restrictions, read the Specifications for custom machine types."
+        (extras.RequiredIn):
+        - compute.instances.insert
       status?:
         type: string
         description: '[Output Only] The status of the instance. One of the following
@@ -2076,6 +2101,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: The name of the instance group. The name must be 1-63 characters long, and comply with RFC1035.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       id?:
         type: integer
         format: int64
@@ -2160,6 +2187,8 @@ types:
         type: string
         pattern: '[a-z][-a-z0-9]{0,57}'
         description: The base instance name to use for instances in this group. The value must be 1-58 characters long. Instances are named by appending a hyphen and a random four-character string to the base instance name. The base instance name must comply with RFC1035.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       instanceGroup?:
         type: string
         description: '[Output Only] The URL of the Instance Group resource.'
@@ -2176,6 +2205,8 @@ types:
         type: integer
         format: int32
         description: The target number of running instances for this managed instance group. Deleting or abandoning instances reduces this number. Resizing the group changes this number.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       zone?:
         type: string
         description: '[Output Only] The URL of the zone where the managed instance
@@ -2193,6 +2224,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: The name of the managed instance group. The name must be 1-63 characters long, and comply with RFC1035.
+        (extras.RequiredIn):
+        - compute.instanceGroupManagers.insert
       id?:
         type: integer
         format: int64
@@ -2608,6 +2641,8 @@ types:
       machineType?:
         type: string
         description: The machine type to use for instances that are created from this template.
+        (extras.RequiredIn):
+        - compute.instanceTemplates.insert
       tags?: Tags
     description: ''
   InstanceReference:
@@ -2632,6 +2667,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.instanceTemplates.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -2791,6 +2828,8 @@ types:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: '[Output Only] Name of the resource. The name is 1-63 characters
           long and complies with RFC1035.'
+        (extras.RequiredIn):
+        - compute.images.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined URL for the resource.'
@@ -3077,6 +3116,9 @@ types:
             value?:
               type: string
               description: Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 32768 bytes.
+              (extras.RequiredIn):
+              - compute.instances.insert
+              - compute.projects.setCommonInstanceMetadata
             key?:
               type: string
               pattern: '[a-zA-Z0-9-_]{1,128}'
@@ -3085,6 +3127,9 @@ types:
                 is reflected as part of a URL in the metadata server. Additionally,
                 to avoid ambiguity, keys must not conflict with any other metadata
                 keys for the project.'
+              (extras.RequiredIn):
+              - compute.instances.insert
+              - compute.projects.setCommonInstanceMetadata
     description: A metadata key/value entry.
   NamedPort:
     type: object
@@ -3124,6 +3169,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.networks.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -3178,6 +3225,8 @@ types:
           \ the network as a full or partial URL. For example, the following are all\
           \ valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project/global/networks/network\
           \ \n- projects/project/global/networks/network \n- global/networks/default"
+        (extras.RequiredIn):
+        - compute.instances.insert
     description: A network interface resource attached to an instance.
   NetworkList:
     type: object
@@ -3328,8 +3377,8 @@ types:
       targetLink?:
         type: string
         description: '[Output Only] The URL of the resource that the operation modifies.
-          If creating a persistent disk snapshot, this points to the persistent disk
-          that the snapshot was created from.'
+          For operations related to creating a snapshot, this points to the persistent
+          disk that the snapshot was created from.'
       creationTimestamp?:
         type: string
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -3772,18 +3821,24 @@ types:
         type: integer
         format: int32
         description: The priority of this route. Priority is used to break ties in cases where there is more than one matching route of equal prefix length. In the case of two routes with equal prefix length, the one with the lowest-numbered priority value wins. Default value is 1000. Valid range is 0 through 65535.
+        (extras.RequiredIn):
+        - compute.routes.insert
       nextHopNetwork?:
         type: string
         description: The URL of the local network if it should handle matching packets.
       network?:
         type: string
         description: Fully-qualified URL of the network that this route applies to.
+        (extras.RequiredIn):
+        - compute.routes.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
       tags?:
         type: array
         description: A list of instance tags to which this route applies.
+        (extras.RequiredIn):
+        - compute.routes.insert
         items:
           type: string
       nextHopInstance?:
@@ -3798,9 +3853,13 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.routes.insert
       destRange?:
         type: string
         description: The destination range of outgoing packets that this route applies to.
+        (extras.RequiredIn):
+        - compute.routes.insert
       nextHopVpnTunnel?:
         type: string
         description: The URL to a VpnTunnel that should handle matching packets.
@@ -3862,6 +3921,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.routers.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -3881,6 +3942,8 @@ types:
       network?:
         type: string
         description: URI of the network to which this router belongs.
+        (extras.RequiredIn):
+        - compute.routers.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined URL for the resource.'
@@ -4420,6 +4483,12 @@ types:
         type: string
         description: '[Output Only] Server-defined URL for this resource.'
     description: Contains a list of Subnetwork resources.
+  SubnetworksExpandIpCidrRangeRequest:
+    type: object
+    properties:
+      ipCidrRange?:
+        type: string
+        description: The IP (in CIDR format or netmask) of internal addresses that are legal on this Subnetwork. This range should be disjoint from other subnetworks within this network. This range can only be larger than (i.e. a superset of) the range previously defined before the update.
   SubnetworksScopedList:
     type: object
     properties:
@@ -5134,6 +5203,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.targetVpnGateways.insert
       description?:
         type: string
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -5156,6 +5227,8 @@ types:
       network?:
         type: string
         description: URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created.
+        (extras.RequiredIn):
+        - compute.targetVpnGateways.insert
       selfLink?:
         type: string
         description: '[Output Only] Server-defined URL for the resource.'
@@ -5461,6 +5534,8 @@ types:
         type: string
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        (extras.RequiredIn):
+        - compute.vpnTunnels.insert
       remoteTrafficSelector?:
         type: array
         description: 'Remote traffic selectors to use when establishing the VPN tunnel
@@ -5482,6 +5557,8 @@ types:
       targetVpnGateway?:
         type: string
         description: URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
+        (extras.RequiredIn):
+        - compute.vpnTunnels.insert
       status?:
         type: string
         description: '[Output Only] The status of the VPN tunnel.'
@@ -6092,6 +6169,24 @@ types:
             type: string
             pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
             description: Name of the network to return.
+        /switchToCustomMode:
+          post:
+            securedBy:
+              oath2:
+                scopes:
+                - https://www.googleapis.com/auth/cloud-platform
+                - https://www.googleapis.com/auth/compute
+            description: Switches the network mode from auto subnet mode to custom subnet mode.
+            displayName: Switch ToCustom Mode
+            is:
+            - hasParameters
+            responses:
+              200:
+                body:
+                  application/json: Operation
+            (commons.Id): compute.networks.switchToCustomMode
+            (commons.LogicalStructure):
+            - Networks
         get:
           securedBy:
             oath2:
@@ -8189,6 +8284,26 @@ types:
               type: string
               pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
               description: Name of the Subnetwork resource to return.
+          /expandIpCidrRange:
+            post:
+              securedBy:
+                oath2:
+                  scopes:
+                  - https://www.googleapis.com/auth/cloud-platform
+                  - https://www.googleapis.com/auth/compute
+              description: Expands the IP CIDR range of the subnetwork to a specified value.
+              displayName: Expand IpCidr Range
+              is:
+              - hasParameters
+              body:
+                application/json: SubnetworksExpandIpCidrRangeRequest
+              responses:
+                200:
+                  body:
+                    application/json: Operation
+              (commons.Id): compute.subnetworks.expandIpCidrRange
+              (commons.LogicalStructure):
+              - Subnetworks
           get:
             securedBy:
               oath2:
@@ -10868,6 +10983,17 @@ types:
               displayName: List Managed Instances
               is:
               - hasParameters
+              queryParameters:
+                filter?:
+                  type: string
+                maxResults?:
+                  type: integer
+                  default: 500
+                  format: int32
+                  maximum: 500
+                  minimum: 0
+                pageToken?:
+                  type: string
               responses:
                 200:
                   body:

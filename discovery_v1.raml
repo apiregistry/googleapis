@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/discovery/v1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/discovery/
@@ -287,6 +288,7 @@ types:
       etag?:
         type: string
         description: The ETag for this response.
+        (extras.Readonly): true
       ownerDomain?:
         type: string
         description: The domain of the owner of this API. Together with the ownerName and a packagePath values, this can be used to generate a library for this API which would have a unique fully qualified name.

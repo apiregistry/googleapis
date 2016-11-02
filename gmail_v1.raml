@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/gmail/v1/users/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/gmail/api/
@@ -31,6 +32,7 @@ securitySchemes:
       - https://www.googleapis.com/auth/gmail.labels
       - https://www.googleapis.com/auth/gmail.compose
       - https://www.googleapis.com/auth/gmail.insert
+      - https://www.googleapis.com/auth/gmail.metadata
       - https://www.googleapis.com/auth/gmail.settings.sharing
       - https://mail.google.com/
       - https://www.googleapis.com/auth/gmail.modify
@@ -86,6 +88,8 @@ types:
       id?:
         type: string
         description: The immutable ID of the draft.
+        (extras.RequiredIn):
+        - gmail.users.drafts.send
       message?: Message
     description: A draft email in the user's mailbox.
   Filter:
@@ -250,6 +254,9 @@ types:
       messageListVisibility?:
         type: string
         description: The visibility of the label in the message list in the Gmail web interface.
+        (extras.RequiredIn):
+        - gmail.users.labels.create
+        - gmail.users.labels.update
         enum:
         - hide
         - show
@@ -268,12 +275,20 @@ types:
       name?:
         type: string
         description: The display name of the label.
+        (extras.RequiredIn):
+        - gmail.users.labels.create
+        - gmail.users.labels.update
       id?:
         type: string
         description: The immutable ID of the label.
+        (extras.RequiredIn):
+        - gmail.users.labels.update
       labelListVisibility?:
         type: string
         description: The visibility of the label in the label list in the Gmail web interface.
+        (extras.RequiredIn):
+        - gmail.users.labels.create
+        - gmail.users.labels.update
         enum:
         - labelHide
         - labelShow
@@ -403,6 +418,11 @@ types:
       raw?:
         type: string
         description: The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+        (extras.RequiredIn):
+        - gmail.users.drafts.create
+        - gmail.users.drafts.update
+        - gmail.users.messages.insert
+        - gmail.users.messages.send
       id?:
         type: string
         description: The immutable ID of the message.
@@ -442,7 +462,7 @@ types:
     properties:
       data?:
         type: string
-        description: The body data of a MIME message part. May be empty for MIME container types that have no message body or when the body data is sent as a separate attachment. An attachment ID is present if the body data is contained in a separate attachment.
+        description: The body data of a MIME message part as a base64url encoded string. May be empty for MIME container types that have no message body or when the body data is sent as a separate attachment. An attachment ID is present if the body data is contained in a separate attachment.
       size?:
         type: integer
         format: int32
@@ -559,8 +579,8 @@ types:
         description: An optional email address that is included in a "Reply-To:" header for mail sent using this alias. If this is empty, Gmail will not generate a "Reply-To:" header.
       treatAsAlias?:
         type: boolean
-        description: Whether Gmail should treat this address as an alias for the user's primary email address. See  for more details. This setting only applies to custom "from" aliases.
-    description: Settings associated with a send-as alias, which can be either the primary login address associated with the account or a custom "from" address. Send-as aliases correspond to the "Send Mail As" feature in the web interface. See  for more details.
+        description: Whether Gmail should  treat this address as an alias for the user's primary email address. This setting only applies to custom "from" aliases.
+    description: Settings associated with a send-as alias, which can be either the primary login address associated with the account or a custom "from" address. Send-as aliases correspond to the "Send Mail As" feature in the web interface.
   SmtpMsa:
     type: object
     properties:
@@ -633,7 +653,7 @@ types:
       restrictToDomain?:
         type: boolean
         description: Flag that determines whether responses are sent to recipients who are outside of the user's domain. This feature is only available for Google Apps users.
-    description: Vacation auto-reply settings for an account. These settings correspond to the "Vacation responder" feature in the web interface. See  for more details.
+    description: Vacation auto-reply settings for an account. These settings correspond to the "Vacation responder" feature in the web interface.
   WatchRequest:
     type: object
     properties:
@@ -679,6 +699,7 @@ types:
         oath2:
           scopes:
           - https://mail.google.com/
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Stop receiving push notifications for the given user mailbox.
@@ -694,6 +715,7 @@ types:
         oath2:
           scopes:
           - https://mail.google.com/
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Set up or update a push notification watch on the given user mailbox.
@@ -716,6 +738,7 @@ types:
           scopes:
           - https://mail.google.com/
           - https://www.googleapis.com/auth/gmail.compose
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Gets the current user's Gmail profile.
@@ -1263,6 +1286,7 @@ types:
           oath2:
             scopes:
             - https://mail.google.com/
+            - https://www.googleapis.com/auth/gmail.metadata
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified message.
@@ -1464,6 +1488,7 @@ types:
         oath2:
           scopes:
           - https://mail.google.com/
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the messages in the user's mailbox.
@@ -1569,6 +1594,7 @@ types:
           oath2:
             scopes:
             - https://mail.google.com/
+            - https://www.googleapis.com/auth/gmail.metadata
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified thread.
@@ -1617,6 +1643,7 @@ types:
         oath2:
           scopes:
           - https://mail.google.com/
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the threads in the user's mailbox.
@@ -1816,6 +1843,7 @@ types:
         oath2:
           scopes:
           - https://mail.google.com/
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing historyId).
@@ -1879,6 +1907,7 @@ types:
             scopes:
             - https://mail.google.com/
             - https://www.googleapis.com/auth/gmail.labels
+            - https://www.googleapis.com/auth/gmail.metadata
             - https://www.googleapis.com/auth/gmail.modify
             - https://www.googleapis.com/auth/gmail.readonly
         description: Gets the specified label.
@@ -1956,6 +1985,7 @@ types:
           scopes:
           - https://mail.google.com/
           - https://www.googleapis.com/auth/gmail.labels
+          - https://www.googleapis.com/auth/gmail.metadata
           - https://www.googleapis.com/auth/gmail.modify
           - https://www.googleapis.com/auth/gmail.readonly
       description: Lists all labels in the user's mailbox.

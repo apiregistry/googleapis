@@ -4,6 +4,7 @@ version: v2.5beta1
 baseUri: https://www.googleapis.com/dfareporting/v2.5beta1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/doubleclick-advertisers/reporting/
@@ -83,6 +84,7 @@ types:
         - ACTIVE_ADS_TIER_300K
         - ACTIVE_ADS_TIER_40K
         - ACTIVE_ADS_TIER_500K
+        - ACTIVE_ADS_TIER_750K
         - ACTIVE_ADS_TIER_75K
       activeViewOptOut?:
         type: boolean
@@ -177,6 +179,7 @@ types:
         - ACTIVE_ADS_TIER_300K
         - ACTIVE_ADS_TIER_40K
         - ACTIVE_ADS_TIER_500K
+        - ACTIVE_ADS_TIER_750K
         - ACTIVE_ADS_TIER_75K
     description: Gets a summary of active ads in an account.
   AccountPermission:
@@ -398,7 +401,7 @@ types:
       creativeRotation?: CreativeRotation
       archived?:
         type: boolean
-        description: Whether this ad is archived.
+        description: Whether this ad is archived. When true, active must be false.
       advertiserIdDimensionValue?: DimensionValue
       startTime?:
         type: datetime
@@ -437,7 +440,7 @@ types:
       clickThroughUrl?: ClickThroughUrl
       active?:
         type: boolean
-        description: Whether this ad is active.
+        description: Whether this ad is active. When true, archived must be false.
       creativeGroupAssignments?:
         type: array
         description: Creative group assignments for this ad. Applicable when type is AD_SERVING_CLICK_TRACKER. Only one assignment per creative group number is allowed for a maximum of two assignments.
@@ -1126,7 +1129,7 @@ types:
     properties:
       limitAdTracking?:
         type: boolean
-        description: Whether the user has Limit Ad Tracking set.
+        description: Whether Limit Ad Tracking is enabled. When set to true, the conversion will be used for reporting but not targeting. This will prevent remarketing.
       mobileDeviceId?:
         type: string
         description: The mobile device ID. This field is mutually exclusive with encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId or encryptedUserIdCandidates[] is a required field.
@@ -2835,6 +2838,8 @@ types:
       endDate?:
         type: string
         description: The end date of the date range for which to retrieve dimension values. A string of the format "yyyy-MM-dd".
+        (extras.RequiredIn):
+        - dfareporting.dimensionValues.query
       kind?:
         type: string
         default: dfareporting#dimensionValueRequest
@@ -2846,9 +2851,13 @@ types:
       dimensionName?:
         type: string
         description: The name of the dimension for which values should be requested.
+        (extras.RequiredIn):
+        - dfareporting.dimensionValues.query
       startDate?:
         type: string
         description: The start date of the date range for which to retrieve dimension values. A string of the format "yyyy-MM-dd".
+        (extras.RequiredIn):
+        - dfareporting.dimensionValues.query
     description: Represents a DimensionValuesRequest.
   DirectorySite:
     type: object
@@ -5209,12 +5218,18 @@ types:
       deliveryType?:
         type: string
         description: The delivery type for the recipient.
+        (extras.RequiredIn):
+        - dfareporting.reports.insert
+        - dfareporting.reports.update
         enum:
         - ATTACHMENT
         - LINK
       email?:
         type: string
         description: The email address of the recipient.
+        (extras.RequiredIn):
+        - dfareporting.reports.insert
+        - dfareporting.reports.update
     description: Represents a recipient.
   Region:
     type: object
@@ -5419,6 +5434,8 @@ types:
         type: integer
         format: int64
         description: The timestamp (in milliseconds since epoch) of when this report was last modified.
+        (extras.RequiredIn):
+        - dfareporting.reports.update
       criteria?:
         type: object
         properties:
@@ -5455,6 +5472,8 @@ types:
         type: integer
         format: int64
         description: The user profile id of the owner of this report.
+        (extras.RequiredIn):
+        - dfareporting.reports.update
       pathToConversionCriteria?:
         type: object
         properties:
@@ -5563,6 +5582,9 @@ types:
       type?:
         type: string
         description: The type of the report.
+        (extras.RequiredIn):
+        - dfareporting.reports.insert
+        - dfareporting.reports.update
         enum:
         - CROSS_DIMENSION_REACH
         - FLOODLIGHT
@@ -5573,6 +5595,8 @@ types:
         type: integer
         format: int64
         description: The account ID to which this report belongs.
+        (extras.RequiredIn):
+        - dfareporting.reports.update
       schedule?:
         type: object
         properties:
@@ -5583,6 +5607,9 @@ types:
               \ also requires fields \"every\" and \"repeatsOnWeekDays\" to be set.\
               \ \n- \"MONTHLY\" also requires fields \"every\" and \"runsOnDayOfMonth\"\
               \ to be set."
+            (extras.RequiredIn):
+            - dfareporting.reports.insert
+            - dfareporting.reports.update
           runsOnDayOfMonth?:
             type: string
             description: |-
@@ -5594,6 +5621,9 @@ types:
           active?:
             type: boolean
             description: Whether the schedule is active or not. Must be set to either true or false.
+            (extras.RequiredIn):
+            - dfareporting.reports.insert
+            - dfareporting.reports.update
           every?:
             type: integer
             format: int32
@@ -5614,9 +5644,15 @@ types:
           startDate?:
             type: string
             description: Start date of date range for which scheduled reports should be run.
+            (extras.RequiredIn):
+            - dfareporting.reports.insert
+            - dfareporting.reports.update
           expirationDate?:
             type: string
             description: The expiration date when the scheduled report stops running.
+            (extras.RequiredIn):
+            - dfareporting.reports.insert
+            - dfareporting.reports.update
         description: The report's schedule. Can only be set if the report's 'dateRange' is a relative date range and the relative date range is not "TODAY".
       subAccountId?:
         type: integer
@@ -5663,6 +5699,9 @@ types:
       name?:
         type: string
         description: The name of the report.
+        (extras.RequiredIn):
+        - dfareporting.reports.insert
+        - dfareporting.reports.update
       etag?:
         type: string
         description: The eTag of this response for caching purposes.
@@ -5670,6 +5709,8 @@ types:
         type: integer
         format: int64
         description: The unique ID identifying this report resource.
+        (extras.RequiredIn):
+        - dfareporting.reports.update
     description: Represents a Report resource.
   ReportCompatibleFields:
     type: object
@@ -6830,7 +6871,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of content categories, possibly filtered.
+        description: Retrieves a list of content categories, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -6969,7 +7010,7 @@ types:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
-            description: Retrieves a list of order documents, possibly filtered.
+            description: Retrieves a list of order documents, possibly filtered. This method supports paging.
             displayName: List
             is:
             - hasParameters
@@ -7052,7 +7093,7 @@ types:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
-            description: Retrieves a list of inventory items, possibly filtered.
+            description: Retrieves a list of inventory items, possibly filtered. This method supports paging.
             displayName: List
             is:
             - hasParameters
@@ -7141,7 +7182,7 @@ types:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
-            description: Retrieves a list of orders, possibly filtered.
+            description: Retrieves a list of orders, possibly filtered. This method supports paging.
             displayName: List
             is:
             - hasParameters
@@ -7194,7 +7235,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of projects, possibly filtered.
+        description: Retrieves a list of projects, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -7329,7 +7370,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of account user profiles, possibly filtered.
+        description: Retrieves a list of account user profiles, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -7471,7 +7512,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of advertisers, possibly filtered.
+        description: Retrieves a list of advertisers, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -7629,7 +7670,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of placement groups, possibly filtered.
+        description: Retrieves a list of placement groups, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -7825,7 +7866,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of creatives, possibly filtered.
+        description: Retrieves a list of creatives, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -8146,7 +8187,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of sites, possibly filtered.
+        description: Retrieves a list of sites, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -8563,7 +8604,7 @@ types:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
-            description: Retrieves the list of creative IDs associated with the specified campaign.
+            description: Retrieves the list of creative IDs associated with the specified campaign. This method supports paging.
             displayName: List
             is:
             - hasParameters
@@ -8772,7 +8813,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of campaigns, possibly filtered.
+        description: Retrieves a list of campaigns, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -8929,7 +8970,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of creative groups, possibly filtered.
+        description: Retrieves a list of creative groups, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -9082,7 +9123,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of change logs.
+        description: Retrieves a list of change logs. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -9196,6 +9237,7 @@ types:
             - ''
             - ''
             - ''
+            - ''
             enum:
             - OBJECT_ACCOUNT
             - OBJECT_ACCOUNT_BILLING_FEATURE
@@ -9229,6 +9271,7 @@ types:
             - OBJECT_REMARKETING_LIST
             - OBJECT_RICHMEDIA_CREATIVE
             - OBJECT_SD_SITE
+            - OBJECT_SEARCH_LIFT_STUDY
             - OBJECT_SIZE
             - OBJECT_SUBACCOUNT
             - OBJECT_TARGETING_TEMPLATE
@@ -9288,7 +9331,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of directory sites, possibly filtered.
+        description: Retrieves a list of directory sites, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -9383,7 +9426,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of targetable remarketing lists, possibly filtered.
+        description: Retrieves a list of targetable remarketing lists, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -9529,7 +9572,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of placement strategies, possibly filtered.
+        description: Retrieves a list of placement strategies, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -9657,7 +9700,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of directory site contacts, possibly filtered.
+        description: Retrieves a list of directory site contacts, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -9926,7 +9969,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of ads, possibly filtered.
+        description: Retrieves a list of ads, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -10205,7 +10248,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of user roles, possibly filtered.
+        description: Retrieves a list of user roles, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -10343,7 +10386,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of remarketing lists, possibly filtered.
+        description: Retrieves a list of remarketing lists, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -10579,7 +10622,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of floodlight activity groups, possibly filtered.
+        description: Retrieves a list of floodlight activity groups, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -10727,7 +10770,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Gets a list of subaccounts, possibly filtered.
+        description: Gets a list of subaccounts, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -11096,7 +11139,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of placements, possibly filtered.
+        description: Retrieves a list of placements, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -11419,7 +11462,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of floodlight activities, possibly filtered.
+        description: Retrieves a list of floodlight activities, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -11592,7 +11635,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of advertiser groups, possibly filtered.
+        description: Retrieves a list of advertiser groups, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -11827,7 +11870,7 @@ types:
               oath2:
                 scopes:
                 - https://www.googleapis.com/auth/dfatrafficking
-            description: Retrieves a list of creative field values, possibly filtered.
+            description: Retrieves a list of creative field values, possibly filtered. This method supports paging.
             displayName: List
             is:
             - hasParameters
@@ -11969,7 +12012,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves a list of creative fields, possibly filtered.
+        description: Retrieves a list of creative fields, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters
@@ -12125,7 +12168,7 @@ types:
           oath2:
             scopes:
             - https://www.googleapis.com/auth/dfatrafficking
-        description: Retrieves the list of accounts, possibly filtered.
+        description: Retrieves the list of accounts, possibly filtered. This method supports paging.
         displayName: List
         is:
         - hasParameters

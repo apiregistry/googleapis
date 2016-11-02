@@ -4,6 +4,7 @@ version: v2
 baseUri: https://www.googleapis.com/content/v2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/shopping-content
@@ -65,6 +66,9 @@ types:
       name?:
         type: string
         description: Display name for the account.
+        (extras.RequiredIn):
+        - content.accounts.insert
+        - content.accounts.update
       adwordsLinks?:
         type: array
         description: List of linked AdWords accounts, active or pending approval. To create a new link request, add a new link with status active to the list. It will remain is state pending until approved or rejected in the AdWords interface. To delete an active link or to cancel a link request, remove it from the list.
@@ -73,6 +77,8 @@ types:
         type: integer
         format: int64
         description: Merchant Center account ID.
+        (extras.RequiredIn):
+        - content.accounts.update
       reviewsUrl?:
         type: string
         description: URL for individual seller reviews, i.e., reviews for each child account.
@@ -117,6 +123,8 @@ types:
         type: integer
         format: int64
         description: The ID of the account to which these account shipping settings belong.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       kind?:
         type: string
         default: content#accountShipping
@@ -145,15 +153,23 @@ types:
       carrier?:
         type: string
         description: The carrier that is responsible for the shipping, such as "UPS", "FedEx", or "USPS".
+        (extras.RequiredIn):
+        - content.accountshipping.update
       carrierService?:
         type: string
         description: The carrier service, such as "Ground" or "2Day".
+        (extras.RequiredIn):
+        - content.accountshipping.update
       shippingOrigin?:
         type: string
         description: Shipping origin represented as a postal code.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       name?:
         type: string
         description: The name of the carrier rate.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       modifierFlatRate?: Price
       modifierPercent?:
         type: string
@@ -161,6 +177,8 @@ types:
       saleCountry?:
         type: string
         description: The sale country for which this carrier rate is valid, represented as a CLDR territory code.
+        (extras.RequiredIn):
+        - content.accountshipping.update
     description: A carrier-calculated shipping rate.
   AccountShippingCondition:
     type: object
@@ -187,6 +205,8 @@ types:
       country?:
         type: string
         description: The CLDR territory code of the country in which this location group is.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       postalCodes?:
         type: array
         description: "A postal code representing a city or a set of cities.  \n- A\
@@ -203,6 +223,8 @@ types:
       name?:
         type: string
         description: The name of the location group.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       postalCodeRanges?:
         type: array
         description: A postal code range representing a city or a set of cities.
@@ -214,9 +236,13 @@ types:
       start?:
         type: string
         description: The first (inclusive) postal code or prefix of the range.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       end?:
         type: string
         description: The last (inclusive) postal code or prefix of the range.
+        (extras.RequiredIn):
+        - content.accountshipping.update
     description: "A postal code range, that can be either:  \n- A range of postal\
       \ codes (e.g., start=12340, end=12359)\n- A range of postal codes prefixes (e.g.,\
       \ start=1234* end=1235*). Prefixes must be of the same length (e.g., start=12*\
@@ -227,9 +253,13 @@ types:
       name?:
         type: string
         description: The name of the rate table.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       saleCountry?:
         type: string
         description: The sale country for which this table is valid, represented as a CLDR territory code.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       content?:
         type: array
         description: One-dimensional table cells define one condition along the same dimension. Bi-dimensional table cells use two dimensions with respectively M and N distinct values and must contain exactly M * N cells with distinct conditions (for each possible value pairs).
@@ -251,12 +281,16 @@ types:
       name?:
         type: string
         description: The name of this shipping service.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       active?:
         type: boolean
         description: Whether the shipping service is available.
       saleCountry?:
         type: string
         description: The CLDR territory code of the sale country for which this service can be used.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       costRuleTree?: AccountShippingShippingServiceCostRule
       maxDaysInTransit?:
         type: integer
@@ -367,6 +401,8 @@ types:
         type: integer
         format: int64
         description: The ID of the account to which these account tax settings belong.
+        (extras.RequiredIn):
+        - content.accounttax.update
       kind?:
         type: string
         default: content#accountTax
@@ -393,6 +429,8 @@ types:
         type: integer
         format: int64
         description: State (or province) is which the tax is applicable, described by its location id (also called criteria id).
+        (extras.RequiredIn):
+        - content.accounttax.update
       shippingTaxed?:
         type: boolean
         description: If true, shipping charges are also taxed.
@@ -717,6 +755,9 @@ types:
       fileName?:
         type: string
         description: The filename of the feed. All feeds must have a unique file name.
+        (extras.RequiredIn):
+        - content.datafeeds.insert
+        - content.datafeeds.update
       intendedDestinations?:
         type: array
         description: The list of intended destinations (corresponds to checked check boxes in Merchant Center).
@@ -731,9 +772,13 @@ types:
       name?:
         type: string
         description: A descriptive name of the data feed.
+        (extras.RequiredIn):
+        - content.datafeeds.insert
       contentLanguage?:
         type: string
         description: The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.
+        (extras.RequiredIn):
+        - content.datafeeds.insert
       attributeLanguage?:
         type: string
         description: The two-letter ISO 639-1 language in which the attributes are defined in the data feed.
@@ -741,12 +786,20 @@ types:
         type: integer
         format: int64
         description: The ID of the data feed.
+        (extras.RequiredIn):
+        - content.datafeeds.update
       contentType?:
         type: string
         description: The type of data feed.
+        (extras.RequiredIn):
+        - content.datafeeds.insert
+        - content.datafeeds.update
       targetCountry?:
         type: string
         description: The country where the items in the feed will be included in the search index, represented as a CLDR territory code.
+        (extras.RequiredIn):
+        - content.datafeeds.insert
+        - content.datafeeds.update
     description: Datafeed data.
   DatafeedFetchSchedule:
     type: object
@@ -1436,13 +1489,19 @@ types:
       isReturnable?:
         type: boolean
         description: Whether the item is returnable.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       policyUrl?:
         type: string
         description: URL of the item return policy.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       daysToReturn?:
         type: integer
         format: int32
         description: How many days later the item can be returned.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   OrderLineItemShippingDetails:
     type: object
     properties:
@@ -1450,9 +1509,13 @@ types:
       shipByDate?:
         type: string
         description: The ship by date, in ISO 8601 format.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       deliverByDate?:
         type: string
         description: The delivery by date, in ISO 8601 format.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   OrderLineItemShippingDetailsMethod:
     type: object
     properties:
@@ -1463,13 +1526,19 @@ types:
         type: integer
         format: int32
         description: Minimum transit time.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       methodName?:
         type: string
         description: The name of the shipping method.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       maxDaysInTransit?:
         type: integer
         format: int32
         description: Maximum transit time.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   OrderPaymentMethod:
     type: object
     properties:
@@ -2065,6 +2134,8 @@ types:
       channel?:
         type: string
         description: The item's channel (online or local).
+        (extras.RequiredIn):
+        - content.products.insert
       availabilityDate?:
         type: string
         description: The day a pre-ordered product becomes available for delivery, in ISO 8601 format.
@@ -2155,6 +2226,8 @@ types:
       targetCountry?:
         type: string
         description: The CLDR territory code for the item.
+        (extras.RequiredIn):
+        - content.products.insert
       condition?:
         type: string
         description: Condition or state of the item.
@@ -2162,9 +2235,13 @@ types:
       contentLanguage?:
         type: string
         description: The two-letter ISO 639-1 language code for the item.
+        (extras.RequiredIn):
+        - content.products.insert
       offerId?:
         type: string
         description: An identifier of the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
+        (extras.RequiredIn):
+        - content.products.insert
       identifierExists?:
         type: boolean
         description: False when the item does not have unique product identifiers appropriate to its category, such as GTIN, MPN, and brand. Required according to the Unique Product Identifier Rules for all target countries except for Canada.
@@ -2773,6 +2850,8 @@ types:
       lineItems?:
         type: array
         description: Line items that are ordered. At least one line item must be provided.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
         items: TestOrderLineItem
       promotions?:
         type: array
@@ -2782,6 +2861,8 @@ types:
       predefinedDeliveryAddress?:
         type: string
         description: Identifier of one of the predefined delivery addresses for the delivery.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       shippingCostTax?: Price
       kind?:
         type: string
@@ -2793,6 +2874,8 @@ types:
       shippingOption?:
         type: string
         description: The requested shipping option.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   TestOrderCustomer:
     type: object
     properties:
@@ -2805,6 +2888,8 @@ types:
       email?:
         type: string
         description: Email address of the customer.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   TestOrderLineItem:
     type: object
     properties:
@@ -2815,6 +2900,8 @@ types:
         type: integer
         format: int32
         description: Number of items ordered.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       unitTax?: Price
   TestOrderLineItemProduct:
     type: object
@@ -2829,34 +2916,50 @@ types:
       channel?:
         type: string
         description: The item's channel.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       mpn?:
         type: string
         description: Manufacturer Part Number (MPN) of the item. Optional.
       title?:
         type: string
         description: The title of the product.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       itemGroupId?:
         type: string
         description: Shared identifier for all variants of the same product. Optional.
       targetCountry?:
         type: string
         description: The CLDR territory code of the target country of the product.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       imageLink?:
         type: string
         description: URL of an image of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       condition?:
         type: string
         description: Condition or state of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       price?: Price
       contentLanguage?:
         type: string
         description: The two-letter ISO 639-1 language code for the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       offerId?:
         type: string
         description: An identifier of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
       brand?:
         type: string
         description: Brand of the item.
+        (extras.RequiredIn):
+        - content.orders.createtestorder
   TestOrderPaymentMethod:
     type: object
     properties:
@@ -2900,9 +3003,13 @@ types:
       unit?:
         type: string
         description: The weight unit.
+        (extras.RequiredIn):
+        - content.accountshipping.update
       value?:
         type: string
         description: The weight represented as a number.
+        (extras.RequiredIn):
+        - content.accountshipping.update
 /{merchantId}:
   uriParameters:
     merchantId:

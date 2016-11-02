@@ -4,6 +4,7 @@ version: alpha
 baseUri: https://www.googleapis.com/clouduseraccounts/alpha/projects/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/compute/docs/access/user-accounts/api/latest/
@@ -160,6 +161,8 @@ types:
         type: string
         pattern: '[a-z][-a-z0-9_]{0,31}'
         description: Name of the resource; provided by the client when the resource is created.
+        (extras.RequiredIn):
+        - clouduseraccounts.groups.insert
       description?:
         type: string
         description: An optional textual description of the resource; provided by the client when the resource is created.
@@ -620,6 +623,8 @@ types:
       owner?:
         type: string
         description: Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account.
+        (extras.RequiredIn):
+        - clouduseraccounts.users.insert
       publicKeys?:
         type: array
         description: '[Output Only] Public keys that this user may use to login.'
@@ -636,6 +641,8 @@ types:
         type: string
         pattern: '[a-z][-a-z0-9_]{0,31}'
         description: Name of the resource; provided by the client when the resource is created.
+        (extras.RequiredIn):
+        - clouduseraccounts.users.insert
       description?:
         type: string
         description: An optional textual description of the resource; provided by the client when the resource is created.

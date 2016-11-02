@@ -4,6 +4,7 @@ version: v1
 baseUri: https://cloudbuild.googleapis.com/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/container-builder/docs/
@@ -135,6 +136,12 @@ types:
           URL to logs for this build in Google Cloud Logging.
           @OutputOnly
       results?: Results
+      buildTriggerId?:
+        type: string
+        description: |-
+          The ID of the BuildTrigger that triggered this build, if it was
+          triggered automatically.
+          @OutputOnly
       projectId?:
         type: string
         description: |-

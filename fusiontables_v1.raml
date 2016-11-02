@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/fusiontables/v1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/fusiontables
@@ -86,6 +87,8 @@ types:
       name?:
         type: string
         description: Required name of the column.
+        (extras.RequiredIn):
+        - fusiontables.column.insert
       description?:
         type: string
         description: Optional column description.
@@ -104,6 +107,8 @@ types:
       type?:
         type: string
         description: Required type of the column.
+        (extras.RequiredIn):
+        - fusiontables.column.insert
       graph_predicate?:
         type: string
         description: Optional column predicate. Used to map table to graph data model (subject,predicate,object) See http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#data-model
@@ -318,6 +323,8 @@ types:
       columnName?:
         type: string
         description: Name of the column whose value is used in the style.
+        (extras.RequiredIn):
+        - fusiontables.style.insert
     description: Represents a StyleFunction within a StyleSetting
   StyleSetting:
     type: object
@@ -368,9 +375,15 @@ types:
       isExportable?:
         type: boolean
         description: Variable for whether table is exportable.
+        (extras.RequiredIn):
+        - fusiontables.table.insert
+        - fusiontables.table.update
       columns?:
         type: array
         description: Columns in the table.
+        (extras.RequiredIn):
+        - fusiontables.table.insert
+        - fusiontables.table.update
         items: Column
       kind?:
         type: string
@@ -385,6 +398,9 @@ types:
       name?:
         type: string
         description: Name assigned to a table.
+        (extras.RequiredIn):
+        - fusiontables.table.insert
+        - fusiontables.table.update
       description?:
         type: string
         description: Optional description assigned to the table.
