@@ -4,6 +4,7 @@ version: v1beta3
 baseUri: https://www.googleapis.com/sql/v1beta3/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/sql/docs/reference/latest
@@ -158,6 +159,9 @@ types:
       instance?:
         type: string
         description: Name of the Cloud SQL instance. This does not include the project ID.
+        (extras.RequiredIn):
+        - sql.instances.insert
+        - sql.instances.update
       ipv6Address?:
         type: string
         description: The IPv6 address assigned to the instance.
@@ -174,6 +178,9 @@ types:
       project?:
         type: string
         description: The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
+        (extras.RequiredIn):
+        - sql.instances.insert
+        - sql.instances.update
       replicaNames?:
         type: array
         description: The replicas of the instance.
@@ -584,6 +591,9 @@ types:
       tier?:
         type: string
         description: The tier of service for this instance, for example D1, D2. For more information, see pricing.
+        (extras.RequiredIn):
+        - sql.instances.insert
+        - sql.instances.update
       locationPreference?: LocationPreference
       replicationType?:
         type: string
@@ -616,6 +626,8 @@ types:
         type: integer
         format: int64
         description: The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.
+        (extras.RequiredIn):
+        - sql.instances.update
       backupConfiguration?:
         type: array
         description: The daily backup configuration for the instance.

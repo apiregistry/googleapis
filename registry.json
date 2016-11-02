@@ -366,6 +366,13 @@
     },
     {
       "org": "Google",
+      "name": "DCM/DFA Reporting And Trafficking API",
+      "icon": "https://www.google.com/images/icons/product/doubleclick-16.gif",
+      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/dfareporting_v2.7.raml",
+      "version": "v2.7"
+    },
+    {
+      "org": "Google",
       "name": "APIs Discovery Service",
       "icon": "http://www.google.com/images/icons/feature/filing_cabinet_search-g16.png",
       "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/discovery_v1.raml",
@@ -706,13 +713,6 @@
       "icon": "http://www.google.com/images/icons/product/search-16.gif",
       "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/identitytoolkit_v3.raml",
       "version": "v3"
-    },
-    {
-      "org": "Google",
-      "name": "Google Cloud Natural Language API",
-      "icon": "http://www.google.com/images/icons/product/search-16.gif",
-      "location": "https://raw.githubusercontent.com/apiregistry/googleapis/master/language_v1beta1.raml",
-      "version": "v1beta1"
     },
     {
       "org": "Google",

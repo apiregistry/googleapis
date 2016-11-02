@@ -4,6 +4,7 @@ version: v1
 baseUri: https://servicemanagement.googleapis.com/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://cloud.google.com/service-management/
@@ -1649,29 +1650,28 @@ types:
       name?:
         type: string
         description: |-
-          Resource name. The format of the name may vary between different
-          implementations. For examples:
+          The resource name of the metric descriptor. Depending on the
+          implementation, the name typically includes: (1) the parent resource name
+          that defines the scope of the metric type or of its data; and (2) the
+          metric's URL-encoded type, which also appears in the `type` field of this
+          descriptor. For example, following is the resource name of a Compute Engine
+          metric within a GCP project:
 
-              projects/{project_id}/metricDescriptors/{type=**}
-              metricDescriptors/{type=**}
+              "projects/123456789/metricDescriptors/compute.googleapis.com%2Finstance%2Fcpu%2Futilization"
       description?:
         type: string
         description: A detailed description of the metric, which can be used in documentation.
       type?:
         type: string
         description: |-
-          The metric type including a DNS name prefix, for example
-          `"compute.googleapis.com/instance/cpu/utilization"`. Metric types
-          should use a natural hierarchical grouping such as the following:
+          The metric type, including its DNS name prefix. The type is not
+          URL-encoded.  All user-defined metric types have the DNS name
+          `custom.googleapis.com`.  Metric types should use a natural hierarchical
+          grouping. Following are some sample metric types:
 
-              compute.googleapis.com/instance/cpu/utilization
-              compute.googleapis.com/instance/disk/read_ops_count
-              compute.googleapis.com/instance/network/received_bytes_count
-
-          Note that if the metric type changes, the monitoring data will be
-          discontinued, and anything depends on it will break, such as monitoring
-          dashboards, alerting rules and quota limits. Therefore, once a metric has
-          been published, its type should be immutable.
+              "compute.googleapis.com/instance/cpu/utilization"
+              "compute.googleapis.com/instance/disk/read_ops_count"
+              "custom.googleapis.com/invoice/paid/amount"
       labels?:
         type: array
         description: |-
@@ -1681,7 +1681,10 @@ types:
           has a label, `loadbalanced`, that specifies whether the traffic was
           received through a load balanced IP address.
         items: LabelDescriptor
-    description: Defines a metric type and its schema.
+    description: |-
+      Defines a metric type and its schema. Once a metric descriptor is created,
+      deleting or altering it stops data collection and makes the metric type's
+      existing data unusable.
   Mixin:
     type: object
     properties:
@@ -2928,6 +2931,7 @@ types:
           queryParameters:
             configId?:
               type: string
+              description: The id of the service configuration resource.
           responses:
             200:
               body:
@@ -2970,6 +2974,7 @@ types:
           uriParameters:
             configId:
               type: string
+              description: The id of the service configuration resource.
           get:
             securedBy:
               oath2:
@@ -3138,7 +3143,9 @@ types:
             - https://www.googleapis.com/auth/cloud-platform.read-only
             - https://www.googleapis.com/auth/service.management
             - https://www.googleapis.com/auth/service.management.readonly
-        description: Gets a managed service.
+        description: |-
+          Gets a managed service. Authentication is required unless the service is
+          public.
         displayName: Get
         is:
         - hasParameters
@@ -3233,14 +3240,15 @@ types:
           - https://www.googleapis.com/auth/cloud-platform.read-only
           - https://www.googleapis.com/auth/service.management
           - https://www.googleapis.com/auth/service.management.readonly
-      description: Lists all managed services.
+      description: |-
+        Lists all managed services. The result is limited to services that the
+        caller has "servicemanagement.services.get" permission for. If the request
+        is made without authentication, it returns only public services that are
+        available to everyone.
       displayName: List
       is:
       - hasParameters
       queryParameters:
-        consumerProjectId?:
-          type: string
-          description: Include services consumed by the specified project.
         pageSize?:
           type: integer
           format: int32

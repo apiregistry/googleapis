@@ -4,6 +4,7 @@ version: v1beta1
 baseUri: https://www.googleapis.com/storage/v1beta1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/storage/docs/json_api/
@@ -89,14 +90,20 @@ types:
       acl?:
         type: array
         description: Access controls on the bucket.
+        (extras.RequiredIn):
+        - storage.buckets.update
         items: BucketAccessControl
       id?:
         type: string
         description: The name of the bucket.
+        (extras.RequiredIn):
+        - storage.buckets.insert
       projectId?:
         type: integer
         format: int64
         description: The project the bucket belongs to.
+        (extras.RequiredIn):
+        - storage.buckets.insert
       selfLink?:
         type: string
         description: The URI of this bucket.
@@ -110,6 +117,8 @@ types:
       role?:
         type: string
         description: The access permission for the entity. Can be READER, WRITER, or OWNER.
+        (extras.RequiredIn):
+        - storage.bucketAccessControls.insert
       kind?:
         type: string
         default: storage#bucketAccessControl
@@ -134,6 +143,8 @@ types:
           \ would be user-liz@example.com. \n- The group example@googlegroups.com\
           \ would be group-example@googlegroups.com. \n- To refer to all members of\
           \ the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        (extras.RequiredIn):
+        - storage.bucketAccessControls.insert
       selfLink?:
         type: string
         description: The link to this access-control entry.
@@ -188,6 +199,8 @@ types:
       acl?:
         type: array
         description: Access controls on the object.
+        (extras.RequiredIn):
+        - storage.objects.update
         items: ObjectAccessControl
       media?:
         type: object
@@ -195,6 +208,8 @@ types:
           data?:
             type: string
             description: URL-safe Base64-encoded data. This property can be used to insert objects under 64KB in size, and will only be returned in response to the get method for objects so created. When this resource is returned in response to the list method, this property is omitted.
+            (extras.RequiredIn):
+            - storage.objects.insert
           length?:
             type: integer
             format: int64
@@ -208,6 +223,9 @@ types:
           contentType?:
             type: string
             description: Content-Type of the object data.
+            (extras.RequiredIn):
+            - storage.objects.insert
+            - storage.objects.update
           hash?:
             type: string
             description: Hash of the data. Required if a hash algorithm is provided.
@@ -250,6 +268,8 @@ types:
       role?:
         type: string
         description: The access permission for the entity. Can be READER or OWNER.
+        (extras.RequiredIn):
+        - storage.objectAccessControls.insert
       kind?:
         type: string
         default: storage#objectAccessControl
@@ -274,6 +294,8 @@ types:
           \ would be user-liz@example.com. \n- The group example@googlegroups.com\
           \ would be group-example@googlegroups.com. \n- To refer to all members of\
           \ the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        (extras.RequiredIn):
+        - storage.objectAccessControls.insert
       object?:
         type: string
         description: The name of the object.

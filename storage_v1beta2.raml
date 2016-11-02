@@ -4,6 +4,7 @@ version: v1beta2
 baseUri: https://www.googleapis.com/storage/v1beta2/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/storage/docs/json_api/
@@ -123,6 +124,8 @@ types:
       acl?:
         type: array
         description: Access controls on the bucket.
+        (extras.RequiredIn):
+        - storage.buckets.update
         items: BucketAccessControl
       selfLink?:
         type: string
@@ -168,6 +171,8 @@ types:
       name?:
         type: string
         description: The name of the bucket.
+        (extras.RequiredIn):
+        - storage.buckets.insert
       logging?:
         type: object
         properties:
@@ -200,6 +205,8 @@ types:
       role?:
         type: string
         description: The access permission for the entity. Can be READER, WRITER, or OWNER.
+        (extras.RequiredIn):
+        - storage.bucketAccessControls.insert
       kind?:
         type: string
         default: storage#bucketAccessControl
@@ -227,6 +234,8 @@ types:
           \ would be user-liz@example.com. \n- The group example@googlegroups.com\
           \ would be group-example@googlegroups.com. \n- To refer to all members of\
           \ the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        (extras.RequiredIn):
+        - storage.bucketAccessControls.insert
       selfLink?:
         type: string
         description: The link to this access-control entry.
@@ -306,6 +315,8 @@ types:
       sourceObjects?:
         type: array
         description: The list of source objects that will be concatenated into a single object.
+        (extras.RequiredIn):
+        - storage.objects.compose
         items:
           type: object
           properties:
@@ -316,6 +327,8 @@ types:
             name?:
               type: string
               description: The source object's name. The source object's bucket is implicitly the destination bucket.
+              (extras.RequiredIn):
+              - storage.objects.compose
             objectPreconditions?:
               type: object
               properties:
@@ -356,6 +369,8 @@ types:
       acl?:
         type: array
         description: Access controls on the object.
+        (extras.RequiredIn):
+        - storage.objects.update
         items: ObjectAccessControl
       cacheControl?:
         type: string
@@ -410,6 +425,8 @@ types:
       contentType?:
         type: string
         description: Content-Type of the object data.
+        (extras.RequiredIn):
+        - storage.objects.update
       updated?:
         type: string
         description: Modification time of the object metadata in RFC 3339 format.

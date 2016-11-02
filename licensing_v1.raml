@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/apps/licensing/v1/product/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/google-apps/licensing/
@@ -51,6 +52,8 @@ types:
       productId?:
         type: string
         description: Name of the product.
+        (extras.RequiredIn):
+        - licensing.licenseAssignments.update
       kind?:
         type: string
         default: licensing#licenseAssignment
@@ -61,9 +64,13 @@ types:
       userId?:
         type: string
         description: Email id of the user.
+        (extras.RequiredIn):
+        - licensing.licenseAssignments.update
       skuId?:
         type: string
         description: Name of the sku of the product.
+        (extras.RequiredIn):
+        - licensing.licenseAssignments.update
       selfLink?:
         type: string
         description: Link to this page.
@@ -74,6 +81,8 @@ types:
       userId?:
         type: string
         description: Email id of the user
+        (extras.RequiredIn):
+        - licensing.licenseAssignments.insert
     description: Template for LicenseAssignment Insert request
   LicenseAssignmentList:
     type: object

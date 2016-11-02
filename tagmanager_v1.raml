@@ -4,6 +4,7 @@ version: v1
 baseUri: https://www.googleapis.com/tagmanager/v1/
 uses:
   commons: https://raw.githubusercontent.com/apiregistry/commons/master/commons.raml
+  extras: https://raw.githubusercontent.com/apiregistry/typesExtras/master/typeExtras.raml
 (commons.Links):
 - title: Developer Documentation
   url: https://developers.google.com/tag-manager/api/v1/
@@ -73,6 +74,8 @@ types:
       permission?:
         type: array
         description: List of Account permissions. Valid account permissions are read and manage.
+        (extras.RequiredIn):
+        - tagmanager.accounts.permissions.create
         items:
           type: string
           enum:
@@ -96,10 +99,16 @@ types:
           \ value, the matching will be case sensitive. \n- To negate an operator,\
           \ include a boolean parameter named negate boolean parameter that is set\
           \ to true."
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.triggers.create
+        - tagmanager.accounts.containers.triggers.update
         items: Parameter
       type?:
         type: string
         description: The type of operator for this condition.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.triggers.create
+        - tagmanager.accounts.containers.triggers.update
         enum:
         - contains
         - cssSelector
@@ -123,6 +132,8 @@ types:
         type: array
         description: 'List of Usage Contexts for the Container. Valid values include:
           web, android, ios.'
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.create
         items:
           type: string
           enum:
@@ -137,6 +148,8 @@ types:
       timeZoneId?:
         type: string
         description: Container Time Zone ID.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.create
       domainName?:
         type: array
         description: Optional list of domain names associated with the Container.
@@ -202,9 +215,13 @@ types:
       name?:
         type: string
         description: Container display name.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.create
       timeZoneCountryId?:
         type: string
         description: Container Country ID.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.create
       containerId?:
         type: string
         description: The Container ID uniquely identifies the GTM Container.
@@ -357,6 +374,8 @@ types:
       name?:
         type: string
         description: The environment display name. Can be set or changed only on USER type environments.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.environments.create
       description?:
         type: string
         description: The environment description. Can be set or changed only on USER type environments.
@@ -394,6 +413,8 @@ types:
       name?:
         type: string
         description: Folder display name.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.folders.create
       containerId?:
         type: string
         description: GTM Container ID.
@@ -563,6 +584,13 @@ types:
           \ be specified \n- template: The value represents any text; this can include\
           \ variable references (even variable references that might return non-string\
           \ types)"
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.tags.create
+        - tagmanager.accounts.containers.tags.update
+        - tagmanager.accounts.containers.triggers.create
+        - tagmanager.accounts.containers.triggers.update
+        - tagmanager.accounts.containers.variables.create
+        - tagmanager.accounts.containers.variables.update
         enum:
         - boolean
         - integer
@@ -654,6 +682,8 @@ types:
       type?:
         type: string
         description: GTM Tag Type.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.tags.create
       setupTag?:
         type: array
         description: The list of setup tags. Currently we only allow one.
@@ -694,6 +724,8 @@ types:
       name?:
         type: string
         description: Tag display name.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.tags.create
       scheduleEndMs?:
         type: integer
         format: int64
@@ -733,6 +765,8 @@ types:
       type?:
         type: string
         description: Defines the data layer event that causes this trigger.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.triggers.create
         enum:
         - ajaxSubmission
         - always
@@ -761,6 +795,8 @@ types:
       name?:
         type: string
         description: Trigger display name.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.triggers.create
       eventName?: Parameter
       interval?: Parameter
       containerId?:
@@ -783,6 +819,8 @@ types:
       emailAddress?:
         type: string
         description: User's email address.
+        (extras.RequiredIn):
+        - tagmanager.accounts.permissions.create
       accountAccess?: AccountAccess
       containerAccess?:
         type: array
@@ -809,6 +847,9 @@ types:
       type?:
         type: string
         description: GTM Variable Type.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.variables.create
+        - tagmanager.accounts.containers.variables.update
       variableId?:
         type: string
         description: The Variable ID uniquely identifies the GTM Variable.
@@ -829,6 +870,8 @@ types:
       name?:
         type: string
         description: Variable display name.
+        (extras.RequiredIn):
+        - tagmanager.accounts.containers.variables.create
       scheduleEndMs?:
         type: integer
         format: int64
